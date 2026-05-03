@@ -26,6 +26,8 @@ interface SystemBarProps {
   onAiPodSelect: (signalingUrl: string) => void;
   onAiConnect: () => void;
   onAiDisconnect: () => void;
+  aiAutoConnect: boolean;
+  onAiAutoConnectChange: (v: boolean) => void;
   /** Live receive FPS while connected, null otherwise. */
   aiFps: number | null;
   /** Round-trip generation latency in ms while connected. */
@@ -59,6 +61,8 @@ export function SystemBar({
   onAiPodSelect,
   onAiConnect,
   onAiDisconnect,
+  aiAutoConnect,
+  onAiAutoConnectChange,
   aiFps,
   aiLatencyMs,
   aiPending,
@@ -246,6 +250,8 @@ export function SystemBar({
           status={aiStatus}
           onConnect={onAiConnect}
           onDisconnect={onAiDisconnect}
+          autoConnect={aiAutoConnect}
+          onAutoConnectChange={onAiAutoConnectChange}
           fps={aiFps}
           latencyMs={aiLatencyMs}
           pending={aiPending}

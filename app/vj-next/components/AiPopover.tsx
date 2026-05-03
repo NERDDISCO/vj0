@@ -22,6 +22,9 @@ interface AiPopoverProps {
   status: AiTransportStatus;
   onConnect: () => void;
   onDisconnect: () => void;
+  /** Persisted "auto-connect on app load + backend switch" setting. */
+  autoConnect: boolean;
+  onAutoConnectChange: (v: boolean) => void;
 
   // ─── Live transport stats
   fps: number | null;
@@ -55,6 +58,8 @@ export function AiPopover({
   status,
   onConnect,
   onDisconnect,
+  autoConnect,
+  onAutoConnectChange,
   fps,
   latencyMs,
   pending,
@@ -197,6 +202,18 @@ export function AiPopover({
               </button>
             )}
           </div>
+          {/* Auto-connect toggle — persisted in useAiSettingsStore so
+              flipping it on here re-enables the boot-time + backend-
+              switch auto-connect identical to legacy /vj. */}
+          <label className="vp-ai-autoconnect">
+            <input
+              type="checkbox"
+              className="vj-check"
+              checked={autoConnect}
+              onChange={(e) => onAutoConnectChange(e.target.checked)}
+            />
+            <span>auto-connect on app load + backend switch</span>
+          </label>
         </div>
 
         {/* ── Pod list ──────────────────────────────────────────── */}

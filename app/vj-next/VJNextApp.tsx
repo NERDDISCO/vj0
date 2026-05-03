@@ -235,6 +235,12 @@ export function VJNextApp() {
   const setAiBackend = useAiSettingsStore((s) => s.setBackend);
   const aiPodUrl = useAiSettingsStore((s) => s.podUrl);
   const setAiPodUrl = useAiSettingsStore((s) => s.setPodUrl);
+  // Auto-connect setting — persisted in the same store as backend +
+  // podUrl so a user who flipped this on in legacy /vj keeps the same
+  // behaviour here (and vice versa). Triggered below in a useEffect
+  // that watches autoConnect + the transport identity.
+  const aiAutoConnect = useAiSettingsStore((s) => s.autoConnect);
+  const setAiAutoConnect = useAiSettingsStore((s) => s.setAutoConnect);
   const aiSignalingUrl = useMemo(() => {
     if (aiBackend === "pod" && aiPodUrl) return aiPodUrl;
     return AI_BACKEND_URLS[aiBackend] || "/api/webrtc/offer";
@@ -413,6 +419,16 @@ export function VJNextApp() {
       void aiTransport.stop();
     };
   }, [aiTransport]);
+
+  // Auto-connect on app load + on every backend / pod switch when the
+  // user has it enabled. Mirrors the legacy /vj behaviour 1:1: the
+  // useMemo above rebuilds aiTransport whenever signaling URL changes,
+  // so this effect fires with a fresh transport for every URL flip.
+  useEffect(() => {
+    if (!aiAutoConnect) return;
+    if (aiTransport.isConnected()) return;
+    void aiTransport.start();
+  }, [aiAutoConnect, aiTransport]);
 
   // ─── Output options ──────────────────────────────────────────────
   const [outWidth, setOutWidth] = useState(512);
@@ -657,6 +673,8 @@ export function VJNextApp() {
           setGenerating(false);
           void aiTransport.stop();
         }}
+        aiAutoConnect={aiAutoConnect}
+        onAiAutoConnectChange={setAiAutoConnect}
         aiFps={aiStatus === "connected" ? aiFps : null}
         // Prefer the server-reported per-frame gen time when we have
         // it (precise), fall back to the wall-clock send→recv estimate

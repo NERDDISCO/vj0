@@ -1824,6 +1824,34 @@
   box-shadow: 0 0 18px -6px var(--vj-error);
 }
 
+/* Auto-connect toggle row — sits right under the connect button so
+   the relationship "this is what happens automatically next time" is
+   visually obvious. Bigger hit area than a vanilla checkbox+label
+   pair; the whole row is the click target. */
+.vp-ai-autoconnect {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--vp-edge-hot);
+  border-radius: 4px;
+  background: var(--vp-void);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--vj-ink);
+  cursor: pointer;
+  transition: border-color 120ms, background 120ms;
+}
+.vp-ai-autoconnect:hover {
+  border-color: var(--vp-cable-a);
+  background: color-mix(in srgb, var(--vp-cable-a) 5%, var(--vp-void));
+}
+.vp-ai-autoconnect:has(input:checked) {
+  border-color: var(--vj-live);
+  background: color-mix(in srgb, var(--vj-live) 8%, var(--vp-void));
+}
+
 .vp-pods {
   display: flex;
   flex-direction: column;
