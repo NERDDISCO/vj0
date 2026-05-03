@@ -302,6 +302,11 @@ export function VJNextApp() {
   // Per-frame stats from the server's "stats" message — used for the
   // popover's latency readout (much more accurate than wall-clock send/recv).
   const [aiServerLatency, setAiServerLatency] = useState<number | null>(null);
+  // Server-emitted text frames that aren't structured (compile/phase/stats)
+  // get appended here as a rolling 20-line log. Surfaced at the bottom of
+  // the AiPopover diagnostics section so the user can debug a stuck pod
+  // without opening devtools.
+  const [aiLogs, setAiLogs] = useState<string[]>([]);
   const lastFrameTimeRef = useRef<number>(0);
   const lastSendTimeRef = useRef<number>(0);
   const sentCountRef = useRef<number>(0);
@@ -437,8 +442,12 @@ export function VJNextApp() {
             return;
           }
         } catch {
-          // Plain log line — not actionable here.
+          // Not JSON — fall through to log it.
         }
+        // Anything we didn't structurally consume goes into the log
+        // panel so the user can see worker stdout / unstructured server
+        // notes without opening devtools.
+        setAiLogs((prev) => [...prev, `← ${frame.message}`].slice(-20));
         return;
       }
       // ─── Image frames below.
@@ -824,6 +833,12 @@ export function VJNextApp() {
   // To stop generation use the button or hit ■ stop.
 
   // ─── Layout ──────────────────────────────────────────────────────
+  // Global error banners for the two error sources in /vj-next:
+  //   - Audio init failure (mic permission denied, no audio in shared
+  //     source, etc.)
+  //   - Recording failure (MediaRecorder unsupported, encoder error)
+  // Click to dismiss. Same red-bordered chrome as legacy /vj.
+  const dismissAudioError = () => setAudioErrorMessage(null);
   return (
     <div className="vp-root">
       <SystemBar
@@ -858,6 +873,7 @@ export function VJNextApp() {
         onAiAutoConnectChange={setAiAutoConnect}
         recording={recording}
         aiTelemetryUrl={aiTelemetryUrl}
+        aiLogs={aiLogs}
         aiFps={aiStatus === "connected" ? aiFps : null}
         // Prefer the server-reported per-frame gen time when we have
         // it (precise), fall back to the wall-clock send→recv estimate
@@ -872,6 +888,27 @@ export function VJNextApp() {
       />
       <SceneTabs />
       <AudioMeters audioFeaturesRef={audioFeaturesRef} />
+
+      {audioErrorMessage && (
+        <button
+          type="button"
+          className="vp-error-banner"
+          onClick={dismissAudioError}
+          title="click to dismiss"
+        >
+          ⚠ audio: {audioErrorMessage}
+        </button>
+      )}
+      {recording.error && (
+        <button
+          type="button"
+          className="vp-error-banner"
+          onClick={recording.clearError}
+          title="click to dismiss"
+        >
+          ⚠ recording: {recording.error}
+        </button>
+      )}
 
       <div className="vp-workspace">
         {/* INPUT column — scene canvas + element inspector */}

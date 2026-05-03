@@ -32,6 +32,7 @@ interface SystemBarProps {
   onAiAutoConnectChange: (v: boolean) => void;
   recording: ReturnType<typeof useRecording>;
   aiTelemetryUrl: string | null;
+  aiLogs: string[];
   /** Live receive FPS while connected, null otherwise. */
   aiFps: number | null;
   /** Round-trip generation latency in ms while connected. */
@@ -69,6 +70,7 @@ export function SystemBar({
   onAiAutoConnectChange,
   recording,
   aiTelemetryUrl,
+  aiLogs,
   aiFps,
   aiLatencyMs,
   aiPending,
@@ -259,6 +261,7 @@ export function SystemBar({
           autoConnect={aiAutoConnect}
           onAutoConnectChange={onAiAutoConnectChange}
           telemetryUrl={aiTelemetryUrl}
+          logs={aiLogs}
           fps={aiFps}
           latencyMs={aiLatencyMs}
           pending={aiPending}

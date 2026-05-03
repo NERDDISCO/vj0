@@ -32,6 +32,8 @@ interface AiPopoverProps {
   /** Same-origin /telemetry URL — derived from the signaling URL.
    *  When set we poll once on open + every 2 s while open. */
   telemetryUrl: string | null;
+  /** Rolling tail of server text frames (non-structured). */
+  logs: string[];
 
   // ─── Live transport stats
   fps: number | null;
@@ -68,6 +70,7 @@ export function AiPopover({
   autoConnect,
   onAutoConnectChange,
   telemetryUrl,
+  logs,
   fps,
   latencyMs,
   pending,
@@ -319,6 +322,40 @@ export function AiPopover({
             />
           </div>
         </div>
+
+        {/* ── Logs ──────────────────────────────────────────────── */}
+        {logs.length > 0 && (
+          <div className="vp-ai-popover__section">
+            <details className="vj-disclosure">
+              <summary>
+                logs · {logs.length} line{logs.length === 1 ? "" : "s"}
+              </summary>
+              <div
+                style={{
+                  maxHeight: 140,
+                  overflow: "auto",
+                  background: "var(--vp-void)",
+                  border: "1px solid var(--vp-edge-hot)",
+                  borderRadius: 4,
+                  padding: "0.5rem 0.6rem",
+                  marginTop: "0.4rem",
+                  fontFamily: "var(--font-jb-mono), monospace",
+                  fontSize: "0.66rem",
+                  color: "var(--vj-ink-dim)",
+                  lineHeight: 1.45,
+                  letterSpacing: 0,
+                  textTransform: "none",
+                }}
+              >
+                {logs.map((line, i) => (
+                  <div key={i} style={{ whiteSpace: "pre-wrap" }}>
+                    {line}
+                  </div>
+                ))}
+              </div>
+            </details>
+          </div>
+        )}
 
         {/* ── Pod telemetry ─────────────────────────────────────── */}
         {/* Hardware diagnostics rack — GPU memory + util, CPU load,

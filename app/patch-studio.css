@@ -2005,6 +2005,31 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Global error banner — used for audio + recording failures.
+   Click-to-dismiss; sits below the audio meters strip so error
+   messages don't push the workspace down too far.
+   ───────────────────────────────────────────────────────────── */
+.vp-error-banner {
+  display: block;
+  width: calc(100% - 2.5rem);
+  margin: 0.4rem 1.25rem 0;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--vj-error) 12%, transparent);
+  border: 1px solid var(--vj-error);
+  color: var(--vj-error);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-align: left;
+  cursor: pointer;
+  transition: background 120ms;
+}
+.vp-error-banner:hover {
+  background: color-mix(in srgb, var(--vj-error) 22%, transparent);
+}
+
+/* ─────────────────────────────────────────────────────────────
    Recording chip — split control: red REC button + tight resolution
    selector. Matches .vp-ai-chip in height so it docks cleanly in
    the system bar row. Goes pulsing-red while recording with a live
