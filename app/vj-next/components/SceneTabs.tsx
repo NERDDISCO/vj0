@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSceneStore, useUiStore } from "@/src/lib/composer";
+import {
+  useSceneStore,
+  useUiStore,
+  SCENE_TEMPLATES,
+} from "@/src/lib/composer";
 
 /**
  * Top scene tabs — one tab per scene. Each tab shows the scene name in the
@@ -17,6 +21,7 @@ export function SceneTabs() {
   const activeId = useSceneStore((s) => s.activeSceneId);
   const setActive = useSceneStore((s) => s.setActiveScene);
   const addScene = useSceneStore((s) => s.addScene);
+  const addSceneFromTemplate = useSceneStore((s) => s.addSceneFromTemplate);
   const renameScene = useSceneStore((s) => s.renameScene);
 
   const togglePalette = useUiStore((s) => s.togglePalette);
@@ -24,6 +29,24 @@ export function SceneTabs() {
   const [renamingId, setRenamingId] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [templateOpen, setTemplateOpen] = useState(false);
+  const templateBtnRef = useRef<HTMLButtonElement>(null);
+  // Outside-click close for the template menu.
+  useEffect(() => {
+    if (!templateOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (!templateBtnRef.current?.parentElement?.contains(e.target as Node)) {
+        setTemplateOpen(false);
+      }
+    };
+    const id = window.setTimeout(() => {
+      window.addEventListener("mousedown", onClick);
+    }, 0);
+    return () => {
+      window.clearTimeout(id);
+      window.removeEventListener("mousedown", onClick);
+    };
+  }, [templateOpen]);
 
   useEffect(() => {
     if (renamingId && inputRef.current) {
@@ -119,13 +142,47 @@ export function SceneTabs() {
         type="button"
         className="vp-tab vp-tab__add"
         onClick={() => addScene()}
-        title="New scene"
+        title="New empty scene"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 5v14M5 12h14" />
         </svg>
         new
       </button>
+      <div style={{ position: "relative" }}>
+        <button
+          ref={templateBtnRef}
+          type="button"
+          className="vp-tab vp-tab__add"
+          onClick={() => setTemplateOpen((o) => !o)}
+          title="Spawn from template"
+          aria-expanded={templateOpen}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 6h16M4 12h16M4 18h10" />
+          </svg>
+          template ▾
+        </button>
+        {templateOpen && (
+          <div className="vp-tpl-menu">
+            <div className="vp-tpl-menu__head">scene templates</div>
+            {SCENE_TEMPLATES.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                className="vp-tpl-menu__item"
+                onClick={() => {
+                  addSceneFromTemplate(t.id);
+                  setTemplateOpen(false);
+                }}
+              >
+                <span className="vp-tpl-menu__name">{t.name}</span>
+                <span className="vp-tpl-menu__desc">{t.description}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <button
         type="button"
         className="vp-cmdk"

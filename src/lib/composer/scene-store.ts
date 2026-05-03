@@ -19,6 +19,7 @@ import type {
   Scene,
 } from "./types";
 import { purgeElementCache } from "./render";
+import { getSceneTemplate } from "./scene-templates";
 
 // ─── Defaults ────────────────────────────────────────────────────────
 function defaultProps(kind: ElementKind, x = 0.5, y = 0.5): ElementProperties {
@@ -78,6 +79,9 @@ interface SceneState {
 
   // ─── Scene actions
   addScene: (name?: string) => string;
+  /** Create a fresh scene populated with elements from a built-in
+   *  template (Waveform / Radial pulse / Spectrum bars / etc). */
+  addSceneFromTemplate: (templateId: string) => string;
   duplicateScene: (id: string) => string;
   removeScene: (id: string) => void;
   renameScene: (id: string, name: string) => void;
@@ -129,6 +133,33 @@ export const useSceneStore = create<SceneState>()(
           prompt: "",
           background: "#04040a",
           elements: [],
+          createdAt: Date.now(),
+        };
+        set((s) => ({
+          scenes: [...s.scenes, next],
+          activeSceneId: id,
+          selectedElementId: null,
+        }));
+        return id;
+      },
+
+      addSceneFromTemplate: (templateId) => {
+        const tpl = getSceneTemplate(templateId);
+        if (!tpl) return "";
+        const id = uid("scene");
+        const elements = tpl.elements().map((el, idx) => ({
+          ...el,
+          id: uid("el"),
+          // "circle 1" / "ring 2" naming so the inspector list stays
+          // self-describing even after the user reshuffles.
+          name: `${el.kind} ${idx + 1}`,
+        }));
+        const next: Scene = {
+          id,
+          name: tpl.name,
+          prompt: "",
+          background: "#04040a",
+          elements,
           createdAt: Date.now(),
         };
         set((s) => ({

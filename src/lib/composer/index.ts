@@ -40,6 +40,12 @@ export {
 } from "./scene-store";
 
 export {
+  SCENE_TEMPLATES,
+  getSceneTemplate,
+  type SceneTemplate,
+} from "./scene-templates";
+
+export {
   usePresetStore,
   presetIsValid,
   buildPresetMap,

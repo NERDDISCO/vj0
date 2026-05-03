@@ -2005,6 +2005,68 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Scene template menu — drops out of the "+ template ▾" button in
+   the scene tab strip. Lists the 6 legacy hardcoded scenes
+   (Waveform / Radial pulse / Spectrum bars / Particle field /
+   Terrain lines / Starfield) so a user has an instant starting
+   point instead of staring at the empty-scene hint.
+   ───────────────────────────────────────────────────────────── */
+.vp-tpl-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  width: 260px;
+  background: var(--vp-rail);
+  border: 1px solid var(--vp-cable-a);
+  border-radius: 8px;
+  padding: 0.45rem;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7),
+    0 0 22px -8px var(--vp-cable-a);
+  animation: vp-quickadd-in 180ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.vp-tpl-menu__head {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vp-cable-a);
+  font-weight: 600;
+  padding: 0.2rem 0.45rem 0.4rem;
+  border-bottom: 1px solid var(--vp-edge);
+  margin-bottom: 0.4rem;
+}
+.vp-tpl-menu__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.55rem;
+  background: transparent;
+  border: 0;
+  color: var(--vj-ink);
+  font: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 100ms;
+}
+.vp-tpl-menu__item:hover {
+  background: color-mix(in srgb, var(--vp-cable-a) 12%, transparent);
+}
+.vp-tpl-menu__name {
+  font-family: var(--font-doto), monospace;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--vj-ink);
+}
+.vp-tpl-menu__desc {
+  font-size: 0.6rem;
+  color: var(--vj-ink-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ─────────────────────────────────────────────────────────────
    Global error banner — used for audio + recording failures.
    Click-to-dismiss; sits below the audio meters strip so error
    messages don't push the workspace down too far.
