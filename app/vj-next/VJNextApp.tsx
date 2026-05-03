@@ -264,6 +264,18 @@ export function VJNextApp() {
       return null;
     }
   }, [aiSignalingUrl]);
+  // Same-origin /telemetry sibling — the AI popover polls this when
+  // open + connected to render pod hardware stats (GPU, CPU, RAM, disk).
+  const aiTelemetryUrl = useMemo(() => {
+    try {
+      const u = new URL(aiSignalingUrl, window.location.href);
+      u.pathname = "/telemetry";
+      u.search = "";
+      return u.toString();
+    } catch {
+      return null;
+    }
+  }, [aiSignalingUrl]);
   const aiTransport = useMemo(
     () =>
       new WebRtcAiTransport({
@@ -845,6 +857,7 @@ export function VJNextApp() {
         aiAutoConnect={aiAutoConnect}
         onAiAutoConnectChange={setAiAutoConnect}
         recording={recording}
+        aiTelemetryUrl={aiTelemetryUrl}
         aiFps={aiStatus === "connected" ? aiFps : null}
         // Prefer the server-reported per-frame gen time when we have
         // it (precise), fall back to the wall-clock send→recv estimate

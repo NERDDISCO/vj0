@@ -4,6 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { AiTransportStatus } from "@/src/lib/ai/transport";
 import type { AiBackend } from "@/src/lib/stores/ai-settings-store";
 import type { PodInfo } from "@/app/api/pods/route";
+import {
+  TelemetryPanel,
+  type TelemetrySnapshot,
+} from "@/app/vj/components/TelemetryPanel";
 
 interface AiPopoverProps {
   /** Position the popover beneath this element (the AI chip in the bar). */
@@ -25,6 +29,9 @@ interface AiPopoverProps {
   /** Persisted "auto-connect on app load + backend switch" setting. */
   autoConnect: boolean;
   onAutoConnectChange: (v: boolean) => void;
+  /** Same-origin /telemetry URL — derived from the signaling URL.
+   *  When set we poll once on open + every 2 s while open. */
+  telemetryUrl: string | null;
 
   // ─── Live transport stats
   fps: number | null;
@@ -60,6 +67,7 @@ export function AiPopover({
   onDisconnect,
   autoConnect,
   onAutoConnectChange,
+  telemetryUrl,
   fps,
   latencyMs,
   pending,
@@ -118,6 +126,47 @@ export function AiPopover({
   const [pods, setPods] = useState<PodInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+
+  // ─── Pod telemetry (only polls while this popover is open + AI is
+  // connected — cheap on demand, wasteful as a permanent background
+  // poll because /telemetry exec()s nvidia-smi on the worker).
+  const [telemetry, setTelemetry] = useState<TelemetrySnapshot | null>(null);
+  const [telemetryLoading, setTelemetryLoading] = useState(false);
+  const [telemetryErr, setTelemetryErr] = useState<string | null>(null);
+  const [telemetryLastTick, setTelemetryLastTick] = useState<number | null>(
+    null,
+  );
+  useEffect(() => {
+    if (!telemetryUrl || status !== "connected") {
+      setTelemetry(null);
+      setTelemetryErr(null);
+      return;
+    }
+    let cancelled = false;
+    setTelemetryLoading(true);
+    const tick = async () => {
+      try {
+        const r = await fetch(telemetryUrl, { cache: "no-store" });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const j = (await r.json()) as TelemetrySnapshot;
+        if (cancelled) return;
+        setTelemetry(j);
+        setTelemetryErr(null);
+        setTelemetryLastTick(Date.now());
+      } catch (e) {
+        if (cancelled) return;
+        setTelemetryErr(e instanceof Error ? e.message : "fetch failed");
+      } finally {
+        if (!cancelled) setTelemetryLoading(false);
+      }
+    };
+    void tick();
+    const id = window.setInterval(() => void tick(), 2000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [telemetryUrl, status]);
 
   const fetchPods = useCallback(async () => {
     setLoading(true);
@@ -270,6 +319,22 @@ export function AiPopover({
             />
           </div>
         </div>
+
+        {/* ── Pod telemetry ─────────────────────────────────────── */}
+        {/* Hardware diagnostics rack — GPU memory + util, CPU load,
+            RAM, disk, network volume. Only renders when AI is
+            connected (the worker IS the pod). Polls every 2 s while
+            the popover is open. */}
+        {status === "connected" && telemetryUrl && (
+          <div className="vp-ai-popover__section">
+            <TelemetryPanel
+              snapshot={telemetry}
+              loading={telemetryLoading}
+              error={telemetryErr}
+              lastTick={telemetryLastTick}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
