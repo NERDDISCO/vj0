@@ -7,6 +7,8 @@ import type { AiBackend } from "@/src/lib/stores/ai-settings-store";
 import type { AudioFeatures } from "@/src/lib/audio-features";
 import { AiPopover } from "./AiPopover";
 import { AudioPopover } from "./AudioPopover";
+import { RecordingChip } from "./RecordingChip";
+import type { useRecording } from "../hooks/useRecording";
 
 interface SystemBarProps {
   audioStatus: "idle" | "starting" | "running" | "error";
@@ -28,6 +30,7 @@ interface SystemBarProps {
   onAiDisconnect: () => void;
   aiAutoConnect: boolean;
   onAiAutoConnectChange: (v: boolean) => void;
+  recording: ReturnType<typeof useRecording>;
   /** Live receive FPS while connected, null otherwise. */
   aiFps: number | null;
   /** Round-trip generation latency in ms while connected. */
@@ -63,6 +66,7 @@ export function SystemBar({
   onAiDisconnect,
   aiAutoConnect,
   onAiAutoConnectChange,
+  recording,
   aiFps,
   aiLatencyMs,
   aiPending,
@@ -304,6 +308,30 @@ export function SystemBar({
       >
         ✷ lighting
       </button>
+
+      <span
+        style={{
+          height: "1rem",
+          width: 1,
+          background: "var(--vp-edge-hot)",
+          margin: "0 0.4rem",
+        }}
+      />
+
+      {/* Recording — session-output action so it lives next to the
+          drawer toggles, not inside the AI popover. Same chip family
+          as the others; goes pulsing-red while recording with a live
+          elapsed timer in dot-matrix font. */}
+      <RecordingChip
+        isRecording={recording.isRecording}
+        isFinalizing={recording.isFinalizing}
+        supported={recording.supported}
+        resolution={recording.resolution}
+        onResolutionChange={recording.setResolution}
+        onStart={recording.start}
+        onStop={recording.stop}
+        getElapsedMs={recording.getElapsedMs}
+      />
 
       <span style={{ flex: 1 }} />
 

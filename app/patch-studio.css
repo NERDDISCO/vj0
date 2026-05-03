@@ -2004,6 +2004,85 @@
   box-shadow: 0 0 0 1px var(--vp-cable-a);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Recording chip — split control: red REC button + tight resolution
+   selector. Matches .vp-ai-chip in height so it docks cleanly in
+   the system bar row. Goes pulsing-red while recording with a live
+   elapsed timer in dot-matrix font.
+   ───────────────────────────────────────────────────────────── */
+.vp-rec-chip {
+  display: inline-flex;
+  align-items: stretch;
+  height: 1.75rem;
+  border: 1px solid var(--vj-edge);
+  background: var(--vj-panel-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.vp-rec-chip__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.6rem;
+  background: color-mix(in srgb, var(--vj-error) 8%, transparent);
+  color: var(--vj-error);
+  border: 0;
+  font: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 120ms;
+}
+.vp-rec-chip__btn:hover {
+  background: color-mix(in srgb, var(--vj-error) 18%, transparent);
+}
+.vp-rec-chip__res {
+  background: var(--vp-void);
+  border: 0;
+  border-left: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink-dim);
+  font: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  padding: 0 0.4rem;
+  cursor: pointer;
+}
+.vp-rec-chip__res option {
+  background: var(--vp-rail);
+  color: var(--vj-ink);
+}
+.vp-rec-chip--live {
+  border-color: var(--vj-error);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vj-error) 30%, transparent),
+    0 0 16px -4px var(--vj-error);
+  animation: vp-rec-pulse 1.6s ease-in-out infinite;
+}
+.vp-rec-chip__btn--stop {
+  background: color-mix(in srgb, var(--vj-error) 18%, transparent);
+}
+.vp-rec-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vj-error);
+  box-shadow: 0 0 6px var(--vj-error);
+  animation: vp-rec-pulse 0.9s ease-in-out infinite;
+}
+.vp-rec-chip__time {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--vj-error);
+  font-variant-numeric: tabular-nums;
+}
+@keyframes vp-rec-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
 /* Auto-connect toggle row — sits right under the connect button so
    the relationship "this is what happens automatically next time" is
    visually obvious. Bigger hit area than a vanilla checkbox+label

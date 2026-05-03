@@ -26,6 +26,7 @@ import { CommandPalette } from "./components/CommandPalette";
 import type { AiCompileState, BootPhase } from "./components/CompileOverlay";
 import { SYSTEM_AUDIO_VALUE } from "./components/AudioPopover";
 import { PerformanceDeck } from "./components/PerformanceDeck";
+import { useRecording } from "./hooks/useRecording";
 
 /**
  * VJNextApp — orchestrator for /vj-next.
@@ -298,6 +299,17 @@ export function VJNextApp() {
   const handleInputCanvas = useCallback((el: HTMLCanvasElement | null) => {
     inputCanvasRef.current = el;
   }, []);
+
+  // ─── Recording ────────────────────────────────────────────────────
+  // For now we record the input scene canvas — always has content even
+  // when AI isn't connected. When the WebGL StageRenderer for the AI
+  // preview lands (Batch 5), getSourceCanvas can switch to the AI
+  // canvas while connected so the recording captures the actual stage
+  // output rather than the source.
+  const recording = useRecording({
+    getSourceCanvas: () => inputCanvasRef.current,
+    audioEngineRef,
+  });
 
   useEffect(() => {
     const onStatus = (s: AiTransportStatus) => {
@@ -769,6 +781,7 @@ export function VJNextApp() {
         }}
         aiAutoConnect={aiAutoConnect}
         onAiAutoConnectChange={setAiAutoConnect}
+        recording={recording}
         aiFps={aiStatus === "connected" ? aiFps : null}
         // Prefer the server-reported per-frame gen time when we have
         // it (precise), fall back to the wall-clock send→recv estimate
