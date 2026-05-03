@@ -1824,6 +1824,186 @@
   box-shadow: 0 0 18px -6px var(--vj-error);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Performance deck — 9 prompt-preset cards in a 3×3 (or 9×1)
+   grid. Each cell shows its hotkey + label and turns magenta-glow
+   when the preset is currently armed. The pencil icon opens an
+   inline editor for label + prompt, persisted via the same
+   useAiSettingsStore the legacy /vj uses.
+   ───────────────────────────────────────────────────────────── */
+.vp-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--vp-edge);
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vp-cable-b) 5%, var(--vp-rail)),
+    var(--vp-rail)
+  );
+  position: relative;
+}
+.vp-deck__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--vp-edge);
+  padding-bottom: 0.5rem;
+}
+.vp-deck__title {
+  font-family: var(--font-doto), monospace;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vp-cable-b);
+}
+.vp-deck__hint {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-deck__hint kbd {
+  font: inherit;
+  font-size: 0.58rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid var(--vp-edge-hot);
+  border-radius: 3px;
+  background: var(--vp-void);
+  color: var(--vj-ink);
+  margin: 0 0.15rem;
+}
+.vp-deck__grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+}
+@media (max-width: 1100px) {
+  .vp-deck__grid { grid-template-columns: repeat(3, 1fr); }
+}
+.vp-deck__cell {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--vp-edge-hot);
+  border-radius: 5px;
+  background: var(--vp-void);
+  overflow: hidden;
+  transition: border-color 120ms, box-shadow 120ms;
+  height: 2.4rem;
+}
+.vp-deck__cell:hover {
+  border-color: var(--vp-cable-a);
+}
+.vp-deck__cell--live {
+  border-color: var(--vp-cable-b);
+  background: color-mix(in srgb, var(--vp-cable-b) 14%, var(--vp-void));
+  box-shadow: 0 0 16px -4px var(--vp-cable-b),
+    inset 2px 0 0 0 var(--vp-cable-b);
+}
+.vp-deck__fire {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.4rem;
+  background: transparent;
+  border: 0;
+  color: var(--vj-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+.vp-deck__hot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  font-family: var(--font-doto), monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--vp-cable-a);
+  background: color-mix(in srgb, var(--vp-cable-a) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vp-cable-a) 35%, transparent);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.vp-deck__cell--live .vp-deck__hot {
+  color: var(--vp-cable-b);
+  background: color-mix(in srgb, var(--vp-cable-b) 18%, transparent);
+  border-color: color-mix(in srgb, var(--vp-cable-b) 50%, transparent);
+}
+.vp-deck__label {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.vp-deck__edit {
+  width: 1.55rem;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink-dim);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.vp-deck__edit:hover { color: var(--vp-cable-a); }
+.vp-deck__editor {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--vp-rail);
+  border: 1px solid var(--vp-cable-a);
+  border-radius: 6px;
+  padding: 0.55rem;
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.7),
+    0 0 22px -8px var(--vp-cable-a);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 240px;
+}
+.vp-deck__editor label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-deck__editor input,
+.vp-deck__editor textarea {
+  background: var(--vp-void);
+  border: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink);
+  padding: 0.35rem 0.5rem;
+  font: inherit;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  outline: 0;
+  resize: vertical;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.vp-deck__editor input:focus,
+.vp-deck__editor textarea:focus {
+  border-color: var(--vp-cable-a);
+  box-shadow: 0 0 0 1px var(--vp-cable-a);
+}
+
 /* Auto-connect toggle row — sits right under the connect button so
    the relationship "this is what happens automatically next time" is
    visually obvious. Bigger hit area than a vanilla checkbox+label

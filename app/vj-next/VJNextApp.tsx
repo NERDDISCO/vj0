@@ -25,6 +25,7 @@ import { Drawer } from "./components/Drawer";
 import { CommandPalette } from "./components/CommandPalette";
 import type { AiCompileState, BootPhase } from "./components/CompileOverlay";
 import { SYSTEM_AUDIO_VALUE } from "./components/AudioPopover";
+import { PerformanceDeck } from "./components/PerformanceDeck";
 
 /**
  * VJNextApp — orchestrator for /vj-next.
@@ -431,13 +432,24 @@ export function VJNextApp() {
   }, [aiAutoConnect, aiTransport]);
 
   // ─── Output options ──────────────────────────────────────────────
-  const [outWidth, setOutWidth] = useState(512);
-  const [outHeight, setOutHeight] = useState(288);
-  const [steps, setSteps] = useState(2);
-  const [alpha, setAlpha] = useState(0.32);
-  const [seed, setSeed] = useState(424242);
+  // Output res, klein α, klein steps, seed all live in useAiSettingsStore
+  // so they stay in sync with the legacy /vj route AND so they survive
+  // reload like every other live-set setting. Local component-state
+  // versions removed — this was a divergence bug between the two routes.
+  const outWidth = useAiSettingsStore((s) => s.outputWidth);
+  const outHeight = useAiSettingsStore((s) => s.outputHeight);
+  const setOutSize = useAiSettingsStore((s) => s.setOutputSize);
+  const steps = useAiSettingsStore((s) => s.kleinSteps);
+  const setSteps = useAiSettingsStore((s) => s.setKleinSteps);
+  const alpha = useAiSettingsStore((s) => s.kleinAlpha);
+  const setAlpha = useAiSettingsStore((s) => s.setKleinAlpha);
+  const seed = useAiSettingsStore((s) => s.seed);
+  const setSeed = useAiSettingsStore((s) => s.setSeed);
   const [generating, setGenerating] = useState(false);
-  const [aiFrameRate] = useState(24);
+  // Frame rate is persisted in useAiSettingsStore — the OutputOptions
+  // FX disclosure has the selector (10/20/24/30/60). Subscribed here
+  // so the rAF send loop's interval picks up changes immediately.
+  const aiFrameRate = useAiSettingsStore((s) => s.frameRate);
   const outputStatus: "idle" | "running" | "error" =
     aiStatus === "error"
       ? "error"
@@ -626,21 +638,103 @@ export function VJNextApp() {
     };
   }, [generating, aiStatus, aiFrameLoop]);
 
-  // Space toggles generation when not in input
+  // ─── Live performance hotkeys ────────────────────────────────────
+  // Mirrors legacy /vj's hotkey map so muscle memory carries over:
+  //   1-9         → fire prompt preset (replaces scene prompt + reroll seed)
+  //   space       → reroll seed only (keep prompt — fresh noise variation)
+  //   ↑ / ↓       → klein α ±0.02 (when backend === klein)
+  //   ← / →       → klein α ±0.01 (fine)
+  //   ⌘K          → command palette (handled in CommandPalette itself)
+  //   p / s / l   → drawer modes (handled in SystemBar)
+  // We intentionally do NOT bind 0 → fog yet because DMX isn't wired
+  // here — that lights up in Batch 3.
+  const updateScenePrompt = useSceneStore((s) => s.updateScenePrompt);
+  const setActiveScenePrompt = useCallback(
+    (next: string) => {
+      const id = useSceneStore.getState().activeSceneId;
+      if (id) updateScenePrompt(id, next);
+    },
+    [updateScenePrompt],
+  );
+
+  // Fire a preset by index — set the active scene's prompt to the
+  // preset's prompt, reroll the seed, then flush. Same shape as legacy.
+  const promptPresets = useAiSettingsStore((s) => s.promptPresets);
+  const firePresetByIndex = useCallback(
+    (idx: number) => {
+      const preset = promptPresets[idx];
+      if (!preset) return;
+      setActiveScenePrompt(preset.prompt);
+      setSeed(Math.floor(Math.random() * 1_000_000));
+      // flushSettingsNow runs from the prompt-change effect below, but
+      // we fire it directly too so the wire-payload lands in the same
+      // event tick as the keypress (no React-scheduler delay → no
+      // perceptible "click did nothing" lag).
+      window.queueMicrotask(() => flushSettingsNow());
+    },
+    [promptPresets, setActiveScenePrompt, setSeed, flushSettingsNow],
+  );
+  const rerollSeed = useCallback(() => {
+    setSeed(Math.floor(Math.random() * 1_000_000));
+    window.queueMicrotask(() => flushSettingsNow());
+  }, [setSeed, flushSettingsNow]);
+  const adjustAlpha = useCallback(
+    (delta: number) => {
+      const next = Math.max(0, Math.min(0.5, +(alpha + delta).toFixed(2)));
+      setAlpha(next);
+    },
+    [alpha, setAlpha],
+  );
+
   useEffect(() => {
+    function isTyping() {
+      const el = document.activeElement as HTMLElement | null;
+      if (!el) return false;
+      const t = el.tagName;
+      if (t === "INPUT" || t === "TEXTAREA" || t === "SELECT") return true;
+      if (el.isContentEditable) return true;
+      return false;
+    }
     function onKey(e: KeyboardEvent) {
-      const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (isTyping()) return;
+      if (/^[1-9]$/.test(e.key)) {
+        firePresetByIndex(parseInt(e.key, 10) - 1);
+        e.preventDefault();
         return;
       }
       if (e.code === "Space") {
+        // Spacebar = reroll seed only (matches legacy — was changed
+        // from "fire random preset" because that was disorienting
+        // mid-set when you've already dialed in a vibe).
+        rerollSeed();
         e.preventDefault();
-        setGenerating((g) => !g);
+        return;
+      }
+      if (aiBackend === "klein") {
+        if (e.key === "ArrowUp") {
+          adjustAlpha(0.02);
+          e.preventDefault();
+        } else if (e.key === "ArrowDown") {
+          adjustAlpha(-0.02);
+          e.preventDefault();
+        } else if (e.key === "ArrowRight") {
+          adjustAlpha(0.01);
+          e.preventDefault();
+        } else if (e.key === "ArrowLeft") {
+          adjustAlpha(-0.01);
+          e.preventDefault();
+        }
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [firePresetByIndex, rerollSeed, adjustAlpha, aiBackend]);
+
+  // ▶ generate is wired to the OutputOptions button + the explicit
+  // generate ▶ inside the popover. Spacebar above no longer toggles
+  // generation (it reroll-seeds) — much more useful in a live set.
+  // To stop generation use the button or hit ■ stop.
 
   // ─── Layout ──────────────────────────────────────────────────────
   return (
@@ -719,10 +813,7 @@ export function VJNextApp() {
           <OutputOptions
             width={outWidth}
             height={outHeight}
-            onResolutionChange={(w, h) => {
-              setOutWidth(w);
-              setOutHeight(h);
-            }}
+            onResolutionChange={(w, h) => setOutSize(w, h)}
             steps={steps}
             onStepsChange={setSteps}
             alpha={alpha}
@@ -732,6 +823,13 @@ export function VJNextApp() {
             generating={generating}
             onGeneratingChange={setGenerating}
             canGenerate={aiStatus === "connected"}
+          />
+          <PerformanceDeck
+            activePrompt={activeScene?.prompt ?? ""}
+            onFirePreset={firePresetByIndex}
+            onReroll={rerollSeed}
+            onAlphaNudge={aiBackend === "klein" ? adjustAlpha : null}
+            alpha={aiBackend === "klein" ? alpha : null}
           />
         </div>
       </div>

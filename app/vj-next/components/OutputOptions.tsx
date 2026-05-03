@@ -1,7 +1,11 @@
 "use client";
 
 import { selectActiveScene, useSceneStore } from "@/src/lib/composer";
-import { OUTPUT_PRESETS } from "@/src/lib/stores/ai-settings-store";
+import {
+  OUTPUT_PRESETS,
+  useAiSettingsStore,
+  type UpscaleMode,
+} from "@/src/lib/stores/ai-settings-store";
 
 interface OutputOptionsProps {
   /** Output resolution. */
@@ -59,6 +63,25 @@ export function OutputOptions({
   // div-by-16 and integer-upscale-friendly to QHD/4K. Keeps both routes
   // in sync so a user switching between them gets the same options.
   const currentResId = `${width}x${height}`;
+
+  // Stage FX + frame rate + upscale mode — settings already persisted
+  // in useAiSettingsStore from legacy /vj. We just expose them here so
+  // the user can drive them from /vj-next instead of having to switch
+  // routes to tune output post-processing.
+  const frameRate = useAiSettingsStore((s) => s.frameRate);
+  const setFrameRate = useAiSettingsStore((s) => s.setFrameRate);
+  const upscaleMode = useAiSettingsStore((s) => s.upscaleMode);
+  const setUpscaleMode = useAiSettingsStore((s) => s.setUpscaleMode);
+  const stageSharpen = useAiSettingsStore((s) => s.stageSharpen);
+  const setStageSharpen = useAiSettingsStore((s) => s.setStageSharpen);
+  const stageScanlines = useAiSettingsStore((s) => s.stageScanlines);
+  const setStageScanlines = useAiSettingsStore((s) => s.setStageScanlines);
+  const stageVignette = useAiSettingsStore((s) => s.stageVignette);
+  const setStageVignette = useAiSettingsStore((s) => s.setStageVignette);
+  const stagePixelate = useAiSettingsStore((s) => s.stagePixelate);
+  const setStagePixelate = useAiSettingsStore((s) => s.setStagePixelate);
+  const stagePixelateSize = useAiSettingsStore((s) => s.stagePixelateSize);
+  const setStagePixelateSize = useAiSettingsStore((s) => s.setStagePixelateSize);
 
   return (
     <div className="vp-options">
@@ -190,7 +213,124 @@ export function OutputOptions({
             ⟲
           </button>
         </label>
+
+        <label className="vj-chip" title="Frame rate target for the send loop">
+          <span className="vj-chip__label">fps</span>
+          <select
+            className="vj-chip__select"
+            value={frameRate}
+            onChange={(e) => setFrameRate(Number(e.target.value))}
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={24}>24</option>
+            <option value={30}>30</option>
+            <option value={60}>60</option>
+          </select>
+        </label>
+
+        <label className="vj-chip" title="Display upscale interpolation">
+          <span className="vj-chip__label">upscale</span>
+          <select
+            className="vj-chip__select"
+            value={upscaleMode}
+            onChange={(e) => setUpscaleMode(e.target.value as UpscaleMode)}
+          >
+            <option value="lanczos">lanczos</option>
+            <option value="bilinear">bilinear</option>
+          </select>
+        </label>
       </div>
+
+      {/* Stage FX disclosure — display-time post-processing applied
+          by StageRenderer (sharpen, scanlines, vignette, pixelate).
+          Tucked into a disclosure because these are set-once-per-set
+          values that don't belong on the live toolbar. */}
+      <details className="vj-disclosure">
+        <summary>stage fx · sharpen · scanlines · vignette · pixelate</summary>
+        <div
+          style={{
+            marginTop: "0.55rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.4rem",
+          }}
+        >
+          <div className="vp-options__row">
+            <div className="vj-chip" title="Unsharp-mask strength applied to the AI output">
+              <span className="vj-chip__label">sharpen</span>
+              <input
+                type="range"
+                min={0}
+                max={4}
+                step={0.05}
+                value={stageSharpen}
+                onChange={(e) => setStageSharpen(Number(e.target.value))}
+                className="vj-range vj-chip__range"
+                style={
+                  {
+                    ["--vj-range-fill" as string]: `${(stageSharpen / 4) * 100}%`,
+                  } as React.CSSProperties
+                }
+              />
+              <span className="vj-chip__value">{stageSharpen.toFixed(2)}</span>
+            </div>
+            <label className="vj-chip" title="Toggle CRT-style scanlines">
+              <input
+                type="checkbox"
+                className="vj-check"
+                checked={stageScanlines}
+                onChange={(e) => setStageScanlines(e.target.checked)}
+              />
+              <span className="vj-chip__label">scanlines</span>
+            </label>
+            <label className="vj-chip" title="Toggle vignette">
+              <input
+                type="checkbox"
+                className="vj-check"
+                checked={stageVignette}
+                onChange={(e) => setStageVignette(e.target.checked)}
+              />
+              <span className="vj-chip__label">vignette</span>
+            </label>
+          </div>
+          <div className="vp-options__row">
+            <label className="vj-chip" title="Toggle pixelate effect">
+              <input
+                type="checkbox"
+                className="vj-check"
+                checked={stagePixelate}
+                onChange={(e) => setStagePixelate(e.target.checked)}
+              />
+              <span className="vj-chip__label">pixelate</span>
+            </label>
+            {stagePixelate && (
+              <div className="vj-chip" title="Pixel block size">
+                <span className="vj-chip__label">size</span>
+                <input
+                  type="range"
+                  min={2}
+                  max={32}
+                  step={1}
+                  value={stagePixelateSize}
+                  onChange={(e) =>
+                    setStagePixelateSize(Number(e.target.value))
+                  }
+                  className="vj-range vj-chip__range"
+                  style={
+                    {
+                      ["--vj-range-fill" as string]: `${
+                        ((stagePixelateSize - 2) / 30) * 100
+                      }%`,
+                    } as React.CSSProperties
+                  }
+                />
+                <span className="vj-chip__value">{stagePixelateSize}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </details>
     </div>
   );
 }
