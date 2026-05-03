@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { selectActiveScene, useSceneStore } from "@/src/lib/composer";
+import type { AiTransportStatus } from "@/src/lib/ai/transport";
+import { CompileOverlay, type AiCompileState } from "./CompileOverlay";
 
 interface OutputStageProps {
   /** When connected, the AI side will stream frames here as a data URL. We
@@ -11,6 +13,15 @@ interface OutputStageProps {
   outputStatus: "idle" | "running" | "error";
   /** Live FPS readout. */
   fps: number;
+  /** AI transport status — disambiguates the empty-state messaging
+   *  (not connected vs. connected-but-not-generating vs. waiting-for-frame). */
+  aiStatus: AiTransportStatus;
+  /** Worker readiness from /healthz — drives "preparing workers x/y". */
+  aiServer: { workerCount: number; readyCount: number } | null;
+  /** Server boot/compile state — drives CompileOverlay. */
+  aiCompile: AiCompileState | null;
+  /** Whether the user has armed generation (▶ generate). */
+  generating: boolean;
 }
 
 /**
@@ -23,7 +34,15 @@ interface OutputStageProps {
  * directly so the design works even before the AI worker is connected. The
  * pass-through path is also genuinely useful as a "no-AI projector mode".
  */
-export function OutputStage({ aiImageUrl, outputStatus, fps }: OutputStageProps) {
+export function OutputStage({
+  aiImageUrl,
+  outputStatus,
+  fps,
+  aiStatus,
+  aiServer,
+  aiCompile,
+  generating,
+}: OutputStageProps) {
   const activeScene = useSceneStore(selectActiveScene);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -53,7 +72,7 @@ export function OutputStage({ aiImageUrl, outputStatus, fps }: OutputStageProps)
           Plain <img> on purpose — `aiImageUrl` is a base64 stream URL that
           changes ~30 fps; next/image's optimization pass would be a
           per-frame waste. */}
-      {aiImageUrl ? (
+      {aiImageUrl && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           ref={imgRef}
@@ -69,7 +88,20 @@ export function OutputStage({ aiImageUrl, outputStatus, fps }: OutputStageProps)
             transition: "opacity 80ms linear",
           }}
         />
-      ) : (
+      )}
+
+      {/* Compile/boot overlay — wins over everything else when the
+          server is loading weights or JIT-compiling. The legacy /vj
+          render of this overlay sells the cold-boot wait that would
+          otherwise look like a frozen preview. */}
+      {aiCompile && <CompileOverlay state={aiCompile} />}
+
+      {/* Smart placeholder ladder when no AI frame yet. Each branch
+          telegraphs the most-specific true thing the server's doing,
+          so the user always knows whether to wait, press ▶, or fix
+          a connection — never sees a blank "OUTPUT IDLE" while the
+          worker is mid-compile. */}
+      {!aiImageUrl && !aiCompile && (
         <div
           style={{
             position: "absolute",
@@ -80,11 +112,41 @@ export function OutputStage({ aiImageUrl, outputStatus, fps }: OutputStageProps)
             justifyContent: "center",
           }}
         >
-          <div className="vp-canvas-hint">
-            <b>OUTPUT IDLE</b>
-            <span>connect ai · or pass-through input</span>
-            <i>scene: {activeScene?.name ?? "—"}</i>
-          </div>
+          {aiStatus === "connecting" ? (
+            <div className="vp-canvas-hint">
+              <b>NEGOTIATING</b>
+              <span>opening webrtc channel…</span>
+            </div>
+          ) : aiStatus !== "connected" ? (
+            <div className="vp-canvas-hint">
+              <b>OUTPUT IDLE</b>
+              <span>connect ai from the bar above</span>
+              <i>scene: {activeScene?.name ?? "—"}</i>
+            </div>
+          ) : aiServer && aiServer.readyCount < aiServer.workerCount ? (
+            <div className="vp-canvas-hint">
+              <b>PREPARING WORKERS</b>
+              <span>
+                {aiServer.readyCount} / {aiServer.workerCount} ready
+              </span>
+              <i>loading weights · compiling kernels — ~3 min on cold boot</i>
+            </div>
+          ) : generating ? (
+            <div className="vp-canvas-hint">
+              <b>GENERATING</b>
+              <span>waiting for first frame…</span>
+            </div>
+          ) : (
+            <div className="vp-canvas-hint">
+              <b>READY</b>
+              <span>
+                {aiServer
+                  ? `${aiServer.workerCount} ${aiServer.workerCount === 1 ? "worker" : "workers"} ready`
+                  : "connected"}
+              </span>
+              <i>press ▶ generate or hit space</i>
+            </div>
+          )}
         </div>
       )}
 

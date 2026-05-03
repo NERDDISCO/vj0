@@ -1946,6 +1946,76 @@
   text-shadow: 0 0 8px color-mix(in srgb, var(--vp-cable-b) 50%, transparent);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Compile overlay — wins over the OUTPUT stage when the worker is
+   loading weights or JIT-compiling. Built to telegraph "the
+   server is busy, here's how busy and how long" so a stage tech
+   doesn't think the app is frozen during the cold-boot wait.
+   ───────────────────────────────────────────────────────────── */
+.vp-compile-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: color-mix(in srgb, #000 88%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.vp-compile-overlay__title {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vp-cable-a);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--vp-cable-a) 55%, transparent);
+  animation: vp-compile-blink 1.6s ease-in-out infinite;
+}
+@keyframes vp-compile-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+.vp-compile-overlay__size {
+  font-family: var(--font-doto), monospace;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  color: var(--vp-cable-b);
+  text-shadow: 0 0 20px color-mix(in srgb, var(--vp-cable-b) 50%, transparent);
+}
+.vp-compile-overlay__bar {
+  width: 14rem;
+  max-width: 80%;
+  height: 6px;
+  background: color-mix(in srgb, var(--vp-edge) 70%, #000);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.vp-compile-overlay__bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(
+    90deg,
+    var(--vp-cable-a) 0%,
+    var(--vp-cable-b) 100%
+  );
+  box-shadow: 0 0 14px var(--vp-cable-b);
+  transition: width 200ms ease-out;
+}
+.vp-compile-overlay__meta {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+  font-variant-numeric: tabular-nums;
+}
+
 /* AI chip in the system bar — clickable variant that toggles the
    popover. Inherits the .vj-chip box but adds open state + chev. */
 .vp-ai-chip {

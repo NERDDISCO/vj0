@@ -29,6 +29,10 @@ interface SceneCanvasProps {
   timeDomainRef: React.MutableRefObject<Float32Array | null>;
   /** Time origin for the formula `t` variable. */
   startedAt: number;
+  /** Receives the raw <canvas> element so the orchestrator's AI send
+   *  loop can read pixels off it. The element is mounted lazily, so
+   *  callers should treat null as "not yet available". */
+  canvasRefCb?: (canvas: HTMLCanvasElement | null) => void;
 }
 
 /**
@@ -47,6 +51,7 @@ export function SceneCanvas({
   audioFeaturesRef,
   timeDomainRef,
   startedAt,
+  canvasRefCb,
 }: SceneCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -390,7 +395,12 @@ export function SceneCanvas({
         {showGrid && <div className="vp-grid-bg" />}
 
         <canvas
-          ref={canvasRef}
+          ref={(el) => {
+            canvasRef.current = el;
+            // Surface the raw element to the orchestrator so the AI
+            // send loop can read pixels off it. Null on unmount.
+            canvasRefCb?.(el);
+          }}
           style={{
             position: "absolute",
             inset: 0,

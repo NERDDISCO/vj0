@@ -13,6 +13,7 @@ import {
   useAiSettingsStore,
   type AiBackend,
 } from "@/src/lib/stores/ai-settings-store";
+import { useSceneStore } from "@/src/lib/composer";
 import { SystemBar } from "./components/SystemBar";
 import { SceneTabs } from "./components/SceneTabs";
 import { AudioMeters } from "./components/AudioMeters";
@@ -22,6 +23,8 @@ import { OutputOptions } from "./components/OutputOptions";
 import { ElementInspector } from "./components/ElementInspector";
 import { Drawer } from "./components/Drawer";
 import { CommandPalette } from "./components/CommandPalette";
+import type { AiCompileState, BootPhase } from "./components/CompileOverlay";
+import { SYSTEM_AUDIO_VALUE } from "./components/AudioPopover";
 
 /**
  * VJNextApp — orchestrator for /vj-next.
@@ -42,6 +45,17 @@ export function VJNextApp() {
   // engine fills this in-place each frame; we hold one shared
   // Float32Array across the session to avoid re-allocating at audio rate.
   const timeDomainRef = useRef<Float32Array | null>(null);
+  // Audio source picker — "device" (mic from enumerateDevices) vs
+  // "system" (getDisplayMedia capture of a tab/screen, audio only).
+  const [audioSource, setAudioSource] = useState<"device" | "system">("device");
+  const [audioErrorMessage, setAudioErrorMessage] = useState<string | null>(null);
+  const [systemAudioSupported, setSystemAudioSupported] = useState(false);
+  useEffect(() => {
+    setSystemAudioSupported(
+      typeof navigator !== "undefined" &&
+        typeof navigator.mediaDevices?.getDisplayMedia === "function",
+    );
+  }, []);
   const [audioStatus, setAudioStatus] = useState<
     "idle" | "starting" | "running" | "error"
   >("idle");
@@ -78,31 +92,100 @@ export function VJNextApp() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const initAudio = useCallback(async (deviceId?: string) => {
-    setAudioStatus("starting");
+  const initAudio = useCallback(
+    async (source?: string | MediaStream) => {
+      setAudioStatus("starting");
+      setAudioErrorMessage(null);
+      try {
+        // Tear down any existing engine so we can swap mic devices /
+        // toggle between mic and system-audio capture.
+        audioEngineRef.current?.destroy();
+        const eng = new AudioEngine();
+        await eng.init(source);
+        audioEngineRef.current = eng;
+        setAudioStatus("running");
+      } catch (e) {
+        console.error("Audio init failed", e);
+        setAudioStatus("error");
+        setAudioErrorMessage(
+          e instanceof Error ? e.message : "audio init failed",
+        );
+      }
+    },
+    [],
+  );
+
+  // System audio capture via getDisplayMedia. Browser shows its
+  // share-picker → user selects a tab/window/screen → we drop the
+  // video track (asked for it because Chrome requires it; we don't
+  // need it) and feed the audio track into the engine. When the user
+  // clicks "Stop sharing" the track ends and we auto-fall-back to the
+  // last selected mic device.
+  const initSystemAudio = useCallback(async () => {
     try {
-      // Tear down any existing engine so we can swap mic devices.
-      audioEngineRef.current?.destroy();
-      const eng = new AudioEngine();
-      await eng.init(deviceId);
-      audioEngineRef.current = eng;
-      setAudioStatus("running");
-    } catch (e) {
-      console.error("Audio init failed", e);
+      const constraints = {
+        video: true,
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false,
+          suppressLocalAudioPlayback: false,
+        },
+        systemAudio: "include",
+        windowAudio: "system",
+      } as DisplayMediaStreamOptions;
+      const stream = await navigator.mediaDevices.getDisplayMedia(constraints);
+      // Drop the video tracks Chrome forced on us.
+      for (const t of stream.getVideoTracks()) {
+        stream.removeTrack(t);
+        t.stop();
+      }
+      const audioTracks = stream.getAudioTracks();
+      if (audioTracks.length === 0) {
+        stream.getTracks().forEach((t) => t.stop());
+        setAudioStatus("error");
+        setAudioErrorMessage(
+          "No audio in the shared source — re-share and tick the audio box (only available for tabs and full screen).",
+        );
+        return;
+      }
+      // Auto-fall-back to last device when user clicks "Stop sharing".
+      audioTracks[0].addEventListener("ended", () => {
+        const fallback = audioDevicesRef.current[0]?.deviceId ?? "";
+        setSelectedDeviceId(fallback);
+        setAudioSource("device");
+        void initAudio(fallback || undefined);
+      });
+      setSelectedDeviceId(SYSTEM_AUDIO_VALUE);
+      setAudioSource("system");
+      await initAudio(stream);
+    } catch (err) {
+      // NotAllowedError = user dismissed the picker. Quietly revert.
+      if (err instanceof DOMException && err.name === "NotAllowedError") {
+        setSelectedDeviceId(audioDevicesRef.current[0]?.deviceId ?? "");
+        return;
+      }
       setAudioStatus("error");
+      setAudioErrorMessage(
+        err instanceof Error ? err.message : "system audio unavailable",
+      );
     }
-  }, []);
+  }, [initAudio]);
+
+  // Keep a ref of the latest devices list so the system-audio
+  // "ended" handler can fall back without re-creating the callback.
+  const audioDevicesRef = useRef<Array<{ deviceId: string; label: string }>>([]);
 
   const fetchDevices = useCallback(async () => {
     try {
       const all = await navigator.mediaDevices.enumerateDevices();
       const inputs = all.filter((d) => d.kind === "audioinput");
-      setAudioDevices(
-        inputs.map((d) => ({
-          deviceId: d.deviceId,
-          label: d.label || `Microphone ${d.deviceId.slice(0, 6)}`,
-        })),
-      );
+      const mapped = inputs.map((d) => ({
+        deviceId: d.deviceId,
+        label: d.label || `Microphone ${d.deviceId.slice(0, 6)}`,
+      }));
+      setAudioDevices(mapped);
+      audioDevicesRef.current = mapped;
       if (!selectedDeviceId && inputs.length > 0) {
         setSelectedDeviceId(inputs[0].deviceId);
         setAudioDeviceLabel(inputs[0].label || "default");
@@ -123,12 +206,21 @@ export function VJNextApp() {
 
   const handleDeviceChange = useCallback(
     (id: string) => {
+      // Sentinel "system audio" → kick the OS share-picker. Don't
+      // persist it (getDisplayMedia must be re-triggered each session).
+      if (id === SYSTEM_AUDIO_VALUE) {
+        setSelectedDeviceId(SYSTEM_AUDIO_VALUE);
+        setAudioDeviceLabel("🖥 System audio");
+        void initSystemAudio();
+        return;
+      }
+      setAudioSource("device");
       setSelectedDeviceId(id);
       const dev = audioDevices.find((d) => d.deviceId === id);
       if (dev) setAudioDeviceLabel(dev.label);
-      void initAudio(id);
+      void initAudio(id || undefined);
     },
-    [audioDevices, initAudio],
+    [audioDevices, initAudio, initSystemAudio],
   );
 
   // ─── AI transport (WebRTC) ────────────────────────────────────────
@@ -147,6 +239,19 @@ export function VJNextApp() {
     if (aiBackend === "pod" && aiPodUrl) return aiPodUrl;
     return AI_BACKEND_URLS[aiBackend] || "/api/webrtc/offer";
   }, [aiBackend, aiPodUrl]);
+  // Same-origin /healthz sibling of the signaling URL — used to poll
+  // worker readiness while connected so the UI can say "preparing
+  // workers 2/4" instead of staring at an empty preview.
+  const aiHealthUrl = useMemo(() => {
+    try {
+      const u = new URL(aiSignalingUrl, window.location.href);
+      u.pathname = "/healthz";
+      u.search = "";
+      return u.toString();
+    } catch {
+      return null;
+    }
+  }, [aiSignalingUrl]);
   const aiTransport = useMemo(
     () =>
       new WebRtcAiTransport({
@@ -163,21 +268,44 @@ export function VJNextApp() {
   // outgoing frames we've buffered minus how many we've received.
   const [aiLatencyMs, setAiLatencyMs] = useState<number | null>(null);
   const [aiPending, setAiPending] = useState<number>(0);
+  // Worker-readiness from /healthz — "preparing workers 2/4 ready" UX.
+  const [aiServer, setAiServer] = useState<{
+    workerCount: number;
+    readyCount: number;
+  } | null>(null);
+  // Boot/compile phase from server text-frame events. Drives CompileOverlay.
+  const [aiCompile, setAiCompile] = useState<AiCompileState | null>(null);
+  // Per-frame stats from the server's "stats" message — used for the
+  // popover's latency readout (much more accurate than wall-clock send/recv).
+  const [aiServerLatency, setAiServerLatency] = useState<number | null>(null);
   const lastFrameTimeRef = useRef<number>(0);
   const lastSendTimeRef = useRef<number>(0);
   const sentCountRef = useRef<number>(0);
   const recvCountRef = useRef<number>(0);
   const frameTimingsRef = useRef<number[]>([]);
 
+  // Forwarded from SceneCanvas — the actual <canvas> element the send
+  // loop reads pixels from. Stored as a ref (not state) so changing it
+  // doesn't trigger re-renders during the rAF send loop.
+  const inputCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const handleInputCanvas = useCallback((el: HTMLCanvasElement | null) => {
+    inputCanvasRef.current = el;
+  }, []);
+
   useEffect(() => {
     const onStatus = (s: AiTransportStatus) => {
       setAiStatus(s);
       // Reset stats on any non-connected state so the popover doesn't
-      // show stale FPS / pending counts after a disconnect.
+      // show stale FPS / pending counts after a disconnect. Also clear
+      // server boot/compile state so we don't show "preparing workers"
+      // forever after a disconnect.
       if (s !== "connected") {
         setAiFps(0);
         setAiLatencyMs(null);
         setAiPending(0);
+        setAiServer(null);
+        setAiCompile(null);
+        setAiServerLatency(null);
         lastFrameTimeRef.current = 0;
         lastSendTimeRef.current = 0;
         sentCountRef.current = 0;
@@ -186,8 +314,69 @@ export function VJNextApp() {
       }
     };
     const onFrame = (frame: AiIncomingFrame) => {
-      // Only image frames carry the preview pixels; text frames are
-      // log/control messages we don't render.
+      // ─── Text frames: server status / compile progress / per-frame
+      // timing. These are the events the user used to see in the legacy
+      // /vj's CompileOverlay + chip readouts. Without them, "connected"
+      // looks identical to "frozen".
+      if (frame.kind === "text") {
+        try {
+          const data = JSON.parse(frame.message) as Record<string, unknown>;
+          // Per-frame timing report from the worker.
+          if (data.type === "stats" && typeof data.gen_time_ms === "number") {
+            setAiServerLatency(data.gen_time_ms);
+            return;
+          }
+          // Pre-warmup phases: weights, fp8 quant, compile-stub registration.
+          if (data.type === "phase") {
+            const stage = data.stage as string | undefined;
+            const PHASE_MAP: Record<string, BootPhase> = {
+              loading_weights: "loading_weights",
+              applying_fp8: "applying_fp8",
+              registering_compile_stubs: "registering_compile_stubs",
+            };
+            if (stage && PHASE_MAP[stage]) {
+              setAiCompile({
+                phase: PHASE_MAP[stage],
+                est_seconds:
+                  typeof data.est_seconds === "number" ? data.est_seconds : 30,
+                started_at: Date.now(),
+              });
+            }
+            return;
+          }
+          // Warmup phase: torch.compile per (W,H) shape. Fires once on
+          // "compiling", periodically on "compiling_progress", clears on
+          // "warmed". Back-calc started_at from the server's elapsed_ms
+          // when we missed the initial event (mid-warmup connect).
+          if (data.type === "compile") {
+            const status = data.status as string | undefined;
+            if (status === "compiling" || status === "compiling_progress") {
+              setAiCompile((prev) => ({
+                phase: "warming_up",
+                width: data.width as number | undefined,
+                height: data.height as number | undefined,
+                n_steps: data.n_steps as number | undefined,
+                iter: data.iter as number | undefined,
+                total_iters: data.total_iters as number | undefined,
+                elapsed_ms: data.elapsed_ms as number | undefined,
+                est_seconds: data.est_seconds as number | undefined,
+                started_at:
+                  prev?.phase === "warming_up" && prev?.started_at
+                    ? prev.started_at
+                    : Date.now() -
+                      (typeof data.elapsed_ms === "number" ? data.elapsed_ms : 0),
+              }));
+            } else if (status === "warmed") {
+              setAiCompile(null);
+            }
+            return;
+          }
+        } catch {
+          // Plain log line — not actionable here.
+        }
+        return;
+      }
+      // ─── Image frames below.
       if (frame.kind !== "image") return;
       // Keep a rolling 30-frame window of inter-frame deltas → smooth FPS.
       const now = performance.now();
@@ -232,12 +421,194 @@ export function VJNextApp() {
   const [alpha, setAlpha] = useState(0.32);
   const [seed, setSeed] = useState(424242);
   const [generating, setGenerating] = useState(false);
+  const [aiFrameRate] = useState(24);
   const outputStatus: "idle" | "running" | "error" =
     aiStatus === "error"
       ? "error"
       : aiStatus === "connected" && generating
         ? "running"
         : "idle";
+
+  // The active scene's prompt — sent to the worker via flushSettingsNow.
+  const activePromptRef = useRef<string>("");
+  const activeScene = useSceneStore((s) =>
+    s.scenes.find((sc) => sc.id === s.activeSceneId) ?? null,
+  );
+  useEffect(() => {
+    activePromptRef.current = activeScene?.prompt ?? "";
+  }, [activeScene?.prompt]);
+
+  // ─── Settings flush ──────────────────────────────────────────────
+  // Builds the settings payload and pushes it down the data channel.
+  // The worker reads the latest values on every frame, so this is the
+  // only path that lets prompt / seed / α / steps / resolution actually
+  // affect generation. Without this, the worker uses its defaults and
+  // the user has no way to change anything.
+  const flushSettingsNow = useCallback(() => {
+    if (!aiTransport.isConnected()) return;
+    const payload: Record<string, unknown> = {
+      prompt: activePromptRef.current,
+      seed,
+      captureWidth: outWidth,
+      captureHeight: outHeight,
+      width: outWidth,
+      height: outHeight,
+    };
+    if (aiBackend === "klein") {
+      payload.alpha = alpha;
+      payload.n_steps = steps;
+    }
+    aiTransport.sendText(JSON.stringify(payload));
+  }, [aiTransport, seed, outWidth, outHeight, aiBackend, alpha, steps]);
+
+  // Re-flush whenever any setting changes. Also re-flushes on connect
+  // (aiStatus dep) so a freshly opened channel immediately gets the
+  // current prompt/res/seed instead of falling back to worker defaults.
+  useEffect(() => {
+    flushSettingsNow();
+  }, [
+    flushSettingsNow,
+    aiStatus,
+    activeScene?.prompt,
+  ]);
+
+  // ─── /healthz polling ─────────────────────────────────────────────
+  // While connected (or attempting), poll worker readiness every 2 s.
+  // The output stage uses this to render "preparing workers 2/4 ready"
+  // instead of a blank canvas during cold boot.
+  useEffect(() => {
+    if (!aiHealthUrl) return;
+    if (aiStatus !== "connected" && aiStatus !== "connecting") {
+      setAiServer(null);
+      return;
+    }
+    let cancelled = false;
+    const tick = async () => {
+      try {
+        const r = await fetch(aiHealthUrl, { cache: "no-store" });
+        if (!r.ok) throw new Error(String(r.status));
+        const j = (await r.json()) as {
+          workerCount?: number;
+          readyCount?: number;
+        };
+        if (cancelled) return;
+        if (
+          typeof j.workerCount === "number" &&
+          typeof j.readyCount === "number"
+        ) {
+          setAiServer({ workerCount: j.workerCount, readyCount: j.readyCount });
+        }
+      } catch {
+        if (!cancelled) setAiServer(null);
+      }
+    };
+    void tick();
+    const id = window.setInterval(() => void tick(), 2000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [aiHealthUrl, aiStatus]);
+
+  // ─── Frame send loop ─────────────────────────────────────────────
+  // Captures the input scene canvas at `aiFrameRate`, encodes as JPEG,
+  // ships down the data channel via sendBinary. Backpressure-safe:
+  // skips when the channel buffer is high or a previous encode is
+  // still in flight. This is what actually makes the worker generate
+  // images — without it, the worker has no source to img2img against.
+  const senderRef = useRef<{
+    running: boolean;
+    lastFrameTime: number;
+    pendingEncode: boolean;
+    captureCanvas: HTMLCanvasElement | null;
+    captureCtx: CanvasRenderingContext2D | null;
+    resolution: number;
+    rafId: number;
+  }>({
+    running: false,
+    lastFrameTime: 0,
+    pendingEncode: false,
+    captureCanvas: null,
+    captureCtx: null,
+    resolution: 0,
+    rafId: 0,
+  });
+
+  const aiFrameLoop = useCallback(() => {
+    const sender = senderRef.current;
+    if (!sender.running) return;
+    sender.rafId = requestAnimationFrame(aiFrameLoop);
+
+    const now = performance.now();
+    const frameInterval = 1000 / aiFrameRate;
+    if (now - sender.lastFrameTime < frameInterval) return;
+
+    const src = inputCanvasRef.current;
+    if (!src || src.width === 0 || src.height === 0) return;
+
+    const capW = outWidth;
+    const capH = outHeight;
+    const resolutionKey = capW * 10000 + capH;
+    if (!sender.captureCanvas || sender.resolution !== resolutionKey) {
+      sender.captureCanvas = document.createElement("canvas");
+      sender.captureCanvas.width = capW;
+      sender.captureCanvas.height = capH;
+      sender.captureCtx = sender.captureCanvas.getContext("2d");
+      sender.resolution = resolutionKey;
+    }
+    const ctx = sender.captureCtx;
+    if (!ctx) return;
+
+    ctx.drawImage(src, 0, 0, capW, capH);
+    sender.lastFrameTime = now;
+
+    if (!aiTransport.isConnected() || !aiTransport.canSend(256 * 1024)) return;
+    if (sender.pendingEncode) return;
+
+    sender.pendingEncode = true;
+    sender.captureCanvas.toBlob(
+      (blob) => {
+        sender.pendingEncode = false;
+        if (!blob || !aiTransport.isConnected()) return;
+        blob
+          .arrayBuffer()
+          .then((buf) => {
+            if (!aiTransport.isConnected()) return;
+            aiTransport.sendBinary(buf);
+            sentCountRef.current += 1;
+            lastSendTimeRef.current = performance.now();
+            setAiPending(
+              Math.max(0, sentCountRef.current - recvCountRef.current),
+            );
+          })
+          .catch(() => {
+            /* network hiccup; next frame will try again */
+          });
+      },
+      "image/jpeg",
+      0.85,
+    );
+  }, [aiTransport, aiFrameRate, outWidth, outHeight]);
+
+  // Start/stop the send loop based on `generating`. Tearing down also
+  // cancels the in-flight rAF so a quick toggle doesn't leak frames.
+  useEffect(() => {
+    const sender = senderRef.current;
+    if (generating && aiStatus === "connected") {
+      if (!sender.running) {
+        sender.running = true;
+        sender.lastFrameTime = 0;
+        sender.rafId = requestAnimationFrame(aiFrameLoop);
+      }
+    } else {
+      sender.running = false;
+      if (sender.rafId) cancelAnimationFrame(sender.rafId);
+    }
+    return () => {
+      sender.running = false;
+      if (sender.rafId) cancelAnimationFrame(sender.rafId);
+    };
+  }, [generating, aiStatus, aiFrameLoop]);
 
   // Space toggles generation when not in input
   useEffect(() => {
@@ -264,6 +635,9 @@ export function VJNextApp() {
         audioDevices={audioDevices}
         selectedDeviceId={selectedDeviceId}
         onDeviceChange={handleDeviceChange}
+        systemAudioSupported={systemAudioSupported}
+        audioErrorMessage={audioErrorMessage}
+        audioFeaturesRef={audioFeaturesRef}
         aiStatus={aiStatus}
         aiBackend={aiBackend}
         onAiBackendChange={(b: AiBackend) => {
@@ -284,7 +658,15 @@ export function VJNextApp() {
           void aiTransport.stop();
         }}
         aiFps={aiStatus === "connected" ? aiFps : null}
-        aiLatencyMs={aiStatus === "connected" ? aiLatencyMs : null}
+        // Prefer the server-reported per-frame gen time when we have
+        // it (precise), fall back to the wall-clock send→recv estimate
+        // (rough but always populated). Either way the popover shows
+        // *something* the moment frames start flowing.
+        aiLatencyMs={
+          aiStatus === "connected"
+            ? aiServerLatency ?? aiLatencyMs
+            : null
+        }
         aiPending={aiStatus === "connected" ? aiPending : null}
       />
       <SceneTabs />
@@ -297,6 +679,7 @@ export function VJNextApp() {
             audioFeaturesRef={audioFeaturesRef}
             timeDomainRef={timeDomainRef}
             startedAt={startedAt}
+            canvasRefCb={handleInputCanvas}
           />
           <ElementInspector
             audioFeaturesRef={audioFeaturesRef}
@@ -310,6 +693,10 @@ export function VJNextApp() {
             aiImageUrl={aiImageUrl}
             outputStatus={outputStatus}
             fps={aiStatus === "connected" ? aiFps : 0}
+            aiStatus={aiStatus}
+            aiServer={aiServer}
+            aiCompile={aiCompile}
+            generating={generating}
           />
           <OutputOptions
             width={outWidth}

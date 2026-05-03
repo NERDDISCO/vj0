@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useUiStore, useSceneStore, usePresetStore } from "@/src/lib/composer";
 import type { AiTransportStatus } from "@/src/lib/ai/transport";
 import type { AiBackend } from "@/src/lib/stores/ai-settings-store";
+import type { AudioFeatures } from "@/src/lib/audio-features";
 import { AiPopover } from "./AiPopover";
+import { AudioPopover } from "./AudioPopover";
 
 interface SystemBarProps {
   audioStatus: "idle" | "starting" | "running" | "error";
@@ -12,6 +14,9 @@ interface SystemBarProps {
   audioDevices: Array<{ deviceId: string; label: string }>;
   selectedDeviceId: string;
   onDeviceChange: (id: string) => void;
+  systemAudioSupported: boolean;
+  audioErrorMessage?: string | null;
+  audioFeaturesRef: React.MutableRefObject<AudioFeatures | null>;
   // ─── AI transport controls
   aiStatus: AiTransportStatus;
   aiBackend: AiBackend;
@@ -44,6 +49,9 @@ export function SystemBar({
   audioDevices,
   selectedDeviceId,
   onDeviceChange,
+  systemAudioSupported,
+  audioErrorMessage,
+  audioFeaturesRef,
   aiStatus,
   aiBackend,
   onAiBackendChange,
@@ -55,8 +63,10 @@ export function SystemBar({
   aiLatencyMs,
   aiPending,
 }: SystemBarProps) {
-  // AI chip toggles a floating popover anchored to itself.
+  // Audio + AI chips both toggle floating popovers anchored to themselves.
+  const audioChipRef = useRef<HTMLButtonElement>(null);
   const aiChipRef = useRef<HTMLButtonElement>(null);
+  const [audioOpen, setAudioOpen] = useState(false);
   const [aiOpen, setAiOpen] = useState(false);
   const openDrawer = useUiStore((s) => s.openDrawer);
   const drawerMode = useUiStore((s) => s.drawerMode);
@@ -143,30 +153,57 @@ export function SystemBar({
         }}
       />
 
-      {/* Audio chip */}
-      <div className="vj-chip" title={`Audio · ${audioStatus}`}>
+      {/* Audio chip — clickable, opens AudioPopover with source picker
+          (mic/system), full device list, and live RMS/peak meter. Same
+          chip-as-button pattern as the AI chip so the bar reads as a
+          row of consistent controls. */}
+      <button
+        type="button"
+        ref={audioChipRef}
+        className="vp-ai-chip"
+        aria-expanded={audioOpen}
+        onClick={() => setAudioOpen((o) => !o)}
+        title={`Audio · ${audioStatus} · ${audioDeviceLabel}`}
+      >
+        <span className="vj-dot" style={{ color: statusColor }} />
+        <span className="vp-ai-chip__label">audio</span>
         <span
-          className="vj-dot"
-          style={{ color: statusColor }}
-        />
-        <span className="vj-chip__label">audio</span>
-        <select
-          className="vj-chip__select"
-          value={selectedDeviceId}
-          onChange={(e) => onDeviceChange(e.target.value)}
-          style={{ maxWidth: 200 }}
+          className="vp-ai-chip__backend"
+          style={{
+            maxWidth: 180,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            textTransform: "none",
+          }}
         >
-          {audioDevices.length === 0 ? (
-            <option value="">{audioDeviceLabel || "no input"}</option>
-          ) : (
-            audioDevices.map((d) => (
-              <option key={d.deviceId} value={d.deviceId}>
-                {d.label.slice(0, 28)}
-              </option>
-            ))
-          )}
-        </select>
-      </div>
+          {audioDeviceLabel || "no input"}
+        </span>
+        <svg
+          className="vp-ai-chip__chev"
+          viewBox="0 0 10 10"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden
+        >
+          <path d="M2 4l3 3 3-3" />
+        </svg>
+      </button>
+      {audioOpen && (
+        <AudioPopover
+          anchorRef={audioChipRef}
+          onClose={() => setAudioOpen(false)}
+          status={audioStatus}
+          deviceLabel={audioDeviceLabel}
+          devices={audioDevices}
+          selectedDeviceId={selectedDeviceId}
+          onDeviceChange={onDeviceChange}
+          systemAudioSupported={systemAudioSupported}
+          audioFeaturesRef={audioFeaturesRef}
+          errorMessage={audioErrorMessage}
+        />
+      )}
 
       {/* AI chip — clickable, opens the AiPopover with backend picker,
           live pod switcher, connect/disconnect, and live transport stats.
