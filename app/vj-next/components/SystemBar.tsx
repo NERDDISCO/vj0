@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUiStore, useSceneStore, usePresetStore } from "@/src/lib/composer";
 import type { AiTransportStatus } from "@/src/lib/ai/transport";
 import type { AiBackend } from "@/src/lib/stores/ai-settings-store";
+import { AiPopover } from "./AiPopover";
 
 interface SystemBarProps {
   audioStatus: "idle" | "starting" | "running" | "error";
@@ -11,14 +12,21 @@ interface SystemBarProps {
   audioDevices: Array<{ deviceId: string; label: string }>;
   selectedDeviceId: string;
   onDeviceChange: (id: string) => void;
-  // ─── AI transport controls — same surface as legacy /vj SystemsBar.
+  // ─── AI transport controls
   aiStatus: AiTransportStatus;
   aiBackend: AiBackend;
   onAiBackendChange: (b: AiBackend) => void;
+  /** Selected dynamic-pod signaling URL (when backend === "pod"). */
+  aiPodUrl: string;
+  onAiPodSelect: (signalingUrl: string) => void;
   onAiConnect: () => void;
   onAiDisconnect: () => void;
   /** Live receive FPS while connected, null otherwise. */
   aiFps: number | null;
+  /** Round-trip generation latency in ms while connected. */
+  aiLatencyMs: number | null;
+  /** Pending in-flight frames (dispatcher backlog). */
+  aiPending: number | null;
 }
 
 /**
@@ -39,10 +47,17 @@ export function SystemBar({
   aiStatus,
   aiBackend,
   onAiBackendChange,
+  aiPodUrl,
+  onAiPodSelect,
   onAiConnect,
   onAiDisconnect,
   aiFps,
+  aiLatencyMs,
+  aiPending,
 }: SystemBarProps) {
+  // AI chip toggles a floating popover anchored to itself.
+  const aiChipRef = useRef<HTMLButtonElement>(null);
+  const [aiOpen, setAiOpen] = useState(false);
   const openDrawer = useUiStore((s) => s.openDrawer);
   const drawerMode = useUiStore((s) => s.drawerMode);
   const drawerOpen = useUiStore((s) => s.drawerOpen);
@@ -153,53 +168,52 @@ export function SystemBar({
         </select>
       </div>
 
-      {/* AI chip — backend select + connect/disconnect button + fps readout.
-          Same affordances as the legacy /vj SystemsBar so the user has the
-          same connection workflow they're already trained on. */}
-      <div
-        className="vj-chip"
-        title={`AI ${aiStatus}${aiFps != null ? ` · ${aiFps.toFixed(1)} fps` : ""}`}
+      {/* AI chip — clickable, opens the AiPopover with backend picker,
+          live pod switcher, connect/disconnect, and live transport stats.
+          The chip itself shows status dot + current backend + (when
+          connected) a live FPS readout, so a stage tech glancing at
+          the bar gets the answers they need without opening anything. */}
+      <button
+        type="button"
+        ref={aiChipRef}
+        className="vp-ai-chip"
+        aria-expanded={aiOpen}
+        onClick={() => setAiOpen((o) => !o)}
+        title={`AI · ${aiStatus}${aiFps != null ? ` · ${aiFps.toFixed(1)} fps` : ""}`}
       >
-        <span
-          className="vj-dot"
-          style={{ color: aiStatusColor(aiStatus) }}
-        />
-        <span className="vj-chip__label">ai</span>
-        <select
-          className="vj-chip__select"
-          value={aiBackend}
-          onChange={(e) => onAiBackendChange(e.target.value as AiBackend)}
-        >
-          <option value="klein">klein</option>
-          <option value="sdturbo">sdturbo</option>
-          <option value="zimage">zimage</option>
-          <option value="pod">pod</option>
-        </select>
-        {aiStatus === "connected" || aiStatus === "connecting" ? (
-          <button
-            type="button"
-            onClick={onAiDisconnect}
-            className="vj-chip__icon"
-            title="Disconnect"
-            style={{ color: "var(--vj-error)" }}
-          >
-            ■
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={onAiConnect}
-            className="vj-chip__icon"
-            title="Connect"
-            style={{ color: "var(--vj-live)" }}
-          >
-            ▶
-          </button>
-        )}
+        <span className="vj-dot" style={{ color: aiStatusColor(aiStatus) }} />
+        <span className="vp-ai-chip__label">ai</span>
+        <span className="vp-ai-chip__backend">{aiBackend}</span>
         {aiFps != null && (
-          <span className="vj-chip__value">{aiFps.toFixed(0)}fps</span>
+          <span className="vp-ai-chip__fps">{aiFps.toFixed(0)}fps</span>
         )}
-      </div>
+        <svg
+          className="vp-ai-chip__chev"
+          viewBox="0 0 10 10"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden
+        >
+          <path d="M2 4l3 3 3-3" />
+        </svg>
+      </button>
+      {aiOpen && (
+        <AiPopover
+          anchorRef={aiChipRef}
+          onClose={() => setAiOpen(false)}
+          backend={aiBackend}
+          onBackendChange={onAiBackendChange}
+          selectedPodUrl={aiPodUrl}
+          onSelectPod={onAiPodSelect}
+          status={aiStatus}
+          onConnect={onAiConnect}
+          onDisconnect={onAiDisconnect}
+          fps={aiFps}
+          latencyMs={aiLatencyMs}
+          pending={aiPending}
+        />
+      )}
 
       <span
         style={{

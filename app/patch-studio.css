@@ -1672,3 +1672,333 @@
 }
 .vp-bind-popover__none:hover { color: var(--vj-error); }
 
+/* ─────────────────────────────────────────────────────────────
+   AI popover — floating menu opened from the AI chip in the
+   system bar. Replaces the in-bar dropdowns with a real surface
+   that fits backend selection, live pod list, connect/disconnect,
+   and live transport stats without cramping the bar itself.
+   ───────────────────────────────────────────────────────────── */
+.vp-ai-popover {
+  position: fixed;            /* anchored from JS via top/left so it follows the chip */
+  z-index: 50;
+  width: 360px;
+  max-width: calc(100vw - 16px);
+  background: var(--vp-rail);
+  border: 1px solid var(--vp-cable-a);
+  border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px -16px rgba(0, 0, 0, 0.85),
+    0 0 36px -10px var(--vp-cable-a),
+    inset 0 1px 0 0 color-mix(in srgb, var(--vp-cable-a) 22%, transparent);
+  animation: vp-quickadd-in 200ms cubic-bezier(0.32, 0.72, 0, 1);
+  transform-origin: top right;
+}
+.vp-ai-popover__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--vp-edge);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vp-cable-a) 8%, transparent),
+    transparent
+  );
+}
+.vp-ai-popover__title {
+  font-family: var(--font-doto), monospace;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--vp-cable-a);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--vp-cable-a) 60%, transparent);
+  text-transform: uppercase;
+}
+.vp-ai-popover__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-ai-popover__body { display: flex; flex-direction: column; }
+
+.vp-ai-popover__section {
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--vp-edge);
+}
+.vp-ai-popover__section:last-child { border-bottom: 0; }
+.vp-ai-popover__section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.vp-ai-popover__section-title button {
+  font: inherit;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  background: transparent;
+  border: 0;
+  color: var(--vp-cable-a);
+  cursor: pointer;
+  padding: 0;
+}
+.vp-ai-popover__section-title button:hover { color: var(--vj-ink); }
+.vp-ai-popover__section-title button:disabled {
+  color: var(--vj-muted); cursor: wait;
+}
+
+.vp-ai-backends {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+.vp-ai-backend {
+  padding: 0.4rem 0.2rem;
+  background: transparent;
+  border: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink-dim);
+  font: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 120ms;
+}
+.vp-ai-backend:hover { color: var(--vj-ink); border-color: var(--vp-cable-a); }
+.vp-ai-backend[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--vp-cable-a) 20%, transparent);
+  color: var(--vp-cable-a);
+  border-color: var(--vp-cable-a);
+  box-shadow: 0 0 14px -6px var(--vp-cable-a);
+}
+
+.vp-ai-connect {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+.vp-ai-connect button {
+  flex: 1;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--vp-edge-hot);
+  background: var(--vp-void);
+  color: var(--vj-ink);
+  font: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 140ms;
+}
+.vp-ai-connect button:hover { border-color: var(--vp-cable-a); }
+.vp-ai-connect__primary {
+  background: color-mix(in srgb, var(--vj-live) 10%, transparent) !important;
+  border-color: var(--vj-live) !important;
+  color: var(--vj-live) !important;
+}
+.vp-ai-connect__primary:hover {
+  background: color-mix(in srgb, var(--vj-live) 22%, transparent) !important;
+  box-shadow: 0 0 18px -6px var(--vj-live);
+}
+.vp-ai-connect__danger {
+  background: color-mix(in srgb, var(--vj-error) 10%, transparent) !important;
+  border-color: var(--vj-error) !important;
+  color: var(--vj-error) !important;
+}
+.vp-ai-connect__danger:hover {
+  background: color-mix(in srgb, var(--vj-error) 22%, transparent) !important;
+  box-shadow: 0 0 18px -6px var(--vj-error);
+}
+
+.vp-pods {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.vp-pod {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.6rem;
+  background: var(--vp-void);
+  border: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink);
+  font: inherit;
+  text-align: left;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 120ms;
+}
+.vp-pod:hover {
+  border-color: var(--vp-cable-a);
+  background: color-mix(in srgb, var(--vp-cable-a) 5%, var(--vp-void));
+}
+.vp-pod[data-active="true"] {
+  border-color: var(--vp-cable-b);
+  background: color-mix(in srgb, var(--vp-cable-b) 12%, var(--vp-void));
+  box-shadow: inset 2px 0 0 0 var(--vp-cable-b);
+}
+.vp-pod__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--vj-muted);
+}
+.vp-pod__dot--ready {
+  background: var(--vj-live);
+  box-shadow: 0 0 6px var(--vj-live);
+}
+.vp-pod__dot--booting {
+  background: var(--vj-warn);
+  box-shadow: 0 0 6px var(--vj-warn);
+  animation: vp-cable-pulse 1.6s ease-in-out infinite;
+}
+.vp-pod__dot--down {
+  background: var(--vj-error);
+  box-shadow: 0 0 6px var(--vj-error);
+}
+.vp-pod__main { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.vp-pod__name {
+  font-family: var(--font-doto), monospace;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vp-pod__meta {
+  font-size: 0.6rem;
+  color: var(--vj-ink-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.vp-pod__meta b {
+  font-weight: 500;
+  color: var(--vp-cable-a);
+}
+.vp-pod__cost {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.7rem;
+  color: var(--vp-cable-b);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.vp-pods__empty,
+.vp-pods__loading,
+.vp-pods__err {
+  padding: 0.85rem 0.5rem;
+  font-size: 0.65rem;
+  color: var(--vj-ink-dim);
+  text-align: center;
+  border: 1px dashed var(--vp-edge-hot);
+  border-radius: 5px;
+}
+.vp-pods__err { color: var(--vj-error); border-color: var(--vj-error); }
+
+.vp-ai-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+.vp-ai-stat {
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--vp-edge-hot);
+  background: var(--vp-void);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vp-ai-stat__label {
+  font-size: 0.54rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-ai-stat__value {
+  font-family: var(--font-doto), monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--vp-cable-a);
+  font-variant-numeric: tabular-nums;
+}
+.vp-ai-stat__value--idle { color: var(--vj-muted); }
+.vp-ai-stat__value--live {
+  color: var(--vp-cable-b);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--vp-cable-b) 50%, transparent);
+}
+
+/* AI chip in the system bar — clickable variant that toggles the
+   popover. Inherits the .vj-chip box but adds open state + chev. */
+.vp-ai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.75rem;
+  padding: 0 0.5rem 0 0.55rem;
+  border: 1px solid var(--vj-edge);
+  background: var(--vj-panel-2);
+  border-radius: 4px;
+  color: var(--vj-ink);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 120ms, box-shadow 120ms, background 120ms;
+}
+.vp-ai-chip:hover { border-color: var(--vj-edge-hot); }
+.vp-ai-chip[aria-expanded="true"] {
+  border-color: var(--vp-cable-a);
+  background: color-mix(in srgb, var(--vp-cable-a) 10%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vp-cable-a) 30%, transparent),
+    0 0 16px -4px var(--vp-cable-a);
+}
+.vp-ai-chip__label {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-ai-chip__backend {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--vp-cable-a);
+  text-transform: lowercase;
+}
+.vp-ai-chip__fps {
+  font-family: var(--font-doto), monospace;
+  font-size: 0.66rem;
+  color: var(--vp-cable-b);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.vp-ai-chip__chev {
+  width: 9px; height: 9px;
+  color: var(--vj-ink-dim);
+  transition: transform 200ms cubic-bezier(0.32, 0.72, 0, 1), color 120ms;
+}
+.vp-ai-chip[aria-expanded="true"] .vp-ai-chip__chev {
+  transform: rotate(180deg);
+  color: var(--vp-cable-a);
+}
+

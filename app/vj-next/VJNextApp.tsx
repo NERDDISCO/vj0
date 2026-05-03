@@ -134,12 +134,19 @@ export function VJNextApp() {
   // ─── AI transport (WebRTC) ────────────────────────────────────────
   // Same transport the legacy /vj uses — wired in directly so connect /
   // disconnect / generate / received-frame all work end to end.
+  //
+  // Backend resolution mirrors legacy /vj: built-in backends use
+  // AI_BACKEND_URLS, the dynamic "pod" backend uses the URL the user
+  // picked from the live pod list. Falls back to /api/webrtc/offer if
+  // neither resolves so dev still has something to point at.
   const aiBackend = useAiSettingsStore((s) => s.backend);
   const setAiBackend = useAiSettingsStore((s) => s.setBackend);
-  const aiSignalingUrl = useMemo(
-    () => AI_BACKEND_URLS[aiBackend] || "/api/webrtc/offer",
-    [aiBackend],
-  );
+  const aiPodUrl = useAiSettingsStore((s) => s.podUrl);
+  const setAiPodUrl = useAiSettingsStore((s) => s.setPodUrl);
+  const aiSignalingUrl = useMemo(() => {
+    if (aiBackend === "pod" && aiPodUrl) return aiPodUrl;
+    return AI_BACKEND_URLS[aiBackend] || "/api/webrtc/offer";
+  }, [aiBackend, aiPodUrl]);
   const aiTransport = useMemo(
     () =>
       new WebRtcAiTransport({
@@ -151,11 +158,33 @@ export function VJNextApp() {
   const [aiStatus, setAiStatus] = useState<AiTransportStatus>("disconnected");
   const [aiImageUrl, setAiImageUrl] = useState<string | null>(null);
   const [aiFps, setAiFps] = useState(0);
+  // Latency = time between sending a frame and receiving one back.
+  // Approximated as `last-receive - last-send`. Pending = how many
+  // outgoing frames we've buffered minus how many we've received.
+  const [aiLatencyMs, setAiLatencyMs] = useState<number | null>(null);
+  const [aiPending, setAiPending] = useState<number>(0);
   const lastFrameTimeRef = useRef<number>(0);
+  const lastSendTimeRef = useRef<number>(0);
+  const sentCountRef = useRef<number>(0);
+  const recvCountRef = useRef<number>(0);
   const frameTimingsRef = useRef<number[]>([]);
 
   useEffect(() => {
-    const onStatus = (s: AiTransportStatus) => setAiStatus(s);
+    const onStatus = (s: AiTransportStatus) => {
+      setAiStatus(s);
+      // Reset stats on any non-connected state so the popover doesn't
+      // show stale FPS / pending counts after a disconnect.
+      if (s !== "connected") {
+        setAiFps(0);
+        setAiLatencyMs(null);
+        setAiPending(0);
+        lastFrameTimeRef.current = 0;
+        lastSendTimeRef.current = 0;
+        sentCountRef.current = 0;
+        recvCountRef.current = 0;
+        frameTimingsRef.current = [];
+      }
+    };
     const onFrame = (frame: AiIncomingFrame) => {
       // Only image frames carry the preview pixels; text frames are
       // log/control messages we don't render.
@@ -171,9 +200,16 @@ export function VJNextApp() {
         if (avg > 0) setAiFps(1000 / avg);
       }
       lastFrameTimeRef.current = now;
+      recvCountRef.current += 1;
+      setAiPending(Math.max(0, sentCountRef.current - recvCountRef.current));
+      // Latency approx: gap between last-send and now. Not RTT-precise
+      // (we don't tag frames), but good enough for "is the dispatcher
+      // backed up" telemetry. Smooth over the same 30-sample window.
+      if (lastSendTimeRef.current > 0) {
+        const dt = now - lastSendTimeRef.current;
+        setAiLatencyMs(dt);
+      }
       // Convert frame blob to an object URL for the preview <img> tag.
-      // Production code would push into a WebGL renderer; this is fine
-      // for the design-iteration phase of /vj-next.
       const url = URL.createObjectURL(frame.blob);
       setAiImageUrl((prev) => {
         if (prev) URL.revokeObjectURL(prev);
@@ -231,8 +267,16 @@ export function VJNextApp() {
         aiStatus={aiStatus}
         aiBackend={aiBackend}
         onAiBackendChange={(b: AiBackend) => {
+          // Switching backend tears down the current channel — the
+          // useMemo that builds aiTransport rebuilds it on the new URL.
           void aiTransport.stop();
           setAiBackend(b);
+        }}
+        aiPodUrl={aiPodUrl}
+        onAiPodSelect={(url) => {
+          // setPodUrl in the store also flips backend to "pod".
+          void aiTransport.stop();
+          setAiPodUrl(url);
         }}
         onAiConnect={() => void aiTransport.start()}
         onAiDisconnect={() => {
@@ -240,6 +284,8 @@ export function VJNextApp() {
           void aiTransport.stop();
         }}
         aiFps={aiStatus === "connected" ? aiFps : null}
+        aiLatencyMs={aiStatus === "connected" ? aiLatencyMs : null}
+        aiPending={aiStatus === "connected" ? aiPending : null}
       />
       <SceneTabs />
       <AudioMeters audioFeaturesRef={audioFeaturesRef} />
