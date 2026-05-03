@@ -834,7 +834,12 @@ export function VJNextApp() {
         </div>
       </div>
 
-      <Drawer audioFeaturesRef={audioFeaturesRef} startedAt={startedAt} />
+      <Drawer
+        audioFeaturesRef={audioFeaturesRef}
+        startedAt={startedAt}
+        inputCanvasRef={inputCanvasRef}
+        audioEngineRef={audioEngineRef}
+      />
       <CommandPalette />
 
       <div className="vp-tipbar">

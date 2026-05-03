@@ -4,11 +4,17 @@ import { useEffect } from "react";
 import { useUiStore, type DrawerMode } from "@/src/lib/composer";
 import { AudioPresetGrid } from "./AudioPresetGrid";
 import { SceneLibrary } from "./SceneLibrary";
+import { LightingMode } from "./LightingMode";
 import type { AudioFeatures } from "@/src/lib/audio-features";
+import type { AudioEngine } from "@/src/lib/audio-engine";
 
 interface DrawerProps {
   audioFeaturesRef: React.MutableRefObject<AudioFeatures | null>;
   startedAt: number;
+  /** Source canvas the lighting engine samples from. Same canvas the
+   *  AI send loop reads — keeps lighting and AI in sync visually. */
+  inputCanvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+  audioEngineRef: React.MutableRefObject<AudioEngine | null>;
 }
 
 /**
@@ -28,7 +34,12 @@ interface DrawerProps {
  * design away from "demonstrate the new pattern" into "rebuild lighting".
  * The slot is real, the pattern is enforced.
  */
-export function Drawer({ audioFeaturesRef, startedAt }: DrawerProps) {
+export function Drawer({
+  audioFeaturesRef,
+  startedAt,
+  inputCanvasRef,
+  audioEngineRef,
+}: DrawerProps) {
   const open = useUiStore((s) => s.drawerOpen);
   const mode = useUiStore((s) => s.drawerMode);
   const setOpen = useUiStore((s) => s.setDrawerOpen);
@@ -93,7 +104,12 @@ export function Drawer({ audioFeaturesRef, startedAt }: DrawerProps) {
           />
         )}
         {mode === "scenes" && <SceneLibrary />}
-        {mode === "lighting" && <LightingStub />}
+        {mode === "lighting" && (
+          <LightingMode
+            sourceCanvasRef={inputCanvasRef}
+            audioEngineRef={audioEngineRef}
+          />
+        )}
       </div>
     </aside>
   );
@@ -138,38 +154,3 @@ function modeSubtitle(mode: DrawerMode): string {
       : "DMX fixtures · fog · cues";
 }
 
-function LightingStub() {
-  return (
-    <div
-      style={{
-        padding: "3rem 1rem",
-        textAlign: "center",
-        color: "var(--vj-ink-dim)",
-        fontSize: "0.78rem",
-        letterSpacing: "0.04em",
-        lineHeight: 1.6,
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "var(--font-doto), monospace",
-          fontWeight: 800,
-          fontSize: "1.2rem",
-          letterSpacing: "0.22em",
-          color: "var(--vp-cable-a)",
-          textTransform: "uppercase",
-          marginBottom: "0.6rem",
-          textShadow: "0 0 14px var(--vp-cable-a)",
-        }}
-      >
-        DMX Lighting
-      </div>
-      <p style={{ maxWidth: 520, margin: "0 auto" }}>
-        The drawer is the new home for the existing /vj lighting console — the
-        full fixture browser, color modes, strobe gates, fog, and live DMX
-        meter all surface here once integrated. The pattern (one drawer,
-        many modes, esc to close) is the same.
-      </p>
-    </div>
-  );
-}
