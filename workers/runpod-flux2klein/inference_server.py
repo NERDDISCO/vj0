@@ -73,7 +73,7 @@ DEFAULT_ALPHA = 0.10
 DEFAULT_N_STEPS = 4   # production quality target. Flip to 2 for the speed-first preset.
 DEFAULT_SEED = 42
 MAX_SEQ_LEN = 64
-JPEG_QUALITY = 80
+JPEG_QUALITY = int(os.environ.get("JPEG_QUALITY", "80"))
 WARMUP_ITERS = 4
 USE_FP8 = True                                          # fp8 on transformer
 USE_VAE_FP8 = os.environ.get("USE_VAE_FP8", "1") != "0"  # also quantize VAE linears (saves ~1ms, +0.2GB free, +0.0015 mse)
@@ -367,6 +367,7 @@ def main():
         "height": DEFAULT_HEIGHT,
         "capture_width": DEFAULT_WIDTH,
         "capture_height": DEFAULT_HEIGHT,
+        "jpeg_quality": JPEG_QUALITY,
     }
 
     # Warmup shapes from WARMUP_SHAPES env (comma-separated WxH list, e.g.
@@ -456,6 +457,8 @@ def main():
             if "captureWidth" in data:
                 state["capture_width"] = int(data["captureWidth"])
                 state["capture_height"] = int(data.get("captureHeight", data["captureWidth"]))
+            if "jpegQuality" in data:
+                state["jpeg_quality"] = max(10, min(100, int(data["jpegQuality"])))
 
     def reader():
         for line in sys.stdin:
@@ -563,7 +566,7 @@ def main():
             gen_ms = (t_transformer - t0) * 1000
             frame_count += 1
 
-            jpg = pil_to_jpeg_bytes(out, JPEG_QUALITY)
+            jpg = pil_to_jpeg_bytes(out, state["jpeg_quality"])
             t_jpeg = time.perf_counter()
 
             timing = {

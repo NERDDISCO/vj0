@@ -107,7 +107,12 @@ COPY server.js inference_server.py ./
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# ── Production env defaults (Phase 9A winner) ─────────────
+# ── Production env defaults (Phase 9A winner + Phase 10 full ladder) ──
+# WARMUP_SHAPES: pre-compile all 9 frontend resolution presets at startup.
+# Each shape costs ~35-150s cold-compile (first ever) or <1s with a warm
+# Inductor cache on /workspace. With 96 GB VRAM (PRO 6000) all shapes
+# fit comfortably — each CUDA graph capture uses ~1-2 GB. On 32 GB GPUs
+# (5090), trim to the 3-4 shapes you actually use to avoid VRAM pressure.
 ENV PORT=3000 \
     HF_HOME=/workspace/hf-cache \
     TORCHINDUCTOR_CACHE_DIR=/tmp/torchinductor_root \
@@ -117,14 +122,17 @@ ENV PORT=3000 \
     INFERENCE_SCRIPT=/app/inference_server.py \
     COMPILE_MODE=reduce-overhead \
     USE_VAE_FP8=1 \
-    WARMUP_SHAPES=512x288,288x512
+    JPEG_QUALITY=80 \
+    WARMUP_SHAPES=512x288,768x448,288x512,256x144,448x768,1024x576,576x1024,1280x720,720x1280
 
 EXPOSE 3000 22
 
 # Healthcheck — RunPod can use this to know when traffic is safe to route.
-# start-period covers cold-cache compile (~3 min); after that it polls every
-# 15 s and only marks healthy when both workers report `inferenceReady:true`.
-HEALTHCHECK --interval=15s --timeout=5s --start-period=300s --retries=3 \
+# start-period covers cold-cache compile of all 9 shapes (~15 min worst
+# case on first-ever boot; ~2 min with warm Inductor cache on /workspace).
+# After that it polls every 15 s and only marks healthy when both workers
+# report `inferenceReady:true`.
+HEALTHCHECK --interval=15s --timeout=5s --start-period=900s --retries=3 \
     CMD curl -fsS http://localhost:${PORT}/healthz | grep -q "\"inferenceReady\":true" || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
