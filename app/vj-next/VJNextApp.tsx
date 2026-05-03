@@ -14,6 +14,10 @@ import {
   type AiBackend,
 } from "@/src/lib/stores/ai-settings-store";
 import { useSceneStore } from "@/src/lib/composer";
+import {
+  openStageChannel,
+  type StageMsg,
+} from "@/src/lib/ai/stage-channel";
 import { SystemBar } from "./components/SystemBar";
 import { SceneTabs } from "./components/SceneTabs";
 import { AudioMeters } from "./components/AudioMeters";
@@ -300,6 +304,33 @@ export function VJNextApp() {
     inputCanvasRef.current = el;
   }, []);
 
+  // ─── Stage / projector channel ────────────────────────────────────
+  // BroadcastChannel published to the /vj/stage tab — same channel name
+  // legacy /vj uses, so opening /vj/stage in a separate window receives
+  // frames + prompt + connection messages from this control tab.
+  const stageChannelRef = useRef<BroadcastChannel | null>(null);
+  const stageFrameSeqRef = useRef(0);
+  useEffect(() => {
+    const ch = openStageChannel();
+    stageChannelRef.current = ch;
+    if (!ch) return;
+    const onMsg = (ev: MessageEvent<StageMsg>) => {
+      // Re-publish a fresh prompt if the stage just woke up — without
+      // this, opening the stage tab mid-set leaves it without context
+      // until the user changes the prompt.
+      if (ev.data?.type === "hello") {
+        const prompt = activePromptRef.current;
+        if (prompt) ch.postMessage({ type: "prompt", prompt });
+      }
+    };
+    ch.onmessage = onMsg;
+    return () => {
+      ch.onmessage = null;
+      ch.close();
+      stageChannelRef.current = null;
+    };
+  }, []);
+
   // ─── Recording ────────────────────────────────────────────────────
   // For now we record the input scene canvas — always has content even
   // when AI isn't connected. When the WebGL StageRenderer for the AI
@@ -314,6 +345,9 @@ export function VJNextApp() {
   useEffect(() => {
     const onStatus = (s: AiTransportStatus) => {
       setAiStatus(s);
+      // Telegraph status to the stage tab so it can show "waiting" /
+      // "connected" / "error" in its idle banner without having to poll.
+      stageChannelRef.current?.postMessage({ type: "connection", status: s });
       // Reset stats on any non-connected state so the popover doesn't
       // show stale FPS / pending counts after a disconnect. Also clear
       // server boot/compile state so we don't show "preparing workers"
@@ -423,6 +457,27 @@ export function VJNextApp() {
         if (prev) URL.revokeObjectURL(prev);
         return url;
       });
+      // Re-publish on the stage channel so /vj/stage (in a second
+      // window/projector) receives the same frame. We send the raw
+      // bytes — the stage tab decodes via createImageBitmap and pushes
+      // through StageRenderer with sharpen/pixelate FX applied.
+      const stageCh = stageChannelRef.current;
+      if (stageCh) {
+        frame.blob
+          .arrayBuffer()
+          .then((buf) => {
+            stageCh.postMessage({
+              type: "frame",
+              bytes: buf,
+              width: outWidth,
+              height: outHeight,
+              seq: ++stageFrameSeqRef.current,
+            });
+          })
+          .catch(() => {
+            /* ignore */
+          });
+      }
     };
     aiTransport.onStatusChange(onStatus);
     aiTransport.onFrame(onFrame);
@@ -476,6 +531,14 @@ export function VJNextApp() {
   );
   useEffect(() => {
     activePromptRef.current = activeScene?.prompt ?? "";
+    // Push prompt updates out to the stage tab so the projector overlay
+    // shows the new prompt for ~2.4s before fading.
+    if (activeScene?.prompt) {
+      stageChannelRef.current?.postMessage({
+        type: "prompt",
+        prompt: activeScene.prompt,
+      });
+    }
   }, [activeScene?.prompt]);
 
   // ─── Settings flush ──────────────────────────────────────────────

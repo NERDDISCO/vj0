@@ -318,6 +318,26 @@ export function SystemBar({
         }}
       />
 
+      {/* Stage / projector — opens /vj/stage in a new tab/window so
+          the user can drag it to a projector display. Frames + prompt
+          + connection state are auto-published via BroadcastChannel
+          from VJNextApp. Window opens at 1280×720 by default but the
+          user is expected to fullscreen + drag to projector. */}
+      <button
+        type="button"
+        className="vj-btn vj-btn--bar"
+        title="Open stage / projector window"
+        onClick={() =>
+          window.open(
+            "/vj/stage",
+            "vj0-stage",
+            "width=1280,height=720,menubar=no,toolbar=no,location=no",
+          )
+        }
+      >
+        ↗ stage
+      </button>
+
       {/* Recording — session-output action so it lives next to the
           drawer toggles, not inside the AI popover. Same chip family
           as the others; goes pulsing-red while recording with a live
