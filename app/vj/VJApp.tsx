@@ -43,7 +43,7 @@ import {
   WaveformSourceCard,
   type StageRendererHandle,
 } from "./components";
-import type { BootPhase } from "./components";
+import type { BootPhase, TelemetrySnapshot } from "./components";
 import { RecordingEngine, type RecordingResult } from "@/src/lib/recording";
 
 type Status = "idle" | "requesting" | "running" | "error";
@@ -140,11 +140,14 @@ export function VJApp() {
 
   // Backend choice (persisted) picks the signaling URL. Env var still overrides.
   const aiBackendSel = useAiSettingsStore((s) => s.backend);
+  const aiPodUrl = useAiSettingsStore((s) => s.podUrl);
   const aiSignalingUrl = useMemo(() => {
     const envOverride = process.env.NEXT_PUBLIC_VJ0_WEBRTC_SIGNALING_URL;
     if (envOverride) return envOverride;
+    // "pod" backend uses the dynamic pod URL from the pod switcher
+    if (aiBackendSel === "pod" && aiPodUrl) return aiPodUrl;
     return AI_BACKEND_URLS[aiBackendSel] || "/api/webrtc/offer";
-  }, [aiBackendSel]);
+  }, [aiBackendSel, aiPodUrl]);
 
   const aiTransport = useMemo(
     () =>
@@ -164,6 +167,20 @@ export function VJApp() {
     try {
       const u = new URL(aiSignalingUrl, window.location.href);
       u.pathname = "/healthz";
+      u.search = "";
+      return u.toString();
+    } catch {
+      return null;
+    }
+  }, [aiSignalingUrl]);
+
+  // /telemetry URL — same-origin sibling of /healthz. Polled only while
+  // the SystemsBar AI pop-over is open (each call exec()s nvidia-smi on
+  // the worker — fine on demand, wasteful as a permanent background poll).
+  const aiTelemetryUrl = useMemo(() => {
+    try {
+      const u = new URL(aiSignalingUrl, window.location.href);
+      u.pathname = "/telemetry";
       u.search = "";
       return u.toString();
     } catch {
@@ -264,6 +281,7 @@ export function VJApp() {
     fogIntensity,
     recordingResolution,
     setBackend: setAiBackend,
+    setPodUrl: setAiPodUrl,
     setSendFrames: setAiSendFrames,
     setShowCaptureDebug: setAiShowCaptureDebug,
     setPrompt: setAiPrompt,
@@ -612,6 +630,21 @@ export function VJApp() {
     workerCount: number;
     readyCount: number;
   } | null>(null);
+
+  // Pod telemetry — polled from the worker's /telemetry endpoint while
+  // the SystemsBar AI pop-over is open. The worker IS the AI backend's
+  // pod, so the telemetry section lives inside the AI pop-over rather
+  // than as a separate top-level button. We only poll on demand because
+  // /telemetry exec()s nvidia-smi on the worker — cheap, but pointless
+  // when the operator isn't looking. SystemsBar flips `aiPopoverOpen`
+  // through its onAiPopoverOpenChange callback.
+  const [aiPopoverOpen, setAiPopoverOpen] = useState(false);
+  const [telemetrySnapshot, setTelemetrySnapshot] = useState<TelemetrySnapshot | null>(
+    null
+  );
+  const [telemetryLoading, setTelemetryLoading] = useState(false);
+  const [telemetryError, setTelemetryError] = useState<string | null>(null);
+  const [telemetryLastTick, setTelemetryLastTick] = useState<number | null>(null);
 
   // DMX/Lighting UI state
   const [dmxStatus, setDmxStatus] = useState<DmxStatus>("disconnected");
@@ -1215,6 +1248,63 @@ export function VJApp() {
     };
   }, [aiHealthUrl, aiStatus]);
 
+  // Pod telemetry polling — only runs while the AI pop-over is open
+  // and the AI transport is connected. Polls /telemetry every 2 s,
+  // mirrors the snapshot into local state, and tracks `lastTick` so
+  // the panel can render a "live" pulse. Errors are surfaced through
+  // `telemetryError` — the panel renders a friendly "unreachable" state
+  // on top of the last successful snapshot so a transient network blip
+  // doesn't wipe out the meters mid-set.
+  useEffect(() => {
+    if (!aiPopoverOpen) return;
+    if (!aiTelemetryUrl) return;
+    if (aiStatus !== "connected") {
+      // SystemsBar already hides the telemetry section when AI isn't
+      // connected — set "not loading" defensively so any leftover state
+      // from a previous open doesn't flash the skeleton on next open.
+      setTelemetryLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    setTelemetryLoading(true);
+
+    const tick = async () => {
+      try {
+        const r = await fetch(aiTelemetryUrl, { cache: "no-store" });
+        if (r.status === 404) {
+          // The /telemetry endpoint was added late — pods running the
+          // older baked image (nerddisco/vj0-flux2klein-worker:latest
+          // pre-telemetry) 404 on it. Surface the actual remediation
+          // instead of the bare HTTP code.
+          throw new Error(
+            "endpoint missing — pod is running an older image. push server.js to main, wait for the GHA build, then restart the pod."
+          );
+        }
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const j = (await r.json()) as TelemetrySnapshot;
+        if (cancelled) return;
+        setTelemetrySnapshot(j);
+        setTelemetryError(null);
+        setTelemetryLastTick(Date.now());
+      } catch (err) {
+        if (cancelled) return;
+        setTelemetryError(
+          err instanceof Error ? err.message : "fetch failed"
+        );
+      } finally {
+        if (!cancelled) setTelemetryLoading(false);
+      }
+    };
+
+    void tick();
+    const id = window.setInterval(() => void tick(), 2000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [aiTelemetryUrl, aiStatus, aiPopoverOpen]);
+
   const aiDebugCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Preview renderer — same WebGL2 sharpen pipeline as the stage page, so
@@ -1565,11 +1655,16 @@ export function VJApp() {
         onSceneChange={handleSceneChange}
         aiStatus={aiStatus}
         aiBackend={aiBackend}
+        aiPodUrl={aiPodUrl}
         onBackendChange={(b) => {
           // Switching backend tears down the current channel — auto-connect
           // (if on) re-opens against the new URL on the next render.
           void aiTransport.stop();
           setAiBackend(b);
+        }}
+        onPodSelect={(url) => {
+          void aiTransport.stop();
+          setAiPodUrl(url);
         }}
         aiAutoConnect={aiAutoConnect}
         onAutoConnectChange={setAiAutoConnect}
@@ -1592,6 +1687,11 @@ export function VJApp() {
         onStopRecording={handleStopRecording}
         recordingResolution={recordingResolution}
         onRecordingResolutionChange={setRecordingResolution}
+        telemetrySnapshot={telemetrySnapshot}
+        telemetryLoading={telemetryLoading}
+        telemetryError={telemetryError}
+        telemetryLastTick={telemetryLastTick}
+        onAiPopoverOpenChange={setAiPopoverOpen}
       />
 
       {/* Error banner */}

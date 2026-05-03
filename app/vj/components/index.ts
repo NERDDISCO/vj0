@@ -31,3 +31,4 @@ export { LightingPanel } from "./LightingPanel";
 
 // Top-level chrome
 export { SystemsBar } from "./SystemsBar";
+export { TelemetryPanel, type TelemetrySnapshot } from "./TelemetryPanel";

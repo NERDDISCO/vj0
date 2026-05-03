@@ -1,15 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type AiBackend = "klein" | "sdturbo" | "zimage";
+export type AiBackend = "klein" | "sdturbo" | "zimage" | "pod";
 
-export const AI_BACKEND_URLS: Record<AiBackend, string> = {
+export const AI_BACKEND_URLS: Record<string, string> = {
   klein: "https://sje35edd58abpo-3000.proxy.runpod.net/webrtc/offer",
   sdturbo: "https://3746utbd1i3x73-3000.proxy.runpod.net/webrtc/offer",
   zimage: "https://astt1jyau6hsaq-3000.proxy.runpod.net/webrtc/offer",
 };
 
-export const AI_BACKEND_LABELS: Record<AiBackend, string> = {
+export const AI_BACKEND_LABELS: Record<string, string> = {
   klein: "FLUX.2 Klein (img2img, ~30fps@256)",
   sdturbo: "SD-Turbo (t2i-ish, ~60fps@256)",
   zimage: "Z-Image Turbo Nunchaku (img2img, ~17fps@256)",
@@ -121,6 +121,8 @@ export const DEFAULT_PROMPT_PRESETS: PromptPreset[] = [
 
 interface AiSettingsState {
   backend: AiBackend;
+  /** When backend === "pod", this is the signaling URL of the selected RunPod pod. */
+  podUrl: string;
   showAi: boolean;
   sendFrames: boolean;
   showCaptureDebug: boolean;
@@ -170,6 +172,7 @@ interface AiSettingsState {
   recordingResolution: RecordingResolution;
 
   setBackend: (value: AiBackend) => void;
+  setPodUrl: (value: string) => void;
   setShowAi: (value: boolean) => void;
   setSendFrames: (value: boolean) => void;
   setShowCaptureDebug: (value: boolean) => void;
@@ -201,6 +204,7 @@ export const useAiSettingsStore = create<AiSettingsState>()(
   persist(
     (set) => ({
       backend: "klein",
+      podUrl: "",
       showAi: true,
       sendFrames: false,
       showCaptureDebug: false,
@@ -251,6 +255,7 @@ export const useAiSettingsStore = create<AiSettingsState>()(
             : "1k",
         }),
       setBackend: (value) => set({ backend: value }),
+      setPodUrl: (value) => set({ podUrl: value, backend: "pod" }),
       setKleinAlpha: (value) =>
         set({ kleinAlpha: Math.max(0, Math.min(0.5, value)) }),
       setKleinSteps: (value) =>

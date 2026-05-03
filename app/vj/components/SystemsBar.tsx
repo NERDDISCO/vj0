@@ -11,6 +11,8 @@ import {
   type RecordingResolution,
 } from "@/src/lib/stores/ai-settings-store";
 import { RecordingControl } from "./RecordingControl";
+import { TelemetryPanel, type TelemetrySnapshot } from "./TelemetryPanel";
+import { PodSwitcher } from "./PodSwitcher";
 
 type Status = "idle" | "requesting" | "running" | "error";
 type DmxStatus = "disconnected" | "connecting" | "connected" | "unsupported";
@@ -44,8 +46,12 @@ interface SystemsBarProps {
   // ── AI ────────────────────────────────────────────────────────
   aiStatus: AiTransportStatus;
   aiBackend: AiBackend;
+  /** Current pod signaling URL when backend === "pod". */
+  aiPodUrl: string;
   /** Switch backend (also closes any open WebRTC channel — caller's job). */
   onBackendChange: (b: AiBackend) => void;
+  /** Select a dynamic pod by signaling URL (sets backend to "pod"). */
+  onPodSelect: (signalingUrl: string) => void;
   aiAutoConnect: boolean;
   onAutoConnectChange: (v: boolean) => void;
   /** Open the WebRTC channel. */
@@ -85,6 +91,25 @@ interface SystemsBarProps {
   onStopRecording: () => void;
   recordingResolution: RecordingResolution;
   onRecordingResolutionChange: (value: RecordingResolution) => void;
+
+  // ── Pod telemetry (rendered inside the AI pop-over) ───────────
+  /** Latest /telemetry snapshot from the worker. null = no successful
+      fetch yet. */
+  telemetrySnapshot: TelemetrySnapshot | null;
+  /** True while the AI pop-over is open and we haven't received our
+      first successful /telemetry response. Drives the skeleton state. */
+  telemetryLoading: boolean;
+  /** Last telemetry fetch error, if any (worker boot, network blip,
+      old image without route). */
+  telemetryError: string | null;
+  /** Tick (Date.now()) of the most recent successful fetch — drives the
+      "live" indicator pulse. */
+  telemetryLastTick: number | null;
+  /** Tells the parent the AI pop-over is open so it can start polling
+      /telemetry. Parent combines this with `aiStatus === "connected"`
+      to gate the actual fetch — no point hitting nvidia-smi when the
+      worker isn't reachable yet. */
+  onAiPopoverOpenChange: (open: boolean) => void;
 }
 
 /**
@@ -109,7 +134,9 @@ export function SystemsBar({
   onSceneChange,
   aiStatus,
   aiBackend,
+  aiPodUrl,
   onBackendChange,
+  onPodSelect,
   aiAutoConnect,
   onAutoConnectChange,
   onConnect,
@@ -128,6 +155,11 @@ export function SystemsBar({
   onStopRecording,
   recordingResolution,
   onRecordingResolutionChange,
+  telemetrySnapshot,
+  telemetryLoading,
+  telemetryError,
+  telemetryLastTick,
+  onAiPopoverOpenChange,
 }: SystemsBarProps) {
   const [activePopover, setActivePopover] = useState<ActivePopover>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
@@ -135,6 +167,14 @@ export function SystemsBar({
   const togglePopover = (which: ActivePopover) => {
     setActivePopover((prev) => (prev === which ? null : which));
   };
+
+  // Tell the parent when the AI pop-over opens / closes so it can start
+  // and stop /telemetry polling. We avoid polling continuously in the
+  // background because each /telemetry call exec()s nvidia-smi on the
+  // worker — cheap, but pointless when nobody's looking at the data.
+  useEffect(() => {
+    onAiPopoverOpenChange(activePopover === "ai");
+  }, [activePopover, onAiPopoverOpenChange]);
 
   // ── Tones ─────────────────────────────────────────────────────
   const audioTone: Tone =
@@ -232,7 +272,18 @@ export function SystemsBar({
 
           {/* ── Pop-over panel ────────────────────────────────────── */}
           {activePopover && (
-            <div className="absolute left-0 top-full mt-2 w-72 rounded-lg border border-[color:var(--vj-edge-hot)] bg-[color:var(--vj-panel)] shadow-[0_18px_48px_-12px_rgba(0,0,0,0.7)] z-50">
+            <div
+              className={`absolute left-0 top-full mt-2 rounded-lg border border-[color:var(--vj-edge-hot)] bg-[color:var(--vj-panel)] shadow-[0_18px_48px_-12px_rgba(0,0,0,0.7)] z-50 ${
+                /* AI is data-dense once the telemetry rack is rendered —
+                   give it room. Audio is just a 3-block control surface
+                   (status / device / scene) so 18rem keeps it tight.
+                   The AI pop-over has backend + pod switcher + latency
+                   + telemetry meters + recording, and suffocates at
+                   18rem; 22rem lets the meter rows breathe without
+                   overshooting the SystemsBar's left column. */
+                activePopover === "ai" ? "w-[22rem]" : "w-72"
+              }`}
+            >
               <div className="space-y-3 p-4 font-mono text-[11px] uppercase tracking-wider">
                 {activePopover === "audio" ? (
                   <>
@@ -320,6 +371,12 @@ export function SystemsBar({
                           )}
                         </select>
 
+                        {/* ── Live Pod Switcher ─────────────── */}
+                        <PodSwitcher
+                          selectedPodUrl={aiPodUrl}
+                          onSelectPod={onPodSelect}
+                        />
+
                         <label className="flex items-center gap-2 text-[color:var(--vj-ink-dim)]">
                           <input
                             type="checkbox"
@@ -377,6 +434,24 @@ export function SystemsBar({
                           </div>
                         </div>
                       </PopoverSection>
+                    )}
+
+                    {/* ── Pod telemetry ────────────────────────── */}
+                    {/* The worker IS the AI backend's pod, so telemetry
+                        belongs here — not as a separate top-level button.
+                        Only render once connected so we don't show
+                        meters/skeletons against an unreachable worker
+                        (the Connect button above is the actionable thing
+                        in that state). The panel renders its own header
+                        ("pod telemetry") so we skip the PopoverSection
+                        title to avoid two titles fighting for the eye. */}
+                    {aiStatus === "connected" && (
+                      <TelemetryPanel
+                        snapshot={telemetrySnapshot}
+                        loading={telemetryLoading}
+                        error={telemetryError}
+                        lastTick={telemetryLastTick}
+                      />
                     )}
 
                     {/* ── Recording ────────────────────────────── */}

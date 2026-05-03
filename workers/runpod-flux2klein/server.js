@@ -18,6 +18,8 @@
 const express = require("express");
 const wrtc = require("@roamhq/wrtc");
 const { spawn, execSync } = require("child_process");
+const fs = require("fs");
+const os = require("os");
 
 // Prevent node from crashing on unhandled errors — log and continue.
 // WebRTC peer teardown and worker pipe errors are the usual culprits.
@@ -293,10 +295,11 @@ function flushPendingForWorker(w) {
 
 // Per-worker dispatch limit. Worker's internal request_queue is maxsize=2,
 // so anything past 2 in flight gets silently dropped at the worker. Setting
-// the dispatcher cap to 3 (one in flight + two queued) gives the worker
-// just enough lookahead without wasting IPC bandwidth on frames that would
-// be dropped anyway. Past this, dispatchFrame() rejects at the source.
-const MAX_PENDING_PER_WORKER = 3;
+// Dispatcher cap: how many frames can be pending per worker (one in flight +
+// N-1 queued). Lower = less pipeline latency but more dropped frames.
+// Default 3 (good throughput). Set to 1 for lowest latency (each worker only
+// processes the freshest frame). Configurable via env for live tuning.
+const MAX_PENDING_PER_WORKER = parseInt(process.env.MAX_PENDING_PER_WORKER || "3", 10);
 let droppedInbound = 0;
 
 // Load-aware "next worker" selector. Strict round-robin starves the dispatcher
@@ -476,6 +479,146 @@ app.get("/healthz", (_req, res) => {
     workers: workers.map(w => ({ gpu: w.gpu, ready: w.ready, framePending: w.framePending })),
   });
 });
+
+// /telemetry endpoint — pod hardware snapshot for the in-app telemetry
+// section (lives inside the SystemsBar AI pop-over). Hits nvidia-smi +
+// /proc + df once per call. Cheap enough to poll at 1Hz while the
+// pop-over is open; the UI only polls then so this never runs during a
+// normal live set.
+//
+// Returns null/undefined for any field that can't be read (e.g. nvidia-smi
+// unavailable, /proc unreadable on macOS dev) — the UI tolerates missing
+// fields so a partial reply still renders the rest of the rack.
+app.get("/telemetry", (_req, res) => {
+  res.json(buildTelemetrySnapshot());
+});
+
+function buildTelemetrySnapshot() {
+  return {
+    pod: readPodInfo(),
+    cpu: readCpuInfo(),
+    ram: readRamInfo(),
+    disk: readDiskInfo("/workspace"),
+    networkVolume: readNetworkVolumeInfo(),
+    gpus: readGpuInfo(),
+    workers: workers.map(w => ({
+      gpu: w.gpu,
+      ready: w.ready,
+      framePending: w.framePending,
+      framesProduced: w.framesProduced || 0,
+      lastFrameAt: w.lastFrameAt || 0,
+    })),
+    serverUptimeS: Math.round(process.uptime()),
+  };
+}
+
+function readPodInfo() {
+  return {
+    id: process.env.RUNPOD_POD_ID || null,
+    hostname: process.env.RUNPOD_POD_HOSTNAME || os.hostname() || null,
+    datacenter: process.env.RUNPOD_DC_ID || null,
+    image: process.env.RUNPOD_IMAGE_NAME || null,
+    publicIp: process.env.RUNPOD_PUBLIC_IP || null,
+  };
+}
+
+function readCpuInfo() {
+  try {
+    const cpus = os.cpus();
+    const load = os.loadavg();
+    return {
+      model: cpus[0]?.model?.trim() || null,
+      cores: cpus.length,
+      loadAvg1: Number((load[0] || 0).toFixed(2)),
+      loadAvg5: Number((load[1] || 0).toFixed(2)),
+    };
+  } catch {
+    return null;
+  }
+}
+
+function readRamInfo() {
+  // Prefer /proc/meminfo MemAvailable (matches what `free` shows users) over
+  // os.freemem() — the latter under-reports because Linux counts buffers
+  // and page cache as "used".
+  try {
+    const mi = fs.readFileSync("/proc/meminfo", "utf8");
+    const totalKb = Number((mi.match(/MemTotal:\s+(\d+)/) || [])[1] || 0);
+    const availKb = Number((mi.match(/MemAvailable:\s+(\d+)/) || [])[1] || 0);
+    if (totalKb > 0) {
+      const totalBytes = totalKb * 1024;
+      const usedBytes = (totalKb - availKb) * 1024;
+      return { totalBytes, usedBytes };
+    }
+  } catch {}
+  // Fallback for non-Linux dev (no /proc): close-enough numbers from os.
+  return {
+    totalBytes: os.totalmem(),
+    usedBytes: os.totalmem() - os.freemem(),
+  };
+}
+
+function readDiskInfo(mount) {
+  try {
+    const out = execSync(
+      `df -B1 --output=size,used,target ${JSON.stringify(mount)}`,
+      { encoding: "utf8", timeout: 2000 }
+    );
+    const lines = out.trim().split("\n");
+    const last = lines[lines.length - 1].trim().split(/\s+/);
+    const totalBytes = Number(last[0]);
+    const usedBytes = Number(last[1]);
+    const target = last[2] || mount;
+    if (Number.isFinite(totalBytes) && Number.isFinite(usedBytes)) {
+      return { mount: target, totalBytes, usedBytes };
+    }
+  } catch {}
+  return null;
+}
+
+function readNetworkVolumeInfo() {
+  // RunPod attaches network volumes at /workspace and exports RUNPOD_VOLUME_ID.
+  // If the env var's set, the volume is present; if /workspace is on its own
+  // device (different from /), that's a secondary signal we surface too.
+  const volumeId = process.env.RUNPOD_VOLUME_ID || null;
+  let mountedSeparately = false;
+  try {
+    const root = fs.statSync("/").dev;
+    const ws = fs.statSync("/workspace").dev;
+    mountedSeparately = root !== ws;
+  } catch {}
+  return {
+    present: Boolean(volumeId) || mountedSeparately,
+    id: volumeId,
+    mount: "/workspace",
+  };
+}
+
+function readGpuInfo() {
+  try {
+    // nounits drops the trailing " MiB" / " %" / " W" — easier to parse.
+    const out = execSync(
+      "nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,temperature.gpu,power.draw " +
+      "--format=csv,noheader,nounits",
+      { encoding: "utf8", timeout: 3000 }
+    );
+    return out.trim().split("\n").filter(Boolean).map(line => {
+      const [index, name, vramTotalMb, vramUsedMb, utilPct, tempC, powerW] =
+        line.split(",").map(s => s.trim());
+      return {
+        index: Number(index),
+        name: name || null,
+        vramTotalMb: Number(vramTotalMb) || null,
+        vramUsedMb: Number(vramUsedMb) || null,
+        utilPct: Number(utilPct) || 0,
+        tempC: Number(tempC) || null,
+        powerW: Number(powerW) || null,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
 
 app.post("/webrtc/offer", async (req, res) => {
   const body = req.body || {};
