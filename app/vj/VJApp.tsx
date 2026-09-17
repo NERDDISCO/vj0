@@ -1,5 +1,6 @@
 "use client";
 
+import { createLatestFrameDecoder } from "@/src/lib/ai/latest-frame-decoder";
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { AudioEngine } from "@/src/lib/audio-engine";
 import { VisualEngine, SCENES } from "@/src/lib/scenes";
@@ -1068,11 +1069,24 @@ export function VJApp() {
   // ============================================================================
 
   useEffect(() => {
+    let forwardingActive = true;
+    let publishedStageSeq = 0;
     const handleStatus = (s: AiTransportStatus) => {
       setAiStatus(s);
       stageChannelRef.current?.postMessage({ type: "connection", status: s });
     };
     aiTransport.onStatusChange(handleStatus);
+
+    const decoder = createLatestFrameDecoder((bitmap) => {
+      previewRendererRef.current?.drawBitmap(bitmap);
+      const aiSrc = aiSourceCanvasRef.current;
+      const ctx = aiSrc?.getContext("2d", { willReadFrequently: true });
+      if (aiSrc && ctx) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "low";
+        ctx.drawImage(bitmap, 0, 0, aiSrc.width, aiSrc.height);
+      }
+    });
 
     const handleFrame = (frame: AiIncomingFrame) => {
       if (frame.kind === "text") {
@@ -1156,50 +1170,34 @@ export function VJApp() {
         if (prev) URL.revokeObjectURL(prev);
         return url;
       });
+      const stageSeq = ++stageFrameSeqRef.current;
       frame.blob
         .arrayBuffer()
         .then((buf) => {
+          if (!forwardingActive || stageSeq <= publishedStageSeq) return;
+          publishedStageSeq = stageSeq;
           stageChannelRef.current?.postMessage({
             type: "frame",
             bytes: buf,
             width: aiOutputWidth,
             height: aiOutputHeight,
-            seq: ++stageFrameSeqRef.current,
+            seq: stageSeq,
           });
         })
         .catch(() => {
           /* ignore */
         });
 
-      // Off-thread: decode the JPEG into an ImageBitmap. The single decoded
-      // bitmap drives both consumers in this branch — preview WebGL renderer
-      // (sharpened display) AND the 1×1 lighting source canvas (averaged
-      // colour for DMX). Fire-and-forget: if a decode is slow the next frame
-      // supersedes it. The bitmap is closed only after both consumers are
-      // done with it.
-      const aiSrc = aiSourceCanvasRef.current;
-      createImageBitmap(frame.blob)
-        .then((bitmap) => {
-          previewRendererRef.current?.drawBitmap(bitmap);
-          if (aiSrc) {
-            const ctx = aiSrc.getContext("2d", { willReadFrequently: true });
-            if (ctx) {
-              ctx.imageSmoothingEnabled = true;
-              ctx.imageSmoothingQuality = "low";
-              ctx.drawImage(bitmap, 0, 0, aiSrc.width, aiSrc.height);
-            }
-          }
-          bitmap.close?.();
-        })
-        .catch(() => {
-          /* swallow: stale frame, next one will retry */
-        });
+      // One decode in flight, with only the newest waiting JPEG retained.
+      decoder.push(frame.blob);
     };
 
     aiTransport.onFrame(handleFrame);
     return () => {
       aiTransport.offFrame(handleFrame);
+      forwardingActive = false;
       aiTransport.offStatusChange(handleStatus);
+      decoder.dispose();
     };
   }, [aiTransport, aiOutputWidth, aiOutputHeight]);
 
@@ -1335,6 +1333,8 @@ export function VJApp() {
     resolution: number;
     frameCount: number;
     pendingEncode: boolean;
+    rafId: number;
+    generation: number;
   }>({
     running: false,
     captureCanvas: null,
@@ -1344,13 +1344,15 @@ export function VJApp() {
     resolution: 0,
     frameCount: 0,
     pendingEncode: false,
+    rafId: 0,
+    generation: 0,
   });
 
   const aiFrameLoop = useCallback(() => {
     const sender = aiFrameSenderRef.current;
     if (!sender.running) return;
 
-    requestAnimationFrame(aiFrameLoop);
+    sender.rafId = requestAnimationFrame(aiFrameLoop);
 
     const now = performance.now();
     const frameInterval = 1000 / aiFrameRate;
@@ -1363,6 +1365,17 @@ export function VJApp() {
     if (!src) {
       return;
     }
+    sender.lastFrameTime = now;
+    const connected = aiTransport.isConnected();
+    const admitted = connected && aiTransport.canSend(256 * 1024);
+    const maySend = admitted && !sender.pendingEncode;
+    if (!maySend && 'diag' in aiTransport) {
+      if (!connected) (aiTransport as any).diag.sendSkippedNotConnected++;
+      else if (!admitted) (aiTransport as any).diag.sendSkippedBackpressure++;
+      else (aiTransport as any).diag.sendSkippedPendingEncode++;
+    }
+    // Capture debug remains useful while disconnected or congested.
+    if (!maySend && !aiShowCaptureDebug) return;
 
     // Capture at the output resolution — VisualEngine already renders at
     // the same dimensions, so this is a straight 1:1 copy. No crop, no
@@ -1385,7 +1398,6 @@ export function VJApp() {
 
     ctx.drawImage(src, 0, 0, capW, capH);
 
-    sender.lastFrameTime = now;
     sender.frameCount++;
 
     const debugCanvas = aiDebugCanvasRef.current;
@@ -1398,37 +1410,32 @@ export function VJApp() {
       sender.debugCtx?.drawImage(sender.captureCanvas, 0, 0);
     }
 
-    if (!aiTransport.isConnected() || !aiTransport.canSend(256 * 1024)) {
-      if ('diag' in aiTransport) {
-        if (!aiTransport.isConnected()) (aiTransport as any).diag.sendSkippedNotConnected++;
-        else (aiTransport as any).diag.sendSkippedBackpressure++;
-      }
-      return;
-    }
-    if (sender.pendingEncode) {
-      if ('diag' in aiTransport) (aiTransport as any).diag.sendSkippedPendingEncode++;
-      return;
-    }
+    if (!maySend) return;
 
     sender.pendingEncode = true;
+    const generation = sender.generation;
     sender.captureCanvas.toBlob(
       (blob) => {
-        sender.pendingEncode = false;
-        if (!blob || !aiTransport.isConnected()) return;
+        if (!blob || !sender.running || generation !== sender.generation) {
+          sender.pendingEncode = false;
+          return;
+        }
         blob
           .arrayBuffer()
           .then((buf) => {
-            if (!aiTransport.isConnected()) return;
+            if (!sender.running || generation !== sender.generation ||
+                !aiTransport.isConnected() || !aiTransport.canSend(256 * 1024)) return;
             aiTransport.sendBinary(buf);
           })
           .catch(() => {
             /* network hiccup; next frame will try again */
-          });
+          })
+          .finally(() => { sender.pendingEncode = false; });
       },
       "image/jpeg",
       0.85
     );
-  }, [aiTransport, aiFrameRate, aiOutputWidth, aiOutputHeight]);
+  }, [aiTransport, aiFrameRate, aiOutputWidth, aiOutputHeight, aiShowCaptureDebug]);
 
   useEffect(() => {
     // Catch-all for non-hotkey state changes (slider drags, backend swap,
@@ -1460,7 +1467,7 @@ export function VJApp() {
       if (!sender.running) {
         sender.running = true;
         sender.lastFrameTime = 0;
-        requestAnimationFrame(aiFrameLoop);
+        sender.rafId = requestAnimationFrame(aiFrameLoop);
       }
     } else {
       sender.running = false;
@@ -1468,6 +1475,8 @@ export function VJApp() {
 
     return () => {
       sender.running = false;
+      sender.generation++;
+      if (sender.rafId) cancelAnimationFrame(sender.rafId);
     };
   }, [aiSendFrames, aiShowCaptureDebug, aiStatus, aiFrameLoop, aiTransport]);
 

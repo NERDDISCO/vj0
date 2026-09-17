@@ -360,6 +360,8 @@ export function VJNextApp() {
   });
 
   useEffect(() => {
+    let forwardingActive = true;
+    let publishedStageSeq = 0;
     const onStatus = (s: AiTransportStatus) => {
       setAiStatus(s);
       // Telegraph status to the stage tab so it can show "waiting" /
@@ -484,15 +486,18 @@ export function VJNextApp() {
       // through StageRenderer with sharpen/pixelate FX applied.
       const stageCh = stageChannelRef.current;
       if (stageCh) {
+        const stageSeq = ++stageFrameSeqRef.current;
         frame.blob
           .arrayBuffer()
           .then((buf) => {
+            if (!forwardingActive || stageSeq <= publishedStageSeq) return;
+            publishedStageSeq = stageSeq;
             stageCh.postMessage({
               type: "frame",
               bytes: buf,
               width: outWidth,
               height: outHeight,
-              seq: ++stageFrameSeqRef.current,
+              seq: stageSeq,
             });
           })
           .catch(() => {
@@ -503,6 +508,7 @@ export function VJNextApp() {
     aiTransport.onStatusChange(onStatus);
     aiTransport.onFrame(onFrame);
     return () => {
+      forwardingActive = false;
       aiTransport.offStatusChange(onStatus);
       aiTransport.offFrame(onFrame);
       void aiTransport.stop();
@@ -648,6 +654,7 @@ export function VJNextApp() {
     captureCtx: CanvasRenderingContext2D | null;
     resolution: number;
     rafId: number;
+    generation: number;
   }>({
     running: false,
     lastFrameTime: 0,
@@ -656,6 +663,7 @@ export function VJNextApp() {
     captureCtx: null,
     resolution: 0,
     rafId: 0,
+    generation: 0,
   });
 
   const aiFrameLoop = useCallback(() => {
@@ -669,6 +677,8 @@ export function VJNextApp() {
 
     const src = inputCanvasRef.current;
     if (!src || src.width === 0 || src.height === 0) return;
+    sender.lastFrameTime = now;
+    if (!aiTransport.isConnected() || !aiTransport.canSend(256 * 1024) || sender.pendingEncode) return;
 
     const capW = outWidth;
     const capH = outHeight;
@@ -684,20 +694,20 @@ export function VJNextApp() {
     if (!ctx) return;
 
     ctx.drawImage(src, 0, 0, capW, capH);
-    sender.lastFrameTime = now;
-
-    if (!aiTransport.isConnected() || !aiTransport.canSend(256 * 1024)) return;
-    if (sender.pendingEncode) return;
 
     sender.pendingEncode = true;
+    const generation = sender.generation;
     sender.captureCanvas.toBlob(
       (blob) => {
-        sender.pendingEncode = false;
-        if (!blob || !aiTransport.isConnected()) return;
+        if (!blob || !sender.running || generation !== sender.generation) {
+          sender.pendingEncode = false;
+          return;
+        }
         blob
           .arrayBuffer()
           .then((buf) => {
-            if (!aiTransport.isConnected()) return;
+            if (!sender.running || generation !== sender.generation ||
+                !aiTransport.isConnected() || !aiTransport.canSend(256 * 1024)) return;
             aiTransport.sendBinary(buf);
             sentCountRef.current += 1;
             lastSendTimeRef.current = performance.now();
@@ -707,7 +717,8 @@ export function VJNextApp() {
           })
           .catch(() => {
             /* network hiccup; next frame will try again */
-          });
+          })
+          .finally(() => { sender.pendingEncode = false; });
       },
       "image/jpeg",
       0.85,
@@ -730,6 +741,7 @@ export function VJNextApp() {
     }
     return () => {
       sender.running = false;
+      sender.generation++;
       if (sender.rafId) cancelAnimationFrame(sender.rafId);
     };
   }, [generating, aiStatus, aiFrameLoop]);

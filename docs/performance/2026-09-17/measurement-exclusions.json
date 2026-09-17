@@ -1,0 +1,10 @@
+{
+  "exclusions": [
+    {
+      "run_directory": "/tmp/vj0-browser-wrtc010-20260917",
+      "trial": "wrtc010-stream-r1",
+      "reason": "Local production build overlapped the 30-second browser measurement, around 10:44:19 UTC. Retain raw result but exclude from library comparison and repeat after the main batch.",
+      "replacement": "pending"
+    }
+  ]
+}

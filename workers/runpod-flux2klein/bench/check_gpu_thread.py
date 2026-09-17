@@ -19,7 +19,7 @@ import time
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--worker-script", type=Path, required=True)
-    parser.add_argument("--scenario", choices=("ownership", "idle-grace", "shutdown", "failure", "queue-drops"), default="ownership")
+    parser.add_argument("--scenario", choices=("ownership", "idle-grace", "shutdown", "failure", "queue-drops", "state-snapshot"), default="ownership")
     args = parser.parse_args()
     import torch
     from PIL import Image
@@ -33,6 +33,8 @@ def main():
     owner = threading.get_ident()
     optional_started, frame_finished = [], []
     three_queued = threading.Event()
+    encode_started = threading.Event()
+    state_changed = threading.Event()
 
     def warmup(pipe, cache, width, height, *unused):
         calls.append({"kind": "warmup", "shape": [width, height],
@@ -43,11 +45,16 @@ def main():
             if args.scenario == "failure":
                 raise RuntimeError("intentional warmup failure")
 
-    def encode(*args):
-        calls.append({"kind": "encode", "on_owner_thread": threading.get_ident() == owner})
+    def encode(pipe, image, width, height):
+        calls.append({"kind": "encode", "shape": [width, height], "on_owner_thread": threading.get_ident() == owner})
+        if args.scenario == "state-snapshot":
+            encode_started.set()
+            if not state_changed.wait(timeout=5):
+                raise RuntimeError("Reader did not apply concurrent state change")
 
     def generate(pipe, latents, embeds, alpha, steps, height, width, seed):
-        calls.append({"kind": "generate", "on_owner_thread": threading.get_ident() == owner})
+        calls.append({"kind": "generate", "shape": [width, height], "alpha": alpha,
+                      "steps": steps, "on_owner_thread": threading.get_ident() == owner})
         if args.scenario == "idle-grace":
             time.sleep(1.1)
         return Image.new("RGB", (width, height), "white")
@@ -55,7 +62,7 @@ def main():
     def emit(**event):
         events.append(event["status"])
         if event["status"] in ("frame", "frame_dropped"):
-            identities.append({k: event.get(k) for k in ("status", "frame_id", "client_epoch")})
+            identities.append({k: event.get(k) for k in ("status", "frame_id", "client_epoch", "width", "height")})
         if event["status"] in ("frame", "error"):
             frame_finished.append(time.monotonic())
             if args.scenario != "queue-drops" or events.count("frame") == 2:
@@ -68,6 +75,16 @@ def main():
 
     class Input:
         def __iter__(self):
+            if args.scenario == "state-snapshot":
+                yield json.dumps({"image_base64": base64.b64encode(image.getvalue()).decode(),
+                    "width": 16, "height": 16, "captureWidth": 16, "captureHeight": 16,
+                    "alpha": 0.1, "n_steps": 2}) + "\n"
+                encode_started.wait(timeout=5)
+                yield '{"width":32,"height":16,"captureWidth":32,"captureHeight":16,"alpha":0.3,"n_steps":4}\n'
+                state_changed.set()
+                frame_done.wait(timeout=5)
+                yield '{"command":"shutdown"}\n'
+                return
             if args.scenario == "queue-drops":
                 for frame_id in (100, 101, 102):
                     yield json.dumps({"image_base64": base64.b64encode(image.getvalue()).decode(),
@@ -115,8 +132,9 @@ def main():
 
     try:
         os.environ["WARMUP_SHAPES"] = "16x16,32x16"
-        if args.scenario == "queue-drops":
+        if args.scenario in ("queue-drops", "state-snapshot"):
             os.environ["WARMUP_SHAPES"] = "16x16"
+        if args.scenario == "queue-drops":
             worker.queue.Queue = ControlledQueue
         sys.stdin = Input()
         torch.cuda.synchronize = lambda: None
@@ -143,6 +161,12 @@ def main():
         passed = (events.count("frame_dropped") == 1 and events.count("frame") == 2
                   and all(e["client_epoch"] == 7 for e in identities)
                   and [e["frame_id"] for e in identities] == [100, 101, 102])
+    elif args.scenario == "state-snapshot":
+        generated = [c for c in calls if c["kind"] == "generate"]
+        passed = (events == ["ready", "frame", "shutdown"] and len(generated) == 1
+                  and generated[0]["shape"] == [16, 16] and generated[0]["steps"] == 2
+                  and generated[0]["alpha"] == 0.1 and identities[0]["width"] == 16
+                  and identities[0]["height"] == 16)
     print(json.dumps({"scenario": args.scenario, "calls": calls, "events": events,
                       "identities": identities,
                       "idle_seconds_after_frame": idle_seconds, "passed": passed}))

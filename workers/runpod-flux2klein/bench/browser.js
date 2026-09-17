@@ -35,6 +35,18 @@ export async function runBenchmark(options) {
     throw new Error("A server URL, valid dimensions, positive duration/FPS/warmup, and stream/single mode are required");
   }
   const server = c.server.replace(/\/$/, "");
+  if (c.serverConfig) {
+    const response = await fetch(`${server}/benchmark/config`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(c.serverConfig), signal: AbortSignal.timeout(10000),
+    });
+    if (!response.ok) throw new Error("Could not apply test-only server configuration");
+    const applied = await response.json();
+    if (applied.maxPending !== c.serverConfig.maxPending ||
+        applied.maxOutboundBytes !== c.serverConfig.maxOutboundBytes) {
+      throw new Error("Server did not confirm requested queue/buffer settings");
+    }
+  }
   if (c.frameIds) {
     const response = await fetch(`${server}/debug`, { cache: "no-store", signal: AbortSignal.timeout(10000) });
     if (!response.ok || (await response.json()).protocol?.benchmarkFrameIds !== 1) {

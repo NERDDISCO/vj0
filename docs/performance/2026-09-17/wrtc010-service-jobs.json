@@ -1,0 +1,59 @@
+[
+  {
+    "name": "state-race-baseline",
+    "argv": [
+      "python3",
+      "-c",
+      "import subprocess,json\nr=subprocess.run(['python3','/workspace/bench-20260917/check_gpu_thread.py','--worker-script','/workspace/baseline-20260917/inference_server.py','--scenario','state-snapshot'],capture_output=True,text=True)\nassert r.stdout, r.stderr\nj=json.loads(r.stdout.splitlines()[-1]);assert r.returncode==1 and not j['passed'],j\nassert [x['shape'] for x in j['calls'] if x['kind']=='generate']==[[32,16]],j\nprint(json.dumps({'status':'reproduced','result':j}))\n"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 60
+  },
+  {
+    "name": "state-snapshot-candidate",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/check_gpu_thread.py",
+      "--worker-script",
+      "/workspace/inference-candidate-v2-20260917.py",
+      "--scenario",
+      "state-snapshot"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 60
+  },
+  {
+    "name": "install-wrtc010",
+    "argv": [
+      "npm",
+      "install",
+      "--prefix",
+      "/workspace/wrtc010-20260917",
+      "--ignore-scripts",
+      "--save-exact",
+      "@roamhq/wrtc@0.10.0"
+    ],
+    "cwd": "/workspace",
+    "timeout_seconds": 300
+  },
+  {
+    "name": "wrtc010-service",
+    "argv": [
+      "node",
+      "/workspace/server-configurable-bench-20260917.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "PORT": "3001",
+      "INFERENCE_SCRIPT": "/workspace/inference-candidate-v2-20260917.py",
+      "WORKER_COUNT": "1",
+      "JPEG_QUALITY": "80",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead",
+      "WARMUP_SHAPES": "512x288,768x448,1024x576",
+      "MAX_PENDING_PER_WORKER": "3"
+    },
+    "timeout_seconds": 7200
+  }
+]

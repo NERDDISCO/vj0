@@ -1,0 +1,20 @@
+{
+  "exit_code": 1,
+  "passed": 2,
+  "failed": 7,
+  "measurement": "CPU scheduling/control-flow regressions against actual extracted app callbacks; no FPS claim",
+  "sha256": {
+    "app/vj-next/VJNextApp.tsx": "93b89220da9d5fb78d9701f8fc8ce1ae210632d090b537001a14156db8e2fea3",
+    "app/vj/VJApp.tsx": "4b9d4f92fa16637a87d3e964b0afc56fb7a38a600fb1a19f2d643b7e22702368",
+    "workers/runpod-flux2klein/bench/test_capture.mjs": "6d7ad51f74eb2811dd46ce11a77846af90ec637dec86ab596ec7afdc991346cd"
+  },
+  "failed_tests": [
+    "\u2716 next: congested transport skips the source canvas copy (4.623917ms)",
+    "\u2716 next: congestion arising during JPEG encode prevents sending (6.104291ms)",
+    "\u2716 next: an encode from a stopped loop cannot reach its replacement (2.587209ms)",
+    "\u2716 legacy: effect cleanup/restart leaves exactly one animation loop (4.716708ms)",
+    "\u2716 legacy: congested transport skips the source canvas copy (2.567ms)",
+    "\u2716 legacy: congestion arising during JPEG encode prevents sending (3.452084ms)",
+    "\u2716 legacy: an encode from a stopped loop cannot reach its replacement (2.324666ms)"
+  ]
+}

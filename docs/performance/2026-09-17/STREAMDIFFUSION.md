@@ -70,15 +70,15 @@ upstream strict metadata. Both checkpoint downloads completed at pinned revision
 - StreamDiffusionV2 causal checkpoint: `2373eb2b39278b3a1aa174964a724ee78ead96f0`.
 
 Source is at `/workspace/streamdiffusionv2-20260917`; download identities are in
-its `checkpoint-revisions.json`. No StreamDiffusionV2 GPU forward pass, FPS or
-quality result has been measured here yet.
+its `checkpoint-revisions.json`. The first GPU smoke result is recorded below;
+steady-state comparisons and live frame age remain pending.
 
 ## First GPU smoke result
 
 The pinned API completed at native 832x480, two steps, single mode, standard VAE,
 initial noise scale 0.8, without FlashAttention installed (PyTorch SDPA fallback).
-It produced 13 valid RGB frames from 17 input frames; four frames remained in
-pipeline fill/drain latency. Model construction took about 97 seconds after
+It produced 13 valid RGB frames from 17 input frames: a four-frame output
+shortfall. Input/output retention and drain have not been directly verified. Model construction took about 97 seconds after
 imports. The first cold forward pass took 3.86 seconds total, with its first
 five output frames after 3.02 seconds. This short cold trial is a correctness
 result, not a steady-state performance claim. CPU control-flow checks finished

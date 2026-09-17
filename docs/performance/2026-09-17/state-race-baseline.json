@@ -1,0 +1,50 @@
+{
+  "status": "reproduced",
+  "result": {
+    "scenario": "state-snapshot",
+    "calls": [
+      {
+        "kind": "warmup",
+        "shape": [
+          16,
+          16
+        ],
+        "on_owner_thread": true
+      },
+      {
+        "kind": "encode",
+        "shape": [
+          16,
+          16
+        ],
+        "on_owner_thread": true
+      },
+      {
+        "kind": "generate",
+        "shape": [
+          32,
+          16
+        ],
+        "alpha": 0.3,
+        "steps": 4,
+        "on_owner_thread": true
+      }
+    ],
+    "events": [
+      "ready",
+      "frame",
+      "shutdown"
+    ],
+    "identities": [
+      {
+        "status": "frame",
+        "frame_id": null,
+        "client_epoch": null,
+        "width": 32,
+        "height": 16
+      }
+    ],
+    "idle_seconds_after_frame": null,
+    "passed": false
+  }
+}

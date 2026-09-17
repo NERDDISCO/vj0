@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "passed": 9,
+  "failed": 0,
+  "measurement": "CPU scheduling/control-flow regressions against actual app callbacks; not live FPS",
+  "sha256": {
+    "app/vj-next/VJNextApp.tsx": "88c7185f568f0da2265657d2c1fcb23c8c74554f7f96d88a1461454aa80a255a",
+    "app/vj/VJApp.tsx": "ae88d76a8abc7e3f16ce681622d020cb9f74cdb56e3459129892dbf89b0c90fd",
+    "workers/runpod-flux2klein/bench/test_capture.mjs": "6d7ad51f74eb2811dd46ce11a77846af90ec637dec86ab596ec7afdc991346cd"
+  }
+}

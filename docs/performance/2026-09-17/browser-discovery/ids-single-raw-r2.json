@@ -1,0 +1,114 @@
+{
+  "config": {
+    "alpha": 0.1,
+    "channelOptions": {},
+    "frameIds": false,
+    "height": 288,
+    "inputQuality": 0.85,
+    "maxBufferedBytes": 262144,
+    "mode": "single",
+    "outputQuality": 80,
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "seconds": 30,
+    "seed": 42,
+    "sendFps": 60,
+    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "steps": 2,
+    "telemetryEveryMs": 0,
+    "warmupFrames": 20,
+    "width": 512
+  },
+  "counts": {
+    "bytesReceived": 7729282,
+    "bytesSent": 1856204,
+    "compileDuringMeasurement": false,
+    "decodeErrors": 0,
+    "decodeSkips": 0,
+    "decodedDrawn": 186,
+    "encodeSkips": 3,
+    "errors": [],
+    "maxBufferedBytes": 0,
+    "received": 186,
+    "sendBufferSkips": 0,
+    "sendErrors": 0,
+    "sent": 187,
+    "telemetryErrors": 0
+  },
+  "date": "2026-09-17T10:16:05.030Z",
+  "decodedDrawnFps": 6.199690015499225,
+  "distributions": {
+    "captureToDrawMs": {
+      "count": 186,
+      "mean": 154.41720429735798,
+      "p50": 152.79999995231628,
+      "p95": 167.12500005960464,
+      "p99": 175.44000003337862
+    },
+    "decodeDrawMs": {
+      "count": 186,
+      "mean": 2.7715053737804456,
+      "p50": 2.299999952316284,
+      "p95": 5.624999970197678,
+      "p99": 13.229999983310712
+    },
+    "encodeMs": {
+      "count": 187,
+      "mean": 4.464705884775376,
+      "p50": 4.099999904632568,
+      "p95": 7.149999988079065,
+      "p99": 17.125999996662127
+    },
+    "inputBytes": {
+      "count": 187,
+      "mean": 9926.22459893048,
+      "p50": 9921,
+      "p95": 10155.3,
+      "p99": 10215.84
+    },
+    "outputBytes": {
+      "count": 186,
+      "mean": 41555.279569892475,
+      "p50": 41569,
+      "p95": 43069.5,
+      "p99": 43586.100000000006
+    },
+    "requestResponseMs": {
+      "count": 186,
+      "mean": 151.64247311699776,
+      "p50": 150.4000000357628,
+      "p95": 162.64999994635582,
+      "p99": 169.59000008106236
+    },
+    "telemetryMs": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "workerTimingMs": {
+      "count": 186,
+      "mean": 38.321505376344106,
+      "p50": 37.675,
+      "p95": 41.9725,
+      "p99": 46.407500000000006
+    }
+  },
+  "elapsedSeconds": 30.0015,
+  "frameAge": "one request in flight; measured on client clock",
+  "inboundMbps": 2.06103881472593,
+  "invalidReasons": [],
+  "measurement": "browser receive/decode/offscreen 2D draw; excludes application upscaler/projector and audio capture",
+  "outboundMbps": 0.49496298518407417,
+  "receivedFps": 6.199690015499225,
+  "sourceCapture": "OffscreenCanvas.convertToBlob; production uses HTMLCanvasElement.toBlob",
+  "status": "measured",
+  "transport": [
+    {
+      "currentRoundTripTime": 0.019,
+      "localCandidate": "srflx",
+      "remoteCandidate": "srflx"
+    }
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+}

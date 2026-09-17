@@ -4,9 +4,7 @@ anyio==4.13.0
 certifi==2026.4.22
 charset-normalizer==3.4.7
 click==8.3.3
-cuda-bindings==12.9.6
-cuda-pathfinder==1.5.4
-cuda-toolkit==12.8.1
+cuda-toolkit==13.2.1
 diffusers @ git+https://github.com/huggingface/diffusers.git@160852de680d36117e0a787f7f8b718232539abb
 filelock==3.29.0
 fsspec==2026.4.0
@@ -35,7 +33,7 @@ requests==2.33.1
 rich==15.0.0
 safetensors==0.8.0rc0
 sentencepiece==0.2.1
-setuptools==68.1.2
+setuptools==77.0.3
 shellingham==1.5.4
 sympy==1.14.0
 tokenizers==0.22.2

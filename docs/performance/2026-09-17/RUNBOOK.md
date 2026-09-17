@@ -12,17 +12,24 @@ three startup shapes compiled with main-thread warmup, but the original dispatch
 subsequently restarted workers with phantom pending work and during compilation.
 Higher-resolution transport measurements were stopped; no valid timed result yet.
 
-The original Node dispatcher (PID 499) is now SIGSTOPped for the serial GPU sweep.
-Runner PID 17191 writes `/workspace/sweep-20260917/sweep.json` and
-`/workspace/sweep-runner-20260917.log`. It kills only its own job process groups,
-checks the GPU between jobs, and resumes the original dispatcher in `finally`.
-Inspect that manifest before touching workers, starting benchmarks, or creating
-another pod. Job arguments are committed in `compute-jobs.json`. Once it exits,
-wait for the restored original worker or deliberately pause it again before
-launching a candidate service on port 3001. Never overlap GPU work.
+The first serial GPU sweep finished successfully at 09:57:59 UTC; all seven jobs
+passed and the original dispatcher resumed. All complete compute summaries are
+now in the report. The candidate live service is now managed by runner PID 24686,
+with Node service PID 24689 on port 3001. Its manifest is
+`/workspace/candidate-service-20260917/sweep.json`; original Node PID 499 is paused
+again. Never resume the original or start another GPU job during these live tests.
+The service runner has a two-hour timeout and restores the original in `finally`.
+Terminate only the candidate Node PID when this live batch is complete; the runner
+cleans its whole process group and restores original service.
 
-StreamDiffusionV2 is installed and downloaded in its separate environment; its
-first forward pass is the second job in the sweep.
+The 30 live trials are in `browser-jobs.json`. `bench/browser_batch.py` runs them
+serially through agent-browser and persists each completed result immediately.
+It stops the batch after two consecutive invalid/failed trials for investigation.
+
+StreamDiffusionV2's first forward pass passed; the extended decoder/step/noise
+jobs are prepared in `stream-jobs.json` but have not started. A second two-PRO-6000
+pod `9vj8k6guaxsbhw` was created for scaling and independent compute work, quoted
+at $4.18/hour plus storage. It is still initializing; inspect before using it.
 Existing older pods remain stopped. Evidence: `baseline-pod.json`.
 
 The branch contains preparation, live baseline evidence, and focused fixes under validation. No new inference default is promoted.

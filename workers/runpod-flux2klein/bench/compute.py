@@ -39,11 +39,12 @@ def arguments():
     p.add_argument("--prompt", default="colorful abstract art, vibrant neon lights, psychedelic patterns")
     p.add_argument("--compile-mode", choices=["reduce-overhead", "default", "max-autotune"], default="reduce-overhead")
     p.add_argument("--vae-fp8", choices=["0", "1"], default="1")
-    p.add_argument("--variant", choices=["baseline", "constants", "no-stage-sync", "inference-mode", "combined"], default="baseline")
+    p.add_argument("--variant", choices=["baseline", "constants", "no-stage-sync", "inference-mode", "combined", "vae-constants", "all-constants"], default="baseline")
+    p.add_argument("--profile-frames", type=int, default=0, help="Separate untimed profiler pass after each measured cell")
     p.add_argument("--image-digest", default="unknown")
     a = p.parse_args()
     a.steps = [int(s) for s in a.steps.split(",")]
-    if min(a.frames, a.warmup, a.repeats) < 1 or any(s not in (1, 2, 3, 4) for s in a.steps):
+    if min(a.frames, a.warmup, a.repeats) < 1 or a.profile_frames < 0 or any(s not in (1, 2, 3, 4) for s in a.steps):
         p.error("Positive counts and 1–4 steps required")
     if not 0 <= a.alpha <= 0.5 or not all(10 <= q <= 100 for q in (a.input_quality, a.output_quality)):
         p.error("Alpha must be 0..0.5 and JPEG quality 10..100")
@@ -73,6 +74,31 @@ def install_constant_cache(worker, torch, np):
         ).images[0]
 
     worker.generate = generate
+
+
+def install_vae_constant_cache(worker, torch, np):
+    """Cache frozen VAE normalization tensors for this one benchmark pipeline."""
+    from diffusers.pipelines.flux2.pipeline_flux2 import retrieve_latents
+    from PIL import Image
+    cache = {}
+
+    def encode(pipe, image, width, height):
+        if image.size != (width, height):
+            image = image.resize((width, height), Image.LANCZOS)
+        array = np.asarray(image, dtype=np.float32) / 127.5 - 1.0
+        tensor = torch.from_numpy(array).permute(2, 0, 1).unsqueeze(0).to('cuda', dtype=torch.bfloat16)
+        raw = retrieve_latents(pipe.vae.encode(tensor), sample_mode='argmax')
+        patch = pipe._patchify_latents(raw)
+        key = (id(pipe), patch.device, patch.dtype)
+        if key not in cache:
+            cache.clear()
+            bn = pipe.vae.bn
+            cache[key] = (bn.running_mean.view(1, -1, 1, 1).to(patch.device, patch.dtype),
+                (bn.running_var + bn.eps).sqrt().view(1, -1, 1, 1).to(patch.device, patch.dtype))
+        mean, std = cache[key]
+        return (patch - mean) / std
+
+    worker.encode_image_to_latents = encode
 
 
 def main():
@@ -113,9 +139,12 @@ def main():
     (a.output / "environment.json").write_text(json.dumps(environment, indent=2) + "\n")
     prompts = worker.PromptCache(pipe)
     baseline_generate = worker.generate
-    if a.variant in ("constants", "combined"):
+    baseline_encode = worker.encode_image_to_latents
+    if a.variant in ("constants", "combined", "all-constants"):
         install_constant_cache(worker, torch, np)
-    stage_sync = a.variant not in ("no-stage-sync", "combined")
+    if a.variant in ("vae-constants", "all-constants"):
+        install_vae_constant_cache(worker, torch, np)
+    stage_sync = a.variant not in ("no-stage-sync", "combined", "all-constants")
     context = torch.inference_mode if a.variant == "inference-mode" else torch.no_grad
 
     def make_input(w, h, phase, blank=False):
@@ -220,13 +249,27 @@ def main():
                         check = {**cell, "status": "correctness", "input_difference_mse": errors,
                                  "jpeg_compression": compression,
                                  "input_influence_observed": all(v > 0 for v in errors.values())}
-                        if a.variant in ("constants", "combined"):
+                        if a.variant in ("constants", "combined", "vae-constants", "all-constants"):
                             patched = worker.generate
+                            patched_encode = worker.encode_image_to_latents
                             worker.generate = baseline_generate
-                            reference, _, _ = frame(inputs[0], w, h, steps, embeds)
-                            worker.generate = patched
+                            worker.encode_image_to_latents = baseline_encode
+                            try:
+                                reference, _, _ = frame(inputs[0], w, h, steps, embeds)
+                            finally:
+                                worker.generate = patched
+                                worker.encode_image_to_latents = patched_encode
                             check["baseline_reference_mse"] = float(np.mean((originals["a"] - np.asarray(reference, dtype=np.float32) / 255) ** 2))
                         results.write(json.dumps(check) + "\n")
+                        if a.profile_frames:
+                            with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,
+                                    torch.profiler.ProfilerActivity.CUDA], record_shapes=True) as profiler:
+                                for i in range(a.profile_frames):
+                                    frame(inputs[i % len(inputs)], w, h, steps, embeds)
+                            prefix = a.output / f'{w}x{h}-{steps}step-profile'
+                            profiler.export_chrome_trace(str(prefix) + '.json')
+                            Path(str(prefix) + '.txt').write_text(profiler.key_averages().table(
+                                sort_by='self_cuda_time_total', row_limit=30))
                 except Exception as exc:
                     results.write(json.dumps({**cell, "status": "failed", "error": repr(exc)}) + "\n")
                     raise

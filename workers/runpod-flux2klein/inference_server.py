@@ -514,20 +514,25 @@ def main():
         # State was already applied by the reader thread. Re-apply in case
         # this frame message carried state fields (belt-and-suspenders).
         _apply_state(req)
+        # A settings message may arrive while CUDA work releases the GIL. Keep
+        # input encoding, generation and output metadata on one configuration;
+        # the next frame observes newer settings without blocking the reader.
+        with state_lock:
+            frame_state = state.copy()
 
         # If resolution changed, re-warm at the new shape unless idle warmup
         # already compiled it.
-        new_size = (state["width"], state["height"])
+        new_size = (frame_state["width"], frame_state["height"])
         if new_size != last_size:
             if new_size in warmed_shapes:
-                log(f"resolution changed → {state['width']}×{state['height']}, already compiled by idle warmup")
+                log(f"resolution changed → {frame_state['width']}×{frame_state['height']}, already compiled by idle warmup")
                 last_size = new_size
             else:
-                log(f"resolution changed → {state['width']}×{state['height']}, re-warming")
+                log(f"resolution changed → {frame_state['width']}×{frame_state['height']}, re-warming")
                 try:
                     with gpu_lock:
-                        warmup(pipe, prompt_cache, state["width"], state["height"],
-                               state["alpha"], state["n_steps"])
+                        warmup(pipe, prompt_cache, frame_state["width"], frame_state["height"],
+                               frame_state["alpha"], frame_state["n_steps"])
                     warmed_shapes.add(new_size)
                     last_size = new_size
                 except Exception as e:
@@ -552,7 +557,7 @@ def main():
         try:
             raw = base64.b64decode(req["image_base64"])
             input_img = bytes_to_pil(
-                raw, state["capture_width"], state["capture_height"]
+                raw, frame_state["capture_width"], frame_state["capture_height"]
             )
         except Exception as e:
             emit(status="error", message=f"decode input failed: {e}",
@@ -565,24 +570,24 @@ def main():
             # Keep prompt encoding + VAE encode + transformer + VAE decode in
             # one GPU critical section on the same thread as shape warmup.
             with gpu_lock:
-                embeds = prompt_cache.get(state["prompt"])
+                embeds = prompt_cache.get(frame_state["prompt"])
                 t_prompt = time.perf_counter()
 
                 torch.cuda.synchronize()
                 t0 = time.perf_counter()
-                lat = encode_image_to_latents(pipe, input_img, state["width"], state["height"])
+                lat = encode_image_to_latents(pipe, input_img, frame_state["width"], frame_state["height"])
                 torch.cuda.synchronize()
                 t_vae_encode = time.perf_counter()
 
                 out = generate(pipe, lat, embeds,
-                               state["alpha"], state["n_steps"],
-                               state["height"], state["width"], state["seed"])
+                               frame_state["alpha"], frame_state["n_steps"],
+                               frame_state["height"], frame_state["width"], frame_state["seed"])
                 torch.cuda.synchronize()
                 t_transformer = time.perf_counter()
             gen_ms = (t_transformer - t0) * 1000
             frame_count += 1
 
-            jpg = pil_to_jpeg_bytes(out, state["jpeg_quality"])
+            jpg = pil_to_jpeg_bytes(out, frame_state["jpeg_quality"])
             t_jpeg = time.perf_counter()
 
             timing = {
@@ -599,7 +604,7 @@ def main():
                 client_epoch=req.get("client_epoch"),
                 image_base64=base64.b64encode(jpg).decode("ascii"),
                 gen_time_ms=round(gen_ms, 1),
-                width=state["width"], height=state["height"],
+                width=frame_state["width"], height=frame_state["height"],
                 timing=timing,
             )
             # Periodic log so we can see the breakdown without DEBUG_FRAMES.

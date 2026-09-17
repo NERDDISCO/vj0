@@ -1,0 +1,11 @@
+{
+  "passed": 16,
+  "failed": 0,
+  "measurement": "CPU control-flow checks; no live FPS claim",
+  "sha256": {
+    "app/vj-next/VJNextApp.tsx": "680e663c51aab999373703b7807e6e44dd7886c8716be43544f044fbf48e8ef2",
+    "app/vj/VJApp.tsx": "76623c2195b451a3473994fa164ff03f3dc542635945a4cbcd183e8c71964140",
+    "app/vj/stage/page.tsx": "727b0f6ec5c3dc2b4dedbdac705b29940d04476ad009cad4f61b4b484faea6fd",
+    "src/lib/ai/latest-frame-decoder.ts": "62cb7353391923e7a5da7d5dd5fae8f2eeabe4f5f27f69b8775799f89572737e"
+  }
+}

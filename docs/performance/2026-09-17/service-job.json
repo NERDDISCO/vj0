@@ -1,0 +1,22 @@
+[
+  {
+    "name": "candidate-service",
+    "argv": [
+      "node",
+      "/workspace/server-candidate-20260917.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "NODE_PATH": "/app/node_modules",
+      "PORT": "3001",
+      "INFERENCE_SCRIPT": "/workspace/inference-candidate-20260917.py",
+      "WORKER_COUNT": "1",
+      "JPEG_QUALITY": "80",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead",
+      "WARMUP_SHAPES": "512x288,768x448,1024x576",
+      "MAX_PENDING_PER_WORKER": "3"
+    },
+    "timeout_seconds": 7200
+  }
+]

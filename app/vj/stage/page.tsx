@@ -13,6 +13,7 @@
  * control panel preview.
  */
 import { useEffect, useRef, useState } from "react";
+import { createLatestFrameDecoder } from "@/src/lib/ai/latest-frame-decoder";
 import { openStageChannel, type StageMsg } from "@/src/lib/ai/stage-channel";
 import { useAiSettingsStore } from "@/src/lib/stores";
 import {
@@ -39,20 +40,16 @@ export default function StagePage() {
     // Announce presence so the control tab can (optionally) re-publish current state
     ch.postMessage({ type: "hello" });
 
-    const onMessage = async (ev: MessageEvent<StageMsg>) => {
+    const decoder = createLatestFrameDecoder((bitmap) => {
+      rendererRef.current?.drawBitmap(bitmap);
+    });
+    const onMessage = (ev: MessageEvent<StageMsg>) => {
       const msg = ev.data;
       if (!msg || typeof msg !== "object") return;
 
       if (msg.type === "frame") {
         setHasSignal(true);
-        try {
-          const blob = new Blob([msg.bytes], { type: "image/jpeg" });
-          const bitmap = await createImageBitmap(blob);
-          rendererRef.current?.drawBitmap(bitmap);
-          bitmap.close?.();
-        } catch {
-          // swallow — next frame will try again
-        }
+        decoder.push(new Blob([msg.bytes], { type: "image/jpeg" }));
       } else if (msg.type === "prompt") {
         const p = msg.prompt.trim();
         if (!p) return;
@@ -70,6 +67,7 @@ export default function StagePage() {
     return () => {
       ch.onmessage = null;
       ch.close();
+      decoder.dispose();
       if (overlayTimeoutRef.current)
         window.clearTimeout(overlayTimeoutRef.current);
     };

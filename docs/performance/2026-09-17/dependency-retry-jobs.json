@@ -1,0 +1,148 @@
+[
+  {
+    "name": "install-torch213-cu132-resolved",
+    "argv": [
+      "/workspace/tools/uv-x86_64-unknown-linux-gnu/uv",
+      "pip",
+      "install",
+      "--python",
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "--extra-index-url",
+      "https://download.pytorch.org/whl/cu132",
+      "--index-strategy",
+      "unsafe-best-match",
+      "-r",
+      "/workspace/bench-20260917/torch213-cu132-resolved.txt"
+    ],
+    "cwd": "/workspace",
+    "timeout_seconds": 1200,
+    "env": {
+      "UV_CACHE_DIR": "/workspace/uv-cache"
+    }
+  },
+  {
+    "name": "torch213-baseline-resolved",
+    "argv": [
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/torch213-baseline-resolved",
+      "--variant",
+      "baseline"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800,
+    "env": {
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    }
+  },
+  {
+    "name": "torch213-combined-resolved",
+    "argv": [
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/torch213-combined-resolved",
+      "--variant",
+      "combined"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800,
+    "env": {
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    }
+  },
+  {
+    "name": "vae-normalization-cache",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute-v2.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/vae-normalization-cache",
+      "--variant",
+      "vae-constants"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "all-constant-caches",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute-v2.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/all-constant-caches",
+      "--variant",
+      "all-constants"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "attention-profile",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute-v2.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/attention-profile",
+      "--sizes",
+      "512x288",
+      "--profile-frames",
+      "16"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800
+  }
+]
