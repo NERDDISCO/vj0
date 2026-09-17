@@ -42,6 +42,11 @@ export async function runBenchmark(options) {
     });
     if (!response.ok) throw new Error("Could not apply test-only server configuration");
     const applied = await response.json();
+    for (const key of ['telemetryMode', 'outboundFrames']) {
+      if (key in c.serverConfig && applied[key] !== c.serverConfig[key]) {
+        throw new Error('Server did not confirm ' + key);
+      }
+    }
     if (applied.maxPending !== c.serverConfig.maxPending ||
         applied.maxOutboundBytes !== c.serverConfig.maxOutboundBytes ||
         (c.serverConfig.benchmarkVariant && applied.benchmarkVariant !== c.serverConfig.benchmarkVariant) ||
@@ -84,9 +89,13 @@ export async function runBenchmark(options) {
     decodeErrors: 0, bytesSent: 0, bytesReceived: 0, telemetryErrors: 0,
     compileDuringMeasurement: false, errors: [],
     encodeMs: [], decodeDrawMs: [], requestResponseMs: [], captureToDrawMs: [],
-    inputBytes: [], outputBytes: [], workerTimingMs: [], telemetryMs: [],
+    inputBytes: [], outputBytes: [], workerTimingMs: [], workerQueueMs: [], telemetryMs: [],
     maxBufferedBytes: 0 };
   const workerFrameCounts = {};
+  const telemetrySnapshots = [];
+  const telemetryPolls = {attempted:0, completedWithinWindow:0, failedWithinWindow:0, censored:0};
+  let telemetryPending = Promise.resolve();
+  let serverCountersBefore = null, serverCountersAfter = null;
   const workerLastActivity = {}, workerMaxGapMs = {};
   let measurementStarted = 0;
   let telemetryTimer, sendTimer;
@@ -175,6 +184,11 @@ export async function runBenchmark(options) {
           }
         }
         if (measuring && message.type === "stats") {
+          if (Number.isFinite(message.timing?.queue_wait_ms)) {
+            measurements.workerQueueMs.push(message.timing.queue_wait_ms);
+          } else if (c.requireQueueTiming) {
+            measurements.errors.push('Missing worker queue timing');
+          }
           if (c.serverConfig?.activeWorkers && (!Number.isInteger(message.worker) ||
               message.worker < 0 || message.worker >= c.serverConfig.activeWorkers)) {
             measurements.errors.push('An unexpected worker produced a measured frame');
@@ -310,6 +324,11 @@ export async function runBenchmark(options) {
     if (c.serverConfig?.activeWorkers && observedVariants.size !== c.serverConfig.activeWorkers) {
       throw new Error('Not all requested active workers produced warmup frames');
     }
+    if (c.recordServerCounters) {
+      const response = await fetch(`${server}/benchmark/window`, {method:'POST', signal:AbortSignal.timeout(10000)});
+      if (!response.ok) throw new Error('Could not reset benchmark server window');
+      serverCountersBefore = {clientAtMs:performance.now(), ...(await response.json())};
+    }
     phase = "measure";
     measuring = true;
     measurements.maxBufferedBytes = 0;
@@ -317,17 +336,30 @@ export async function runBenchmark(options) {
     measurementStarted = started;
     if (c.telemetryEveryMs > 0) {
       let busy = false;
-      telemetryTimer = setInterval(async () => {
+      telemetryTimer = setInterval(() => {
         if (busy || stopped) return;
         busy = true;
+        telemetryPolls.attempted++;
+        telemetryPending = (async () => {
         const start = performance.now();
         try {
           const r = await fetch(`${server}/telemetry`, { signal: AbortSignal.timeout(5000) });
           if (!r.ok) throw new Error(`Telemetry HTTP ${r.status}`);
-          await r.json();
-          if (!stopped) measurements.telemetryMs.push(performance.now() - start);
-        } catch { if (!stopped) measurements.telemetryErrors++; }
+          const snapshot = await r.json();
+          if (!stopped) {
+            telemetryPolls.completedWithinWindow++;
+            measurements.telemetryMs.push(performance.now() - start);
+            if (c.recordTelemetry) telemetrySnapshots.push({
+              elapsedMs: performance.now() - started,
+              gpus: snapshot.gpus, workers: snapshot.workers,
+            });
+          } else telemetryPolls.censored++;
+        } catch {
+          if (!stopped) { measurements.telemetryErrors++; telemetryPolls.failedWithinWindow++; }
+          else telemetryPolls.censored++;
+        }
         finally { busy = false; }
+        })();
       }, c.telemetryEveryMs);
     }
     sendTimer = setInterval(send, Math.max(1, 1000 / c.sendFps));
@@ -340,11 +372,13 @@ export async function runBenchmark(options) {
     const elapsed = (performance.now() - started) / 1000;
     const measurementEnded = started + elapsed * 1000;
     let finalWorkerHealth = null;
-    if (c.serverConfig?.activeWorkers) {
+    if (c.serverConfig?.activeWorkers || c.recordServerCounters) {
       const response = await fetch(`${server}/debug`, {cache:'no-store', signal:AbortSignal.timeout(10000)});
       if (!response.ok) throw new Error('Could not verify final scaling worker health');
-      finalWorkerHealth = (await response.json()).workers;
-      for (let worker=0; worker<c.serverConfig.activeWorkers; worker++) {
+      const debug = await response.json();
+      finalWorkerHealth = debug.workers;
+      if (c.recordServerCounters) serverCountersAfter = {clientAtMs:performance.now(), stats:debug.stats};
+      for (let worker=0; worker<(c.serverConfig?.activeWorkers || 0); worker++) {
         workerMaxGapMs[worker] = Math.max(workerMaxGapMs[worker] || 0,
           measurementEnded - (workerLastActivity[worker] ?? started));
         if (workerMaxGapMs[worker] > 2000 || !finalWorkerHealth?.find(w=>w.gpu===worker)?.ready) {
@@ -352,6 +386,8 @@ export async function runBenchmark(options) {
         }
       }
     }
+    // Settle outstanding polls outside the timed interval before controls change.
+    await telemetryPending;
     const stats = await pc.getStats();
     const transport = [];
     stats.forEach((s) => {
@@ -374,6 +410,11 @@ export async function runBenchmark(options) {
     if (!measurements.decodedDrawn) invalidReasons.push("no successfully decoded/drawn images");
     if (measurements.decodeErrors) invalidReasons.push("JPEG decode failures");
     if (measurements.sendErrors || measurements.errors.length) invalidReasons.push("transport or encode errors");
+    if (c.requireQueueTiming && !measurements.workerQueueMs.length) invalidReasons.push('No worker queue measurements');
+    if (c.recordTelemetry && (!telemetrySnapshots.length || measurements.telemetryErrors ||
+        telemetrySnapshots.some(s => !s.gpus?.length || s.gpus.some(g => !Number.isFinite(g.utilPct))))) {
+      invalidReasons.push('Incomplete GPU telemetry measurements');
+    }
     if (c.serverConfig?.activeWorkers && Object.keys(workerFrameCounts).length !== c.serverConfig.activeWorkers) {
       invalidReasons.push('Not all requested active workers produced measured frames');
     }
@@ -384,7 +425,12 @@ export async function runBenchmark(options) {
       frameAge: c.frameIds ? "correlated by echoed frame ID; measured on client clock"
         : c.mode === "single" ? "one request in flight; measured on client clock" : "unknown: baseline does not echo frame IDs",
       workerVariants: Array.from(observedVariants, ([worker, value]) => ({worker, ...value})),
-      workerFrameCounts,
+      workerFrameCounts, telemetrySnapshots, telemetryPolls,
+      serverCounters: c.recordServerCounters ? {before:serverCountersBefore, after:serverCountersAfter,
+        interval:'server snapshots bracket the client timed window and may include final in-flight work',
+        deltas:Object.fromEntries(['framesFromClient','framesToWorker','framesFromWorker','framesToClient',
+          'droppedByWorker','droppedInbound','droppedOutbound'].map(k=>[k,
+            serverCountersAfter.stats[k]-serverCountersBefore.stats[k]]))} : null,
       workerMaxGapMs, finalWorkerHealth,
       elapsedSeconds: elapsed, receivedFps: measurements.received / elapsed,
       decodedDrawnFps: measurements.decodedDrawn / elapsed,
@@ -395,6 +441,7 @@ export async function runBenchmark(options) {
     stopped = true;
     clearInterval(sendTimer);
     clearInterval(telemetryTimer);
+    await telemetryPending;
     ch.close();
     pc.close();
   }

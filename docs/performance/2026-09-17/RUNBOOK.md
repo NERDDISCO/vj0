@@ -2,75 +2,90 @@
 
 ## Current next action
 
-Checkpoint at 12:04 UTC, 2026-09-17. Continue the selected plan through measured,
-failed, or concretely unsuitable outcomes; the user has authorized funded tests
-and keeping these resources warm. Do not create replacement pods unnecessarily.
-No UI redesign, main-branch deployment, or stable image overwrite is authorized.
+Checkpoint at 13:01 UTC, 2026-09-17. Continue the selected plan until every row
+has a measured, failed, or concretely unsuitable outcome. Funding and warm paid
+pods are authorized. No UI redesign, main deployment, or stable image overwrite.
+Original snapshot `a10fdbe` is pushed; perf branch `perf/2026-09-live-bench` last
+pushed checkpoint is `51315b3`; newer local commits also need the final push.
 
-The original snapshot is pushed on `snapshot/pre-performance-2026-09-17`.
-The experiment branch is `perf/2026-09-live-bench` (last pushed checkpoint
-`51315b3` before the updates below). Original-image compute, 30 WebRTC discovery
-trials, 24 wrtc 0.10 trials plus a clean replacement, extended compute, and the
-original-environment Stream model/decoder/step/resolution/paced tests are saved.
-The old quota/interrupted-install failures are preserved separately.
+**Active Mac queues:**
+- `/tmp/vj0-app-comparison-20260917`: eleven/twelve jobs started; the Next layout's
+  six comparisons passed, legacy comparisons continue. Smoke4 passed.
+- `/tmp/vj0-after-app-comparisons.py` (PID 80695) waits for all twelve measured
+  app trials and closed tabs, then runs thirteen `browser-responsive-jobs.json`
+  trials into `/tmp/vj0-browser-responsive-20260917`. Last trial restores JPEG80.
+- `/tmp/vj0-finish-queues-20260917.py` (PID 96095) waits for those thirteen trials.
+  It starts Pod A same-host tests and Pod B scaling in parallel on separate GPUs.
+  Pod A then transitions to the five explicit TRT/native tests. Pod B runs
+  eighteen scaling trials, twelve frame-aware buffer trials, transitions to the
+  isolated Torch2.13 service, runs eighteen alternating within-stack live trials,
+  then the actual-app ten-minute soak plus prompt/resolution/reconnect stress.
+  Every transition stops on failed prerequisites; inspect any failure and resume
+  deliberately. No additional Mac WAN or app client may overlap timed batches.
 
-**Pod A:** `0pxb4bss2jmbhg`, one PRO 6000, $2.09/GPU-hour.
-Current runner 38454: `/workspace/trt-retry-20260917/sweep.json`.
-Node 39977 serves `https://0pxb4bss2jmbhg-3001.proxy.runpod.net`; original Node
-499 is paused. All three shapes warmed. Dispatcher SHA
-`dbe212ac6fab113e4ec28fea64dc92d86303789be3d0a77a9265c233d63dd9b2`.
-The 36 alternating live trials are running in
-`/tmp/vj0-browser-live-compute-20260917`, browser session `vj0-perf-20260917`.
-A local follow-up waits for all 36 valid results, then runs the entropy batch,
-app smoke4, and twelve app comparisons. It stops explicitly on failure.
-No other client or GPU job may overlap these Pod A timed trials.
+**Pod A** `0pxb4bss2jmbhg`, one PRO6000, $2.09 GPU/hour.
+Current runner38454 `/workspace/trt-retry-20260917/sweep.json`, Node39977 on3001;
+original Node499 paused. Current server SHA dbe212ac6fab113e4ec28fea64dc92d86303789be3d0a77a9265c233d63dd9b2.
+All36 alternating live compute trials passed and are saved in browser-live-compute/.
+Three entropy tests also passed in `/tmp/vj0-browser-entropy-20260917` (collect).
+Same-host baseline runner `/workspace/livebench-20260917/samehost_runner.py`
+will write `/workspace/samehost-results-20260917`; do not launch it via run_sweep,
+which would pause the service it needs. The coordinator transitions afterward to
+`/workspace/trt-explicit-20260917`, using `trt-explicit-jobs.json` and guarded
+streamv2-explicit.py SHA eed04fbcd318bf7fcdc6007b6140f0998ba8d69ca781451460fb18045580ebd9.
+Initial TRT requests failed because upstream parent Module.to bypassed decoder
+initialization. The explicit retry includes matched FP16 parallel native controls,
+RNG-isolated export builds, and real engine-cache guards. See STREAMDIFFUSION.md.
+The final TRT service now has no automatic six-hour timeout; keep it warm.
 
-TRT imports now pass. The initial acceleration requests failed because upstream
-parent `Module.to()` bypasses decoder initialization, leaving a silent native
-fallback. The guarded explicit-wrapper retry is staged but **not started**:
-`/workspace/livebench-20260917/trt-explicit-jobs.json`, output will be
-`/workspace/trt-explicit-20260917`. Its harness is
-`streamv2-explicit.py`, SHA
-`eed04fbcd318bf7fcdc6007b6140f0998ba8d69ca781451460fb18045580ebd9`.
-Run it only after Pod A live/app/same-host clients finish. It includes matched
-FP16 parallel native controls, RNG-isolated builds, and engine-cache identity.
-See STREAMDIFFUSION.md for quota recovery and the 14B checkpoint re-download note.
+**Pod B** `9vj8k6guaxsbhw`, two PRO6000 GPUs, $4.18 GPU/hour.
+Runner48800 `/workspace/scaling-service-20260917/sweep.json`: both Torch2.13
+confirmations and the late original control passed. Node60552 is warming two
+workers on3001; original Node567 remains paused. Latest staged source hashes:
+server5c1396ab0e1907b75a078a1ebdbfa0f0e29c75391b7c95c917ebdfaf48798179,
+workerbdff1fa8918c2985a91a5c77b8b6d494cc24178a81b972cf77576f9b6a036b11.
+`scaling-extended-source.jsonl` preserves prior and final identities.
+Waiter58492 `/workspace/scaling-livebench-20260917/wait-telemetry-service.py`
+waits for both workers' three-shape completion, then runs eight same-host
+sync/async telemetry controls into `/workspace/telemetry-controlled-20260917`.
+Its log is `/workspace/telemetry-service-waiter.log`. The Mac coordinator will
+not begin scaling until all eight controls are measured. These loopback clients
+can overlap Pod A WAN tests; they share neither GPU nor Mac network workload.
+Latest samehost client SHA8a3d4ba25d04257d0c359fc38db785dcc2f76e8e68cd2e597b8569d2342a26f6.
 
-**Pod B:** `9vj8k6guaxsbhw`, two PRO 6000 GPUs, $4.18/GPU-hour.
-Runner 28890: `/workspace/dependency-retry-20260917/sweep.json`.
-GPU 0 runs serial tests; GPU 1 is idle. Original Node 567 is paused.
-Torch 2.13 baseline and combined tests passed, followed by normalization/cache
-and attention profiling. FA4 installed and its kernel correctness check passed;
-full-pipeline FA4 tests are underway. Waiter 31190 then runs
-`scaling-service-jobs.json`: three late compute confirmations, isolated wrtc
-installation, and a two-worker service. Its future manifest is
-`/workspace/scaling-service-20260917/sweep.json`. After both workers warm,
-run the eighteen `browser-scaling-jobs.json` trials. These compare one/two active
-GPUs with both models loaded, not differently priced allocations.
+The late original Torch2.11 control accidentally retained the new environment's
+cache-directory settings. It therefore compiled fresh (~531s first shape).
+Warm FPS remains valid; do not claim the long fresh-cache compile is unique to
+Torch2.13. All12 dependency-retry jobs completed; collect their final JSONL and
+environment files, including FA4, normalization, all-constants and profiling.
 
-**Actual app:** production builds are on 18766 (candidate app source 4a02d2f)
-and 18767 (7139e0f baseline). Both tabs need persistent CDP probe, focus, and
-viewport overrides: main 1440x900, stage 1920x1080, DPR 1. At source 512x288,
-the real stage GL buffer is 2048x1152. Do not confuse viewport and GL dimensions.
-Run setup keeps both tabs visible; an inactive headless tab otherwise pauses RAF.
-The proxy rejects Python's default HTTP User-Agent; the harness sets an explicit
-browser-compatible benchmark User-Agent for the control request.
+The future new-stack service uses the same generated dispatcher/worker but
+WORKER_COUNT1 and the isolated venv's PATH plus its separate caches. Its manifest
+will be `/workspace/torch213-live-service-20260917/sweep.json`. Current-stack
+versus refreshed-stack WAN batches are sequential; within-stack baseline versus
+combined is alternating. Preserve that distinction. The final app soak explicitly
+uses the new-stack combined variant, pending3, JPEG80 and telemetry enabled.
 
-Smoke1 failed that proxy request. Smoke2 failed viewport verification. Smoke3
-received/submitted 28.56 FPS to stage with real analyser RMS around 0.14, but was
-invalid because preview RAF measurement omitted revoked-yet-loaded image URLs.
-That probe omission is reproduced/fixed with CPU controls; smoke3 stays invalid.
-Updated init requests `/tmp/vj0-app-init-v2.json` and
-`/tmp/vj0-stage-init-v2.json` are attached. Smoke4 must pass before the twelve
-comparisons. The final ten-minute soak and prompt/resolution/reconnect stress
-remain required. Screenshots/video must be outside timed measurements.
+**Actual app:** production builds18766 candidate source4a02d2f and18767 baseline
+7139e0f. Main/stage targets and persistent CDP requests are listed in `/tmp/vj0-*
+cdp.json` and init-v2/focus/metrics request files. Main1440x900, stage1920x1080,
+DPR1, focus emulation enabled. Stage source512x288 has actual GL buffer2048x1152.
+Both init-v2 sessions and focus/viewport sessions are held for four hours; verify
+that they are still attached before the final soak. Inactive headless tabs pause
+RAF. Do not substitute screenshot dimensions for canvas dimensions.
 
-Remaining after queued work: same-host transport, multi-GPU scaling, the matched
-TRT retry, the final combination/soak, raw-data review, complete result tables,
-independent review, and final branch push. Keep model changes isolated; do not
-promote an option based on one trial. Preserve failed attempts and exact labels.
-Current spend last observed at 10:46 UTC was $6.331/hour including storage;
-balance $93.62. Refresh at completion. Five unrelated old pods remain stopped.
+Smoke1 proxy-UA failure, smoke2 viewport failure, smoke3 invalid RAF observation
+are preserved. Smoke4 fixed probe passed: received/projector27.106FPS, p95stage
+177.410ms. The observation is unique WebGL submission/current loaded image at RAF,
+not compositor/physical presentation. No extra JPEG subscriber or UI change.
+
+Still required after queues: collect all raw results and quality samples; inspect
+TRT success/failure and repair concrete compatibility problems; record screenshots
+and a short flow video outside timed work; regenerate summaries; rewrite final
+RESULTS/DEPENDENCIES/STREAMDIFFUSION status; independent final review; commit/push.
+No speculative performance default is promoted. Keep both task pods warm and
+refresh account balance/hourly spend at completion. Five unrelated old pods stay
+stopped. API system/container logs worked before SSH; serverless logs untested.
 
 ## Tool and infrastructure checks
 

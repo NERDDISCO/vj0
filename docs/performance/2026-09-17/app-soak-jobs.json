@@ -4,13 +4,16 @@
     "origin": "http://127.0.0.1:18766",
     "source_commit": "4a02d2f",
     "layout": "vj-next",
-    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
     "seconds": 600,
     "width": 512,
     "height": 288,
     "sendFps": 60,
     "telemetry": true,
     "audioCycle": true,
-    "stress": true
+    "stress": true,
+    "variant": "combined",
+    "maxPending": 3,
+    "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80"
   }
 ]

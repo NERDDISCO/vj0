@@ -14,6 +14,7 @@ from pathlib import Path
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source', type=Path, required=True)
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--queue-timing', action='store_true', help='Record reader-enqueue to GPU-thread dequeue time')
 a = p.parse_args()
 if a.output.exists():
     p.error('Refusing to overwrite an existing generated worker')
@@ -79,6 +80,13 @@ replace('''                torch.cuda.synchronize()
                 generation_stage_ms = stage_events[1].elapsed_time(stage_events[2]) if use_events else (t_transformer - t_vae_encode) * 1000''')
 replace('"vae_encode_ms": round((t_vae_encode - t0) * 1000, 2),', '"vae_encode_ms": round(vae_stage_ms, 2),')
 replace('"transformer_plus_decode_ms": round((t_transformer - t_vae_encode) * 1000, 2),', '"transformer_plus_decode_ms": round(generation_stage_ms, 2),\n                "stage_clock": "cuda-events" if use_events else "wall-clock",\n                "benchmark_variant": variant,')
+if a.queue_timing:
+    replace('                request_queue.put(data)',
+        '                data["_bench_enqueued_at"] = time.perf_counter()\n                request_queue.put(data)')
+    replace('            req = request_queue.get(timeout=0.05)',
+        '            req = request_queue.get(timeout=0.05)\n            req["_bench_queue_ms"] = (time.perf_counter() - req["_bench_enqueued_at"]) * 1000')
+    replace('            timing = {',
+        '            timing = {\n                "queue_wait_ms": round(req["_bench_queue_ms"], 3),')
 ast.parse(generated)
 a.output.write_text(generated)
 print(json.dumps({'source_sha256': hashlib.sha256(source.encode()).hexdigest(),

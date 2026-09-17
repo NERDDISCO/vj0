@@ -24,9 +24,12 @@ async function main(){
   if(inputs.length<2)throw new Error('Multiple animated input fixtures required');
   const pc=new RTCPeerConnection({iceServers:[]});
   const channel=pc.createDataChannel('frames');channel.binaryType='arraybuffer';
-  const pending=new Map(), ages=[], sizes=[], errors=[], workerMs=[];
+  const pending=new Map(), ages=[], sizes=[], errors=[], workerMs=[], queueMs=[], telemetryMs=[], telemetrySnapshots=[];
   let id=0,phase='warmup',sent=0,received=0,bytesSent=0,bytesReceived=0,skips=0,warmReceived=0,timer;
-  let lastReceivedAt=null,confirmedVariant=false;
+  let lastReceivedAt=null,confirmedVariant=false,warmStats=0;
+  let telemetryTimer;
+  let telemetryPending=Promise.resolve();
+  const telemetryPolls={attempted:0,completedWithinWindow:0,failedWithinWindow:0,censored:0};
   channel.onclose=()=>{if(phase==='measure')errors.push('Data channel closed during measurement');};
   channel.onerror=event=>{if(phase==='measure')errors.push('Data channel error: '+String(event));};
   pc.onconnectionstatechange=()=>{
@@ -43,8 +46,14 @@ async function main(){
     if(phase==='measure'){sent++;bytesSent+=packet.length;}
   };
   channel.onmessage=event=>{
+    if(phase==='drain'||phase==='finished')return;
     if(typeof event.data==='string'){
-      try{const m=JSON.parse(event.data);if(phase==='measure'&&m.type==='stats'&&m.timing)workerMs.push(m.timing.total_ms);
+      try{const m=JSON.parse(event.data);if(phase==='warmup'&&m.type==='stats')warmStats++;
+        if(phase==='measure'&&m.type==='stats'&&m.timing){
+          workerMs.push(m.timing.total_ms);
+          if(Number.isFinite(m.timing.queue_wait_ms))queueMs.push(m.timing.queue_wait_ms);
+          else if(c.requireQueueTiming)errors.push('Missing queue timing');
+        }
         if(m.type==='stats'&&c.serverConfig?.benchmarkVariant){
           const expected=c.serverConfig.benchmarkVariant;
           if(m.timing?.benchmark_variant!==expected||m.timing?.stage_clock!==(expected==='baseline'?'wall-clock':'cuda-events')||
@@ -87,14 +96,42 @@ async function main(){
     // Single-flight warmup cannot leave unacknowledged input in the pipe.
     for(let n=0;n<20;n++){const before=warmReceived;send();await until(()=>warmReceived>before,30,'warmup frame');}
     await until(()=>pending.size===0,10,'warmup completion');
+    if(c.serverConfig?.benchmarkVariant)await until(()=>warmStats===warmReceived,10,'warmup stats completion');
     if(errors.length||c.serverConfig?.benchmarkVariant&&!confirmedVariant)throw new Error('Warmup validation failed: '+errors.join('; '));
     phase='measure';const begin=performance.now();
+    if(c.telemetryEveryMs>0){
+      let busy=false;
+      telemetryTimer=setInterval(()=>{
+        if(busy||phase!=='measure')return;
+        busy=true;const start=performance.now();
+        telemetryPolls.attempted++;
+        telemetryPending=(async()=>{
+        try{
+          const response=await fetch(c.server+'/telemetry',{signal:AbortSignal.timeout(5000)});
+          if(!response.ok)throw new Error('HTTP '+response.status);
+          const snapshot=await response.json();
+          if(phase==='measure'){
+            telemetryPolls.completedWithinWindow++;
+            telemetryMs.push(performance.now()-start);
+            telemetrySnapshots.push({elapsedMs:performance.now()-begin,gpus:snapshot.gpus,workers:snapshot.workers});
+          }else telemetryPolls.censored++;
+        }catch(e){
+          if(phase==='measure'){errors.push('Telemetry: '+e.message);telemetryPolls.failedWithinWindow++;}
+          else telemetryPolls.censored++;
+        }
+        finally{busy=false;}
+        })();
+      },c.telemetryEveryMs);
+    }
     timer=setInterval(send,1000/c.sendFps);send();
     await wait(c.seconds*1000);
     const stopped=performance.now(),elapsed=(stopped-begin)/1000;
     if(channel.readyState!=='open'||pc.connectionState!=='connected')errors.push('Connection not active at measurement end');
     if(lastReceivedAt===null||stopped-lastReceivedAt>2000)errors.push('No output in the final two seconds');
-    phase='drain';clearInterval(timer);
+    phase='drain';clearInterval(timer);clearInterval(telemetryTimer);
+    await telemetryPending;
+    if(c.requireQueueTiming&&!queueMs.length)errors.push('No worker queue measurements');
+    if(c.telemetryEveryMs>0&&(!telemetrySnapshots.length||telemetrySnapshots.some(s=>!s.gpus?.length||s.gpus.some(g=>!Number.isFinite(g.utilPct)))))errors.push('Incomplete GPU telemetry');
     let statsTimeout;
     const stats=Array.from((await Promise.race([pc.getStats(),new Promise((_,reject)=>{
       statsTimeout=setTimeout(()=>reject(new Error('RTC stats timed out')),5000);
@@ -103,9 +140,10 @@ async function main(){
       measurement:'same-pod pre-encoded JPEG send to receive; no browser encode/decode/display',
       elapsedSeconds:elapsed,sent,received,receivedFps:received/elapsed,
       outboundMbps:bytesSent*8/elapsed/1e6,inboundMbps:bytesReceived*8/elapsed/1e6,
-      sendToReceiveMs:summary(ages),outputBytes:summary(sizes),workerMs:summary(workerMs),bufferSkips:skips,errors,transport:stats};
+      sendToReceiveMs:summary(ages),outputBytes:summary(sizes),workerMs:summary(workerMs),workerQueueMs:summary(queueMs),
+      telemetryMs:summary(telemetryMs),telemetrySnapshots,telemetryPolls,bufferSkips:skips,errors,transport:stats};
     fs.writeFileSync(c.output,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
     if(report.status!=='measured')throw new Error('Invalid measurement');
-  }finally{clearInterval(timer);channel.close();pc.close();}
+  }finally{phase='finished';clearInterval(timer);clearInterval(telemetryTimer);await telemetryPending;channel.close();pc.close();}
 }
 main().then(()=>process.exit(0)).catch(error=>{console.error(error.stack);process.exit(1);});

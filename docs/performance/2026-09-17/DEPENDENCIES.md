@@ -3,14 +3,18 @@
 The frozen image uses torch 2.11.0+cu128, torchao 0.17.0+cu128 and diffusers
 `160852de680d36117e0a787f7f8b718232539abb`. Keep that environment intact.
 
-A separate G07 candidate should test torch 2.13.0 with CUDA 13.2 and torchao
-0.18.0, retaining the pinned diffusers source and transformers 5.7.0 initially.
+The isolated G07 environment successfully runs torch 2.13.0 with CUDA 13.2 and
+torchao 0.18.0, retaining pinned diffusers and transformers 5.7.0.
 PyTorch publishes 2.13.0 wheels for CUDA 13.0 and 13.2; TorchAO's 0.18 release
 notes say its release CI is pinned to PyTorch 2.13 and remove the legacy v1
 quantized tensor/layout stack. Verify the current Float8 configuration path and
 actual quantization instead of treating an import/fallback as successful FP8.
-Do not change the pod's host driver. Import/forward-pass and performance tests
-remain pending; these versions are candidates, not measured wins.
+Do not change the pod's host driver. FP8 import/forward and repeated compute tests passed. Combined warm FPS is
+about31–32 /15.8 /9.0 at512x288 /768x448 /1024x576. Live transport confirmation
+and the new-stack app soak are queued; no dependency default is promoted.
+Fresh-cache compilation is expensive on both old and new stacks; the late old
+control used the new cache directory accidentally, so its cold run must be
+labelled separately from previously warm-cache controls.
 
 Sources:
 - https://pytorch.org/get-started/previous-versions/
@@ -40,3 +44,24 @@ used PyTorch SDPA. An attention-extension experiment must verify SM120 support
 and ABI compatibility rather than installing an arbitrary prebuilt wheel.
 Official SM120 support discussion:
 https://github.com/Dao-AILab/flash-attention/issues/2307
+
+## FA4 integration experiment
+
+The isolated environment uses official `flash-attn-4==4.0.0b31` and
+`kernels==0.12.3` while retaining the baseline Torch/Diffusers stack. The kernel
+numerical check and full-pipeline native/FA4/combined/native-repeat jobs passed.
+The initial native medians were 28.707 / 14.021 / 8.224 FPS; FA4 measured
+28.215 / 13.974 / 8.223. These are this integration's end-to-end compute results,
+not a claim that the standalone FA4 kernel is universally slower.
+
+Source and log review found no KV-processor bypass. Both processors forward the
+selected backend, and the FA4 job logs contain CuTe execution/JIT evidence naming
+`FlashAttentionForwardSm120`. This proves the path was reached during full-pipeline
+warmup. A measured-frame CUDA trace was not collected for these FA4 jobs.
+Compilation-limit and empty-CUDA-graph warnings further constrain conclusions
+about the underlying kernel. No attention backend was promoted.
+
+Primary sources:
+- https://github.com/Dao-AILab/flash-attention/releases/tag/fa4-v4.0.0.beta31
+- https://github.com/Dao-AILab/flash-attention/releases/tag/fa4-v4.0.0.beta5
+- https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/cute/README.md
