@@ -72,3 +72,37 @@ upstream strict metadata. Both checkpoint downloads completed at pinned revision
 Source is at `/workspace/streamdiffusionv2-20260917`; download identities are in
 its `checkpoint-revisions.json`. No StreamDiffusionV2 GPU forward pass, FPS or
 quality result has been measured here yet.
+
+## First GPU smoke result
+
+The pinned API completed at native 832x480, two steps, single mode, standard VAE,
+initial noise scale 0.8, without FlashAttention installed (PyTorch SDPA fallback).
+It produced 13 valid RGB frames from 17 input frames; four frames remained in
+pipeline fill/drain latency. Model construction took about 97 seconds after
+imports. The first cold forward pass took 3.86 seconds total, with its first
+five output frames after 3.02 seconds. This short cold trial is a correctness
+result, not a steady-state performance claim. CPU control-flow checks finished
+while the model was still loading, before the timed forward pass.
+
+See `streamv2-smoke.json`, `samples/streamv2-smoke-{input,output}.mp4`, and
+`samples/streamv2-smoke-quality.jpg`. For this black-background waveform and
+abstract-art prompt, the output mostly preserves/recolors the line; it does not
+create the rich abstract scene seen from Klein. Follow-up trials should test
+higher noise scale and a detailed background as well as the decoder/step modes.
+The API adapts noise scale downward based on adjacent-frame changes; the raw
+records contain effective values. New trials also record the adaptive timestep.
+
+## Acceleration scope checked in upstream source
+
+The current TensorRT implementation accelerates the TAEHV decoder only, not
+Wan's denoising transformer. `fast=True` additionally changes KV-cache/sink
+configuration; treat it as a quality/context tradeoff. The current smoke run
+uses neither TensorRT nor FlashAttention. A TensorRT installation is not yet
+validated on this pod.
+
+TAEHV follow-ups use `taew2_1.pth` from official repository commit
+`011dfc2112197741c540e0bdd5b7b67bcc930771`. The download job records its SHA-256
+before use. The [official TAEHV documentation](https://github.com/madebyollin/taehv)
+identifies these weights for Wan2.1 and notes a quality tradeoff against the full
+VAE. Prepared job arguments are in `stream-jobs.json`; preparation is not a
+measured outcome.

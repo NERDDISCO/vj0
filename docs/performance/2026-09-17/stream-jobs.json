@@ -1,0 +1,215 @@
+[
+  {
+    "name": "download-taehv",
+    "argv": [
+      "python3",
+      "-c",
+      "import pathlib,urllib.request,hashlib,json\nroot=pathlib.Path('/workspace/streamdiffusionv2-20260917/ckpts')\nrevision='011dfc2112197741c540e0bdd5b7b67bcc930771'\nurl=f'https://raw.githubusercontent.com/madebyollin/taehv/{revision}/taew2_1.pth'\ntarget=root/'taew2_1.pth'\nif target.exists():\n raise RuntimeError('Refusing to overwrite existing checkpoint without verification')\ndata=urllib.request.urlopen(url,timeout=120).read()\nif len(data)<1000000: raise RuntimeError('Unexpectedly small checkpoint')\ntarget.write_bytes(data)\nrecord={'repository':'madebyollin/taehv','revision':revision,'url':url,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}\n(root/'taew2_1-provenance.json').write_text(json.dumps(record,indent=2)+'\\n')\nprint(json.dumps(record))\n"
+    ],
+    "cwd": "/workspace",
+    "timeout_seconds": 180
+  },
+  {
+    "name": "standard-single",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/standard-single",
+      "--frames",
+      "65",
+      "--repeats",
+      "3"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "standard-single-wo",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/standard-single-wo",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--mode",
+      "single-wo"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-single",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-single",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-single-wo",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-single-wo",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--mode",
+      "single-wo"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-one-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-one-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "1"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-four-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-four-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "4"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-noise100",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-noise100",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--noise-scale",
+      "1.0"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-detailed",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-detailed",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--scene",
+      "detailed",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  }
+]

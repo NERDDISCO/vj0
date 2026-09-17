@@ -29,3 +29,14 @@ Do not promote partial reliability on the existing shared image/settings channel
 lost settings would need a separately acknowledged control mechanism. The
 current strict untagged warmup-drain test also requires delivery of all inputs.
 Source: https://www.w3.org/TR/webrtc/#dom-rtcdatachannelinit
+
+StreamDiffusionV2's published 64.52 FPS (1.3B) and 58.28 FPS (14B) headline
+measurements use **four H100 GPUs**, not one RTX PRO 6000. They are not directly
+comparable to this one-GPU smoke test. Source:
+https://arxiv.org/abs/2511.07399
+
+Our first StreamDiffusionV2 run explicitly reported FlashAttention missing and
+used PyTorch SDPA. An attention-extension experiment must verify SM120 support
+and ABI compatibility rather than installing an arbitrary prebuilt wheel.
+Official SM120 support discussion:
+https://github.com/Dao-AILab/flash-attention/issues/2307

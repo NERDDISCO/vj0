@@ -1,0 +1,805 @@
+{
+  "environment": {
+    "time_utc": "2026-09-17T09:35:32.471655+00:00",
+    "versions": {
+      "torch": "2.11.0+cu128",
+      "torchao": "0.17.0+cu128",
+      "diffusers": "0.38.0.dev0",
+      "transformers": "5.7.0",
+      "pillow": "12.2.0",
+      "numpy": "2.4.4"
+    },
+    "python": "3.12.3",
+    "cuda": "12.8",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "visible_devices": "0",
+    "driver": "595.71.05",
+    "worker_sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+    "image_digest": "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+    "arguments": {
+      "worker_script": "/workspace/baseline-20260917/inference_server.py",
+      "output": "/workspace/sweep-20260917/compute-no-sync",
+      "sizes": [
+        [
+          512,
+          288
+        ],
+        [
+          768,
+          448
+        ],
+        [
+          1024,
+          576
+        ]
+      ],
+      "steps": [
+        2
+      ],
+      "frames": 100,
+      "warmup": 8,
+      "repeats": 3,
+      "seed": 42,
+      "alpha": 0.1,
+      "input_quality": 85,
+      "output_quality": 80,
+      "scene": "waveform",
+      "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+      "compile_mode": "reduce-overhead",
+      "vae_fp8": "1",
+      "variant": "no-stage-sync",
+      "image_digest": "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    },
+    "model_cache_main_refs": {
+      "black-forest-labs/FLUX.2-klein-4B": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+      "black-forest-labs/FLUX.2-small-decoder": "a3efc24f613ef42d9428af62fdbd6f5fd8856c4a"
+    }
+  },
+  "records": [
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 0,
+      "frames": 100,
+      "wall_seconds": 3.722197595052421,
+      "fps": 26.86584939308996,
+      "warmup_seconds": 39.122045423835516,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 37.214069198817015,
+          "p50": 33.929572673514485,
+          "p95": 60.480450838804245,
+          "p99": 85.04451225977392,
+          "min": 32.75115741416812,
+          "max": 87.23845332860947
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.2936120703816414,
+          "p50": 0.2886219881474972,
+          "p95": 0.326723325997591,
+          "p99": 0.3443250153213752,
+          "min": 0.2527041360735893,
+          "max": 0.5877511575818062
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.36383073776960373,
+          "p50": 0.3591973800212145,
+          "p95": 0.39871649350970984,
+          "p99": 0.42280671652406454,
+          "min": 0.3077257424592972,
+          "max": 0.42578065767884254
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 41229.39,
+        "p50": 41395.5,
+        "p95": 42409.0,
+        "p99": 43014.0,
+        "min": 39240,
+        "max": 43014
+      },
+      "peak_allocated_bytes": 12302821888,
+      "peak_reserved_bytes": 12993953792
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 1,
+      "frames": 100,
+      "wall_seconds": 3.543234442360699,
+      "fps": 28.22280084107967,
+      "warmup_seconds": 39.122045423835516,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 35.426333234645426,
+          "p50": 33.54156808927655,
+          "p95": 52.88334025535731,
+          "p99": 61.39935517683628,
+          "min": 32.649185974150896,
+          "max": 67.06156395375729
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.2796631259843707,
+          "p50": 0.2791935112327337,
+          "p95": 0.303449179045856,
+          "p99": 0.3139017987996341,
+          "min": 0.2428898587822914,
+          "max": 0.33731991425156593
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.35600575618445873,
+          "p50": 0.354730524122715,
+          "p95": 0.37294430658221245,
+          "p99": 0.40134940762072807,
+          "min": 0.30514225363731384,
+          "max": 0.4166681319475174
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 41229.39,
+        "p50": 41395.5,
+        "p95": 42409.0,
+        "p99": 43014.0,
+        "min": 39240,
+        "max": 43014
+      },
+      "peak_allocated_bytes": 12302821888,
+      "peak_reserved_bytes": 12993953792
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 2,
+      "frames": 100,
+      "wall_seconds": 3.339951471891254,
+      "fps": 29.940554777993466,
+      "warmup_seconds": 39.122045423835516,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 33.39435790665448,
+          "p50": 33.361786510795355,
+          "p95": 35.23509819060563,
+          "p99": 37.992727826349444,
+          "min": 32.53498673439026,
+          "max": 38.747749757021666
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.260462136939168,
+          "p50": 0.25930884294211864,
+          "p95": 0.2735100220888853,
+          "p99": 0.2794543467462063,
+          "min": 0.25091180577874184,
+          "max": 0.2794838510453701
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.3511515911668539,
+          "p50": 0.3497230354696512,
+          "p95": 0.3649301826953888,
+          "p99": 0.38145435042679315,
+          "min": 0.3401339054107666,
+          "max": 0.38933660835027695
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 41229.39,
+        "p50": 41395.5,
+        "p95": 42409.0,
+        "p99": 43014.0,
+        "min": 39240,
+        "max": 43014
+      },
+      "peak_allocated_bytes": 12302821888,
+      "peak_reserved_bytes": 12993953792
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "correctness",
+      "input_difference_mse": {
+        "b": 0.03005952760577202,
+        "blank": 0.22809311747550964
+      },
+      "jpeg_compression": {
+        "a": {
+          "bytes": 40800,
+          "mse": 0.0017488921293988824,
+          "psnr_db": 27.572369767143257
+        },
+        "b": {
+          "bytes": 41196,
+          "mse": 0.0017820566426962614,
+          "psnr_db": 27.490784960233455
+        },
+        "blank": {
+          "bytes": 18622,
+          "mse": 0.001587715931236744,
+          "psnr_db": 27.992271974581236
+        }
+      },
+      "input_influence_observed": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 0,
+      "frames": 100,
+      "wall_seconds": 6.876861425116658,
+      "fps": 14.54151738971585,
+      "warmup_seconds": 49.79933795705438,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 68.76066510099918,
+          "p50": 68.83604684844613,
+          "p95": 70.50351416692138,
+          "p99": 70.84121960680932,
+          "min": 67.39399582147598,
+          "max": 70.8448481746018
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.5125256674364209,
+          "p50": 0.5124292802065611,
+          "p95": 0.5785025656223297,
+          "p99": 0.597211020067336,
+          "min": 0.44436799362301826,
+          "max": 0.9310198947787285
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.5859801406040788,
+          "p50": 0.5911409389227629,
+          "p95": 0.6342473439872265,
+          "p99": 0.6687822751700878,
+          "min": 0.5293842405080795,
+          "max": 0.6709028966724873
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 33024.23,
+        "p50": 32965.0,
+        "p95": 36702.0,
+        "p99": 36901.0,
+        "min": 28215,
+        "max": 36901
+      },
+      "peak_allocated_bytes": 12306057728,
+      "peak_reserved_bytes": 13262389248
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 1,
+      "frames": 100,
+      "wall_seconds": 6.858926546759903,
+      "fps": 14.579540882711322,
+      "warmup_seconds": 49.79933795705438,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 68.58237656299025,
+          "p50": 68.73959978111088,
+          "p95": 69.98419461306185,
+          "p99": 70.34670335706323,
+          "min": 66.8105618096888,
+          "max": 70.87151799350977
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.4954630834981799,
+          "p50": 0.4761603195220232,
+          "p95": 0.5423790542408824,
+          "p99": 0.5492765223607421,
+          "min": 0.4460308700799942,
+          "max": 0.5535800009965897
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.5805981904268265,
+          "p50": 0.5886321887373924,
+          "p95": 0.6236267974600196,
+          "p99": 0.6291881576180458,
+          "min": 0.5306270904839039,
+          "max": 0.6327969022095203
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 33024.23,
+        "p50": 32965.0,
+        "p95": 36702.0,
+        "p99": 36901.0,
+        "min": 28215,
+        "max": 36901
+      },
+      "peak_allocated_bytes": 12306057728,
+      "peak_reserved_bytes": 13262389248
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 2,
+      "frames": 100,
+      "wall_seconds": 6.894782593008131,
+      "fps": 14.503720552611494,
+      "warmup_seconds": 49.79933795705438,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 68.94092003349215,
+          "p50": 69.34235710650682,
+          "p95": 70.64436059445143,
+          "p99": 72.54866390489042,
+          "min": 67.47066974639893,
+          "max": 72.73133331909776
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.4954029666259885,
+          "p50": 0.4937215708196163,
+          "p95": 0.539177586324513,
+          "p99": 0.5434778146445751,
+          "min": 0.4482143558561802,
+          "max": 0.544755719602108
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.5730957118794322,
+          "p50": 0.5761734209954739,
+          "p95": 0.6202301476150751,
+          "p99": 0.6231253175064921,
+          "min": 0.5265502259135246,
+          "max": 0.6313049234449863
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 33024.23,
+        "p50": 32965.0,
+        "p95": 36702.0,
+        "p99": 36901.0,
+        "min": 28215,
+        "max": 36901
+      },
+      "peak_allocated_bytes": 12306057728,
+      "peak_reserved_bytes": 13262389248
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "correctness",
+      "input_difference_mse": {
+        "b": 0.03133717179298401,
+        "blank": 0.07790812849998474
+      },
+      "jpeg_compression": {
+        "a": {
+          "bytes": 33588,
+          "mse": 0.0007321645389311016,
+          "psnr_db": 31.353913092150556
+        },
+        "b": {
+          "bytes": 31761,
+          "mse": 0.0005415971390902996,
+          "psnr_db": 32.663236384155596
+        },
+        "blank": {
+          "bytes": 7650,
+          "mse": 3.990639015682973e-05,
+          "psnr_db": 43.98957555750784
+        }
+      },
+      "input_influence_observed": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 0,
+      "frames": 100,
+      "wall_seconds": 11.967507423833013,
+      "fps": 8.35595888587897,
+      "warmup_seconds": 67.87104262597859,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 119.66378518380225,
+          "p50": 120.4364919103682,
+          "p95": 123.39938529767096,
+          "p99": 128.25770456809553,
+          "min": 116.8155581690371,
+          "max": 131.18606572970748
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.7783011067658663,
+          "p50": 0.7745325565338135,
+          "p95": 0.7966424571350217,
+          "p99": 0.9045568434521558,
+          "min": 0.7552993483841419,
+          "max": 0.943928025662899
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.7775232382118702,
+          "p50": 0.7807216607034206,
+          "p95": 0.8152708876878023,
+          "p99": 0.8192673372104764,
+          "min": 0.712184701114893,
+          "max": 0.820706132799387
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 29858.2,
+        "p50": 33047.0,
+        "p95": 40120.0,
+        "p99": 41551.0,
+        "min": 16238,
+        "max": 41551
+      },
+      "peak_allocated_bytes": 12309955072,
+      "peak_reserved_bytes": 14474543104
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 1,
+      "frames": 100,
+      "wall_seconds": 12.001185113098472,
+      "fps": 8.332510419396568,
+      "warmup_seconds": 67.87104262597859,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 120.0017671380192,
+          "p50": 120.60272321105003,
+          "p95": 123.37095013353974,
+          "p99": 129.5092693902552,
+          "min": 116.84656515717506,
+          "max": 131.38672383502126
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.7917234767228365,
+          "p50": 0.7884581573307514,
+          "p95": 0.8134342962875962,
+          "p99": 0.8600730169564489,
+          "min": 0.77093206346035,
+          "max": 0.9164880029857159
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.7936919759958982,
+          "p50": 0.7936854381114244,
+          "p95": 0.8416283410042524,
+          "p99": 0.8624228602275252,
+          "min": 0.7389145903289318,
+          "max": 0.8639898151159286
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 29858.2,
+        "p50": 33047.0,
+        "p95": 40120.0,
+        "p99": 41551.0,
+        "min": 16238,
+        "max": 41551
+      },
+      "peak_allocated_bytes": 12309955072,
+      "peak_reserved_bytes": 14474543104
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "measured",
+      "repeat": 2,
+      "frames": 100,
+      "wall_seconds": 11.983379777986556,
+      "fps": 8.344891161982515,
+      "warmup_seconds": 67.87104262597859,
+      "timing_ms": {
+        "total_ms": {
+          "count": 100,
+          "mean": 119.82397048268467,
+          "p50": 120.72168523445725,
+          "p95": 121.99102560989559,
+          "p99": 128.96741822827607,
+          "min": 117.37750098109245,
+          "max": 131.70471508055925
+        },
+        "decode_input_ms": {
+          "count": 100,
+          "mean": 0.7941357791423798,
+          "p50": 0.7868260145187378,
+          "p95": 0.8033687248826027,
+          "p99": 0.8273155242204703,
+          "min": 0.7686177268624306,
+          "max": 1.5352140180766582
+        },
+        "vae_encode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "generate_decode_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "jpeg_ms": {
+          "count": 100,
+          "mean": 0.8069624565541744,
+          "p50": 0.7985029369592667,
+          "p95": 0.8480498567223549,
+          "p99": 0.8842809544876256,
+          "min": 0.7200362160801888,
+          "max": 1.6180570237338543
+        }
+      },
+      "jpeg_bytes": {
+        "count": 100,
+        "mean": 29858.2,
+        "p50": 33047.0,
+        "p95": 40120.0,
+        "p99": 41551.0,
+        "min": 16238,
+        "max": 41551
+      },
+      "peak_allocated_bytes": 12309955072,
+      "peak_reserved_bytes": 14474543104
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "variant": "no-stage-sync",
+      "status": "correctness",
+      "input_difference_mse": {
+        "b": 0.04435131326317787,
+        "blank": 0.033495284616947174
+      },
+      "jpeg_compression": {
+        "a": {
+          "bytes": 35719,
+          "mse": 0.00088878272799775,
+          "psnr_db": 30.512043937703325
+        },
+        "b": {
+          "bytes": 25349,
+          "mse": 0.0005572166410274804,
+          "psnr_db": 32.539759220426006
+        },
+        "blank": {
+          "bytes": 11178,
+          "mse": 1.5724608601885848e-05,
+          "psnr_db": 48.0342015568598
+        }
+      },
+      "input_influence_observed": true
+    }
+  ]
+}

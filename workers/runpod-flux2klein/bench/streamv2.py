@@ -29,6 +29,7 @@ def main():
     p.add_argument('--mode', choices=['single', 'single-wo'], default='single')
     p.add_argument('--taehv', action='store_true')
     p.add_argument('--noise-scale', type=float, default=0.8)
+    p.add_argument('--scene', choices=['waveform', 'detailed'], default='waveform')
     p.add_argument('--prompt', default='colorful abstract art, vibrant neon lights, psychedelic patterns')
     a = p.parse_args()
     if a.frames < 5 or (a.frames - 1) % 4 or not 1 <= a.steps <= 4 or a.repeats < 1:
@@ -61,7 +62,13 @@ def main():
         frames = []
         x = np.arange(a.width)
         for index in range(a.frames):
-            im = Image.new('RGB', (a.width, a.height), (10, 10, 10))
+            if a.scene == 'detailed':
+                yy, xx = np.indices((a.height, a.width))
+                background = np.stack(((xx*3+yy)%128, (xx+yy*5)%128,
+                    ((xx//12 ^ yy//12)%2)*100), axis=-1).astype('uint8')
+                im = Image.fromarray(background)
+            else:
+                im = Image.new('RGB', (a.width, a.height), (10, 10, 10))
             y = a.height * (0.5 + 0.24 * np.sin(x / a.width * np.pi * 4 + index * 0.25)
                            + 0.07 * np.sin(x / a.width * np.pi * 19 - index * 0.17))
             ImageDraw.Draw(im).line(list(zip(x.tolist(), y.tolist())), fill='white', width=max(2, a.width // 128))
@@ -95,7 +102,8 @@ def main():
                     if first_output is None:
                         first_output = done - start
                 records.append({'input_start': chunk.start_idx, 'input_end': chunk.end_idx,
-                    'output_frames': count, 'elapsed_ms': timings[-1], 'noise_scale': noise_scale})
+                    'output_frames': count, 'elapsed_ms': timings[-1], 'noise_scale': noise_scale,
+                    'adaptive_timestep': encoded.current_step})
             elapsed = time.perf_counter() - start
             count = sum(len(o) for o in outputs)
             if count == 0:

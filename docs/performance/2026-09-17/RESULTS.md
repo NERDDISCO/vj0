@@ -23,13 +23,13 @@ optimization has passed repeated comparison or been promoted yet.
 | Live container application logs | Passed | API returned entrypoint, model fetch and compilation messages; samples in `baseline-pod.json` |
 | Live serverless worker logs | Pending | Command exists; no live worker validated |
 | GPU baseline and optimization sweep | In progress | Initial 512x288 WAN runs measured; remaining sweep pending |
-| Compute harness | Prepared, CUDA unverified | Actual worker import, wall-clock FPS, stage timings, A/B/blank and encoded JPEG samples |
+| Compute harness | Nine baseline settings measured on CUDA | Actual worker import, wall-clock FPS, stage timings, A/B/blank and encoded JPEG samples |
 | Browser harness | Live WebRTC measured | Raw-image protocol, server-verified stream drain, single-flight timing, decode/draw checks |
 | Local bookkeeping tests | Passed: 5 | Python unittest suite in `bench/test_metrics.py` |
-| Browser regression tests | Passed: 4 | Mocked decode failure, delayed warmup input/output, and late-control-message cases |
+| Browser regression tests | Passed: 5 | Mocked decode failure, delayed warmup input/output, and late-control-message cases |
 | Archived-output JPEG sweep | Measured locally | 12 existing images, 6 quality settings; no live inference or FPS measurement |
 | Syntax and whitespace | Passed | Python AST/CLI help, JavaScript module syntax, `git diff --check` |
-| StreamDiffusionV2 | Isolated environment/import and checkpoint downloads passed; forward pass pending | Pinned upstream commit and model/environment notes in STREAMDIFFUSION.md |
+| StreamDiffusionV2 | Wan2.1 1.3B forward pass passed; steady-state comparisons pending | Pinned upstream commit and model/environment notes in STREAMDIFFUSION.md |
 
 ## Live baseline discovery runs
 
@@ -106,10 +106,61 @@ also acknowledges Python queue evictions/errors, which otherwise leave phantom
 pending counts, and forwards the existing JPEG-quality setting. Default app
 image payloads remain raw JPEG. These additions are under validation and not yet
 running on the GPU pod. Local dispatcher/envelope and browser correlation checks
-pass; live correlated-age and final queue regression checks remain pending.
+pass; live correlated-age and final live queue checks remain pending.
 
 The isolated compute sweep has started, with exact serial jobs in
 `compute-jobs.json`. Do not infer completion from job preparation or partial logs.
+
+## Completed isolated compute baseline
+
+One RTX PRO 6000, frozen original Python and environment; 100 frames per run,
+three runs per setting after warmup. Median measured wall-clock FPS includes
+input JPEG decoding, VAE encode, generation/decode and output JPEG encoding.
+It excludes network, application rendering, prompt-cache lookup and model load.
+
+| Resolution | 2 steps | 3 steps | 4 steps |
+|---|---:|---:|---:|
+| 512x288 | 28.88 | 22.47 | 18.08 |
+| 768x448 | 13.98 | 10.63 | 8.68 |
+| 1024x576 | 8.28 | 6.34 | 5.07 |
+
+All nine configurations produced the requested dimensions, and changed/blank
+inputs produced distinct outputs. This demonstrates input influence on the
+synthetic fixture; it is not a real-audio or perceptual-quality score. Raw records
+and environment are in `compute-baseline.json`; earlier partial records remain
+archived separately. See `samples/baseline-step-quality.jpg`: two steps produce
+a more textured appearance, while three/four give smoother shapes in this prompt.
+No step-count change is an equal-quality performance optimization.
+
+The queue-drop CPU regression passed against the candidate: a three-frame burst
+produced one explicit drop and two outputs with their original IDs/connection
+epoch. It ran while StreamDiffusionV2 was still loading, before its timed forward
+pass (checked before and after). See `gpu-thread-queue-drops-candidate.json`.
+
+## First compute candidates (comparison incomplete)
+
+Each candidate ran 100 frames three times at two steps on the same frozen image.
+Median FPS by resolution 512x288 / 768x448 / 1024x576:
+
+- No intermediate stage synchronization: 28.22 / 14.54 / 8.34.
+- Cached fixed-seed noise and sigmas: 28.61 / 13.94 / 8.22.
+
+Caching matched the in-process baseline output exactly (MSE 0 at each size),
+but has no demonstrated throughput benefit. The no-sync 768x448 result is
+approximately 4% above the initial baseline; the final repeated baseline and
+combination trials are still pending. No production default is changed.
+Raw records: `compute-no-sync.json`, `compute-constants.json`.
+
+## StreamDiffusionV2 smoke result
+
+Wan2.1 1.3B, distilled video-to-video checkpoint, 832x480, two steps, standard
+VAE, single mode, PyTorch SDPA fallback: 13 output frames from 17 inputs, with
+four inputs still in the streaming pipeline. The cold forward pass took 3.86 s;
+this short run is not a steady-state throughput comparison. Actual frame shapes
+and finite RGB ranges passed. The visual output mostly preserves/recolors the
+white waveform rather than producing the rich abstract Klein appearance.
+See `streamv2-smoke.json` and the input/output clips and quality contact sheet in
+`samples/`. Faster decoder, noise strength and scene trials remain pending.
 
 ## Independent preparation review
 
@@ -122,7 +173,7 @@ regression tests. This is manual review of preparation, not an automatic stop
 gate or independent verification of GPU performance.
 
 The reviewer's focused follow-up passed after the final correction. Five Python
-tests and four browser regression tests pass. At that preparation checkpoint both worktrees were clean and both branches
+tests and five browser regression tests pass. At that preparation checkpoint both worktrees were clean and both branches
 were pushed. Later live experiments add new results and focused fixes. GitHub rejected two
 SSH pack transfers for the experiment branch; local object/pack verification
 passed and the HTTPS push succeeded. No global Git configuration was changed.

@@ -1,0 +1,90 @@
+{
+  "status": "measured",
+  "config": {
+    "checkpoint_folder": "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+    "output": "/workspace/sweep-20260917/streamv2-smoke",
+    "width": 832,
+    "height": 480,
+    "frames": 17,
+    "steps": 2,
+    "repeats": 1,
+    "mode": "single",
+    "taehv": false,
+    "noise_scale": 0.8,
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns"
+  },
+  "python": "3.11.16",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "diffusers": "0.35.1",
+    "transformers": "4.54.0",
+    "numpy": "1.24.4",
+    "pillow": "10.1.0"
+  },
+  "pipeline_sha256": "8db1426302ded6ad052ec67f7d6e545aee9a3e89a0355953dfec7a05643a3d39",
+  "frame_age": "not measured: offline inputs, no verified output-to-input correspondence",
+  "runs": [
+    {
+      "repeat": 0,
+      "cold_first_pass": true,
+      "elapsed_seconds": 3.860215311869979,
+      "input_frames": 17,
+      "output_frames": 13,
+      "output_fps": 3.3676877971095593,
+      "output_shape_thwc": [
+        13,
+        480,
+        832,
+        3
+      ],
+      "output_range": [
+        0.0,
+        1.0
+      ],
+      "first_output_seconds": 3.0163275320082903,
+      "chunk_ms": {
+        "count": 4,
+        "mean": 965.0479543488473,
+        "p50": 328.0125770252198,
+        "p95": 2619.1273245029156,
+        "p99": 2936.885335426778,
+        "min": 187.84182518720627,
+        "max": 3016.324838157743
+      },
+      "chunks": [
+        {
+          "input_start": 0,
+          "input_end": 5,
+          "output_frames": 5,
+          "elapsed_ms": 3016.324838157743,
+          "noise_scale": 0.8
+        },
+        {
+          "input_start": 5,
+          "input_end": 9,
+          "output_frames": 0,
+          "elapsed_ms": 187.84182518720627,
+          "noise_scale": 0.7100000000000002
+        },
+        {
+          "input_start": 9,
+          "input_end": 13,
+          "output_frames": 4,
+          "elapsed_ms": 368.34141379222274,
+          "noise_scale": 0.7010000000000002
+        },
+        {
+          "input_start": 13,
+          "input_end": 17,
+          "output_frames": 4,
+          "elapsed_ms": 287.68374025821686,
+          "noise_scale": 0.7001000000000002
+        }
+      ],
+      "peak_allocated_bytes": 23408841216,
+      "peak_reserved_bytes": 26115833856
+    }
+  ],
+  "load_seconds": 97.05945815704763
+}
