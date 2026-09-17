@@ -64,20 +64,28 @@ export class WaveformScene implements VjScene {
     ctx.beginPath();
 
     const bufferLength = timeDomain.length;
-    const sliceWidth = width / bufferLength;
-    let x = 0;
+    // Portrait (9:16): waveform runs top-to-bottom, centered horizontally
+    const portrait = height > width;
+    const span = portrait ? height : width;
+    const centerAxis = portrait ? width / 2 : centerY;
+    const halfAxis = portrait ? width / 2 : centerY;
+    const sliceStep = span / bufferLength;
+    let pos = 0;
 
     for (let i = 0; i < bufferLength; i++) {
-      // Map audio sample [-1, 1] to canvas Y coordinate
-      const y = centerY + timeDomain[i] * centerY * 0.8;
+      const displacement = centerAxis + timeDomain[i] * halfAxis * 0.8;
 
-      if (i === 0) {
-        ctx.moveTo(x, y);
+      if (portrait) {
+        // x = displacement, y = pos (top to bottom)
+        if (i === 0) ctx.moveTo(displacement, pos);
+        else ctx.lineTo(displacement, pos);
       } else {
-        ctx.lineTo(x, y);
+        // x = pos (left to right), y = displacement
+        if (i === 0) ctx.moveTo(pos, displacement);
+        else ctx.lineTo(pos, displacement);
       }
 
-      x += sliceWidth;
+      pos += sliceStep;
     }
 
     ctx.stroke();

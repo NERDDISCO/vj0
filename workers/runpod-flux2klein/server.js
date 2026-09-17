@@ -17,9 +17,20 @@
  */
 const express = require("express");
 const wrtc = require("@roamhq/wrtc");
-const { spawn, execSync } = require("child_process");
+const { spawn, execSync, exec } = require("child_process");
+const { promisify } = require("util");
 const fs = require("fs");
 const os = require("os");
+
+// Async siblings of the sync helpers we use in the /telemetry path. The
+// telemetry endpoint MUST NOT use execSync / readFileSync / statSync —
+// the dispatcher and the WebRTC data channel share this event loop, and
+// nvidia-smi under inference load can take 200–500 ms per call. A
+// blocked event loop = stalled frame relay = visible fps drop. Use
+// these async versions exclusively in /telemetry.
+const execAsync = promisify(exec);
+const readFileAsync = promisify(fs.readFile);
+const statAsync = promisify(fs.stat);
 
 // Prevent node from crashing on unhandled errors — log and continue.
 // WebRTC peer teardown and worker pipe errors are the usual culprits.
@@ -481,26 +492,75 @@ app.get("/healthz", (_req, res) => {
 });
 
 // /telemetry endpoint — pod hardware snapshot for the in-app telemetry
-// section (lives inside the SystemsBar AI pop-over). Hits nvidia-smi +
-// /proc + df once per call. Cheap enough to poll at 1Hz while the
-// pop-over is open; the UI only polls then so this never runs during a
-// normal live set.
+// section (lives inside the SystemsBar AI pop-over).
 //
-// Returns null/undefined for any field that can't be read (e.g. nvidia-smi
-// unavailable, /proc unreadable on macOS dev) — the UI tolerates missing
-// fields so a partial reply still renders the rest of the rack.
-app.get("/telemetry", (_req, res) => {
-  res.json(buildTelemetrySnapshot());
+// CRITICAL: this handler shares an event loop with the WebRTC dispatcher
+// and the worker stdout parser that relays inference frames to the
+// browser. Any sync I/O here (execSync, readFileSync, statSync) blocks
+// frame flow for the duration of the call — and nvidia-smi under
+// inference load is 200–500 ms per invocation. The first version of
+// this endpoint was sync, polled at 2 s, and dropped 50 fps → 9 fps
+// the moment the user opened the telemetry pop-over.
+//
+// Fix: every probe is async (no event-loop blocking), and a 1.5 s
+// in-memory cache means even a too-aggressive client poll only hits
+// nvidia-smi once per cache window. The UI already polls at 2 s, so
+// the cache is essentially "warm hit on every poll" while still being
+// fresh enough to feel live.
+const TELEMETRY_CACHE_MS = 1500;
+let telemetryCache = { at: 0, snapshot: null };
+let telemetryInflight = null;
+
+app.get("/telemetry", async (_req, res) => {
+  try {
+    const snap = await getTelemetrySnapshotCached();
+    res.json(snap);
+  } catch (err) {
+    console.error("[/telemetry] error:", err && err.message);
+    res.status(500).json({ error: String(err && err.message) || "fail" });
+  }
 });
 
-function buildTelemetrySnapshot() {
+async function getTelemetrySnapshotCached() {
+  const now = Date.now();
+  if (telemetryCache.snapshot && now - telemetryCache.at < TELEMETRY_CACHE_MS) {
+    return telemetryCache.snapshot;
+  }
+  // De-dupe concurrent requests — without this, two near-simultaneous
+  // /telemetry calls (e.g. dev tools auto-reload + UI poll) both fire
+  // their own nvidia-smi. Coalesce onto the first inflight build.
+  if (telemetryInflight) return telemetryInflight;
+  telemetryInflight = (async () => {
+    try {
+      const snap = await buildTelemetrySnapshot();
+      telemetryCache = { at: Date.now(), snapshot: snap };
+      return snap;
+    } finally {
+      telemetryInflight = null;
+    }
+  })();
+  return telemetryInflight;
+}
+
+async function buildTelemetrySnapshot() {
+  // Fire all probes in parallel — total wall time ≈ slowest probe
+  // (usually nvidia-smi at ~50–200 ms idle, ~200–500 ms under load).
+  // Crucially, each is async so the event loop stays free during the
+  // wait — frame relay and channel send keep happening normally.
+  const [cpu, ram, disk, networkVolume, gpus] = await Promise.all([
+    readCpuInfo(),
+    readRamInfo(),
+    readDiskInfo("/workspace"),
+    readNetworkVolumeInfo(),
+    readGpuInfo(),
+  ]);
   return {
     pod: readPodInfo(),
-    cpu: readCpuInfo(),
-    ram: readRamInfo(),
-    disk: readDiskInfo("/workspace"),
-    networkVolume: readNetworkVolumeInfo(),
-    gpus: readGpuInfo(),
+    cpu,
+    ram,
+    disk,
+    networkVolume,
+    gpus,
     workers: workers.map(w => ({
       gpu: w.gpu,
       ready: w.ready,
@@ -513,6 +573,7 @@ function buildTelemetrySnapshot() {
 }
 
 function readPodInfo() {
+  // Pure env / os reads — non-blocking, no I/O, leave sync.
   return {
     id: process.env.RUNPOD_POD_ID || null,
     hostname: process.env.RUNPOD_POD_HOSTNAME || os.hostname() || null,
@@ -522,7 +583,7 @@ function readPodInfo() {
   };
 }
 
-function readCpuInfo() {
+async function readCpuInfo() {
   try {
     const cpus = os.cpus();
     const load = os.loadavg();
@@ -537,12 +598,12 @@ function readCpuInfo() {
   }
 }
 
-function readRamInfo() {
+async function readRamInfo() {
   // Prefer /proc/meminfo MemAvailable (matches what `free` shows users) over
   // os.freemem() — the latter under-reports because Linux counts buffers
   // and page cache as "used".
   try {
-    const mi = fs.readFileSync("/proc/meminfo", "utf8");
+    const mi = await readFileAsync("/proc/meminfo", "utf8");
     const totalKb = Number((mi.match(/MemTotal:\s+(\d+)/) || [])[1] || 0);
     const availKb = Number((mi.match(/MemAvailable:\s+(\d+)/) || [])[1] || 0);
     if (totalKb > 0) {
@@ -558,13 +619,13 @@ function readRamInfo() {
   };
 }
 
-function readDiskInfo(mount) {
+async function readDiskInfo(mount) {
   try {
-    const out = execSync(
+    const { stdout } = await execAsync(
       `df -B1 --output=size,used,target ${JSON.stringify(mount)}`,
-      { encoding: "utf8", timeout: 2000 }
+      { timeout: 2000 }
     );
-    const lines = out.trim().split("\n");
+    const lines = stdout.trim().split("\n");
     const last = lines[lines.length - 1].trim().split(/\s+/);
     const totalBytes = Number(last[0]);
     const usedBytes = Number(last[1]);
@@ -576,16 +637,15 @@ function readDiskInfo(mount) {
   return null;
 }
 
-function readNetworkVolumeInfo() {
+async function readNetworkVolumeInfo() {
   // RunPod attaches network volumes at /workspace and exports RUNPOD_VOLUME_ID.
   // If the env var's set, the volume is present; if /workspace is on its own
   // device (different from /), that's a secondary signal we surface too.
   const volumeId = process.env.RUNPOD_VOLUME_ID || null;
   let mountedSeparately = false;
   try {
-    const root = fs.statSync("/").dev;
-    const ws = fs.statSync("/workspace").dev;
-    mountedSeparately = root !== ws;
+    const [root, ws] = await Promise.all([statAsync("/"), statAsync("/workspace")]);
+    mountedSeparately = root.dev !== ws.dev;
   } catch {}
   return {
     present: Boolean(volumeId) || mountedSeparately,
@@ -594,15 +654,15 @@ function readNetworkVolumeInfo() {
   };
 }
 
-function readGpuInfo() {
+async function readGpuInfo() {
   try {
     // nounits drops the trailing " MiB" / " %" / " W" — easier to parse.
-    const out = execSync(
+    const { stdout } = await execAsync(
       "nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,temperature.gpu,power.draw " +
       "--format=csv,noheader,nounits",
-      { encoding: "utf8", timeout: 3000 }
+      { timeout: 3000 }
     );
-    return out.trim().split("\n").filter(Boolean).map(line => {
+    return stdout.trim().split("\n").filter(Boolean).map(line => {
       const [index, name, vramTotalMb, vramUsedMb, utilPct, tempC, powerW] =
         line.split(",").map(s => s.trim());
       return {

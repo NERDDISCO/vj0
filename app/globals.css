@@ -863,8 +863,351 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-/* Section — used inside the drawer to group related controls horizontally
-   with a bracket-style label rather than a heavyweight panel border. */
+/* ─────────────────────────────────────────────────────────────
+   TelemetryPanel — pod telemetry rack, lives inside the SystemsBar
+   AI popover (the worker IS the AI backend's pod, so it doesn't
+   warrant a separate top-level button).
+   Designed to read like a hardware diagnostics strip: thin labeled
+   modules stacked vertically, inline meter bars are the visual primary,
+   tabular-aligned monospace text fills the gaps. The meter colors lean
+   on the existing tone palette (cyan = info, emerald = live, yellow =
+   warn, magenta = saturated) so a stage tech reading peripherally
+   gets load info without parsing numbers.
+   ───────────────────────────────────────────────────────────── */
+.vj-telemetry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  /* Lives inside the AI pop-over which already provides p-4 outer pad,
+     so we don't add our own. A top divider + small top pad separates
+     us from the Latency block above and reads as a distinct rack. */
+  padding: 0.5rem 0 0;
+  margin-top: 0.15rem;
+  border-top: 1px solid var(--vj-edge);
+  font-size: 0.7rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: none; /* override the popover's blanket uppercase — too shouty for tabular data */
+  color: var(--vj-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.vj-telemetry__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--vj-edge);
+}
+.vj-telemetry__title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.vj-telemetry__title {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vj-accent);
+  font-weight: 700;
+}
+.vj-telemetry__uptime {
+  font-size: 0.62rem;
+  color: var(--vj-ink-dim);
+  letter-spacing: 0.06em;
+}
+.vj-telemetry__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--vj-ink-dim);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+.vj-telemetry__live--idle {
+  color: var(--vj-ink-dim);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+/* Live tick — pulses every poll cycle so a glance confirms the data
+   is moving. Goes dark when polling stops. */
+.vj-telemetry__tick {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vj-muted);
+  transition: background 120ms;
+}
+.vj-telemetry__tick--on {
+  background: var(--vj-info);
+  box-shadow: 0 0 6px var(--vj-info);
+  animation: vj-telemetry-tick 1.6s ease-in-out infinite;
+}
+@keyframes vj-telemetry-tick {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+.vj-telemetry__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.vj-telemetry__section-label {
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+  font-weight: 600;
+}
+.vj-telemetry__section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-left: 0.4rem;
+  /* Subtle left rule — the "rack rail" that ties each section's rows
+     into one visual group without using a heavy border. */
+  border-left: 1px solid color-mix(in srgb, var(--vj-edge) 80%, transparent);
+}
+
+/* Pod-section key/value row */
+.vj-telemetry__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.vj-telemetry__k {
+  flex-shrink: 0;
+  width: 2.2rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vj-ink-dim);
+}
+.vj-telemetry__v {
+  flex: 1;
+  min-width: 0;
+  color: var(--vj-ink);
+}
+.vj-telemetry__v--mono {
+  font-variant-numeric: tabular-nums;
+  color: var(--vj-info);
+}
+.vj-telemetry__v--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vj-telemetry__sep {
+  margin: 0 0.4rem;
+  color: var(--vj-edge-hot);
+}
+.vj-telemetry__dc {
+  display: inline-flex;
+  align-items: baseline;
+}
+.vj-telemetry__vol {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.vj-telemetry__vol--on {
+  color: var(--vj-live);
+}
+.vj-telemetry__vol--off {
+  color: var(--vj-muted);
+}
+
+/* GPU per-card block — header line (idx + name + meta) plus two stacked
+   meters. Slight bottom margin so adjacent GPUs feel like distinct units
+   rather than a wall of bars. */
+.vj-telemetry__gpu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  padding-bottom: 0.25rem;
+}
+.vj-telemetry__gpu + .vj-telemetry__gpu {
+  border-top: 1px dashed color-mix(in srgb, var(--vj-edge) 60%, transparent);
+  padding-top: 0.4rem;
+}
+.vj-telemetry__gpu-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+.vj-telemetry__gpu-name {
+  flex: 1;
+  min-width: 0;
+  color: var(--vj-ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vj-telemetry__gpu-meta {
+  display: inline-flex;
+  gap: 0.4rem;
+  color: var(--vj-ink-dim);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.62rem;
+}
+
+/* Index marker — the [00] column. Box-style so the eye locks onto a
+   consistent left rail across GPU rows + worker rows. */
+.vj-telemetry__idx {
+  display: inline-block;
+  flex-shrink: 0;
+  min-width: 1.4rem;
+  padding: 0 0.25rem;
+  border: 1px solid var(--vj-edge);
+  border-radius: 2px;
+  text-align: center;
+  font-size: 0.6rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--vj-info);
+  background: color-mix(in srgb, var(--vj-info) 8%, transparent);
+}
+
+/* The meter — three-column row: [label]  [track]  [readout].
+   Track expands to fill the available width so the bar dominates
+   visually; the label and readout columns are fixed-width so multiple
+   meters in the same section align into a clean grid. */
+.vj-telemetry__meter {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+.vj-telemetry__meter-label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--vj-ink-dim);
+}
+.vj-telemetry__meter-track {
+  position: relative;
+  height: 4px;
+  background: color-mix(in srgb, var(--vj-edge) 70%, #000);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.vj-telemetry__meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  /* width + bg are inline-styled so React-driven values animate without
+     a CSS-var dance; transition makes them pulse smoothly poll-to-poll. */
+  transition: width 320ms ease-out, background 200ms ease-out,
+    box-shadow 200ms ease-out;
+}
+.vj-telemetry__meter-readout {
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-align: right;
+  min-width: 5.2rem;
+  /* color is inline-styled to match the tone of the bar */
+}
+
+/* CPU model line — sits above the cpu meter so the model name + core
+   count gets its own row instead of fighting the meter for width. */
+.vj-telemetry__cpu-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.66rem;
+  color: var(--vj-ink);
+}
+.vj-telemetry__cpu-model {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vj-telemetry__cpu-cores {
+  flex-shrink: 0;
+  color: var(--vj-info);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.62rem;
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+}
+
+/* Worker row — readiness dot + state + small counters */
+.vj-telemetry__worker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  color: var(--vj-ink);
+  font-variant-numeric: tabular-nums;
+}
+.vj-telemetry__worker-state {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.6rem;
+  color: var(--vj-ink-dim);
+}
+.vj-telemetry__worker-pending,
+.vj-telemetry__worker-frames {
+  font-variant-numeric: tabular-nums;
+  color: var(--vj-info);
+}
+.vj-telemetry__worker-pending {
+  color: var(--vj-warn);
+}
+
+/* Skeleton — placeholder bars while the first /admin response is in flight.
+   Pulse animation reuses the meter color so the loading state feels like
+   "data is coming" rather than "the UI is broken". */
+.vj-telemetry--loading .vj-telemetry__skeleton-row {
+  height: 8px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--vj-edge) 0%,
+    var(--vj-edge-hot) 50%,
+    var(--vj-edge) 100%
+  );
+  background-size: 200% 100%;
+  animation: vj-telemetry-shimmer 1.6s linear infinite;
+}
+@keyframes vj-telemetry-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty state — used when the AI transport isn't connected or /admin is
+   unreachable. Same vertical rhythm as a real section so the popover
+   doesn't suddenly collapse. */
+.vj-telemetry--empty {
+  padding: 1rem 0.7rem;
+  text-align: center;
+}
+.vj-telemetry__empty-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vj-accent);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.vj-telemetry__empty-body {
+  font-size: 0.7rem;
+  color: var(--vj-ink-dim);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
 .vj-section {
   display: flex;
   flex-direction: column;

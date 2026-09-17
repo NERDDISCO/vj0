@@ -32,6 +32,10 @@ export class TerrainLinesScene implements VjScene {
   ): void {
     if (!this.width || !this.height || !timeDomain) return;
 
+    // Clear canvas with dark background
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, this.width, this.height);
+
     const rms = features?.rms ?? 0;
     const peak = features?.peak ?? 0;
     const energyLow = features?.energyLow ?? 0;
