@@ -1,41 +1,49 @@
 # Resume the experiment loop
 
-Checkpoint 13:32 UTC. Latest active recovery coordinator PID12509, exec31307:
-`/tmp/vj0-finish-queues-idle-fixed-20260917.py`. It waits for both workers in
-`/workspace/scaling-idle-fixed-service-20260917/scaling-service.log` to finish
-3/3 shapes plus local `/tmp/vj0-benchmark-io-complete`, then runs all18 scaling
-trials into `/tmp/vj0-browser-scaling-idle-fixed-20260917`, 12 frame buffers,
-new-stack warmup, 27 new-stack live trials, and 600s actual-app768 soak+stress.
-Previous coordinator1155 exited after intentional cancellation of scaling.
-Seven measured initial trials plus one failure are preserved under
-browser-scaling-before-idle-fix/. GPU1 resumed after88s idle and the watchdog
-incorrectly counted that as processing stall. Fixed dispatcher starts deadline
-on0→1 pending transition. Eight CPU lifecycle/frame-ID checks and independent
-source review pass; complete GPU rerun remains required.
+Checkpoint 14:03 UTC. Continue until all remaining live/app trials, final review
+and push are complete. Both paid pods remain warm. No UI redesign, main push or
+stable-image deployment.
 
-Pod B original Node567 paused; runner64223 current recovery manifest above.
-Corrected generated server path `server-idle-fixed.js`, SHA
+The corrected scaling batch completed all 18 trials and is saved in
+browser-scaling-idle-fixed/. One raw result remains invalid with an audited,
+hash-bound assessment in measurement-assessments.json: its measured data are
+usable, but a 3.2165-second client-observed worker-stat arrival gap fails
+continuity. No restart, compile, decode/send errors or unavailable workers.
+The browser harness now reports continuity separately; missing health/data still
+invalidate measurements. The actual-app soak's strict rules are unchanged.
+
+Successor PID 22824, exec 95579, /tmp/vj0-remaining-queues-20260917.py waits on
+/tmp/vj0-post-scaling-ready.json for this checkpoint push, then runs:
+12 frame-buffer trials → both Torch 2.13 workers warm all three shapes → 27 live
+trials → 600-second app/projector soak and lifecycle stress.
+Create the marker only after checks and successful push; do not leave it waiting.
+Outputs: /tmp/vj0-browser-frame-buffer-20260917,
+/tmp/vj0-browser-torch213-20260917, /tmp/vj0-app-soak-20260917.
+
+Pod B: 9vj8k6guaxsbhw, current runner 64223, manifest
+/workspace/scaling-idle-fixed-service-20260917/sweep.json; future manifest
+/workspace/torch213-live-service-20260917/sweep.json. Both select corrected
+/workspace/scaling-livebench-20260917/server-idle-fixed.js, SHA
 9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03.
-Future Torch2.13 service jobs now select this same corrected server.
-Original generated server retained unchanged for historical identity.
+Original Node 567 paused. Pod A: 0pxb4bss2jmbhg, runner 49372,
+/workspace/stream512-paced-20260917/sweep.json. Both 512 paced jobs passed;
+final Klein service remains warm. Original Node 499 paused.
 
-Pod A original Node499 paused; runner45986 now executes
-`/workspace/trt-parser-path-20260917/sweep.json`. Explicit wrapper tests exposed
-upstream ONNX parser omission of the model path for external weights. Isolated
-harness SHA bce7f8edeb43b5407788da895cbbc1b59a62dc5cd44823801c619fae2474605f
-patches only that path argument in-process, preserving the upstream checkout.
-Native control and real TRT engine trial have passed; remaining fast/noise tests
-are running, then indefinite Klein service. Real TRT first trial builds3shapes
-(~33s total); warm~22FPS versus matching native~20.3FPS. Collect terminal records,
-engine hashes, samples and verify quality before closing.
+All Stream results, clips and engine identities have now been collected, including
+512×288 / 257-input-frame paced follow-ups. Inspect their clips locally under
+/tmp/vj0-quality-20260917/stream512-paced and finish the Stream appendix/review.
+35 Stream records now include failed attempts. Browser index has 140 trials;
+compute has 85 cells, actual-app has 13 summaries, same-host has 16 trials.
 
-All16 samehost trials collected, plus13 responsive trials. COMPUTE appendix
-contains85cells/255repeats. New compute quality contact sheet inspected; local
-texture differences are visible and samples are not bit-identical across processes.
-No dependency/queue/JPEG default promoted. Final report/review/push still required.
+App CDP probe/focus/viewport sessions expire roughly 15:40–16:04 UTC; extend before
+expiry if needed without changing the measurement probe. Final soak uses frontend
+4a02d2f, 768×448, new-stack combined, two GPUs, pending 3, JPEG 80, telemetry and
+real synthetic WebAudio. Stress rotates 1024→512→768, prompts and reconnects.
+Keep harness frozen during measurement. Capture screenshots/flow video afterward
+outside Git at /tmp/vj0-perf-evidence-20260917.
 
-The retained instructions below contain earlier process IDs; use the checkpoint
-above for current processes.
+Never run builds, downloads, pushes or bulk SSH during timed Mac WAN/app trials.
+All final reports, independent review, commit and push still require completion.
 
 ## Tool and infrastructure checks
 

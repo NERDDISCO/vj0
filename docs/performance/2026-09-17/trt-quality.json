@@ -1,0 +1,145 @@
+{
+  "samples": [
+    {
+      "variant": "native-fp16-parallel",
+      "frame": "first",
+      "sha256": "f1f825e9c3238120166b41e3a7d14bc19469f06fa0c148ede3d2c9356eeab666",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fp16-parallel/output-first.png"
+    },
+    {
+      "variant": "native-fp16-parallel",
+      "frame": "middle",
+      "sha256": "a2019214e83a35222a4bc8a929dcfe376060cd1cedd78d4a30872770bb643f7c",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fp16-parallel/output-middle.png"
+    },
+    {
+      "variant": "native-fp16-parallel",
+      "frame": "last",
+      "sha256": "ed2136ab07334189ad215c330183383cbd2db43db6e47ccd358b168e21ee5427",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fp16-parallel/output-last.png"
+    },
+    {
+      "variant": "trt-fp16",
+      "frame": "first",
+      "sha256": "c1241204c2eeba76eb4287665aa25fbf49cf6b88d61d6125d2295ce2eab9da18",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16/output-first.png"
+    },
+    {
+      "variant": "trt-fp16",
+      "frame": "middle",
+      "sha256": "d38dabf7f97ca230874294def28a75a4c9b1738cd43a011c95e160429c564f79",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16/output-middle.png"
+    },
+    {
+      "variant": "trt-fp16",
+      "frame": "last",
+      "sha256": "b6946326bf768c97ff77444ad91c7d28842cec5ad66dedee177328fc5758cbbf",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16/output-last.png"
+    },
+    {
+      "variant": "native-fast-fp16",
+      "frame": "first",
+      "sha256": "f1f825e9c3238120166b41e3a7d14bc19469f06fa0c148ede3d2c9356eeab666",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fast-fp16/output-first.png"
+    },
+    {
+      "variant": "native-fast-fp16",
+      "frame": "middle",
+      "sha256": "598513d0c8fc0e19cb9af4f6651190aaeb18b2b18c7d1ab5d03e5b2b20526137",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fast-fp16/output-middle.png"
+    },
+    {
+      "variant": "native-fast-fp16",
+      "frame": "last",
+      "sha256": "65df10cb958e2989343b62205e715e3c2e473dfb0e273461490bcc3eb12b0035",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/native-fast-fp16/output-last.png"
+    },
+    {
+      "variant": "trt-fast-fp16",
+      "frame": "first",
+      "sha256": "c1241204c2eeba76eb4287665aa25fbf49cf6b88d61d6125d2295ce2eab9da18",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fast-fp16/output-first.png"
+    },
+    {
+      "variant": "trt-fast-fp16",
+      "frame": "middle",
+      "sha256": "07652fb141aa0c0196836f1b0a305a84c7e86ce133e13a43dc695a9615047fb7",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fast-fp16/output-middle.png"
+    },
+    {
+      "variant": "trt-fast-fp16",
+      "frame": "last",
+      "sha256": "0dd1dcd6514c0ffd1d61f6278b535f538eb6b0548737f921a7a730d79f709ecd",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fast-fp16/output-last.png"
+    },
+    {
+      "variant": "trt-fp16-noise095",
+      "frame": "first",
+      "sha256": "35604e34636a6ca9af4decb426a81d9f424db01fa4cb5ca6a25ef6fd1d3f95f2",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16-noise095/output-first.png"
+    },
+    {
+      "variant": "trt-fp16-noise095",
+      "frame": "middle",
+      "sha256": "8922d3eeca5b398fef426d29256a520c7717dd0f30701eab5efb0dd6d46dfe11",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16-noise095/output-middle.png"
+    },
+    {
+      "variant": "trt-fp16-noise095",
+      "frame": "last",
+      "sha256": "ec5f68d0611e9196ec00ee5febec75680daf6ec24b0844aed4a34c032f264f13",
+      "path": "/tmp/vj0-quality-20260917/trt-parser-path/trt-fp16-noise095/output-last.png"
+    }
+  ],
+  "comparisons": [
+    {
+      "native": "native-fp16-parallel",
+      "trt": "trt-fp16",
+      "frame": "first",
+      "mse_8bit": 0.057517027243589744,
+      "psnr_db": 60.53283929339195
+    },
+    {
+      "native": "native-fp16-parallel",
+      "trt": "trt-fp16",
+      "frame": "middle",
+      "mse_8bit": 0.06360927483974359,
+      "psnr_db": 60.09559916319408
+    },
+    {
+      "native": "native-fp16-parallel",
+      "trt": "trt-fp16",
+      "frame": "last",
+      "mse_8bit": 0.06798460870726496,
+      "psnr_db": 59.806697586042496
+    },
+    {
+      "native": "native-fast-fp16",
+      "trt": "trt-fast-fp16",
+      "frame": "first",
+      "mse_8bit": 0.057517027243589744,
+      "psnr_db": 60.53283929339195
+    },
+    {
+      "native": "native-fast-fp16",
+      "trt": "trt-fast-fp16",
+      "frame": "middle",
+      "mse_8bit": 0.06297659588675214,
+      "psnr_db": 60.13901179123668
+    },
+    {
+      "native": "native-fast-fp16",
+      "trt": "trt-fast-fp16",
+      "frame": "last",
+      "mse_8bit": 0.06394981971153846,
+      "psnr_db": 60.072410364221874
+    }
+  ],
+  "metric_scope": "Same-seed saved 8-bit outputs, numerical difference only; not perceptual preference or temporal quality",
+  "visual_review": {
+    "status": "reviewed",
+    "contact_sheet": "samples/trt-contact.jpg",
+    "observation": "Matched native/TRT first/middle/last frames retain the same line structure, colour and black background. Noise0.95 begins with stronger rainbow swirls; later selected frames largely preserve/recolour the line. No obvious corruption in these samples.",
+    "limitation": "Static selected-frame inspection does not establish temporal quality or preference."
+  }
+}

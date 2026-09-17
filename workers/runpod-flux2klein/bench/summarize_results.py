@@ -7,6 +7,7 @@ This index is descriptive: it does not select winners or assert equal quality.
 """
 import argparse
 from collections import defaultdict
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -160,10 +161,22 @@ def main():
     excluded, unmatched = browser_exclusions(browser_paths, args.root, exclusions.get('exclusions',[]))
     if unmatched:
         result['unmatched_measurement_exclusions'] = unmatched
+    assessment_path = args.root/'measurement-assessments.json'
+    assessments = {}
+    if assessment_path.exists():
+        for assessment in json.loads(assessment_path.read_text())['assessments']:
+            path = args.root/assessment['artifact']
+            if path not in browser_paths or path in assessments:
+                raise ValueError('Missing or duplicate assessed browser artifact: '+str(path))
+            if hashlib.sha256(path.read_bytes()).hexdigest() != assessment['sha256']:
+                raise ValueError('Assessed browser artifact changed: '+str(path))
+            assessments[path] = assessment
     for path in browser_paths:
         data = json.loads(path.read_text())
         if not isinstance(data,dict) or ('receivedFps' not in data and
                 not (data.get('status') in ['failed','invalid'] and 'error' in data)):
+            if path in assessments:
+                raise ValueError('Assessed artifact is not a browser result: '+str(path))
             continue
         entry = {'artifact':str(path.relative_to(args.root)),
             **{k:data.get(k) for k in ['status','error','config','receivedFps','decodedDrawnFps',
@@ -171,11 +184,17 @@ def main():
                 'distributions','transport','workerFrameCounts','workerMaxGapMs',
                 'serverCounters','telemetryPolls','telemetrySnapshots',
                 'measurement','frameAge','sourceCapture','userAgent',
-                'workerVariants','finalWorkerHealth']},
+                'workerVariants','finalWorkerHealth','continuity','validationStatus']},
             'capture_to_draw_ms':data.get('distributions',{}).get('captureToDrawMs'),
             'arithmetic_checked_fields':validate_browser_rates(data,path)}
         if path in excluded:
             entry.update(status='excluded', raw_status=data.get('status'), exclusions=excluded[path])
+        if path in assessments:
+            if path in excluded or data.get('status') != assessments[path]['raw_status']:
+                raise ValueError('Conflicting browser assessment: '+str(path))
+            # Preserve raw status/errors. A reconciled performance failure must
+            # never be silently rewritten as a successful original trial.
+            entry['derivedAssessment'] = assessments[path]
         result['browser'].append(entry)
     result['samehost'] = []
     for folder in sorted(args.root.glob('samehost-*')):

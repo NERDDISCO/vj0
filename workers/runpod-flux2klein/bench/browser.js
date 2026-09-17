@@ -13,6 +13,26 @@ export function summarize(values) {
     p50: p(0.5), p95: p(0.95), p99: p(0.99) };
 }
 
+// Continuity is an observed performance outcome, separate from data validity.
+// Stats arrive on the client: a long gap does not prove the GPU itself stalled.
+export function assessWorkerDelivery(workerCount, gaps, health) {
+  const failures = [], healthErrors = [];
+  let missingGap = false;
+  for (let worker=0; worker<workerCount; worker++) {
+    if (!health?.find(w=>w.gpu===worker)?.ready) {
+      healthErrors.push(`Worker ${worker} was not ready at completion`);
+    }
+    if (!Number.isFinite(gaps[worker])) {
+      missingGap = true;
+      healthErrors.push(`Worker ${worker} has no valid arrival-gap measurement`);
+    } else if (gaps[worker] > 2000) {
+      failures.push({worker, maxGapMs:gaps[worker]});
+    }
+  }
+  return {healthErrors, continuity:{status:workerCount ? (failures.length ? 'failed' : missingGap ? 'unknown' : 'passed') : 'not-requested',
+    thresholdMs:2000, measurement:'client-observed worker-stat arrival gap', failures}};
+}
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function waitUntil(test, milliseconds, description) {
@@ -381,11 +401,10 @@ export async function runBenchmark(options) {
       for (let worker=0; worker<(c.serverConfig?.activeWorkers || 0); worker++) {
         workerMaxGapMs[worker] = Math.max(workerMaxGapMs[worker] || 0,
           measurementEnded - (workerLastActivity[worker] ?? started));
-        if (workerMaxGapMs[worker] > 2000 || !finalWorkerHealth?.find(w=>w.gpu===worker)?.ready) {
-          measurements.errors.push(`Worker ${worker} had an output gap over two seconds or was not ready at completion`);
-        }
       }
     }
+    const delivery = assessWorkerDelivery(c.serverConfig?.activeWorkers || 0, workerMaxGapMs, finalWorkerHealth);
+    measurements.errors.push(...delivery.healthErrors);
     // Settle outstanding polls outside the timed interval before controls change.
     await telemetryPending;
     const stats = await pc.getStats();
@@ -419,6 +438,8 @@ export async function runBenchmark(options) {
       invalidReasons.push('Not all requested active workers produced measured frames');
     }
     return { status: invalidReasons.length ? "invalid" : "measured", invalidReasons,
+      continuity:delivery.continuity,
+      validationStatus:invalidReasons.length || delivery.continuity.status === "failed" ? "failed" : "passed",
       date: new Date().toISOString(), config: c, userAgent: navigator.userAgent,
       measurement: "browser receive/decode/offscreen 2D draw; excludes application upscaler/projector and audio capture",
       sourceCapture: "OffscreenCanvas.convertToBlob; production uses HTMLCanvasElement.toBlob",

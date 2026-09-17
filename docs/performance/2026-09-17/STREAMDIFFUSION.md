@@ -1,192 +1,97 @@
-# StreamDiffusionV2 comparison preparation
+# StreamDiffusionV2 measurements — 2026-09-17
 
-Inspected official source at commit
-`6961a5cf2045d1dda05a04ef229698bdc04e873a` (2026-09-14), package version 0.1.1.
-Source: https://github.com/chenfengxu714/StreamDiffusionV2
+StreamDiffusionV2 works on the test PRO 6000, including its 14B model and a real TensorRT decoder. Its strongest tested small-resolution result is **43.66–44.49 decoded FPS at 512×288** with 1.3B/TAEHV/two steps. At native 832×480, standard decoding produces **13.58–13.84 FPS**, TAEHV **20.64–21.06 FPS**, and the corrected TensorRT fast preset **22.76–23.11 FPS**. These are different model/decoder/context choices, not equal-quality FLUX speedups or app/projector FPS.
 
-## Model and actual processing behavior
+**Model and source identity**
 
-- Start with `Wan-AI/Wan2.1-T2V-1.3B` plus the distilled causal video-to-video
-  checkpoint `jerryfeng/StreamDiffusionV2`, folder `wan_causal_dmd_v2v`.
-- The 14B alternative uses the Wan2.1 14B base plus `wan_causal_dmd_v2v_14b`;
-  upstream credits CausVid-Plus for its offline 14B model.
-- This is a video pipeline with temporal state. It is not a faster FLUX.2 loader.
-- Current default source resolution is 832x480; the API accepts width/height.
-  Validate smaller identical-to-Klein sizes before treating them as supported.
-- `num_frame_per_block=1` in the standard config; `chunk_size=4` video frames.
-  The initial chunk contains five input frames. Future chunks contain four.
-  At a 30 FPS source, simply collecting four frames takes approximately 100 ms
-  from first to fourth frame (133 ms between four-frame chunk arrivals), before
-  processing. Capture age must include this, not just frames/compute-second.
-- Modes `single` and `single-wo` respectively use stream batching and the
-  non-batched single-GPU path. Measure both. `single` can return no decoded output
-  for intermediate chunks while filling the denoising pipeline.
-- Standard denoising schedule is `[700, 500, 400, 200, 0]`; `step=1..4` selects
-  that many nonterminal entries and retains terminal zero. These steps and its
-  `noise_scale` are not numerically equivalent to Klein's step count and alpha.
-- Optional TAEHV uses `madebyollin/taehv`'s `taew2_1.pth` decoder.
-- Latest inspected commit fixes streaming RoPE position refresh. Pin this commit
-  instead of assuming the PyPI wheel contains the same fix.
+The pinned [official source](https://github.com/chenfengxu714/StreamDiffusionV2/tree/6961a5cf2045d1dda05a04ef229698bdc04e873a) is commit `6961a5cf2045d1dda05a04ef229698bdc04e873a`, dated September 14, package version 0.1.1. It uses causal Wan2.1 video models with temporal state:
 
-## Environment isolation
+- [Wan2.1 1.3B base](https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B), revision `37ec512624d61f7aa208f7ea8140a131f93afc9a`.
+- [Distilled causal checkpoint](https://huggingface.co/jerryfeng/StreamDiffusionV2), revision `2373eb2b39278b3a1aa174964a724ee78ead96f0`; folders `wan_causal_dmd_v2v` and `wan_causal_dmd_v2v_14b`.
+- Wan2.1 14B base revision `a064a6c71f5be440641209c07bf2a5ce7a2ff5e4`.
+- [TAEHV](https://github.com/madebyollin/taehv), commit `011dfc2112197741c540e0bdd5b7b67bcc930771`, `taew2_1.pth` weights.
 
-The package pins torch 2.6.0, torchvision 0.21.0, torchaudio 2.6.0,
-diffusers 0.35.1, transformers 4.54.0, and numpy 1.24.4. Its README separately
-instructs Blackwell users to install torch 2.11.0 / torchvision 0.26.0.
-Those are incompatible with the unmodified package's strict torch metadata.
+`single` uses stream batching; `single-wo` is the non-batched single-GPU path. The first input chunk contains five frames and subsequent chunks four. At 30 FPS, collecting four frames spans 100 ms from first to fourth, with chunks arriving every 133 ms. Its step/noise-scale values are not numerically equivalent to Klein's steps/alpha. The denoising schedule is restored before each repeat, caches reset, and seed set to 42. Each raw record retains resolved context, effective noise and adaptive timestep.
 
-Use a dedicated Python 3.11 environment on `/workspace/envs/streamv2`, with an
-explicit dependency override for torch/torchvision/torchaudio compatible with the
-pod's driver. Do not upgrade/downgrade `/app`'s Klein environment. Record the
-resolved versions, override file, and successful forward pass. Treat upstream's
-optional FlashAttention package separately; it is not required for the initial
-correctness run and its old pin needs Blackwell compatibility verification.
+**Measurement boundaries and latency**
 
-## Measurement sequence
+Every full trial uses 65 input frames and three independent clips. Repeat 0 is explicitly cold; the table reports repeats 1 and 2. FPS is actual decoded output count / observed wall time, including encode/denoise/decode and pipeline fill/tail shortfall, excluding model construction, file writing and input host upload. Inputs are preloaded GPU-resident synthetic clips. No interpolation or duplicated display frames count as output.
 
-1. Download the pinned 1.3B base/causal checkpoints to the test pod only.
-2. Smoke-test official encode_chunk -> denoise_chunk -> decode_chunk API with a
-   deterministic waveform video. Retain input and output clips.
-3. Measure first output after model load and separately cold load time.
-4. Measure sequential chunk processing at 832x480, then matching Klein sizes if
-   supported. Report all produced output frames divided by wall time, exact
-   output count, chunk-time distribution, and memory. Exclude model loading and
-   file writing from steady-state compute time; include VAE encode and decode.
-5. Repeat with arrival-paced input at 30 FPS and record capture-to-output age,
-   including chunk collection and pipeline fill. Offline processing FPS alone
-   does not establish live responsiveness.
-6. Compare steps 1/2/3/4, single/single-wo, default VAE/TAEHV. Keep noise scale
-   fixed initially; then separately assess waveform influence and continuity.
-7. Only investigate 14B after the 1.3B path works and memory/runtime is understood.
-8. Any live integration prototype is a separate experimental backend. Do not
-   replace the app's default or redesign its UI.
+With two steps, standard `single` emits 61/65 frames and `single-wo` 65/65. TAEHV removes the separate frame-zero anchor, yielding 60/65 and 64/65 respectively; the remaining four-frame tail in `single` is not drained. Exact counts for other settings remain in each raw record.
 
-Status: the funded pod now has the isolated Python 3.11.16 environment at
-`/workspace/envs/streamv2`. Import passed with torch 2.11.0+cu128; the base Klein
-environment is unchanged. Explicit torch/vision/audio overrides resolved the
-upstream strict metadata. Both checkpoint downloads completed at pinned revisions:
+The corrected 30-FPS-arrival tests verify source mapping through rolling latent positions. At 832×480, TAEHV/two steps/noise 0.95 measured **19.23–19.66 FPS and p95 simulated capture→decoded age 1087–1155 ms** (`single`), versus **20.00–20.39 FPS and 1037–1097 ms** (`single-wo`). Output slower than input accumulates delay. These ages exclude JPEG transport, host upload, browser/display and audio acquisition, and apply only to these settings. Earlier anchor-count assertions failed explicitly and their failed records are retained.
 
-- Wan 1.3B: `37ec512624d61f7aa208f7ea8140a131f93afc9a`.
-- StreamDiffusionV2 causal checkpoint: `2373eb2b39278b3a1aa174964a724ee78ead96f0`.
+**No Stream browser-display rate is claimed.** The existing application sends independent image requests. Mapping its latest-frame admission, prompt changes and reconnects onto causal four-frame chunks and persistent video state requires a model-specific streaming adapter. The tested visual/latency tradeoffs do not currently justify building that adapter: the fast 1.3B output mostly preserves the line, while the stronger 14B transformation is slower. Adapter complexity is a scope cost, not proof of incompatibility. FLUX actual-app/projector measurements are reported separately. A focused follow-up now measures the faster 512×288 TensorRT configuration at paced 30 FPS input; the 832×480 ages must not be extrapolated to it.
 
-Source is at `/workspace/streamdiffusionv2-20260917`; download identities are in
-its `checkpoint-revisions.json`. The first GPU smoke result is recorded below;
-steady-state comparisons and live frame age remain pending.
+**Environment and compatibility work**
 
-## First GPU smoke result
+The isolated environment uses Python 3.11.16, Torch 2.11.0+cu128, Diffusers 0.35.1, Transformers 4.54.0, NumPy 1.24.4 and Pillow 10.1.0. Explicit Torch/vision/audio overrides reconcile upstream strict Torch 2.6 metadata with its Blackwell installation guidance. FlashAttention is absent; the measured pipeline uses PyTorch SDPA fallback. The original Klein environment remains intact.
 
-The pinned API completed at native 832x480, two steps, single mode, standard VAE,
-initial noise scale 0.8, without FlashAttention installed (PyTorch SDPA fallback).
-It produced 13 valid RGB frames from 17 input frames: a four-frame output
-shortfall. Input/output retention and drain have not been directly verified. Model construction took about 97 seconds after
-imports. The first cold forward pass took 3.86 seconds total, with its first
-five output frames after 3.02 seconds. This short cold trial is a correctness
-result, not a steady-state performance claim. CPU control-flow checks finished
-while the model was still loading, before the timed forward pass.
+TensorRT uses an isolated complete Torch 2.11/cu128 environment with `tensorrt-cu12==10.16.1.11`, ONNX1.22.0 and onnxscript0.7.2. Version 11 removes `BuilderFlag.FP16`, used by this exporter, so the experiment pins compatible 10.x. [NVIDIA migration reference](https://docs.nvidia.com/deeplearning/tensorrt/latest/api/migration/tensorrt-10x-to-11x-python-api-patterns.html).
 
-See `streamv2-smoke.json`, `samples/streamv2-smoke-{input,output}.mp4`, and
-`samples/streamv2-smoke-quality.jpg`. For this black-background waveform and
-abstract-art prompt, the output mostly preserves/recolors the line; it does not
-create the rich abstract scene seen from Klein. Follow-up trials should test
-higher noise scale and a detailed background as well as the decoder/step modes.
-The API adapts noise scale downward based on adjacent-frame changes; the raw
-records contain effective values. New trials also record the adaptive timestep.
+Two real compatibility failures were diagnosed and retained:
 
-## Acceleration scope checked in upstream source
+1. Parent `nn.Module.to()` bypasses TAEHV's custom initialization. Requested TensorRT silently falls back to native. The benchmark rejects results without an initialized decoder and executed cached engine. The retry explicitly invokes the wrapper, applying its FP16 decoder policy and eval mode; matched native controls use the same parallel FP16 decoder.
+2. The newer ONNX exporter writes weights beside the model. Upstream calls `parser.parse(bytes)` without the model path, so TensorRT cannot locate those weights. The final benchmark changes only that documented path argument in-process, preserving the pinned checkout. The exact missing external-weight message is retained in the [failed export log](trt-external-weight-failure.log). [TensorRT parser API](https://docs.nvidia.com/deeplearning/tensorrt/latest/_static/python-api/parsers/Onnx/pyOnnx.html).
 
-The current TensorRT implementation accelerates the TAEHV decoder only, not
-Wan's denoising transformer. `fast=True` additionally changes KV-cache/sink
-configuration; treat it as a quality/context tradeoff. The current smoke run
-uses neither TensorRT nor FlashAttention. A TensorRT installation is not yet
-validated on this pod.
+All five final native/TRT jobs passed. [Job commands](trt-parser-path-jobs.json), [manifest](trt-parser-path-manifest.json), [engine identity](trt-engine-identity.json), and [raw results](stream-trt-parser-path-results/) record the evidence. Export builds preserve CPU/current-GPU RNG so random export inputs do not alter subsequent video noise.
 
-TAEHV follow-ups use `taew2_1.pth` from official repository commit
-`011dfc2112197741c540e0bdd5b7b67bcc930771`. The download job records its SHA-256
-before use. The [official TAEHV documentation](https://github.com/madebyollin/taehv)
-identifies these weights for Wan2.1 and notes a quality tradeoff against the full
-VAE. Prepared job arguments are in `stream-jobs.json`; preparation is not a
-measured outcome.
+| Matched final 832×480/two-step setting | Warm decoded FPS | Warm first output s |
+|---|---:|---:|
+| Native FP16 parallel, ordinary context | 20.21–20.36 | 0.273–0.276 |
+| TensorRT FP16, ordinary context | 22.00–22.13 | 0.253–0.269 |
+| Native FP16, fast context | 21.67–22.06 | 0.264–0.267 |
+| TensorRT FP16, fast context | 22.76–23.11 | 0.263–0.265 |
+| TensorRT FP16, ordinary context, noise 0.95 | 21.33–21.45 | 0.263–0.267 |
 
+The ordinary-context TRT mean is approximately 8.8% above its matched native mean; fast-context TRT approximately 4.9% above its matched native control. These are two warm clips in sequential processes, not a long live confirmation. TRT accelerates the TAEHV decoder only, not Wan's denoising transformer. Fast context changes KV-cache/sink/adaptation settings (6/3/0.2→5/2/−1), so its gain also changes model context.
 
-## Extended queue and compatibility decisions
+The first cold TRT clip built three actual engines, shapes 1×2/3/4×16×60×104, taking **13.77+9.23+10.02≈33.02 seconds** in total. Its first output took 14.41s and overall cold throughput 1.66 FPS. Later TRT processes reuse disk-cached engines; their repeat 0 remains process-cold, not engine-build-cold. Initial cache hashes and build timings are in raw results. PyTorch allocated/reserved peaks exclude TensorRT allocations; nvidia-smi end snapshots include total usage but are not peaks.
 
-The complete follow-up is `stream-extended-jobs.json`: standard/TAEHV,
-single/single-wo, 1–4 steps, noise strength and detailed input; simulated 30 FPS
-arrivals; a separately pinned 14B comparison; decoder TensorRT/fast; and matching
-512x288/1024x576 sizes. Job preparation is not a measured result.
+**Quality and practical fit**
 
-Arrival-mode age is tracked through the actual rolling latent positions and
-validated decoded counts. It represents simulated input capture to decoded
-output, excluding network, browser display and audio acquisition. Until those
-checks pass, no numeric capture-age claim is valid.
+At noise 0.8, the 1.3B model mainly preserves/recolours the waveform. It does not produce the rich full-frame Klein scene on this fixture. At noise 0.95, the inspected TRT clip begins with stronger rainbow imagery and later returns to a largely preserved line as processing adapts. The fast-context and ordinary-context native/TRT pairs look very similar in the selected first/middle/last frames. Their saved 8-bit sample PSNR is 59.81–60.53 dB; that measures numerical closeness, not a perceptual preference or temporal guarantee. See [TRT quality diagnostics](trt-quality.json) and [contact sheet](samples/trt-contact.jpg).
 
-The 14B base revision is `a064a6c71f5be440641209c07bf2a5ce7a2ff5e4`.
-Its approximately 57 GB of base shards use the separate 80 GB container disk;
-the approximately 28.6 GB causal checkpoint uses `/workspace`. T5/VAE assets
-are shared with 1.3B only after matching actual SHA-256 against the 14B repo's
-published LFS hashes. This avoids counting the shared storage server's `df`
-capacity as the pod's volume allowance.
+The 14B model produces stronger transformation in the inspected noise 0.95 samples. At 832×480, its standard-VAE trial used noise 0.8 and reached **6.45–6.50 FPS**; TAEHV reached **7.68–7.71 FPS** at both tested noise 0.8 and 0.95 settings. Peak PyTorch allocated memory is about 61.5 GB/59.6 GB decimal, with reserved memory higher. Model/step/decoder/noise changes are explicit quality tradeoffs. No Stream backend replaces the application's FLUX default.
 
-TensorRT 11 removed `BuilderFlag.FP16`, which this pinned upstream exporter
-uses. The isolated decoder experiment therefore selects the compatible 10.x
-release `10.16.1.11`; it does not silently port the upstream exporter or change
-Klein's environment. See [NVIDIA's Python migration guide](https://docs.nvidia.com/deeplearning/tensorrt/latest/api/migration/tensorrt-10x-to-11x-python-api-patterns.html).
+The 120 GB workspace quota was reached during installation. Recovery preserved results/source and removed reproducible cache plus the already-tested 28.6 GB 14B causal checkpoint. Download it again before another 14B run; the 57 GB base remains on the pod container disk. [Recovery record](stream-cache-recovery.json).
 
-## Extended measured comparisons
+**Every retained trial**
 
-Warm offline 832x480, same one-GPU PRO 6000, two steps:
-1.3B standard decoder 13.58–13.84 FPS; TAEHV 20.64–21.06 FPS.
-One-step TAEHV reaches 27.33–27.87 FPS; four-step TAEHV 12.94–13.20 FPS.
-These counts include pipeline fill/tail shortfalls; they are decoded outputs,
-not interpolated frames or browser display rates. Cold first clips are separate.
+Each warm range below represents two clips. Failed rows have no throughput. `paced` marks simulated 30 FPS input; all other trials process the GPU-resident clip as quickly as possible. Initial explicit-wrapper failures and final parser-path successes remain separate.
 
-The 14B model loads successfully. Standard decoder warm throughput is
-6.45–6.50 FPS, TAEHV 7.68–7.71 FPS. Peak allocated memory is approximately
-61.5 GB / 59.6 GB respectively (decimal GB, reserved memory is higher).
-Its noise-0.95 samples transform the simple waveform into stronger flowing
-rainbow imagery; 1.3B at 0.8–1.0 mainly recolours/preserves the waveform.
-These visual differences are why the model FPS figures are not equal-quality
-FLUX speedups. Full raw records are in `stream-results/`.
-
-TAEHV's first decode removes the frame-zero anchor latent. With 65 inputs and
-two steps, `single` emits 60 frames (one omitted anchor plus four undrained tail
-frames), while `single-wo` emits 64. The paced-input harness initially asserted
-the standard VAE's count and failed explicitly; the corrected reruns use
-source indices 1–4 for the first TAEHV output and preserve the verified rolling
-latent mapping for subsequent chunks.
-
-The corrected two-step TAEHV runs measured 43.66–44.49 FPS at 512x288 and
-13.65–13.95 FPS at 1024x576. Three-step native 832x480 measured 15.51–16.01 FPS.
-At simulated 30 FPS input, native-size two-step output was 19.23–19.66 FPS
-(`single`) and 20.00–20.39 FPS (`single-wo`). Their warm p95 simulated capture
-ages were 1087–1155 ms and 1037–1097 ms. Processing slower than the incoming
-source accumulates delay. These GPU-resident clips exclude host upload,
-JPEG/network transport, display, and audio acquisition. The age result applies
-to these tested settings, not every StreamDiffusionV2 configuration.
-Raw records: `stream-recovery-results/`.
-
-## TensorRT initialization finding and isolated retry
-
-The complete TensorRT environment imports successfully, but all three first
-acceleration requests failed the benchmark's real-engine guard. At this pinned
-source, the manager calls the parent `nn.Module.to()`, which does not call the
-TAEHV wrapper's custom `to()` method. Its TensorRT decoder stays uninitialized
-and inference silently uses PyTorch. These are failed acceleration trials,
-not TensorRT speed measurements (`stream-trt-initial-results/`).
-
-The isolated retry explicitly invokes the existing wrapper method. This also
-applies its FP16 decoder policy, so matching native controls use FP16, parallel
-decode, and eval mode. The fast preset has a separate native control retaining
-its context settings. No production pipeline was modified.
-
-Engine export samples random input; the benchmark preserves CPU/CUDA RNG around
-lazy builds to avoid changing subsequent video noise. Engine caches have a
-dedicated directory and initial hashes, with per-build time recorded. Warm
-repeats exclude first-pass engine build/deserialization. PyTorch allocator peaks
-exclude TensorRT-owned allocations; end-of-trial nvidia-smi snapshots are total
-usage observations, not peaks. Jobs: `trt-explicit-jobs.json`; results pending.
-
-The first installation also exposed the pod's 120 GB workspace quota. Cleanup
-removed reproducible download cache and the already-tested 14B causal checkpoint,
-preserving source, results, and the running pod. The 14B causal checkpoint must
-be downloaded again before another 14B run. See `stream-cache-recovery.json`.
+| Raw trial | Status | Model / size | Steps / mode | Decoder / noise / paced | Warm FPS | Output frames per warm clip |
+|---|---|---|---|---|---:|---|
+| [stream-recovery-results/taehv-1024x576](stream-recovery-results/taehv-1024x576.json) | measured | T2V-1.3B / 1024×576 | 2 / single | TAEHV / 0.8 / no | 13.65–13.95 | [60, 60] |
+| [stream-recovery-results/taehv-512x288](stream-recovery-results/taehv-512x288.json) | measured | T2V-1.3B / 512×288 | 2 / single | TAEHV / 0.8 / no | 43.66–44.49 | [60, 60] |
+| [stream-recovery-results/taehv-arrival30-single-anchor-corrected](stream-recovery-results/taehv-arrival30-single-anchor-corrected.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.95 / yes | 19.23–19.66 | [60, 60] |
+| [stream-recovery-results/taehv-arrival30-single-wo-anchor-corrected](stream-recovery-results/taehv-arrival30-single-wo-anchor-corrected.json) | measured | T2V-1.3B / 832×480 | 2 / single-wo | TAEHV / 0.95 / yes | 20.00–20.39 | [64, 64] |
+| [stream-recovery-results/taehv-three-step](stream-recovery-results/taehv-three-step.json) | measured | T2V-1.3B / 832×480 | 3 / single | TAEHV / 0.8 / no | 15.51–16.01 | [56, 56] |
+| [stream-results/standard-single-wo](stream-results/standard-single-wo.json) | measured | T2V-1.3B / 832×480 | 2 / single-wo | standard / 0.8 / no | 13.73–13.98 | [65, 65] |
+| [stream-results/standard-single](stream-results/standard-single.json) | measured | T2V-1.3B / 832×480 | 2 / single | standard / 0.8 / no | 13.58–13.84 | [61, 61] |
+| [stream-results/taehv-arrival30-single-wo](stream-results/taehv-arrival30-single-wo.json) | failed | T2V-1.3B / 832×480 | 2 / single-wo | TAEHV / 0.95 / yes | — | [] |
+| [stream-results/taehv-arrival30-single](stream-results/taehv-arrival30-single.json) | failed | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.95 / yes | — | [] |
+| [stream-results/taehv-detailed](stream-results/taehv-detailed.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.95 / no | 20.88–21.28 | [60, 60] |
+| [stream-results/taehv-four-step](stream-results/taehv-four-step.json) | measured | T2V-1.3B / 832×480 | 4 / single | TAEHV / 0.8 / no | 12.94–13.20 | [52, 52] |
+| [stream-results/taehv-noise 095](stream-results/taehv-noise095.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.95 / no | 20.72–21.08 | [60, 60] |
+| [stream-results/taehv-noise100](stream-results/taehv-noise100.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 1.0 / no | 20.71–21.14 | [60, 60] |
+| [stream-results/taehv-one-step](stream-results/taehv-one-step.json) | measured | T2V-1.3B / 832×480 | 1 / single | TAEHV / 0.8 / no | 27.33–27.87 | [64, 64] |
+| [stream-results/taehv-single-wo](stream-results/taehv-single-wo.json) | measured | T2V-1.3B / 832×480 | 2 / single-wo | TAEHV / 0.8 / no | 21.04–21.24 | [64, 64] |
+| [stream-results/taehv-single](stream-results/taehv-single.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.8 / no | 20.64–21.06 | [60, 60] |
+| [stream-results/wan14b-standard](stream-results/wan14b-standard.json) | measured | T2V-14B / 832×480 | 2 / single | standard / 0.8 / no | 6.45–6.50 | [61, 61] |
+| [stream-results/wan14b-taehv-noise 095](stream-results/wan14b-taehv-noise095.json) | measured | T2V-14B / 832×480 | 2 / single | TAEHV / 0.95 / no | 7.68–7.71 | [60, 60] |
+| [stream-results/wan14b-taehv](stream-results/wan14b-taehv.json) | measured | T2V-14B / 832×480 | 2 / single | TAEHV / 0.8 / no | 7.68–7.71 | [60, 60] |
+| [stream-trt-explicit-results/native-fast-fp16](stream-trt-explicit-results/native-fast-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV fast / 0.8 / no | 21.43–21.79 | [60, 60] |
+| [stream-trt-explicit-results/native-fp16-parallel](stream-trt-explicit-results/native-fp16-parallel.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.8 / no | 20.41–20.79 | [60, 60] |
+| [stream-trt-explicit-results/trt-fast-fp16](stream-trt-explicit-results/trt-fast-fp16.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT fast / 0.8 / no | — | [] |
+| [stream-trt-explicit-results/trt-fp16-noise 095](stream-trt-explicit-results/trt-fp16-noise095.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT / 0.95 / no | — | [] |
+| [stream-trt-explicit-results/trt-fp16](stream-trt-explicit-results/trt-fp16.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT / 0.8 / no | — | [] |
+| [stream-trt-initial-results/trt-env-taehv-baseline](stream-trt-initial-results/trt-env-taehv-baseline.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.8 / no | 20.42–20.65 | [60, 60] |
+| [stream-trt-initial-results/trt-fast](stream-trt-initial-results/trt-fast.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT fast / 0.8 / no | — | [] |
+| [stream-trt-initial-results/trt-taehv-noise 095](stream-trt-initial-results/trt-taehv-noise095.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT / 0.95 / no | — | [] |
+| [stream-trt-initial-results/trt-taehv](stream-trt-initial-results/trt-taehv.json) | failed | T2V-1.3B / 832×480 | 2 / single | TRT / 0.8 / no | — | [] |
+| [stream-trt-parser-path-results/native-fast-fp16](stream-trt-parser-path-results/native-fast-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV fast / 0.8 / no | 21.67–22.06 | [60, 60] |
+| [stream-trt-parser-path-results/native-fp16-parallel](stream-trt-parser-path-results/native-fp16-parallel.json) | measured | T2V-1.3B / 832×480 | 2 / single | TAEHV / 0.8 / no | 20.21–20.36 | [60, 60] |
+| [stream-trt-parser-path-results/trt-fast-fp16](stream-trt-parser-path-results/trt-fast-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT fast / 0.8 / no | 22.76–23.11 | [60, 60] |
+| [stream-trt-parser-path-results/trt-fp16-noise 095](stream-trt-parser-path-results/trt-fp16-noise095.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT / 0.95 / no | 21.33–21.45 | [60, 60] |
+| [stream-trt-parser-path-results/trt-fp16](stream-trt-parser-path-results/trt-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT / 0.8 / no | 22.00–22.13 | [60, 60] |

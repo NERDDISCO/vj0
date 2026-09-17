@@ -1,0 +1,92 @@
+{
+  "status": "running",
+  "dispatcher_pid": 499,
+  "runner_pid": 49372,
+  "jobs": [
+    {
+      "name": "trt512-arrival30-single",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-parser-path.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream512-paced-20260917/trt512-arrival30-single",
+        "--frames",
+        "257",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-parser-path-20260917/engine-cache",
+        "--tensorrt",
+        "--noise-scale",
+        "0.95",
+        "--trt-external-weight-path",
+        "--width",
+        "512",
+        "--height",
+        "288",
+        "--arrival-fps",
+        "30",
+        "--mode",
+        "single"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:40:44.819389+00:00",
+      "status": "passed",
+      "pid": 49375,
+      "returncode": 0,
+      "finished_at": "2026-09-17T13:44:10.411819+00:00"
+    },
+    {
+      "name": "trt512-arrival30-single-wo",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-parser-path.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream512-paced-20260917/trt512-arrival30-single-wo",
+        "--frames",
+        "257",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-parser-path-20260917/engine-cache",
+        "--tensorrt",
+        "--noise-scale",
+        "0.95",
+        "--trt-external-weight-path",
+        "--width",
+        "512",
+        "--height",
+        "288",
+        "--arrival-fps",
+        "30",
+        "--mode",
+        "single-wo"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:44:10.416611+00:00",
+      "status": "passed",
+      "pid": 50247,
+      "returncode": 0,
+      "finished_at": "2026-09-17T13:45:35.961828+00:00"
+    },
+    {
+      "name": "live-compute-service",
+      "argv": [
+        "node",
+        "/workspace/livebench-20260917/server.js"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T13:45:35.966165+00:00",
+      "status": "running",
+      "pid": 50651
+    }
+  ]
+}

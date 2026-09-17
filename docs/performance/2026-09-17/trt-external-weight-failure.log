@@ -1,0 +1,28 @@
+2026-09-17 13:24:19,077 - SingleGPUInference - INFO - Single GPU inference pipeline manager initialized
+2026-09-17 13:24:20,823 - SingleGPUInference - INFO - Loading checkpoint from /workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v/model.pt
+{"loaded_seconds": 34.275558322668076}
+/workspace/envs/streamv2-trt/lib/python3.11/site-packages/torch/nn/modules/module.py:1790: UserWarning: flash_attn is not installed; falling back to scaled_dot_product_attention for KV-cache attention.
+  return forward_call(*args, **kwargs)
+/workspace/streamdiffusionv2-20260917/models/wan/wan_base/modules/model.py:189: UserWarning: flash_attn is not installed; falling back to scaled_dot_product_attention.
+  x = flash_attention(q, k, v, k_lens=context_lens)
+[torch.onnx] Obtain model graph for `TAEHVParallelDecoderModule([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `TAEHVParallelDecoderModule([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decompositions...
+/workspace/uv-python/cpython-3.11.16-linux-x86_64-gnu/lib/python3.11/copyreg.py:105: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)
+[torch.onnx] Run decompositions... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+[torch.onnx] Optimize the ONNX graph...
+[torch.onnx] Optimize the ONNX graph... ✅
+[09/17/2026-13:24:30] [TRT] [E] WeightsContext.cpp:183: Failed to open file: taehv_decoder_trt_1x2x16x60x104.onnx.data
+[09/17/2026-13:24:30] [TRT] [E] ModelImporter.cpp:149: ERROR: ModelImporter.cpp:603 In function parseGraph:
+[5] Failed to import initializer: In node -1 with name:  and operator:  (parseGraph): UNSUPPORTED_NODE: Assertion failed: ctx->getWeightsContext().convertOnnxWeights(initializer, &weights): Failed to import initializer: decoder.1.weight
+WARNING:models.wan.taehv_wrapper:TAEHV TensorRT decode failed for shape (1, 2, 16, 60, 104), falling back to PyTorch parallel decode: Failed to parse ONNX for TAEHV TensorRT engine:
+In node -1 with name:  and operator:  (parseGraph): INVALID_GRAPH: Failed to import initializer: In node -1 with name:  and operator:  (parseGraph): UNSUPPORTED_NODE: Assertion failed: ctx->getWeightsContext().convertOnnxWeights(initializer, &weights): Failed to import initializer: decoder.1.weight
+Traceback (most recent call last):
+  File "/workspace/livebench-20260917/streamv2-explicit.py", line 279, in <module>
+    main()
+  File "/workspace/livebench-20260917/streamv2-explicit.py", line 187, in main
+    raise RuntimeError('Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result')
+RuntimeError: Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result

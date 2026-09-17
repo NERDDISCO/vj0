@@ -1,351 +1,226 @@
-# Experiment results — 2026-09-17
+# Live image performance results — 2026-09-17
 
-## Status
+**Work is still running.** Compute, transport discovery, twelve app comparisons,
+controlled telemetry, and StreamDiffusion/TensorRT experiments are complete.
+The corrected two-GPU scaling batch is complete. Frame-aware buffer trials,
+newer-stack live confirmation, and the final ten-minute app/projector soak remain
+in the active queue.
+The original snapshot and completed checkpoints are pushed. No UI redesign,
+main deployment or stable image overwrite has been made.
 
-Funding is confirmed and baseline pod `0pxb4bss2jmbhg` is running. Both funded test pods are running: the original one-GPU pod and two-GPU
-scaling pod `9vj8k6guaxsbhw`. The first compute sweep and 30 candidate live
-discovery trials are complete. The 24 WebRTC-upgrade comparisons and one clean repeat are complete.
-StreamDiffusionV2 and extended compute jobs are running. These are discovery runs; no performance
-optimization has passed repeated comparison or been promoted yet.
+## What the completed measurements show
 
-| Item | Result | Evidence |
+- **Two GPUs approximately double generation throughput.** Three corrected-service
+  60-second live pairs per resolution measured one/two-GPU medians of
+  **28.86/55.80 FPS at 512×288, 13.87/27.56 at 768×448, and 8.20/16.38 at
+  1024×576**. The 768 runs include a 3.2165-second continuity failure and latency
+  spikes; their numbers remain visible. The idle-watchdog fix held through all
+  18 trials. Scaling throughput alone does not establish acceptable continuity.
+- **The isolated new compute stack reaches about 31–32 /15.8 /9.0FPS per GPU** at
+  512×288 /768×448 /1024×576, two steps. Old-stack late control medians are
+  28.37 /14.09 /8.18. These are sequential compute batches; live confirmation is
+  pending. The combined variant caches fixed-seed noise/sigmas and removes
+  intermediate stage synchronization. New Torch/CUDA/TorchAO changes are tested
+  together; the whole difference cannot be assigned to one package.
+- **Queue limits trade throughput against age.** On the upgraded WebRTC test
+  library, pending 1/2/3 discovery runs measured 20.70 /27.10 /27.86FPS and
+  p95 age 141 /166 /188ms. Later alternating timing-events+pending2 comparisons
+  improved p95 in three pairs, but p99 worsened in two. Compression can lower
+  bandwidth/age, with an explicit image-quality tradeoff.
+- **The actual app changes do not show a consistent overall FPS improvement.**
+  Next-layout projector median 26.89→27.85FPS (+3.60%); legacy 26.70→26.02FPS
+  (−2.56%). Both have run variation. These changes address stale work and
+  lifecycle correctness; the data does not support a universal app speedup.
+- **StreamDiffusionV2 works, including 14B and real TensorRT.** The 1.3B/TAEHV
+  two-step path reaches 43.66–44.49 decodedFPS at 512×288; the corrected TRT fast
+  path reaches 22.76–23.11 at 832×480. Its visual transformation and temporal
+  behavior differ substantially from FLUX. At 832×480 the 14B/TAEHV path reaches
+  7.68–7.71FPS. These are isolated generation measurements, not browser FPS.
+- **Several plausible changes did not provide a useful win:** synchronous versus
+  asynchronous telemetry on this machine, VAE BF16, inference mode, compile-default,
+  normalization caching alone, and this FlashAttention4 integration. Reliable
+  unordered transport worsened tail latency in its discovery run. Failed and
+  slower trials remain in the evidence.
+
+## Read the numbers at the correct boundary
+
+| Measurement | Includes | Excludes |
 |---|---|---|
-| Preserve all local work | Complete | `a10fdbe`, snapshot branch pushed |
-| Isolated experiment branch | Complete | `perf/2026-09-live-bench` |
-| Runpod CLI update | Complete | `runpodctl 2.14.0-dd55bcf` |
-| Project Runpod skill update | Complete | Official skill 1.2.0 and lock record |
-| API authentication and catalog | Passed | `user`, `pod list --all`, `gpu list --include-unavailable` |
-| Baseline image pin | Complete | Digests in PLAN.md |
-| Baseline runtime captured | Complete | `baseline-environment.json`: exact packages, driver, model revisions and source hashes |
-| SSH readiness | Passed | `pod create --wait` completed after 158 seconds; SSH execution verified |
-| Unmodified app production build | Passed | `pnpm install --frozen-lockfile`, `pnpm build` |
-| Two-GPU EU-RO-1 create | No pod created | API reported insufficient matching capacity |
-| One-GPU create | No pod created | API reported insufficient account funds |
-| Live pod API system logs | Passed before SSH readiness | `baseline-pod.json`: image-pull logs while SSH reported no container |
-| Live container application logs | Passed | API returned entrypoint, model fetch and compilation messages; samples in `baseline-pod.json` |
-| Live serverless worker logs | Not exercised | Pod workloads were used; no endpoint/worker created |
-| GPU baseline and optimization sweep | In progress | First seven jobs complete; extended sweeps running |
-| Compute harness | Nine baseline settings measured on CUDA | Actual worker import, wall-clock FPS, stage timings, A/B/blank and encoded JPEG samples |
-| Browser harness | Live WebRTC measured | Raw-image protocol, server-verified stream drain, single-flight timing, decode/draw checks |
-| Local bookkeeping tests | Passed: 5 | Python unittest suite in `bench/test_metrics.py` |
-| Browser regression tests | Passed: 5 | Mocked decode failure, delayed warmup input/output, and late-control-message cases |
-| Archived-output JPEG sweep | Measured locally | 12 existing images, 6 quality settings; no live inference or FPS measurement |
-| Syntax and whitespace | Passed | Python AST/CLI help, JavaScript module syntax, `git diff --check` |
-| StreamDiffusionV2 | Wan2.1 1.3B forward pass passed; steady-state comparisons pending | Pinned upstream commit and model/environment notes in STREAMDIFFUSION.md |
+| FLUX compute | JPEG input decode, VAE encode, denoising/decode, JPEG output encode, final GPU synchronization | Model load, prompt lookup, IPC, network, application rendering |
+| Same-host WebRTC | Preencoded JPEG send→receive on the pod | Fixture encoding, browser decode/draw, WAN, app/projector |
+| Browser transport | Synthetic fixture draw/encode, actual WAN WebRTC, received JPEG decode/offscreen2D draw | Audio acquisition, app upscaler/projector, compositor/physical display |
+| Actual app | Synthetic WebAudio through real analyser, real app capture/transport, main-image RAF observation and stage WebGL submission | Age starts at JPEG encoding; audio acquisition/canvas copy and physical display presentation are outside that age |
+| StreamDiffusion | GPU-resident video encode/denoise/decode, pipeline fill/tail effects | Host upload, JPEG/network, audio acquisition, app/browser/display |
 
-## Live baseline discovery runs
+Generated/received/drawn frames are counted separately. Dropped or skipped frames
+are not counted as useful display throughput. Client ages use one client clock;
+worker queue timing, when present, applies only to delivered frames. The app
+probe observes a current loaded image at an animation-frame callback and unique
+stage GL submissions; it does not prove actual display presentation.
 
-One RTX PRO 6000, original image/Python, 512x288, 2 steps, alpha 0.10, seed 42,
-JPEG input 85/output 80. Local headless Chrome 149 on this Mac, actual WAN
-WebRTC path, 30 seconds after warmup. The failed background warmup thread had
-already exited before these runs; no compilation overlapped measurement.
+Complete tables and raw artifacts:
+[compute appendix](COMPUTE.md), [compute CSV](compute-results.csv),
+[browser table](BROWSER.md), [browser CSV](browser-results.csv),
+[same-host table](SAMEHOST.md), [StreamDiffusion](STREAMDIFFUSION.md),
+[app comparisons](app-comparison/), [dependency details](DEPENDENCIES.md).
+The index can be regenerated with
+`python3 workers/runpod-flux2klein/bench/summarize_results.py --root docs/performance/2026-09-17 --output /tmp/vj0-metrics-index.json`.
 
-| Run | Received FPS | Offscreen decoded/drawn FPS | Mean worker time | Network RTT snapshot |
-|---|---:|---:|---:|---:|
-| Telemetry off | 27.43 | 24.43 | 35.65 ms | 21 ms |
-| Telemetry every 2 seconds | 25.60 | 22.70 | 37.62 ms | See raw JSON |
+## Preserved project state and last implementation
 
-Source files: `baseline-webrtc-512x288-2step-stream-telemetry-{off,on}.json`.
-No decode failures or transport errors occurred. The first run received 823
-images and drew 733; 90 images were skipped while another decode was pending.
-Configured sending was 60 FPS, but observed sending in the first run was 62.16
-FPS because interval scheduling uses integer milliseconds. Use measured rates.
-The reviewer independently reconciled the first run's counts, FPS and bytes.
+The last pre-existing commit was 141569d on May 3, 2026, adding six legacy scene
+templates. Other recent changes added AI/global error logs, pod telemetry,
+stage/projector behavior and recording. The project was using **FLUX.2-klein-4B**
+with `Flux2KleinKVPipeline` and the FLUX.2 small decoder. The May benchmark had
+already adopted FP8 transformer/VAE, PerTensor quantization, reduce-overhead
+compilation and independent workers across GPUs. Those are existing features,
+not new gains from this session. The saved snapshot already contained the
+asynchronous telemetry implementation.
 
-These are not full-app/projector FPS or exact streaming frame-age measurements.
-The separate one-request-in-flight run delivered 6.17 FPS with median capture-to-
-draw age 150.5 ms (p95 200.88 ms); mean worker time was 40.05 ms. This measures
-latency on the client clock, not concurrent streaming age. See the `single` JSON.
+All starting local work is preserved as **a10fdbe** on the pushed branch
+`snapshot/pre-performance-2026-09-17`. Experiments and focused fixes are on
+`perf/2026-09-live-bench`; pushed checkpoint 7c41b8e includes the idle-watchdog fix.
+The original checkout remains on the snapshot branch.
 
-The telemetry difference is one pair of discovery trials, not a repeat-verified
-speedup or proof that the asynchronous handler fixes the whole difference.
+The baseline image was last updated May 3, 18:46:46 UTC and is frozen at
+`nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490`.
+Runtime models download separately. This run resolves Klein revision
+`e7b7dc27f91deacad38e78976d1f2b499d76a294` and small decoder
+`a3efc24f613ef42d9428af62fdbd6f5fd8856c4a`; the exact May model-cache revision
+is unknown. Image identity alone cannot establish identical May weights.
+The historical benchmark is project evidence of the selected configuration,
+not proof that it was universally the best model at that date.
 
-## Live failures and focused fixes under validation
+## Focused implementation changes and observed failures
 
-1. **Background shape warmup crashes with FP8 autograd.** First 512x288 readiness
-   was reported at 08:46:14 UTC, about 453 seconds after pod creation. The next
-   768x448 shape failed with `derivative for aten::_scaled_mm is not implemented`.
-   `setup_pipeline()` disables gradients only in its caller thread; a newly
-   spawned warmup thread enables them again. A focused check against the actual
-   warmup function fails on the frozen source and passes with `@torch.no_grad()`.
-   The decorator removed that error but exposed a second CUDA-graph thread-state
-   assertion (`tree_manager_containers`). Moving optional warmup onto the main
-   GPU thread successfully compiled 768x448; 1024x576 also completed at 09:12:10 UTC (3/3 shapes).
-   The worker waits for one second after frame completion before starting
-   optional work; an already-running compile still blocks frames. Terminal
-   compile failure now clears dispatcher/client tracking, and the dispatcher
-   grants compilation up to ten minutes before the normal frame watchdog applies.
-   Four local dispatcher lifecycle/watchdog tests pass; full GPU lifecycle validation remains
-   pending. Evidence:
-   `baseline-boot-events.json`, `warmup-thread-baseline.json`,
-   `warmup-thread-no-grad.json`, `no-grad-recovery-events.json`,
-   `idle-recovery-events.json`. Final idle-grace/shutdown/failure CPU checks also
-   pass; see `gpu-thread-*-final.json`.
-2. **Dynamic pod mode drops step/alpha settings.** Both app layouts send those
-   fields only for backend `klein`; the current pod picker selects Klein images
-   but sets backend `pod`. The app can show two steps while the worker runs its
-   four-step default. The settings paths now include `pod`. Rebuilt production-app payload capture passed for both layouts:
-   `app-pod-settings-next.json` and `app-pod-settings-legacy.json` contain
-   actual RTCDataChannel sends with two steps and alpha 0.10. Any resulting FPS increase is a corrected step/quality
-   setting, not a speedup at equal settings. No visual UI change was made.
+1. **Warmup owns the main GPU thread.** The frozen background warmup first failed
+   with FP8 autograd; adding no-grad exposed CUDA-graph thread-state assertions.
+   Main-thread optional warmup successfully compiles all three shapes. It waits
+   for one second after frame activity; an already-running compile still blocks
+   inference. Terminal compile failure clears tracking, and compile timeouts
+   remain bounded at ten minutes.
+2. **Pod mode forwards actual step/alpha settings in both layouts.** Previously
+   the UI could show two steps while the worker retained four. Captured payloads
+   now contain two and 0.10. Any 4→2 FPS change is a corrected setting/quality
+   change, not an equal-quality inference optimization.
+3. **Per-frame settings are snapshotted consistently.** The baseline CPU
+   reproduction generated 32×16 after a 16×16 request raced a settings change;
+   the candidate retains the requested dimensions, step count and alpha.
+4. **Capture/decode work is bounded.** Admission runs before canvas copying and
+   again after encoding; obsolete callbacks are invalidated. Legacy preview and
+   stage keep one decode in progress plus the newest queued frame, close replaced
+   bitmaps and recover after decode errors. Stage forwarding rejects older
+   asynchronous results. The Next image element remains the existing renderer.
+5. **Dispatcher accounting survives drops and reconnects.** Queue evictions and
+   frame errors acknowledge drops; connection epochs reject old responses.
+   Optional frame IDs enable measurements while ordinary clients retain raw JPEG.
+6. **Idle time no longer counts as a stalled request.** The scaling test resumed
+   GPU 1 after 88.1 seconds without output; its first new pending frames triggered
+   an immediate watchdog kill. The corrected deadline starts when pending work
+   changes 0→1, extends on real output/compile completion, and is not extended by
+   additional queued input. Two new regressions fail before the fix and pass
+   afterward; all eight lifecycle/frame-ID checks pass. GPU rerun is pending.
+   [Failure and correction](watchdog-idle-recovery.json).
 
-The unchanged production app received and displayed generated output at 512x288
-before these fixes. This was a smoke check, not a timed full-app benchmark.
+The production frontend build and earlier focused regressions passed. Twelve
+real app comparisons use source 7139e0f as the baseline and 4a02d2f as the frontend
+candidate. That app baseline already includes step/alpha forwarding and the
+warmup/lifecycle fixes; it is not the untouched a10fdbe snapshot. The later
+watchdog correction changes the test dispatcher, not the frontend build.
 
-## Repeat transport attempts and measurement corrections
+## Actual app comparisons
 
-Four additional 512x288/two-step runs completed on the recovered Python warmup
-code and original dispatcher: telemetry-off received 27.93/28.40 FPS;
-telemetry-on received 28.00/28.11 FPS. Thus the earlier apparent telemetry loss
-is not consistently reproduced. The fifth repeat failed the strict warmup-drain
-check, and the subsequent resolution sweep was interrupted after worker restarts.
-See `recovered-webrtc-*.json`, `recovered-batch-failure.json`, and
-`resolution-watchdog-events.json`. Those early higher-resolution attempts yielded no valid numbers; later candidate trials below succeeded.
+Both versions used the same saved fixture within each layout, the same warm
+one-GPU service at 512×288/two steps, main viewport 1440×900 and stage 1920×1080,
+DPR 1. The stage's actual GL buffer was 2048×1152. Synthetic WebAudio drove the
+real analyser; exact audio/fixture/config/source identities and raw frame logs
+are retained. Each of three alternating pairs ran 60 seconds after warmup.
 
-The candidate now carries optional per-frame IDs and server-owned connection
-epochs to measure streaming frame age without mixing old-client responses. It
-also acknowledges Python queue evictions/errors, which otherwise leave phantom
-pending counts, and forwards the existing JPEG-quality setting. Default app
-image payloads remain raw JPEG. These additions ran successfully through 30 GPU-backed live trials. Local
-dispatcher/envelope and browser correlation checks pass; exact correlated ages
-are recorded below. Final live queue comparisons and the soak remain pending.
+| Layout / source | Projector FPS, three trials | Capture→stage p95ms, three trials |
+|---|---|---|
+| Next baseline | 26.885 /28.066 /26.096 | 179.720 /161.620 /296.150 |
+| Next candidate | 27.979 /27.853 /26.839 | 178.400 /173.300 /214.275 |
+| Legacy baseline | 26.044 /27.125 /26.703 | 298.700 /191.200 /246.625 |
+| Legacy candidate | 27.505 /26.019 /25.501 | 190.400 /226.810 /331.850 |
 
-The first isolated compute sweep completed, with exact serial jobs in
-`compute-jobs.json`. Extended jobs are tracked separately.
+All twelve complete trials passed their channel/visibility/dimension/audio and
+fresh-output guards. Independent review reconciled 234,540 common-window events
+and 19,426 cross-tab age checks. Comparison scope is within a layout; these numbers
+do not establish one layout is faster overall. The first three smoke attempts
+failed harness checks (proxy user-agent, viewport/visibility, then RAF observation);
+smoke 4 passed. Invalid smoke runs are not promoted into app measurements.
 
-## Completed isolated compute baseline
+## Quality and unsupported claims
 
-One RTX PRO 6000, frozen original Python and environment; 100 frames per run,
-three runs per setting after warmup. Median measured wall-clock FPS includes
-input JPEG decoding, VAE encode, generation/decode and output JPEG encoding.
-It excludes network, application rendering, prompt-cache lookup and model load.
+Within-process combined FLUX reference checks record MSE 0, and changed/blank
+waveforms produce distinct outputs. Across separately loaded processes, saved
+samples differ numerically; visual inspection found the same broad composition
+at fixed resolution with local texture/colour differences. Higher resolution
+also changes the composition at fixed alpha, rather than merely sharpening the
+512 image. [Compute sample review](new-compute-quality.json).
 
-| Resolution | 2 steps | 3 steps | 4 steps |
-|---|---:|---:|---:|
-| 512x288 | 28.88 | 22.47 | 18.08 |
-| 768x448 | 13.98 | 10.63 | 8.68 |
-| 1024x576 | 8.28 | 6.34 | 5.07 |
+JPEG 60 reduced median size to about 68.9% of JPEG 80 in the nine-current-image
+local study, with PSNR 30.05 dB versus 31.49 dB. This compression study is not a live
+FPS measurement. VAE BF16 samples looked broadly similar to FP8, with no clear
+throughput advantage. Neither PSNR nor a static contact sheet substitutes for
+live perceptual preference. [JPEG evidence](jpeg-current-worker.json),
+[VAE evidence](vae-quality-comparison.json).
 
-All nine configurations produced the requested dimensions, and changed/blank
-inputs produced distinct outputs. This demonstrates input influence on the
-synthetic fixture; it is not a real-audio or perceptual-quality score. Raw records
-and environment are in `compute-baseline.json`; earlier partial records remain
-archived separately. See `samples/baseline-step-quality.jpg`: two steps produce
-a more textured appearance, while three/four give smoother shapes in this prompt.
-No step-count change is an equal-quality performance optimization.
+Partial reliability is not selected for the existing shared settings/image
+channel: losing settings would require an acknowledged control mechanism.
+Reliable unordered delivery was actually tested and regressed. StreamDiffusion
+browser display remains unmeasured because its causal chunk/state adapter is a
+separate backend integration; isolated throughput and simulated-age results are
+reported without substituting them for application FPS.
 
-The queue-drop CPU regression passed against the candidate: a three-frame burst
-produced one explicit drop and two outputs with their original IDs/connection
-epoch. It ran while StreamDiffusionV2 was still loading, before its timed forward
-pass (checked before and after). See `gpu-thread-queue-drops-candidate.json`.
+## Runpod and logging
 
-## Completed first compute sweep
+Funding was confirmed and paid test pods were created. `runpodctl` was updated
+from 2.1.9 to **2.14.0-dd55bcf**, and the official project skill to 1.2.0.
+**API system/image-pull logs worked before SSH became available.** Container
+application logs also worked through the API, including model/compile output.
+Live serverless-worker logs were not exercised. [Evidence and tweet draft](RUNPOD-LOGS.md).
 
-All seven serial jobs completed at 09:57:59 UTC, including the final baseline
-repeat. Each two-step cell used 100 frames, three runs, on one PRO 6000.
-Median wall-clock FPS:
+Both task pods are kept running as requested: one PRO 6000 in 0pxb4bss2jmbhg and
+two in 9vj8k6guaxsbhw, EU-CZ-1. GPU prices total $6.27/hour; the last account quote
+including storage was $6.331/hour. Final balance and runtime state will be refreshed
+after the remaining measurements. Five unrelated old pods remain stopped.
 
-| Variant | 512x288 | 768x448 | 1024x576 |
-|---|---:|---:|---:|
-| Initial baseline | 28.88 | 13.98 | 8.28 |
-| No intermediate stage sync | 28.22 | 14.54 | 8.34 |
-| Cached noise/sigmas | 28.61 | 13.94 | 8.22 |
-| Inference mode | 29.06 | 14.04 | 8.27 |
-| Cached constants + no stage sync | 30.05 | 14.52 | 8.36 |
-| Final baseline repeat | 28.85 | 14.05 | 8.21 |
+## Experiment coverage
 
-The combined candidate is approximately 4.2%, 3.3%, and 1.8% above the final
-baseline repeat. Cached and combined outputs match their in-process baseline
-reference exactly (MSE 0 for each size). These are discovery measurements,
-not the alternating 60-second live comparisons required for promotion. The
-candidate is still confined to the benchmark harness. Caching or inference mode
-alone has no demonstrated substantial throughput benefit.
+| Plan ID | Current outcome | Evidence / qualification |
+|---|---|---|
+| T00 | Complete | CLI/skill update; real pod API logs; serverless logs untested |
+| F00 | Measured failure and corrected warmup | Baseline FP8/thread failures; all three shapes warm on main GPU thread; bounded failure controls |
+| F01 | Corrected and verified | Both real app payloads transmit requested steps/alpha |
+| B00 | Measured boot and recovery | Immutable image/source/environment, original cold-start failure and timestamps retained |
+| B01 | Complete | Five-resolution, 2/3/4-step compute frontier; 85 total compute cells across experiments |
+| B02 | Complete | Eight same-host trials and WAN send-rate/mode comparisons |
+| B03 | Complete | Waveform A/B/blank, three prompts, detailed background, fixed-seed checks and samples |
+| M00 | Complete | Raw/tagged single/stream trials; unknown ages remain unknown |
+| P01 | Complete; no material FPS benefit here | Eight controlled same-host sync/async off/on trials, plus WAN polling discovery |
+| P02 | Complete; quality tradeoff | Six output JPEG levels, live discovery and repeated JPEG 60 combinations; numerical/sample checks |
+| P03 | Complete | Input JPEG95/85/70/60 discovery and entropy stress |
+| P04 | Complete | Pending1/2/3 discovery and repeated pending2 combinations; p99 caveats retained |
+| P05 | Running queue | Fixed byte limits measured; twelve frame-aware-policy trials pending |
+| P06 | Reliable unordered regressed; partial reliability unsuitable for current protocol | Dropping shared settings messages requires acknowledged controls; no invented lossy-channel result |
+| P07 | Implemented and app-tested | Admission/decoder/stage regressions; twelve real app comparisons, mixed FPS result |
+| G01 | Complete | Stage-sync removal, event-timed live variant, repeated three-resolution transport trials |
+| G02 | Complete | Noise/sigma and normalization caches, exact in-process reference checks; combined variants |
+| G03 | Complete; no consistent large gain | Inference-mode compute trials |
+| G04 | Complete; BF16 VAE no clear win | Baseline FP8 verified, VAE BF16 speed/sample comparisons |
+| G05 | Complete for selected modes | reduce-overhead/default measured; prior SM120 max-autotune failure has no verified enabling change, so not repeated |
+| G06 | Complete; no FA4 integration win | Native profiler plus actual SM120 FA4 path; no measured-frame FA4 CUDA trace |
+| G07 | Compute complete; live pending | Isolated Torch2.13/CUDA13.2/TorchAO0.18; repeated compute, 27 live trials queued |
+| G08 | Pending final stress | Prompt cold/warm/rapid changes occur after steady app soak |
+| S01 | Corrected rerun active | Initial 512 pairs measured; later idle-watchdog failure fixed; all 18 pairs being rerun |
+| V01 | Isolated generation/age complete | Wan1.3B; real app display unmeasured without a causal-state adapter |
+| V02 | Main comparisons complete; 512 paced follow-up running | Decoder, mode, 1–4 steps, noise, sizes, matched TensorRT/fast controls |
+| V03 | Complete | Wan14B standard/TAEHV/noise 0.95; checkpoint cleanup documented |
+| C01 | Several combinations complete; new-stack live pending | Existing 36 live compute trials, 13 responsive combinations; repeated new-stack trials queued |
+| C02 | Pending | Ten-minute actual app 768/two-GPU/new-stack soak plus prompt/resolution/reconnect stress |
+| R00 | Ongoing | Independent arithmetic/source reviews completed in stages; final complete-report review still required |
 
-Raw records: `compute-{baseline,no-sync,constants,inference-mode,combined,baseline-repeat}.json`.
-The server was restored after the compute sweep. All 30 subsequent live
-discovery trials completed successfully and were persisted individually.
-
-## Completed live discovery batch
-
-All 30 trials in `browser-jobs.json` completed with status `measured`; full
-records are in `browser-discovery/`. Candidate worker/dispatcher, wrtc 0.8.0,
-2 steps, default 512x288, WAN Chrome 149, 30-second discovery windows.
-These measure offscreen decode/draw, not the complete app or projector.
-
-- Single-in-flight: raw 6.13–6.50 FPS, tagged 6.17–6.53 FPS.
-- Streaming: raw 24.73–27.86 received FPS; tagged 20.23–26.60 FPS.
-  The tagged p95 capture-to-draw age ranged from 260 to 884 ms. Sequential
-  run variation prevents attributing the whole difference to the ID envelope.
-- JPEG output 60: 28.10 received / 26.40 drawn FPS, p95 age 208 ms, 6.42 Mbps
-  incoming. This promising single trial requires repeated confirmation and
-  image-quality review. No compression default changed.
-- Send target 30: 27.93 received / 25.66 drawn FPS, p95 age 200 ms.
-- Reliable unordered: 23.37 received / 21.10 drawn FPS, p95 age 1,121 ms,
-  p99 3,662 ms. This run regressed; no recommendation to enable it.
-- Input buffering capped at 16/64 KB: 26.90/27.10 received FPS, p95 age
-  223/219 ms. Other parameters retained their recorded defaults.
-- 768x448: 14.03 received/drawn FPS, p95 age 324 ms.
-- 1024x576: 8.10 received/drawn FPS, p95 age 488 ms.
-
-The following 24-trial batch uses wrtc 0.10.0 and varies pending/output buffers,
-then alternates 60-second baseline, JPEG 60, and combination trials three times.
-Its exact jobs are in `browser-wrtc010-jobs.json`; all 24 completed, plus one
-clean replacement for the trial excluded due to a concurrent local build.
-Raw results are in `browser-wrtc010/`; exclusions are explicit in
-`measurement-exclusions.json`. The replacement received 26.96 FPS, p95 age 199 ms.
-
-## Additional correctness fixes and secondary compute
-
-A deterministic concurrent-settings check reproduces a mixed-frame race on the
-frozen Python: an input captured at 16x16 is generated/reported at 32x16 after a
-reader-thread settings update. Copying settings under the lock for each frame
-passes the same check. See `state-race-baseline.json` and
-`state-snapshot-candidate.json`. The updated worker also warmed all three GPU
-shapes before the wrtc 0.10.0 trials.
-
-Capture scheduling now admits before canvas copy, rechecks after asynchronous
-JPEG encoding, and invalidates old callbacks when capture stops. The legacy
-layout also cancels its RAF on cleanup. Bounded latest-frame decoding prevents
-an unbounded JPEG decode backlog in legacy preview and the stage. Sixteen focused
-capture/decode/stage-forwarding checks and the production build pass; full-app live performance
-and lifecycle validation are still pending. No visual design change was made.
-
-On GPU 0 of the separate two-GPU pod, the original environment's two-step
-baseline measured 28.33 / 13.97 / 8.20 FPS at the three main sizes. Disabling
-VAE FP8 measured 28.75 / 13.99 / 8.16 FPS: no substantial speed benefit.
-Quantization output-quality comparisons remain pending. Compile mode `default`
-measured 27.89 / 13.50 / 8.28 FPS; it did not consistently beat `reduce-overhead`.
-See `compute-compile-default.json`. Raw records are
-`compute-baseline-secondary.json` and `compute-vae-bf16.json`.
-
-The first PyTorch 2.13 installation failed dependency resolution. A separately
-resolved lock addresses setuptools and CUDA-toolkit constraints; the retry is
-queued after the extended compute jobs. Failure and retry are separate records.
-
-## StreamDiffusionV2 smoke result
-
-Wan2.1 1.3B, distilled video-to-video checkpoint, 832x480, two steps, standard
-VAE, single mode, PyTorch SDPA fallback: 13 output frames from 17 inputs, with
-a four-frame output shortfall. The cold forward pass took 3.86 s;
-this short run is not a steady-state throughput comparison. Actual frame shapes
-and finite RGB ranges passed. The visual output mostly preserves/recolors the
-white waveform rather than producing the rich abstract Klein appearance.
-See `streamv2-smoke.json` and the input/output clips and quality contact sheet in
-`samples/`. Faster decoder, noise strength and scene trials remain pending.
-
-## Independent preparation review
-
-A separate reviewer found five measurement defects: false single-flight latency
-from a slow warmup response; success despite every JPEG decode failing; JPEG
-quality samples saved before compression; late stats arriving outside the timing
-window; delayed warmup input arriving after a false streaming drain. All five
-were corrected. The browser reproductions were retained as
-regression tests. This is manual review of preparation, not an automatic stop
-gate or independent verification of GPU performance.
-
-The reviewer's focused follow-up passed after the final correction. Five Python
-tests and five browser regression tests pass. At that preparation checkpoint both worktrees were clean and both branches
-were pushed. Later live experiments add new results and focused fixes. GitHub rejected two
-SSH pack transfers for the experiment branch; local object/pack verification
-passed and the HTTPS push succeeded. No global Git configuration was changed.
-
-## Offline JPEG payload study
-
-Re-encoded 12 archived generated PNGs with the worker's Pillow JPEG options.
-These are existing outputs, not freshly generated baseline images. The raw
-measurements and image hashes are in `jpeg-archived-results.json`; reproduce
-with `bench/jpeg_sweep.py` using Pillow 11.3.0 and NumPy 2.3.3.
-
-| JPEG quality | Median paired payload change versus 80 | Median PSNR versus original PNG |
-|---|---:|---:|
-| 95 | +69.8% | 49.9 dB |
-| 85 | +10.1% | 47.2 dB |
-| 80 | Baseline | 46.2 dB |
-| 70 | −11.9% | 44.5 dB |
-| 60 | −19.1% | 42.9 dB |
-| 50 | −24.0% | 42.2 dB |
-
-This supports testing quality 70 and 60 for bandwidth reduction. It does not
-establish a live FPS/latency improvement, perceptual acceptability, or the same
-savings at other resolutions/content. PSNR alone is not a visual quality gate.
-No production JPEG setting was changed.
-
-## How results will be stored
-
-Commit compact JSON summaries and representative synthetic inputs/outputs with
-the report. Keep full machine logs and high-volume frame traces as downloadable
-artifacts, never credentials or full pod environment dumps. Each summary records
-source/image identity, environment, settings, sample count, wall time and latency
-percentiles. Record failed runs and timeouts too.
-
-## Promotion decision
-
-None yet. Passing focused checks and single discovery trials do not establish
-a repeatable performance improvement.
-
-## Repeated transport results and resolution frontier
-
-On wrtc 0.10.0, pending limits 1/2/3 delivered 20.70/27.10/27.86 received FPS
-with p95 capture-to-draw ages 141/166/188 ms. Limiting the queue trades throughput
-for responsiveness. The three alternating 60-second combined trials
-(JPEG 60, send target 30, input buffer 16 KB, pending 2, output buffer 64 KB)
-received 25.20/23.67/26.15 FPS with p95 ages 164/257/163 ms. Their paired
-baselines received 27.22/26.65/24.68 FPS with p95 ages 308/203/997 ms.
-This is a latency/throughput tradeoff, not a verified overall FPS improvement.
-JPEG 60 alone received 27.06/27.31/27.55 FPS; WAN variation and one 531 ms
-p95 tail prevent claiming a uniformly improved result.
-
-The combination at 768x448 delivered 13.83 received/drawn FPS, p95 235 ms;
-at 1024x576 it delivered 8.18 received/drawn FPS, p95 350 ms. These are
-offscreen benchmark draws, not complete app/projector rendering. The wrtc
-version trials were sequential batches, so they do not establish an isolated
-library speedup. No dependency or compression default was promoted.
-
-On GPU 0 of the second pod (same PRO 6000 model), the additional compute
-frontier medians were 49.49/39.47/32.43 FPS at 256x144 for 2/3/4 steps,
-and 4.84/3.66/2.91 FPS at 1280x720. See `compute-resolution-frontier.json`.
-These include JPEG decode, inference and JPEG encode, excluding transport/display.
-
-## Secondary confirmation, compression and Stream discovery
-
-The second pod's final baseline repeat measured 28.64 / 13.95 / 8.24 FPS.
-The constants/no-stage-sync combination measured 29.38 / 14.20 / 8.34 FPS,
-approximately +2.6% / +1.8% / +1.2%. The small gain appears on both hosts;
-36 alternating live trials remain required before promotion.
-
-VAE FP8 versus BF16 sample comparisons have diagnostic PSNR 30.10 / 31.98 /
-29.75 dB at the three main sizes. The composition and appearance are similar
-on visual inspection; BF16 is a comparator, not perceptual ground truth.
-See `vae-quality-comparison.json` for exact sample identities. Disabling VAE
-FP8 has no demonstrated substantial throughput benefit.
-
-Re-encoding nine uncompressed outputs from the current GPU baseline gives
-median size ratios to JPEG 80 of 2.077 / 1.164 / 1 / 0.806 / 0.689 / 0.614
-for quality 95/85/80/70/60/50. Quality 60 has median PSNR 30.05 dB versus
-31.49 at quality 80. This is an offline compression diagnostic using the
-recorded local Pillow version, not an additional live FPS result.
-Raw data: `jpeg-current-worker.json`.
-
-Initial StreamDiffusionV2 1.3B warm repeat ranges at native 832x480:
-
-| Decoder / mode / steps | Decoded output FPS | Output/input frames per clip |
-|---|---:|---:|
-| Standard / single / 2 | 13.58–13.84 | 61/65 |
-| Standard / single-wo / 2 | 13.73–13.98 | 65/65 |
-| TAEHV / single / 2 | 20.64–21.06 | 60/65 |
-| TAEHV / single-wo / 2 | 21.04–21.24 | 64/65 |
-| TAEHV / single / 1 | 27.33–27.87 | See raw clip count |
-| TAEHV / single / 4 | 12.94–13.20 | See raw clip count |
-
-Each job has three clips, with the cold first clip explicitly excluded from
-these warm ranges. These are offline decoded throughput, not browser FPS or
-audio-to-display latency. Raw records are in `stream-results/`. At noise 0.8,
-the output mainly preserves/recolours the waveform, visibly different from
-FLUX's stronger abstract transformation. Higher-noise, 14B, TensorRT and paced
-input tests are still running/queued.
-
-The first paced TAEHV tests correctly stopped on a frame-count assertion:
-TAEHV deliberately removes the frame-zero anchor, so its first four outputs
-correspond to source frames 1–4. A corrected benchmark tracks this omission
-and is queued separately; failed attempts remain recorded. No upstream
-production/model code was changed for the correction.
+No pending row is a completed outcome. The active runbook tracks process IDs,
+artifact locations and guarded recovery steps so work can resume without losing
+measurements: [RUNBOOK.md](RUNBOOK.md).

@@ -1,0 +1,6 @@
+{
+  "source_before_sha256": "ae8a05e47d265a611904de335cb07c38696d0b9e340a4b2274f7f59473a5178f",
+  "source_after_sha256": "bc7e4d46d70dcd8d4c6ff924dc18d3159b71737b102134e3879d555dbffbe8f3",
+  "change": "Post-window classification only; preserve failed continuity separately from measurement validity. No input/output timing loop changed. App soak rules unchanged.",
+  "validation": "Five existing mocked browser regressions and recorded-gap/missing/healthy controls pass; independent source review completed."
+}

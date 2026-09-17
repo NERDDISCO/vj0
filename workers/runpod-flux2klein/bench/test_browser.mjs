@@ -8,8 +8,24 @@ import test from 'node:test';
 
 const source = process.env.VJ0_BROWSER_BENCH_SOURCE ??
   new URL('./browser.js', import.meta.url);
-const { runBenchmark } = await import('data:text/javascript;base64,' +
+const { runBenchmark, assessWorkerDelivery } = await import('data:text/javascript;base64,' +
   Buffer.from(await readFile(source)).toString('base64'));
+
+test('delivery gaps fail continuity while missing or unavailable workers invalidate measurements', () => {
+  const healthy = [{ gpu: 0, ready: true }, { gpu: 1, ready: true }];
+  const gap = assessWorkerDelivery(1, { 0: 3216.5 }, healthy);
+  assert.deepEqual(gap.healthErrors, []);
+  assert.equal(gap.continuity.status, 'failed');
+  assert.equal(gap.continuity.failures[0].maxGapMs, 3216.5);
+  assert.equal(assessWorkerDelivery(1, { 0: 100 }, [{ gpu: 0, ready: false }]).healthErrors.length, 1);
+  const missing = assessWorkerDelivery(2, { 0: 100 }, [healthy[0]]);
+  assert.equal(missing.healthErrors.length, 2);
+  assert.equal(missing.continuity.status, 'unknown');
+  const clean = assessWorkerDelivery(2, { 0: 100, 1: 200 }, healthy);
+  assert.deepEqual(clean.healthErrors, []);
+  assert.equal(clean.continuity.status, 'passed');
+  assert.equal(assessWorkerDelivery(0, {}, null).continuity.status, 'not-requested');
+});
 
 function installBrowser({ decodeFails = false, responseDelay = () => 0,
   inputDelay = () => 0, lateStats = false, echoFrameIds = false } = {}) {

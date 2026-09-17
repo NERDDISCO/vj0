@@ -1,0 +1,21 @@
+{
+  "raw_results_unchanged": true,
+  "assessments": [
+    {
+      "artifact": "browser-scaling-idle-fixed/scaling-768x448-active1-r0.json",
+      "sha256": "bb49a90b5049aa21ddba35a0a3b9d9b245f6995be8200ebc1eaf4f46f6f6308c",
+      "raw_status": "invalid",
+      "measurement_status": "measured",
+      "continuity_status": "failed",
+      "validation_status": "failed",
+      "threshold_ms": 2000,
+      "failing_workers": [
+        {
+          "worker": 0,
+          "client_observed_stat_arrival_gap_ms": 3216.5
+        }
+      ],
+      "reason": "Only the old combined continuity/health guard failed. All requested workers were ready; no compile/decode/send errors; rate arithmetic and required counts reconciled. Retain measured performance with failed continuity. This is not evidence of a GPU processing stall or eligibility for promotion."
+    }
+  ]
+}

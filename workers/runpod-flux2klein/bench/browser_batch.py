@@ -58,6 +58,7 @@ def main():
 
     saved = 0
     failed_names = []
+    validation_failed_names = []
 
     def snapshot(freeze=False):
         return evaluate("(() => { const b=window.vj0Batch; if (!b) return null; "
@@ -78,6 +79,8 @@ def main():
             temporary = target.with_suffix('.json.tmp')
             temporary.write_text(body)
             temporary.replace(target)
+            if record['result'].get('validationStatus') == 'failed':
+                validation_failed_names.append(record['name'])
             if record['result']['status'] != 'measured':
                 failed_names.append(record['name'])
             saved += 1
@@ -85,6 +88,7 @@ def main():
                 'receivedFps':record['result'].get('receivedFps')}), flush=True)
         state = {key:value for key,value in payload.items() if key != 'results'}
         state['failed'] = list(failed_names)
+        state['validationFailed'] = list(validation_failed_names)
         progress = a.output / 'batch.json.tmp'
         progress.write_text(json.dumps(state, indent=2) + '\n')
         progress.replace(a.output / 'batch.json')
