@@ -43,7 +43,8 @@ export async function runBenchmark(options) {
     if (!response.ok) throw new Error("Could not apply test-only server configuration");
     const applied = await response.json();
     if (applied.maxPending !== c.serverConfig.maxPending ||
-        applied.maxOutboundBytes !== c.serverConfig.maxOutboundBytes) {
+        applied.maxOutboundBytes !== c.serverConfig.maxOutboundBytes ||
+        (c.serverConfig.benchmarkVariant && applied.benchmarkVariant !== c.serverConfig.benchmarkVariant)) {
       throw new Error("Server did not confirm requested queue/buffer settings");
     }
   }
@@ -73,6 +74,7 @@ export async function runBenchmark(options) {
     maxBufferedBytes: 0 };
   let telemetryTimer, sendTimer;
   const compilingWorkers = new Set();
+  const observedVariants = new Map();
   let serverFramesBeforeWarmup = null;
   let serverInputsBeforeWarmup = null;
   let nextFrameId = 0;
@@ -154,6 +156,13 @@ export async function runBenchmark(options) {
         }
         if (measuring && message.type === "stats" && Number.isFinite(message.timing?.total_ms)) {
           measurements.workerTimingMs.push(message.timing.total_ms);
+        }
+        if (message.type === "stats" && c.serverConfig?.benchmarkVariant) {
+          observedVariants.set(message.worker, {variant:message.timing?.benchmark_variant, clock:message.timing?.stage_clock});
+          if (message.timing?.benchmark_variant !== c.serverConfig.benchmarkVariant ||
+              message.timing?.stage_clock !== (c.serverConfig.benchmarkVariant === 'baseline' ? 'wall-clock' : 'cuda-events')) {
+            measurements.errors.push('Worker did not apply requested compute variant and timing clock');
+          }
         }
         if (measuring && message.type === "compile" && message.status !== "warmed") {
           measurements.compileDuringMeasurement = true;
@@ -262,6 +271,9 @@ export async function runBenchmark(options) {
       }
     }
     frameIndex = 0;
+    if (c.serverConfig?.benchmarkVariant && !observedVariants.size) {
+      throw new Error('No worker telemetry confirmed the requested compute variant');
+    }
     phase = "measure";
     measuring = true;
     measurements.maxBufferedBytes = 0;
@@ -317,6 +329,7 @@ export async function runBenchmark(options) {
       sourceCapture: "OffscreenCanvas.convertToBlob; production uses HTMLCanvasElement.toBlob",
       frameAge: c.frameIds ? "correlated by echoed frame ID; measured on client clock"
         : c.mode === "single" ? "one request in flight; measured on client clock" : "unknown: baseline does not echo frame IDs",
+      workerVariants: Array.from(observedVariants, ([worker, value]) => ({worker, ...value})),
       elapsedSeconds: elapsed, receivedFps: measurements.received / elapsed,
       decodedDrawnFps: measurements.decodedDrawn / elapsed,
       outboundMbps: measurements.bytesSent * 8 / elapsed / 1e6,

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "wrtc010-stream-build-free-repeat",
+    "options": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 30,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576
+      }
+    }
+  }
+]

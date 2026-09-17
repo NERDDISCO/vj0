@@ -41,6 +41,7 @@ def arguments():
     p.add_argument("--vae-fp8", choices=["0", "1"], default="1")
     p.add_argument("--variant", choices=["baseline", "constants", "no-stage-sync", "inference-mode", "combined", "vae-constants", "all-constants"], default="baseline")
     p.add_argument("--profile-frames", type=int, default=0, help="Separate untimed profiler pass after each measured cell")
+    p.add_argument("--attention-backend", choices=["native", "flash4"], default="native")
     p.add_argument("--image-digest", default="unknown")
     a = p.parse_args()
     a.steps = [int(s) for s in a.steps.split(",")]
@@ -131,6 +132,20 @@ def main():
     (a.output / "environment.json").write_text(json.dumps(environment, indent=2) + "\n")
     # setup_pipeline has its own FP8 fallback logging: retain stdout with tee.
     pipe = worker.setup_pipeline()
+    if a.attention_backend == 'flash4':
+        # Use diffusers' existing FA4 adapter with the pinned official PyPI
+        # implementation; do not fetch an unpinned Hub kernel at runtime.
+        from flash_attn.cute import flash_attn_func
+        from diffusers.models.attention_dispatch import AttentionBackendName, _HUB_KERNELS_REGISTRY
+        _HUB_KERNELS_REGISTRY[AttentionBackendName.FLASH_4_HUB].kernel_fn = flash_attn_func
+        pipe.transformer.set_attention_backend('flash_4_hub')
+        count = sum(getattr(getattr(m, 'processor', None), '_attention_backend', None)
+            == AttentionBackendName.FLASH_4_HUB for m in pipe.transformer.modules())
+        if not count:
+            raise RuntimeError('No transformer attention processors selected FA4')
+        environment['attention_processors_selected'] = count
+        for name in ['flash-attn-4', 'nvidia-cutlass-dsl', 'kernels', 'quack-kernels']:
+            environment['versions'][name] = importlib.metadata.version(name)
     hf_home = Path(os.environ.get("HF_HOME", Path.home() / ".cache/huggingface"))
     environment["model_cache_main_refs"] = {}
     for repo in (worker.KLEIN_REPO, worker.DECODER_REPO):
@@ -198,7 +213,7 @@ def main():
             inputs = [make_input(w, h, i) for i in range(32)]
             Image.open(io.BytesIO(inputs[0])).save(a.output / f"input-{w}x{h}.png")
             for steps in a.steps:
-                cell = {"size": [w, h], "steps": steps, "variant": a.variant}
+                cell = {"size": [w, h], "steps": steps, "variant": a.variant, "attention_backend":a.attention_backend}
                 try:
                     with context():
                         embeds = prompts.get(a.prompt)
@@ -249,16 +264,20 @@ def main():
                         check = {**cell, "status": "correctness", "input_difference_mse": errors,
                                  "jpeg_compression": compression,
                                  "input_influence_observed": all(v > 0 for v in errors.values())}
-                        if a.variant in ("constants", "combined", "vae-constants", "all-constants"):
+                        if a.variant in ("constants", "combined", "vae-constants", "all-constants") or a.attention_backend != 'native':
                             patched = worker.generate
                             patched_encode = worker.encode_image_to_latents
                             worker.generate = baseline_generate
                             worker.encode_image_to_latents = baseline_encode
                             try:
+                                if a.attention_backend != 'native':
+                                    pipe.transformer.set_attention_backend('native')
                                 reference, _, _ = frame(inputs[0], w, h, steps, embeds)
                             finally:
                                 worker.generate = patched
                                 worker.encode_image_to_latents = patched_encode
+                                if a.attention_backend != 'native':
+                                    pipe.transformer.set_attention_backend('flash_4_hub')
                             check["baseline_reference_mse"] = float(np.mean((originals["a"] - np.asarray(reference, dtype=np.float32) / 255) ** 2))
                         results.write(json.dumps(check) + "\n")
                         if a.profile_frames:

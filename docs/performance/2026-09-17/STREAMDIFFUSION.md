@@ -106,3 +106,28 @@ before use. The [official TAEHV documentation](https://github.com/madebyollin/ta
 identifies these weights for Wan2.1 and notes a quality tradeoff against the full
 VAE. Prepared job arguments are in `stream-jobs.json`; preparation is not a
 measured outcome.
+
+
+## Extended queue and compatibility decisions
+
+The complete follow-up is `stream-extended-jobs.json`: standard/TAEHV,
+single/single-wo, 1–4 steps, noise strength and detailed input; simulated 30 FPS
+arrivals; a separately pinned 14B comparison; decoder TensorRT/fast; and matching
+512x288/1024x576 sizes. Job preparation is not a measured result.
+
+Arrival-mode age is tracked through the actual rolling latent positions and
+validated decoded counts. It represents simulated input capture to decoded
+output, excluding network, browser display and audio acquisition. Until those
+checks pass, no numeric capture-age claim is valid.
+
+The 14B base revision is `a064a6c71f5be440641209c07bf2a5ce7a2ff5e4`.
+Its approximately 57 GB of base shards use the separate 80 GB container disk;
+the approximately 28.6 GB causal checkpoint uses `/workspace`. T5/VAE assets
+are shared with 1.3B only after matching actual SHA-256 against the 14B repo's
+published LFS hashes. This avoids counting the shared storage server's `df`
+capacity as the pod's volume allowance.
+
+TensorRT 11 removed `BuilderFlag.FP16`, which this pinned upstream exporter
+uses. The isolated decoder experiment therefore selects the compatible 10.x
+release `10.16.1.11`; it does not silently port the upstream exporter or change
+Klein's environment. See [NVIDIA's Python migration guide](https://docs.nvidia.com/deeplearning/tensorrt/latest/api/migration/tensorrt-10x-to-11x-python-api-patterns.html).

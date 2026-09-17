@@ -1,0 +1,533 @@
+[
+  {
+    "name": "download-taehv",
+    "argv": [
+      "python3",
+      "-c",
+      "import pathlib,urllib.request,hashlib,json\nroot=pathlib.Path('/workspace/streamdiffusionv2-20260917/ckpts')\nrevision='011dfc2112197741c540e0bdd5b7b67bcc930771'\nurl=f'https://raw.githubusercontent.com/madebyollin/taehv/{revision}/taew2_1.pth'\ntarget=root/'taew2_1.pth'\nif target.exists():\n raise RuntimeError('Refusing to overwrite existing checkpoint without verification')\ndata=urllib.request.urlopen(url,timeout=120).read()\nif len(data)<1000000: raise RuntimeError('Unexpectedly small checkpoint')\ntarget.write_bytes(data)\nrecord={'repository':'madebyollin/taehv','revision':revision,'url':url,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}\n(root/'taew2_1-provenance.json').write_text(json.dumps(record,indent=2)+'\\n')\nprint(json.dumps(record))\n"
+    ],
+    "cwd": "/workspace",
+    "timeout_seconds": 180
+  },
+  {
+    "name": "standard-single",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/standard-single",
+      "--frames",
+      "65",
+      "--repeats",
+      "3"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "standard-single-wo",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/standard-single-wo",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--mode",
+      "single-wo"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-single",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-single",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-single-wo",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-single-wo",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--mode",
+      "single-wo"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-one-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-one-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "1"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-four-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-four-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "4"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-noise100",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-noise100",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--noise-scale",
+      "1.0"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-detailed",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-detailed",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--scene",
+      "detailed",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-arrival30-single",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-arrival30-single",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-arrival30-single-wo",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-arrival30-single-wo",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single-wo",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "download-wan14b",
+    "cwd": "/workspace",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/download_wan14b.py"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache",
+      "HF_HUB_OFFLINE": "0"
+    },
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "wan14b-standard",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+      "--output",
+      "/workspace/stream-sweep-20260917/wan14b-standard",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--model-type",
+      "T2V-14B",
+      "--config-path",
+      "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "wan14b-taehv",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+      "--output",
+      "/workspace/stream-sweep-20260917/wan14b-taehv",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--model-type",
+      "T2V-14B",
+      "--config-path",
+      "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "wan14b-taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+      "--output",
+      "/workspace/stream-sweep-20260917/wan14b-taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--model-type",
+      "T2V-14B",
+      "--config-path",
+      "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml",
+      "--taehv",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1800
+  },
+  {
+    "name": "install-trt10-compatible",
+    "cwd": "/workspace",
+    "argv": [
+      "python3",
+      "-c",
+      "import pathlib,subprocess,os\nuv='/workspace/tools/uv/bin/uv';original='/workspace/envs/streamv2/bin/python';venv=pathlib.Path('/workspace/envs/streamv2-trt')\nif venv.exists():raise RuntimeError('TRT environment already exists')\nfreeze=subprocess.check_output([uv,'pip','freeze','--python',original],text=True)\nrequirements=pathlib.Path('/workspace/bench-20260917/streamv2-trt-requirements.txt')\nrequirements.write_text('\\n'.join(l for l in freeze.splitlines() if not l.startswith('-e ') and 'streamdiffusion' not in l.lower())+'\\ntensorrt-cu12==10.16.1.11\\nonnx==1.22.0\\nonnxscript==0.7.2\\n')\nsubprocess.run([uv,'venv','--python',original,str(venv)],check=True)\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--extra-index-url','https://download.pytorch.org/whl/cu128','--index-strategy','unsafe-best-match','-r',str(requirements)],check=True)\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--no-deps','-e','/workspace/streamdiffusionv2-20260917'],check=True)\n(venv/'freeze.txt').write_text(subprocess.check_output([uv,'pip','freeze','--python',str(venv/'bin/python')],text=True))\n"
+    ],
+    "env": {
+      "UV_CACHE_DIR": "/workspace/uv-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "trt-env-taehv-baseline",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/trt-env-taehv-baseline",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/trt-taehv",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-fast",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/trt-fast",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--fast"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/trt-taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "taehv-three-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-three-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "3"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-512x288",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-512x288",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--width",
+      "512",
+      "--height",
+      "288"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-1024x576",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-sweep-20260917/taehv-1024x576",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--width",
+      "1024",
+      "--height",
+      "576"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  }
+]

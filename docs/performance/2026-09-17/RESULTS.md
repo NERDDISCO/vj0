@@ -4,8 +4,8 @@
 
 Funding is confirmed and baseline pod `0pxb4bss2jmbhg` is running. Both funded test pods are running: the original one-GPU pod and two-GPU
 scaling pod `9vj8k6guaxsbhw`. The first compute sweep and 30 candidate live
-discovery trials are complete. Extended compute and WebRTC-upgrade comparisons
-are running. These are discovery runs; no performance
+discovery trials are complete. The 24 WebRTC-upgrade comparisons and one clean repeat are complete.
+StreamDiffusionV2 and extended compute jobs are running. These are discovery runs; no performance
 optimization has passed repeated comparison or been promoted yet.
 
 | Item | Result | Evidence |
@@ -189,7 +189,10 @@ These measure offscreen decode/draw, not the complete app or projector.
 
 The following 24-trial batch uses wrtc 0.10.0 and varies pending/output buffers,
 then alternates 60-second baseline, JPEG 60, and combination trials three times.
-Its exact jobs are in `browser-wrtc010-jobs.json`; it is not complete yet.
+Its exact jobs are in `browser-wrtc010-jobs.json`; all 24 completed, plus one
+clean replacement for the trial excluded due to a concurrent local build.
+Raw results are in `browser-wrtc010/`; exclusions are explicit in
+`measurement-exclusions.json`. The replacement received 26.96 FPS, p95 age 199 ms.
 
 ## Additional correctness fixes and secondary compute
 
@@ -210,7 +213,9 @@ and lifecycle validation are still pending. No visual design change was made.
 On GPU 0 of the separate two-GPU pod, the original environment's two-step
 baseline measured 28.33 / 13.97 / 8.20 FPS at the three main sizes. Disabling
 VAE FP8 measured 28.75 / 13.99 / 8.16 FPS: no substantial speed benefit.
-Quantization output-quality comparisons remain pending. Raw records are
+Quantization output-quality comparisons remain pending. Compile mode `default`
+measured 27.89 / 13.50 / 8.28 FPS; it did not consistently beat `reduce-overhead`.
+See `compute-compile-default.json`. Raw records are
 `compute-baseline-secondary.json` and `compute-vae-bf16.json`.
 
 The first PyTorch 2.13 installation failed dependency resolution. A separately
@@ -277,3 +282,26 @@ percentiles. Record failed runs and timeouts too.
 
 None yet. Passing focused checks and single discovery trials do not establish
 a repeatable performance improvement.
+
+## Repeated transport results and resolution frontier
+
+On wrtc 0.10.0, pending limits 1/2/3 delivered 20.70/27.10/27.86 received FPS
+with p95 capture-to-draw ages 141/166/188 ms. Limiting the queue trades throughput
+for responsiveness. The three alternating 60-second combined trials
+(JPEG 60, send target 30, input buffer 16 KB, pending 2, output buffer 64 KB)
+received 25.20/23.67/26.15 FPS with p95 ages 164/257/163 ms. Their paired
+baselines received 27.22/26.65/24.68 FPS with p95 ages 308/203/997 ms.
+This is a latency/throughput tradeoff, not a verified overall FPS improvement.
+JPEG 60 alone received 27.06/27.31/27.55 FPS; WAN variation and one 531 ms
+p95 tail prevent claiming a uniformly improved result.
+
+The combination at 768x448 delivered 13.83 received/drawn FPS, p95 235 ms;
+at 1024x576 it delivered 8.18 received/drawn FPS, p95 350 ms. These are
+offscreen benchmark draws, not complete app/projector rendering. The wrtc
+version trials were sequential batches, so they do not establish an isolated
+library speedup. No dependency or compression default was promoted.
+
+On GPU 0 of the second pod (same PRO 6000 model), the additional compute
+frontier medians were 49.49/39.47/32.43 FPS at 256x144 for 2/3/4 steps,
+and 4.84/3.66/2.91 FPS at 1280x720. See `compute-resolution-frontier.json`.
+These include JPEG decode, inference and JPEG encode, excluding transport/display.

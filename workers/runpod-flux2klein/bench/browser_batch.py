@@ -85,7 +85,9 @@ def main():
                 'receivedFps':record['result'].get('receivedFps')}), flush=True)
         state = {key:value for key,value in payload.items() if key != 'results'}
         state['failed'] = list(failed_names)
-        (a.output / 'batch.json').write_text(json.dumps(state, indent=2) + '\n')
+        progress = a.output / 'batch.json.tmp'
+        progress.write_text(json.dumps(state, indent=2) + '\n')
+        progress.replace(a.output / 'batch.json')
         return state
 
     previous = None

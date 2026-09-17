@@ -49,6 +49,7 @@ def main():
     report = {'status': 'running', 'config': {k: str(v) if isinstance(v, Path) else v for k, v in vars(a).items()},
         'python': platform.python_version(), 'gpu': torch.cuda.get_device_name(0),
         'versions': {n: importlib.metadata.version(n) for n in ['torch', 'diffusers', 'transformers', 'numpy', 'pillow']},
+        'harness_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'pipeline_sha256': hashlib.sha256(Path(pipeline_module.__file__).read_bytes()).hexdigest(),
         'frame_age': 'not measured: offline inputs, no verified output-to-input correspondence', 'runs': []}
 
@@ -64,6 +65,17 @@ def main():
             model_type=a.model_type, config_path=a.config_path, device='cuda', fps=30)
         torch.cuda.synchronize()
         report['load_seconds'] = time.perf_counter() - started
+        report['resolved'] = {'model_type':pipe.model_type, 'mode':pipe.mode,
+            'use_taehv':pipe.use_taehv, 'use_tensorrt':pipe.use_tensorrt, 'fast':pipe.fast,
+            'num_steps':pipe.num_steps, 'num_kv_cache':int(pipe.config.num_kv_cache),
+            'num_sink_tokens':int(pipe.config.num_sink_tokens),
+            'adapt_sink_threshold':float(pipe.config.adapt_sink_threshold),
+            'config_path':pipe.config_path}
+        if pipe.use_tensorrt:
+            for name in ['tensorrt-cu12', 'onnx', 'onnxscript']:
+                report['versions'][name] = importlib.metadata.version(name)
+        canonical_schedule = pipe.pipeline_manager.pipeline.denoising_step_list.detach().clone()
+        report['resolved']['initial_denoising_schedule'] = canonical_schedule.tolist()
         print(json.dumps({'loaded_seconds': report['load_seconds']}), flush=True)
         frames = []
         x = np.arange(a.width)
@@ -83,11 +95,18 @@ def main():
         Image.fromarray(inputs[0]).save(a.output / 'input-first.png')
         video = torch.from_numpy(inputs.copy()).permute(3, 0, 1, 2).unsqueeze(0).to(device='cuda', dtype=torch.bfloat16) / 127.5 - 1
         for repeat in range(a.repeats):
+            # Upstream prepare() clears caches but retains the adaptive schedule
+            # mutated by the previous clip. Restore this independent trial's
+            # original schedule in both modes, then reset caches and RNG.
+            runtime = pipe.pipeline_manager.pipeline
+            runtime.denoising_step_list = canonical_schedule.clone()
+            runtime.timestep = runtime.denoising_step_list
             pipe.prepare(a.prompt)
             torch.manual_seed(42)
             chunks = pipe.chunk_video(video)
             noise_scale = a.noise_scale
             outputs, timings, records = [], [], []
+            capture_ages, latent_sources, previous_positions = [], None, None
             torch.cuda.reset_peak_memory_stats()
             torch.cuda.synchronize()
             start = time.perf_counter()
@@ -113,9 +132,37 @@ def main():
                     outputs.append(decoded)
                     if first_output is None:
                         first_output = done - start
+                source_index = None
+                positions = None
+                if a.arrival_fps:
+                    if a.mode == 'single':
+                        positions = pipe.pipeline_manager.pipeline.kv_cache_starts.tolist()
+                        if index == 0:
+                            latent_sources = [None] * len(positions)
+                        else:
+                            # Pinned upstream inference_stream shifts hidden
+                            # states and their RoPE positions together. Verify
+                            # that transition instead of assuming a fixed delay.
+                            if positions[1:] != previous_positions[:-1]:
+                                raise RuntimeError('Rolling latent-position transition does not match source tracking')
+                            latent_sources = [index] + latent_sources[:-1]
+                        previous_positions = positions
+                        source_index = 0 if index == 0 and count else latent_sources[-1] if count else None
+                    elif count:
+                        source_index = index
+                    if count:
+                        if source_index is None:
+                            raise RuntimeError('Decoded output has no verified source latent chunk')
+                        source_chunk = chunks[source_index]
+                        if count != source_chunk.end_idx - source_chunk.start_idx:
+                            raise RuntimeError('Decoded frame count differs from its source chunk')
+                        capture_ages.extend((done - (start + frame_index/a.arrival_fps))*1000
+                            for frame_index in range(source_chunk.start_idx, source_chunk.end_idx))
                 records.append({'input_start': chunk.start_idx, 'input_end': chunk.end_idx,
                     'output_frames': count, 'elapsed_ms': timings[-1], 'noise_scale': noise_scale,
                     'adaptive_timestep': encoded.current_step,
+                    'output_source_chunk_index': source_index,
+                    'rolling_latent_positions': positions,
                     'chunk_submission_delay_ms': (t0 - available) * 1000 if available is not None else None,
                     'submitted_chunk_available_to_completion_ms': (done - available) * 1000 if available is not None else None})
             elapsed = time.perf_counter() - start
@@ -130,10 +177,13 @@ def main():
                 if not np.isfinite(decoded).all() or decoded.min() < 0 or decoded.max() > 1:
                     raise RuntimeError('output must be finite RGB values in [0, 1]')
             run = {'repeat': repeat, 'cold_first_pass': repeat == 0, 'elapsed_seconds': elapsed,
+                'initial_denoising_schedule': canonical_schedule.tolist(),
+                'final_denoising_schedule': runtime.denoising_step_list.tolist(),
                 'input_frames': a.frames, 'output_frames': count, 'output_fps': count / elapsed,
                 'output_shape_thwc': [count, a.height, a.width, 3],
                 'output_range': [float(min(o.min() for o in outputs)), float(max(o.max() for o in outputs))],
                 'first_output_seconds': first_output, 'chunk_ms': distribution(timings), 'chunks': records,
+                'simulated_capture_to_decoded_ms': distribution(capture_ages),
                 'peak_allocated_bytes': torch.cuda.max_memory_allocated(),
                 'peak_reserved_bytes': torch.cuda.max_memory_reserved()}
             report['runs'].append(run)
@@ -145,6 +195,8 @@ def main():
                     Image.fromarray((np.clip(frame, 0, 1) * 255).astype('uint8')).save(a.output / f'output-{name}.png')
                 export_video(output, str(a.output / 'output.mp4'), fps=30)
                 export_video(inputs.astype('float32') / 255, str(a.output / 'input.mp4'), fps=30)
+        if a.arrival_fps:
+            report['frame_age'] = 'Simulated paced input capture to decoded output; source chunk tracked through verified rolling latent positions (single) or direct denoising (single-wo). Excludes network/display and audio acquisition.'
         report['status'] = 'measured'
     except Exception as error:
         report['status'] = 'failed'

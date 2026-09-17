@@ -1,5 +1,33 @@
 {
+  "status": "finished",
   "name": "vae-bf16",
+  "job": {
+    "name": "vae-bf16",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/extended-compute-20260917/vae-bf16",
+      "--vae-fp8",
+      "0"
+    ],
+    "cwd": "/app",
+    "started_at": "2026-09-17T10:30:24.837096+00:00",
+    "status": "passed",
+    "pid": 11872,
+    "returncode": 0,
+    "finished_at": "2026-09-17T10:40:53.793542+00:00"
+  },
   "environment": {
     "time_utc": "2026-09-17T10:30:25.629228+00:00",
     "versions": {
@@ -802,6 +830,5 @@
       },
       "input_influence_observed": true
     }
-  ],
-  "status": "finished"
+  ]
 }

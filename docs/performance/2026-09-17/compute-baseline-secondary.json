@@ -1,5 +1,31 @@
 {
+  "status": "finished",
   "name": "baseline-secondary",
+  "job": {
+    "name": "baseline-secondary",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/extended-compute-20260917/baseline-secondary"
+    ],
+    "cwd": "/app",
+    "started_at": "2026-09-17T10:15:30.165669+00:00",
+    "status": "passed",
+    "pid": 3257,
+    "returncode": 0,
+    "finished_at": "2026-09-17T10:30:24.832832+00:00"
+  },
   "environment": {
     "time_utc": "2026-09-17T10:15:31.122193+00:00",
     "versions": {
@@ -802,6 +828,5 @@
       },
       "input_influence_observed": true
     }
-  ],
-  "status": "finished"
+  ]
 }

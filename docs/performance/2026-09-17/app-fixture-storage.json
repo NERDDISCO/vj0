@@ -1,0 +1,62 @@
+{
+  "vj0-ai-settings-storage": {
+    "version": 8,
+    "state": {
+      "backend": "pod",
+      "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+      "autoConnect": false,
+      "sendFrames": false,
+      "showAi": true,
+      "showCaptureDebug": false,
+      "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+      "captureSize": 512,
+      "outputWidth": 512,
+      "outputHeight": 288,
+      "frameRate": 60,
+      "seed": 42,
+      "kleinSteps": 2,
+      "kleinAlpha": 0.1,
+      "sceneId": "waveform",
+      "stageSharpen": 0.6,
+      "stageScanlines": true,
+      "stageVignette": true,
+      "stagePixelate": false,
+      "stagePixelateSize": 8
+    }
+  },
+  "vj0-composer-scenes": {
+    "version": 1,
+    "state": {
+      "scenes": [
+        {
+          "id": "benchmark-waveform",
+          "name": "Benchmark waveform",
+          "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+          "background": "#0a0a0a",
+          "createdAt": 0,
+          "elements": [
+            {
+              "id": "benchmark-wave",
+              "kind": "waveform",
+              "name": "Waveform",
+              "props": {
+                "x": 0.5,
+                "y": 0.5,
+                "size": 0.48,
+                "aspect": 4,
+                "rotation": 0,
+                "color": "#ffffff",
+                "opacity": 1,
+                "stroke": 0.012,
+                "text": ""
+              },
+              "bindings": {}
+            }
+          ]
+        }
+      ],
+      "activeSceneId": "benchmark-waveform",
+      "selectedElementId": null
+    }
+  }
+}
