@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checks": 10,
+  "scope": "Six compile/watchdog lifecycle checks plus four frame ID/source-order checks; unchanged frontend build remains4a02d2f",
+  "prior_server_failure": "Before correction, original dispatcher lacks source_seq and both raw/tagged inversion cases forward the late older result. Three of four frame-ID tests fail; ordinary raw/tagged echo remains passing.",
+  "prior_soak_assertion": {
+    "received_reversals": 2300,
+    "preview_raf_reversals": 1383,
+    "stage_reversals": 2293
+  },
+  "sources": {
+    "workers/runpod-flux2klein/server.js": "66643b1c2909687215a96cb42959141a65e1ada9e98dd2a15dad48f232a99ac9",
+    "workers/runpod-flux2klein/inference_server.py": "940a7d32972c360874303c37f212282c92d62878e4d3ac0cd4e056273e7bfa67",
+    "workers/runpod-flux2klein/bench/app_batch.py": "4d83a1944cabf155aa8b3ebf07dc14ad9f4736c0a9743821b7a1fb502941c3a1",
+    "workers/runpod-flux2klein/bench/test_frame_ids.mjs": "02911b7f54d543ea672ceee59990ca822b4aea2bfe8503bd5736fb044616ceab"
+  },
+  "cpu_output": "\u2714 long compilation survives the frame watchdog and success grants a fresh frame deadline (1.356292ms)\n\u2714 compile failure ends replay and watchdog exemption and accounts for a dropped live frame (0.385875ms)\n\u2714 progress cannot extend an indefinitely stalled compilation (0.293334ms)\n\u2714 compile timeout applies during boot and idle startup warmup without pending frames (0.771167ms)\n\u2714 an idle worker gets a full processing deadline when frames resume (0.30375ms)\n\u2714 the first request to a ready worker is also bounded without a prior output (0.234625ms)\n\u2714 dispatcher keeps per-frame IDs separate from broadcast settings (1.106417ms)\n\u2714 late GPU output cannot reverse raw JPEG source order (0.980333ms)\n\u2714 late GPU output cannot reverse tagged source order (0.357416ms)\n\u2714 tagged responses echo IDs while ordinary clients still receive raw JPEG (0.337625ms)\n\u2139 tests 10\n\u2139 suites 0\n\u2139 pass 10\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 38.889292\n"
+}

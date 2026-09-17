@@ -1,17 +1,30 @@
 # Live image performance results — 2026-09-17
 
-**The final audit found a two-GPU temporal-order bug.** All planned compute,
-transport, app, StreamDiffusion and dependency measurements are collected. The
-600-second app soak passed its original scripted checks, but independent review
-found 2,293 backwards source transitions at the projector. The dispatcher now
-rejects late older worker results for raw and tagged clients. A corrected
-three-resolution app confirmation and another ten-minute soak are queued before
-final acceptance. Original measurements and the failed-ordering evidence remain
-preserved. No UI redesign or main/stable-image deployment was made.
+**All selected experiments now have results.** The final audit found and led to
+a correction for out-of-order output from multiple GPUs. The corrected
+three-resolution app tests and ten-minute soak/lifecycle checks passed. Original
+failures and slower trials remain preserved. No UI redesign, main deployment,
+or stable image overwrite was made.
+
+The most relevant final numbers are from the **actual app with two GPUs**, using
+FLUX.2-klein-4B, two steps, the combined profile and the isolated newer stack:
+
+| Generated size | Test duration | Received FPS | Projector GL FPS | Encode→projector p95 age |
+|---|---:|---:|---:|---:|
+| 512×288 | 60 seconds | 33.54 | 32.64 | 180 ms |
+| 768×448 | 600 seconds | 26.96 | 26.73 | 285 ms |
+| 1024×576 | 60 seconds | 17.02 | 17.01 | 462 ms |
+
+These are one completed observation per size, not repeated medians. All three
+have zero observed source-order reversals. The long run's stage median/p99 age
+is 227.7/329.9 ms; maximum 532.2 ms. Three reconnects recovered in about 11.2
+seconds. Projector FPS counts unique WebGL submissions, not physical display
+presentation. The [app report](APP.md) has full counts, main-preview rates,
+latency distributions, original failure evidence and remaining limitations.
 
 ## What the completed measurements show
 
-- **Two GPUs approximately double generation throughput.** Three corrected-service
+- **Two GPUs approximately double received throughput in the earlier controlled transport tests.** Before the source-order correction, three watchdog-corrected-service
   60-second live pairs per resolution measured one/two-GPU medians of
   **28.86/55.80 FPS at 512×288, 13.87/27.56 at 768×448, and 8.20/16.38 at
   1024×576**. The 768 runs include a 3.2165-second continuity failure and latency
@@ -71,7 +84,8 @@ Complete tables and raw artifacts:
 [browser table](BROWSER.md), [browser CSV](browser-results.csv),
 [same-host table](SAMEHOST.md), [newer-stack comparison](NEWSTACK.md),
 [StreamDiffusion](STREAMDIFFUSION.md),
-[app comparisons](app-comparison/), [dependency details](DEPENDENCIES.md).
+[actual app and corrected soak](APP.md), [app comparisons](app-comparison/),
+[dependency details](DEPENDENCIES.md).
 The index can be regenerated with
 `python3 workers/runpod-flux2klein/bench/summarize_results.py --root docs/performance/2026-09-17 --output /tmp/vj0-metrics-index.json`.
 
@@ -89,7 +103,9 @@ asynchronous telemetry implementation.
 All starting local work is preserved as **a10fdbe** on the pushed branch
 `snapshot/pre-performance-2026-09-17`. Experiments and focused fixes are on
 `perf/2026-09-live-bench`; pushed checkpoint 7c41b8e includes the idle-watchdog fix.
-The original checkout remains on the snapshot branch.
+The original checkout remains on the snapshot branch. Checkpoint 98dc346
+preserves the original final soak, all 27 newer-stack live trials and the
+source-order correction; later report artifacts are on the same performance branch.
 
 The baseline image was last updated May 3, 18:46:46 UTC and is frozen at
 `nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490`.
@@ -131,6 +147,16 @@ not proof that it was universally the best model at that date.
    afterward; all eight lifecycle/frame-ID checks pass. All 18 corrected-service
    GPU trials completed without this watchdog restart.
    [Failure and correction](watchdog-idle-recovery.json).
+
+7. **Late GPU results no longer reverse source order.** The original ten-minute
+   app run had 2,293 backwards source transitions at the projector. A private
+   dispatcher sequence now accompanies all raw/tagged requests and worker
+   responses. Older results are dropped after pending/watchdog accounting;
+   only successfully sent JPEGs advance the delivery watermark. Invalid sequence
+   echoes fail closed and are logged. The dispatcher and worker deploy together.
+   Ten CPU lifecycle/frame-ID checks pass. The corrected app trials and stress
+   explicitly test source order. [Original audit](review-app-soak.json),
+   [corrected application results](APP.md).
 
 The production frontend build and earlier focused regressions passed. Twelve
 real app comparisons use source 7139e0f as the baseline and 4a02d2f as the frontend
@@ -191,10 +217,15 @@ from 2.1.9 to **2.14.0-dd55bcf**, and the official project skill to 1.2.0.
 application logs also worked through the API, including model/compile output.
 Live serverless-worker logs were not exercised. [Evidence and tweet draft](RUNPOD-LOGS.md).
 
-Both task pods are kept running as requested: one PRO 6000 in 0pxb4bss2jmbhg and
-two in 9vj8k6guaxsbhw, EU-CZ-1. GPU prices total $6.27/hour; the last account quote
-including storage was $6.331/hour. Final balance and runtime state will be refreshed
-after the remaining measurements. Five unrelated old pods remain stopped.
+Both task pods remain running as requested: one PRO 6000 in **0pxb4bss2jmbhg**
+and two in **9vj8k6guaxsbhw**, EU-CZ-1. GPU prices total **$6.27/hour**;
+the account quote including storage is **$6.331/hour**. At 17:32 UTC, the balance
+was **$50.36**. Both services reported healthy with all workers ready. Five
+unrelated old pods remain stopped. [Final resources](final-resources.json),
+[corrected two-GPU service](final-source-order-service/),
+[retained one-GPU service](final-baseline-retained-service/).
+The corrected service uses isolated workspace files and a pinned environment;
+these experiments have not published a replacement stable Docker image.
 
 ## Experiment coverage
 
@@ -223,14 +254,13 @@ after the remaining measurements. Five unrelated old pods remain stopped.
 | G06 | Complete; no FA4 integration win | Native profiler plus actual SM120 FA4 path; no measured-frame FA4 CUDA trace |
 | G07 | Compute/live complete | Isolated Torch2.13/CUDA13.2/TorchAO0.18; repeated compute and all 27 live trials, exact runtime identity retained |
 | G08 | Scripted lifecycle complete | Prompt settings, rapid changes, three resolutions and three reconnects recovered; prompt revision execution latency is not proven |
-| S01 | Complete; one continuity failure retained | All 18 corrected-service trials; approximately 1.93–2.00× median generation scaling; no watchdog restart |
+| S01 | Complete; one continuity failure retained | All 18 corrected-service trials; approximately 1.93–2.00× median received-throughput scaling; no watchdog restart |
 | V01 | Isolated generation/age complete | Wan1.3B; real app display unmeasured without a causal-state adapter |
 | V02 | Complete | Decoder, mode, 1–4 steps, noise, sizes, matched TensorRT/fast controls |
 | V03 | Complete | Wan14B standard/TAEHV/noise 0.95; checkpoint cleanup documented |
 | C01 | Complete; tail tradeoffs retained | 36 old-stack live compute trials, 13 responsive combinations, 27 new-stack live trials; app acceptance separate |
-| C02 | Valid measured temporal-order failure; correction under test | Original soak 29.96 received / 29.90 stage FPS, p95 stage 598.6ms; 2,293 stage reversals. New source-order guard and corrected soak queued |
-| R00 | Ongoing | Independent arithmetic/source reviews completed in stages; final complete-report review still required |
+| C02 | Corrected trials and soak/stress passed | Original temporal-order failure retained; corrected 512/1024 confirmations and ten-minute 768 run have zero reversals. See APP.md and independent corrected-run review |
+| R00 | Independent measurement and report audits passed | Original failure, corrected raw capture order, counts/ages, source hashes and archival identity reconciled; manual review, not an automatic Codex Stop hook |
 
-No pending row is a completed outcome. The active runbook tracks process IDs,
-artifact locations and guarded recovery steps so work can resume without losing
-measurements: [RUNBOOK.md](RUNBOOK.md).
+The runbook records retained resources, source identities and reproduction
+commands for the completed matrix: [RUNBOOK.md](RUNBOOK.md).

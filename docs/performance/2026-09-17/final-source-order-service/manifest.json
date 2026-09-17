@@ -1,0 +1,18 @@
+{
+  "status": "running",
+  "dispatcher_pid": 567,
+  "runner_pid": 74772,
+  "jobs": [
+    {
+      "name": "source-order-service",
+      "argv": [
+        "node",
+        "/workspace/source-order-20260917/server.js"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T17:11:46.696178+00:00",
+      "status": "running",
+      "pid": 74775
+    }
+  ]
+}

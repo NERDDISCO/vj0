@@ -1,5 +1,11 @@
 # Newer-stack live confirmation — 2026-09-17
 
+**These transport trials precede the source-order correction.** Two-worker
+outputs can arrive out of capture order; the later actual-app audit found 2,293
+projector reversals in ten minutes. The rates below remain valid transport
+measurements, but they are not an approved temporally correct display profile.
+See [the actual-app results](APP.md) for the failure and corrected measurements.
+
 All 27 one-minute trials completed with valid measurements and passed their client-observed continuity guards. Large latency/throughput variation remains visible in some two-GPU trials. These are synthetic-input WAN WebRTC/offscreen-draw results; the actual app/projector soak is reported separately in [RESULTS.md](RESULTS.md).
 
 The same two-GPU PRO 6000 host, worker/dispatcher source, FP8 models, two steps, alpha 0.1, seed 42, input JPEG 85, output JPEG 80, pending limit 3 and one-MiB outbound admission threshold are used throughout. One/two GPU means one/two active workers on this allocated two-GPU host; both models remain loaded. The library is @roamhq/wrtc 0.10.0. The compute environment changes to Torch 2.13.0+cu132 / TorchAO 0.18.0+cu132 / torchvision 0.28.0+cu132, retaining pinned Diffusers and other recorded dependencies. [Runtime/source proof](torch213-live-identity.json), [native library proof](torch213-native-transport-identity.json), [jobs and raw trials](browser-torch213/).

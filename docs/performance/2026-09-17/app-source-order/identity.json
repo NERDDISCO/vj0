@@ -1,0 +1,128 @@
+{
+  "jobs": [
+    {
+      "name": "source-order-next-512x288-confirmation",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": false,
+      "stress": false,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    },
+    {
+      "name": "source-order-next-1024x576-confirmation",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 1024,
+      "height": 576,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": false,
+      "stress": false,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    },
+    {
+      "name": "source-order-next-768x448-ten-minute-soak",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 600,
+      "width": 768,
+      "height": 448,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": true,
+      "stress": true,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    }
+  ],
+  "fixture": {
+    "vj0-ai-settings-storage": {
+      "version": 8,
+      "state": {
+        "backend": "pod",
+        "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+        "autoConnect": false,
+        "sendFrames": false,
+        "showAi": true,
+        "showCaptureDebug": false,
+        "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+        "captureSize": 512,
+        "outputWidth": 512,
+        "outputHeight": 288,
+        "frameRate": 60,
+        "seed": 42,
+        "kleinSteps": 2,
+        "kleinAlpha": 0.1,
+        "sceneId": "waveform",
+        "stageSharpen": 0.6,
+        "stageScanlines": true,
+        "stageVignette": true,
+        "stagePixelate": false,
+        "stagePixelateSize": 8
+      }
+    },
+    "vj0-composer-scenes": {
+      "version": 1,
+      "state": {
+        "scenes": [
+          {
+            "id": "benchmark-waveform",
+            "name": "Benchmark waveform",
+            "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+            "background": "#0a0a0a",
+            "createdAt": 0,
+            "elements": [
+              {
+                "id": "benchmark-wave",
+                "kind": "waveform",
+                "name": "Waveform",
+                "props": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "size": 0.48,
+                  "aspect": 4,
+                  "rotation": 0,
+                  "color": "#ffffff",
+                  "opacity": 1,
+                  "stroke": 0.012,
+                  "text": ""
+                },
+                "bindings": {}
+              }
+            ]
+          }
+        ],
+        "activeSceneId": "benchmark-waveform",
+        "selectedElementId": null
+      }
+    }
+  },
+  "harness_sha256": "4d83a1944cabf155aa8b3ebf07dc14ad9f4736c0a9743821b7a1fb502941c3a1",
+  "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685"
+}

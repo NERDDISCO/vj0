@@ -1,0 +1,480 @@
+{
+  "status": "captured_and_inspected",
+  "timing": "Outside all timed benchmark runs",
+  "metadata": {
+    "purpose": "Silent visual evidence only; captured outside timed benchmark runs",
+    "frontend_source": "4a02d2f",
+    "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+    "worker_stack": "Torch2.13 cu132/TorchAO0.18 combined, two workers, 768x448, two steps; source-order dispatcher e4e2626 / worker cc9fb7a",
+    "server_config": {
+      "telemetryMode": "async",
+      "outboundFrames": 0,
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "combined",
+      "activeWorkers": 2,
+      "loadedWorkers": 2
+    },
+    "audio_levels": [
+      0,
+      0.2,
+      0.6
+    ],
+    "observed_audio_rms": [
+      {
+        "at": 1789666441820.4,
+        "level": 0.2,
+        "rms": 0.14221291563489272
+      },
+      {
+        "at": 1789666442320,
+        "level": 0.2,
+        "rms": 0.13743651148654762
+      },
+      {
+        "at": 1789666442820.5,
+        "level": 0.2,
+        "rms": 0.138718162334572
+      },
+      {
+        "at": 1789666443320.4,
+        "level": 0.2,
+        "rms": 0.14488062408319116
+      },
+      {
+        "at": 1789666443820.7,
+        "level": 0.2,
+        "rms": 0.14221332721857374
+      },
+      {
+        "at": 1789666444321.5999,
+        "level": 0.2,
+        "rms": 0.13743647595935007
+      },
+      {
+        "at": 1789666444821.5,
+        "level": 0.2,
+        "rms": 0.1427338428167515
+      },
+      {
+        "at": 1789666445320.7998,
+        "level": 0.2,
+        "rms": 0.14488042991256686
+      },
+      {
+        "at": 1789666445819.7998,
+        "level": 0.2,
+        "rms": 0.142213748903396
+      },
+      {
+        "at": 1789666446321,
+        "level": 0.2,
+        "rms": 0.13743645031344304
+      },
+      {
+        "at": 1789666446819.5999,
+        "level": 0.2,
+        "rms": 0.13871752291361816
+      },
+      {
+        "at": 1789666447320.7998,
+        "level": 0.2,
+        "rms": 0.14488024179571626
+      },
+      {
+        "at": 1789666447819.9,
+        "level": 0.2,
+        "rms": 0.14221416032626485
+      },
+      {
+        "at": 1789666448322,
+        "level": 0.2,
+        "rms": 0.13743641532710177
+      },
+      {
+        "at": 1789666448820.9,
+        "level": 0.2,
+        "rms": 0.1427330444759531
+      },
+      {
+        "at": 1789666449321.5,
+        "level": 0.2,
+        "rms": 0.1448800474358873
+      },
+      {
+        "at": 1789666449820.2998,
+        "level": 0.2,
+        "rms": 0.14221458202771686
+      },
+      {
+        "at": 1789666450321.2,
+        "level": 0.2,
+        "rms": 0.13743639004908695
+      },
+      {
+        "at": 1789666450820.5,
+        "level": 0.2,
+        "rms": 0.13871688369902652
+      },
+      {
+        "at": 1789666451319.2998,
+        "level": 0.2,
+        "rms": 0.14487985941422296
+      },
+      {
+        "at": 1789666451821,
+        "level": 0.2,
+        "rms": 0.1422149937104864
+      },
+      {
+        "at": 1789666452319.5,
+        "level": 0.2,
+        "rms": 0.13743635441333094
+      },
+      {
+        "at": 1789666452819,
+        "level": 0.2,
+        "rms": 0.13871656091939957
+      },
+      {
+        "at": 1789666453319.9,
+        "level": 0.2,
+        "rms": 0.14487966519977827
+      },
+      {
+        "at": 1789666453819.2,
+        "level": 0.2,
+        "rms": 0.1422154147387974
+      },
+      {
+        "at": 1789666454320.2,
+        "level": 0.2,
+        "rms": 0.1374363292395916
+      },
+      {
+        "at": 1789666454827.9,
+        "level": 0.2,
+        "rms": 0.14526816365627335
+      },
+      {
+        "at": 1789666455326.5,
+        "level": 0.2,
+        "rms": 0.1446062891110774
+      },
+      {
+        "at": 1789666455832.9,
+        "level": 0.2,
+        "rms": 0.13775210320210468
+      },
+      {
+        "at": 1789666456342.7998,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666456848.2,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666457352.7998,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666457835.9,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666458335.7998,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666458835.7998,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666459335.7,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666459835.5999,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666460335.5,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666460835.5999,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666461335.5999,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666461835.5,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666462340.9,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666462835.7,
+        "level": 0,
+        "rms": 0
+      },
+      {
+        "at": 1789666463336.7,
+        "level": 0.2,
+        "rms": 0.13767327630468176
+      },
+      {
+        "at": 1789666463836,
+        "level": 0.2,
+        "rms": 0.1411122093496585
+      },
+      {
+        "at": 1789666464340.7998,
+        "level": 0.2,
+        "rms": 0.14253534428707546
+      },
+      {
+        "at": 1789666464841.5999,
+        "level": 0.2,
+        "rms": 0.13964066189383956
+      },
+      {
+        "at": 1789666465342,
+        "level": 0.2,
+        "rms": 0.1384778560109915
+      },
+      {
+        "at": 1789666465849.2998,
+        "level": 0.2,
+        "rms": 0.14478169211862232
+      },
+      {
+        "at": 1789666466335.5999,
+        "level": 0.2,
+        "rms": 0.145234454447791
+      },
+      {
+        "at": 1789666466835.7,
+        "level": 0.2,
+        "rms": 0.14370137419834125
+      },
+      {
+        "at": 1789666467336.2,
+        "level": 0.2,
+        "rms": 0.1376735786876373
+      },
+      {
+        "at": 1789666467835.9,
+        "level": 0.2,
+        "rms": 0.1411113546654759
+      },
+      {
+        "at": 1789666468335.7998,
+        "level": 0.2,
+        "rms": 0.14523453522760538
+      },
+      {
+        "at": 1789666468835.7998,
+        "level": 0.2,
+        "rms": 0.14370171797450979
+      },
+      {
+        "at": 1789666469335.7,
+        "level": 0.2,
+        "rms": 0.13767373065397182
+      },
+      {
+        "at": 1789666469835.7,
+        "level": 0.2,
+        "rms": 0.14111092827460497
+      },
+      {
+        "at": 1789666470335.7998,
+        "level": 0.6,
+        "rms": 0.4357038550281669
+      },
+      {
+        "at": 1789666470835.7998,
+        "level": 0.6,
+        "rms": 0.4311061841116843
+      },
+      {
+        "at": 1789666471335.9,
+        "level": 0.6,
+        "rms": 0.4130216518870154
+      },
+      {
+        "at": 1789666471835.7998,
+        "level": 0.6,
+        "rms": 0.423331510442633
+      },
+      {
+        "at": 1789666472335.7998,
+        "level": 0.6,
+        "rms": 0.4357040966751201
+      },
+      {
+        "at": 1789666472845,
+        "level": 0.6,
+        "rms": 0.4122819280778622
+      },
+      {
+        "at": 1789666473343.7,
+        "level": 0.6,
+        "rms": 0.42724621656689055
+      },
+      {
+        "at": 1789666473848.7,
+        "level": 0.6,
+        "rms": 0.4343476156932921
+      },
+      {
+        "at": 1789666474335.5999,
+        "level": 0.6,
+        "rms": 0.4357043364535908
+      },
+      {
+        "at": 1789666474835.4,
+        "level": 0.6,
+        "rms": 0.4311082327136092
+      },
+      {
+        "at": 1789666475335.5999,
+        "level": 0.6,
+        "rms": 0.41302255925198217
+      },
+      {
+        "at": 1789666475835.5999,
+        "level": 0.6,
+        "rms": 0.42332894561667456
+      },
+      {
+        "at": 1789666476335.9,
+        "level": 0.6,
+        "rms": 0.43570457707834476
+      },
+      {
+        "at": 1789666476835.5,
+        "level": 0.6,
+        "rms": 0.4311092643842859
+      },
+      {
+        "at": 1789666477335.7,
+        "level": 0.6,
+        "rms": 0.4130230170944508
+      }
+    ],
+    "screenshots": [
+      "next-ready.png",
+      "next-generating.png",
+      "projector-generating.png",
+      "next-audio-reactive.png",
+      "projector-audio-reactive.png"
+    ]
+  },
+  "videos": [
+    {
+      "file": "/tmp/vj0-perf-evidence-20260917/app-flow.webm",
+      "sha256": "ba7caefeae49220b19cfad3d219a888b964e11902303dcca996d0bbaf96bda07",
+      "bytes": 2642293,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp9",
+            "width": 1440,
+            "height": 900,
+            "avg_frame_rate": "15/1"
+          }
+        ],
+        "format": {
+          "duration": "38.200000"
+        }
+      }
+    },
+    {
+      "file": "/tmp/vj0-perf-evidence-20260917/projector-flow.webm",
+      "sha256": "d6b71c48b9f0b8056cb00171904a631e3588aac32741e36f7f9dd50d28df5a66",
+      "bytes": 5777701,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp9",
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "15/1"
+          }
+        ],
+        "format": {
+          "duration": "38.134000"
+        }
+      }
+    }
+  ],
+  "files": [
+    {
+      "label": "Ready app",
+      "path": "/tmp/vj0-perf-evidence-20260917/next-ready.png",
+      "sha256": "2d071db5127465751b6d72f91b2965dae41135a1c8578549ed569e8aa090ca9e",
+      "bytes": 124985
+    },
+    {
+      "label": "Generating app",
+      "path": "/tmp/vj0-perf-evidence-20260917/next-generating.png",
+      "sha256": "fe62478ab12d6df8e00bbde8f90776dbb84aebbf6662e8840199bff05b332a18",
+      "bytes": 172650
+    },
+    {
+      "label": "Higher audio level, app",
+      "path": "/tmp/vj0-perf-evidence-20260917/next-audio-reactive.png",
+      "sha256": "f7754028603809e542533f49bf244517c329f888323d695574c83268644b7997",
+      "bytes": 185647
+    },
+    {
+      "label": "Generating projector",
+      "path": "/tmp/vj0-perf-evidence-20260917/projector-generating.png",
+      "sha256": "01907346d6cd414c92dcdff966ca8f8a2ed4c1af2ab40e542fcdc7e8b58dc5d3",
+      "bytes": 336663
+    },
+    {
+      "label": "Higher audio level, projector",
+      "path": "/tmp/vj0-perf-evidence-20260917/projector-audio-reactive.png",
+      "sha256": "b624ee2c9456c5e2963a827c2edf2867a9ebc0a0f5d2a84e446498171247a643",
+      "bytes": 460087
+    },
+    {
+      "label": "App flow, 38.2 seconds",
+      "path": "/tmp/vj0-perf-evidence-20260917/app-flow.webm",
+      "sha256": "ba7caefeae49220b19cfad3d219a888b964e11902303dcca996d0bbaf96bda07",
+      "bytes": 2642293
+    },
+    {
+      "label": "Projector flow, 38.1 seconds",
+      "path": "/tmp/vj0-perf-evidence-20260917/projector-flow.webm",
+      "sha256": "d6b71c48b9f0b8056cb00171904a631e3588aac32741e36f7f9dd50d28df5a66",
+      "bytes": 5777701
+    }
+  ],
+  "inspection": "Five screenshots and video samples at5/15/30seconds; model transformation visibly follows synthetic waveform amplitude. Final projector captures cover1920x1080. Physical display latency is not measured."
+}

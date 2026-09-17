@@ -1,5 +1,9 @@
 # Live image performance experiments — 2026-09-17
 
+All selected experiments have terminal outcomes, including the later cross-GPU
+ordering failure and corrected app confirmation. See [RESULTS.md](RESULTS.md)
+for the final outcome ledger and [APP.md](APP.md) for actual-app measurements.
+
 ## Objective and scope
 
 Increase useful displayed FPS and the resolution sustainable at 30 FPS, while

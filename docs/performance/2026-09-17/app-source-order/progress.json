@@ -1,0 +1,78 @@
+[
+  {
+    "name": "source-order-next-512x288-confirmation",
+    "status": "measured",
+    "config": {
+      "name": "source-order-next-512x288-confirmation",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": false,
+      "stress": false,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    },
+    "summary": "/tmp/vj0-app-source-order-20260917/source-order-next-512x288-confirmation/summary.json"
+  },
+  {
+    "name": "source-order-next-1024x576-confirmation",
+    "status": "measured",
+    "config": {
+      "name": "source-order-next-1024x576-confirmation",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 1024,
+      "height": 576,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": false,
+      "stress": false,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    },
+    "summary": "/tmp/vj0-app-source-order-20260917/source-order-next-1024x576-confirmation/summary.json"
+  },
+  {
+    "name": "source-order-next-768x448-ten-minute-soak",
+    "status": "measured",
+    "config": {
+      "name": "source-order-next-768x448-ten-minute-soak",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 600,
+      "width": 768,
+      "height": 448,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": true,
+      "stress": true,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2,
+      "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+      "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+    },
+    "summary": "/tmp/vj0-app-source-order-20260917/source-order-next-768x448-ten-minute-soak/summary.json",
+    "stress_status": "passed"
+  }
+]

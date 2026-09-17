@@ -13,8 +13,10 @@ Do not change the pod's host driver. FP8 import/forward and repeated compute tes
 about 31–32 / 15.8 / 9.0 at 512×288 / 768×448 / 1024×576. All 27 live
 transport comparisons are complete: combined one-GPU received medians are
 31.52 / 15.97 / 9.03 and two-GPU medians 57.21 / 31.48 / 18.08. Latency variation
-and paired results are in [NEWSTACK.md](NEWSTACK.md). The app soak is running;
-no dependency default is promoted.
+and paired results are in [NEWSTACK.md](NEWSTACK.md). The original app soak has a confirmed cross-GPU source-order failure; the
+paired dispatcher/worker correction passed three actual-app sizes and a new
+ten-minute soak/lifecycle check in [APP.md](APP.md).
+No dependency default is promoted.
 Fresh-cache compilation is expensive on both old and new stacks; the late old
 control used the new cache directory accidentally, so its cold run must be
 labelled separately from previously warm-cache controls.

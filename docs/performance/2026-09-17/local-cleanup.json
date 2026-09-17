@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-09-17T17:36:42.307576+00:00",
+  "status": "owned_local_test_services_closed",
+  "stopped_pids": [
+    37883,
+    37906,
+    77905,
+    23505,
+    23506,
+    23507,
+    23508,
+    23509,
+    23510
+  ],
+  "closed_browser_sessions": [
+    "vj0-app-check-20260917",
+    "vj0-perf-20260917"
+  ],
+  "ports_no_longer_listening": [
+    18765,
+    18766,
+    18767
+  ],
+  "remote_pods": "both task pods kept running; no stop/terminate performed",
+  "unrelated_local_port_8765": "untouched"
+}

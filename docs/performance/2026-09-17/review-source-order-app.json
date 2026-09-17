@@ -1,0 +1,1399 @@
+{
+  "reviewed_at_utc": "2026-09-17T17:32:08.829694+00:00",
+  "reviewer": "independent benchmark_review agent",
+  "reviewed_base_commit": "98dc3466c9b40ed1f900e85c33b3cae52c183523",
+  "status": "passed_for_tested_configuration_with_measurement_limits",
+  "scope": "Independent source and completed-raw-data audit of the source-order correction, two one-minute actual-app confirmations, one600-second actual-app soak and its separate lifecycle trial. No live browser, GPU, network or build activity was performed by this reviewer. This is not unrestricted deployment or performance promotion.",
+  "blockers": [],
+  "original_failed_run_preserved": {
+    "review": "review-app-soak.json",
+    "artifacts": "app-soak/",
+    "status": "valid_measurement_with_failed_temporal_ordering_acceptance",
+    "formal_reversals": {
+      "received": 2300,
+      "preview_image_raf": 1383,
+      "stage_gl": 2293
+    }
+  },
+  "source_review": {
+    "commit": "98dc3466c9b40ed1f900e85c33b3cae52c183523",
+    "independent_cpu_tests_passed": 10,
+    "generated_copy_check": "The recorded generated dispatcher and worker hashes match source-order-identity.json; their changed text is exactly the production correction,4 dispatcher edits and1 worker echo. The raw/tagged wire format and existing ordered channel are unchanged.",
+    "semantics": "Every incoming image obtains a server-owned increasing source sequence before dispatch admission; rejected inputs may leave harmless gaps. After current-epoch pending/output/watchdog accounting, results at or below the last successfully sent sequence are discarded. Successful JPEG send advances the sequence before stats send; congestion and failed JPEG sends do not advance it. Prior epochs are rejected first; missing/invalid echoes are counted and rejected.",
+    "checker_validation": "The new source-order checker reproduces2300/1383/2293 prior formal failures, accepts strictly increasing controls, and rejects duplicate/missing/reversed IDs.",
+    "diagnostic_limit": "The existing framesToClient diagnostic increments after stats send; a successful JPEG followed by a stats-send exception can be absent from that counter. This does not compromise the source watermark or the independently counted client measurements."
+  },
+  "identity": {
+    "app_source_commit": "4a02d2f",
+    "harness_sha256": "4d83a1944cabf155aa8b3ebf07dc14ad9f4736c0a9743821b7a1fb502941c3a1",
+    "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685",
+    "server_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+    "worker_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac",
+    "runtime_artifact": "source-order-runtime.json",
+    "runtime_artifact_sha256": "a10566c92a1338b0f14b2ba68880b1d74371a55d8fd961fd1d4572d284c447a3",
+    "qualification": "Saved process commands, workerGPU0/1 environments, source hashes and job options reconcile. The app/probe source is unchanged; the harness adds ordering checks. Both model workers are resident on the same two-GPU host, using the isolated newer stack and combined profile. No new runtime query was made during the audit."
+  },
+  "archive": {
+    "files_compared_to_originals": 28,
+    "lossless_gzip_raw_files": 8,
+    "status": "all archived data files match the completed local originals byte-for-byte after decompression; all8 raw hashes match archive.json"
+  },
+  "steady_checks": {
+    "formal_trials": 3,
+    "event_groups_recomputed": 33,
+    "common_window_events_reconciled": 228055,
+    "age_samples_recomputed": 70993,
+    "audio_rms_samples": 1440,
+    "window_definition": "For each trial,max(main.started,stage.started) through min(main.at,stage.at). FPS is unique IDs divided by that observed elapsed time; all counts,percentiles,means,dimensions and worker gaps recompute from this common interval.",
+    "capture_order_definition": "For each aged event,source capture time is reconstructed as at-ageMs. Every observed capture sequence is strictly increasing,with no tolerance needed. Minimum positive step across the steady streams is15.89990234375ms.",
+    "metadata_integrity": "Every formal aged preview/stage source ID resolves to a recorded main receipt; source capture timestamps agree within0.7001953125ms,consistent with separate sampling of epoch() in record/age fields. The correction is therefore verified beyond monotonic probe IDs.",
+    "health": "All three trials have both expected worker IDs,combined/cuda-events telemetry,the requested decoded dimensions,no probe/compile/connection errors,and an open main channel. All per-worker output gaps remain below2seconds."
+  },
+  "completed_trials": [
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/summary.json",
+      "config": {
+        "name": "source-order-next-512x288-confirmation",
+        "origin": "http://127.0.0.1:18766",
+        "source_commit": "4a02d2f",
+        "layout": "vj-next",
+        "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+        "seconds": 60,
+        "width": 512,
+        "height": 288,
+        "sendFps": 60,
+        "telemetry": true,
+        "audioCycle": false,
+        "stress": false,
+        "variant": "combined",
+        "maxPending": 3,
+        "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+        "activeWorkers": 2,
+        "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+        "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+      },
+      "status": "measured",
+      "problems": [],
+      "window": {
+        "start_epoch_ms": 1789665345906.8,
+        "end_epoch_ms": 1789665406111.1,
+        "observed_seconds": 60.204300048828124,
+        "main_probe_start_end": [
+          1789665345863,
+          1789665406111.1
+        ],
+        "stage_probe_start_end": [
+          1789665345906.8,
+          1789665406285.6
+        ]
+      },
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "viewport": [
+          1920,
+          1080
+        ],
+        "glBuffer": [
+          2048,
+          1152
+        ],
+        "devicePixelRatio": 1,
+        "mainViewport": [
+          1440,
+          900
+        ],
+        "focusEmulation": true
+      },
+      "metrics": {
+        "main": {
+          "preview-image-loaded": {
+            "events": 1778,
+            "unique_frames": 1778,
+            "fps": 29.53277421310388,
+            "dimensions": [
+              [
+                512,
+                288
+              ]
+            ],
+            "age_ms": {
+              "count": 1778,
+              "mean": 115.27502990654,
+              "p50": 114.35009765625,
+              "p95": 162.39990234375,
+              "p99": 195.37504882812505,
+              "min": 57.7998046875,
+              "max": 261.199951171875
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "preview-image-raf": {
+            "events": 1580,
+            "unique_frames": 1580,
+            "fps": 26.24397258532291,
+            "dimensions": [],
+            "age_ms": {
+              "count": 1580,
+              "mean": 124.67601967340784,
+              "p50": 123.550048828125,
+              "p95": 173.199951171875,
+              "p99": 201.94703857421877,
+              "min": 65.2001953125,
+              "max": 272.5
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "received": {
+            "events": 2019,
+            "unique_frames": 2019,
+            "fps": 33.53581053782719,
+            "dimensions": [],
+            "age_ms": {
+              "count": 2019,
+              "mean": 117.84423223517211,
+              "p50": 120.39990234375,
+              "p95": 178.92011718749998,
+              "p99": 219.699951171875,
+              "min": 56.699951171875,
+              "max": 260
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "sent": {
+            "events": 2263,
+            "unique_frames": 2263,
+            "fps": 37.58867719024414,
+            "dimensions": [],
+            "age_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "events": 1965,
+            "unique_frames": 1965,
+            "fps": 32.63886463934147,
+            "dimensions": [
+              [
+                2048,
+                1152
+              ]
+            ],
+            "age_ms": {
+              "count": 1965,
+              "mean": 120.51898556774809,
+              "p50": 122.60009765625,
+              "p95": 179.8,
+              "p99": 223.4600097656249,
+              "min": 58.2998046875,
+              "max": 266.2998046875
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        }
+      },
+      "worker_activity": {
+        "0": {
+          "frames": 1015,
+          "max_gap_ms": 447.2998046875
+        },
+        "1": {
+          "frames": 1004,
+          "max_gap_ms": 522.7001953125
+        }
+      },
+      "audio_rms_by_fixture_level": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14137535982666438,
+          "p50": 0.14241941921062334,
+          "p95": 0.14396257008228674,
+          "p99": 0.1452072876509363,
+          "min": 0.1376282416457701,
+          "max": 0.14528280655526668
+        }
+      },
+      "audio_fixture_change_count": 0,
+      "source_and_capture_order": {
+        "main": {
+          "preview-image-loaded": {
+            "frames": 1778,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 1778,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "preview-image-raf": {
+            "frames": 1580,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 1580,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "received": {
+            "frames": 2019,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 2019,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.0
+          },
+          "sent": {
+            "frames": 2263,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-post": {
+            "frames": 2019,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "frames": 1965,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-message": {
+            "frames": 2019,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "webgl-frame-submitted": {
+            "frames": 1965,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 1965,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          }
+        }
+      },
+      "main_channel_states": [
+        "open"
+      ]
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/summary.json",
+      "config": {
+        "name": "source-order-next-1024x576-confirmation",
+        "origin": "http://127.0.0.1:18766",
+        "source_commit": "4a02d2f",
+        "layout": "vj-next",
+        "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+        "seconds": 60,
+        "width": 1024,
+        "height": 576,
+        "sendFps": 60,
+        "telemetry": true,
+        "audioCycle": false,
+        "stress": false,
+        "variant": "combined",
+        "maxPending": 3,
+        "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+        "activeWorkers": 2,
+        "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+        "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+      },
+      "status": "measured",
+      "problems": [],
+      "window": {
+        "start_epoch_ms": 1789665425183,
+        "end_epoch_ms": 1789665485393.8,
+        "observed_seconds": 60.210800048828126,
+        "main_probe_start_end": [
+          1789665425139,
+          1789665485393.8
+        ],
+        "stage_probe_start_end": [
+          1789665425183,
+          1789665485488.7998
+        ]
+      },
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "viewport": [
+          1920,
+          1080
+        ],
+        "glBuffer": [
+          2048,
+          1152
+        ],
+        "devicePixelRatio": 1,
+        "mainViewport": [
+          1440,
+          900
+        ],
+        "focusEmulation": true
+      },
+      "metrics": {
+        "main": {
+          "preview-image-loaded": {
+            "events": 957,
+            "unique_frames": 957,
+            "fps": 15.89415851016625,
+            "dimensions": [
+              [
+                1024,
+                576
+              ]
+            ],
+            "age_ms": {
+              "count": 957,
+              "mean": 391.8354165646225,
+              "p50": 388.39990234375,
+              "p95": 452.36005859375,
+              "p99": 479.143896484375,
+              "min": 321.89990234375,
+              "max": 497.60009765625
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "preview-image-raf": {
+            "events": 923,
+            "unique_frames": 923,
+            "fps": 15.32947576267863,
+            "dimensions": [],
+            "age_ms": {
+              "count": 923,
+              "mean": 400.45384393198134,
+              "p50": 399.7998046875,
+              "p95": 456.86013183593747,
+              "p99": 485.4579833984375,
+              "min": 333.199951171875,
+              "max": 509.099853515625
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "received": {
+            "events": 1025,
+            "unique_frames": 1025,
+            "fps": 17.02352400514149,
+            "dimensions": [],
+            "age_ms": {
+              "count": 1025,
+              "mean": 391.73950838414635,
+              "p50": 386.300048828125,
+              "p95": 456.380126953125,
+              "p99": 479.599951171875,
+              "min": 319.800048828125,
+              "max": 494.800048828125
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "sent": {
+            "events": 2301,
+            "unique_frames": 2301,
+            "fps": 38.215735352029824,
+            "dimensions": [],
+            "age_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "events": 1024,
+            "unique_frames": 1024,
+            "fps": 17.006915689038912,
+            "dimensions": [
+              [
+                2048,
+                1152
+              ]
+            ],
+            "age_ms": {
+              "count": 1024,
+              "mean": 397.0849549770355,
+              "p50": 391.39990234375,
+              "p95": 462.3849243164062,
+              "p99": 484.86386474609367,
+              "min": 324.39990234375,
+              "max": 499.599853515625
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        }
+      },
+      "worker_activity": {
+        "0": {
+          "frames": 502,
+          "max_gap_ms": 337.599853515625
+        },
+        "1": {
+          "frames": 523,
+          "max_gap_ms": 312.0
+        }
+      },
+      "audio_rms_by_fixture_level": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14121529294130877,
+          "p50": 0.14245717092468055,
+          "p95": 0.14433133066329254,
+          "p99": 0.14505822632772136,
+          "min": 0.1374943091014653,
+          "max": 0.14505884314880463
+        }
+      },
+      "audio_fixture_change_count": 0,
+      "source_and_capture_order": {
+        "main": {
+          "preview-image-loaded": {
+            "frames": 957,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 957,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "preview-image-raf": {
+            "frames": 923,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 923,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.599853515625,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "received": {
+            "frames": 1025,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 1025,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.0
+          },
+          "sent": {
+            "frames": 2301,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-post": {
+            "frames": 1025,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "frames": 1024,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-message": {
+            "frames": 1025,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "webgl-frame-submitted": {
+            "frames": 1024,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 1024,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 16.5,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          }
+        }
+      },
+      "main_channel_states": [
+        "open"
+      ]
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/summary.json",
+      "config": {
+        "name": "source-order-next-768x448-ten-minute-soak",
+        "origin": "http://127.0.0.1:18766",
+        "source_commit": "4a02d2f",
+        "layout": "vj-next",
+        "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+        "seconds": 600,
+        "width": 768,
+        "height": 448,
+        "sendFps": 60,
+        "telemetry": true,
+        "audioCycle": true,
+        "stress": true,
+        "variant": "combined",
+        "maxPending": 3,
+        "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+        "activeWorkers": 2,
+        "server_source_sha256": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+        "worker_source_sha256": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+      },
+      "status": "measured",
+      "problems": [],
+      "window": {
+        "start_epoch_ms": 1789665503150.2,
+        "end_epoch_ms": 1789666103403.0999,
+        "observed_seconds": 600.2528999023438,
+        "main_probe_start_end": [
+          1789665503107.9,
+          1789666103403.0999
+        ],
+        "stage_probe_start_end": [
+          1789665503150.2,
+          1789666104112.6
+        ]
+      },
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "viewport": [
+          1920,
+          1080
+        ],
+        "glBuffer": [
+          2304,
+          1344
+        ],
+        "devicePixelRatio": 1,
+        "mainViewport": [
+          1440,
+          900
+        ],
+        "focusEmulation": true
+      },
+      "metrics": {
+        "main": {
+          "preview-image-loaded": {
+            "events": 14573,
+            "unique_frames": 14573,
+            "fps": 24.278100118085074,
+            "dimensions": [
+              [
+                768,
+                448
+              ]
+            ],
+            "age_ms": {
+              "count": 14573,
+              "mean": 225.62690593196214,
+              "p50": 224.7001953125,
+              "p95": 270.9,
+              "p99": 310.399970703125,
+              "min": 120.39990234375,
+              "max": 498.599853515625
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "preview-image-raf": {
+            "events": 12923,
+            "unique_frames": 12923,
+            "fps": 21.52925875427252,
+            "dimensions": [],
+            "age_ms": {
+              "count": 12923,
+              "mean": 234.3611153638982,
+              "p50": 233.300048828125,
+              "p95": 277.699951171875,
+              "p99": 316.400146484375,
+              "min": 130.5,
+              "max": 509.199951171875
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "received": {
+            "events": 16182,
+            "unique_frames": 16182,
+            "fps": 26.958636938918044,
+            "dimensions": [],
+            "age_ms": {
+              "count": 16182,
+              "mean": 225.99969818111464,
+              "p50": 223.5,
+              "p95": 280.2950561523438,
+              "p99": 324.0189721679688,
+              "min": 118.60009765625,
+              "max": 526.2001953125
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          },
+          "sent": {
+            "events": 22220,
+            "unique_frames": 22220,
+            "fps": 37.01773036600908,
+            "dimensions": [],
+            "age_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "events": 16044,
+            "unique_frames": 16044,
+            "fps": 26.72873384303554,
+            "dimensions": [
+              [
+                2304,
+                1344
+              ]
+            ],
+            "age_ms": {
+              "count": 16044,
+              "mean": 230.67385971537257,
+              "p50": 227.699951171875,
+              "p95": 284.9850219726563,
+              "p99": 329.8569653320312,
+              "min": 122.199951171875,
+              "max": 532.2001953125
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            }
+          }
+        }
+      },
+      "worker_activity": {
+        "0": {
+          "frames": 8376,
+          "max_gap_ms": 710.7001953125
+        },
+        "1": {
+          "frames": 7806,
+          "max_gap_ms": 1520.699951171875
+        }
+      },
+      "audio_rms_by_fixture_level": {
+        "0": {
+          "count": 428,
+          "mean": 0.0006572784345813178,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0,
+          "max": 0.281315170000804
+        },
+        "0.2": {
+          "count": 426,
+          "mean": 0.1410210724112935,
+          "p50": 0.14124555128230143,
+          "p95": 0.1451109230494688,
+          "p99": 0.14520808375421096,
+          "min": 0,
+          "max": 0.14530587775659462
+        },
+        "0.6": {
+          "count": 346,
+          "mean": 0.4245415594280983,
+          "p50": 0.4244390415057667,
+          "p95": 0.4308900965270883,
+          "p99": 0.43095056686865113,
+          "min": 0.4174661810869494,
+          "max": 0.43095359191109156
+        }
+      },
+      "audio_fixture_change_count": 20,
+      "source_and_capture_order": {
+        "main": {
+          "preview-image-loaded": {
+            "frames": 14573,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 14573,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 15.89990234375,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "preview-image-raf": {
+            "frames": 12923,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 12923,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 15.89990234375,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.10009765625
+          },
+          "received": {
+            "frames": 16182,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 16182,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 15.89990234375,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.0
+          },
+          "sent": {
+            "frames": 22220,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-post": {
+            "frames": 16182,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "frames": 16044,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "stage-message": {
+            "frames": 16182,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0
+          },
+          "webgl-frame-submitted": {
+            "frames": 16044,
+            "missing_ids": 0,
+            "duplicate_ids": 0,
+            "source_id_reversals": 0,
+            "capture_timestamp_samples": 16044,
+            "capture_timestamp_reversals": 0,
+            "capture_timestamp_duplicates": 0,
+            "minimum_capture_step_ms": 15.89990234375,
+            "unmatched_receive_ids": 0,
+            "maximum_capture_metadata_difference_ms": 0.7001953125
+          }
+        }
+      },
+      "main_channel_states": [
+        "open"
+      ]
+    }
+  ],
+  "stress": {
+    "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/stress.json",
+    "status": "passed",
+    "errors": [],
+    "checked_actions": 10,
+    "actions": [
+      {
+        "action": "prompt",
+        "index": 0,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789666104906.7,
+        "first_subsequent_capture_received_at": 1789666105060.9,
+        "settings_to_new_capture_receive_ms": 154.199951171875,
+        "frame_id": 22356
+      },
+      {
+        "action": "prompt",
+        "index": 1,
+        "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+        "settings_sent_at": 1789666108342.7,
+        "first_subsequent_capture_received_at": 1789666108509.3,
+        "settings_to_new_capture_receive_ms": 166.60009765625,
+        "frame_id": 22462
+      },
+      {
+        "action": "prompt",
+        "index": 2,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789666111772.0999,
+        "first_subsequent_capture_received_at": 1789666111901.5999,
+        "settings_to_new_capture_receive_ms": 129.5,
+        "frame_id": 22569
+      },
+      {
+        "action": "resolution",
+        "width": 1024,
+        "height": 576,
+        "started_at": 1789666115148.5,
+        "matching_worker_output_at": 1789666115374.4,
+        "change_to_matching_worker_output_ms": 225.89990234375,
+        "subsequent_frame_id": 22693,
+        "main_decoded_frame_id": 22693,
+        "stage_decoded_frame_id": 22693
+      },
+      {
+        "action": "resolution",
+        "width": 512,
+        "height": 288,
+        "started_at": 1789666118773.2,
+        "matching_worker_output_at": 1789666118948.5999,
+        "change_to_matching_worker_output_ms": 175.39990234375,
+        "subsequent_frame_id": 22811,
+        "main_decoded_frame_id": 22811,
+        "stage_decoded_frame_id": 22811
+      },
+      {
+        "action": "resolution",
+        "width": 768,
+        "height": 448,
+        "started_at": 1789666122416.2,
+        "matching_worker_output_at": 1789666122601.2,
+        "change_to_matching_worker_output_ms": 185.0,
+        "subsequent_frame_id": 22942,
+        "main_decoded_frame_id": 22943,
+        "stage_decoded_frame_id": 22942
+      },
+      {
+        "action": "ten-rapid-prompts",
+        "final_prompt_observed": true,
+        "subsequent_frame_id": 23100
+      },
+      {
+        "action": "reconnect",
+        "index": 0,
+        "connect_clicked_at": 1789666130862.5999,
+        "disconnect_clicked_at": 1789666128665.4,
+        "new_capture_received_at": 1789666142013.9,
+        "reconnect_to_new_capture_receive_ms": 11151.300048828125,
+        "frame_id": 23150
+      },
+      {
+        "action": "reconnect",
+        "index": 1,
+        "connect_clicked_at": 1789666148488.9,
+        "disconnect_clicked_at": 1789666146247.2,
+        "new_capture_received_at": 1789666159654.8,
+        "reconnect_to_new_capture_receive_ms": 11165.900146484375,
+        "frame_id": 23302
+      },
+      {
+        "action": "reconnect",
+        "index": 2,
+        "connect_clicked_at": 1789666166088.3,
+        "disconnect_clicked_at": 1789666163904.2,
+        "new_capture_received_at": 1789666177273.0999,
+        "reconnect_to_new_capture_receive_ms": 11184.7998046875,
+        "frame_id": 23467
+      }
+    ],
+    "target_windows": {
+      "main": {
+        "start_epoch_ms": 1789666104776.9,
+        "end_epoch_ms": 1789666181412.3,
+        "seconds": 76.63540014648437
+      },
+      "stage": {
+        "start_epoch_ms": 1789666104817.9,
+        "end_epoch_ms": 1789666181551.1,
+        "seconds": 76.7332001953125
+      }
+    },
+    "source_and_capture_order": {
+      "main": {
+        "preview-image-loaded": {
+          "frames": 989,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 989,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": 16.5,
+          "final_event_age_ms": 56.800048828125
+        },
+        "preview-image-raf": {
+          "frames": 861,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 861,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": 16.599853515625,
+          "final_event_age_ms": 42.5
+        },
+        "received": {
+          "frames": 1049,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 1049,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": 16.5,
+          "final_event_age_ms": 58.7001953125
+        },
+        "sent": {
+          "frames": 1270,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 0,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": null,
+          "final_event_age_ms": 7.60009765625
+        },
+        "stage-post": {
+          "frames": 1049,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 0,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": null,
+          "final_event_age_ms": 57.2001953125
+        }
+      },
+      "stage": {
+        "bitmap-decoded": {
+          "frames": 1052,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 0,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": null,
+          "final_event_age_ms": 24.400146484375
+        },
+        "stage-message": {
+          "frames": 1052,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 0,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": null,
+          "final_event_age_ms": 25.10009765625
+        },
+        "webgl-frame-submitted": {
+          "frames": 1052,
+          "source_id_reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamp_samples": 1052,
+          "capture_timestamp_reversals": 0,
+          "capture_timestamp_duplicates": 0,
+          "minimum_capture_step_ms": 16.5,
+          "final_event_age_ms": 24.10009765625
+        }
+      }
+    },
+    "main_final_channel_states": [
+      "closed",
+      "closed",
+      "closed",
+      "open"
+    ],
+    "checks": [
+      "All3 prompt settings events and reported settings\u2192subsequent-capture receive intervals reconcile with raw timestamps. Each is followed by stage output.",
+      "All3 genuine shape changes1024x576\u2192512x288\u2192768x448 have matching worker reports and subsequently decoded main/stage frames of that size; the specific stage decoded ID is also submitted. On the return to768,the main decoded ID22943 and stage ID22942 legitimately differ because each surface advances independently.",
+      "All10 rapid prompt edits reached outgoing settings,including cue9,and subsequent captured output recovered.",
+      "All3 reconnects have a recorded new connected event,post-click source capture and later stage output. Connect\u2192new-capture receive delays11151.300048828125,11165.900146484375,11184.7998046875ms are preserved.",
+      "All observed stress streams have zero source-ID reversals/duplicates and strictly increasing reconstructed capture timestamps where available. Source-ID gaps are valid dropped/skipped inputs.",
+      "No errors or unexpected failed connection events are recorded; the final main channel is open and3 prior channels are closed. Final receive/RAF/stage output freshness is58.7002/42.5/24.1001ms."
+    ],
+    "count_scope": "1049 receives,861 preview RAF observations and1052 stage submissions belong to separate stress target windows,not one common interval. The stage end is138.800048828125ms later than the main end; do not compare these as loss counts or steady FPS.",
+    "prompt_semantics": "Settings-sent\u2192receive of an input captured afterward proves control transmission and fresh output recovery. It does not identify the model prompt revision used for that output,prove visual prompt adherence,or measure isolated cold/warm prompt embedding latency."
+  },
+  "cleanup": {
+    "status": "pages-closed",
+    "errors": []
+  },
+  "conclusions": [
+    "The original cross-GPU reversal is absent in all three corrected actual-app steady trials and the complete scripted lifecycle test,both by source IDs and reconstructed capture timestamps. This verifies the bounded ordering correction for the tested ordered-channel configuration.",
+    "At768x448,the observed600.2529second run records16182 receipts,12923 preview RAF observations and16044 stage submissions:26.9586/21.5293/26.7287FPS. Stage age p95 is284.9850ms,p99329.8570ms,max532.2002ms. These are actual app instrumentation results at their stated boundaries.",
+    "The512x288 one-minute confirmation records33.5358 received/26.2440 preview RAF/32.6389 stageFPS;1024x576 records17.0235/15.3295/17.0069FPS. They are single confirmations,not repeated per-size performance estimates.",
+    "Compared with the earlier failed-ordering soak,lower stage FPS and improved tail ages are sequential observations. Rejecting older output is a verified correctness change; the entire latency difference cannot be causally assigned to it because transport/time also changed. No original failed evidence is replaced.",
+    "The real analyser responds to synthetic WebAudio gains0/0.2/0.6 with median RMS0/0.14125/0.42444 in the long run. Transition samples remain:one gain0 sample reaches0.2813 and the gain0.2 minimum is0. These commanded-level groups are not instantaneous settled-level guarantees."
+  ],
+  "limitations": [
+    "Preview RAF observes a currently loaded image at an animation-frame callback;stage GL records final framebuffer submission. Neither proves compositor/physical projector presentation or completion of GPU display work.",
+    "Age starts at canvas encode initiation,excluding prior audio acquisition/canvas copying and physical presentation. Synthetic oscillator MediaStreams exercise real WebAudio analysis,not a physical microphone/device path.",
+    "The1920x1080 stage viewport differs from the actual GL buffer:2048x1152 for512/1024generated sizes,2304x1344 for768. All dimensions are retained.",
+    "The768preview is21.529FPS despite26.729stage submissions/s. A60FPS capture setting produced only about37\u201338sends/s; these confirmations do not establish30FPS preview or the standalone57FPS transport rate in the actual app.",
+    "The corrected one-minute confirmations and ten-minute soak are not matched repeated before/after timing experiments. They validate observed functionality/order/stability for this fixture and profile,not universal speed,quality equivalence or all workloads.",
+    "The stress reconnects take about11.15\u201311.18seconds. Passing recovery is not a low-latency reconnection claim. Deliberate stress pauses are excluded from steady FPS.",
+    "This audit does not establish source ordering for an unordered transport channel;the production path tested here is ordered."
+  ],
+  "artifact_bindings": [
+    {
+      "artifact": "app-source-order/archive.json",
+      "sha256": "9090b57d072afd5cc2fc60d34472ef89b8b373f96a16ed3a2464f8449541559d",
+      "encoding": "identity",
+      "uncompressed_sha256": "9090b57d072afd5cc2fc60d34472ef89b8b373f96a16ed3a2464f8449541559d",
+      "uncompressed_bytes": 1125
+    },
+    {
+      "artifact": "app-source-order/cleanup.json",
+      "sha256": "6265f89e41fee29cf415e98428968a763b306f30512d854b5b0f22478a490f44",
+      "encoding": "identity",
+      "uncompressed_sha256": "6265f89e41fee29cf415e98428968a763b306f30512d854b5b0f22478a490f44",
+      "uncompressed_bytes": 47
+    },
+    {
+      "artifact": "app-source-order/identity.json",
+      "sha256": "23c97b2e5adf91971466efd6b38251b7dad9fd878341a42f2676bba49c96367c",
+      "encoding": "identity",
+      "uncompressed_sha256": "23c97b2e5adf91971466efd6b38251b7dad9fd878341a42f2676bba49c96367c",
+      "uncompressed_bytes": 4214
+    },
+    {
+      "artifact": "app-source-order/progress.json",
+      "sha256": "b677f843f21c39d9a799d4f5952e45c6e1b115e50694965f968afd4e70c36b46",
+      "encoding": "identity",
+      "uncompressed_sha256": "b677f843f21c39d9a799d4f5952e45c6e1b115e50694965f968afd4e70c36b46",
+      "uncompressed_bytes": 2890
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/input-0.2.jpg",
+      "sha256": "4c51d98cccdc0e69145bd7f3a5ecfbf7eb4bd10a93483e973b0ef85f68179233",
+      "encoding": "identity",
+      "uncompressed_sha256": "4c51d98cccdc0e69145bd7f3a5ecfbf7eb4bd10a93483e973b0ef85f68179233",
+      "uncompressed_bytes": 8131
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/main-raw.json.gz",
+      "sha256": "c91444e1d6d4080ec6079284fda08aff6f1457b38a20cf5f11ab168164f44c38",
+      "encoding": "gzip",
+      "uncompressed_sha256": "3ae0844bfd4bcf72eef406cc55440f96840cb920a3be36d9d126740b50736c3d",
+      "uncompressed_bytes": 1760195
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/output-0.2.jpg",
+      "sha256": "9f07c1798e61e82dc0ef84bfb7cbfcd529f08d55e5d5084976b02a5c1b325744",
+      "encoding": "identity",
+      "uncompressed_sha256": "9f07c1798e61e82dc0ef84bfb7cbfcd529f08d55e5d5084976b02a5c1b325744",
+      "uncompressed_bytes": 18649
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/renderer.json",
+      "sha256": "34e9a4b46207592a31bae520f2d143269971ec396cfdbf41be84639b7c70fcae",
+      "encoding": "identity",
+      "uncompressed_sha256": "34e9a4b46207592a31bae520f2d143269971ec396cfdbf41be84639b7c70fcae",
+      "uncompressed_bytes": 427
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/stage-raw.json.gz",
+      "sha256": "648272450b0080e29d4b388e7aa3a6aa6481ab48bf78dd204a616b9f9ef664c6",
+      "encoding": "gzip",
+      "uncompressed_sha256": "91a67fe42c685a8738ad0b7a08ff2e2bfe486a02fe127db314c8f073d4a67353",
+      "uncompressed_bytes": 433725
+    },
+    {
+      "artifact": "app-source-order/source-order-next-1024x576-confirmation/summary.json",
+      "sha256": "2a2b67441ca26b6e428fbb67ea22dd1ca90e41e4da723c1a4d0774fdd1d8f1fe",
+      "encoding": "identity",
+      "uncompressed_sha256": "2a2b67441ca26b6e428fbb67ea22dd1ca90e41e4da723c1a4d0774fdd1d8f1fe",
+      "uncompressed_bytes": 9108
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/input-0.2.jpg",
+      "sha256": "d7116fa725c3455f6cc1e81e187076dc872dd7dc5dd23ce055e42de4e1b5194c",
+      "encoding": "identity",
+      "uncompressed_sha256": "d7116fa725c3455f6cc1e81e187076dc872dd7dc5dd23ce055e42de4e1b5194c",
+      "uncompressed_bytes": 3391
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/main-raw.json.gz",
+      "sha256": "9e3a86e344eaec94e13b56eaa5c54a5e37326c7f76dcdb88b859573bb2d3cc75",
+      "encoding": "gzip",
+      "uncompressed_sha256": "638ac778c27f92ea1938a06bae63ef9bf52d6b196603497f233be9a87586a720",
+      "uncompressed_bytes": 2627357
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/output-0.2.jpg",
+      "sha256": "6604ab0ba5d5fc83b4f4e3ee90e468ea1351b31bd674159eef88a3a3c4858bd9",
+      "encoding": "identity",
+      "uncompressed_sha256": "6604ab0ba5d5fc83b4f4e3ee90e468ea1351b31bd674159eef88a3a3c4858bd9",
+      "uncompressed_bytes": 15021
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/renderer.json",
+      "sha256": "34e9a4b46207592a31bae520f2d143269971ec396cfdbf41be84639b7c70fcae",
+      "encoding": "identity",
+      "uncompressed_sha256": "34e9a4b46207592a31bae520f2d143269971ec396cfdbf41be84639b7c70fcae",
+      "uncompressed_bytes": 427
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/stage-raw.json.gz",
+      "sha256": "30cf651f537294e32344fc499ab024e53fcf2fecfcc388ead5dd124166596145",
+      "encoding": "gzip",
+      "uncompressed_sha256": "b496444c7f7a17e90c03498e124eb4216b560dd97f9b4e136c1f6f3af23cbc45",
+      "uncompressed_bytes": 825618
+    },
+    {
+      "artifact": "app-source-order/source-order-next-512x288-confirmation/summary.json",
+      "sha256": "f8d292f6d18312bf578042174791ee58b0bb6e31c3f5941392046531585ad00d",
+      "encoding": "identity",
+      "uncompressed_sha256": "f8d292f6d18312bf578042174791ee58b0bb6e31c3f5941392046531585ad00d",
+      "uncompressed_bytes": 9099
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/input-0.2.jpg",
+      "sha256": "d18993f41e52aa61d099b51e327d1cfd348befd92aa671e58d64ccf6162f2450",
+      "encoding": "identity",
+      "uncompressed_sha256": "d18993f41e52aa61d099b51e327d1cfd348befd92aa671e58d64ccf6162f2450",
+      "uncompressed_bytes": 3769
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/input-0.6.jpg",
+      "sha256": "eb8989de322b23c1432f54590862777569638e844c0a02001ea9e0be04dd93d4",
+      "encoding": "identity",
+      "uncompressed_sha256": "eb8989de322b23c1432f54590862777569638e844c0a02001ea9e0be04dd93d4",
+      "uncompressed_bytes": 5609
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/input-0.jpg",
+      "sha256": "887634c2c111593c70ac0b8f09977feed007d9618ec6f9c526279d1aa2b6971a",
+      "encoding": "identity",
+      "uncompressed_sha256": "887634c2c111593c70ac0b8f09977feed007d9618ec6f9c526279d1aa2b6971a",
+      "uncompressed_bytes": 5685
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/main-raw.json.gz",
+      "sha256": "df7a2e52ab21dfe3814b84aa35241266858e3da280235583b2647422cda66074",
+      "encoding": "gzip",
+      "uncompressed_sha256": "366c820f623d5f21ee1c17acecb08a3a07af08d76ac12b36a6646bfd23ea574c",
+      "uncompressed_bytes": 22693693
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/main-stress-raw.json.gz",
+      "sha256": "7e15ef2bc67e2baedfcd3d829052d88c94a260756f800c1ba6e96a5940aeb4fd",
+      "encoding": "gzip",
+      "uncompressed_sha256": "3cc86ef1b72f7b77d39bc9a3ea9536b8917ad99927ef9064df16915d8c6be171",
+      "uncompressed_bytes": 1442278
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/output-0.2.jpg",
+      "sha256": "e58dd2e323cbb9d59ae8bdb90b444e61a99fe58e49fc3b3a7b6b182d59c48462",
+      "encoding": "identity",
+      "uncompressed_sha256": "e58dd2e323cbb9d59ae8bdb90b444e61a99fe58e49fc3b3a7b6b182d59c48462",
+      "uncompressed_bytes": 13801
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/output-0.6.jpg",
+      "sha256": "616db4188868f21b0a0153df83b29bdfd9b4999992cf1793e84407a98b33e630",
+      "encoding": "identity",
+      "uncompressed_sha256": "616db4188868f21b0a0153df83b29bdfd9b4999992cf1793e84407a98b33e630",
+      "uncompressed_bytes": 15865
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/output-0.jpg",
+      "sha256": "d8059f2ae7dbe6834638c555473f376c33face8d9433209083143e6c9b7064c9",
+      "encoding": "identity",
+      "uncompressed_sha256": "d8059f2ae7dbe6834638c555473f376c33face8d9433209083143e6c9b7064c9",
+      "uncompressed_bytes": 13396
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/renderer.json",
+      "sha256": "9af736d22761b429a22d4f3abdcba7571aa793c25df2cc781a80e0292c9fdcc7",
+      "encoding": "identity",
+      "uncompressed_sha256": "9af736d22761b429a22d4f3abdcba7571aa793c25df2cc781a80e0292c9fdcc7",
+      "uncompressed_bytes": 427
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/stage-raw.json.gz",
+      "sha256": "9ba5282fdfaf3c8ff4baa8196cc585d63e54eaa55c01148a4783ce1edd55511a",
+      "encoding": "gzip",
+      "uncompressed_sha256": "aa786bd3651e99cdf584e4b85c3ff578419267f26f4914c059863765c3b076f4",
+      "uncompressed_bytes": 6753404
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/stage-stress-raw.json.gz",
+      "sha256": "140f55fa6efc4817fc282d92532e254692dd2bba7e9b268a5be024e340f84c47",
+      "encoding": "gzip",
+      "uncompressed_sha256": "16a8fdaf4cb4cc60680b3bcac7aded08ddc9966a99345ee68a8c0261558514e1",
+      "uncompressed_bytes": 443330
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/stress.json",
+      "sha256": "c124be3612ee72310189b8a73b6389364405e7bcd71836e62c9f692d028b20b2",
+      "encoding": "identity",
+      "uncompressed_sha256": "c124be3612ee72310189b8a73b6389364405e7bcd71836e62c9f692d028b20b2",
+      "uncompressed_bytes": 3824
+    },
+    {
+      "artifact": "app-source-order/source-order-next-768x448-ten-minute-soak/summary.json",
+      "sha256": "c63041149acc170bbcb7aea03e26c6dba1ceff481a3ed0d7c0a2a9b9be0f9da8",
+      "encoding": "identity",
+      "uncompressed_sha256": "c63041149acc170bbcb7aea03e26c6dba1ceff481a3ed0d7c0a2a9b9be0f9da8",
+      "uncompressed_bytes": 9532
+    }
+  ]
+}

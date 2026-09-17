@@ -1,0 +1,63 @@
+{
+  "ready": true,
+  "failed": false,
+  "manifest": {
+    "status": "running",
+    "dispatcher_pid": 567,
+    "runner_pid": 74772,
+    "jobs": [
+      {
+        "name": "source-order-service",
+        "argv": [
+          "node",
+          "/workspace/source-order-20260917/server.js"
+        ],
+        "cwd": "/app",
+        "started_at": "2026-09-17T17:11:46.696178+00:00",
+        "status": "running",
+        "pid": 74775
+      }
+    ]
+  },
+  "workers": {
+    "74782": {
+      "argv": [
+        "python3",
+        "/workspace/source-order-20260917/inference_server.py"
+      ],
+      "exe": "/usr/bin/python3.12",
+      "env": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "PYTHONPATH": "/workspace/scaling-livebench-20260917",
+        "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+        "USE_VAE_FP8": "1",
+        "COMPILE_MODE": "reduce-overhead",
+        "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+        "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+      }
+    },
+    "74783": {
+      "argv": [
+        "python3",
+        "/workspace/source-order-20260917/inference_server.py"
+      ],
+      "exe": "/usr/bin/python3.12",
+      "env": {
+        "CUDA_VISIBLE_DEVICES": "1",
+        "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "PYTHONPATH": "/workspace/scaling-livebench-20260917",
+        "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+        "USE_VAE_FP8": "1",
+        "COMPILE_MODE": "reduce-overhead",
+        "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+        "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+      }
+    }
+  },
+  "source_hashes": {
+    "server.js": "e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f",
+    "inference_server.py": "cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac"
+  },
+  "recorded_at_epoch": 1789665327.765794
+}

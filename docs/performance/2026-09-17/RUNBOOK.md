@@ -1,99 +1,58 @@
-# Current checkpoint: source-order correction
+# Completed performance experiment record
 
-17:13 UTC: Original 600-second app soak and lifecycle completed and collected in
-app-soak/. Independent review found 2,293 stage source reversals; do not call this
-an unqualified pass. New paired dispatcher/worker adds internal source_seq for
-all raw/tagged images, drops older-than-last-delivered output without withholding
-pending/watchdog accounting, and reports protocol/order drops separately.
+All selected timed tests are complete. Corrected app results and remaining
+limits are in [RESULTS.md](RESULTS.md) and [APP.md](APP.md). The original snapshot
+is pushed at a10fdbe; the isolated branch is perf/2026-09-live-bench. Source-order
+correction checkpoint98dc346 is pushed. The final report and audit artifacts are
+saved on the same branch. Main and the stable image tag were not overwritten.
 
-Pod B transition started source-order-service runner74772/server74775, manifest
-/workspace/source-order-service-20260917/sweep.json. New exact source hashes are
-in source-order-identity.json. Both workers are warming. Run app-source-order-jobs.json
-(60s512,60s1024,600s768+stress) into /tmp/vj0-app-source-order-20260917 after
-warmup and checkpoint push. Harness now explicitly rejects source reversals;
-probe, timing, continuity and age criteria otherwise remain fixed. The old
-soak fails this new assertion on both real app surfaces. CDP supervisor25051
-keeps probe/focus/viewport alive for two hours from17:11UTC.
+## Retained running resources
 
-Finish correction trials, inspect temporal quality, capture screenshots/videos
-outside timed work, review, update reports, commit/push, verify final resources.
-Keep both pods running as authorized. Earlier checkpoint details follow for
-provenance; their running/pending statements are historical.
+- Pod B 9vj8k6guaxsbhw: two RTX PRO6000 GPUs, $4.18 GPU/hour, corrected ordered
+  source delivery. Runner74772/server74775; workers74782/74783. Manifest
+  /workspace/source-order-service-20260917/sweep.json; job source
+  /workspace/source-order-20260917/jobs.json. Server URL
+  https://9vj8k6guaxsbhw-3001.proxy.runpod.net. Both workers ready.
+- Pod A 0pxb4bss2jmbhg: one RTX PRO6000, $2.09 GPU/hour, retained older baseline
+  Klein service. Runner49372, /workspace/stream512-paced-20260917/sweep.json.
+  Its service is healthy; it has not been switched to the newer source-order
+  deployment. Original Node499 remains paused; B original Node567 is paused.
+- Account quote at17:32UTC: $6.331/hour including storage, balance$50.36.
+  Both pods intentionally remain running. Five unrelated pods remain stopped.
 
-# Resume the experiment loop
+The final service snapshots and allowed runtime identities are checked into this
+folder. The Python dispatcher/worker pair must be deployed together: missing
+source_seq is explicitly rejected. Source hashes: server e4e2626116f517b6d6fcdad84c8dde31b6fb3dc14c97faa489a230116613518f;
+worker cc9fb7a5f849a0308d9c6509e7d5ffe0ab0853cb29ec7487a0642082cbd647ac.
+Environment: isolated Torch2.13/cu132/TorchAO0.18; pinned Diffusers/weights;
+wrtc0.10.0; combined benchmark profile, JPEG80, pending3, two steps.
 
-Checkpoint 14:55 UTC. Continue until all remaining live/app trials, final review
-and push are complete. Both paid pods remain warm. No UI redesign, main push or
-stable-image deployment.
+## Final artifacts and reproduction
 
-The corrected scaling batch completed all 18 trials and is saved in
-browser-scaling-idle-fixed/. One raw result remains invalid with an audited,
-hash-bound assessment in measurement-assessments.json: its measured data are
-usable, but a 3.2165-second client-observed worker-stat arrival gap fails
-continuity. No restart, compile, decode/send errors or unavailable workers.
-The browser harness now reports continuity separately; missing health/data still
-invalidate measurements. The actual-app soak's strict rules are unchanged.
+- app-soak/ preserves the original measured ordering failure; do not replace it.
+- app-source-order/ contains 60s512,60s1024,600s768+stress, eight lossless gzip
+  frame logs and their original SHA256 values. The fixed source-order assertion
+  checks received, main RAF and stage source IDs; the independent audit also
+  checks reconstructed capture timestamps.
+- app-source-order-jobs.json supplies the final live configs. app_batch.py requires
+  two owned CDP targets with persistent app_probe.js, focus and viewport sessions.
+  Benchmark frontend remains4a02d2f; no production build was rerun during timing.
+- /tmp/vj0-source-order-queue.py was the serial coordinator; all its trials ended.
+  /tmp/vj0-app-source-order-runner.log retains stdout. The script and transient
+  CDP sessions are not required to read committed results.
+- Browser179records, compute85cells/255repeats/25,500frames, Stream35records/
+  27measured/81clips, same-host16trials, app18summaries (16formal +2setup smokes).
+  Boundaries and failed/invalid observations are explicit in the appendices.
+- Visual evidence lives outside Git at /tmp/vj0-perf-evidence-20260917. Capture
+  uses explicit full-viewport CDP frames after all timed work; video playback
+  FPS must not be used as benchmark throughput.
 
-Pushed checkpoint 0887e6b. The audited marker /tmp/vj0-post-scaling-ready.json
-released successor PID 22824, exec 95579, /tmp/vj0-remaining-queues-20260917.py:
-12 frame-buffer trials → both Torch 2.13 workers warm all three shapes → 27 live
-trials → 600-second app/projector soak and lifecycle stress.
-All 12 frame-buffer trials completed, with two continuity failures retained.
-Coordinator PID 22824 resumed after the successful checkpoint push. Both
-new-stack workers completed all three shapes. All 27 live comparisons finished and are collected in browser-torch213/,
-run 5b4b5fe8-52e5-4461-b49d-81d18b55ff09. Coordinator exited after a premeasurement
-app setup failure: .vp-ai-chip selected the audio button. That failure is
-retained in app-soak-initial-setup-failure/ and /tmp/vj0-app-soak-initial-setup-failure-20260917.
-The only harness fix selects the button labelled ai, in two places; criteria
-and timing/probe are unchanged. Short actual selector smoke passed.
-Active corrected app runner exec 94288 writes /tmp/vj0-app-soak-20260917,
-log /tmp/vj0-app-soak-corrected-runner.log, jobs app-soak-corrected-jobs.json
-(5-second selector smoke followed by 600-second soak + stress).
-Outputs: /tmp/vj0-browser-frame-buffer-20260917,
-/tmp/vj0-browser-torch213-20260917, /tmp/vj0-app-soak-20260917.
-
-Pod B: 9vj8k6guaxsbhw, new-stack runner 67122, manifest
-/workspace/torch213-live-service-20260917/sweep.json. Prior server 64226 terminated
-by the guarded transition. Both select corrected
-/workspace/scaling-livebench-20260917/server-idle-fixed.js, SHA
-9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03.
-New-stack server PID 67137, worker PIDs 67144/67145. Actual environment/source
-identity is saved in torch213-live-identity.json. Original Node 567 paused. Pod A: 0pxb4bss2jmbhg, runner 49372,
-/workspace/stream512-paced-20260917/sweep.json. Both 512 paced jobs passed;
-final Klein service remains warm. Original Node 499 paused.
-
-All Stream results, clips and engine identities have now been collected, including
-512×288 / 257-input-frame paced follow-ups. Static cold-clip samples have been inspected and the Stream appendix updated.
-Independent audit in review-stream512-scaling.json verifies all 6 new clips /
-384 chunks / 1,524 source timestamps. Local videos remain under
-/tmp/vj0-quality-20260917/stream512-paced.
-35 Stream records now include failed attempts. Browser index has 179 trials;
-compute has 85 cells, actual-app has 13 summaries, same-host has 16 trials.
-
-App CDP probe/focus/viewport sessions expire roughly 15:40–16:04 UTC; extend before
-expiry if needed without changing the measurement probe. Final soak uses frontend
-4a02d2f, 768×448, new-stack combined, two GPUs, pending 3, JPEG 80, telemetry and
-real synthetic WebAudio. Stress rotates 1024→512→768, prompts and reconnects.
-Keep harness frozen during measurement. Capture screenshots/flow video afterward
-outside Git at /tmp/vj0-perf-evidence-20260917.
-
-Never run builds, downloads, pushes or bulk SSH during timed Mac WAN/app trials.
-After all timed work:
-- /tmp/vj0-collect-final-20260917.py verifies the existing identical 12-buffer and 27-new-stack collections and
-  collects the corrected app soak, and gzips raw app
-  JSON losslessly. Only run once both batches are done and app cleanup confirmed.
-- /tmp/vj0-capture-flow-20260917.py prepares actual app/projector screenshots and
-  two silent screencasts, with completion guards. It uses the existing persistent
-  probes and /tmp/vj0-screencast-20260917.mjs. Run outside all timed work; encode
-  each frames.ffconcat to WebM using ffmpeg, inspect screenshots, and preserve
-  evidence outside Git at /tmp/vj0-perf-evidence-20260917.
-- Collect the final remote service log/manifest and actual health. Refresh funds,
-  runtime state and price; leave both task pods warm as requested.
-- Finish report tables/PLAN terminal outcomes, independent final review, commit,
-  push and self-contained response. Do not stop at the first failure or leave
-  unrun lifecycle checks; preserve failures and recover only actual harness bugs.
-
-All final reports, independent review, commit and push still require completion.
+Both pods were left warm by request. Local test clients are closed after evidence.
+To restart experiments after a pod/container restart, use the recorded files and
+current dispatcher PID, rather than assuming the old process IDs remain valid.
+The stable image still contains its original code; workspace tests did not
+publish a new Docker image. Never overlap benchmark timing with builds, bulk
+transfers, other clients or evidence capture.
 
 ## Tool and infrastructure checks
 
@@ -188,5 +147,3 @@ distinguish generated FPS, browser decoded/drawn FPS and actual app display FPS.
 - State exactly which test resources remain running and their hourly cost.
 - Provide tweet-ready log/API conclusions limited to what actually worked.
 
-Latest account check13:08UTC: balance$78.3258, total spend$6.331/hour. A transient
-503 from the account endpoint cleared on retry; benchmark services were unaffected.
