@@ -146,4 +146,3 @@ distinguish generated FPS, browser decoded/drawn FPS and actual app display FPS.
   the stable image tag or main branch before review.
 - State exactly which test resources remain running and their hourly cost.
 - Provide tweet-ready log/API conclusions limited to what actually worked.
-
