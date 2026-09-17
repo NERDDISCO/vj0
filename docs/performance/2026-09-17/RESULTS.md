@@ -2,7 +2,8 @@
 
 ## Status
 
-Preparation in progress. **No new GPU performance numbers have been measured.**
+Preparation is committed and backed up on the experiment branch. GPU execution
+is waiting on account funding. **No new GPU performance numbers have been measured.**
 
 | Item | Result | Evidence |
 |---|---|---|
@@ -34,6 +35,12 @@ window; delayed warmup input arriving after a false streaming drain. All five
 were corrected. The browser reproductions were retained as
 regression tests. This is manual review of preparation, not an automatic stop
 gate or independent verification of GPU performance.
+
+The reviewer's focused follow-up passed after the final correction. Five Python
+tests and four browser regression tests pass. Both local worktrees are clean;
+the snapshot and experiment branches are pushed to GitHub. GitHub rejected two
+SSH pack transfers for the experiment branch; local object/pack verification
+passed and the HTTPS push succeeded. No global Git configuration was changed.
 
 ## Offline JPEG payload study
 
