@@ -15,13 +15,43 @@ The pinned [official source](https://github.com/chenfengxu714/StreamDiffusionV2/
 
 **Measurement boundaries and latency**
 
-Every full trial uses 65 input frames and three independent clips. Repeat 0 is explicitly cold; the table reports repeats 1 and 2. FPS is actual decoded output count / observed wall time, including encode/denoise/decode and pipeline fill/tail shortfall, excluding model construction, file writing and input host upload. Inputs are preloaded GPU-resident synthetic clips. No interpolation or duplicated display frames count as output.
+The original trials use 65 input frames; the final 512×288 paced follow-up uses 257. Each full trial has three independent clips. Repeat 0 is explicitly cold; the table reports repeats 1 and 2. FPS is actual decoded output count / observed wall time, including encode/denoise/decode and pipeline fill/tail shortfall, excluding model construction, file writing and input host upload. Inputs are preloaded GPU-resident synthetic clips. No interpolation or duplicated display frames count as output.
 
 With two steps, standard `single` emits 61/65 frames and `single-wo` 65/65. TAEHV removes the separate frame-zero anchor, yielding 60/65 and 64/65 respectively; the remaining four-frame tail in `single` is not drained. Exact counts for other settings remain in each raw record.
 
 The corrected 30-FPS-arrival tests verify source mapping through rolling latent positions. At 832×480, TAEHV/two steps/noise 0.95 measured **19.23–19.66 FPS and p95 simulated capture→decoded age 1087–1155 ms** (`single`), versus **20.00–20.39 FPS and 1037–1097 ms** (`single-wo`). Output slower than input accumulates delay. These ages exclude JPEG transport, host upload, browser/display and audio acquisition, and apply only to these settings. Earlier anchor-count assertions failed explicitly and their failed records are retained.
 
-**No Stream browser-display rate is claimed.** The existing application sends independent image requests. Mapping its latest-frame admission, prompt changes and reconnects onto causal four-frame chunks and persistent video state requires a model-specific streaming adapter. The tested visual/latency tradeoffs do not currently justify building that adapter: the fast 1.3B output mostly preserves the line, while the stronger 14B transformation is slower. Adapter complexity is a scope cost, not proof of incompatibility. FLUX actual-app/projector measurements are reported separately. A focused follow-up now measures the faster 512×288 TensorRT configuration at paced 30 FPS input; the 832×480 ages must not be extrapolated to it.
+**No Stream browser-display rate is claimed.** The existing application sends independent image requests. Mapping its latest-frame admission, prompt changes and reconnects onto causal four-frame chunks and persistent video state requires a model-specific streaming adapter. The tested visual/latency tradeoffs do not currently justify building that adapter: the fast 1.3B output mostly preserves the line, while the stronger 14B transformation is slower. Adapter complexity is a scope cost, not proof of incompatibility. FLUX actual-app/projector measurements are reported separately. The completed 512×288 follow-up below establishes a much lower isolated latency at that size; it still does not establish app display rate or long-session continuity.
+
+**512×288 paced follow-up**
+
+To test the small-resolution exception directly, two additional jobs used 257
+input frames at simulated 30 FPS arrival, 1.3B/two steps/noise 0.95, the ordinary
+context and the verified FP16 TensorRT decoder. Each had one cold and two warm
+clips. The pipeline keeps up with this input rate in the warm clips; these
+arrival-limited rates do not measure its maximum unpaced capacity.
+
+| Mode | Warm output FPS | Output / input frames | Simulated source age p50 ms | p95 ms | First output ms |
+|---|---:|---:|---:|---:|---:|
+| single, stream batching | 29.271 / 29.271 | 252 / 257 | 248.3 / 247.7 | 309.2 / 309.0 | 277.2 / 274.7 |
+| single-wo, direct single GPU | 29.692 / 29.692 | 256 / 257 | 154.7 / 154.5 | 190.9 / 190.3 | 278.5 / 274.6 |
+
+The frame-zero anchor is omitted in both modes; stream batching also leaves its
+four-frame tail undrained. Source ages include input collection and pipeline
+fill. They exclude real input upload, transport, JPEG, app/projector and audio.
+The first cold single clip built three 512 engines in 30.08 seconds total;
+its first output took 16.63 seconds, throughput was 6.78 FPS, and p95 age 32.07
+seconds. The later single-wo process reused disk-cached engines; its process-cold
+clip was 29.69 FPS with p95 age 550.9 ms. Cold results remain separate from warm.
+
+The saved cold-first-clip samples from both modes begin with full-frame neon
+rings/blobs, then mostly preserve the
+waveform with colored highlights on black in the inspected middle/final frames.
+This makes the measured speed/latency promising for that visual style, but does
+not establish equivalent Klein scene transformation. See the [sample contact
+sheet](samples/stream512-contact.jpg), [inspection record](stream512-quality.json),
+[raw results](stream512-paced-results/), [job commands](stream512-paced-jobs.json),
+[manifest](stream512-paced-manifest.json) and [actual engine hashes](stream512-engine-identity.json).
 
 **Environment and compatibility work**
 
@@ -95,3 +125,5 @@ Each warm range below represents two clips. Failed rows have no throughput. `pac
 | [stream-trt-parser-path-results/trt-fast-fp16](stream-trt-parser-path-results/trt-fast-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT fast / 0.8 / no | 22.76–23.11 | [60, 60] |
 | [stream-trt-parser-path-results/trt-fp16-noise 095](stream-trt-parser-path-results/trt-fp16-noise095.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT / 0.95 / no | 21.33–21.45 | [60, 60] |
 | [stream-trt-parser-path-results/trt-fp16](stream-trt-parser-path-results/trt-fp16.json) | measured | T2V-1.3B / 832×480 | 2 / single | TRT / 0.8 / no | 22.00–22.13 | [60, 60] |
+| [stream512-paced-results/trt512-arrival30-single](stream512-paced-results/trt512-arrival30-single.json) | measured | T2V-1.3B / 512×288 | 2 / single | TAEHV/TRT / 0.95 / yes | 29.27 | [252, 252] / 257 input |
+| [stream512-paced-results/trt512-arrival30-single-wo](stream512-paced-results/trt512-arrival30-single-wo.json) | measured | T2V-1.3B / 512×288 | 2 / single-wo | TAEHV/TRT / 0.95 / yes | 29.69 | [256, 256] / 257 input |

@@ -2,9 +2,8 @@
 
 **Work is still running.** Compute, transport discovery, twelve app comparisons,
 controlled telemetry, and StreamDiffusion/TensorRT experiments are complete.
-The corrected two-GPU scaling batch is complete. Frame-aware buffer trials,
-newer-stack live confirmation, and the final ten-minute app/projector soak remain
-in the active queue.
+The corrected two-GPU scaling batch is complete. Frame-aware buffer trials are also complete. Newer-stack live confirmation
+and the final ten-minute app/projector soak remain in the active queue.
 The original snapshot and completed checkpoints are pushed. No UI redesign,
 main deployment or stable image overwrite has been made.
 
@@ -119,7 +118,8 @@ not proof that it was universally the best model at that date.
    an immediate watchdog kill. The corrected deadline starts when pending work
    changes 0→1, extends on real output/compile completion, and is not extended by
    additional queued input. Two new regressions fail before the fix and pass
-   afterward; all eight lifecycle/frame-ID checks pass. GPU rerun is pending.
+   afterward; all eight lifecycle/frame-ID checks pass. All 18 corrected-service
+   GPU trials completed without this watchdog restart.
    [Failure and correction](watchdog-idle-recovery.json).
 
 The production frontend build and earlier focused regressions passed. Twelve
@@ -202,7 +202,7 @@ after the remaining measurements. Five unrelated old pods remain stopped.
 | P02 | Complete; quality tradeoff | Six output JPEG levels, live discovery and repeated JPEG 60 combinations; numerical/sample checks |
 | P03 | Complete | Input JPEG95/85/70/60 discovery and entropy stress |
 | P04 | Complete | Pending1/2/3 discovery and repeated pending2 combinations; p99 caveats retained |
-| P05 | Running queue | Fixed byte limits measured; twelve frame-aware-policy trials pending |
+| P05 | Complete; no reliable benefit | Twelve frame-aware-policy discovery trials; two continuity failures retained, no default promotion |
 | P06 | Reliable unordered regressed; partial reliability unsuitable for current protocol | Dropping shared settings messages requires acknowledged controls; no invented lossy-channel result |
 | P07 | Implemented and app-tested | Admission/decoder/stage regressions; twelve real app comparisons, mixed FPS result |
 | G01 | Complete | Stage-sync removal, event-timed live variant, repeated three-resolution transport trials |
@@ -213,9 +213,9 @@ after the remaining measurements. Five unrelated old pods remain stopped.
 | G06 | Complete; no FA4 integration win | Native profiler plus actual SM120 FA4 path; no measured-frame FA4 CUDA trace |
 | G07 | Compute complete; live pending | Isolated Torch2.13/CUDA13.2/TorchAO0.18; repeated compute, 27 live trials queued |
 | G08 | Pending final stress | Prompt cold/warm/rapid changes occur after steady app soak |
-| S01 | Corrected rerun active | Initial 512 pairs measured; later idle-watchdog failure fixed; all 18 pairs being rerun |
+| S01 | Complete; one continuity failure retained | All 18 corrected-service trials; approximately 1.93–2.00× median generation scaling; no watchdog restart |
 | V01 | Isolated generation/age complete | Wan1.3B; real app display unmeasured without a causal-state adapter |
-| V02 | Main comparisons complete; 512 paced follow-up running | Decoder, mode, 1–4 steps, noise, sizes, matched TensorRT/fast controls |
+| V02 | Complete | Decoder, mode, 1–4 steps, noise, sizes, matched TensorRT/fast controls |
 | V03 | Complete | Wan14B standard/TAEHV/noise 0.95; checkpoint cleanup documented |
 | C01 | Several combinations complete; new-stack live pending | Existing 36 live compute trials, 13 responsive combinations; repeated new-stack trials queued |
 | C02 | Pending | Ten-minute actual app 768/two-GPU/new-stack soak plus prompt/resolution/reconnect stress |

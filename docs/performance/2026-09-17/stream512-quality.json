@@ -1,0 +1,30 @@
+{
+  "method": "Static inspection of first/middle/last outputs from the cold first clip of each mode (the harness saves PNG samples only at repeat 0); no claim of warm-clip or full temporal-quality validation.",
+  "observation": "Both modes begin with full-frame neon rings/blobs. Middle and final samples mainly preserve the waveform with colored highlights on black. No obvious malformed image in selected samples. This differs substantially from Klein full-frame scene transformation.",
+  "sample_files": [
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single/output-first.png",
+      "sha256": "b014f2176d8333b5e288fc2c391bc0f7c0c87d23d4a12f129c189d39e11f1909"
+    },
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single/output-last.png",
+      "sha256": "43bf5c0461f3ec0b86b1e1c52ac73d37c6ef7c468f36a36a9a548f29e9d8acb7"
+    },
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single/output-middle.png",
+      "sha256": "2bbcfbe557c0b891e37eb4d9347d5c9d545b97461b9e30ff2fd7602a02dd0c8e"
+    },
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single-wo/output-first.png",
+      "sha256": "b014f2176d8333b5e288fc2c391bc0f7c0c87d23d4a12f129c189d39e11f1909"
+    },
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single-wo/output-last.png",
+      "sha256": "2dbb9e533f7d67ab4067362733048cb93f993b7b21603a0a65b74aed84aa9ba1"
+    },
+    {
+      "local_path": "/tmp/vj0-quality-20260917/stream512-paced/trt512-arrival30-single-wo/output-middle.png",
+      "sha256": "d0f9b12c1be51f5167ec3c2ee7782ee931def2e7460ad6db1a1ddd068d534f8b"
+    }
+  ]
+}

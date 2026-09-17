@@ -1,0 +1,243 @@
+{
+  "config": {
+    "alpha": 0.1,
+    "channelOptions": {},
+    "frameIds": true,
+    "height": 288,
+    "inputQuality": 0.85,
+    "inputScene": "waveform",
+    "maxBufferedBytes": 262144,
+    "mode": "stream",
+    "outputQuality": 80,
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "recordServerCounters": true,
+    "recordTelemetry": false,
+    "requireQueueTiming": true,
+    "seconds": 30,
+    "seed": 42,
+    "sendFps": 60,
+    "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+    "serverConfig": {
+      "activeWorkers": 1,
+      "benchmarkVariant": "baseline",
+      "maxOutboundBytes": 65536,
+      "maxPending": 3,
+      "outboundFrames": 0,
+      "telemetryMode": "async"
+    },
+    "steps": 2,
+    "telemetryEveryMs": 0,
+    "warmupFrames": 20,
+    "width": 512
+  },
+  "continuity": {
+    "failures": [],
+    "measurement": "client-observed worker-stat arrival gap",
+    "status": "passed",
+    "thresholdMs": 2000
+  },
+  "counts": {
+    "bytesReceived": 35643299,
+    "bytesSent": 18534558,
+    "compileDuringMeasurement": false,
+    "decodeErrors": 0,
+    "decodeSkips": 5,
+    "decodedDrawn": 851,
+    "encodeSkips": 9,
+    "errors": [],
+    "maxBufferedBytes": 29974,
+    "received": 856,
+    "sendBufferSkips": 0,
+    "sendErrors": 0,
+    "sent": 1864,
+    "telemetryErrors": 0
+  },
+  "date": "2026-09-17T14:02:03.980Z",
+  "decodedDrawnFps": 28.36203420110303,
+  "distributions": {
+    "captureToDrawMs": {
+      "count": 851,
+      "mean": 158.10352526610382,
+      "p50": 155.80000007152557,
+      "p95": 184.20000004768372,
+      "p99": 189.4000000357628
+    },
+    "decodeDrawMs": {
+      "count": 851,
+      "mean": 3.085546415925166,
+      "p50": 2.600000023841858,
+      "p95": 5.5,
+      "p99": 10.799999952316284
+    },
+    "encodeMs": {
+      "count": 1864,
+      "mean": 4.460032188393527,
+      "p50": 4.399999976158142,
+      "p95": 5.899999976158142,
+      "p99": 8.274000021219232
+    },
+    "inputBytes": {
+      "count": 1864,
+      "mean": 9943.432403433477,
+      "p50": 9943,
+      "p95": 10161,
+      "p99": 10233.37
+    },
+    "outputBytes": {
+      "count": 856,
+      "mean": 41631.3679906542,
+      "p50": 41649,
+      "p95": 43053,
+      "p99": 43582.9
+    },
+    "requestResponseMs": {
+      "count": 856,
+      "mean": 154.99182243129917,
+      "p50": 153.10000002384186,
+      "p95": 181.19999992847443,
+      "p99": 185.4700000047684
+    },
+    "telemetryMs": {
+      "count": 0,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "workerQueueMs": {
+      "count": 856,
+      "mean": 55.04315303738318,
+      "p50": 61.7105,
+      "p95": 69.002,
+      "p99": 71.79100000000001
+    },
+    "workerTimingMs": {
+      "count": 856,
+      "mean": 34.80754672897197,
+      "p50": 34.455,
+      "p95": 36.38,
+      "p99": 38.14400000000001
+    }
+  },
+  "elapsedSeconds": 30.004899999976157,
+  "finalWorkerHealth": [
+    {
+      "framePending": 1,
+      "framesDispatched": 19177,
+      "framesProduced": 19175,
+      "gpu": 0,
+      "lastFrameAt": 1789653723956,
+      "ready": true,
+      "stdoutBufLen": 0
+    },
+    {
+      "framePending": 0,
+      "framesDispatched": 8921,
+      "framesProduced": 8920,
+      "gpu": 1,
+      "lastFrameAt": 1789653402027,
+      "ready": true,
+      "stdoutBufLen": 0
+    }
+  ],
+  "frameAge": "correlated by echoed frame ID; measured on client clock",
+  "inboundMbps": 9.503327523178768,
+  "invalidReasons": [],
+  "measurement": "browser receive/decode/offscreen 2D draw; excludes application upscaler/projector and audio capture",
+  "outboundMbps": 4.941741648867946,
+  "receivedFps": 28.528673649993173,
+  "serverCounters": {
+    "after": {
+      "clientAtMs": 13978788.799999952,
+      "stats": {
+        "benchmarkBudgetMaxBytes": 65536,
+        "benchmarkBudgetMinBytes": 65536,
+        "benchmarkOutboundMaxBytes": 0,
+        "channelBufferedAmount": 0,
+        "channelState": "open",
+        "droppedByWorker": 2,
+        "droppedInbound": 40319,
+        "droppedOutbound": 0,
+        "eventLoopChecks": 3879,
+        "eventLoopLagMs": 1,
+        "eventLoopLagTotal": 1762,
+        "framesFromClient": 68417,
+        "framesFromWorker": 28095,
+        "framesToClient": 28081,
+        "framesToWorker": 28098,
+        "lastClientFrameAt": 1789653723918,
+        "lastSentToClientAt": 1789653723956,
+        "lastWorkerFrameAt": 1789653723956,
+        "outboundBudgetBytes": 65536,
+        "startedAt": 1789651782929
+      }
+    },
+    "before": {
+      "clientAtMs": 13948725,
+      "serverTimeMs": 1789653693905,
+      "stats": {
+        "benchmarkBudgetMaxBytes": 0,
+        "benchmarkBudgetMinBytes": null,
+        "benchmarkOutboundMaxBytes": 0,
+        "channelBufferedAmount": 0,
+        "channelState": "open",
+        "droppedByWorker": 2,
+        "droppedInbound": 39314,
+        "droppedOutbound": 0,
+        "eventLoopChecks": 3819,
+        "eventLoopLagMs": 0,
+        "eventLoopLagTotal": 1754,
+        "framesFromClient": 66553,
+        "framesFromWorker": 27237,
+        "framesToClient": 27223,
+        "framesToWorker": 27239,
+        "lastClientFrameAt": 1789653691512,
+        "lastSentToClientAt": 1789653691620,
+        "lastWorkerFrameAt": 1789653691620,
+        "outboundBudgetBytes": 65536,
+        "startedAt": 1789651782929
+      }
+    },
+    "deltas": {
+      "droppedByWorker": 0,
+      "droppedInbound": 1005,
+      "droppedOutbound": 0,
+      "framesFromClient": 1864,
+      "framesFromWorker": 858,
+      "framesToClient": 858,
+      "framesToWorker": 859
+    },
+    "interval": "server snapshots bracket the client timed window and may include final in-flight work"
+  },
+  "sourceCapture": "OffscreenCanvas.convertToBlob; production uses HTMLCanvasElement.toBlob",
+  "status": "measured",
+  "telemetryPolls": {
+    "attempted": 0,
+    "censored": 0,
+    "completedWithinWindow": 0,
+    "failedWithinWindow": 0
+  },
+  "telemetrySnapshots": [],
+  "transport": [
+    {
+      "currentRoundTripTime": 0.02,
+      "localCandidate": "srflx",
+      "remoteCandidate": "srflx"
+    }
+  ],
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+  "validationStatus": "passed",
+  "workerFrameCounts": {
+    "0": 856
+  },
+  "workerMaxGapMs": {
+    "0": 168.09999990463257
+  },
+  "workerVariants": [
+    {
+      "clock": "wall-clock",
+      "variant": "baseline",
+      "worker": 0
+    }
+  ]
+}

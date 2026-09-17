@@ -1,0 +1,144 @@
+{
+  "reviewed_at_utc": "2026-09-17T14:08:10.658264+00:00",
+  "reviewer": "independent benchmark_review agent",
+  "status": "passed_with_explicit_measurement_limits",
+  "scope": "Local artifact/source/report audit of completed paced512 and scaling evidence; not new GPU/browser execution or final project acceptance.",
+  "reviewed_base_commit": "b0d1006",
+  "report_corrections_confirmed": [
+    "Original65 versus final257 input frames distinguished; all35 retained Stream rows included.",
+    "Warm paced512 rates/ages and cold engine-build/process-cold results separated.",
+    "RESULTS V02 complete and S01 complete with the continuity failure retained.",
+    "512 quality sample provenance corrected to the cold first clip of each mode; no claim that those PNGs are warm-clip samples."
+  ],
+  "stream512": {
+    "measured_jobs": 2,
+    "clips_checked": 6,
+    "input_chunks_checked": 384,
+    "output_source_timestamps_checked": 1524,
+    "arithmetic_checks": [
+      "Every clip output_fps equals actual decoded count divided by observed elapsed seconds.",
+      "Output counts equal chunk counts and validated THWC dimensions.",
+      "All source-age distribution fields independently reconstructed from chunk completion,30FPS source timestamps and mapped frame ranges."
+    ],
+    "mapping_checks": [
+      "Frame-zero anchor omitted in both modes.",
+      "single maps outputs to input1..252 with four input tail frames undrained; source tracking follows actual rolling latent positions.",
+      "One RoPE-position wrap per single clip preserves verified source tracking.",
+      "single-wo maps outputs directly to input1..256.",
+      "Initial denoising schedule [700,500] restored for each repeat."
+    ],
+    "source_sha256": "bce7f8edeb43b5407788da895cbbc1b59a62dc5cd44823801c619fae2474605f",
+    "engine_identity": "stream512-engine-identity.json agrees with cached plan hashes in later job; all clips report executed512 shapes [1,2/3/4,16,36,64], initialized FP16 decoder and ordinary context.",
+    "trials": {
+      "single": {
+        "artifact": "stream512-paced-results/trt512-arrival30-single.json",
+        "sha256": "ff84153d5f89b9b49b9b5f98c0dc4bee105e21cad9632ae3449a055f8dfbc1ea",
+        "input_frames_per_clip": 257,
+        "output_frames_per_clip": 252,
+        "source_frame_range_inclusive": [
+          1,
+          252
+        ],
+        "warm_output_fps": [
+          29.27114909821015,
+          29.270712615721063
+        ],
+        "warm_source_age_p95_ms": [
+          309.15720951743424,
+          309.0425366535783
+        ],
+        "cold": {
+          "output_fps": 6.782528125554849,
+          "source_age_p95_ms": 32066.255517769605,
+          "first_output_seconds": 16.629364618100226,
+          "engine_build_seconds": 30.077237594407052,
+          "engine_cache_state": "new 512 engines built; 832 engines already cached"
+        }
+      },
+      "single-wo": {
+        "artifact": "stream512-paced-results/trt512-arrival30-single-wo.json",
+        "sha256": "d3c4ac72d4489b03fb81e2cffb8defbc5bd074c6fc17bd3684a0baec5f836476",
+        "input_frames_per_clip": 257,
+        "output_frames_per_clip": 256,
+        "source_frame_range_inclusive": [
+          1,
+          256
+        ],
+        "warm_output_fps": [
+          29.691738496696843,
+          29.692006818398287
+        ],
+        "warm_source_age_p95_ms": [
+          190.8612394472584,
+          190.33463147934526
+        ],
+        "cold": {
+          "output_fps": 29.693506206342427,
+          "source_age_p95_ms": 550.872647203505,
+          "first_output_seconds": 0.6565335332415998,
+          "engine_build_seconds": 0,
+          "engine_cache_state": "reused disk-cached 512 engines"
+        }
+      }
+    }
+  },
+  "browser_scaling": {
+    "completed_trials": 18,
+    "raw_status_counts": {
+      "measured": 17,
+      "invalid": 1
+    },
+    "browser_table_and_csv_rows_checked": 140,
+    "checks": [
+      "All140 CSV/table rows reconcile numerical fields, rates, raw configurations/counters, artifact hashes and explicit exclusion.",
+      "Index retains35 Stream records and140 browser records.",
+      "Hash-bound scaling assessment preserves raw invalid status, original errors and quantified3216.5ms client-observed worker-stat gap; derived measurement is measured with continuity and validation failed.",
+      "Assessment conflicts, stale hashes, duplicate targets, excluded targets and non-result bookkeeping targets are rejected."
+    ],
+    "assessment_artifact": "browser-scaling-idle-fixed/scaling-768x448-active1-r0.json",
+    "assessment_sha256": "bb49a90b5049aa21ddba35a0a3b9d9b245f6995be8200ebc1eaf4f46f6f6308c",
+    "received_fps_median_ratios_including_retained_continuity_failure": {
+      "512x288": {
+        "one_active_gpu_median_received_fps": 28.86493477056896,
+        "two_active_gpu_median_received_fps": 55.797210139493025,
+        "ratio": 1.9330447334453893
+      },
+      "768x448": {
+        "one_active_gpu_median_received_fps": 13.865603637048984,
+        "two_active_gpu_median_received_fps": 27.5646452593586,
+        "ratio": 1.9879873953489977
+      },
+      "1024x576": {
+        "one_active_gpu_median_received_fps": 8.199207409956887,
+        "two_active_gpu_median_received_fps": 16.382323090095642,
+        "ratio": 1.9980374042253657
+      }
+    }
+  },
+  "visual_review": {
+    "samples_checked": 6,
+    "sample_record": "stream512-quality.json",
+    "observation": "The cold first sample in each mode has colourful full-frame rings/blobs; selected middle/final samples largely preserve the waveform with coloured highlights on black. This supports the stated style distinction from Klein.",
+    "provenance": "Cold repeat0 from each mode, matching the harness save condition and six recorded PNG hashes."
+  },
+  "limitations": [
+    "Paced rates are constrained by30FPS input and finite clip boundaries; they are not maximum unpaced throughput.",
+    "GPU-resident synthetic input and simulated source ages exclude upload,JPEG/network,browser/app/projector,audio acquisition and physical presentation.",
+    "Near30FPS with approximately190ms warm p95 in single-wo prevents a blanket512 throughput/latency rejection; non-promotion is a bounded style/scope decision for the tested presets.",
+    "Selected static cold samples do not establish warm-video equivalence,temporal preference,long-session continuity or app-adapter compatibility/performance.",
+    "Worker-stat gaps are observed at the client and do not independently identify a GPU processing stall.",
+    "Continuity-failed performance remains ineligible for acceptance; actual-app soak criteria remain unchanged.",
+    "Remaining frame-buffer,new-stack live and final soak work is outside this review; no winner promotion or final completion approval."
+  ],
+  "open_findings": [],
+  "reviewed_document_sha256": {
+    "STREAMDIFFUSION.md": "c241935a95976e84edd485f386130030d3bc10f53c5ec2aeed35acb209c39f37",
+    "RESULTS.md": "24a0af359ab558827231370da995bf74a08164c5b91679f277db4de1dcf318ac",
+    "stream512-quality.json": "c15144a892e03bc93e1db5fa92f3a117c542ca7b5a8dac88c7f16836187ea682",
+    "BROWSER.md": "57da95b4dc48dff459ee2cd7945ba7d3565e5ecc68d472c68f90ed17e47ef919",
+    "browser-results.csv": "a26646e32866386f6dbef6eb6e4f22defab4f45bcf773e8d1541cf26310c1d9b",
+    "measurement-assessments.json": "0cce8c9b580246a006153e687488adb83c065273d2f7007657985d809c50b5a0",
+    "stream512-engine-identity.json": "7dbaf63b1b1df5ba07faeb48cc2ff5c6395ebf8728492752752eb8a352944048"
+  },
+  "actions": "Read local files and images; lightweight CPU arithmetic/source checks; wrote only this review JSON. No live browser,network,GPU or build activity."
+}

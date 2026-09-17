@@ -1,6 +1,6 @@
 # September 2026 performance harness
 
-Plan and results: `docs/performance/2026-09-17/` at repository root.
+Plan and results: [September report](../../../docs/performance/2026-09-17/RESULTS.md).
 These are experimental harnesses. They do not change application defaults.
 
 ## Compute
@@ -29,7 +29,8 @@ prompt-cache lookups; compare separately with end-to-end results.
 Available isolated experiments: `--variant constants`, `--variant no-stage-sync`,
 `--variant inference-mode`, `--variant combined` (constants + no-stage-sync),
 `--compile-mode default`, `--vae-fp8 0`, JPEG qualities and step/resolution sweeps.
-These are unmeasured candidates, not recommended production settings.
+Measured outcomes, repeat spreads and compatibility failures are recorded in the
+report. Experimental variants remain separate from production defaults.
 
 ## Browser / actual WAN path
 
@@ -48,8 +49,9 @@ window.benchResult = await runBenchmark({
 Save the returned JSON. Repeat with `telemetryEveryMs: 2000`, `mode: 'single'`,
 and the planned shapes/settings. The harness uses the actual WebRTC connection
 and binary JPEG protocol. Single mode measures correlated request/response time;
-stream mode deliberately reports frame age as unknown. Do not subtract the most
-recent send time from an unrelated response.
+untagged stream mode reports frame age as unknown. Set `frameIds: true` only
+against the instrumented dispatcher to correlate each output with its input.
+Do not subtract the most recent send time from an unrelated response.
 
 Decode/draw FPS is an offscreen source-resolution 2D measurement. It is **not**
 proof of the full app/projector FPS: that additionally includes React, WebGL
@@ -58,9 +60,10 @@ uses `HTMLCanvasElement.toBlob`; this harness uses `OffscreenCanvas.convertToBlo
 Keep this difference in reports. Use the unchanged app for the final integration
 and soak test; never promote a browser optimization based only on this harness.
 
-The current image silently ignores the `jpegQuality` client field in its
-dispatcher. Until that forwarding is fixed/tested, output-quality baselines must
-use `JPEG_QUALITY` in the worker environment, with process restart recorded.
+The frozen baseline image ignores the `jpegQuality` client field in its
+dispatcher. Immutable-image baselines therefore use `JPEG_QUALITY` in the worker
+environment, with process restart recorded. The instrumented candidate forwards
+and verifies this field; its quality trials record an explicit output quality.
 
 ## Local checks
 
@@ -92,7 +95,9 @@ python3 bench/check_warmup_thread.py --worker-script /app/inference_server.py
 
 The frozen original source exits 1; the no-grad correction exits 0. Tiny CPU
 operations replace model/GPU work in this check. Separately validate that all
-selected resolutions actually finish background compilation on the GPU.
+selected resolutions actually finish compilation on the GPU. The final worker
+correction runs optional warmup on the main GPU thread because no-grad alone
+does not resolve CUDA-graph thread ownership.
 
 The warmup recovery also has dispatcher lifecycle/watchdog coverage:
 `node --test workers/runpod-flux2klein/bench/test_compile.mjs`.
@@ -101,8 +106,8 @@ slow frame and verifies a full second of idle time afterward; `shutdown` and
 `failure` cover early exit and terminal compile-failure reporting. These execute
 fake model operations in the actual loop and do not replace GPU recovery tests.
 
-`streamv2.py` is a separate, initially unvalidated staged-API benchmark for the
-pinned StreamDiffusionV2 environment. It records actual output counts and the
+`streamv2.py` is the separate staged-API benchmark for the pinned StreamDiffusionV2
+environment, including decoder/mode/context and paced-input experiments. It records actual output counts and the
 first pass separately; offline output FPS is not capture-to-output age. Run only
 with the Klein dispatcher paused and its Python process stopped. See
 `docs/performance/2026-09-17/STREAMDIFFUSION.md` for environment/model identities.
@@ -126,3 +131,22 @@ It refuses to overwrite prior run output, cleans process groups between jobs,
 checks for competing CUDA processes, and resumes the paused dispatcher in a
 nested `finally`. Failed jobs produce a nonzero aggregate exit status. The
 runner must never overlap browser/GPU measurements on that pod.
+
+## Saved result review
+
+`summarize_results.py` validates recorded rate arithmetic and produces an index
+without pooling different settings. `render_browser_tables.py` renders that index
+as per-trial Markdown and CSV. Both retain explicit exclusions, failed trials,
+raw status/errors, and any hash-bound assessment of measured continuity failures.
+
+A client-observed worker-stat gap over two seconds fails continuity even when
+frame counts and rates remain valid. Missing timing/health or unavailable workers
+still invalidate the measurement. `validationStatus` and `validationFailed` retain
+this distinction; a numerically measured run is not necessarily acceptable.
+The actual-app soak uses its own unchanged, strict continuity/lifecycle guards.
+
+`app_batch.py` requires two owned browser targets with persistent `app_probe.js`,
+focus and viewport CDP sessions installed before navigation. It exercises real
+WebAudio/analyser/capture, the selected app layout and the projector renderer.
+Observe exact source/config identities and common windows in saved artifacts.
+Screenshots or recordings must be captured outside timed intervals.

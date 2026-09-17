@@ -63,6 +63,23 @@ One earlier WebRTC-upgrade trial overlapped a local build and is explicitly excl
 | [high-entropy-input16k](browser-entropy/high-entropy-input16k.json) | measured | 21.70 | 21.30 | 222.53 | 252.11 | — | 21.33 / 10.67 |
 | [high-entropy-input60](browser-entropy/high-entropy-input60.json) | measured | 24.43 | 23.90 | 508.08 | 641.12 | — | 28.69 / 12.06 |
 
+## browser-frame-buffer
+
+| Trial | Status | Received FPS | Drawn FPS | Age p95 ms | Age p99 ms | Queue p95 ms | Input / output Mbps |
+|---|---|---:|---:|---:|---:|---:|---:|
+| [buffer-1024x576-frames0](browser-frame-buffer/buffer-1024x576-frames0.json) | measured | 8.20 | 8.03 | 966.40 | 1235.24 | 240.42 | 10.63 / 1.58 |
+| [buffer-1024x576-frames1](browser-frame-buffer/buffer-1024x576-frames1.json) | measured | 7.87 | 7.80 | 1344.80 | 2079.94 | 239.91 | 10.26 / 1.51 |
+| [buffer-1024x576-frames2](browser-frame-buffer/buffer-1024x576-frames2.json) | measured; continuity failed | 6.60 | 6.57 | 2256.90 | 5343.27 | 240.80 | 7.03 / 1.28 |
+| [buffer-512x288-frames0](browser-frame-buffer/buffer-512x288-frames0.json) | measured | 28.53 | 28.36 | 184.20 | 189.40 | 69.00 | 4.94 / 9.50 |
+| [buffer-512x288-frames1](browser-frame-buffer/buffer-512x288-frames1.json) | measured | 27.20 | 27.03 | 1948.05 | 3031.85 | 68.80 | 4.94 / 9.07 |
+| [buffer-512x288-frames2](browser-frame-buffer/buffer-512x288-frames2.json) | measured | 28.16 | 27.86 | 263.90 | 479.65 | 68.69 | 4.91 / 9.38 |
+| [buffer-768x448-frames0](browser-frame-buffer/buffer-768x448-frames0.json) | measured | 14.10 | 14.07 | 299.78 | 412.43 | 139.92 | 8.58 / 3.83 |
+| [buffer-768x448-frames1](browser-frame-buffer/buffer-768x448-frames1.json) | measured | 13.93 | 13.93 | 311.94 | 344.85 | 141.56 | 8.58 / 3.81 |
+| [buffer-768x448-frames2](browser-frame-buffer/buffer-768x448-frames2.json) | measured | 13.90 | 13.40 | 792.00 | 1014.31 | 141.24 | 8.54 / 3.79 |
+| [buffer-entropy-frames0](browser-frame-buffer/buffer-entropy-frames0.json) | measured; continuity failed | 5.20 | 5.20 | 3247.90 | 6186.31 | 14.31 | 4.54 / 2.56 |
+| [buffer-entropy-frames1](browser-frame-buffer/buffer-entropy-frames1.json) | measured | 24.20 | 23.66 | 324.51 | 554.88 | 69.00 | 37.53 / 11.90 |
+| [buffer-entropy-frames2](browser-frame-buffer/buffer-entropy-frames2.json) | measured | 22.66 | 21.86 | 2244.55 | 2498.09 | 68.95 | 49.30 / 11.15 |
+
 ## browser-live-compute
 
 | Trial | Status | Received FPS | Drawn FPS | Age p95 ms | Age p99 ms | Queue p95 ms | Input / output Mbps |

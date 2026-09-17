@@ -1,6 +1,6 @@
 # Resume the experiment loop
 
-Checkpoint 14:03 UTC. Continue until all remaining live/app trials, final review
+Checkpoint 14:11 UTC. Continue until all remaining live/app trials, final review
 and push are complete. Both paid pods remain warm. No UI redesign, main push or
 stable-image deployment.
 
@@ -12,17 +12,19 @@ continuity. No restart, compile, decode/send errors or unavailable workers.
 The browser harness now reports continuity separately; missing health/data still
 invalidate measurements. The actual-app soak's strict rules are unchanged.
 
-Successor PID 22824, exec 95579, /tmp/vj0-remaining-queues-20260917.py waits on
-/tmp/vj0-post-scaling-ready.json for this checkpoint push, then runs:
+Pushed checkpoint b0d1006. The audited marker /tmp/vj0-post-scaling-ready.json
+released successor PID 22824, exec 95579, /tmp/vj0-remaining-queues-20260917.py:
 12 frame-buffer trials → both Torch 2.13 workers warm all three shapes → 27 live
 trials → 600-second app/projector soak and lifecycle stress.
-Create the marker only after checks and successful push; do not leave it waiting.
+All 12 frame-buffer trials completed, with two continuity failures retained.
+The coordinator is briefly SIGSTOPped for checkpoint push; resume PID 22824
+after push, then monitor both new-stack workers warming and remaining queues.
 Outputs: /tmp/vj0-browser-frame-buffer-20260917,
 /tmp/vj0-browser-torch213-20260917, /tmp/vj0-app-soak-20260917.
 
-Pod B: 9vj8k6guaxsbhw, current runner 64223, manifest
-/workspace/scaling-idle-fixed-service-20260917/sweep.json; future manifest
-/workspace/torch213-live-service-20260917/sweep.json. Both select corrected
+Pod B: 9vj8k6guaxsbhw, new-stack runner 67122, manifest
+/workspace/torch213-live-service-20260917/sweep.json. Prior server 64226 terminated
+by the guarded transition. Both select corrected
 /workspace/scaling-livebench-20260917/server-idle-fixed.js, SHA
 9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03.
 Original Node 567 paused. Pod A: 0pxb4bss2jmbhg, runner 49372,
