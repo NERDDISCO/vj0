@@ -1,0 +1,80 @@
+[
+  {
+    "name": "high-entropy-default",
+    "options": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 30,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline"
+      },
+      "inputScene": "high-entropy",
+      "maxBufferedBytes": 262144
+    }
+  },
+  {
+    "name": "high-entropy-input16k",
+    "options": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 30,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline"
+      },
+      "inputScene": "high-entropy",
+      "maxBufferedBytes": 16384
+    }
+  },
+  {
+    "name": "high-entropy-input60",
+    "options": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.6,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 30,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline"
+      },
+      "inputScene": "high-entropy",
+      "maxBufferedBytes": 262144
+    }
+  }
+]

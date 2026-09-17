@@ -1,0 +1,200 @@
+{
+  "jobs": [
+    {
+      "name": "vj-next-baseline-r0",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-next-candidate-r0",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-next-baseline-r1",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-next-candidate-r1",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-next-baseline-r2",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-next-candidate-r2",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-baseline-r0",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-candidate-r0",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-baseline-r1",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-candidate-r1",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-baseline-r2",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    {
+      "name": "vj-legacy-candidate-r2",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    }
+  ],
+  "fixture": {
+    "vj0-ai-settings-storage": {
+      "version": 8,
+      "state": {
+        "backend": "pod",
+        "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+        "autoConnect": false,
+        "sendFrames": false,
+        "showAi": true,
+        "showCaptureDebug": false,
+        "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+        "captureSize": 512,
+        "outputWidth": 512,
+        "outputHeight": 288,
+        "frameRate": 60,
+        "seed": 42,
+        "kleinSteps": 2,
+        "kleinAlpha": 0.1,
+        "sceneId": "waveform",
+        "stageSharpen": 0.6,
+        "stageScanlines": true,
+        "stageVignette": true,
+        "stagePixelate": false,
+        "stagePixelateSize": 8
+      }
+    },
+    "vj0-composer-scenes": {
+      "version": 1,
+      "state": {
+        "scenes": [
+          {
+            "id": "benchmark-waveform",
+            "name": "Benchmark waveform",
+            "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+            "background": "#0a0a0a",
+            "createdAt": 0,
+            "elements": [
+              {
+                "id": "benchmark-wave",
+                "kind": "waveform",
+                "name": "Waveform",
+                "props": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "size": 0.48,
+                  "aspect": 4,
+                  "rotation": 0,
+                  "color": "#ffffff",
+                  "opacity": 1,
+                  "stroke": 0.012,
+                  "text": ""
+                },
+                "bindings": {}
+              }
+            ]
+          }
+        ],
+        "activeSceneId": "benchmark-waveform",
+        "selectedElementId": null
+      }
+    }
+  },
+  "harness_sha256": "153a10393812230c31c4a801a4e08438d438484f34b334e04a756a98a9ad7076",
+  "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685"
+}

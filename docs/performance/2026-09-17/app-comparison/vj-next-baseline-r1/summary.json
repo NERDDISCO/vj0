@@ -1,0 +1,339 @@
+{
+  "window_start": 1789649364720.8,
+  "window_end": 1789649424936,
+  "seconds": 60.215199951171876,
+  "renderer": {
+    "vendor": "WebKit",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "glBuffer": [
+      2048,
+      1152
+    ],
+    "devicePixelRatio": 1,
+    "mainViewport": [
+      1440,
+      900
+    ],
+    "focusEmulation": true
+  },
+  "targets": {
+    "main": {
+      "encode-done": {
+        "events": 2186,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 2186,
+          "mean": 6.683853414662912,
+          "p50": 6.39990234375,
+          "p95": 11.2001953125,
+          "p99": 17.345019531250028,
+          "min": 1.5,
+          "max": 25
+        }
+      },
+      "encode-start": {
+        "events": 2186,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preview-image-loaded": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 1690,
+          "mean": 135.576039547892,
+          "p50": 137.0,
+          "p95": 160.81003417968748,
+          "p99": 190.36605957031244,
+          "min": 94.39990234375,
+          "max": 246.300048828125
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preview-image-raf": {
+        "events": 1664,
+        "unique_frames": 1664,
+        "fps": 27.634218625020377,
+        "dimensions": [],
+        "age_ms": {
+          "count": 1664,
+          "mean": 145.22734407278207,
+          "p50": 147.39990234375,
+          "p95": 173.24006347656245,
+          "p99": 199.1368896484375,
+          "min": 99.800048828125,
+          "max": 251.699951171875
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "received": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [],
+        "age_ms": {
+          "count": 1690,
+          "mean": 131.86994181074334,
+          "p50": 130.2999267578125,
+          "p95": 157.87485351562498,
+          "p99": 186.20790771484346,
+          "min": 91.599853515625,
+          "max": 242.5
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "sent": {
+        "events": 2186,
+        "unique_frames": 2186,
+        "fps": 36.3031261504174,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "stage-post": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "worker-stats": {
+        "events": 1690,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    },
+    "stage": {
+      "bitmap-decoded": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 1690,
+          "mean": 0.7826590814534023,
+          "p50": 0.7001953125,
+          "p95": 1.10009765625,
+          "p99": 3.03300537109372,
+          "min": 0.199951171875,
+          "max": 5.10009765625
+        }
+      },
+      "stage-message": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "webgl-frame-submitted": {
+        "events": 1690,
+        "unique_frames": 1690,
+        "fps": 28.06600329103632,
+        "dimensions": [
+          [
+            2048,
+            1152
+          ]
+        ],
+        "age_ms": {
+          "count": 1690,
+          "mean": 136.4568408492049,
+          "p50": 137.4998779296875,
+          "p95": 161.61998291015624,
+          "p99": 191.39795654296856,
+          "min": 94.89990234375,
+          "max": 246.499755859375
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    }
+  },
+  "audio_rms_by_fixture_level": {
+    "0.2": {
+      "count": 121,
+      "mean": 0.14122298642547737,
+      "p50": 0.14077529880462814,
+      "p95": 0.14528380050961487,
+      "p99": 0.14528401971373445,
+      "min": 0.13780206485792634,
+      "max": 0.14528406881757064
+    }
+  },
+  "status": "measured",
+  "problems": [],
+  "measurement": "Actual app capture/preview + stage GL submission in a 1920x1080 viewport; actual GL buffer sizes recorded separately; excludes physical display presentation",
+  "config": {
+    "name": "vj-next-baseline-r1",
+    "origin": "http://127.0.0.1:18767",
+    "source_commit": "7139e0f",
+    "layout": "vj-next",
+    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "seconds": 60,
+    "width": 512,
+    "height": 288,
+    "sendFps": 60
+  }
+}

@@ -1,32 +1,5 @@
 {
-  "status": "finished",
-  "job": {
-    "name": "torch213-baseline-resolved",
-    "argv": [
-      "/workspace/envs/klein-torch213-cu132/bin/python",
-      "/workspace/bench-20260917/compute.py",
-      "--worker-script",
-      "/workspace/baseline-20260917/inference_server.py",
-      "--steps",
-      "2",
-      "--frames",
-      "100",
-      "--repeats",
-      "3",
-      "--image-digest",
-      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
-      "--output",
-      "/workspace/dependency-retry-20260917/torch213-baseline-resolved",
-      "--variant",
-      "baseline"
-    ],
-    "cwd": "/app",
-    "started_at": "2026-09-17T11:20:11.406334+00:00",
-    "status": "passed",
-    "pid": 29084,
-    "returncode": 0,
-    "finished_at": "2026-09-17T11:47:09.611420+00:00"
-  },
+  "status": "complete",
   "environment": {
     "time_utc": "2026-09-17T11:20:20.421397+00:00",
     "versions": {
@@ -86,6 +59,34 @@
       "black-forest-labs/FLUX.2-klein-4B": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
       "black-forest-labs/FLUX.2-small-decoder": "a3efc24f613ef42d9428af62fdbd6f5fd8856c4a"
     }
+  },
+  "source_manifest": "/workspace/dependency-retry-20260917/sweep.json",
+  "job": {
+    "name": "torch213-baseline-resolved",
+    "argv": [
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/dependency-retry-20260917/torch213-baseline-resolved",
+      "--variant",
+      "baseline"
+    ],
+    "cwd": "/app",
+    "started_at": "2026-09-17T11:20:11.406334+00:00",
+    "status": "passed",
+    "pid": 29084,
+    "returncode": 0,
+    "finished_at": "2026-09-17T11:47:09.611420+00:00"
   },
   "results": [
     {

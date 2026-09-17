@@ -1,0 +1,117 @@
+{
+  "status": "running",
+  "dispatcher_pid": 567,
+  "runner_pid": 48800,
+  "jobs": [
+    {
+      "name": "torch213-baseline-confirmation",
+      "argv": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/bench-20260917/compute.py",
+        "--worker-script",
+        "/workspace/baseline-20260917/inference_server.py",
+        "--steps",
+        "2",
+        "--frames",
+        "100",
+        "--repeats",
+        "3",
+        "--image-digest",
+        "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+        "--output",
+        "/workspace/scaling-service-20260917/torch213-baseline-confirmation",
+        "--variant",
+        "baseline"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T12:24:27.809079+00:00",
+      "status": "passed",
+      "pid": 48803,
+      "returncode": 0,
+      "finished_at": "2026-09-17T12:27:56.133253+00:00"
+    },
+    {
+      "name": "torch213-combined-confirmation",
+      "argv": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/bench-20260917/compute.py",
+        "--worker-script",
+        "/workspace/baseline-20260917/inference_server.py",
+        "--steps",
+        "2",
+        "--frames",
+        "100",
+        "--repeats",
+        "3",
+        "--image-digest",
+        "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+        "--output",
+        "/workspace/scaling-service-20260917/torch213-combined-confirmation",
+        "--variant",
+        "combined"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T12:27:56.137338+00:00",
+      "status": "passed",
+      "pid": 49776,
+      "returncode": 0,
+      "finished_at": "2026-09-17T12:30:38.746738+00:00"
+    },
+    {
+      "name": "original-stack-late-baseline",
+      "argv": [
+        "python3",
+        "/workspace/bench-20260917/compute.py",
+        "--worker-script",
+        "/workspace/baseline-20260917/inference_server.py",
+        "--steps",
+        "2",
+        "--frames",
+        "100",
+        "--repeats",
+        "3",
+        "--image-digest",
+        "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+        "--output",
+        "/workspace/scaling-service-20260917/original-stack-late-baseline",
+        "--variant",
+        "baseline"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T12:30:38.750852+00:00",
+      "status": "passed",
+      "pid": 50436,
+      "returncode": 0,
+      "finished_at": "2026-09-17T12:57:52.378915+00:00"
+    },
+    {
+      "name": "install-wrtc010",
+      "argv": [
+        "npm",
+        "install",
+        "--prefix",
+        "/workspace/wrtc010-20260917",
+        "--ignore-scripts",
+        "--save-exact",
+        "@roamhq/wrtc@0.10.0"
+      ],
+      "cwd": "/workspace",
+      "started_at": "2026-09-17T12:57:52.383133+00:00",
+      "status": "passed",
+      "pid": 60539,
+      "returncode": 0,
+      "finished_at": "2026-09-17T12:57:54.080631+00:00"
+    },
+    {
+      "name": "scaling-service",
+      "argv": [
+        "node",
+        "/workspace/scaling-livebench-20260917/server.js"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T12:57:54.084248+00:00",
+      "status": "running",
+      "pid": 60552
+    }
+  ]
+}

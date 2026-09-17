@@ -1,0 +1,36 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+## Call CompiledFxGraph fvswsji56imt5qppflin5iudfvao...         0.00%       0.000us         0.00%       0.000us       0.000us     335.818ms        74.88%     335.818ms      10.494ms            32  
+                             Torch-Compiled Region: 1/0         3.56%      17.428ms         6.51%      31.874ms     996.067us     329.812ms        73.54%     329.996ms      10.312ms            32  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128...         0.00%       0.000us         0.00%       0.000us       0.000us      98.343ms        21.93%      98.343ms     153.660us           640  
+## Call CompiledFxGraph f7ajbwvnaws7dabxtmf7nopklkeb...         0.00%       0.000us         0.00%       0.000us       0.000us      69.399ms        15.47%      69.399ms       4.337ms            16  
+                             Torch-Compiled Region: 2/0         0.26%       1.282ms         1.01%       4.944ms     309.008us      66.431ms        14.81%      66.537ms       4.159ms            16  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128...         0.00%       0.000us         0.00%       0.000us       0.000us      59.768ms        13.33%      59.768ms      93.388us           640  
+## Call CompiledFxGraph fvinx7wfgmefpva6udlfuhcbpqzk...         0.00%       0.000us         0.00%       0.000us       0.000us      52.250ms        11.65%      52.250ms       3.266ms            16  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      50.744ms        11.31%      50.744ms     105.717us           480  
+                             Torch-Compiled Region: 0/0         0.33%       1.603ms         1.09%       5.324ms     332.736us      49.677ms        11.08%      49.793ms       3.112ms            16  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x...         0.00%       0.000us         0.00%       0.000us       0.000us      43.906ms         9.79%      43.906ms      30.490us          1440  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x...         0.00%       0.000us         0.00%       0.000us       0.000us      25.341ms         5.65%      25.341ms      65.992us           384  
+void pytorch_flash::flash_fwd_splitkv_kernel<Flash_f...         0.00%       0.000us         0.00%       0.000us       0.000us      24.798ms         5.53%      24.798ms      30.998us           800  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      14.618ms         3.26%      14.618ms     130.516us           112  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x...         0.00%       0.000us         0.00%       0.000us       0.000us      12.726ms         2.84%      12.726ms      79.540us           160  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us       9.207ms         2.05%       9.207ms      31.969us           288  
+void pytorch_flash::flash_fwd_splitkv_combine_kernel...         0.00%       0.000us         0.00%       0.000us       0.000us       7.011ms         1.56%       7.011ms       8.763us           800  
+triton_red_fused__fused_rms_norm__scaled_dot_product...         0.00%       0.000us         0.00%       0.000us       0.000us       6.741ms         1.50%       6.741ms      10.533us           640  
+fmha_cutlassF_bf16_aligned_32x128_gmem_sm80(PyTorchM...         0.00%       0.000us         0.00%       0.000us       0.000us       6.623ms         1.48%       6.623ms     206.961us            32  
+triton_poi_fused__scaled_mm__to_copy_cat_clamp_div_m...         0.00%       0.000us         0.00%       0.000us       0.000us       5.956ms         1.33%       5.956ms       9.306us           640  
+triton_per_fused_abs_amax_cat_mul_permute_silu_split...         0.00%       0.000us         0.00%       0.000us       0.000us       5.522ms         1.23%       5.522ms       8.628us           640  
+                           triton_red_fused_mm_silu_t_3         0.00%       0.000us         0.00%       0.000us       0.000us       4.940ms         1.10%       4.940ms     154.372us            32  
+                                  cudaDeviceSynchronize         9.44%      46.187ms         9.44%      46.187ms     942.595us       3.116ms         0.69%       3.116ms      63.587us            49  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.222ms         0.50%       2.222ms      11.575us           192  
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.097ms         0.47%       2.097ms      65.544us            32  
+triton_poi_fused__to_copy_arange_cat_clone_cos_div_e...         0.00%       0.000us         0.00%       0.000us       0.000us       1.972ms         0.44%       1.972ms      61.612us            32  
+       triton_red_fused_abs_amax_mul_silu_split_view_27         0.00%       0.000us         0.00%       0.000us       0.000us       1.904ms         0.42%       1.904ms      11.901us           160  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.868ms         0.42%       1.868ms       9.730us           192  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.524ms         0.34%       1.524ms       6.803us           224  
+                           triton_red_fused_abs_amax_37         0.00%       0.000us         0.00%       0.000us       0.000us       1.445ms         0.32%       1.445ms       2.258us           640  
+                    triton_poi_fused_convolution_silu_6         0.00%       0.000us         0.00%       0.000us       0.000us       1.399ms         0.31%       1.399ms       3.803us           368  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 489.307ms
+Self CUDA time total: 448.489ms

@@ -1,0 +1,194 @@
+[
+  {
+    "name": "vj-next-baseline-r0",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-baseline-r0",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-baseline-r0/summary.json"
+  },
+  {
+    "name": "vj-next-candidate-r0",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-candidate-r0",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-candidate-r0/summary.json"
+  },
+  {
+    "name": "vj-next-baseline-r1",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-baseline-r1",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-baseline-r1/summary.json"
+  },
+  {
+    "name": "vj-next-candidate-r1",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-candidate-r1",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-candidate-r1/summary.json"
+  },
+  {
+    "name": "vj-next-baseline-r2",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-baseline-r2",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-baseline-r2/summary.json"
+  },
+  {
+    "name": "vj-next-candidate-r2",
+    "status": "measured",
+    "config": {
+      "name": "vj-next-candidate-r2",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-next-candidate-r2/summary.json"
+  },
+  {
+    "name": "vj-legacy-baseline-r0",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-baseline-r0",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-baseline-r0/summary.json"
+  },
+  {
+    "name": "vj-legacy-candidate-r0",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-candidate-r0",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-candidate-r0/summary.json"
+  },
+  {
+    "name": "vj-legacy-baseline-r1",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-baseline-r1",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-baseline-r1/summary.json"
+  },
+  {
+    "name": "vj-legacy-candidate-r1",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-candidate-r1",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-candidate-r1/summary.json"
+  },
+  {
+    "name": "vj-legacy-baseline-r2",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-baseline-r2",
+      "origin": "http://127.0.0.1:18767",
+      "source_commit": "7139e0f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-baseline-r2/summary.json"
+  },
+  {
+    "name": "vj-legacy-candidate-r2",
+    "status": "measured",
+    "config": {
+      "name": "vj-legacy-candidate-r2",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-legacy",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "seconds": 60,
+      "width": 512,
+      "height": 288,
+      "sendFps": 60
+    },
+    "summary": "/tmp/vj0-app-comparison-20260917/vj-legacy-candidate-r2/summary.json"
+  }
+]
