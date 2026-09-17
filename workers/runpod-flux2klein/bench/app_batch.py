@@ -63,16 +63,26 @@ def main():
 
     def stress(folder):
         """Separate lifecycle trial; deliberate disconnects aren't steady FPS."""
-        actions = []
+        actions, intentional_disconnects = [], []
         for target in targets:
             evaluate(target, 'window.vj0AppProbe.begin()')
 
-        def received_after(at, timeout=60):
+        def received_after(at, timeout=60, dimensions=None):
             expression = ('window.vj0AppProbe.snapshot().rows.find(r=>r.kind==="received"&&'
                           'Number.isFinite(r.ageMs)&&r.at-r.ageMs>='+str(at)+')')
             wait_for('main', '!!('+expression+')', timeout)
             row = evaluate('main', expression)
             wait_for('stage', 'window.vj0AppProbe.snapshot().rows.some(r=>r.kind==="webgl-frame-submitted"&&r.id>='+str(row['id'])+')', timeout)
+            if dimensions:
+                width, height = dimensions
+                for target, kind in [('main','preview-image-loaded'), ('stage','bitmap-decoded')]:
+                    expr = ('window.vj0AppProbe.snapshot().rows.find(r=>r.kind==='+json.dumps(kind)+
+                        '&&r.id>='+str(row['id'])+'&&r.width==='+str(width)+'&&r.height==='+str(height)+')')
+                    wait_for(target, '!!('+expr+')', timeout)
+                    decoded = evaluate(target, expr)
+                    row[target+'_decoded_frame_id'] = decoded['id']
+                    if target == 'stage':
+                        wait_for(target, 'window.vj0AppProbe.snapshot().rows.some(r=>r.kind==="webgl-frame-submitted"&&r.id==='+str(decoded['id'])+')', timeout)
             return row
 
         try:
@@ -97,10 +107,11 @@ def main():
                 condition = 'window.vj0AppProbe.snapshot().rows.find(r=>r.kind==="worker-stats"&&r.at>='+str(before)+'&&r.width==='+str(width)+'&&r.height==='+str(height)+')'
                 wait_for('main', '!!('+condition+')', 180)
                 state = evaluate('main', condition)
-                row = received_after(state['at'], 180)
+                row = received_after(state['at'], 180, (width,height))
                 actions.append({'action':'resolution', 'width':width, 'height':height,
                     'started_at':before, 'matching_worker_output_at':state['at'],
-                    'change_to_matching_worker_output_ms':state['at']-before, 'subsequent_frame_id':row['id']})
+                    'change_to_matching_worker_output_ms':state['at']-before, 'subsequent_frame_id':row['id'],
+                    'main_decoded_frame_id':row['main_decoded_frame_id'], 'stage_decoded_frame_id':row['stage_decoded_frame_id']})
                 time.sleep(2)
             # Exercise rapid preset input through the actual controlled field.
             # React/app debounce may intentionally coalesce these changes.
@@ -112,6 +123,7 @@ def main():
             for index in range(3):
                 evaluate('main', '(()=>{if(!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]"))document.querySelector("button.vp-ai-chip").click()})()')
                 wait_for('main', '!!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]")')
+                disconnect_at = evaluate('main', 'performance.timeOrigin+performance.now()')
                 evaluate('main', 'Array.from(document.querySelectorAll("button")).find(b=>/disconnect/i.test(b.textContent)).click()')
                 wait_for('main', '!window.vj0AppProbe.snapshot().channelStates.includes("open")')
                 time.sleep(2)
@@ -120,16 +132,28 @@ def main():
                 wait_for('main', 'window.vj0AppProbe.snapshot().channelStates.includes("open")', 60)
                 evaluate('main', '(()=>{const b=Array.from(document.querySelectorAll("button")).find(b=>/generate/i.test(b.textContent)&&!b.disabled);if(b)b.click()})()')
                 row = received_after(at)
+                intentional_disconnects.append((disconnect_at,row['at']))
                 actions.append({'action':'reconnect', 'index':index, 'connect_clicked_at':at,
+                    'disconnect_clicked_at':disconnect_at,
                     'new_capture_received_at':row['at'], 'reconnect_to_new_capture_receive_ms':row['at']-at,
                     'frame_id':row['id']})
                 time.sleep(3)
             raw = {target:evaluate(target, 'window.vj0AppProbe.end()') for target in targets}
             problems = [target+': '+str(error) for target,data in raw.items() for error in data['errors']]
+            if 'open' not in raw['main']['channelStates']:
+                problems.append('main: no open channel at stress completion')
             for target, data in raw.items():
                 if any(e.get('type')=='error' or e.get('status') in ['error','compile_failed'] or
                        (e.get('type')=='connection' and e.get('state')=='failed') for e in data['events']):
                     problems.append(target+': worker or connection failure')
+                for event in data['events']:
+                    if event.get('type')=='connection' and event.get('state') in ['closed','disconnected'] and not any(
+                        start<=event['at']<=end for start,end in intentional_disconnects):
+                        problems.append(target+': unexpected disconnection outside a requested reconnect')
+                for kind in (['received','preview-image-raf'] if target=='main' else ['webgl-frame-submitted']):
+                    recent = [r['at'] for r in data['rows'] if r['kind']==kind]
+                    if not recent or data['at']-max(recent)>2000:
+                        problems.append(target+': stale final '+kind+' output')
                 (folder/(target+'-stress-raw.json')).write_text(json.dumps(data,indent=2)+'\n')
             result = {'status':'failed' if problems else 'passed', 'actions':actions, 'errors':problems,
                 'measurement':'Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result'}
@@ -143,8 +167,8 @@ def main():
 
     progress = []
     try:
-        command('main', 'Emulation.setDeviceMetricsOverride', {'width':1440, 'height':900, 'deviceScaleFactor':1, 'mobile':False})
-        command('stage', 'Emulation.setDeviceMetricsOverride', {'width':1920, 'height':1080, 'deviceScaleFactor':1, 'mobile':False})
+        # Metrics and focus emulation belong to the persistent setup sessions.
+        # A short-lived CDP session can lose its override when it detaches.
         for job in jobs:
             name = job['name']
             if not name.replace('-', '').replace('_', '').isalnum():
@@ -160,7 +184,8 @@ def main():
             server = job['server'].rstrip('/')
             request = urllib.request.Request(server+'/benchmark/config', data=json.dumps({
                 'maxPending':job.get('maxPending',3), 'maxOutboundBytes':1048576,
-                'benchmarkVariant':job.get('variant','baseline')}).encode(), headers={'Content-Type':'application/json'})
+                'benchmarkVariant':job.get('variant','baseline')}).encode(), headers={
+                    'Content-Type':'application/json', 'User-Agent':'Mozilla/5.0 vj0-performance-benchmark'})
             with urllib.request.urlopen(request, timeout=15) as response:
                 applied = json.load(response)
             if applied.get('benchmarkVariant') != job.get('variant','baseline'):
@@ -182,6 +207,8 @@ def main():
             evaluate('stage', 'window.vj0AppProbe.begin()')
             navigate('main', origin+'/'+job['layout'])
             wait_for('main', '!!window.vj0AppProbe && !!document.querySelector("canvas")')
+            for target in targets:
+                wait_for(target, 'document.visibilityState === "visible"')
             evaluate('main', 'window.vj0AppProbe.begin();window.vj0AppProbe.setAudio(0.2,110)')
             wait_for('main', 'window.vj0AppProbe.snapshot().channelStates.includes("open")', 60)
             if job['layout'] == 'vj-next':
@@ -190,6 +217,7 @@ def main():
                 wait_for('main', 'Array.from(document.querySelectorAll("button")).some(b=>/stop/i.test(b.textContent)&&!b.disabled)')
             wait_for('main', 'window.vj0AppProbe.snapshot().rows.filter(r=>r.kind==="received").length>=40', 120)
             wait_for('stage', 'window.vj0AppProbe.snapshot().rows.filter(r=>r.kind==="webgl-frame-submitted").length>=20', 60)
+            wait_for('main', 'window.vj0AppProbe.snapshot().rms.some(r=>r.level===0.2&&r.rms>0.01)', 15)
             expected_variant = job.get('variant', 'baseline')
             expected_clock = 'wall-clock' if expected_variant == 'baseline' else 'cuda-events'
             warm_stats = evaluate('main', 'window.vj0AppProbe.snapshot().rows.filter(r=>r.kind==="worker-stats")')
@@ -197,8 +225,13 @@ def main():
                 r['timing'].get('stage_clock') != expected_clock for r in warm_stats):
                 raise RuntimeError('Worker telemetry did not confirm requested warmup compute variant')
             renderer = evaluate('stage', '(()=>{const g=document.querySelector("canvas").getContext("webgl2");const e=g.getExtension("WEBGL_debug_renderer_info");return {vendor:g.getParameter(g.VENDOR),renderer:e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER),userAgent:navigator.userAgent,viewport:[innerWidth,innerHeight],glBuffer:[g.drawingBufferWidth,g.drawingBufferHeight],devicePixelRatio}})()')
+            renderer['mainViewport'] = evaluate('main', '[innerWidth,innerHeight]')
+            renderer['focusEmulation'] = True
+            (folder/'renderer.json').write_text(json.dumps(renderer,indent=2)+'\n')
             if renderer['viewport'] != [1920,1080] or renderer['devicePixelRatio'] != 1:
                 raise RuntimeError('Stage viewport differs from the requested benchmark configuration')
+            if renderer['mainViewport'] != [1440,900]:
+                raise RuntimeError('Main viewport differs from the requested benchmark configuration')
             if job.get('telemetry'):
                 if job['layout'] != 'vj-next':
                     raise ValueError('Telemetry popover action currently targets vj-next')
@@ -217,6 +250,9 @@ def main():
                 healthy = evaluate('main', 'window.vj0AppProbe.snapshot().channelStates.includes("open")')
                 if not healthy:
                     raise RuntimeError('App disconnected during measurement')
+                for target in targets:
+                    if evaluate(target, 'document.visibilityState') != 'visible':
+                        raise RuntimeError(target+' became hidden during measurement')
                 if job.get('audioCycle'):
                     index = int((time.monotonic()-started)//30) % 3
                     if index != audio_index:
@@ -228,6 +264,13 @@ def main():
             seconds = (end-start)/1000
             summary = {'window_start':start, 'window_end':end, 'seconds':seconds, 'renderer':renderer, 'targets':{}}
             problems = []
+            audio_rows = [r for r in raw['main']['rms'] if start<=r['at']<=end]
+            summary['audio_rms_by_fixture_level'] = {str(level):distribution([r['rms'] for r in audio_rows if r['level']==level])
+                for level in sorted({r['level'] for r in audio_rows})}
+            for level in ([0,0.2,0.6] if job.get('audioCycle') else [0.2]):
+                values = [r['rms'] for r in audio_rows if r['level']==level]
+                if not values or (level and max(values)<0.01):
+                    problems.append('main: audio analyser did not observe fixture level '+str(level))
             for target, data in raw.items():
                 (folder/(target+'-raw.json')).write_text(json.dumps(data, indent=2)+'\n')
                 rows = [r for r in data['rows'] if start<=r['at']<=end]
@@ -279,7 +322,14 @@ def main():
             if job.get('stress'):
                 if job['layout'] != 'vj-next':
                     raise ValueError('Lifecycle actions currently target vj-next')
-                record['stress_status'] = stress(folder)['status']
+                record['stress_status'] = 'running'
+                (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
+                try:
+                    record['stress_status'] = stress(folder)['status']
+                except BaseException as error:
+                    record.update(stress_status='failed', stress_error=str(error))
+                    (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
+                    raise
                 (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
     except BaseException as error:
         if progress and progress[-1]['status'] == 'running':

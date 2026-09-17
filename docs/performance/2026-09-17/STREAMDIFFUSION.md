@@ -154,3 +154,39 @@ frames), while `single-wo` emits 64. The paced-input harness initially asserted
 the standard VAE's count and failed explicitly; the corrected reruns use
 source indices 1–4 for the first TAEHV output and preserve the verified rolling
 latent mapping for subsequent chunks.
+
+The corrected two-step TAEHV runs measured 43.66–44.49 FPS at 512x288 and
+13.65–13.95 FPS at 1024x576. Three-step native 832x480 measured 15.51–16.01 FPS.
+At simulated 30 FPS input, native-size two-step output was 19.23–19.66 FPS
+(`single`) and 20.00–20.39 FPS (`single-wo`). Their warm p95 simulated capture
+ages were 1087–1155 ms and 1037–1097 ms. Processing slower than the incoming
+source accumulates delay. These GPU-resident clips exclude host upload,
+JPEG/network transport, display, and audio acquisition. The age result applies
+to these tested settings, not every StreamDiffusionV2 configuration.
+Raw records: `stream-recovery-results/`.
+
+## TensorRT initialization finding and isolated retry
+
+The complete TensorRT environment imports successfully, but all three first
+acceleration requests failed the benchmark's real-engine guard. At this pinned
+source, the manager calls the parent `nn.Module.to()`, which does not call the
+TAEHV wrapper's custom `to()` method. Its TensorRT decoder stays uninitialized
+and inference silently uses PyTorch. These are failed acceleration trials,
+not TensorRT speed measurements (`stream-trt-initial-results/`).
+
+The isolated retry explicitly invokes the existing wrapper method. This also
+applies its FP16 decoder policy, so matching native controls use FP16, parallel
+decode, and eval mode. The fast preset has a separate native control retaining
+its context settings. No production pipeline was modified.
+
+Engine export samples random input; the benchmark preserves CPU/CUDA RNG around
+lazy builds to avoid changing subsequent video noise. Engine caches have a
+dedicated directory and initial hashes, with per-build time recorded. Warm
+repeats exclude first-pass engine build/deserialization. PyTorch allocator peaks
+exclude TensorRT-owned allocations; end-of-trial nvidia-smi snapshots are total
+usage observations, not peaks. Jobs: `trt-explicit-jobs.json`; results pending.
+
+The first installation also exposed the pod's 120 GB workspace quota. Cleanup
+removed reproducible download cache and the already-tested 14B causal checkpoint,
+preserving source, results, and the running pod. The 14B causal checkpoint must
+be downloaded again before another 14B run. See `stream-cache-recovery.json`.

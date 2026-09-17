@@ -10,6 +10,8 @@
   const channels = [], peers = [], audioContexts = [];
   let id = 0, measuring = false, started = 0, ended = 0, audioLevel = 0;
   let rows = [], events = [], errors = [], rms = [], samples = {};
+  let rafDiagnostics = {};
+  const rafCount = key => { if (measuring) rafDiagnostics[key]=(rafDiagnostics[key]||0)+1; };
   const record = (kind, extra = {}) => {
     if (measuring) rows.push({kind, at:epoch(), ...extra});
   };
@@ -50,20 +52,27 @@
   URL.revokeObjectURL = url => { urls.delete(url); return revokeObjectURL(url); };
   const loadedImages = new WeakMap(), pendingImageRaf = new WeakSet();
   document.addEventListener('load', event => {
-    if (!(event.target instanceof HTMLImageElement)) return;
-    const value = urls.get(event.target.currentSrc || event.target.src);
+    const img = event.target;
+    if (!(img instanceof HTMLImageElement)) return;
+    const url = img.currentSrc || img.src;
+    const value = urls.get(url);
     if (!value?.id) return;
     record('preview-image-loaded', {id:value.id, ageMs:epoch()-value.capture,
-      width:event.target.naturalWidth,height:event.target.naturalHeight});
-    loadedImages.set(event.target, value);
-    if (pendingImageRaf.has(event.target)) return;
-    pendingImageRaf.add(event.target);
+      width:img.naturalWidth,height:img.naturalHeight});
+    loadedImages.set(img, {...value,url});
+    if (pendingImageRaf.has(img)) { rafCount('coalesced'); return; }
+    pendingImageRaf.add(img);
+    rafCount('scheduled');
     requestAnimationFrame(() => {
-      pendingImageRaf.delete(event.target);
-      const loaded = loadedImages.get(event.target);
-      const current = urls.get(event.target.currentSrc || event.target.src);
-      if (!event.target.isConnected || current?.id !== loaded?.id) return;
-      record('preview-image-raf', {id:current.id, ageMs:epoch()-current.capture});
+      rafCount('callbacks');
+      pendingImageRaf.delete(img);
+      const loaded = loadedImages.get(img);
+      if (!img.isConnected) { rafCount('detached'); return; }
+      if ((img.currentSrc || img.src) !== loaded.url) { rafCount('replaced'); return; }
+      // Revoking an object URL doesn't remove an already loaded DOM image.
+      // Keep its load metadata while still rejecting an unloaded replacement.
+      if (!urls.has(loaded.url)) rafCount('revokedButStillLoaded');
+      record('preview-image-raf', {id:loaded.id, ageMs:epoch()-loaded.capture});
     });
   }, true);
   const bitmap = window.createImageBitmap.bind(window);
@@ -176,8 +185,9 @@
   addEventListener('error',event=>errorRecord(String(event.message)));
   addEventListener('unhandledrejection',event=>errorRecord(String(event.reason)));
   window.vj0AppProbe={
-    begin() {rows=[];events=[];errors=[];rms=[];samples={};ended=0;started=epoch();measuring=true;return started;},
+    begin() {rows=[];events=[];errors=[];rms=[];samples={};rafDiagnostics={};ended=0;started=epoch();measuring=true;return started;},
     snapshot() {return {started,at:ended || epoch(),measuring,rows:rows.slice(),events:events.slice(),errors:errors.slice(),rms:rms.slice(),
+      rafDiagnostics:{...rafDiagnostics},previewRafMeaning:'current loaded image observed at an animation-frame callback; not paint/compositor/display presentation',
       channelStates:channels.map(c=>c.readyState),captureAgeMeaning:'canvas encode start to receive/load/GL submission; excludes audio analyser acquisition and physical presentation'};},
     end() {if (measuring) ended=epoch();measuring=false;return this.snapshot();},
     async sampleImages() {

@@ -1,0 +1,57 @@
+{
+  "status": "failed",
+  "config": {
+    "checkpoint_folder": "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+    "model_type": "T2V-1.3B",
+    "config_path": null,
+    "output": "/workspace/trt-retry-20260917/trt-fast",
+    "width": 832,
+    "height": 480,
+    "frames": 65,
+    "steps": 2,
+    "repeats": 3,
+    "mode": "single",
+    "taehv": true,
+    "tensorrt": false,
+    "fast": true,
+    "arrival_fps": 0,
+    "noise_scale": 0.8,
+    "scene": "waveform",
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns"
+  },
+  "python": "3.11.16",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "diffusers": "0.35.1",
+    "transformers": "4.54.0",
+    "numpy": "1.24.4",
+    "pillow": "10.1.0",
+    "tensorrt-cu12": "10.16.1.11",
+    "onnx": "1.22.0",
+    "onnxscript": "0.7.2"
+  },
+  "harness_sha256": "0606bfb102bff3ef518f58e45222d862de53ac3a06a7a43a5aefff20590d0295",
+  "pipeline_sha256": "8db1426302ded6ad052ec67f7d6e545aee9a3e89a0355953dfec7a05643a3d39",
+  "frame_age": "not measured: offline inputs, no verified output-to-input correspondence",
+  "runs": [],
+  "load_seconds": 34.255494370125234,
+  "resolved": {
+    "model_type": "T2V-1.3B",
+    "mode": "single",
+    "use_taehv": true,
+    "use_tensorrt": true,
+    "fast": true,
+    "num_steps": 2,
+    "num_kv_cache": 5,
+    "num_sink_tokens": 2,
+    "adapt_sink_threshold": -1.0,
+    "config_path": "/workspace/streamdiffusionv2-20260917/streamv2v/configs/wan_causal_dmd_v2v.yaml",
+    "initial_denoising_schedule": [
+      700,
+      500
+    ]
+  },
+  "error": "Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/livebench-20260917/streamv2.py\", line 135, in main\n    raise RuntimeError('Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result')\nRuntimeError: Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result\n"
+}

@@ -1,0 +1,81 @@
+{
+  "status": "running",
+  "dispatcher_pid": 567,
+  "runner_pid": 28890,
+  "jobs": [
+    {
+      "name": "install-torch213-cu132-resolved",
+      "argv": [
+        "/workspace/tools/uv-x86_64-unknown-linux-gnu/uv",
+        "pip",
+        "install",
+        "--python",
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "--extra-index-url",
+        "https://download.pytorch.org/whl/cu132",
+        "--index-strategy",
+        "unsafe-best-match",
+        "-r",
+        "/workspace/bench-20260917/torch213-cu132-resolved.txt"
+      ],
+      "cwd": "/workspace",
+      "started_at": "2026-09-17T11:18:57.556093+00:00",
+      "status": "passed",
+      "pid": 28893,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:20:11.402098+00:00"
+    },
+    {
+      "name": "torch213-baseline-resolved",
+      "argv": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/bench-20260917/compute.py",
+        "--worker-script",
+        "/workspace/baseline-20260917/inference_server.py",
+        "--steps",
+        "2",
+        "--frames",
+        "100",
+        "--repeats",
+        "3",
+        "--image-digest",
+        "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+        "--output",
+        "/workspace/dependency-retry-20260917/torch213-baseline-resolved",
+        "--variant",
+        "baseline"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T11:20:11.406334+00:00",
+      "status": "passed",
+      "pid": 29084,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:47:09.611420+00:00"
+    },
+    {
+      "name": "torch213-combined-resolved",
+      "argv": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/bench-20260917/compute.py",
+        "--worker-script",
+        "/workspace/baseline-20260917/inference_server.py",
+        "--steps",
+        "2",
+        "--frames",
+        "100",
+        "--repeats",
+        "3",
+        "--image-digest",
+        "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+        "--output",
+        "/workspace/dependency-retry-20260917/torch213-combined-resolved",
+        "--variant",
+        "combined"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T11:47:09.615844+00:00",
+      "status": "running",
+      "pid": 39564
+    }
+  ]
+}

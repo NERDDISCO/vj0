@@ -1,5 +1,86 @@
 [
   {
+    "name": "torch213-baseline-confirmation",
+    "argv": [
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/scaling-service-20260917/torch213-baseline-confirmation",
+      "--variant",
+      "baseline"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800,
+    "env": {
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    }
+  },
+  {
+    "name": "torch213-combined-confirmation",
+    "argv": [
+      "/workspace/envs/klein-torch213-cu132/bin/python",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/scaling-service-20260917/torch213-combined-confirmation",
+      "--variant",
+      "combined"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800,
+    "env": {
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    }
+  },
+  {
+    "name": "original-stack-late-baseline",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+      "--output",
+      "/workspace/scaling-service-20260917/original-stack-late-baseline",
+      "--variant",
+      "baseline"
+    ],
+    "cwd": "/app",
+    "timeout_seconds": 1800,
+    "env": {
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    }
+  },
+  {
     "name": "install-wrtc010",
     "argv": [
       "npm",

@@ -2,86 +2,75 @@
 
 ## Current next action
 
-Funding was confirmed on 2026-09-17: approximately $100 available. The baseline
-pod `0pxb4bss2jmbhg` was created in EU-CZ-1 at $2.09/hour (one RTX PRO 6000).
-EU-RO-1 had no matching capacity. API system logs returned image-pull progress
-before SSH was ready. Continue B00 on this existing pod; inspect its current
-state before any new create. SSH and API container logs are verified. Original-image 512x288 WebRTC baselines
-and four repeat runs are saved; the fifth repeat failed its drain check. All
-three startup shapes compiled with main-thread warmup, but the original dispatcher
-subsequently restarted workers with phantom pending work and during compilation.
-Those early higher-resolution attempts were stopped; later candidate trials measured 14.03 FPS at 768x448 and 8.10 FPS at 1024x576.
+Checkpoint at 12:04 UTC, 2026-09-17. Continue the selected plan through measured,
+failed, or concretely unsuitable outcomes; the user has authorized funded tests
+and keeping these resources warm. Do not create replacement pods unnecessarily.
+No UI redesign, main-branch deployment, or stable image overwrite is authorized.
 
-The first seven-job compute sweep, 30 live discovery trials, and 24 wrtc 0.10
-trials plus one clean replacement are complete. Checkpoint `5c64612` is pushed.
-The first Stream sweep stopped during TensorRT installation at the 120 GB
-workspace quota. Its manifest was truncated; completed per-job results and
-append-only runner log are preserved. `stream-quota-recovery.json` reconstructs
-job states explicitly from that log. Cleared 4.1 GiB of UV download cache and
-the reproducible 28.58 GB 14B causal checkpoint after all three selected 14B
-comparisons completed. Model revisions and generated samples are preserved;
-14B would need that checkpoint downloaded again before another run. The base
-14B model remains on container storage. No pod resize/restart occurred.
+The original snapshot is pushed on `snapshot/pre-performance-2026-09-17`.
+The experiment branch is `perf/2026-09-live-bench` (last pushed checkpoint
+`51315b3` before the updates below). Original-image compute, 30 WebRTC discovery
+trials, 24 wrtc 0.10 trials plus a clean replacement, extended compute, and the
+original-environment Stream model/decoder/step/resolution/paced tests are saved.
+The old quota/interrupted-install failures are preserved separately.
 
-The new recovery runner is 35784, manifest
-`/workspace/stream-recovery-20260917/sweep.json`. It repairs the isolated TRT
-environment, runs the remaining seven Stream options and two corrected paced
-tests, then starts the configurable compute service on port 3001.
-`stream-recovery-jobs.json` is the exact queue. Original Node 499 is paused.
-The old follow-up waiter 30655 was stopped; it must not be restarted.
-The recovery runner writes its manifest atomically. Its remaining original-env
-Stream tests and corrected paced tests completed. The first TRT repair exposed
-partially installed Torch files from the interrupted installation, so its TRT
-trials failed explicitly before inference. Waiter 36926 stopped the temporary
-service, waited for cleanup, and started `trt-retry-jobs.json` under
-`/workspace/trt-retry-20260917/sweep.json`. This performs a complete exact-version
-reinstall, validates imports and the three documented upstream Torch overrides,
-then runs four TRT comparisons and starts the final live compute service.
-Do not start WAN tests against the earlier temporary service.
-TensorRT results now
-require actual cached-engine execution and reject the upstream silent fallback.
+**Pod A:** `0pxb4bss2jmbhg`, one PRO 6000, $2.09/GPU-hour.
+Current runner 38454: `/workspace/trt-retry-20260917/sweep.json`.
+Node 39977 serves `https://0pxb4bss2jmbhg-3001.proxy.runpod.net`; original Node
+499 is paused. All three shapes warmed. Dispatcher SHA
+`dbe212ac6fab113e4ec28fea64dc92d86303789be3d0a77a9265c233d63dd9b2`.
+The 36 alternating live trials are running in
+`/tmp/vj0-browser-live-compute-20260917`, browser session `vj0-perf-20260917`.
+A local follow-up waits for all 36 valid results, then runs the entropy batch,
+app smoke4, and twelve app comparisons. It stops explicitly on failure.
+No other client or GPU job may overlap these Pod A timed trials.
 
-The upcoming dispatcher hash is `dbe212ac6fab113e4ec28fea64dc92d86303789be3d0a77a9265c233d63dd9b2`
-(generated with an explicit three-shape warmup fallback before launch).
+TRT imports now pass. The initial acceleration requests failed because upstream
+parent `Module.to()` bypasses decoder initialization, leaving a silent native
+fallback. The guarded explicit-wrapper retry is staged but **not started**:
+`/workspace/livebench-20260917/trt-explicit-jobs.json`, output will be
+`/workspace/trt-explicit-20260917`. Its harness is
+`streamv2-explicit.py`, SHA
+`eed04fbcd318bf7fcdc6007b6140f0998ba8d69ca781451460fb18045580ebd9`.
+Run it only after Pod A live/app/same-host clients finish. It includes matched
+FP16 parallel native controls, RNG-isolated builds, and engine-cache identity.
+See STREAMDIFFUSION.md for quota recovery and the 14B checkpoint re-download note.
 
-The next WAN queue is `browser-live-compute-jobs.json` (36 alternating trials).
-Only start it after the service's three shapes have warmed and no other client
-is attached. The harness requires worker telemetry to confirm the requested
-compute variant and timing clock.
+**Pod B:** `9vj8k6guaxsbhw`, two PRO 6000 GPUs, $4.18/GPU-hour.
+Runner 28890: `/workspace/dependency-retry-20260917/sweep.json`.
+GPU 0 runs serial tests; GPU 1 is idle. Original Node 567 is paused.
+Torch 2.13 baseline and combined tests passed, followed by normalization/cache
+and attention profiling. FA4 installed and its kernel correctness check passed;
+full-pipeline FA4 tests are underway. Waiter 31190 then runs
+`scaling-service-jobs.json`: three late compute confirmations, isolated wrtc
+installation, and a two-worker service. Its future manifest is
+`/workspace/scaling-service-20260917/sweep.json`. After both workers warm,
+run the eighteen `browser-scaling-jobs.json` trials. These compare one/two active
+GPUs with both models loaded, not differently priced allocations.
 
-Local app builds: current branch on port 18766, detached 7139e0f baseline on
-18767 (`/tmp/vj0-app-baseline-20260917`). A CDP init session must remain attached
-for its new-document probe to survive navigation; `bench/cdp.mjs` now supports
-command arrays and keepAliveSeconds for that purpose. The audio fixture has
-produced real analyser RMS around 0.14 at amplitude 0.2; GPU app/soak measurements
-remain pending. UI captures will be saved separately from timed runs.
+**Actual app:** production builds are on 18766 (candidate app source 4a02d2f)
+and 18767 (7139e0f baseline). Both tabs need persistent CDP probe, focus, and
+viewport overrides: main 1440x900, stage 1920x1080, DPR 1. At source 512x288,
+the real stage GL buffer is 2048x1152. Do not confuse viewport and GL dimensions.
+Run setup keeps both tabs visible; an inactive headless tab otherwise pauses RAF.
+The proxy rejects Python's default HTTP User-Agent; the harness sets an explicit
+browser-compatible benchmark User-Agent for the control request.
 
-Second pod `9vj8k6guaxsbhw` has two PRO 6000 GPUs. GPU 0 is running the serial
-extended compute jobs; GPU 1 is deliberately idle during these isolated trials.
-Original Node 567 is paused. Manifest:
-`/workspace/extended-compute-20260917/sweep.json` (runner 3037 at launch).
-A waiting follow-up process starts `dependency-and-attention-jobs.json` after
-that runner exits; remote job file is named `dependency-retry-jobs.json` and
-output is `/workspace/dependency-retry-20260917`. The dependency retry, constant
-cache/profile tests, and FA4 tests are serial and use separate environments.
-Do not start scaling tests before this follow-up finishes. A second waiter
-(PID 31190) starts `scaling-service-jobs.json` afterwards; manifest
-`/workspace/scaling-service-20260917/sweep.json`. The isolated dispatcher keeps
-two workers loaded and switches one/two active GPUs between trials, avoiding
-startup/compilation differences. `browser-scaling-jobs.json` contains 18
-alternating trials. Worker IDs, counts, maximum output gap, and final readiness
-are verified; both loaded models are explicitly part of the experiment identity.
+Smoke1 failed that proxy request. Smoke2 failed viewport verification. Smoke3
+received/submitted 28.56 FPS to stage with real analyser RMS around 0.14, but was
+invalid because preview RAF measurement omitted revoked-yet-loaded image URLs.
+That probe omission is reproduced/fixed with CPU controls; smoke3 stays invalid.
+Updated init requests `/tmp/vj0-app-init-v2.json` and
+`/tmp/vj0-stage-init-v2.json` are attached. Smoke4 must pass before the twelve
+comparisons. The final ten-minute soak and prompt/resolution/reconnect stress
+remain required. Screenshots/video must be outside timed measurements.
 
-Current spend observed at 10:46 UTC was $6.331/hour for the two test pods plus
-storage; account balance was $93.62. Existing older pods remain stopped.
-Keep the warm test resources per user authorization, and report their final
-running state and refreshed spend. No new inference default is promoted.
-
-Still required after these queues: inspect/fix concrete test failures, live
-alternating compute variants, same-pod transport, 1-vs-2 worker scaling, real
-app/stage measurements using the synthetic WebAudio fixture, 10-minute soak
-with prompt/shape/reconnect changes, and independent final result review.
-No UI design changes or stable image/main-branch updates are authorized here.
+Remaining after queued work: same-host transport, multi-GPU scaling, the matched
+TRT retry, the final combination/soak, raw-data review, complete result tables,
+independent review, and final branch push. Keep model changes isolated; do not
+promote an option based on one trial. Preserve failed attempts and exact labels.
+Current spend last observed at 10:46 UTC was $6.331/hour including storage;
+balance $93.62. Refresh at completion. Five unrelated old pods remain stopped.
 
 ## Tool and infrastructure checks
 

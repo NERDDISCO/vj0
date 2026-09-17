@@ -11,6 +11,7 @@ import importlib.metadata
 import json
 from pathlib import Path
 import platform
+import subprocess
 import time
 import traceback
 
@@ -32,11 +33,22 @@ def main():
     p.add_argument('--taehv', action='store_true')
     p.add_argument('--tensorrt', action='store_true')
     p.add_argument('--fast', action='store_true', help='Upstream fast preset changes decoder AND KV/context settings')
+    p.add_argument('--initialize-taehv-wrapper', action='store_true',
+        help='Explicitly run upstream wrapper.to; parent Module.to skips its TensorRT initialization and FP16 decoder policy')
+    p.add_argument('--parallel-taehv', action='store_true',
+        help='Use upstream native parallel decoder as the matching TensorRT control')
+    p.add_argument('--native-fast-control', action='store_true',
+        help='Keep the fast preset context settings but disable TensorRT for its native control')
+    p.add_argument('--trt-cache-dir', type=Path)
     p.add_argument('--arrival-fps', type=float, default=0, help='Pace chunk availability; reports submission delay, not input/output correspondence')
     p.add_argument('--noise-scale', type=float, default=0.8)
     p.add_argument('--scene', choices=['waveform', 'detailed'], default='waveform')
     p.add_argument('--prompt', default='colorful abstract art, vibrant neon lights, psychedelic patterns')
     a = p.parse_args()
+    if (a.initialize_taehv_wrapper or a.parallel_taehv) and not (a.taehv or a.fast):
+        p.error('TAEHV wrapper options require --taehv or --fast')
+    if a.native_fast_control and not a.fast:
+        p.error('--native-fast-control requires --fast')
     if a.frames < 5 or (a.frames - 1) % 4 or not 1 <= a.steps <= 4 or a.repeats < 1 or a.arrival_fps < 0:
         p.error('frames must be 1+4n >=5, steps 1..4, and repeats positive')
     a.output.mkdir(parents=True, exist_ok=True)
@@ -51,18 +63,51 @@ def main():
         'versions': {n: importlib.metadata.version(n) for n in ['torch', 'diffusers', 'transformers', 'numpy', 'pillow']},
         'harness_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'pipeline_sha256': hashlib.sha256(Path(pipeline_module.__file__).read_bytes()).hexdigest(),
-        'frame_age': 'not measured: offline inputs, no verified output-to-input correspondence', 'runs': []}
+        'frame_age': 'not measured: offline inputs, no verified output-to-input correspondence',
+        'memory_accounting': 'peak_allocated/reserved_bytes are PyTorch allocator statistics only; TensorRT allocations are excluded. nvidia-smi end snapshots include all GPU allocations but are not peaks.',
+        'runs': []}
 
     def save():
         (a.output / 'result.json').write_text(json.dumps(report, indent=2) + '\n')
 
     save()
     try:
+        if a.tensorrt or a.fast:
+            # Upstream engine export samples random input. Keep that one-time
+            # build from changing the RNG used by subsequent video chunks.
+            from models.wan.taehv_wrapper import TAEHVTensorRTDecoder
+            build_engine = TAEHVTensorRTDecoder._build_engine
+            report['tensorrt_builds'] = []
+            report['tensorrt_build_rng_preserved'] = True
+
+            def isolated_build(decoder, shape, device):
+                began = time.perf_counter()
+                try:
+                    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
+                        return build_engine(decoder, shape, device)
+                finally:
+                    report['tensorrt_builds'].append({'shape':list(shape),
+                        'seconds':time.perf_counter()-began})
+
+            TAEHVTensorRTDecoder._build_engine = isolated_build
         started = time.perf_counter()
         pipe = StreamDiffusionV2Pipeline(a.checkpoint_folder, mode=a.mode,
             width=a.width, height=a.height, step=a.steps, noise_scale=a.noise_scale,
             seed=42, use_taehv=a.taehv, use_tensorrt=a.tensorrt, fast=a.fast,
             model_type=a.model_type, config_path=a.config_path, device='cuda', fps=30)
+        vae = pipe.pipeline_manager.pipeline.vae
+        if a.native_fast_control:
+            pipe.use_tensorrt = vae.use_tensorrt = False
+            vae.parallel_decode = True
+        if a.trt_cache_dir:
+            vae._tensorrt_cache_dir = a.trt_cache_dir
+            report['initial_trt_cache'] = {str(p):hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in a.trt_cache_dir.glob('*.plan')}
+        if a.initialize_taehv_wrapper:
+            vae.to(device='cuda', dtype=torch.bfloat16)
+            vae.taehv.eval()
+        if a.parallel_taehv:
+            vae.parallel_decode = True
         torch.cuda.synchronize()
         report['load_seconds'] = time.perf_counter() - started
         report['resolved'] = {'model_type':pipe.model_type, 'mode':pipe.mode,
@@ -71,6 +116,13 @@ def main():
             'num_sink_tokens':int(pipe.config.num_sink_tokens),
             'adapt_sink_threshold':float(pipe.config.adapt_sink_threshold),
             'config_path':pipe.config_path}
+        if pipe.use_taehv:
+            report['resolved'].update(taehv_dtype=str(next(vae.taehv.parameters()).dtype),
+                parallel_decode=vae.parallel_decode, wrapper_use_tensorrt=vae.use_tensorrt,
+                tensorrt_decoder_initialized=vae._tensorrt_decoder is not None,
+                taehv_training=vae.taehv.training)
+            import models.wan.taehv_wrapper as taehv_module
+            report['taehv_wrapper_sha256'] = hashlib.sha256(Path(taehv_module.__file__).read_bytes()).hexdigest()
         if pipe.use_tensorrt:
             for name in ['tensorrt-cu12', 'onnx', 'onnxscript']:
                 report['versions'][name] = importlib.metadata.version(name)
@@ -197,7 +249,9 @@ def main():
                 'first_output_seconds': first_output, 'chunk_ms': distribution(timings), 'chunks': records,
                 'simulated_capture_to_decoded_ms': distribution(capture_ages),
                 'peak_allocated_bytes': torch.cuda.max_memory_allocated(),
-                'peak_reserved_bytes': torch.cuda.max_memory_reserved()}
+                'peak_reserved_bytes': torch.cuda.max_memory_reserved(),
+                'gpu_memory_used_mib_at_trial_end': int(subprocess.check_output([
+                    'nvidia-smi', '-i', '0', '--query-gpu=memory.used', '--format=csv,noheader,nounits'], text=True).strip())}
             if pipe.use_tensorrt:
                 run['tensorrt_engine_shapes'] = [list(shape) for shape in pipe.pipeline_manager.pipeline.vae._tensorrt_decoder._engine_cache]
             report['runs'].append(run)
