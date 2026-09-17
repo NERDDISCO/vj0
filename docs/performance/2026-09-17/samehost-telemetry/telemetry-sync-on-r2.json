@@ -1,0 +1,1320 @@
+{
+  "status": "measured",
+  "config": {
+    "name": "telemetry-sync-on-r2",
+    "server": "http://127.0.0.1:3001",
+    "width": 512,
+    "height": 288,
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "mode": "stream",
+    "seconds": 60,
+    "sendFps": 60,
+    "maxBufferedBytes": 262144,
+    "inputs": [
+      "/workspace/telemetry-fixtures-20260917/512x288-00.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-01.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-02.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-03.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-04.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-05.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-06.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-07.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-08.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-09.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-10.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-11.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-12.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-13.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-14.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-15.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-16.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-17.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-18.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-19.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-20.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-21.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-22.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-23.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-24.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-25.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-26.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-27.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-28.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-29.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-30.jpg",
+      "/workspace/telemetry-fixtures-20260917/512x288-31.jpg"
+    ],
+    "output": "/workspace/telemetry-controlled-20260917/telemetry-sync-on-r2.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline",
+      "activeWorkers": 1,
+      "telemetryMode": "sync",
+      "outboundFrames": 0
+    },
+    "requireQueueTiming": true,
+    "telemetryEveryMs": 2000
+  },
+  "date": "2026-09-17T13:09:07.875Z",
+  "measurement": "same-pod pre-encoded JPEG send to receive; no browser encode/decode/display",
+  "elapsedSeconds": 60.000092358,
+  "sent": 3736,
+  "received": 1729,
+  "receivedFps": 28.816622309239943,
+  "outboundMbps": 5.846497400486551,
+  "inboundMbps": 9.517827482541488,
+  "sendToReceiveMs": {
+    "count": 1729,
+    "mean": 96.35299789300163,
+    "p50": 96.22355600000446,
+    "p95": 106.35602700000008,
+    "p99": 126.07724064000041
+  },
+  "outputBytes": {
+    "count": 1729,
+    "mean": 41286.18623481781,
+    "p50": 41364,
+    "p95": 42740,
+    "p99": 42889
+  },
+  "workerMs": {
+    "count": 1729,
+    "mean": 34.53783111625216,
+    "p50": 34.23,
+    "p95": 36.88399999999999,
+    "p99": 39.4936
+  },
+  "workerQueueMs": {
+    "count": 1729,
+    "mean": 52.80660670908042,
+    "p50": 47.924,
+    "p95": 68.6486,
+    "p99": 73.43231999999999
+  },
+  "telemetryMs": {
+    "count": 29,
+    "mean": 49.816425206895865,
+    "p50": 49.50458799999615,
+    "p95": 53.351194199998275,
+    "p99": 61.74544475999776
+  },
+  "telemetrySnapshots": [
+    {
+      "elapsedMs": 2049.46793,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 65,
+          "powerW": 488.89
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.32
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10552,
+          "lastFrameAt": 1789650489852
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 4047.458699,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 80,
+          "tempC": 66,
+          "powerW": 484.1
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.07
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10610,
+          "lastFrameAt": 1789650491858
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 6047.883871,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 80,
+          "tempC": 67,
+          "powerW": 452.06
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.73
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 2,
+          "framesProduced": 10667,
+          "lastFrameAt": 1789650493871
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 8048.052946000001,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 83,
+          "tempC": 67,
+          "powerW": 508.42
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.79
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10725,
+          "lastFrameAt": 1789650495856
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 10050.522156,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 66,
+          "powerW": 469.2
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.02
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10784,
+          "lastFrameAt": 1789650497865
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 12050.181701000001,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 68,
+          "powerW": 504.59
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.85
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10843,
+          "lastFrameAt": 1789650499861
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 14047.852669000002,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 83,
+          "tempC": 68,
+          "powerW": 533.98
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.82
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10902,
+          "lastFrameAt": 1789650501853
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 16048.410396,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 67,
+          "powerW": 519.85
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.77
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 10961,
+          "lastFrameAt": 1789650503849
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 18049.371807,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 78,
+          "tempC": 65,
+          "powerW": 489.59
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.82
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11019,
+          "lastFrameAt": 1789650505843
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 20051.742723,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 83,
+          "tempC": 68,
+          "powerW": 441.86
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.22
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 2,
+          "framesProduced": 11079,
+          "lastFrameAt": 1789650507869
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 22051.619007,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 66,
+          "powerW": 495.6
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.76
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11136,
+          "lastFrameAt": 1789650509854
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 24050.223980000002,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 84,
+          "tempC": 66,
+          "powerW": 483.39
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.81
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11193,
+          "lastFrameAt": 1789650511849
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 26051.128868,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 80,
+          "tempC": 67,
+          "powerW": 455.12
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.82
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11250,
+          "lastFrameAt": 1789650513856
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 28048.382962,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 80,
+          "tempC": 67,
+          "powerW": 475.14
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.33
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11306,
+          "lastFrameAt": 1789650515857
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 30050.417723000002,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 64,
+          "powerW": 478.41
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.82
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11363,
+          "lastFrameAt": 1789650517848
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 32048.68554,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 78,
+          "tempC": 65,
+          "powerW": 459.03
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.81
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11419,
+          "lastFrameAt": 1789650519852
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 34050.983188,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 65,
+          "powerW": 496.83
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.7
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11475,
+          "lastFrameAt": 1789650521851
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 36051.185512000004,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 67,
+          "powerW": 497.05
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.46
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 2,
+          "framesProduced": 11533,
+          "lastFrameAt": 1789650523875
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 38055.701014,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 83,
+          "tempC": 68,
+          "powerW": 472.78
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.27
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11590,
+          "lastFrameAt": 1789650525858
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 40047.427532,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 79,
+          "tempC": 66,
+          "powerW": 498.39
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.76
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11647,
+          "lastFrameAt": 1789650527855
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 42050.595011,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 65,
+          "powerW": 483.18
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.54
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11704,
+          "lastFrameAt": 1789650529852
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 44051.09328,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 67,
+          "powerW": 484.71
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.79
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11762,
+          "lastFrameAt": 1789650531859
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 46051.099626,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 67,
+          "powerW": 467.42
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.82
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 2,
+          "framesProduced": 11819,
+          "lastFrameAt": 1789650533872
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 48049.681144,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 82,
+          "tempC": 67,
+          "powerW": 469.66
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.38
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 2,
+          "framesProduced": 11877,
+          "lastFrameAt": 1789650535874
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 50046.861169,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 68,
+          "powerW": 496.25
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 90.55
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11935,
+          "lastFrameAt": 1789650537862
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 52049.158667,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 67,
+          "powerW": 439.17
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.53
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 11992,
+          "lastFrameAt": 1789650539865
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 54049.381,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 83,
+          "tempC": 68,
+          "powerW": 494.2
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.16
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 12049,
+          "lastFrameAt": 1789650541860
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 56064.715148,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 79,
+          "tempC": 67,
+          "powerW": 526.76
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 88.84
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 12108,
+          "lastFrameAt": 1789650543861
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    },
+    {
+      "elapsedMs": 58048.436693,
+      "gpus": [
+        {
+          "index": 0,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14639,
+          "utilPct": 81,
+          "tempC": 67,
+          "powerW": 492.61
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+          "vramTotalMb": 97887,
+          "vramUsedMb": 14707,
+          "utilPct": 0,
+          "tempC": 29,
+          "powerW": 89.11
+        }
+      ],
+      "workers": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 3,
+          "framesProduced": 12166,
+          "lastFrameAt": 1789650545856
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 0,
+          "lastFrameAt": 0
+        }
+      ]
+    }
+  ],
+  "telemetryPolls": {
+    "attempted": 29,
+    "completedWithinWindow": 29,
+    "failedWithinWindow": 0,
+    "censored": 0
+  },
+  "bufferSkips": 0,
+  "errors": [],
+  "transport": [
+    {
+      "id": "RTCIceCandidatePair_XDNCP7Lh_KE7wqFoH",
+      "timestamp": 1789650547874.945,
+      "type": "candidate-pair",
+      "transportId": "RTCTransport_0_1",
+      "localCandidateId": "RTCIceCandidate_XDNCP7Lh",
+      "remoteCandidateId": "RTCIceCandidate_KE7wqFoH",
+      "state": "succeeded",
+      "priority": 9115038255631187000,
+      "nominated": true,
+      "writable": true,
+      "packetsSent": 71599,
+      "packetsReceived": 83378,
+      "bytesSent": 48761241,
+      "bytesReceived": 78163980,
+      "totalRoundTripTime": 0.002,
+      "currentRoundTripTime": 0,
+      "requestsReceived": 28,
+      "requestsSent": 1,
+      "responsesReceived": 28,
+      "responsesSent": 28,
+      "consentRequestsSent": 27,
+      "packetsDiscardedOnSend": 0,
+      "bytesDiscardedOnSend": 0
+    },
+    {
+      "id": "RTCIceCandidatePair_b4Z6VtRw_ugtJ87KE",
+      "timestamp": 1789650547874.945,
+      "type": "candidate-pair",
+      "transportId": "RTCTransport_0_1",
+      "localCandidateId": "RTCIceCandidate_b4Z6VtRw",
+      "remoteCandidateId": "RTCIceCandidate_ugtJ87KE",
+      "state": "succeeded",
+      "priority": 9114789766003194000,
+      "nominated": false,
+      "writable": true,
+      "packetsSent": 0,
+      "packetsReceived": 0,
+      "bytesSent": 0,
+      "bytesReceived": 0,
+      "totalRoundTripTime": 0,
+      "currentRoundTripTime": 0,
+      "requestsReceived": 3,
+      "requestsSent": 1,
+      "responsesReceived": 3,
+      "responsesSent": 3,
+      "consentRequestsSent": 2,
+      "packetsDiscardedOnSend": 0,
+      "bytesDiscardedOnSend": 0
+    },
+    {
+      "id": "RTCIceCandidatePair_grmkC2MM_KE7wqFoH",
+      "timestamp": 1789650547874.945,
+      "type": "candidate-pair",
+      "transportId": "RTCTransport_0_1",
+      "localCandidateId": "RTCIceCandidate_grmkC2MM",
+      "remoteCandidateId": "RTCIceCandidate_KE7wqFoH",
+      "state": "succeeded",
+      "priority": 9114475305677766000,
+      "nominated": false,
+      "writable": true,
+      "packetsSent": 0,
+      "packetsReceived": 0,
+      "bytesSent": 0,
+      "bytesReceived": 0,
+      "totalRoundTripTime": 0,
+      "currentRoundTripTime": 0,
+      "requestsReceived": 0,
+      "requestsSent": 1,
+      "responsesReceived": 3,
+      "responsesSent": 0,
+      "consentRequestsSent": 2,
+      "packetsDiscardedOnSend": 0,
+      "bytesDiscardedOnSend": 0
+    }
+  ]
+}

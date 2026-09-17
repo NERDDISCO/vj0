@@ -1,0 +1,153 @@
+{
+  "status": "finished-with-failures",
+  "dispatcher_pid": 499,
+  "runner_pid": 44166,
+  "jobs": [
+    {
+      "name": "native-fp16-parallel",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-explicit.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/trt-explicit-20260917/native-fp16-parallel",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-explicit-20260917/engine-cache",
+        "--parallel-taehv"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:20:59.776049+00:00",
+      "status": "passed",
+      "pid": 44169,
+      "returncode": 0,
+      "finished_at": "2026-09-17T13:23:32.408233+00:00"
+    },
+    {
+      "name": "trt-fp16",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-explicit.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/trt-explicit-20260917/trt-fp16",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-explicit-20260917/engine-cache",
+        "--tensorrt"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:23:32.415327+00:00",
+      "status": "failed",
+      "pid": 44645,
+      "returncode": 1,
+      "finished_at": "2026-09-17T13:24:32.131014+00:00"
+    },
+    {
+      "name": "native-fast-fp16",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-explicit.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/trt-explicit-20260917/native-fast-fp16",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-explicit-20260917/engine-cache",
+        "--fast",
+        "--native-fast-control"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:24:32.134477+00:00",
+      "status": "passed",
+      "pid": 44897,
+      "returncode": 0,
+      "finished_at": "2026-09-17T13:25:33.794360+00:00"
+    },
+    {
+      "name": "trt-fast-fp16",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-explicit.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/trt-explicit-20260917/trt-fast-fp16",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-explicit-20260917/engine-cache",
+        "--fast"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:25:33.804710+00:00",
+      "status": "failed",
+      "pid": 45309,
+      "returncode": 1,
+      "finished_at": "2026-09-17T13:26:30.373449+00:00"
+    },
+    {
+      "name": "trt-fp16-noise095",
+      "argv": [
+        "/workspace/envs/streamv2-trt/bin/python",
+        "/workspace/livebench-20260917/streamv2-explicit.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/trt-explicit-20260917/trt-fp16-noise095",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--initialize-taehv-wrapper",
+        "--trt-cache-dir",
+        "/workspace/trt-explicit-20260917/engine-cache",
+        "--tensorrt",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T13:26:30.376732+00:00",
+      "status": "failed",
+      "pid": 45577,
+      "returncode": 1,
+      "finished_at": "2026-09-17T13:27:28.437604+00:00"
+    },
+    {
+      "name": "live-compute-service",
+      "argv": [
+        "node",
+        "/workspace/livebench-20260917/server.js"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T13:27:28.444015+00:00",
+      "status": "passed",
+      "pid": 45877,
+      "returncode": 0,
+      "finished_at": "2026-09-17T13:27:32.314488+00:00"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "config": {
+    "alpha": 0.1,
+    "frameIds": true,
+    "height": 448,
+    "inputQuality": 0.85,
+    "mode": "stream",
+    "outputQuality": 80,
+    "recordServerCounters": true,
+    "requireQueueTiming": true,
+    "seconds": 60,
+    "seed": 42,
+    "sendFps": 60,
+    "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+    "serverConfig": {
+      "activeWorkers": 2,
+      "benchmarkVariant": "baseline",
+      "maxOutboundBytes": 1048576,
+      "maxPending": 3
+    },
+    "steps": 2,
+    "telemetryEveryMs": 0,
+    "warmupFrames": 20,
+    "width": 768
+  },
+  "date": "2026-09-17T13:26:35.820Z",
+  "error": "Error: Timeout verifying server/transport warmup drain",
+  "status": "failed"
+}

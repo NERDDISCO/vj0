@@ -8,11 +8,13 @@ assumed across the stream-batched pipeline.
 import argparse
 import hashlib
 import importlib.metadata
+import inspect
 import json
 from pathlib import Path
 import platform
 import subprocess
 import time
+import textwrap
 import traceback
 
 from metrics import distribution
@@ -40,6 +42,8 @@ def main():
     p.add_argument('--native-fast-control', action='store_true',
         help='Keep the fast preset context settings but disable TensorRT for its native control')
     p.add_argument('--trt-cache-dir', type=Path)
+    p.add_argument('--trt-external-weight-path', action='store_true',
+        help='Pass the ONNX model path to the upstream parser so external weights resolve beside the model')
     p.add_argument('--arrival-fps', type=float, default=0, help='Pace chunk availability; reports submission delay, not input/output correspondence')
     p.add_argument('--noise-scale', type=float, default=0.8)
     p.add_argument('--scene', choices=['waveform', 'detailed'], default='waveform')
@@ -77,6 +81,22 @@ def main():
             # build from changing the RNG used by subsequent video chunks.
             from models.wan.taehv_wrapper import TAEHVTensorRTDecoder
             build_engine = TAEHVTensorRTDecoder._build_engine
+            if a.trt_external_weight_path:
+                # PyTorch's newer exporter stores weights in a sibling file.
+                # Preserve the upstream checkout and change only the parser's
+                # documented path argument in this isolated benchmark process.
+                original = textwrap.dedent(inspect.getsource(build_engine))
+                needle = 'parser.parse(handle.read())'
+                if original.count(needle) != 1:
+                    raise RuntimeError('Upstream TensorRT parser source changed; refusing an ambiguous compatibility patch')
+                patched = original.replace(needle, 'parser.parse(handle.read(), str(onnx_path))')
+                namespace = dict(build_engine.__globals__)
+                exec(compile(patched, '<benchmark-trt-parser-path>', 'exec'), namespace)
+                build_engine = namespace['_build_engine']
+                report['tensorrt_parser_compatibility'] = {
+                    'change': 'pass ONNX model path for sibling external weights',
+                    'original_function_sha256': hashlib.sha256(original.encode()).hexdigest(),
+                    'patched_function_sha256': hashlib.sha256(patched.encode()).hexdigest()}
             report['tensorrt_builds'] = []
             report['tensorrt_build_rng_preserved'] = True
 

@@ -155,23 +155,39 @@ def main():
                 'warm_simulated_capture_age_p95_ms':spread([r['simulated_capture_to_decoded_ms']['p95']
                     for r in warm if r.get('simulated_capture_to_decoded_ms',{}).get('p95') is not None]),
                 'cold_first_pass_seconds':[r['elapsed_seconds'] for r in data['runs'] if r['cold_first_pass']]})
-    browser_paths = sorted(path for folder in args.root.glob('browser-*') if folder.is_dir()
-        for path in folder.glob('*.json'))
+    browser_paths = sorted({path for folder in args.root.glob('browser-*') if folder.is_dir()
+        for path in folder.glob('*.json')} | set(args.root.glob('*-webrtc-*.json')))
     excluded, unmatched = browser_exclusions(browser_paths, args.root, exclusions.get('exclusions',[]))
     if unmatched:
         result['unmatched_measurement_exclusions'] = unmatched
     for path in browser_paths:
         data = json.loads(path.read_text())
-        if not isinstance(data,dict) or 'receivedFps' not in data:
+        if not isinstance(data,dict) or ('receivedFps' not in data and
+                not (data.get('status') in ['failed','invalid'] and 'error' in data)):
             continue
         entry = {'artifact':str(path.relative_to(args.root)),
-            **{k:data.get(k) for k in ['status','config','receivedFps','decodedDrawnFps',
-                'elapsedSeconds','counts','invalidReasons','inboundMbps','outboundMbps']},
+            **{k:data.get(k) for k in ['status','error','config','receivedFps','decodedDrawnFps',
+                'elapsedSeconds','counts','invalidReasons','inboundMbps','outboundMbps',
+                'distributions','transport','workerFrameCounts','workerMaxGapMs',
+                'serverCounters','telemetryPolls','telemetrySnapshots',
+                'measurement','frameAge','sourceCapture','userAgent',
+                'workerVariants','finalWorkerHealth']},
             'capture_to_draw_ms':data.get('distributions',{}).get('captureToDrawMs'),
             'arithmetic_checked_fields':validate_browser_rates(data,path)}
         if path in excluded:
             entry.update(status='excluded', raw_status=data.get('status'), exclusions=excluded[path])
         result['browser'].append(entry)
+    result['samehost'] = []
+    for folder in sorted(args.root.glob('samehost-*')):
+        if not folder.is_dir():
+            continue
+        for path in sorted(folder.glob('*.json')):
+            data = json.loads(path.read_text())
+            if not isinstance(data,dict) or 'receivedFps' not in data:
+                continue
+            if not math.isclose(data['receivedFps'],data['received']/data['elapsedSeconds'],rel_tol=1e-9):
+                raise ValueError('Same-host FPS arithmetic mismatch: '+str(path))
+            result['samehost'].append({'artifact':str(path.relative_to(args.root)),**data})
     for path in sorted(args.root.glob('app-*/*/summary.json')):
         data = json.loads(path.read_text())
         result['app'].append({'artifact':str(path.relative_to(args.root)),**data,

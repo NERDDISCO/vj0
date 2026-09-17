@@ -1,0 +1,82 @@
+{
+  "status": "failed",
+  "config": {
+    "checkpoint_folder": "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+    "model_type": "T2V-1.3B",
+    "config_path": null,
+    "output": "/workspace/trt-explicit-20260917/trt-fp16-noise095",
+    "width": 832,
+    "height": 480,
+    "frames": 65,
+    "steps": 2,
+    "repeats": 3,
+    "mode": "single",
+    "taehv": true,
+    "tensorrt": true,
+    "fast": false,
+    "initialize_taehv_wrapper": true,
+    "parallel_taehv": false,
+    "native_fast_control": false,
+    "trt_cache_dir": "/workspace/trt-explicit-20260917/engine-cache",
+    "arrival_fps": 0,
+    "noise_scale": 0.95,
+    "scene": "waveform",
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns"
+  },
+  "python": "3.11.16",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "diffusers": "0.35.1",
+    "transformers": "4.54.0",
+    "numpy": "1.24.4",
+    "pillow": "10.1.0",
+    "tensorrt-cu12": "10.16.1.11",
+    "onnx": "1.22.0",
+    "onnxscript": "0.7.2"
+  },
+  "harness_sha256": "eed04fbcd318bf7fcdc6007b6140f0998ba8d69ca781451460fb18045580ebd9",
+  "pipeline_sha256": "8db1426302ded6ad052ec67f7d6e545aee9a3e89a0355953dfec7a05643a3d39",
+  "frame_age": "not measured: offline inputs, no verified output-to-input correspondence",
+  "memory_accounting": "peak_allocated/reserved_bytes are PyTorch allocator statistics only; TensorRT allocations are excluded. nvidia-smi end snapshots include all GPU allocations but are not peaks.",
+  "runs": [],
+  "tensorrt_builds": [
+    {
+      "shape": [
+        1,
+        2,
+        16,
+        60,
+        104
+      ],
+      "seconds": 2.847708278335631
+    }
+  ],
+  "tensorrt_build_rng_preserved": true,
+  "initial_trt_cache": {},
+  "load_seconds": 37.43825401784852,
+  "resolved": {
+    "model_type": "T2V-1.3B",
+    "mode": "single",
+    "use_taehv": true,
+    "use_tensorrt": true,
+    "fast": false,
+    "num_steps": 2,
+    "num_kv_cache": 6,
+    "num_sink_tokens": 3,
+    "adapt_sink_threshold": 0.2,
+    "config_path": "/workspace/streamdiffusionv2-20260917/streamv2v/configs/wan_causal_dmd_v2v.yaml",
+    "taehv_dtype": "torch.float16",
+    "parallel_decode": true,
+    "wrapper_use_tensorrt": true,
+    "tensorrt_decoder_initialized": true,
+    "taehv_training": false,
+    "initial_denoising_schedule": [
+      700,
+      500
+    ]
+  },
+  "taehv_wrapper_sha256": "66d3dc6355c52b08c76a23e779b1c4dca1434c102b7a80fec41cd52b18568ea7",
+  "error": "Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/livebench-20260917/streamv2-explicit.py\", line 187, in main\n    raise RuntimeError('Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result')\nRuntimeError: Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result\n"
+}

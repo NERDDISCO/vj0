@@ -120,7 +120,7 @@ function spawnWorker(gpu) {
     env,
   });
   const w = { proc, gpu, ready: false, stdoutBuf: "", framePending: 0, lastFrameAt: 0,
-    compileStartedAt: 0, compileFinishedAt: 0 };
+    compileStartedAt: 0, compileFinishedAt: 0, pendingStartedAt: 0 };
   workers.push(w);
 
   proc.stdout.on("data", (chunk) => {
@@ -406,6 +406,9 @@ function dispatchFrame(frameMsg) {
   }
   try {
     const ok = w.proc.stdin.write(JSON.stringify(frameMsg) + "\n");
+    // Idle time is not request processing time. Start a fresh deadline only
+    // when work resumes; additional queued input must not mask a real stall.
+    if (w.framePending === 0) w.pendingStartedAt = Date.now();
     w.framePending++;
     w.framesDispatched = (w.framesDispatched || 0) + 1;
     diagStats.framesToWorker++;
@@ -963,10 +966,10 @@ setInterval(() => {
     const compileExpired = w.compileStartedAt && now - w.compileStartedAt >= WATCHDOG_COMPILE_MS;
     if (!compileExpired && (!w.ready || w.framePending === 0)) continue;
     if (w.compileStartedAt && now - w.compileStartedAt < WATCHDOG_COMPILE_MS) continue;
-    if (!w.compileStartedAt && w.lastFrameAt === 0 && !w.compileFinishedAt) continue;
+    if (!w.compileStartedAt && w.lastFrameAt === 0 && !w.compileFinishedAt && !w.pendingStartedAt) continue;
     const stalled = w.compileStartedAt
       ? now - w.compileStartedAt
-      : now - Math.max(w.lastFrameAt, w.compileFinishedAt);
+      : now - Math.max(w.lastFrameAt, w.compileFinishedAt, w.pendingStartedAt || 0);
     if (stalled > WATCHDOG_STALL_MS) {
       console.log(`[watchdog] worker ${w.gpu} stalled ${(stalled / 1000).toFixed(1)}s with pending=${w.framePending} stdoutBuf=${w.stdoutBuf.length}, killing for respawn`);
       w.ready = false;

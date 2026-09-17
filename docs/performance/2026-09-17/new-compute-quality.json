@@ -1,0 +1,445 @@
+{
+  "metric_scope": "8-bit RGB uncompressed sample comparison; numerical difference, not perceptual preference or live temporal quality",
+  "samples": [
+    {
+      "variant": "Old stack",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/original-stack-late-baseline/512x288-2step-a-uncompressed.png",
+      "sha256": "811b015a86b5b7fa0e53b7b34d25ed6c0242e14e951dd0f96b2b3aeadec9943e"
+    },
+    {
+      "variant": "Old stack",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/original-stack-late-baseline/768x448-2step-a-uncompressed.png",
+      "sha256": "c39630d2adb5b935418cb4ecd0a026a2b3067e69bc0ead9bbca9a18eb38e63f7"
+    },
+    {
+      "variant": "Old stack",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/original-stack-late-baseline/1024x576-2step-a-uncompressed.png",
+      "sha256": "6b8d9e9d2a90da5efc083bf2a50d1d623dfb73318cd85382a32e0566ad193b53"
+    },
+    {
+      "variant": "New baseline",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-baseline-confirmation/512x288-2step-a-uncompressed.png",
+      "sha256": "3acd71890d7591275e34efced4a2541b92c1c4d4b5f8b72f1a62f9bd6a580dc4"
+    },
+    {
+      "variant": "New baseline",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-baseline-confirmation/768x448-2step-a-uncompressed.png",
+      "sha256": "145fbda6d8feaa53221c66cce9ca98146ffcfc078d2287c1e97dfa345dd476bd"
+    },
+    {
+      "variant": "New baseline",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-baseline-confirmation/1024x576-2step-a-uncompressed.png",
+      "sha256": "3cc9f7c4689159a24803647b1f856405bc204c3cc0d06dd0d6d5715b54f6ebc7"
+    },
+    {
+      "variant": "New combined",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-combined-confirmation/512x288-2step-a-uncompressed.png",
+      "sha256": "c7b37483c32a0e6e13982507272fc622b6f7b98701e2e46d7569ab71ed51d543"
+    },
+    {
+      "variant": "New combined",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-combined-confirmation/768x448-2step-a-uncompressed.png",
+      "sha256": "ef31630731873abbac66005cd70f370a8569337fca4ad9011273e1cea4ff3646"
+    },
+    {
+      "variant": "New combined",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/scaling-service-20260917/torch213-combined-confirmation/1024x576-2step-a-uncompressed.png",
+      "sha256": "f4be3d55a9e6ecd0ffd0b1be8b7484083851fb4fc24205ec647730d7829cce1b"
+    },
+    {
+      "variant": "FA4 native",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-env-native/512x288-2step-a-uncompressed.png",
+      "sha256": "a541def887f9b2c1077578c5a769881b53c4cb0fa53ef204e040dfea6e9372af"
+    },
+    {
+      "variant": "FA4 native",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-env-native/768x448-2step-a-uncompressed.png",
+      "sha256": "6bb155f71861fb4185f5c224721b0b295a771ae6a0dc4e15663a4daf16c744b5"
+    },
+    {
+      "variant": "FA4 native",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-env-native/1024x576-2step-a-uncompressed.png",
+      "sha256": "0abe2b3af8d739eb610d54a7736c995391336bf37e302be38e7afb44d512047c"
+    },
+    {
+      "variant": "FA4",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer/512x288-2step-a-uncompressed.png",
+      "sha256": "0cc4020601998147fc8deb3b767ff0b1c89120150ff8d2bab50c5f63d9226f18"
+    },
+    {
+      "variant": "FA4",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer/768x448-2step-a-uncompressed.png",
+      "sha256": "d4f730b950bbbd0aa33f01da09b6c8dc759d25cf5625d2ca62a1430665b1f24d"
+    },
+    {
+      "variant": "FA4",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer/1024x576-2step-a-uncompressed.png",
+      "sha256": "fa1ff932d4c93514a91fd0416677279c922ef52facd1ef2ac87810b2e738b99a"
+    },
+    {
+      "variant": "FA4 combined",
+      "size": "512x288",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer-combined/512x288-2step-a-uncompressed.png",
+      "sha256": "3dff5fd1cfecbb1e8e565b09bb0ddd1aad0f75ac505b97387929865a18cb30c7"
+    },
+    {
+      "variant": "FA4 combined",
+      "size": "768x448",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer-combined/768x448-2step-a-uncompressed.png",
+      "sha256": "2dd5f96aab8516619eb8468902b873e1eb41d2c3e03e1e1286d8b8803a150f84"
+    },
+    {
+      "variant": "FA4 combined",
+      "size": "1024x576",
+      "sample": "/tmp/vj0-quality-20260917/new-compute/dependency-retry-20260917/flash4-transformer-combined/1024x576-2step-a-uncompressed.png",
+      "sha256": "fafb7529a371dda9ef2c204b68d1a1e79e4be11aae4fc0d48f7ba7a9138209b1"
+    }
+  ],
+  "comparisons": [
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "512x288",
+      "input_case": "a",
+      "mse_8bit": 127.14959716796875,
+      "psnr_db": 27.08765372274432,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "512x288",
+      "input_case": "b",
+      "mse_8bit": 177.37155942563658,
+      "psnr_db": 25.64196376571246,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "512x288",
+      "input_case": "blank",
+      "mse_8bit": 229.91670961733217,
+      "psnr_db": 24.515098253059318,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "768x448",
+      "input_case": "a",
+      "mse_8bit": 33.224880642361114,
+      "psnr_db": 32.916169314173864,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "768x448",
+      "input_case": "b",
+      "mse_8bit": 29.3793209015377,
+      "psnr_db": 33.45038607947486,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "768x448",
+      "input_case": "blank",
+      "mse_8bit": 2.420684330047123,
+      "psnr_db": 44.29142202015653,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "1024x576",
+      "input_case": "a",
+      "mse_8bit": 35.752834178783274,
+      "psnr_db": 32.59769886215604,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "1024x576",
+      "input_case": "b",
+      "mse_8bit": 52.26166562680845,
+      "psnr_db": 30.948971138959603,
+      "identical": false
+    },
+    {
+      "reference": "Old stack",
+      "candidate": "New baseline",
+      "size": "1024x576",
+      "input_case": "blank",
+      "mse_8bit": 0.33132878056278936,
+      "psnr_db": 52.9282119876584,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "512x288",
+      "input_case": "a",
+      "mse_8bit": 67.44587311921296,
+      "psnr_db": 29.841249796751875,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "512x288",
+      "input_case": "b",
+      "mse_8bit": 76.64981418185764,
+      "psnr_db": 29.28569254513677,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "512x288",
+      "input_case": "blank",
+      "mse_8bit": 132.44870786313658,
+      "psnr_db": 26.91032635083637,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "768x448",
+      "input_case": "a",
+      "mse_8bit": 27.91515628875248,
+      "psnr_db": 33.67240297187542,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "768x448",
+      "input_case": "b",
+      "mse_8bit": 30.01455543154762,
+      "psnr_db": 33.35748445794894,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "768x448",
+      "input_case": "blank",
+      "mse_8bit": 1.0654384068080358,
+      "psnr_db": 47.8555201273658,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "1024x576",
+      "input_case": "a",
+      "mse_8bit": 28.959392406322337,
+      "psnr_db": 33.51290915129734,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "1024x576",
+      "input_case": "b",
+      "mse_8bit": 18.10174786603009,
+      "psnr_db": 35.553598494284046,
+      "identical": false
+    },
+    {
+      "reference": "New baseline",
+      "candidate": "New combined",
+      "size": "1024x576",
+      "input_case": "blank",
+      "mse_8bit": 0.33740969057436343,
+      "psnr_db": 52.849228092818585,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "512x288",
+      "input_case": "a",
+      "mse_8bit": 76.96744339554398,
+      "psnr_db": 29.267732998982453,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "512x288",
+      "input_case": "b",
+      "mse_8bit": 127.85958523220486,
+      "psnr_db": 27.0634706958953,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "512x288",
+      "input_case": "blank",
+      "mse_8bit": 39.961708351417826,
+      "psnr_db": 32.114363149542285,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "768x448",
+      "input_case": "a",
+      "mse_8bit": 69.2370372953869,
+      "psnr_db": 29.72741885052678,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "768x448",
+      "input_case": "b",
+      "mse_8bit": 101.37982080853175,
+      "psnr_db": 28.071288416066334,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "768x448",
+      "input_case": "blank",
+      "mse_8bit": 1.801088363405258,
+      "psnr_db": 45.57545340553701,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "1024x576",
+      "input_case": "a",
+      "mse_8bit": 21.780362729673033,
+      "psnr_db": 34.75015252657353,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "1024x576",
+      "input_case": "b",
+      "mse_8bit": 25.95577437789352,
+      "psnr_db": 33.98846370495299,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4",
+      "size": "1024x576",
+      "input_case": "blank",
+      "mse_8bit": 0.3038776538990162,
+      "psnr_db": 53.30381596112642,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "512x288",
+      "input_case": "a",
+      "mse_8bit": 78.32963053385417,
+      "psnr_db": 29.191542828059216,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "512x288",
+      "input_case": "b",
+      "mse_8bit": 128.73199010778356,
+      "psnr_db": 27.03393877670512,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "512x288",
+      "input_case": "blank",
+      "mse_8bit": 36.60845947265625,
+      "psnr_db": 32.49498907228157,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "768x448",
+      "input_case": "a",
+      "mse_8bit": 38.95967707558284,
+      "psnr_db": 32.22465012375749,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "768x448",
+      "input_case": "b",
+      "mse_8bit": 72.29302494109623,
+      "psnr_db": 29.53983963652535,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "768x448",
+      "input_case": "blank",
+      "mse_8bit": 0.6254194955977183,
+      "psnr_db": 50.16908945907679,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "1024x576",
+      "input_case": "a",
+      "mse_8bit": 22.479909261067707,
+      "psnr_db": 34.61285806973428,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "1024x576",
+      "input_case": "b",
+      "mse_8bit": 13.777066266095197,
+      "psnr_db": 36.73923613549758,
+      "identical": false
+    },
+    {
+      "reference": "FA4 native",
+      "candidate": "FA4 combined",
+      "size": "1024x576",
+      "input_case": "blank",
+      "mse_8bit": 0.3612636990017361,
+      "psnr_db": 52.55256036485838,
+      "identical": false
+    }
+  ],
+  "visual_review": {
+    "status": "reviewed",
+    "contact_sheet": "samples/new-compute-contact.jpg",
+    "observation": "At each fixed resolution, old/new stack and native/FA4 preserve the same broad neon composition, black regions and waveform-derived structure, with local texture/colour differences. No obvious blank/corrupt output in inspected contact sheet. 512 produces denser full-frame texture; higher resolutions produce sparser bright trails at the same alpha and prompt. More pixels changes composition as well as detail.",
+    "limitations": "Static selected A-frame review is not a temporal preference study. Cross-process sample differences cannot be assigned solely to the selected optimization; in-process reference diagnostics are recorded separately."
+  }
+}
