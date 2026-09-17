@@ -82,7 +82,9 @@ The first cold TRT clip built three actual engines, shapes 1×2/3/4×16×60×104
 
 At noise 0.8, the 1.3B model mainly preserves/recolours the waveform. It does not produce the rich full-frame Klein scene on this fixture. At noise 0.95, the inspected TRT clip begins with stronger rainbow imagery and later returns to a largely preserved line as processing adapts. The fast-context and ordinary-context native/TRT pairs look very similar in the selected first/middle/last frames. Their saved 8-bit sample PSNR is 59.81–60.53 dB; that measures numerical closeness, not a perceptual preference or temporal guarantee. See [TRT quality diagnostics](trt-quality.json) and [contact sheet](samples/trt-contact.jpg).
 
-The 14B model produces stronger transformation in the inspected noise 0.95 samples. At 832×480, its standard-VAE trial used noise 0.8 and reached **6.45–6.50 FPS**; TAEHV reached **7.68–7.71 FPS** at both tested noise 0.8 and 0.95 settings. Peak PyTorch allocated memory is about 61.5 GB/59.6 GB decimal, with reserved memory higher. Model/step/decoder/noise changes are explicit quality tradeoffs. No Stream backend replaces the application's FLUX default.
+The 14B model produces stronger transformation in the inspected noise 0.95 samples. At 832×480, its standard-VAE trial used noise 0.8 and reached **6.45–6.50 FPS**; TAEHV reached **7.68–7.71 FPS** at both tested noise 0.8 and 0.95 settings. Peak PyTorch allocated memory is about 61.5 GB/59.6 GB decimal, with reserved memory higher. Model/step/decoder/noise changes are explicit quality tradeoffs. This quality conclusion applies to the measured settings and synthetic fixture;
+it does not rule out further model-quality tuning. No Stream backend replaces
+the application's FLUX default.
 
 The 120 GB workspace quota was reached during installation. Recovery preserved results/source and removed reproducible cache plus the already-tested 28.6 GB 14B causal checkpoint. Download it again before another 14B run; the 57 GB base remains on the pod container disk. [Recovery record](stream-cache-recovery.json).
 

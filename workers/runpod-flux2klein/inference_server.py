@@ -601,6 +601,7 @@ def main():
             emit(
                 status="frame",
                 frame_id=req.get("frame_id"),
+                source_seq=req.get("source_seq"),
                 client_epoch=req.get("client_epoch"),
                 image_base64=base64.b64encode(jpg).decode("ascii"),
                 gen_time_ms=round(gen_ms, 1),

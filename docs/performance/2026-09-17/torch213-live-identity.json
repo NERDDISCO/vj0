@@ -1,0 +1,89 @@
+{
+  "manifest": {
+    "status": "running",
+    "dispatcher_pid": 567,
+    "runner_pid": 67122,
+    "jobs": [
+      {
+        "name": "torch213-live-service",
+        "argv": [
+          "node",
+          "/workspace/scaling-livebench-20260917/server-idle-fixed.js"
+        ],
+        "cwd": "/app",
+        "started_at": "2026-09-17T14:10:44.538976+00:00",
+        "status": "running",
+        "pid": 67137
+      }
+    ]
+  },
+  "workers": [
+    {
+      "pid": 67144,
+      "command": "python3 /workspace/scaling-livebench-20260917/inference_server.py ",
+      "environment": {
+        "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "CUDA_VISIBLE_DEVICES": "0",
+        "USE_VAE_FP8": "1",
+        "COMPILE_MODE": "reduce-overhead",
+        "HF_HOME": "/workspace/hf-cache",
+        "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+        "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+      }
+    },
+    {
+      "pid": 67145,
+      "command": "python3 /workspace/scaling-livebench-20260917/inference_server.py ",
+      "environment": {
+        "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "CUDA_VISIBLE_DEVICES": "1",
+        "USE_VAE_FP8": "1",
+        "COMPILE_MODE": "reduce-overhead",
+        "HF_HOME": "/workspace/hf-cache",
+        "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+        "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+      }
+    }
+  ],
+  "versions": {
+    "torch": "2.13.0+cu132",
+    "torchao": "0.18.0+cu132",
+    "torchvision": "0.28.0+cu132",
+    "diffusers": "0.38.0.dev0",
+    "transformers": "5.7.0",
+    "pillow": "12.2.0",
+    "numpy": "2.4.4"
+  },
+  "files": [
+    {
+      "path": "/workspace/scaling-livebench-20260917/server-idle-fixed.js",
+      "sha256": "9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03"
+    },
+    {
+      "path": "/workspace/scaling-livebench-20260917/inference_server.py",
+      "sha256": "bdff1fa8918c2985a91a5c77b8b6d494cc24178a81b972cf77576f9b6a036b11"
+    },
+    {
+      "path": "/workspace/scaling-livebench-20260917/compute.py",
+      "sha256": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe"
+    }
+  ],
+  "health_at_check": {
+    "ok": true,
+    "workerCount": 2,
+    "readyCount": 2,
+    "inferenceReady": true,
+    "workers": [
+      {
+        "gpu": 0,
+        "ready": true,
+        "framePending": 3
+      },
+      {
+        "gpu": 1,
+        "ready": true,
+        "framePending": 0
+      }
+    ]
+  }
+}

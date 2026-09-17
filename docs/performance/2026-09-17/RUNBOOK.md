@@ -1,6 +1,28 @@
+# Current checkpoint: source-order correction
+
+17:13 UTC: Original 600-second app soak and lifecycle completed and collected in
+app-soak/. Independent review found 2,293 stage source reversals; do not call this
+an unqualified pass. New paired dispatcher/worker adds internal source_seq for
+all raw/tagged images, drops older-than-last-delivered output without withholding
+pending/watchdog accounting, and reports protocol/order drops separately.
+
+Pod B transition started source-order-service runner74772/server74775, manifest
+/workspace/source-order-service-20260917/sweep.json. New exact source hashes are
+in source-order-identity.json. Both workers are warming. Run app-source-order-jobs.json
+(60s512,60s1024,600s768+stress) into /tmp/vj0-app-source-order-20260917 after
+warmup and checkpoint push. Harness now explicitly rejects source reversals;
+probe, timing, continuity and age criteria otherwise remain fixed. The old
+soak fails this new assertion on both real app surfaces. CDP supervisor25051
+keeps probe/focus/viewport alive for two hours from17:11UTC.
+
+Finish correction trials, inspect temporal quality, capture screenshots/videos
+outside timed work, review, update reports, commit/push, verify final resources.
+Keep both pods running as authorized. Earlier checkpoint details follow for
+provenance; their running/pending statements are historical.
+
 # Resume the experiment loop
 
-Checkpoint 14:11 UTC. Continue until all remaining live/app trials, final review
+Checkpoint 14:55 UTC. Continue until all remaining live/app trials, final review
 and push are complete. Both paid pods remain warm. No UI redesign, main push or
 stable-image deployment.
 
@@ -12,13 +34,21 @@ continuity. No restart, compile, decode/send errors or unavailable workers.
 The browser harness now reports continuity separately; missing health/data still
 invalidate measurements. The actual-app soak's strict rules are unchanged.
 
-Pushed checkpoint b0d1006. The audited marker /tmp/vj0-post-scaling-ready.json
+Pushed checkpoint 0887e6b. The audited marker /tmp/vj0-post-scaling-ready.json
 released successor PID 22824, exec 95579, /tmp/vj0-remaining-queues-20260917.py:
 12 frame-buffer trials → both Torch 2.13 workers warm all three shapes → 27 live
 trials → 600-second app/projector soak and lifecycle stress.
 All 12 frame-buffer trials completed, with two continuity failures retained.
-The coordinator is briefly SIGSTOPped for checkpoint push; resume PID 22824
-after push, then monitor both new-stack workers warming and remaining queues.
+Coordinator PID 22824 resumed after the successful checkpoint push. Both
+new-stack workers completed all three shapes. All 27 live comparisons finished and are collected in browser-torch213/,
+run 5b4b5fe8-52e5-4461-b49d-81d18b55ff09. Coordinator exited after a premeasurement
+app setup failure: .vp-ai-chip selected the audio button. That failure is
+retained in app-soak-initial-setup-failure/ and /tmp/vj0-app-soak-initial-setup-failure-20260917.
+The only harness fix selects the button labelled ai, in two places; criteria
+and timing/probe are unchanged. Short actual selector smoke passed.
+Active corrected app runner exec 94288 writes /tmp/vj0-app-soak-20260917,
+log /tmp/vj0-app-soak-corrected-runner.log, jobs app-soak-corrected-jobs.json
+(5-second selector smoke followed by 600-second soak + stress).
 Outputs: /tmp/vj0-browser-frame-buffer-20260917,
 /tmp/vj0-browser-torch213-20260917, /tmp/vj0-app-soak-20260917.
 
@@ -27,14 +57,17 @@ Pod B: 9vj8k6guaxsbhw, new-stack runner 67122, manifest
 by the guarded transition. Both select corrected
 /workspace/scaling-livebench-20260917/server-idle-fixed.js, SHA
 9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03.
-Original Node 567 paused. Pod A: 0pxb4bss2jmbhg, runner 49372,
+New-stack server PID 67137, worker PIDs 67144/67145. Actual environment/source
+identity is saved in torch213-live-identity.json. Original Node 567 paused. Pod A: 0pxb4bss2jmbhg, runner 49372,
 /workspace/stream512-paced-20260917/sweep.json. Both 512 paced jobs passed;
 final Klein service remains warm. Original Node 499 paused.
 
 All Stream results, clips and engine identities have now been collected, including
-512×288 / 257-input-frame paced follow-ups. Inspect their clips locally under
-/tmp/vj0-quality-20260917/stream512-paced and finish the Stream appendix/review.
-35 Stream records now include failed attempts. Browser index has 140 trials;
+512×288 / 257-input-frame paced follow-ups. Static cold-clip samples have been inspected and the Stream appendix updated.
+Independent audit in review-stream512-scaling.json verifies all 6 new clips /
+384 chunks / 1,524 source timestamps. Local videos remain under
+/tmp/vj0-quality-20260917/stream512-paced.
+35 Stream records now include failed attempts. Browser index has 179 trials;
 compute has 85 cells, actual-app has 13 summaries, same-host has 16 trials.
 
 App CDP probe/focus/viewport sessions expire roughly 15:40–16:04 UTC; extend before
@@ -45,6 +78,21 @@ Keep harness frozen during measurement. Capture screenshots/flow video afterward
 outside Git at /tmp/vj0-perf-evidence-20260917.
 
 Never run builds, downloads, pushes or bulk SSH during timed Mac WAN/app trials.
+After all timed work:
+- /tmp/vj0-collect-final-20260917.py verifies the existing identical 12-buffer and 27-new-stack collections and
+  collects the corrected app soak, and gzips raw app
+  JSON losslessly. Only run once both batches are done and app cleanup confirmed.
+- /tmp/vj0-capture-flow-20260917.py prepares actual app/projector screenshots and
+  two silent screencasts, with completion guards. It uses the existing persistent
+  probes and /tmp/vj0-screencast-20260917.mjs. Run outside all timed work; encode
+  each frames.ffconcat to WebM using ffmpeg, inspect screenshots, and preserve
+  evidence outside Git at /tmp/vj0-perf-evidence-20260917.
+- Collect the final remote service log/manifest and actual health. Refresh funds,
+  runtime state and price; leave both task pods warm as requested.
+- Finish report tables/PLAN terminal outcomes, independent final review, commit,
+  push and self-contained response. Do not stop at the first failure or leave
+  unrun lifecycle checks; preserve failures and recover only actual harness bugs.
+
 All final reports, independent review, commit and push still require completion.
 
 ## Tool and infrastructure checks

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "source-order-service",
+    "argv": [
+      "node",
+      "/workspace/source-order-20260917/server.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "PORT": "3001",
+      "WORKER_COUNT": "2",
+      "INFERENCE_SCRIPT": "/workspace/source-order-20260917/inference_server.py",
+      "PYTHONPATH": "/workspace/scaling-livebench-20260917",
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead",
+      "WARMUP_SHAPES": "512x288,768x448,1024x576",
+      "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+      "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+    },
+    "timeout_seconds": null
+  }
+]

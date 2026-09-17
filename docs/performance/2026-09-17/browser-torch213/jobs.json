@@ -1,0 +1,731 @@
+[
+  {
+    "name": "torch213-512x288-baseline-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-baseline-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-baseline-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-512x288-combined-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-baseline-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-baseline-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-baseline-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-768x448-combined-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-baseline-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-baseline-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-baseline-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 1
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  },
+  {
+    "name": "torch213-1024x576-combined-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "combined",
+        "activeWorkers": 2
+      },
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    }
+  }
+]

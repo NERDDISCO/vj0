@@ -1,0 +1,490 @@
+{
+  "reviewed_at_utc": "2026-09-17T14:14:20.005274+00:00",
+  "reviewer": "independent benchmark_review agent",
+  "reviewed_base_commit": "0887e6b",
+  "status": "passed_with_performance_failures_retained",
+  "scope": "Local audit of all 12 completed frame-buffer trials, their counters, classifications and report rows; no new live execution.",
+  "batch": {
+    "run_id": "9e84bc0d-f864-4469-b8c9-01603356cd31",
+    "harness_sha256": "bc7e4d46d70dcd8d4c6ff924dc18d3159b71737b102134e3879d555dbffbe8f3",
+    "identity_hash_reconciled": true,
+    "measured_trials": 12,
+    "validation_passed": 10,
+    "validation_failed": [
+      "buffer-1024x576-frames2",
+      "buffer-entropy-frames0"
+    ],
+    "csv_total_rows": 152,
+    "csv_line_endings": "LF"
+  },
+  "configuration": "One active GPU on the same two-GPU host; GPU0 baseline variant and wall-clock timing, both workers ready. Three waveform sizes and one 512x288 high-entropy fixture; each tested once in fixed 0/1/2 policy order. All use 2 steps, alpha 0.1, seed 42, input JPEG85/output JPEG80, requested 60 sends/s, about 30 seconds after 20 warmup frames, pending limit 3 and client buffered-byte threshold 262144. Telemetry polling disabled.",
+  "policy_semantics": "outboundFrames=0 uses a fixed 65536-byte threshold, not unlimited output. Policies 1/2 set max(16384, N*(current JPEG bytes+8)). The dispatcher compares already-buffered bytes before sending the next frame; this is a byte threshold based on current frame size, not a hard cap of N queued frames. Policy2 can be looser than the fixed control.",
+  "checks": [
+    "Saved jobs match the root job manifest and every resolved option; run identity and recorded/current harness hash agree.",
+    "All 48 FPS/bandwidth equations reconcile to client counts and observed elapsed time; required worker/age/output sample counts match received or drawn frames.",
+    "Expected worker identity/variant/clock, final ready state, zero compile/decode/send errors and zero telemetry attempts reconcile.",
+    "All 12 table/CSV rows retain exact numeric values, raw counters, hashes and continuity classifications. The CSV has 152 parsed rows and LF endings.",
+    "All server deltas equal after minus before; reset high-water/min/max fields are correct. For each trial, intake=dispatch+inbound drops; worker output=client output+outbound drops; dispatch-worker output-worker drops=final pending. All 36 flow equations reconcile.",
+    "Batch records all 12 measured outcomes and both validation failures without converting them into invalid timing evidence or successful acceptance."
+  ],
+  "counter_window": {
+    "scope": "Server snapshots bracket the client timed window and can include final in-flight work. Client snapshot timestamp span is not an exact server interval or the FPS denominator.",
+    "client_snapshot_span_extra_ms_min_max": [
+      51.800000071525574,
+      448.5
+    ],
+    "examples": [
+      "512 waveform policy2: 1853 client sends versus 1842 server inputs at final snapshot; the snapshot does not establish the later delivery/drop outcome of the remaining11 inputs.",
+      "Entropy control: 160 client sends versus 156 server inputs/outputs and 156 client receipts.",
+      "Entropy policy2: 831 worker outputs = 715 sends to client +116 outbound drops; only680 reached the client timed window."
+    ],
+    "restriction": "Do not force server/client counts equal, call their difference packet loss, or divide server deltas by the client elapsed time as though both counters share one interval."
+  },
+  "conclusions": [
+    "No repeatable outbound-policy benefit is established: one sequential observation per setting, fixed order and WAN variability prevent causal attribution.",
+    "All three waveform groups had their highest observed received FPS in the fixed64KiB control. That observation does not prove the adaptive policies caused regressions.",
+    "Ten of 12 trials recorded zero server outbound high-water bytes and zero outbound drops. Those trials demonstrate no exercised output-admission bottleneck, despite some large frame ages and input backpressure.",
+    "Output admission was exercised in 512 waveform policy1 (8 bracketed drops,86027-byte high-water) and entropy policy2 (116 drops,189181-byte high-water). Neither isolated run establishes improved age/throughput versus a matched repeated control.",
+    "Entropy control5.20FPS versus policy1 24.20 and policy2 22.66FPS is not a causal policy win: control output buffering/drops were zero, client input-buffer skips were1709 with only160 sends, and worker queue p95 was14.31ms. Policies1/2 sent1323/1738 inputs under different observed transport conditions. The control is consistent with upstream/client transport backpressure starving work, not its outbound64KiB threshold binding.",
+    "The entropy policy2 frame-age p95 remained2244.55ms despite passing the2-second inter-arrival-gap threshold. Continuity status does not certify acceptable age.",
+    "P05 can be marked measured/complete with no default promotion; both continuity failures remain failed acceptance evidence."
+  ],
+  "trials": [
+    {
+      "artifact": "browser-frame-buffer/buffer-512x288-frames0.json",
+      "sha256": "418d6175a3c53dc98bd033432da896ad735ca481e11cf326915908d25fd231fd",
+      "scene": "waveform",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 0,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 28.528673649993173,
+      "drawn_fps": 28.36203420110303,
+      "capture_to_draw_p95_ms": 184.20000004768372,
+      "capture_to_draw_p99_ms": 189.4000000357628,
+      "worker_stat_max_gap_ms": 168.09999990463257,
+      "sent_frames": 1864,
+      "received_frames": 856,
+      "client_input_buffer_skips": 0,
+      "worker_queue_p95_ms": 69.002,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1005,
+        "droppedOutbound": 0,
+        "framesFromClient": 1864,
+        "framesFromWorker": 858,
+        "framesToClient": 858,
+        "framesToWorker": 859
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        65536,
+        65536
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-512x288-frames1.json",
+      "sha256": "b36f68c613c3ad951d70eee376512101d639673e66f766ad9be647bda4738f56",
+      "scene": "waveform",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 1,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 27.197008329127023,
+      "drawn_fps": 27.030359993776983,
+      "capture_to_draw_p95_ms": 1948.0499999523165,
+      "capture_to_draw_p99_ms": 3031.8500000357626,
+      "worker_stat_max_gap_ms": 1500.899999976158,
+      "sent_frames": 1865,
+      "received_frames": 816,
+      "client_input_buffer_skips": 0,
+      "worker_queue_p95_ms": 68.804,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1037,
+        "droppedOutbound": 8,
+        "framesFromClient": 1865,
+        "framesFromWorker": 827,
+        "framesToClient": 819,
+        "framesToWorker": 828
+      },
+      "server_outbound_buffer_high_water_bytes": 86027,
+      "server_threshold_min_max_bytes": [
+        39142,
+        44195
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-512x288-frames2.json",
+      "sha256": "acc923fad0101bd0ad085d6ec1fd1c35e971e056e5a6c27f20ed9b0695de42b7",
+      "scene": "waveform",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 2,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 28.161879147189264,
+      "drawn_fps": 27.861930138520975,
+      "capture_to_draw_p95_ms": 263.9000000357628,
+      "capture_to_draw_p99_ms": 479.6450000405309,
+      "worker_stat_max_gap_ms": 189.39999997615817,
+      "sent_frames": 1853,
+      "received_frames": 845,
+      "client_input_buffer_skips": 8,
+      "worker_queue_p95_ms": 68.6886,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 2,
+        "droppedInbound": 989,
+        "droppedOutbound": 0,
+        "framesFromClient": 1842,
+        "framesFromWorker": 849,
+        "framesToClient": 849,
+        "framesToWorker": 853
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        77768,
+        88968
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-768x448-frames0.json",
+      "sha256": "7bf21e75d9829a418ee2533cdccec81374d86e3a858b6817d118d8f5d837e332",
+      "scene": "waveform",
+      "size": [
+        768,
+        448
+      ],
+      "outbound_frames": 0,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 14.098402181097349,
+      "drawn_fps": 14.065072625113666,
+      "capture_to_draw_p95_ms": 299.77999995350837,
+      "capture_to_draw_p99_ms": 412.43499997735034,
+      "worker_stat_max_gap_ms": 253.10000002384183,
+      "sent_frames": 1855,
+      "received_frames": 423,
+      "client_input_buffer_skips": 0,
+      "worker_queue_p95_ms": 139.916,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1428,
+        "droppedOutbound": 0,
+        "framesFromClient": 1855,
+        "framesFromWorker": 427,
+        "framesToClient": 427,
+        "framesToWorker": 427
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        65536,
+        65536
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-768x448-frames1.json",
+      "sha256": "5c76eb82280fbba55e337f5c27d546887791726358e8a3df55bcafb795ec67ba",
+      "scene": "waveform",
+      "size": [
+        768,
+        448
+      ],
+      "outbound_frames": 1,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 13.932125882412452,
+      "drawn_fps": 13.932125882412452,
+      "capture_to_draw_p95_ms": 311.94499996900555,
+      "capture_to_draw_p99_ms": 344.8549999999997,
+      "worker_stat_max_gap_ms": 202.29999995231628,
+      "sent_frames": 1855,
+      "received_frames": 418,
+      "client_input_buffer_skips": 0,
+      "worker_queue_p95_ms": 141.55630000000002,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1433,
+        "droppedOutbound": 0,
+        "framesFromClient": 1855,
+        "framesFromWorker": 419,
+        "framesToClient": 419,
+        "framesToWorker": 422
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        26932,
+        39825
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-768x448-frames2.json",
+      "sha256": "ccb9bdf54edc1cdfbf96f824b7664ed04f98eb7a163bf7368e79345fd85384fe",
+      "scene": "waveform",
+      "size": [
+        768,
+        448
+      ],
+      "outbound_frames": 2,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 13.897915312703097,
+      "drawn_fps": 13.39799030145478,
+      "capture_to_draw_p95_ms": 791.9950000047684,
+      "capture_to_draw_p99_ms": 1014.3080000472072,
+      "worker_stat_max_gap_ms": 409.8000000715256,
+      "sent_frames": 1847,
+      "received_frames": 417,
+      "client_input_buffer_skips": 6,
+      "worker_queue_p95_ms": 141.2434,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1426,
+        "droppedOutbound": 0,
+        "framesFromClient": 1847,
+        "framesFromWorker": 421,
+        "framesToClient": 421,
+        "framesToWorker": 421
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        56084,
+        79650
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-1024x576-frames0.json",
+      "sha256": "5e28389c3c49047c69d60f35f62d7d1ef780092f6395c1ab07531b6683922157",
+      "scene": "waveform",
+      "size": [
+        1024,
+        576
+      ],
+      "outbound_frames": 0,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 8.198824835119998,
+      "drawn_fps": 8.032182053918373,
+      "capture_to_draw_p95_ms": 966.399999976158,
+      "capture_to_draw_p99_ms": 1235.2399999618524,
+      "worker_stat_max_gap_ms": 383.09999990463257,
+      "sent_frames": 1569,
+      "received_frames": 246,
+      "client_input_buffer_skips": 285,
+      "worker_queue_p95_ms": 240.4235,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1319,
+        "droppedOutbound": 0,
+        "framesFromClient": 1569,
+        "framesFromWorker": 247,
+        "framesToClient": 247,
+        "framesToWorker": 250
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        65536,
+        65536
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-1024x576-frames1.json",
+      "sha256": "d48e3cabc884700e87842265a69c61cde595b29351eede4f8a8bfecbe83647fa",
+      "scene": "waveform",
+      "size": [
+        1024,
+        576
+      ],
+      "outbound_frames": 1,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 7.865722779926824,
+      "drawn_fps": 7.799064112300326,
+      "capture_to_draw_p95_ms": 1344.7950000166886,
+      "capture_to_draw_p99_ms": 2079.9390000796316,
+      "worker_stat_max_gap_ms": 1358.600000023842,
+      "sent_frames": 1515,
+      "received_frames": 236,
+      "client_input_buffer_skips": 338,
+      "worker_queue_p95_ms": 239.91025,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 1276,
+        "droppedOutbound": 0,
+        "framesFromClient": 1515,
+        "framesFromWorker": 236,
+        "framesToClient": 236,
+        "framesToWorker": 239
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        16384,
+        37304
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-1024x576-frames2.json",
+      "sha256": "5d9ed269baf1ff6e8edc7ec8b42b7c3fdf5cf1a101ec39a128673fdb75665f21",
+      "scene": "waveform",
+      "size": [
+        1024,
+        576
+      ],
+      "outbound_frames": 2,
+      "status": "measured",
+      "validation_status": "failed",
+      "received_fps": 6.5994060534447,
+      "drawn_fps": 6.566075719841444,
+      "capture_to_draw_p95_ms": 2256.8999999523144,
+      "capture_to_draw_p99_ms": 5343.267999978065,
+      "worker_stat_max_gap_ms": 2444.2999999523163,
+      "sent_frames": 1038,
+      "received_frames": 198,
+      "client_input_buffer_skips": 819,
+      "worker_queue_p95_ms": 240.79525,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 837,
+        "droppedOutbound": 0,
+        "framesFromClient": 1038,
+        "framesFromWorker": 199,
+        "framesToClient": 199,
+        "framesToWorker": 201
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        25618,
+        76010
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-entropy-frames0.json",
+      "sha256": "5a7fc06b364824d788466fa0b1d2ffe11d3d4ace4aa6c402bc9c45ca01dc7e8f",
+      "scene": "high-entropy",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 0,
+      "status": "measured",
+      "validation_status": "failed",
+      "received_fps": 5.199445392503863,
+      "drawn_fps": 5.199445392503863,
+      "capture_to_draw_p95_ms": 3247.900000035763,
+      "capture_to_draw_p99_ms": 6186.30500001907,
+      "worker_stat_max_gap_ms": 4368.799999952316,
+      "sent_frames": 160,
+      "received_frames": 156,
+      "client_input_buffer_skips": 1709,
+      "worker_queue_p95_ms": 14.3085,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 0,
+        "droppedOutbound": 0,
+        "framesFromClient": 156,
+        "framesFromWorker": 156,
+        "framesToClient": 156,
+        "framesToWorker": 156
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        65536,
+        65536
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-entropy-frames1.json",
+      "sha256": "a8126b646edeef19144d258ad9e98cae57be412c7b56107344539cc07b7dfedf",
+      "scene": "high-entropy",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 1,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 24.196854408946063,
+      "drawn_fps": 23.66359039993348,
+      "capture_to_draw_p95_ms": 324.5100000023842,
+      "capture_to_draw_p99_ms": 554.8820000910758,
+      "worker_stat_max_gap_ms": 659.8999999761581,
+      "sent_frames": 1323,
+      "received_frames": 726,
+      "client_input_buffer_skips": 547,
+      "worker_queue_p95_ms": 68.99575,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 592,
+        "droppedOutbound": 0,
+        "framesFromClient": 1323,
+        "framesFromWorker": 729,
+        "framesToClient": 729,
+        "framesToWorker": 731
+      },
+      "server_outbound_buffer_high_water_bytes": 0,
+      "server_threshold_min_max_bytes": [
+        58976,
+        64213
+      ]
+    },
+    {
+      "artifact": "browser-frame-buffer/buffer-entropy-frames2.json",
+      "sha256": "efa369b7ac54369dad8aeafcc6e82451d3136163f6325b21ad64619daf6f34fa",
+      "scene": "high-entropy",
+      "size": [
+        512,
+        288
+      ],
+      "outbound_frames": 2,
+      "status": "measured",
+      "validation_status": "passed",
+      "received_fps": 22.663040580209856,
+      "drawn_fps": 21.86316855973186,
+      "capture_to_draw_p95_ms": 2244.550000011921,
+      "capture_to_draw_p99_ms": 2498.094999980927,
+      "worker_stat_max_gap_ms": 739.6000000238419,
+      "sent_frames": 1738,
+      "received_frames": 680,
+      "client_input_buffer_skips": 125,
+      "worker_queue_p95_ms": 68.9485,
+      "server_bracketed_deltas": {
+        "droppedByWorker": 0,
+        "droppedInbound": 904,
+        "droppedOutbound": 116,
+        "framesFromClient": 1738,
+        "framesFromWorker": 831,
+        "framesToClient": 715,
+        "framesToWorker": 834
+      },
+      "server_outbound_buffer_high_water_bytes": 189181,
+      "server_threshold_min_max_bytes": [
+        117148,
+        129080
+      ]
+    }
+  ],
+  "limitations": [
+    "Only client-observed worker-stat arrival gaps are measured; no independent GPU-stall attribution.",
+    "A final RTT snapshot cannot reconstruct transport variability throughout the trial.",
+    "Queue percentiles cover delivered frames only.",
+    "The high-water mark samples server datachannel buffered bytes before output attempts; it is not total end-to-end outstanding data.",
+    "Synthetic capture/JPEG/WebRTC/offscreen drawing excludes actual app/projector/audio acquisition and physical display.",
+    "Remaining new-stack live comparisons and full-app soak are outside this review; no winner promotion or final project acceptance."
+  ],
+  "open_findings": [],
+  "reviewed_document_sha256": {
+    "browser-frame-buffer-jobs.json": "f47cc4b8195693175bd3c7be921f80b36df617de4dccceae7c3a7c81db426176",
+    "BROWSER.md": "f30789d5fbf7cc7225922b76d0987b1783578ac87c8449659f5524647e48bf0c",
+    "browser-results.csv": "3de04a73449fca92c3bb8f501709e11645d2188a85155c4e3fcc0cd30db1a890",
+    "RESULTS.md": "310359498d371ef8ec6e5888373ea737f4251bd57d6a0c262e172eaa1a0824b1"
+  },
+  "actions": "Read local files/source; lightweight CPU arithmetic/report checks; wrote only this review JSON. No browser,network,GPU or build activity."
+}

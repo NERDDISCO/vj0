@@ -1,0 +1,7 @@
+{
+  "failure": "Before the timed window: .vp-ai-chip matched the audio button first, so the AI transport dialog never opened.",
+  "correction": "Select the chip whose label is exactly ai, both for initial telemetry and reconnects. No app/probe/timing/acceptance changes.",
+  "old_harness_sha256": "e341bec628634d59eecddf817103c106ab4bc9990ed2056e6ed28756f179d4df",
+  "new_harness_sha256": "59ecefb8aac18c76dab4e899ca44455e0ab4dbb66e808dbb742b1233cfe8bd08",
+  "preserved_failure": "app-soak-initial-setup-failure/"
+}

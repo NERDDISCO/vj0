@@ -82,6 +82,11 @@ const BENCH_FRAME_MAGIC = 0x564a3042;
 // 1MB ≈ 30 frames of buffered output at 256² JPEG.
 const MAX_OUTBOUND_BUFFER = Number(process.env.MAX_OUTBOUND_BUFFER || 1024 * 1024);
 let droppedOutbound = 0;
+// Internal capture order applies to raw JPEG clients as well as tagged probes.
+// Independent GPUs can finish in the opposite order to dispatch. Never deliver
+// an older source after a newer one; keep the counter across client epochs.
+let nextSourceSequence = 0;
+let lastSentSourceSequence = 0;
 
 // Latest known compile status per worker. Used to replay state to a client
 // that connects mid-compile (so the overlay shows up immediately instead of
@@ -264,6 +269,17 @@ function handleWorkerLine(w, line) {
     w.lastFrameAt = Date.now();
     diagStats.framesFromWorker++;
     diagStats.lastWorkerFrameAt = Date.now();
+    if (!Number.isSafeInteger(msg.source_seq) || msg.source_seq < 1) {
+      diagStats.invalidSourceSequence = (diagStats.invalidSourceSequence || 0) + 1;
+      if (diagStats.invalidSourceSequence % 100 === 1) {
+        console.error(`[worker ${w.gpu}] missing/invalid source sequence; deploy matching dispatcher and worker`);
+      }
+      return;
+    }
+    if (msg.source_seq <= lastSentSourceSequence) {
+      diagStats.droppedStaleSource = (diagStats.droppedStaleSource || 0) + 1;
+      return;
+    }
     if (process.env.DEBUG_FRAMES) {
       console.log(`[worker ${w.gpu}] frame ${w.framesProduced} ${msg.gen_time_ms}ms ${msg.width}x${msg.height}`);
     }
@@ -290,6 +306,7 @@ function handleWorkerLine(w, line) {
       } else {
         activeChannel.send(imgBuffer);
       }
+      lastSentSourceSequence = msg.source_seq;
       activeChannel.send(JSON.stringify({
         type: "stats",
         gen_time_ms: msg.gen_time_ms,
@@ -447,7 +464,7 @@ function sendToInference(req) {
     // Frame data — route to one worker round-robin.
     // The state was already broadcast above, so we send frame-only to avoid
     // redundant state updates eating stdin bandwidth.
-    const frameMsg = { image_base64: req.image_base64,
+    const frameMsg = { image_base64: req.image_base64, source_seq: ++nextSourceSequence,
       ...(req.client_epoch !== undefined ? { client_epoch: req.client_epoch } : {}),
       ...(req.frame_id !== undefined ? { frame_id: req.frame_id } : {}) };
     dispatchFrame(frameMsg);

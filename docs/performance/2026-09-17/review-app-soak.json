@@ -1,0 +1,835 @@
+{
+  "reviewed_at_utc": "2026-09-17T15:06:47.449844+00:00",
+  "reviewer": "independent benchmark_review agent",
+  "reviewed_base_commit": "0887e6b1db17f56c08e6585b10957f1be05901f8",
+  "status": "valid_measurement_with_failed_temporal_ordering_acceptance",
+  "scope": "Independent local audit after cleanup of the completed actual-app600-second steady interval and separate stress trial. No live browser, GPU, network or build actions; raw outcomes are unchanged. This does not approve the two-worker configuration for promotion.",
+  "reviewed_raw_directory": "/tmp/vj0-app-soak-20260917",
+  "expected_archive_directory": "docs/performance/2026-09-17/app-soak",
+  "archive_verification": "All10 review-bound core artifacts match the collected archive by uncompressed SHA256. All6 gzip raw files, including selector smoke, decompress byte-for-byte to the original local files. No raw outcomes were rewritten.",
+  "raw_harness_status": {
+    "steady": "measured",
+    "steady_problems": [],
+    "stress": "passed",
+    "stress_errors": [],
+    "cleanup": {
+      "status": "pages-closed",
+      "errors": []
+    }
+  },
+  "independent_assessment": {
+    "steady_arithmetic": "passed",
+    "source_identity": "passed_against_saved_identity_and_current_harness_probe",
+    "worker_identity_and_continuity": "passed",
+    "audio_fixture_observation": "passed_with_transition_samples_retained",
+    "lifecycle_actions_and_recovery": "passed",
+    "temporal_source_order": "failed",
+    "promotion": "not_approved"
+  },
+  "findings": [
+    {
+      "priority": "P1",
+      "issue": "Two-worker output is rendered out of source-capture order in both real app surfaces.",
+      "evidence": "Within the exact formal window,2300/17986 receive events,1383/14592 preview RAF observations and2293/17955 stage GL submissions go backward in source ID. All regressions cross worker0/1; each worker individually remains monotonic. Main outgoing IDs are strictly increasing.",
+      "cause_scope": "The existing app sequence numbers order reception/asynchronous forwarding, not source captures; preview and stage therefore accept a late older worker result. Raw JPEG production handling does not use the probe source ID to reject these older results.",
+      "sources": [
+        "app/vj-next/VJNextApp.tsx:477",
+        "app/vj-next/VJNextApp.tsx:489",
+        "app/vj/stage/page.tsx:52",
+        "src/lib/ai/latest-frame-decoder.ts:1"
+      ],
+      "required_correction": "Retain this run as valid measured failure evidence. Before promoting two workers as temporally correct, enforce a source-order policy across worker outputs that also applies to ordinary untagged app traffic, and explicitly verify preview/stage source-ID monotonicity. No implementation or rerun was performed in this review."
+    },
+    {
+      "priority": "P2",
+      "issue": "Raw measured/stress-passed status is narrower than successful final acceptance.",
+      "evidence": "The harness validates output continuity, channel recovery, dimensions and compute variant, but has no source-ID ordering assertion. Its passed lifecycle result must not override the independently confirmed ordering failure.",
+      "required_correction": "Report valid FPS/ages, passed scripted recovery and failed temporal ordering separately; do not call the combined two-GPU full-app soak an unqualified pass."
+    }
+  ],
+  "identity": {
+    "harness_sha256": "59ecefb8aac18c76dab4e899ca44455e0ab4dbb66e808dbb742b1233cfe8bd08",
+    "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685",
+    "job": {
+      "name": "candidate-next-ten-minute-soak",
+      "origin": "http://127.0.0.1:18766",
+      "source_commit": "4a02d2f",
+      "layout": "vj-next",
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "seconds": 600,
+      "width": 768,
+      "height": 448,
+      "sendFps": 60,
+      "telemetry": true,
+      "audioCycle": true,
+      "stress": true,
+      "variant": "combined",
+      "maxPending": 3,
+      "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+      "activeWorkers": 2
+    },
+    "fixture": {
+      "vj0-ai-settings-storage": {
+        "version": 8,
+        "state": {
+          "backend": "pod",
+          "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+          "autoConnect": false,
+          "sendFrames": false,
+          "showAi": true,
+          "showCaptureDebug": false,
+          "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+          "captureSize": 512,
+          "outputWidth": 512,
+          "outputHeight": 288,
+          "frameRate": 60,
+          "seed": 42,
+          "kleinSteps": 2,
+          "kleinAlpha": 0.1,
+          "sceneId": "waveform",
+          "stageSharpen": 0.6,
+          "stageScanlines": true,
+          "stageVignette": true,
+          "stagePixelate": false,
+          "stagePixelateSize": 8
+        }
+      },
+      "vj0-composer-scenes": {
+        "version": 1,
+        "state": {
+          "scenes": [
+            {
+              "id": "benchmark-waveform",
+              "name": "Benchmark waveform",
+              "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+              "background": "#0a0a0a",
+              "createdAt": 0,
+              "elements": [
+                {
+                  "id": "benchmark-wave",
+                  "kind": "waveform",
+                  "name": "Waveform",
+                  "props": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "size": 0.48,
+                    "aspect": 4,
+                    "rotation": 0,
+                    "color": "#ffffff",
+                    "opacity": 1,
+                    "stroke": 0.012,
+                    "text": ""
+                  },
+                  "bindings": {}
+                }
+              ]
+            }
+          ],
+          "activeSceneId": "benchmark-waveform",
+          "selectedElementId": null
+        }
+      }
+    },
+    "renderer": {
+      "vendor": "WebKit",
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "glBuffer": [
+        2304,
+        1344
+      ],
+      "devicePixelRatio": 1,
+      "mainViewport": [
+        1440,
+        900
+      ],
+      "focusEmulation": true
+    },
+    "runtime_reference": "torch213-live-identity.json",
+    "qualification": "Harness/probe SHA256 match the saved run identity and current files. The job uses source4a02d2f on the isolated Torch2.13/CUDA13.2/TorchAO0.18 service, combined variant, two active GPUs with both models resident,2steps/alpha0.1/seed42,768x448 output,JPEG80,maxPending3,telemetry popover open and synthetic WebAudio levels cycling. Saved runtime identity supplies process/package provenance; no new runtime query was made."
+  },
+  "formal_window": {
+    "start_epoch_ms": 1789656691803.7,
+    "end_epoch_ms": 1789657292210.9,
+    "observed_seconds": 600.4071999511718,
+    "requested_seconds": 600,
+    "main_start_epoch_ms": 1789656691761.5999,
+    "stage_start_epoch_ms": 1789656691803.7,
+    "main_end_epoch_ms": 1789657292210.9,
+    "stage_end_epoch_ms": 1789657293101.9,
+    "definition": "Intersection of both frozen probe intervals: max(started),min(at). Only events in that common interval contribute to formal counts, FPS and ages. In-flight captures may precede the start; end-of-main to end-of-stage collection work is excluded.",
+    "checked_event_groups": 11,
+    "checked_age_samples": 67287
+  },
+  "formal_measurements": {
+    "main": {
+      "preview-image-loaded": {
+        "events": 16754,
+        "unique_frames": 16754,
+        "fps": 27.904395552489245,
+        "dimensions": [
+          [
+            768,
+            448
+          ]
+        ],
+        "age_ms": {
+          "count": 16754,
+          "mean": 299.07421515069626,
+          "p50": 223.800048828125,
+          "p95": 604.8348388671875,
+          "p99": 2434.1741723632863,
+          "min": 96.400146484375,
+          "max": 4442.699951171875
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preview-image-raf": {
+        "events": 14592,
+        "unique_frames": 14592,
+        "fps": 24.303506022557183,
+        "dimensions": [],
+        "age_ms": {
+          "count": 14592,
+          "mean": 312.0492738087972,
+          "p50": 233.599853515625,
+          "p95": 624.1450317382813,
+          "p99": 2465.462897949219,
+          "min": 101.2001953125,
+          "max": 4454.60009765625
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "received": {
+        "events": 17986,
+        "unique_frames": 17986,
+        "fps": 29.95633630220076,
+        "dimensions": [],
+        "age_ms": {
+          "count": 17986,
+          "mean": 296.193105936236,
+          "p50": 220.800048828125,
+          "p95": 594.3248901367188,
+          "p99": 2445.6401245117213,
+          "min": 94.60009765625,
+          "max": 4440.300048828125
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "sent": {
+        "events": 21020,
+        "unique_frames": 21020,
+        "fps": 35.00957350562994,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    },
+    "stage": {
+      "webgl-frame-submitted": {
+        "events": 17955,
+        "unique_frames": 17955,
+        "fps": 29.90470467619341,
+        "dimensions": [
+          [
+            2304,
+            1344
+          ]
+        ],
+        "age_ms": {
+          "count": 17955,
+          "mean": 301.17900318558986,
+          "p50": 225.5,
+          "p95": 598.609887695312,
+          "p99": 2454.9060791015613,
+          "min": 97.900146484375,
+          "max": 4444.5
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    }
+  },
+  "worker_activity": {
+    "0": {
+      "frames": 8989,
+      "max_gap_ms": 1911.60009765625
+    },
+    "1": {
+      "frames": 8997,
+      "max_gap_ms": 1553.099853515625
+    }
+  },
+  "worker_validation": {
+    "expected_workers": [
+      0,
+      1
+    ],
+    "all_observed_variants": [
+      "combined"
+    ],
+    "all_observed_stage_clocks": [
+      "cuda-events"
+    ],
+    "stats_count": 17986,
+    "each_worker_source_order_monotonic": true,
+    "max_allowed_worker_stat_arrival_gap_ms": 2000,
+    "channel_states_at_formal_end": [
+      "open"
+    ],
+    "compile_or_connection_error_events": 0,
+    "probe_errors": []
+  },
+  "frame_ordering": {
+    "main/sent": {
+      "events": 21020,
+      "adjacent_source_id_regressions": 0,
+      "regression_fraction_pct": 0.0,
+      "largest_backward_id_step": 0,
+      "max_event_gap_ms": 3842.800048828125
+    },
+    "main/received": {
+      "events": 17986,
+      "adjacent_source_id_regressions": 2300,
+      "regression_fraction_pct": 12.787723785166241,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1551.5,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 98,
+          "older_id": 97,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691893.4,
+          "older_at": 1789656691893.7,
+          "capture_time_reversal_ms": 17.199951171875
+        },
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691953,
+          "older_at": 1789656691958.2,
+          "capture_time_reversal_ms": 32.599853515625
+        }
+      ]
+    },
+    "main/stage-post": {
+      "events": 17986,
+      "adjacent_source_id_regressions": 2300,
+      "regression_fraction_pct": 12.787723785166241,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1553.800048828125,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 98,
+          "older_id": 97,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691894.5,
+          "older_at": 1789656691894.5999,
+          "capture_time_reversal_ms": 17.199951171875
+        },
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691957,
+          "older_at": 1789656691959.4,
+          "capture_time_reversal_ms": 32.599853515625
+        }
+      ]
+    },
+    "main/preview-image-loaded": {
+      "events": 16754,
+      "adjacent_source_id_regressions": 1990,
+      "regression_fraction_pct": 11.87776053479766,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1554.0,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691957.0999,
+          "older_at": 1789656691960.0999,
+          "capture_time_reversal_ms": 32.599853515625
+        },
+        {
+          "newer_id": 102,
+          "older_id": 101,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656692017.5,
+          "older_at": 1789656692020.4,
+          "capture_time_reversal_ms": 33.10009765625
+        }
+      ]
+    },
+    "main/preview-image-raf": {
+      "events": 14592,
+      "adjacent_source_id_regressions": 1383,
+      "regression_fraction_pct": 9.477796052631579,
+      "largest_backward_id_step": 1,
+      "max_event_gap_ms": 1550.5,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 117,
+          "older_id": 116,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656692388.5,
+          "older_at": 1789656692413,
+          "capture_time_reversal_ms": 16.800048828125
+        },
+        {
+          "newer_id": 146,
+          "older_id": 145,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656693277.2998,
+          "older_at": 1789656693288.7998,
+          "capture_time_reversal_ms": 17.5
+        }
+      ]
+    },
+    "stage/stage-message": {
+      "events": 17986,
+      "adjacent_source_id_regressions": 2300,
+      "regression_fraction_pct": 12.787723785166241,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1553.900146484375,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 98,
+          "older_id": 97,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691894.7998,
+          "older_at": 1789656691894.9,
+          "capture_time_reversal_ms": 17.199951171875
+        },
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691957.4,
+          "older_at": 1789656691959.5999,
+          "capture_time_reversal_ms": 32.599853515625
+        }
+      ]
+    },
+    "stage/bitmap-decoded": {
+      "events": 17955,
+      "adjacent_source_id_regressions": 2293,
+      "regression_fraction_pct": 12.770815928710666,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1554.5,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 98,
+          "older_id": 97,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691895.5,
+          "older_at": 1789656691896.2998,
+          "capture_time_reversal_ms": 17.199951171875
+        },
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691958.2,
+          "older_at": 1789656691960.4,
+          "capture_time_reversal_ms": 32.599853515625
+        }
+      ]
+    },
+    "stage/webgl-frame-submitted": {
+      "events": 17955,
+      "adjacent_source_id_regressions": 2293,
+      "regression_fraction_pct": 12.770815928710666,
+      "largest_backward_id_step": 2,
+      "max_event_gap_ms": 1554.89990234375,
+      "all_regressions_cross_worker": true,
+      "examples": [
+        {
+          "newer_id": 98,
+          "older_id": 97,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691895.7,
+          "older_at": 1789656691896.5,
+          "capture_time_reversal_ms": 17.199951171875
+        },
+        {
+          "newer_id": 100,
+          "older_id": 99,
+          "newer_worker": 0,
+          "older_worker": 1,
+          "newer_at": 1789656691958.4,
+          "older_at": 1789656691960.7998,
+          "capture_time_reversal_ms": 32.599853515625
+        }
+      ]
+    }
+  },
+  "ordering_metadata_check": {
+    "capture_reversal_range_ms": [
+      16.10009765625,
+      67.10009765625
+    ],
+    "maximum_receive_vs_downstream_capture_timestamp_difference_ms": 0.300048828125,
+    "conclusion": "The later-rendered smaller IDs represent genuinely older source captures; consistent propagated timestamps and individually monotonic GPU streams exclude a simple probe-ID relabeling explanation."
+  },
+  "audio": {
+    "rms_samples": 1199,
+    "fixture_change_events": 20,
+    "rms_by_commanded_level": {
+      "0": {
+        "count": 428,
+        "mean": 0.0009998531371752171,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "min": 0,
+        "max": 0.4279371427109929
+      },
+      "0.2": {
+        "count": 424,
+        "mean": 0.14147798613171395,
+        "p50": 0.141242875421645,
+        "p95": 0.14526292742811397,
+        "p99": 0.14530496705693813,
+        "min": 0.13744469361680922,
+        "max": 0.14530505173615071
+      },
+      "0.6": {
+        "count": 347,
+        "mean": 0.42347497331874073,
+        "p50": 0.4246931321866518,
+        "p95": 0.43091136582948836,
+        "p99": 0.4309545608997271,
+        "min": 0.14359828737443986,
+        "max": 0.4309545703346425
+      }
+    },
+    "interpretation": "The real WebAudio analyser observes the injected oscillator MediaStream through the app: medians0,0.14124,0.42469 for gain0,0.2,0.6. This is not physical microphone/audio-device capture validation. Commanded-level labels are immediate and include analyser-buffer transition samples: one silent-command sample is0.42794 and the0.6 group minimum0.14360. Do not claim every sample instantly matched its newly requested gain."
+  },
+  "stress": {
+    "status": "passed",
+    "checked_actions": 10,
+    "actions": [
+      {
+        "action": "prompt",
+        "index": 0,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789657294327.7998,
+        "first_subsequent_capture_received_at": 1789657294581.0999,
+        "settings_to_new_capture_receive_ms": 253.300048828125,
+        "frame_id": 21185
+      },
+      {
+        "action": "prompt",
+        "index": 1,
+        "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+        "settings_sent_at": 1789657297842.7998,
+        "first_subsequent_capture_received_at": 1789657298052.5,
+        "settings_to_new_capture_receive_ms": 209.7001953125,
+        "frame_id": 21315
+      },
+      {
+        "action": "prompt",
+        "index": 2,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789657301355.5,
+        "first_subsequent_capture_received_at": 1789657301554.0999,
+        "settings_to_new_capture_receive_ms": 198.599853515625,
+        "frame_id": 21446
+      },
+      {
+        "action": "resolution",
+        "width": 1024,
+        "height": 576,
+        "started_at": 1789657304777.0999,
+        "matching_worker_output_at": 1789657305008.5999,
+        "change_to_matching_worker_output_ms": 231.5,
+        "subsequent_frame_id": 21579,
+        "main_decoded_frame_id": 21579,
+        "stage_decoded_frame_id": 21579
+      },
+      {
+        "action": "resolution",
+        "width": 512,
+        "height": 288,
+        "started_at": 1789657308500.9,
+        "matching_worker_output_at": 1789657308620.7998,
+        "change_to_matching_worker_output_ms": 119.89990234375,
+        "subsequent_frame_id": 21713,
+        "main_decoded_frame_id": 21713,
+        "stage_decoded_frame_id": 21713
+      },
+      {
+        "action": "resolution",
+        "width": 768,
+        "height": 448,
+        "started_at": 1789657312205.7998,
+        "matching_worker_output_at": 1789657312384.2,
+        "change_to_matching_worker_output_ms": 178.400146484375,
+        "subsequent_frame_id": 21852,
+        "main_decoded_frame_id": 21852,
+        "stage_decoded_frame_id": 21852
+      },
+      {
+        "action": "ten-rapid-prompts",
+        "final_prompt_observed": true,
+        "subsequent_frame_id": 22027
+      },
+      {
+        "action": "reconnect",
+        "index": 0,
+        "connect_clicked_at": 1789657320856.4,
+        "disconnect_clicked_at": 1789657318650.2998,
+        "new_capture_received_at": 1789657332114.4,
+        "reconnect_to_new_capture_receive_ms": 11258.0,
+        "frame_id": 22085
+      },
+      {
+        "action": "reconnect",
+        "index": 1,
+        "connect_clicked_at": 1789657338593.4,
+        "disconnect_clicked_at": 1789657336400.5,
+        "new_capture_received_at": 1789657349880,
+        "reconnect_to_new_capture_receive_ms": 11286.60009765625,
+        "frame_id": 22246
+      },
+      {
+        "action": "reconnect",
+        "index": 2,
+        "connect_clicked_at": 1789657356357.2,
+        "disconnect_clicked_at": 1789657354167.9,
+        "new_capture_received_at": 1789657367608.2,
+        "reconnect_to_new_capture_receive_ms": 11251.0,
+        "frame_id": 22417
+      }
+    ],
+    "main_recorded_seconds": 77.65160009765626,
+    "stage_recorded_seconds": 77.70989990234375,
+    "final_main_channel_states": [
+      "closed",
+      "closed",
+      "closed",
+      "open"
+    ],
+    "source_order_and_final_freshness": {
+      "main": {
+        "received": {
+          "events": 1162,
+          "adjacent_source_id_regressions": 111,
+          "largest_backward_id_step": 5,
+          "final_event_age_ms": 56.2001953125
+        },
+        "preview-image-loaded": {
+          "events": 1087,
+          "adjacent_source_id_regressions": 98,
+          "largest_backward_id_step": 5,
+          "final_event_age_ms": 54.2001953125
+        },
+        "preview-image-raf": {
+          "events": 957,
+          "adjacent_source_id_regressions": 75,
+          "largest_backward_id_step": 5,
+          "final_event_age_ms": 37.300048828125
+        }
+      },
+      "stage": {
+        "webgl-frame-submitted": {
+          "events": 1164,
+          "adjacent_source_id_regressions": 111,
+          "largest_backward_id_step": 5,
+          "final_event_age_ms": 45.199951171875
+        }
+      }
+    },
+    "checks": [
+      "All3 prompt settings events and subsequent newly captured receives reconcile with their saved timestamps; each has subsequent stage submission. This proves transport/control recovery, not visual semantic prompt adherence.",
+      "All3 actual shape changes1024x576\u2192512x288\u2192768x448 match worker dimensions and subsequent decoded main/stage frames; the exact decoded stage IDs were submitted.",
+      "All10 rapid prompt settings events are present, including the final cue and subsequent output.",
+      "All3 reconnect actions have recorded connected events and new post-click captures, followed by stage output; reconnect-to-new-capture delays11.258,11.2866,11.251seconds are retained.",
+      "No probe/worker/connection failures are recorded; final receive,preview RAF and stage output freshness are56.2,37.3,45.2ms respectively. The3 historical channels are closed and the final channel is open.",
+      "Stress raw source-order regressions remain:111 receives,75 preview RAF observations,111 stage submissions, with up to5 source IDs backward. Intentional lifecycle pauses are excluded from steady FPS."
+    ],
+    "prompt_semantics": "The three prompt metrics start at the settings-sent event and end when a capture started after that event is received. They prove settings transmission and subsequent fresh output, not the identity of the model prompt revision used for that particular output, prompt-embedding latency, or semantic visual adherence. Do not label them cold/warm prompt-to-image latency without corresponding model-state evidence."
+  },
+  "limitations": [
+    "Preview RAF means the currently loaded image was observed at an animation-frame callback; stage GL means final framebuffer submission. Neither is compositor completion, physical display/projector presentation or GPU fence completion.",
+    "Frame age begins at canvas encode start. It excludes audio analyser acquisition and physical presentation; it is not end-to-end microphone-to-photon latency.",
+    "The stage viewport is1920x1080, while its actual upscale GL buffer is2304x1344. Both are preserved; reporting the latter as a1920x1080 render buffer would be incorrect.",
+    "Formal stage p95 age598.61ms,p992454.91ms,max4444.5ms and preview RAF24.30FPS do not establish uniformly subsecond response or30FPS preview, despite roughly29.90 stage submissions/s.",
+    "The requested60sendFPS produced35.01 measured sends/s; the longest client send gap was3842.8ms. Passing a2second worker-output gap guard does not imply capture continuity or low queue age.",
+    "The5second selector smoke is setup evidence only and is excluded from the600.407second totals. The earlier setup failure remains a separate retained failure.",
+    "No baseline600second app run is paired here; this soak alone cannot establish a causal stack/worker-count performance gain or quality equivalence."
+  ],
+  "artifact_bindings": [
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/identity.json",
+      "uncompressed_sha256": "321e5a8c8607424e1196c41649c9a6cef7c68889698b8ab74c57436d04dfa831",
+      "bytes": 3049,
+      "archived_artifact": "app-soak/identity.json",
+      "archive_sha256": "321e5a8c8607424e1196c41649c9a6cef7c68889698b8ab74c57436d04dfa831",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/progress.json",
+      "uncompressed_sha256": "dd39fca25dec55a77f682cf1047411f9efdea9ae47b3aed1aebb5d93dd2d306e",
+      "bytes": 1454,
+      "archived_artifact": "app-soak/progress.json",
+      "archive_sha256": "dd39fca25dec55a77f682cf1047411f9efdea9ae47b3aed1aebb5d93dd2d306e",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/cleanup.json",
+      "uncompressed_sha256": "6265f89e41fee29cf415e98428968a763b306f30512d854b5b0f22478a490f44",
+      "bytes": 47,
+      "archived_artifact": "app-soak/cleanup.json",
+      "archive_sha256": "6265f89e41fee29cf415e98428968a763b306f30512d854b5b0f22478a490f44",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/renderer.json",
+      "uncompressed_sha256": "9af736d22761b429a22d4f3abdcba7571aa793c25df2cc781a80e0292c9fdcc7",
+      "bytes": 427,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/renderer.json",
+      "archive_sha256": "9af736d22761b429a22d4f3abdcba7571aa793c25df2cc781a80e0292c9fdcc7",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/summary.json",
+      "uncompressed_sha256": "e070b51c167184e491b57f400e9b86e4b4a2489017e14d76a2af986d731cbf4b",
+      "bytes": 8772,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/summary.json",
+      "archive_sha256": "e070b51c167184e491b57f400e9b86e4b4a2489017e14d76a2af986d731cbf4b",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/main-raw.json",
+      "uncompressed_sha256": "b8b28087d5c86725cb0d0ede7ac393366e9c10407ea6fb090d6cca6f3d1b1e69",
+      "bytes": 24177618,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/main-raw.json.gz",
+      "archive_sha256": "9b679c63621f6868e31a230dcc4343c7ce3aa171725ab7d1cdf125ef0ca67808",
+      "encoding": "gzip",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/stage-raw.json",
+      "uncompressed_sha256": "29045df4cd98aa4e206d53f58c3395031bf6afdda960f713cfc7a01f8427dfb1",
+      "bytes": 7602259,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/stage-raw.json.gz",
+      "archive_sha256": "b3e2b8e3ef35ea28dcdf1b543ad187a0c9a93996f30b4a735f139b5bfb2db8a5",
+      "encoding": "gzip",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/stress.json",
+      "uncompressed_sha256": "763743f9c08fb00760d5c0948e2f8c0da758f1b2ff33f7a6e971c037c64c674c",
+      "bytes": 3264,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/stress.json",
+      "archive_sha256": "763743f9c08fb00760d5c0948e2f8c0da758f1b2ff33f7a6e971c037c64c674c",
+      "encoding": "identity",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/main-stress-raw.json",
+      "uncompressed_sha256": "aa5fe3546d997dbd82bca005d11814990a5df2810d3b5aa94c8a2f22f809207f",
+      "bytes": 1592259,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/main-stress-raw.json.gz",
+      "archive_sha256": "8e29e9fbba4943b1249d7658cc3c4f7183a5a9f6e77a13ffdf4d108709468552",
+      "encoding": "gzip",
+      "lossless_archive_verified": true
+    },
+    {
+      "reviewed_file": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/stage-stress-raw.json",
+      "uncompressed_sha256": "8b10bef2979d45bd79f95f16bbdfc2eb7f1126bccf10a44aae8c3b8a4d0a4f20",
+      "bytes": 494125,
+      "archived_artifact": "app-soak/candidate-next-ten-minute-soak/stage-stress-raw.json.gz",
+      "archive_sha256": "d88926370aa20736fd5fe3b1b0b944886167d0c6b6c3cbb8026fa25bcf5dfe9c",
+      "encoding": "gzip",
+      "lossless_archive_verified": true
+    }
+  ],
+  "archive_verified_at_utc": "2026-09-17T17:09:46.170906+00:00",
+  "app_summary_inventory": {
+    "summaries": 15,
+    "formal_comparison_trials": 12,
+    "formal_600s_soaks": 1,
+    "setup_smokes": 2,
+    "qualification": "The15 summaries comprise12 comparisons,the5second selector smoke,the earlier smoke4,and1 formal soak; they are not15 independent acceptance trials."
+  }
+}

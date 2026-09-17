@@ -1,11 +1,13 @@
 # Live image performance results — 2026-09-17
 
-**Work is still running.** Compute, transport discovery, twelve app comparisons,
-controlled telemetry, and StreamDiffusion/TensorRT experiments are complete.
-The corrected two-GPU scaling batch is complete. Frame-aware buffer trials are also complete. Newer-stack live confirmation
-and the final ten-minute app/projector soak remain in the active queue.
-The original snapshot and completed checkpoints are pushed. No UI redesign,
-main deployment or stable image overwrite has been made.
+**The final audit found a two-GPU temporal-order bug.** All planned compute,
+transport, app, StreamDiffusion and dependency measurements are collected. The
+600-second app soak passed its original scripted checks, but independent review
+found 2,293 backwards source transitions at the projector. The dispatcher now
+rejects late older worker results for raw and tagged clients. A corrected
+three-resolution app confirmation and another ten-minute soak are queued before
+final acceptance. Original measurements and the failed-ordering evidence remain
+preserved. No UI redesign or main/stable-image deployment was made.
 
 ## What the completed measurements show
 
@@ -17,10 +19,17 @@ main deployment or stable image overwrite has been made.
   18 trials. Scaling throughput alone does not establish acceptable continuity.
 - **The isolated new compute stack reaches about 31–32 /15.8 /9.0FPS per GPU** at
   512×288 /768×448 /1024×576, two steps. Old-stack late control medians are
-  28.37 /14.09 /8.18. These are sequential compute batches; live confirmation is
-  pending. The combined variant caches fixed-seed noise/sigmas and removes
+  28.37 /14.09 /8.18. These are sequential compute batches. The completed live confirmation is
+  reported in [NEWSTACK.md](NEWSTACK.md). The combined variant caches fixed-seed noise/sigmas and removes
   intermediate stage synchronization. New Torch/CUDA/TorchAO changes are tested
   together; the whole difference cannot be assigned to one package.
+- **The newer combined live profile reaches median 31.52 / 15.97 / 9.03 received
+  FPS with one active GPU and 57.21 / 31.48 / 18.08 with two**, at 512×288 /
+  768×448 / 1024×576. Within the new stack, adding constant reuse and event timing
+  improves one-GPU medians by 4.83% / 2.46% / 1.69%. Throughput and p95 age improve
+  in all nine pairs, but p99 worsens in two; two-GPU runs contain notable dips.
+  These are pre-ordering-fix browser transport results. They include older source
+  results arriving late and cannot establish temporally correct projector FPS.
 - **Queue limits trade throughput against age.** On the upgraded WebRTC test
   library, pending 1/2/3 discovery runs measured 20.70 /27.10 /27.86FPS and
   p95 age 141 /166 /188ms. Later alternating timing-events+pending2 comparisons
@@ -60,7 +69,8 @@ stage GL submissions; it does not prove actual display presentation.
 Complete tables and raw artifacts:
 [compute appendix](COMPUTE.md), [compute CSV](compute-results.csv),
 [browser table](BROWSER.md), [browser CSV](browser-results.csv),
-[same-host table](SAMEHOST.md), [StreamDiffusion](STREAMDIFFUSION.md),
+[same-host table](SAMEHOST.md), [newer-stack comparison](NEWSTACK.md),
+[StreamDiffusion](STREAMDIFFUSION.md),
 [app comparisons](app-comparison/), [dependency details](DEPENDENCIES.md).
 The index can be regenerated with
 `python3 workers/runpod-flux2klein/bench/summarize_results.py --root docs/performance/2026-09-17 --output /tmp/vj0-metrics-index.json`.
@@ -211,14 +221,14 @@ after the remaining measurements. Five unrelated old pods remain stopped.
 | G04 | Complete; BF16 VAE no clear win | Baseline FP8 verified, VAE BF16 speed/sample comparisons |
 | G05 | Complete for selected modes | reduce-overhead/default measured; prior SM120 max-autotune failure has no verified enabling change, so not repeated |
 | G06 | Complete; no FA4 integration win | Native profiler plus actual SM120 FA4 path; no measured-frame FA4 CUDA trace |
-| G07 | Compute complete; live pending | Isolated Torch2.13/CUDA13.2/TorchAO0.18; repeated compute, 27 live trials queued |
-| G08 | Pending final stress | Prompt cold/warm/rapid changes occur after steady app soak |
+| G07 | Compute/live complete | Isolated Torch2.13/CUDA13.2/TorchAO0.18; repeated compute and all 27 live trials, exact runtime identity retained |
+| G08 | Scripted lifecycle complete | Prompt settings, rapid changes, three resolutions and three reconnects recovered; prompt revision execution latency is not proven |
 | S01 | Complete; one continuity failure retained | All 18 corrected-service trials; approximately 1.93–2.00× median generation scaling; no watchdog restart |
 | V01 | Isolated generation/age complete | Wan1.3B; real app display unmeasured without a causal-state adapter |
 | V02 | Complete | Decoder, mode, 1–4 steps, noise, sizes, matched TensorRT/fast controls |
 | V03 | Complete | Wan14B standard/TAEHV/noise 0.95; checkpoint cleanup documented |
-| C01 | Several combinations complete; new-stack live pending | Existing 36 live compute trials, 13 responsive combinations; repeated new-stack trials queued |
-| C02 | Pending | Ten-minute actual app 768/two-GPU/new-stack soak plus prompt/resolution/reconnect stress |
+| C01 | Complete; tail tradeoffs retained | 36 old-stack live compute trials, 13 responsive combinations, 27 new-stack live trials; app acceptance separate |
+| C02 | Valid measured temporal-order failure; correction under test | Original soak 29.96 received / 29.90 stage FPS, p95 stage 598.6ms; 2,293 stage reversals. New source-order guard and corrected soak queued |
 | R00 | Ongoing | Independent arithmetic/source reviews completed in stages; final complete-report review still required |
 
 No pending row is a completed outcome. The active runbook tracks process IDs,

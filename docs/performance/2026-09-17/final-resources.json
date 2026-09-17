@@ -1,0 +1,79 @@
+{
+  "checked_at_utc": "2026-09-17T17:09:08.625967+00:00",
+  "account": {
+    "clientBalance": 52.9956180154,
+    "currentSpendPerHr": 6.331,
+    "notifyLowBalance": false,
+    "spendLimit": 80
+  },
+  "pods": [
+    {
+      "costPerHr": 4.18,
+      "desiredStatus": "RUNNING",
+      "gpuCount": 2,
+      "id": "9vj8k6guaxsbhw",
+      "lastStatusChange": "Rented by User: Thu Sep 17 2026 10:11:16 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-perf-20260917-scaling",
+      "runtimeStatus": "running"
+    },
+    {
+      "costPerHr": 2.09,
+      "desiredStatus": "RUNNING",
+      "gpuCount": 1,
+      "id": "0pxb4bss2jmbhg",
+      "lastStatusChange": "Rented by User: Thu Sep 17 2026 08:38:41 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-perf-20260917-baseline",
+      "runtimeStatus": "running"
+    },
+    {
+      "costPerHr": 4.18,
+      "desiredStatus": "EXITED",
+      "gpuCount": 2,
+      "id": "f3xpnbnofqzfdu",
+      "lastStatusChange": "Exited by user: Sat May 02 2026 22:11:47 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-pro6k-2x-is1",
+      "runtimeStatus": "stopped",
+      "runtimeStatusReason": "stopped_by_user"
+    },
+    {
+      "costPerHr": 1.98,
+      "desiredStatus": "EXITED",
+      "gpuCount": 2,
+      "id": "dz02kp6d6quwmq",
+      "lastStatusChange": "Exited by user: Sat May 02 2026 09:15:52 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-flux2-5090x2-is2",
+      "runtimeStatus": "stopped",
+      "runtimeStatusReason": "stopped_by_user"
+    },
+    {
+      "costPerHr": 0.99,
+      "desiredStatus": "EXITED",
+      "gpuCount": 1,
+      "id": "d6d75sgdh21tmn",
+      "lastStatusChange": "Exited by user: Thu Apr 30 2026 22:07:23 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-flux2-5090-ro-v2",
+      "runtimeStatus": "stopped",
+      "runtimeStatusReason": "stopped_by_user"
+    },
+    {
+      "costPerHr": 0.99,
+      "desiredStatus": "EXITED",
+      "gpuCount": 1,
+      "id": "astt1jyau6hsaq",
+      "lastStatusChange": "Exited by user: Fri Apr 17 2026 20:47:49 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-zimage-5090-ro",
+      "runtimeStatus": "stopped",
+      "runtimeStatusReason": "stopped_by_user"
+    },
+    {
+      "costPerHr": 0.99,
+      "desiredStatus": "EXITED",
+      "gpuCount": 1,
+      "id": "3m90zbu8fwyyqk",
+      "lastStatusChange": "Exited by user: Thu Apr 30 2026 21:11:54 GMT+0000 (Coordinated Universal Time)",
+      "name": "vj0-flux2-5090-ro",
+      "runtimeStatus": "stopped",
+      "runtimeStatusReason": "stopped_by_user"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "browser_batches": [
+    {
+      "batch": "browser-frame-buffer",
+      "state": {
+        "active": null,
+        "count": 12,
+        "done": true,
+        "error": null,
+        "signature": "9e84bc0d-f864-4469-b8c9-01603356cd31",
+        "failed": [],
+        "validationFailed": [
+          "buffer-1024x576-frames2",
+          "buffer-entropy-frames0"
+        ]
+      },
+      "jobs_sha256": "f47cc4b8195693175bd3c7be921f80b36df617de4dccceae7c3a7c81db426176"
+    },
+    {
+      "batch": "browser-torch213",
+      "state": {
+        "active": null,
+        "count": 27,
+        "done": true,
+        "error": null,
+        "signature": "5b4b5fe8-52e5-4461-b49d-81d18b55ff09",
+        "failed": [],
+        "validationFailed": []
+      },
+      "jobs_sha256": "6541cb5622ae789f00781c08d5c79bbbdc5285ffdd8595e2c3942c6241934fc0"
+    }
+  ],
+  "app_progress": [
+    {
+      "name": "telemetry-selector-smoke",
+      "status": "measured",
+      "config": {
+        "name": "telemetry-selector-smoke",
+        "origin": "http://127.0.0.1:18766",
+        "source_commit": "4a02d2f",
+        "layout": "vj-next",
+        "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+        "seconds": 5,
+        "width": 768,
+        "height": 448,
+        "sendFps": 60,
+        "telemetry": true,
+        "audioCycle": false,
+        "stress": false,
+        "variant": "combined",
+        "maxPending": 3,
+        "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+        "activeWorkers": 2
+      },
+      "summary": "/tmp/vj0-app-soak-20260917/telemetry-selector-smoke/summary.json"
+    },
+    {
+      "name": "candidate-next-ten-minute-soak",
+      "status": "measured",
+      "config": {
+        "name": "candidate-next-ten-minute-soak",
+        "origin": "http://127.0.0.1:18766",
+        "source_commit": "4a02d2f",
+        "layout": "vj-next",
+        "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+        "seconds": 600,
+        "width": 768,
+        "height": 448,
+        "sendFps": 60,
+        "telemetry": true,
+        "audioCycle": true,
+        "stress": true,
+        "variant": "combined",
+        "maxPending": 3,
+        "worker_environment": "isolated Torch2.13/cu132 + torchao0.18; JPEG80",
+        "activeWorkers": 2
+      },
+      "summary": "/tmp/vj0-app-soak-20260917/candidate-next-ten-minute-soak/summary.json",
+      "stress_status": "passed"
+    }
+  ],
+  "app_raw_encoding": "Lossless gzip; uncompressed summaries, stress results, configs and identities retained"
+}

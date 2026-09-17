@@ -10,8 +10,11 @@ notes say its release CI is pinned to PyTorch 2.13 and remove the legacy v1
 quantized tensor/layout stack. Verify the current Float8 configuration path and
 actual quantization instead of treating an import/fallback as successful FP8.
 Do not change the pod's host driver. FP8 import/forward and repeated compute tests passed. Combined warm FPS is
-about31–32 /15.8 /9.0 at512x288 /768x448 /1024x576. Live transport confirmation
-and the new-stack app soak are queued; no dependency default is promoted.
+about 31–32 / 15.8 / 9.0 at 512×288 / 768×448 / 1024×576. All 27 live
+transport comparisons are complete: combined one-GPU received medians are
+31.52 / 15.97 / 9.03 and two-GPU medians 57.21 / 31.48 / 18.08. Latency variation
+and paired results are in [NEWSTACK.md](NEWSTACK.md). The app soak is running;
+no dependency default is promoted.
 Fresh-cache compilation is expensive on both old and new stacks; the late old
 control used the new cache directory accidentally, so its cold run must be
 labelled separately from previously warm-cache controls.

@@ -1,0 +1,18 @@
+{
+  "status": "running",
+  "dispatcher_pid": 567,
+  "runner_pid": 67122,
+  "jobs": [
+    {
+      "name": "torch213-live-service",
+      "argv": [
+        "node",
+        "/workspace/scaling-livebench-20260917/server-idle-fixed.js"
+      ],
+      "cwd": "/app",
+      "started_at": "2026-09-17T14:10:44.538976+00:00",
+      "status": "running",
+      "pid": 67137
+    }
+  ]
+}

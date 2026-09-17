@@ -17,6 +17,23 @@ import urllib.request
 from metrics import distribution
 
 
+def source_order(rows):
+    """Audit source IDs, not receive-order counters, on the actual app surfaces."""
+    result = {}
+    for kind in ['received', 'preview-image-raf', 'webgl-frame-submitted']:
+        selected = [r for r in rows if r['kind'] == kind]
+        if not selected:
+            continue
+        ids = [r.get('id') for r in selected]
+        missing = sum(not isinstance(i, int) or i < 1 for i in ids)
+        reversals = sum(b < a for a,b in zip(ids, ids[1:]) if isinstance(a,int) and isinstance(b,int))
+        duplicates = len(ids) - len(set(ids))
+        result[kind] = {'frames':len(ids), 'missing_ids':missing,
+            'reversals':reversals, 'duplicate_ids':duplicates,
+            'status':'failed' if missing or reversals or duplicates else 'passed'}
+    return result
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--main-target', type=Path, required=True)
@@ -123,7 +140,7 @@ def main():
             row = received_after(at)
             actions.append({'action':'ten-rapid-prompts', 'final_prompt_observed':True, 'subsequent_frame_id':row['id']})
             for index in range(3):
-                evaluate('main', '(()=>{if(!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]"))document.querySelector("button.vp-ai-chip").click()})()')
+                evaluate('main', '(()=>{if(!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]"))Array.from(document.querySelectorAll("button.vp-ai-chip")).find(b=>b.querySelector(".vp-ai-chip__label")?.textContent.trim()==="ai").click()})()')
                 wait_for('main', '!!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]")')
                 disconnect_at = evaluate('main', 'performance.timeOrigin+performance.now()')
                 evaluate('main', 'Array.from(document.querySelectorAll("button")).find(b=>/disconnect/i.test(b.textContent)).click()')
@@ -144,6 +161,10 @@ def main():
             problems = [target+': '+str(error) for target,data in raw.items() for error in data['errors']]
             if 'open' not in raw['main']['channelStates']:
                 problems.append('main: no open channel at stress completion')
+            order = {target:source_order(data['rows']) for target,data in raw.items()}
+            for target, checks in order.items():
+                if any(check['status'] != 'passed' for check in checks.values()):
+                    problems.append(target+': source frames are not strictly increasing during stress')
             for target, data in raw.items():
                 if any(e.get('type')=='error' or e.get('status') in ['error','compile_failed'] or
                        (e.get('type')=='connection' and e.get('state')=='failed') for e in data['events']):
@@ -157,7 +178,7 @@ def main():
                     if not recent or data['at']-max(recent)>2000:
                         problems.append(target+': stale final '+kind+' output')
                 (folder/(target+'-stress-raw.json')).write_text(json.dumps(data,indent=2)+'\n')
-            result = {'status':'failed' if problems else 'passed', 'actions':actions, 'errors':problems,
+            result = {'status':'failed' if problems else 'passed', 'actions':actions, 'errors':problems, 'source_order':order,
                 'measurement':'Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result'}
             (folder/'stress.json').write_text(json.dumps(result,indent=2)+'\n')
             if problems:
@@ -242,7 +263,7 @@ def main():
             if job.get('telemetry'):
                 if job['layout'] != 'vj-next':
                     raise ValueError('Telemetry popover action currently targets vj-next')
-                evaluate('main', 'document.querySelector("button.vp-ai-chip").click()')
+                evaluate('main', 'Array.from(document.querySelectorAll("button.vp-ai-chip")).find(b=>b.querySelector(".vp-ai-chip__label")?.textContent.trim()==="ai").click()')
                 wait_for('main', '!!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]")')
             if job.get('audioCycle'):
                 evaluate('main', 'window.vj0AppProbe.setAudio(0,110)')
@@ -281,6 +302,10 @@ def main():
             for target, data in raw.items():
                 (folder/(target+'-raw.json')).write_text(json.dumps(data, indent=2)+'\n')
                 rows = [r for r in data['rows'] if start<=r['at']<=end]
+                order = source_order(rows)
+                summary.setdefault('source_order', {})[target] = order
+                if any(check['status'] != 'passed' for check in order.values()):
+                    problems.append(target+': source frames are not strictly increasing during measurement')
                 for row in rows:
                     if row['kind'] in ['preview-image-loaded', 'bitmap-decoded'] and row.get('id'):
                         if row.get('width') != job.get('width',512) or row.get('height') != job.get('height',288):

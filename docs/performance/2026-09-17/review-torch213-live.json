@@ -1,0 +1,1088 @@
+{
+  "reviewed_at_utc": "2026-09-17T14:54:53.121091+00:00",
+  "reviewer": "independent benchmark_review agent",
+  "reviewed_base_commit": "0887e6b1db17f56c08e6585b10957f1be05901f8",
+  "status": "passed_with_latency_and_comparison_limits",
+  "scope": "Local evidence and source audit of the 27 newer-stack browser trials, their table/CSV rows, and the narrow app soak selector correction. No new browser, network, GPU or build execution. This is not final completion grading or a full-app soak result.",
+  "blockers": [],
+  "batch": {
+    "run_id": "5b4b5fe8-52e5-4461-b49d-81d18b55ff09",
+    "config_hash": "276e523f51feba41f786d142e3da82540f4368fd699d8a44aad15c3f298a82f5",
+    "origin": "http://127.0.0.1:18765",
+    "harness_sha256": "bc7e4d46d70dcd8d4c6ff924dc18d3159b71737b102134e3879d555dbffbe8f3",
+    "measured_trials": 27,
+    "validation_passed": 27,
+    "continuity_passed": 27,
+    "csv_total_rows": 179,
+    "csv_line_endings": "LF",
+    "date_range_utc": [
+      "2026-09-17T14:15:58.932Z",
+      "2026-09-17T14:48:53.523Z"
+    ],
+    "batch_failures": [],
+    "batch_validation_failures": []
+  },
+  "runtime_identity": {
+    "artifact": "torch213-live-identity.json",
+    "artifact_sha256": "561c6f63d1d86f5f8af136309cfc0fa6249a4548247d5be735060ec0d44cf5de",
+    "versions": {
+      "torch": "2.13.0+cu132",
+      "torchao": "0.18.0+cu132",
+      "torchvision": "0.28.0+cu132",
+      "diffusers": "0.38.0.dev0",
+      "transformers": "5.7.0",
+      "pillow": "12.2.0",
+      "numpy": "2.4.4"
+    },
+    "workers": [
+      {
+        "pid": 67144,
+        "command": "python3 /workspace/scaling-livebench-20260917/inference_server.py ",
+        "environment": {
+          "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "CUDA_VISIBLE_DEVICES": "0",
+          "USE_VAE_FP8": "1",
+          "COMPILE_MODE": "reduce-overhead",
+          "HF_HOME": "/workspace/hf-cache",
+          "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+          "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+        }
+      },
+      {
+        "pid": 67145,
+        "command": "python3 /workspace/scaling-livebench-20260917/inference_server.py ",
+        "environment": {
+          "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "CUDA_VISIBLE_DEVICES": "1",
+          "USE_VAE_FP8": "1",
+          "COMPILE_MODE": "reduce-overhead",
+          "HF_HOME": "/workspace/hf-cache",
+          "TORCHINDUCTOR_CACHE_DIR": "/workspace/torch213-inductor-cache",
+          "INDUCTOR_PERSIST_DIR": "/workspace/torch213-inductor-persist"
+        }
+      }
+    ],
+    "source_files": [
+      {
+        "path": "/workspace/scaling-livebench-20260917/server-idle-fixed.js",
+        "sha256": "9fd289c7e339c3496582daeb2a92d615f9db39c0df3a4aa68fa83f98ce6b8c03"
+      },
+      {
+        "path": "/workspace/scaling-livebench-20260917/inference_server.py",
+        "sha256": "bdff1fa8918c2985a91a5c77b8b6d494cc24178a81b972cf77576f9b6a036b11"
+      },
+      {
+        "path": "/workspace/scaling-livebench-20260917/compute.py",
+        "sha256": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe"
+      }
+    ],
+    "qualification": "Reconciled saved source hashes, process command/environment and versions with saved service jobs/transition and browser options. No independent live process query was performed during this review. One versus two active GPUs on the same two-GPU host, with both models loaded and prewarmed."
+  },
+  "configuration": {
+    "shared_options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "requireQueueTiming": true,
+      "recordServerCounters": true
+    },
+    "server_pending_per_worker": 3,
+    "server_max_outbound_bytes": 1048576,
+    "client_max_buffered_bytes": 262144,
+    "input_scene": "waveform",
+    "order": "Each size runs baseline1, combined1, combined2 for repeat0, then the same order for repeats1 and2; sizes run512,768,1024. Fixed sequential order, not randomized or counterbalanced."
+  },
+  "checks": [
+    "Saved/root jobs match all27 resolved configurations; run identity recomputes from jobs and the exact recorded/current browser source hash.",
+    "All108 FPS/bandwidth equations match counts divided by observed elapsed time; frame-age/output/worker sample counts match the corresponding received or drawn counts.",
+    "All27 trials report the exact active worker IDs and benchmark variants/clocks, worker counts sum to received frames, final workers are ready, and no compile/decode/send errors occurred.",
+    "All27 continuity guards pass with finite worker-stat arrival gaps at most2seconds; this does not certify low frame age.",
+    "All27 BROWSER/CSV rows retain exact artifact hashes, rates, ages, counters, transport and variants; the complete CSV has179 rows and LF endings.",
+    "All server deltas reconcile to after minus before. Server snapshots bracket the client timing interval and may include final in-flight work; they are not the client FPS denominator or an exact packet-loss ledger."
+  ],
+  "within_stack_results": [
+    {
+      "size": "512x288",
+      "groups": {
+        "baseline": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            30.063760503115528,
+            30.047145521211306,
+            30.31504986398316
+          ],
+          "drawn_fps_median_min_max": [
+            28.96391509476719,
+            28.697225934792097,
+            29.29843741664783
+          ],
+          "p95_age_ms_by_repeat": [
+            196.39499998092649,
+            195,
+            193.94500007033344
+          ],
+          "p99_age_ms_by_repeat": [
+            218.47400001883503,
+            230.1299999797345,
+            217.42999995231617
+          ]
+        },
+        "combined": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            31.51524848052261,
+            31.45843504286795,
+            31.71365386952386
+          ],
+          "drawn_fps_median_min_max": [
+            30.648620812099992,
+            30.40870972099259,
+            30.84706952837029
+          ],
+          "p95_age_ms_by_repeat": [
+            184.89999997615817,
+            188,
+            185.39999997615817
+          ],
+          "p99_age_ms_by_repeat": [
+            210.5,
+            204.6759999513626,
+            231.28399998187984
+          ]
+        },
+        "combined-active2": {
+          "active_workers": 2,
+          "received_fps_median_min_max": [
+            57.21418738519058,
+            46.181332142255485,
+            57.9298575418578
+          ],
+          "drawn_fps_median_min_max": [
+            50.88112848441212,
+            41.36487418876872,
+            52.01354585389476
+          ],
+          "p95_age_ms_by_repeat": [
+            203.19999992847443,
+            781.3399999737737,
+            327.6399999856949
+          ],
+          "p99_age_ms_by_repeat": [
+            266.7799999237063,
+            1876.4329999613765,
+            436.6120000362397
+          ]
+        }
+      },
+      "paired_combined1_vs_baseline1": [
+        {
+          "repeat": 0,
+          "received_fps_change_pct": 5.487980674398174,
+          "drawn_fps_change_pct": 7.491468333779805,
+          "p95_age_change_ms": -11.495000004768315,
+          "p99_age_change_ms": -7.974000018835028
+        },
+        {
+          "repeat": 1,
+          "received_fps_change_pct": 3.771675072331737,
+          "drawn_fps_change_pct": 3.7895273681520125,
+          "p95_age_change_ms": -7,
+          "p99_age_change_ms": -25.454000028371894
+        },
+        {
+          "repeat": 2,
+          "received_fps_change_pct": 4.885998100135414,
+          "drawn_fps_change_pct": 5.816567656066529,
+          "p95_age_change_ms": -8.545000094175265,
+          "p99_age_change_ms": 13.854000029563679
+        }
+      ],
+      "combined1_vs_baseline1_ratio_of_medians_gain_pct": 4.828031999711624,
+      "combined2_vs_combined1_ratio_of_medians": 1.8154445909113075,
+      "sequential_original_stack_baseline_fps_by_repeat": [
+        28.048223612471105,
+        28.86493477056896,
+        28.997873489288978
+      ],
+      "sequential_new_baseline_vs_original_baseline_ratio_of_medians_gain_pct": 4.1532251573591195,
+      "sequential_new_combined_vs_original_baseline_ratio_of_medians_gain_pct": 9.18177619668812
+    },
+    {
+      "size": "768x448",
+      "groups": {
+        "baseline": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            15.582372420385983,
+            15.548574713984552,
+            15.599272033953154
+          ],
+          "drawn_fps_median_min_max": [
+            15.44904730876771,
+            15.33192790660856,
+            15.599272033953154
+          ],
+          "p95_age_ms_by_repeat": [
+            391.8949999511241,
+            379.489999949932,
+            276.59999999403954
+          ],
+          "p99_age_ms_by_repeat": [
+            646.9309999477855,
+            695.0560000300409,
+            282.1250000298023
+          ]
+        },
+        "combined": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            15.965362828708663,
+            15.782386390143651,
+            16.08215397534958
+          ],
+          "drawn_fps_median_min_max": [
+            15.682052632374589,
+            15.482404389063836,
+            16.08215397534958
+          ],
+          "p95_age_ms_by_repeat": [
+            312.60000002384186,
+            324.64000008106206,
+            271.0800000190735
+          ],
+          "p99_age_ms_by_repeat": [
+            422.00000000000017,
+            747.7679999589927,
+            281.14399999141693
+          ]
+        },
+        "combined-active2": {
+          "active_workers": 2,
+          "received_fps_median_min_max": [
+            31.480919796198993,
+            27.44817012199187,
+            31.614400967955756
+          ],
+          "drawn_fps_median_min_max": [
+            29.614396229669463,
+            26.31491233917739,
+            30.13117393255878
+          ],
+          "p95_age_ms_by_repeat": [
+            289.5,
+            288.2949999928474,
+            606.7600000500652
+          ],
+          "p99_age_ms_by_repeat": [
+            313.3479999637604,
+            313.27899995565417,
+            2185.235999965668
+          ]
+        }
+      },
+      "paired_combined1_vs_baseline1": [
+        {
+          "repeat": 0,
+          "received_fps_change_pct": 2.6805551144777784,
+          "drawn_fps_change_pct": 2.2836314382558065,
+          "p95_age_change_ms": -79.29499992728222,
+          "p99_age_change_ms": -224.93099994778532
+        },
+        {
+          "repeat": 1,
+          "received_fps_change_pct": 1.283591255308436,
+          "drawn_fps_change_pct": 0.21591674638212766,
+          "p95_age_change_ms": -54.84999986886993,
+          "p99_age_change_ms": 52.711999928951855
+        },
+        {
+          "repeat": 2,
+          "received_fps_change_pct": 3.0955415121000085,
+          "drawn_fps_change_pct": 3.0955415121000085,
+          "p95_age_change_ms": -5.5199999749660265,
+          "p99_age_change_ms": -0.981000038385389
+        }
+      ],
+      "combined1_vs_baseline1_ratio_of_medians_gain_pct": 2.4578440175234473,
+      "combined2_vs_combined1_ratio_of_medians": 1.9718261422528087,
+      "sequential_original_stack_baseline_fps_by_repeat": [
+        13.915530231703274,
+        13.732188984251312,
+        13.865603637048984
+      ],
+      "sequential_new_baseline_vs_original_baseline_ratio_of_medians_gain_pct": 12.381493285656763,
+      "sequential_new_combined_vs_original_baseline_ratio_of_medians_gain_pct": 15.143655095181785
+    },
+    {
+      "size": "1024x576",
+      "groups": {
+        "baseline": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            8.882667133298336,
+            8.749547940037004,
+            8.899555022248888
+          ],
+          "drawn_fps_median_min_max": [
+            8.832670883017107,
+            8.749547940037004,
+            8.899555022248888
+          ],
+          "p95_age_ms_by_repeat": [
+            613.0799999475464,
+            427.4349999845028,
+            895.4349999785408
+          ],
+          "p99_age_ms_by_repeat": [
+            2373.671999964714,
+            439.2419999361037,
+            1298.3590000545998
+          ]
+        },
+        "combined": {
+          "active_workers": 1,
+          "received_fps_median_min_max": [
+            9.032490300919603,
+            9.016125699121137,
+            9.065956500066957
+          ],
+          "drawn_fps_median_min_max": [
+            9.032490300919603,
+            9.016125699121137,
+            9.065956500066957
+          ],
+          "p95_age_ms_by_repeat": [
+            424.59499990940094,
+            421.89999997615814,
+            413
+          ],
+          "p99_age_ms_by_repeat": [
+            437.21800005197525,
+            430.4799999713899,
+            425.0269999897481
+          ]
+        },
+        "combined-active2": {
+          "active_workers": 2,
+          "received_fps_median_min_max": [
+            18.08242921187274,
+            17.949102544872755,
+            18.114855181148553
+          ],
+          "drawn_fps_median_min_max": [
+            17.43246171024782,
+            17.19914004299785,
+            17.6315701763157
+          ],
+          "p95_age_ms_by_repeat": [
+            409.0150000035763,
+            443.5749999582767,
+            409.3000000059605
+          ],
+          "p99_age_ms_by_repeat": [
+            424.3579999661446,
+            629.9600000023825,
+            425.5690000164509
+          ]
+        }
+      },
+      "paired_combined1_vs_baseline1": [
+        {
+          "repeat": 0,
+          "received_fps_change_pct": 3.2337940522376485,
+          "drawn_fps_change_pct": 3.2337940522376485,
+          "p95_age_change_ms": -188.48500003814547,
+          "p99_age_change_ms": -1936.4539999127387
+        },
+        {
+          "repeat": 1,
+          "received_fps_change_pct": 1.309848375349354,
+          "drawn_fps_change_pct": 1.309848375349354,
+          "p95_age_change_ms": -5.535000008344639,
+          "p99_age_change_ms": -8.761999964713823
+        },
+        {
+          "repeat": 2,
+          "received_fps_change_pct": 2.0634496826018145,
+          "drawn_fps_change_pct": 2.6411673223146526,
+          "p95_age_change_ms": -482.43499997854076,
+          "p99_age_change_ms": -873.3320000648517
+        }
+      ],
+      "combined1_vs_baseline1_ratio_of_medians_gain_pct": 1.6866912310563587,
+      "combined2_vs_combined1_ratio_of_medians": 2.0019317607273552,
+      "sequential_original_stack_baseline_fps_by_repeat": [
+        8.199467034629716,
+        8.149497447667109,
+        8.199207409956887
+      ],
+      "sequential_new_baseline_vs_original_baseline_ratio_of_medians_gain_pct": 8.33568037944099,
+      "sequential_new_combined_vs_original_baseline_ratio_of_medians_gain_pct": 10.162968800506267
+    }
+  ],
+  "conclusions": [
+    "Combined1 increased received FPS and offscreen drawn FPS in all9 same-size/repeat pairs and lowered capture-to-draw p95 in all9. Ratio-of-median received improvements are4.83%,2.46%,1.69% at512x288,768x448,1024x576.",
+    "These compare the combined bundle against baseline within the newer stack. The bundle includes cached fixed-seed noise/sigmas and CUDA-event timing/removal of intermediate synchronization; these trials cannot attribute the gain to an individual subchange.",
+    "Capture-to-draw p99 worsened in2 of9 one-GPU pairs. Fixed trial order and WAN variability limit causal certainty even when paired directions agree.",
+    "Two active GPUs increased median received throughput by1.815x,1.972x,2.002x versus one active combined worker. Both models remain resident in both cases, so this does not measure the cost of loading/compiling a second worker or a one-GPU physical host.",
+    "Two-GPU latency tails vary materially:512 repeat1 fell to46.18 received/41.36 drawn FPS with p95 age781.34ms and p991876.43ms;768 repeat2 fell to27.45/26.31FPS with p95 age606.76ms and p992185.24ms. These are retained valid measurements despite passing the inter-arrival continuity threshold.",
+    "New-stack baseline versus earlier original-stack baseline median increases are4.15%,12.38%,8.34%; newer combined versus original baseline are9.18%,15.14%,10.16%. These are sequential stack-bundle observations, not isolated causal Torch-version gains. Package/runtime changes and WAN/time differences remain confounded. The earlier768 continuity failure remains included as valid quantified timing evidence through its explicit assessment.",
+    "Rates measure receive and offscreen2D decode/draw using the browser harness, excluding the actual application upscaler/projector and audio capture. They do not establish actual-app FPS, display presentation or600-second stability. Quality equivalence and a promoted default are not established by this audit."
+  ],
+  "p99_paired_regressions": [
+    {
+      "size": "512x288",
+      "repeat": 2,
+      "received_fps_change_pct": 4.885998100135414,
+      "drawn_fps_change_pct": 5.816567656066529,
+      "p95_age_change_ms": -8.545000094175265,
+      "p99_age_change_ms": 13.854000029563679
+    },
+    {
+      "size": "768x448",
+      "repeat": 1,
+      "received_fps_change_pct": 1.283591255308436,
+      "drawn_fps_change_pct": 0.21591674638212766,
+      "p95_age_change_ms": -54.84999986886993,
+      "p99_age_change_ms": 52.711999928951855
+    }
+  ],
+  "app_soak_selector_review": {
+    "prior_failure_artifact": "app-soak-initial-setup-failure/progress.json",
+    "prior_failure_scope": "Failed waiting for the AI transport dialog before timing; no600-second measurement was produced. Cleanup records pages closed without errors.",
+    "changed_source": "workers/runpod-flux2klein/bench/app_batch.py",
+    "changed_source_sha256": "59ecefb8aac18c76dab4e899ca44455e0ab4dbb66e808dbb742b1233cfe8bd08",
+    "diff_scope": "Only the telemetry setup and reconnect stress selectors change from the first button.vp-ai-chip to the button whose .vp-ai-chip__label text is exactly ai.",
+    "actual_component": "app/vj-next/components/SystemBar.tsx",
+    "frozen_source_commit_checked": "4a02d2f",
+    "source_verdict": "Correct against both current and frozen component source: the first shared-class chip label is audio, and the AI chip label is ai. Missing chip still throws and the existing exact AI-dialog wait remains; the correction does not weaken timing, measurement, probe, stress or soak criteria.",
+    "execution_verdict": "Source review only. The actual selector smoke and full600-second soak/stress require separate completed execution evidence."
+  },
+  "follow_up_report_note": "At review time RESULTS.md G07/C01 still says new-stack live pending/queued despite these27 completed records. Update those statuses when incorporating this evidence; full-app soak remains separately pending.",
+  "artifact_bindings": [
+    {
+      "artifact": "browser-torch213/jobs.json",
+      "sha256": "6541cb5622ae789f00781c08d5c79bbbdc5285ffdd8595e2c3942c6241934fc0"
+    },
+    {
+      "artifact": "browser-torch213/run-identity.json",
+      "sha256": "4bf5e8049c0ed903eb1fd62596f40489223fb86c0e3c2e8eea1c93d99bd25ea3"
+    },
+    {
+      "artifact": "browser-torch213/batch.json",
+      "sha256": "bcc9dbb6cc46595b89dd959dded17905d0036db59b36f88cd476af39b636c1c0"
+    },
+    {
+      "artifact": "torch213-live-service-jobs.json",
+      "sha256": "a7f64ad83cc70c48c0951b96887c64436de2e81e6bd87dcf1be29513d7e3b10c"
+    },
+    {
+      "artifact": "torch213-live-transition.json",
+      "sha256": "082baee85e0eee86e2ac7f53beb894cae0fa74e8069ce3184d6f9beccc9b3958"
+    },
+    {
+      "artifact": "BROWSER.md",
+      "sha256": "9bb27e84acf9b248b8ed3609b8363d3cb551939de058b5743f2e7f20c3ad2cd5"
+    },
+    {
+      "artifact": "browser-results.csv",
+      "sha256": "770c98de288aa02b613c7fb9df053973a47bf8d2d3961b113b6a2c9739977a7a"
+    }
+  ],
+  "trials": [
+    {
+      "artifact": "browser-torch213/torch213-512x288-baseline-r0.json",
+      "sha256": "eb3a22d9ef73ac3b77cd47e48986ed930a7bd00705a70f0971398802ba3e1fed",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00580000007152,
+      "received_frames": 1804,
+      "drawn_frames": 1722,
+      "received_fps": 30.063760503115528,
+      "drawn_fps": 28.697225934792097,
+      "p95_age_ms": 196.39499998092649,
+      "p99_age_ms": 218.47400001883503,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1804
+      },
+      "worker_max_gap_ms": {
+        "0": 179.20000004768372
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-r0.json",
+      "sha256": "efbbff02370a204fc1712acb319bc6adf66d16e888160e54d31a7605005ce006",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00570000004768,
+      "received_frames": 1903,
+      "drawn_frames": 1851,
+      "received_fps": 31.71365386952386,
+      "drawn_fps": 30.84706952837029,
+      "p95_age_ms": 184.89999997615817,
+      "p99_age_ms": 210.5,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1903
+      },
+      "worker_max_gap_ms": {
+        "0": 169.79999995231628
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-active2-r0.json",
+      "sha256": "8bf51855845afe8a7aac54051b36d0323962faf2bc661f214daee4c40ae98dad",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003600000023845,
+      "received_frames": 3476,
+      "drawn_frames": 3121,
+      "received_fps": 57.9298575418578,
+      "drawn_fps": 52.01354585389476,
+      "p95_age_ms": 203.19999992847443,
+      "p99_age_ms": 266.7799999237063,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1740,
+        "1": 1736
+      },
+      "worker_max_gap_ms": {
+        "0": 164.5,
+        "1": 160
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-baseline-r1.json",
+      "sha256": "5b098949076423affde86a583260d7f462fd0fb460a7f4b13f9c609fa436134c",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00320000004768,
+      "received_frames": 1819,
+      "drawn_frames": 1758,
+      "received_fps": 30.31504986398316,
+      "drawn_fps": 29.29843741664783,
+      "p95_age_ms": 195,
+      "p99_age_ms": 230.1299999797345,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1819
+      },
+      "worker_max_gap_ms": {
+        "0": 182
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-r1.json",
+      "sha256": "c57faff32e7be576e7fa7ef25912b3f20fb945856c54e2d304e5fb5d07992fc3",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.01569999992847,
+      "received_frames": 1888,
+      "drawn_frames": 1825,
+      "received_fps": 31.45843504286795,
+      "drawn_fps": 30.40870972099259,
+      "p95_age_ms": 188,
+      "p99_age_ms": 204.6759999513626,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1888
+      },
+      "worker_max_gap_ms": {
+        "0": 171.59999990463257
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-active2-r1.json",
+      "sha256": "1ef4e03579ce6bd8d43a5f29b197fcaeab1021c84d1901dfd7facc10159906b3",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00260000002384,
+      "received_frames": 2771,
+      "drawn_frames": 2482,
+      "received_fps": 46.181332142255485,
+      "drawn_fps": 41.36487418876872,
+      "p95_age_ms": 781.3399999737737,
+      "p99_age_ms": 1876.4329999613765,
+      "input_buffer_skips": 519,
+      "worker_frame_counts": {
+        "0": 1390,
+        "1": 1381
+      },
+      "worker_max_gap_ms": {
+        "0": 910.5,
+        "1": 787.5
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-baseline-r2.json",
+      "sha256": "ecce4d5a83e376ce5217c188748a74a6629c2d43fd07ac590dcf2e53143bd063",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.005699999928474,
+      "received_frames": 1803,
+      "drawn_frames": 1738,
+      "received_fps": 30.047145521211306,
+      "drawn_fps": 28.96391509476719,
+      "p95_age_ms": 193.94500007033344,
+      "p99_age_ms": 217.42999995231617,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1803
+      },
+      "worker_max_gap_ms": {
+        "0": 156.10000002384186
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-r2.json",
+      "sha256": "a349ffefde650932753d7fd25c3ed175038356d294eb03dfbdeff1acb7042e36",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.002699999928474,
+      "received_frames": 1891,
+      "drawn_frames": 1839,
+      "received_fps": 31.51524848052261,
+      "drawn_fps": 30.648620812099992,
+      "p95_age_ms": 185.39999997615817,
+      "p99_age_ms": 231.28399998187984,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 1891
+      },
+      "worker_max_gap_ms": {
+        "0": 171.29999995231628
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-512x288-combined-active2-r2.json",
+      "sha256": "2dd33abb3918839097389a9ffa9de771448479bc3157843f165ed593dc54300c",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00260000002384,
+      "received_frames": 3433,
+      "drawn_frames": 3053,
+      "received_fps": 57.21418738519058,
+      "drawn_fps": 50.88112848441212,
+      "p95_age_ms": 327.6399999856949,
+      "p99_age_ms": 436.6120000362397,
+      "input_buffer_skips": 31,
+      "worker_frame_counts": {
+        "0": 1717,
+        "1": 1716
+      },
+      "worker_max_gap_ms": {
+        "0": 172.60000002384186,
+        "1": 191.29999995231628
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-baseline-r0.json",
+      "sha256": "86fdea4f791a78b263bf1b750c8ce8bf41b9a13fb6d5cbef8468cbb84ddb2451",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.0055,
+      "received_frames": 933,
+      "drawn_frames": 920,
+      "received_fps": 15.548574713984552,
+      "drawn_fps": 15.33192790660856,
+      "p95_age_ms": 391.8949999511241,
+      "p99_age_ms": 646.9309999477855,
+      "input_buffer_skips": 95,
+      "worker_frame_counts": {
+        "0": 933
+      },
+      "worker_max_gap_ms": {
+        "0": 190.79999995231628
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-r0.json",
+      "sha256": "38bd4e3e5d9ac83ff8f7becd7feedf0442675f6a6b181087456f2ec5799fcc06",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00489999997616,
+      "received_frames": 958,
+      "drawn_frames": 941,
+      "received_fps": 15.965362828708663,
+      "drawn_fps": 15.682052632374589,
+      "p95_age_ms": 312.60000002384186,
+      "p99_age_ms": 422.00000000000017,
+      "input_buffer_skips": 26,
+      "worker_frame_counts": {
+        "0": 958
+      },
+      "worker_max_gap_ms": {
+        "0": 202
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-active2-r0.json",
+      "sha256": "2ee6f1bbcdbd44109933c964a4f6a5c399081ff343162e1de654fd6905627b5d",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.004599999904634,
+      "received_frames": 1889,
+      "drawn_frames": 1777,
+      "received_fps": 31.480919796198993,
+      "drawn_fps": 29.614396229669463,
+      "p95_age_ms": 289.5,
+      "p99_age_ms": 313.3479999637604,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 944,
+        "1": 945
+      },
+      "worker_max_gap_ms": {
+        "0": 182.69999992847443,
+        "1": 203.89999997615817
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-baseline-r1.json",
+      "sha256": "3d0256284adfc631ae4f23e738ff68aaea855203b8108977763d4e40133a66a2",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00369999992847,
+      "received_frames": 935,
+      "drawn_frames": 927,
+      "received_fps": 15.582372420385983,
+      "drawn_fps": 15.44904730876771,
+      "p95_age_ms": 379.489999949932,
+      "p99_age_ms": 695.0560000300409,
+      "input_buffer_skips": 73,
+      "worker_frame_counts": {
+        "0": 935
+      },
+      "worker_max_gap_ms": {
+        "0": 214.19999992847443
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-r1.json",
+      "sha256": "89baea7b78b7df8cbcc92c84f68b974bf091d42aa0afc79efc3037caebcb14c7",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003600000023845,
+      "received_frames": 947,
+      "drawn_frames": 929,
+      "received_fps": 15.782386390143651,
+      "drawn_fps": 15.482404389063836,
+      "p95_age_ms": 324.64000008106206,
+      "p99_age_ms": 747.7679999589927,
+      "input_buffer_skips": 86,
+      "worker_frame_counts": {
+        "0": 947
+      },
+      "worker_max_gap_ms": {
+        "0": 366.7999999523163
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-active2-r1.json",
+      "sha256": "b87e824e8762b1893c5af76b9a7156ef0e298af899eca3e62013515f136b3f00",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00429999995232,
+      "received_frames": 1897,
+      "drawn_frames": 1808,
+      "received_fps": 31.614400967955756,
+      "drawn_fps": 30.13117393255878,
+      "p95_age_ms": 288.2949999928474,
+      "p99_age_ms": 313.27899995565417,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 949,
+        "1": 948
+      },
+      "worker_max_gap_ms": {
+        "0": 207.20000004768372,
+        "1": 173.70000004768372
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-baseline-r2.json",
+      "sha256": "fe93f33e9ccfbb7b74a13a9b1ae93477ccf3aad79a8773f27bc9cf232ca4b754",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00280000007152,
+      "received_frames": 936,
+      "drawn_frames": 936,
+      "received_fps": 15.599272033953154,
+      "drawn_fps": 15.599272033953154,
+      "p95_age_ms": 276.59999999403954,
+      "p99_age_ms": 282.1250000298023,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 936
+      },
+      "worker_max_gap_ms": {
+        "0": 196.70000004768372
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-r2.json",
+      "sha256": "e53c997f5207354ab5ec4bdb2502a1175e0fa3b97cae79048258bfe22f64a704",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.004400000095366,
+      "received_frames": 965,
+      "drawn_frames": 965,
+      "received_fps": 16.08215397534958,
+      "drawn_fps": 16.08215397534958,
+      "p95_age_ms": 271.0800000190735,
+      "p99_age_ms": 281.14399999141693,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 965
+      },
+      "worker_max_gap_ms": {
+        "0": 191.5
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-768x448-combined-active2-r2.json",
+      "sha256": "ea2c8f53d99303ab54afbd0c0b356f0c1733c97133d4302dd6325ffb82864ef4",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.004,
+      "received_frames": 1647,
+      "drawn_frames": 1579,
+      "received_fps": 27.44817012199187,
+      "drawn_fps": 26.31491233917739,
+      "p95_age_ms": 606.7600000500652,
+      "p99_age_ms": 2185.235999965668,
+      "input_buffer_skips": 626,
+      "worker_frame_counts": {
+        "0": 824,
+        "1": 823
+      },
+      "worker_max_gap_ms": {
+        "0": 1407.8000000715256,
+        "1": 1331.6999999284744
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-baseline-r0.json",
+      "sha256": "c45b8699e2d5e2992054705dcf3b835510ab609985a059b3c6c83f2d1f366244",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003099999904634,
+      "received_frames": 525,
+      "drawn_frames": 525,
+      "received_fps": 8.749547940037004,
+      "drawn_fps": 8.749547940037004,
+      "p95_age_ms": 613.0799999475464,
+      "p99_age_ms": 2373.671999964714,
+      "input_buffer_skips": 255,
+      "worker_frame_counts": {
+        "0": 525
+      },
+      "worker_max_gap_ms": {
+        "0": 1186.1999999284744
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-r0.json",
+      "sha256": "b6149edc52876720fbf5c9e15179094e3a587fd03e58a77fcf66d85441ab9a08",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00559999990463,
+      "received_frames": 542,
+      "drawn_frames": 542,
+      "received_fps": 9.032490300919603,
+      "drawn_fps": 9.032490300919603,
+      "p95_age_ms": 424.59499990940094,
+      "p99_age_ms": 437.21800005197525,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 542
+      },
+      "worker_max_gap_ms": {
+        "0": 266.59999990463257
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-active2-r0.json",
+      "sha256": "a604e72a0949588ea426e28a7b3f297a1ae4731004ef8f130c5ceeec0bd9ff28",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.006,
+      "received_frames": 1087,
+      "drawn_frames": 1058,
+      "received_fps": 18.114855181148553,
+      "drawn_fps": 17.6315701763157,
+      "p95_age_ms": 409.0150000035763,
+      "p99_age_ms": 424.3579999661446,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 543,
+        "1": 544
+      },
+      "worker_max_gap_ms": {
+        "0": 254.60000002384183,
+        "1": 277.90000009536743
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-baseline-r1.json",
+      "sha256": "ce7d4affa6a2bcf5d1719369ae3b0074b6731c08b168206f865d0e768f211af9",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003,
+      "received_frames": 534,
+      "drawn_frames": 534,
+      "received_fps": 8.899555022248888,
+      "drawn_fps": 8.899555022248888,
+      "p95_age_ms": 427.4349999845028,
+      "p99_age_ms": 439.2419999361037,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 534
+      },
+      "worker_max_gap_ms": {
+        "0": 271.10000002384186
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-r1.json",
+      "sha256": "f29f9f72fc9a9389ab6e2321d506b5fc9bd8dc0410b1eb4ab68c3de9be7b824e",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003600000023845,
+      "received_frames": 541,
+      "drawn_frames": 541,
+      "received_fps": 9.016125699121137,
+      "drawn_fps": 9.016125699121137,
+      "p95_age_ms": 421.89999997615814,
+      "p99_age_ms": 430.4799999713899,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 541
+      },
+      "worker_max_gap_ms": {
+        "0": 265.7000000476837
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-active2-r1.json",
+      "sha256": "4afa5873f9e83cb6a702769e0a32dba3e6bd750886ced8b2aa46917b8501fec7",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003,
+      "received_frames": 1077,
+      "drawn_frames": 1046,
+      "received_fps": 17.949102544872755,
+      "drawn_fps": 17.43246171024782,
+      "p95_age_ms": 443.5749999582767,
+      "p99_age_ms": 629.9600000023825,
+      "input_buffer_skips": 56,
+      "worker_frame_counts": {
+        "0": 538,
+        "1": 539
+      },
+      "worker_max_gap_ms": {
+        "0": 251.30000007152557,
+        "1": 275.60000002384186
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-baseline-r2.json",
+      "sha256": "fd96c21d17ffb6384ea81949a87e18037ca7bc0d63bfd4428d939f279b06216c",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.0045,
+      "received_frames": 533,
+      "drawn_frames": 530,
+      "received_fps": 8.882667133298336,
+      "drawn_fps": 8.832670883017107,
+      "p95_age_ms": 895.4349999785408,
+      "p99_age_ms": 1298.3590000545998,
+      "input_buffer_skips": 393,
+      "worker_frame_counts": {
+        "0": 533
+      },
+      "worker_max_gap_ms": {
+        "0": 338.89999997615814
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-r2.json",
+      "sha256": "15011544fcff883f5ba429fe5c8cc8f485b6633a03c6b3319728e489034da6f1",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.00470000004768,
+      "received_frames": 544,
+      "drawn_frames": 544,
+      "received_fps": 9.065956500066957,
+      "drawn_fps": 9.065956500066957,
+      "p95_age_ms": 413,
+      "p99_age_ms": 425.0269999897481,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 544
+      },
+      "worker_max_gap_ms": {
+        "0": 260.40000009536743
+      }
+    },
+    {
+      "artifact": "browser-torch213/torch213-1024x576-combined-active2-r2.json",
+      "sha256": "1a3435b7229cb09bdeac102c587a5873a67a42adfb3c4abc33b952947e9c0eda",
+      "status": "measured",
+      "validation_status": "passed",
+      "continuity_status": "passed",
+      "elapsed_seconds": 60.003,
+      "received_frames": 1085,
+      "drawn_frames": 1032,
+      "received_fps": 18.08242921187274,
+      "drawn_fps": 17.19914004299785,
+      "p95_age_ms": 409.3000000059605,
+      "p99_age_ms": 425.5690000164509,
+      "input_buffer_skips": 0,
+      "worker_frame_counts": {
+        "0": 541,
+        "1": 544
+      },
+      "worker_max_gap_ms": {
+        "0": 245.59999990463257,
+        "1": 265.5
+      }
+    }
+  ]
+}

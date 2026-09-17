@@ -1,0 +1,99 @@
+{
+  "status": "passed",
+  "actions": [
+    {
+      "action": "prompt",
+      "index": 0,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789657294327.7998,
+      "first_subsequent_capture_received_at": 1789657294581.0999,
+      "settings_to_new_capture_receive_ms": 253.300048828125,
+      "frame_id": 21185
+    },
+    {
+      "action": "prompt",
+      "index": 1,
+      "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+      "settings_sent_at": 1789657297842.7998,
+      "first_subsequent_capture_received_at": 1789657298052.5,
+      "settings_to_new_capture_receive_ms": 209.7001953125,
+      "frame_id": 21315
+    },
+    {
+      "action": "prompt",
+      "index": 2,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789657301355.5,
+      "first_subsequent_capture_received_at": 1789657301554.0999,
+      "settings_to_new_capture_receive_ms": 198.599853515625,
+      "frame_id": 21446
+    },
+    {
+      "action": "resolution",
+      "width": 1024,
+      "height": 576,
+      "started_at": 1789657304777.0999,
+      "matching_worker_output_at": 1789657305008.5999,
+      "change_to_matching_worker_output_ms": 231.5,
+      "subsequent_frame_id": 21579,
+      "main_decoded_frame_id": 21579,
+      "stage_decoded_frame_id": 21579
+    },
+    {
+      "action": "resolution",
+      "width": 512,
+      "height": 288,
+      "started_at": 1789657308500.9,
+      "matching_worker_output_at": 1789657308620.7998,
+      "change_to_matching_worker_output_ms": 119.89990234375,
+      "subsequent_frame_id": 21713,
+      "main_decoded_frame_id": 21713,
+      "stage_decoded_frame_id": 21713
+    },
+    {
+      "action": "resolution",
+      "width": 768,
+      "height": 448,
+      "started_at": 1789657312205.7998,
+      "matching_worker_output_at": 1789657312384.2,
+      "change_to_matching_worker_output_ms": 178.400146484375,
+      "subsequent_frame_id": 21852,
+      "main_decoded_frame_id": 21852,
+      "stage_decoded_frame_id": 21852
+    },
+    {
+      "action": "ten-rapid-prompts",
+      "final_prompt_observed": true,
+      "subsequent_frame_id": 22027
+    },
+    {
+      "action": "reconnect",
+      "index": 0,
+      "connect_clicked_at": 1789657320856.4,
+      "disconnect_clicked_at": 1789657318650.2998,
+      "new_capture_received_at": 1789657332114.4,
+      "reconnect_to_new_capture_receive_ms": 11258.0,
+      "frame_id": 22085
+    },
+    {
+      "action": "reconnect",
+      "index": 1,
+      "connect_clicked_at": 1789657338593.4,
+      "disconnect_clicked_at": 1789657336400.5,
+      "new_capture_received_at": 1789657349880,
+      "reconnect_to_new_capture_receive_ms": 11286.60009765625,
+      "frame_id": 22246
+    },
+    {
+      "action": "reconnect",
+      "index": 2,
+      "connect_clicked_at": 1789657356357.2,
+      "disconnect_clicked_at": 1789657354167.9,
+      "new_capture_received_at": 1789657367608.2,
+      "reconnect_to_new_capture_receive_ms": 11251.0,
+      "frame_id": 22417
+    }
+  ],
+  "errors": [],
+  "measurement": "Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result"
+}

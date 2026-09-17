@@ -175,6 +175,38 @@ One earlier WebRTC-upgrade trial overlapped a local build and is explicitly excl
 | [scaling-768x448-active2-r1](browser-scaling-idle-fixed/scaling-768x448-active2-r1.json) | measured | 27.56 | 26.81 | 310.00 | 473.97 | 144.10 | 8.49 / 7.51 |
 | [scaling-768x448-active2-r2](browser-scaling-idle-fixed/scaling-768x448-active2-r2.json) | measured | 27.61 | 26.37 | 721.45 | 1901.75 | 143.68 | 8.53 / 7.52 |
 
+## browser-torch213
+
+| Trial | Status | Received FPS | Drawn FPS | Age p95 ms | Age p99 ms | Queue p95 ms | Input / output Mbps |
+|---|---|---:|---:|---:|---:|---:|---:|
+| [torch213-1024x576-baseline-r0](browser-torch213/torch213-1024x576-baseline-r0.json) | measured | 8.75 | 8.75 | 613.08 | 2373.67 | 223.29 | 11.75 / 1.70 |
+| [torch213-1024x576-baseline-r1](browser-torch213/torch213-1024x576-baseline-r1.json) | measured | 8.90 | 8.90 | 427.43 | 439.24 | 224.06 | 12.58 / 1.73 |
+| [torch213-1024x576-baseline-r2](browser-torch213/torch213-1024x576-baseline-r2.json) | measured | 8.88 | 8.83 | 895.43 | 1298.36 | 223.34 | 11.22 / 1.77 |
+| [torch213-1024x576-combined-active2-r0](browser-torch213/torch213-1024x576-combined-active2-r0.json) | measured | 18.11 | 17.63 | 409.02 | 424.36 | 220.67 | 12.54 / 3.54 |
+| [torch213-1024x576-combined-active2-r1](browser-torch213/torch213-1024x576-combined-active2-r1.json) | measured | 17.95 | 17.43 | 443.57 | 629.96 | 223.27 | 12.34 / 3.53 |
+| [torch213-1024x576-combined-active2-r2](browser-torch213/torch213-1024x576-combined-active2-r2.json) | measured | 18.08 | 17.20 | 409.30 | 425.57 | 221.08 | 12.55 / 3.53 |
+| [torch213-1024x576-combined-r0](browser-torch213/torch213-1024x576-combined-r0.json) | measured | 9.03 | 9.03 | 424.59 | 437.22 | 220.57 | 12.55 / 1.78 |
+| [torch213-1024x576-combined-r1](browser-torch213/torch213-1024x576-combined-r1.json) | measured | 9.02 | 9.02 | 421.90 | 430.48 | 221.71 | 12.53 / 1.76 |
+| [torch213-1024x576-combined-r2](browser-torch213/torch213-1024x576-combined-r2.json) | measured | 9.07 | 9.07 | 413.00 | 425.03 | 221.01 | 12.58 / 1.77 |
+| [torch213-512x288-baseline-r0](browser-torch213/torch213-512x288-baseline-r0.json) | measured | 30.06 | 28.70 | 196.39 | 218.47 | 65.36 | 4.93 / 9.96 |
+| [torch213-512x288-baseline-r1](browser-torch213/torch213-512x288-baseline-r1.json) | measured | 30.32 | 29.30 | 195.00 | 230.13 | 64.62 | 4.94 / 10.05 |
+| [torch213-512x288-baseline-r2](browser-torch213/torch213-512x288-baseline-r2.json) | measured | 30.05 | 28.96 | 193.95 | 217.43 | 65.14 | 4.92 / 9.96 |
+| [torch213-512x288-combined-active2-r0](browser-torch213/torch213-512x288-combined-active2-r0.json) | measured | 57.93 | 52.01 | 203.20 | 266.78 | 68.41 | 4.93 / 19.20 |
+| [torch213-512x288-combined-active2-r1](browser-torch213/torch213-512x288-combined-active2-r1.json) | measured | 46.18 | 41.36 | 781.34 | 1876.43 | 72.16 | 4.24 / 15.30 |
+| [torch213-512x288-combined-active2-r2](browser-torch213/torch213-512x288-combined-active2-r2.json) | measured | 57.21 | 50.88 | 327.64 | 436.61 | 69.52 | 4.90 / 18.96 |
+| [torch213-512x288-combined-r0](browser-torch213/torch213-512x288-combined-r0.json) | measured | 31.71 | 30.85 | 184.90 | 210.50 | 61.72 | 4.94 / 10.51 |
+| [torch213-512x288-combined-r1](browser-torch213/torch213-512x288-combined-r1.json) | measured | 31.46 | 30.41 | 188.00 | 204.68 | 62.42 | 4.92 / 10.42 |
+| [torch213-512x288-combined-r2](browser-torch213/torch213-512x288-combined-r2.json) | measured | 31.52 | 30.65 | 185.40 | 231.28 | 62.25 | 4.93 / 10.44 |
+| [torch213-768x448-baseline-r0](browser-torch213/torch213-768x448-baseline-r0.json) | measured | 15.55 | 15.33 | 391.89 | 646.93 | 127.29 | 8.35 / 4.27 |
+| [torch213-768x448-baseline-r1](browser-torch213/torch213-768x448-baseline-r1.json) | measured | 15.58 | 15.45 | 379.49 | 695.06 | 127.28 | 8.40 / 4.27 |
+| [torch213-768x448-baseline-r2](browser-torch213/torch213-768x448-baseline-r2.json) | measured | 15.60 | 15.60 | 276.60 | 282.13 | 127.06 | 8.58 / 4.28 |
+| [torch213-768x448-combined-active2-r0](browser-torch213/torch213-768x448-combined-active2-r0.json) | measured | 31.48 | 29.61 | 289.50 | 313.35 | 126.96 | 8.54 / 8.63 |
+| [torch213-768x448-combined-active2-r1](browser-torch213/torch213-768x448-combined-active2-r1.json) | measured | 31.61 | 30.13 | 288.29 | 313.28 | 125.31 | 8.54 / 8.67 |
+| [torch213-768x448-combined-active2-r2](browser-torch213/torch213-768x448-combined-active2-r2.json) | measured | 27.45 | 26.31 | 606.76 | 2185.24 | 128.39 | 7.10 / 7.52 |
+| [torch213-768x448-combined-r0](browser-torch213/torch213-768x448-combined-r0.json) | measured | 15.97 | 15.68 | 312.60 | 422.00 | 124.61 | 8.51 / 4.37 |
+| [torch213-768x448-combined-r1](browser-torch213/torch213-768x448-combined-r1.json) | measured | 15.78 | 15.48 | 324.64 | 747.77 | 124.78 | 8.37 / 4.32 |
+| [torch213-768x448-combined-r2](browser-torch213/torch213-768x448-combined-r2.json) | measured | 16.08 | 16.08 | 271.08 | 281.14 | 123.34 | 8.57 / 4.42 |
+
 ## browser-wrtc010
 
 | Trial | Status | Received FPS | Drawn FPS | Age p95 ms | Age p99 ms | Queue p95 ms | Input / output Mbps |

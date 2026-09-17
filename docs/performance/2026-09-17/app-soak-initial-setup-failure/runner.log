@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/app_batch.py", line 372, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/app_batch.py", line 246, in main
+    wait_for('main', '!!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]")')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/app_batch.py", line 62, in wait_for
+    raise TimeoutError(expression)
+TimeoutError: !!document.querySelector("[role=dialog][aria-label=\"AI transport\"]")
