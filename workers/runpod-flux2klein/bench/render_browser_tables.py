@@ -32,7 +32,7 @@ def status_text(result):
  return text
 
 with (root/'browser-results.csv').open('w',newline='') as f:
- w=csv.DictWriter(f,fieldnames=fields+["measurement_status","continuity_status","validation_status","assessment_json"]);w.writeheader()
+ w=csv.DictWriter(f,fieldnames=fields+["measurement_status","continuity_status","validation_status","assessment_json"],lineterminator="\n");w.writeheader()
  for r in rows:
   c=r.get('config') or {};counts=r.get('counts') or {};s=c.get('serverConfig') or {};d=r.get('distributions') or {};sc=r.get('serverCounters') or {}
   w.writerow(add_validation(dict(zip(fields,[r['artifact'],hashlib.sha256((root/r['artifact']).read_bytes()).hexdigest(),r.get('status'),r.get('error'),c.get('width'),c.get('height'),c.get('steps'),c.get('inputQuality'),c.get('outputQuality'),c.get('mode'),s.get('benchmarkVariant'),s.get('activeWorkers'),s.get('maxPending'),r.get('receivedFps'),r.get('decodedDrawnFps'),r.get('elapsedSeconds'),val(d,'captureToDrawMs','p50'),val(d,'captureToDrawMs','p95'),val(d,'captureToDrawMs','p99'),val(d,'workerQueueMs','p95'),val(d,'workerTimingMs','p95'),r.get('outboundMbps'),r.get('inboundMbps'),counts.get('received'),counts.get('decodedDrawn'),counts.get('decodeSkips'),counts.get('encodeSkips'),counts.get('sendBufferSkips'),val(sc,'deltas','droppedOutbound'),r.get('measurement'),r.get('frameAge'),json.dumps(c,separators=(',',':')),json.dumps(counts,separators=(',',':')),json.dumps(sc,separators=(',',':')),json.dumps(r.get('transport'),separators=(',',':')),json.dumps(r.get('workerVariants'),separators=(',',':'))])),r))
