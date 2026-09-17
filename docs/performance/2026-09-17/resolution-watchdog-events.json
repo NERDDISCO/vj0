@@ -1,0 +1,87 @@
+[
+  {
+    "source": "container",
+    "line": "[worker 0] READY",
+    "ts": "2026-09-17T09:02:46.125203556Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY after first shape 512x288 \u2014 remaining 2 shapes warming when idle",
+    "ts": "2026-09-17T09:02:46.125267401Z"
+  },
+  {
+    "source": "container",
+    "line": "ICE connection state: failed",
+    "ts": "2026-09-17T09:13:44.642179959Z"
+  },
+  {
+    "source": "container",
+    "line": "[DIAG] Connection state: failed (channel=none buf=0)",
+    "ts": "2026-09-17T09:13:44.642199447Z"
+  },
+  {
+    "source": "container",
+    "line": "ICE connection state: failed",
+    "ts": "2026-09-17T09:14:17.064166280Z"
+  },
+  {
+    "source": "container",
+    "line": "[DIAG] Connection state: failed (channel=none buf=0)",
+    "ts": "2026-09-17T09:14:17.064183275Z"
+  },
+  {
+    "source": "container",
+    "line": "[watchdog] worker 0 stalled 34.2s with pending=1 stdoutBuf=0, killing for respawn",
+    "ts": "2026-09-17T09:18:50.936541562Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] exited code=null, respawning in 3s...",
+    "ts": "2026-09-17T09:18:51.198117528Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] respawning now",
+    "ts": "2026-09-17T09:18:54.198108502Z"
+  },
+  {
+    "source": "container",
+    "line": "ICE connection state: failed",
+    "ts": "2026-09-17T09:19:32.183869678Z"
+  },
+  {
+    "source": "container",
+    "line": "[DIAG] Connection state: failed (channel=none buf=0)",
+    "ts": "2026-09-17T09:19:32.183901165Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY",
+    "ts": "2026-09-17T09:20:35.565943498Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY after first shape 512x288 \u2014 remaining 2 shapes warming when idle",
+    "ts": "2026-09-17T09:20:35.565986972Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] resolution changed \u2192 768\u00d7448, already compiled by idle warmup",
+    "ts": "2026-09-17T09:22:06.960196560Z"
+  },
+  {
+    "source": "container",
+    "line": "[watchdog] worker 0 stalled 32.3s with pending=1 stdoutBuf=0, killing for respawn",
+    "ts": "2026-09-17T09:22:40.945445833Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] exited code=null, respawning in 3s...",
+    "ts": "2026-09-17T09:22:41.207781094Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] respawning now",
+    "ts": "2026-09-17T09:22:44.207722335Z"
+  }
+]

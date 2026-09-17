@@ -1,0 +1,153 @@
+[
+  {
+    "name": "compute-baseline",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-baseline",
+      "--variant",
+      "baseline",
+      "--steps",
+      "2,3,4",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  },
+  {
+    "name": "streamv2-smoke",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/bench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/sweep-20260917/streamv2-smoke",
+      "--frames",
+      "17",
+      "--repeats",
+      "1"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    }
+  },
+  {
+    "name": "compute-no-sync",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-no-sync",
+      "--variant",
+      "no-stage-sync",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  },
+  {
+    "name": "compute-constants",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-constants",
+      "--variant",
+      "constants",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  },
+  {
+    "name": "compute-inference-mode",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-inference-mode",
+      "--variant",
+      "inference-mode",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  },
+  {
+    "name": "compute-combined",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-combined",
+      "--variant",
+      "combined",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  },
+  {
+    "name": "compute-baseline-repeat",
+    "cwd": "/app",
+    "argv": [
+      "python3",
+      "/workspace/bench-20260917/compute.py",
+      "--worker-script",
+      "/workspace/baseline-20260917/inference_server.py",
+      "--output",
+      "/workspace/sweep-20260917/compute-baseline-repeat",
+      "--variant",
+      "baseline",
+      "--steps",
+      "2",
+      "--frames",
+      "100",
+      "--repeats",
+      "3",
+      "--image-digest",
+      "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490"
+    ]
+  }
+]

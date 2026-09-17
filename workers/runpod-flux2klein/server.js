@@ -71,7 +71,11 @@ const WORKER_COUNT = detectGpuCount();
 // in sync. Frame data (`image_base64`) is the only field that gets routed
 // round-robin to a single worker.
 const STATE_FIELDS = ["prompt", "seed", "alpha", "n_steps", "width", "height",
-                      "captureWidth", "captureHeight"];
+                      "captureWidth", "captureHeight", "jpegQuality"];
+
+// Optional benchmark envelope: "VJ0B" + uint32 frame ID + JPEG. Ordinary JPEG
+// clients retain their existing wire format. Echo IDs only for tagged requests.
+const BENCH_FRAME_MAGIC = 0x564a3042;
 
 // Drop outbound frames if the WebRTC DataChannel buffer exceeds this many bytes.
 // Live VJ wants newest-wins; stale frames in flight clog the channel.
@@ -220,7 +224,9 @@ function handleWorkerLine(w, line) {
       console.log(`[worker ${w.gpu}] warmed ${msg.width}x${msg.height} in ${msg.total_ms}ms`);
     } else if (msg.status === "compile_failed") {
       console.error(`[worker ${w.gpu}] compile failed ${msg.width}x${msg.height}: ${msg.message}`);
-      if (msg.frame_dropped) w.framePending = Math.max(0, w.framePending - 1);
+      if (msg.frame_dropped && (msg.client_epoch == null || msg.client_epoch === activeClientEpoch)) {
+        w.framePending = Math.max(0, w.framePending - 1);
+      }
     }
     const payload = {
       type: "compile",
@@ -250,6 +256,9 @@ function handleWorkerLine(w, line) {
   }
 
   if (msg.status === "frame") {
+    // In-flight results from a replaced connection belong to that connection,
+    // including its pending count and optional benchmark wire format.
+    if (msg.client_epoch != null && msg.client_epoch !== activeClientEpoch) return;
     w.framePending = Math.max(0, w.framePending - 1);
     w.framesProduced = (w.framesProduced || 0) + 1;
     w.lastFrameAt = Date.now();
@@ -273,7 +282,14 @@ function handleWorkerLine(w, line) {
         return;
       }
       const imgBuffer = Buffer.from(msg.image_base64, "base64");
-      activeChannel.send(imgBuffer);
+      if (Number.isInteger(msg.frame_id) && msg.frame_id >= 0 && msg.frame_id <= 0xffffffff) {
+        const header = Buffer.alloc(8);
+        header.writeUInt32BE(BENCH_FRAME_MAGIC, 0);
+        header.writeUInt32BE(msg.frame_id, 4);
+        activeChannel.send(Buffer.concat([header, imgBuffer]));
+      } else {
+        activeChannel.send(imgBuffer);
+      }
       activeChannel.send(JSON.stringify({
         type: "stats",
         gen_time_ms: msg.gen_time_ms,
@@ -295,7 +311,13 @@ function handleWorkerLine(w, line) {
     }
     return;
   }
-  if (msg.status === "error") {
+  if (msg.status === "frame_dropped" || msg.status === "error") {
+    if ((msg.status === "frame_dropped" || msg.frame_dropped) &&
+        (msg.client_epoch == null || msg.client_epoch === activeClientEpoch)) {
+      w.framePending = Math.max(0, w.framePending - 1);
+      diagStats.droppedByWorker++;
+    }
+    if (msg.status === "frame_dropped") return;
     console.error(`[worker ${w.gpu} ERROR]`, msg.message);
     return;
   }
@@ -401,6 +423,7 @@ function dispatchFrame(frameMsg) {
 // Public: send a client request through the dispatcher. Splits state vs frame.
 function sendToInference(req) {
   if (!req || typeof req !== "object") return;
+  if (req.client_epoch != null && req.client_epoch !== activeClientEpoch) return;
 
   // Buffer until a worker is ready
   if (!workers.some(w => w.ready)) {
@@ -421,7 +444,9 @@ function sendToInference(req) {
     // Frame data — route to one worker round-robin.
     // The state was already broadcast above, so we send frame-only to avoid
     // redundant state updates eating stdin bandwidth.
-    const frameMsg = { image_base64: req.image_base64 };
+    const frameMsg = { image_base64: req.image_base64,
+      ...(req.client_epoch !== undefined ? { client_epoch: req.client_epoch } : {}),
+      ...(req.frame_id !== undefined ? { frame_id: req.frame_id } : {}) };
     dispatchFrame(frameMsg);
   }
 }
@@ -442,15 +467,18 @@ function clearPendingFrames() {
 let activePc = null;
 let activeChannel = null;
 let disconnectTimer = null;
+let activeClientEpoch = 0;
 
 function closeActivePc() {
+  activeClientEpoch++;
+  clearPendingFrames();
   if (disconnectTimer) {
     clearTimeout(disconnectTimer);
     disconnectTimer = null;
   }
   // Reset worker pending counts — in-flight frames from the dying connection
-  // are stale. Results that trickle back will harmlessly clamp to 0 via
-  // Math.max(0, framePending - 1). Without this reset, workers stay at
+  // are stale. Their echoed connection epoch prevents them from decrementing
+  // the replacement connection's pending count. Without this reset, workers stay at
   // MAX_PENDING and dispatchFrame() drops every new frame → deadlock.
   for (const w of workers) {
     if (w.framePending > 0) {
@@ -748,25 +776,34 @@ app.post("/webrtc/offer", async (req, res) => {
 
   pc.ondatachannel = (event) => {
     const channel = event.channel;
+    if (activePc !== pc) { channel.close(); return; }
+    const clientEpoch = activeClientEpoch;
     channel.binaryType = "arraybuffer";
     activeChannel = channel;
     console.log("DataChannel opened:", channel.label);
 
     channel.onmessage = (ev) => {
+      if (activeChannel !== channel) return;
       if (typeof ev.data === "string") {
         try {
           const msg = JSON.parse(ev.data);
           if (msg.prompt || msg.seed != null || msg.width || msg.height) clearPendingFrames();
-          sendToInference(msg);
+          sendToInference({ ...msg, client_epoch: clientEpoch });
         } catch {
           console.log("Invalid JSON from client");
         }
       } else {
         diagStats.framesFromClient++;
         diagStats.lastClientFrameAt = Date.now();
-        const buffer = Buffer.from(ev.data);
+        let buffer = Buffer.from(ev.data);
+        let frame_id;
+        if (buffer.length >= 8 && buffer.readUInt32BE(0) === BENCH_FRAME_MAGIC) {
+          frame_id = buffer.readUInt32BE(4);
+          buffer = buffer.subarray(8);
+        }
         const base64 = buffer.toString("base64");
-        sendToInference({ image_base64: base64 });
+        sendToInference({ image_base64: base64, client_epoch: clientEpoch,
+          ...(frame_id !== undefined ? { frame_id } : {}) });
       }
     };
     channel.onclose = () => {
@@ -806,6 +843,7 @@ const diagStats = {
   framesToWorker: 0,         // frames dispatched to worker stdin
   framesFromWorker: 0,       // frame results from worker stdout
   framesToClient: 0,         // frames sent back over WebRTC channel
+  droppedByWorker: 0,        // explicitly acknowledged Python queue/error drops
   droppedInbound: 0,         // dropped because worker saturated
   droppedOutbound: 0,        // dropped because channel congested
   lastClientFrameAt: 0,      // when we last got a frame from the client
@@ -875,6 +913,7 @@ setInterval(() => {
 app.get("/debug", (_req, res) => {
   const now = Date.now();
   res.json({
+    protocol: { benchmarkFrameIds: 1 },
     uptime_s: ((now - diagStats.startedAt) / 1000).toFixed(0),
     stats: { ...diagStats },
     memory: process.memoryUsage(),

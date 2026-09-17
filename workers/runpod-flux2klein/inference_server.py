@@ -94,8 +94,12 @@ COMPILE_MODE = os.environ.get("COMPILE_MODE", "reduce-overhead")
 
 
 # ---- output helpers (line-buffered JSON to stdout) ---- #
+_stdout_lock = threading.Lock()
+
+
 def emit(**msg):
-    print(json.dumps(msg), flush=True)
+    with _stdout_lock:
+        print(json.dumps(msg), flush=True)
 
 
 def log(text):
@@ -468,7 +472,10 @@ def main():
             # they'd evict frame messages.
             if "image_base64" in data:
                 if request_queue.full():
-                    try: request_queue.get_nowait()
+                    try:
+                        dropped = request_queue.get_nowait()
+                        emit(status="frame_dropped", frame_id=dropped.get("frame_id"),
+                             client_epoch=dropped.get("client_epoch"))
                     except queue.Empty: pass
                 request_queue.put(data)
 
@@ -525,7 +532,8 @@ def main():
                     last_size = new_size
                 except Exception as e:
                     emit(status="compile_failed", width=new_size[0], height=new_size[1],
-                         frame_dropped=True, message=f"warmup failed: {e}")
+                         frame_dropped=True, client_epoch=req.get("client_epoch"),
+                         message=f"warmup failed: {e}")
                     last_request_at = time.monotonic()
                     continue
 
@@ -547,7 +555,8 @@ def main():
                 raw, state["capture_width"], state["capture_height"]
             )
         except Exception as e:
-            emit(status="error", message=f"decode input failed: {e}")
+            emit(status="error", message=f"decode input failed: {e}",
+                 frame_dropped=True, client_epoch=req.get("client_epoch"))
             last_request_at = time.monotonic()
             continue
         t_decode_in = time.perf_counter()
@@ -586,6 +595,8 @@ def main():
             }
             emit(
                 status="frame",
+                frame_id=req.get("frame_id"),
+                client_epoch=req.get("client_epoch"),
                 image_base64=base64.b64encode(jpg).decode("ascii"),
                 gen_time_ms=round(gen_ms, 1),
                 width=state["width"], height=state["height"],
@@ -597,7 +608,8 @@ def main():
         except Exception as e:
             import traceback
             log(traceback.format_exc())
-            emit(status="error", message=str(e))
+            emit(status="error", message=str(e), frame_dropped=True,
+                 client_epoch=req.get("client_epoch"))
         finally:
             # Count idle time from completion, including slow frames/errors.
             last_request_at = time.monotonic()

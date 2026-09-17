@@ -12,7 +12,7 @@ const { runBenchmark } = await import('data:text/javascript;base64,' +
   Buffer.from(await readFile(source)).toString('base64'));
 
 function installBrowser({ decodeFails = false, responseDelay = () => 0,
-  inputDelay = () => 0, lateStats = false } = {}) {
+  inputDelay = () => 0, lateStats = false, echoFrameIds = false } = {}) {
   const decodedRequestNumbers = [];
   const timers = new Set();
   let framePending = 0, framesToClient = 0, framesFromClient = 0, activeChannel;
@@ -31,6 +31,7 @@ function installBrowser({ decodeFails = false, responseDelay = () => 0,
   globalThis.fetch = async (url) => ({
     ok: true,
     json: async () => url.endsWith('/debug') ? {
+      protocol: { benchmarkFrameIds: 1 },
       stats: { framesToClient, framesFromClient }, workers: [{ ready: true, framePending }],
       channel: { bufferedAmount: 0 },
     } : { sdp: { type: 'answer', sdp: 'fake' } },
@@ -49,6 +50,7 @@ function installBrowser({ decodeFails = false, responseDelay = () => 0,
         },
         send(bytes) {
           if (typeof bytes === 'string') return;
+          const frameId = echoFrameIds ? new DataView(bytes).getUint32(4) : null;
           const number = ++count;
           const intakeTimer = setTimeout(() => {
             timers.delete(intakeTimer);
@@ -60,7 +62,15 @@ function installBrowser({ decodeFails = false, responseDelay = () => 0,
               if (channel.readyState === 'open') {
                 framePending--;
                 framesToClient++;
-                channel.onmessage({ data: new TextEncoder().encode(String(number)).buffer });
+                let response = new TextEncoder().encode(String(number));
+                if (echoFrameIds) {
+                  const tagged = new Uint8Array(response.length + 8);
+                  new DataView(tagged.buffer).setUint32(0, 0x564a3042);
+                  new DataView(tagged.buffer).setUint32(4, frameId);
+                  tagged.set(response, 8);
+                  response = tagged;
+                }
+                channel.onmessage({ data: response.buffer });
               }
             }, responseDelay(number));
             timers.add(responseTimer);
@@ -100,6 +110,18 @@ await test('all JPEG decodes failing cannot be a successful measured run', async
   assert.ok(result.counts.received > 0, 'fixture must deliver image payloads');
   assert.equal(result.counts.decodedDrawn, 0);
   assert.notEqual(result.status, 'measured', 'decode failure must invalidate the run');
+});
+
+await test('streaming frame IDs retain capture age across overlapping delayed responses', async () => {
+  installBrowser({ echoFrameIds: true, responseDelay: () => 120 });
+  const result = await runBenchmark({ server: 'https://mock', frameIds: true,
+    warmupFrames: 1, sendFps: 1000, seconds: 0.3 });
+  assert.equal(result.status, 'measured');
+  assert.ok(result.distributions.requestResponseMs.count > 20);
+  assert.ok(result.distributions.requestResponseMs.p50 >= 110,
+    'age must use the echoed request capture, not the most recent overlapping send');
+  assert.match(result.frameAge, /echoed frame ID/);
+  assert.equal(result.counts.decodeErrors, 0, 'the envelope must be removed before JPEG decode');
 });
 
 await test('single mode excludes outstanding warmup responses from measured latency', async () => {

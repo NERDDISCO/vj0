@@ -90,6 +90,27 @@ speedup or proof that the asynchronous handler fixes the whole difference.
 The unchanged production app received and displayed generated output at 512x288
 before these fixes. This was a smoke check, not a timed full-app benchmark.
 
+## Repeat transport attempts and measurement corrections
+
+Four additional 512x288/two-step runs completed on the recovered Python warmup
+code and original dispatcher: telemetry-off received 27.93/28.40 FPS;
+telemetry-on received 28.00/28.11 FPS. Thus the earlier apparent telemetry loss
+is not consistently reproduced. The fifth repeat failed the strict warmup-drain
+check, and the subsequent resolution sweep was interrupted after worker restarts.
+See `recovered-webrtc-*.json`, `recovered-batch-failure.json`, and
+`resolution-watchdog-events.json`. No higher-resolution WAN number is valid yet.
+
+The candidate now carries optional per-frame IDs and server-owned connection
+epochs to measure streaming frame age without mixing old-client responses. It
+also acknowledges Python queue evictions/errors, which otherwise leave phantom
+pending counts, and forwards the existing JPEG-quality setting. Default app
+image payloads remain raw JPEG. These additions are under validation and not yet
+running on the GPU pod. Local dispatcher/envelope and browser correlation checks
+pass; live correlated-age and final queue regression checks remain pending.
+
+The isolated compute sweep has started, with exact serial jobs in
+`compute-jobs.json`. Do not infer completion from job preparation or partial logs.
+
 ## Independent preparation review
 
 A separate reviewer found five measurement defects: false single-flight latency

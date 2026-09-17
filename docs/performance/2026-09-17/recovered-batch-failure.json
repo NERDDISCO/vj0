@@ -1,0 +1,13 @@
+{
+  "current": {
+    "height": 288,
+    "repeat": 2,
+    "steps": 2,
+    "telemetryEveryMs": 0,
+    "width": 512
+  },
+  "date": "2026-09-17T09:20:48.464Z",
+  "error": "Error: Timeout verifying server/transport warmup drain",
+  "status": "failed",
+  "interpretation": "Transport warmup drain could not be verified; no timed result for this cell. Do not treat as a measured performance loss."
+}

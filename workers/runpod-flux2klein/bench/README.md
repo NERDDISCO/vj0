@@ -106,3 +106,23 @@ pinned StreamDiffusionV2 environment. It records actual output counts and the
 first pass separately; offline output FPS is not capture-to-output age. Run only
 with the Klein dispatcher paused and its Python process stopped. See
 `docs/performance/2026-09-17/STREAMDIFFUSION.md` for environment/model identities.
+
+For the candidate dispatcher, `frameIds: true` uses an optional `VJ0B`/uint32/JPEG
+envelope and measures streaming capture age from the echoed ID. `/debug` must
+advertise protocol version 1. Connection epochs prevent old results from being
+assigned to a replacement client. The ordinary app protocol stays raw JPEG.
+Frame-ID trials default to explicit output quality 80; **set `outputQuality`
+explicitly in every patched-server quality comparison** because worker state
+persists between clients. `channelOptions: {ordered: false}` tests unordered
+reliable transport; partial reliability is not validated by the current drain
+checks and must not be promoted for the shared settings/image channel.
+
+`check_gpu_thread.py --scenario queue-drops` queues three frames before the GPU
+loop can dequeue any, then verifies one explicit drop plus two outputs retain
+their IDs/connection epoch. It is a CPU control-flow check, not a throughput test.
+
+`run_sweep.py` runs the explicit `compute-jobs.json` jobs serially on the pod.
+It refuses to overwrite prior run output, cleans process groups between jobs,
+checks for competing CUDA processes, and resumes the paused dispatcher in a
+nested `finally`. Failed jobs produce a nonzero aggregate exit status. The
+runner must never overlap browser/GPU measurements on that pod.

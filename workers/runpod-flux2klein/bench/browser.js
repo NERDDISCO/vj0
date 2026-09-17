@@ -28,19 +28,26 @@ export async function runBenchmark(options) {
     prompt: "colorful abstract art, vibrant neon lights, psychedelic patterns",
     inputQuality: 0.85, outputQuality: null, sendFps: 60, seconds: 30,
     warmupFrames: 20, maxBufferedBytes: 256 * 1024, telemetryEveryMs: 0,
-    mode: "stream", ...options };
+    mode: "stream", frameIds: false, channelOptions: {}, ...options };
+  if (c.frameIds && c.outputQuality === null) c.outputQuality = 80;
   if (!c.server || !["stream", "single"].includes(c.mode) || c.seconds <= 0 || c.sendFps <= 0 ||
       c.warmupFrames < 1 || c.width % 16 || c.height % 16 || Math.min(c.width, c.height) < 16) {
     throw new Error("A server URL, valid dimensions, positive duration/FPS/warmup, and stream/single mode are required");
   }
   const server = c.server.replace(/\/$/, "");
+  if (c.frameIds) {
+    const response = await fetch(`${server}/debug`, { cache: "no-store", signal: AbortSignal.timeout(10000) });
+    if (!response.ok || (await response.json()).protocol?.benchmarkFrameIds !== 1) {
+      throw new Error("Server does not advertise benchmark frame ID support");
+    }
+  }
   const canvas = new OffscreenCanvas(c.width, c.height);
   const ctx = canvas.getContext("2d");
   const output = new OffscreenCanvas(c.width, c.height);
   const outCtx = output.getContext("2d");
   const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
   // Baseline must use the same reliability as the shipped application.
-  const ch = pc.createDataChannel("frames");
+  const ch = pc.createDataChannel("frames", c.channelOptions);
   ch.binaryType = "arraybuffer";
   let phase = "warmup", stopped = false, measuring = false, warmReceived = 0, warmSent = 0;
   let inFlight = false, lastCapture = null, pendingDecode = false, encodePending = false;
@@ -56,6 +63,8 @@ export async function runBenchmark(options) {
   const compilingWorkers = new Set();
   let serverFramesBeforeWarmup = null;
   let serverInputsBeforeWarmup = null;
+  let nextFrameId = 0;
+  const captures = new Map();
 
   function drawInput(index) {
     ctx.fillStyle = "#0a0a0a";
@@ -85,12 +94,24 @@ export async function runBenchmark(options) {
     try {
       drawInput(frameIndex++);
       const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: c.inputQuality });
-      const bytes = await blob.arrayBuffer();
+      let bytes = await blob.arrayBuffer();
       if (stopped || ch.readyState !== "open" || phase !== thisPhase) return;
       // Explicit admission after async encode; its cost is reported separately.
       if (ch.bufferedAmount >= c.maxBufferedBytes) {
         if (measuring) measurements.sendBufferSkips++;
         return;
+      }
+      if (c.frameIds) {
+        const tagged = new Uint8Array(bytes.byteLength + 8);
+        const view = new DataView(tagged.buffer);
+        view.setUint32(0, 0x564a3042);
+        const id = ++nextFrameId;
+        view.setUint32(4, id);
+        tagged.set(new Uint8Array(bytes), 8);
+        bytes = tagged.buffer;
+        captures.set(id, capture);
+        // Dropped frames never return. Keep only recent outstanding IDs.
+        if (captures.size > 4096) captures.delete(captures.keys().next().value);
       }
       ch.send(bytes);
       if (thisPhase === "warmup") warmSent++;
@@ -128,27 +149,44 @@ export async function runBenchmark(options) {
       } catch { /* The worker also sends human-readable progress. */ }
       return;
     }
-    const captured = lastCapture;
+    let captured = lastCapture;
+    let bytes = event.data;
+    const wireBytes = bytes.byteLength;
+    if (c.frameIds) {
+      const view = new DataView(bytes);
+      if (bytes.byteLength < 8 || view.getUint32(0) !== 0x564a3042) {
+        measurements.errors.push("Missing benchmark frame ID envelope");
+        return;
+      }
+      const frameId = view.getUint32(4);
+      captured = captures.get(frameId);
+      captures.delete(frameId);
+      if (captured === undefined) {
+        measurements.errors.push(`Unknown returned frame ID ${frameId}`);
+        return;
+      }
+      bytes = bytes.slice(8);
+    }
     inFlight = false;
     if (stopped) return;
     if (!measuring) { warmReceived++; latestWarmReceive = performance.now(); return; }
     const receivedAt = performance.now();
     const id = ++receiveIndex;
-    const bytes = event.data;
     measurements.received++;
-    measurements.bytesReceived += bytes.byteLength;
+    measurements.bytesReceived += wireBytes;
     measurements.outputBytes.push(bytes.byteLength);
-    if (c.mode === "single" && captured !== null) measurements.requestResponseMs.push(receivedAt - captured);
+    if ((c.mode === "single" || c.frameIds) && captured !== null) measurements.requestResponseMs.push(receivedAt - captured);
     if (pendingDecode) { measurements.decodeSkips++; return; }
     pendingDecode = true;
     createImageBitmap(new Blob([bytes], { type: "image/jpeg" })).then((bitmap) => {
       try {
         if (stopped || id <= lastPainted) return;
+        if (bitmap.width !== c.width || bitmap.height !== c.height) throw new Error(`Unexpected output size ${bitmap.width}x${bitmap.height}`);
         outCtx.drawImage(bitmap, 0, 0);
         lastPainted = id;
         measurements.decodedDrawn++;
         measurements.decodeDrawMs.push(performance.now() - receivedAt);
-        if (c.mode === "single" && captured !== null) measurements.captureToDrawMs.push(performance.now() - captured);
+        if ((c.mode === "single" || c.frameIds) && captured !== null) measurements.captureToDrawMs.push(performance.now() - captured);
       } finally { bitmap.close(); }
     }).catch((error) => {
       if (!stopped) { measurements.decodeErrors++; measurements.errors.push(String(error)); }
@@ -181,7 +219,10 @@ export async function runBenchmark(options) {
       captureWidth: c.width, captureHeight: c.height, alpha: c.alpha, n_steps: c.steps,
       ...(c.outputQuality !== null ? { jpegQuality: c.outputQuality } : {}) }));
     sendTimer = setInterval(send, Math.max(1, 1000 / c.sendFps));
-    await waitUntil(() => warmReceived >= c.warmupFrames, 600000, "warmup image responses");
+    await waitUntil(() => {
+      if (measurements.errors.length) throw new Error(measurements.errors.join("; "));
+      return warmReceived >= c.warmupFrames;
+    }, 600000, "warmup image responses");
     clearInterval(sendTimer);
     // Stop input and drain all accepted warmup frames. Any slow compile/startup
     // belongs outside the measurement. Single mode has at most one outstanding.
@@ -194,6 +235,7 @@ export async function runBenchmark(options) {
     } else {
       const deadline = performance.now() + 60000;
       for (;;) {
+        if (measurements.errors.length) throw new Error(measurements.errors.join("; "));
         const response = await fetch(`${server}/debug`, { cache: "no-store", signal: AbortSignal.timeout(10000) });
         if (!response.ok) throw new Error("Could not verify server warmup drain");
         const debug = await response.json();
@@ -261,7 +303,8 @@ export async function runBenchmark(options) {
       date: new Date().toISOString(), config: c, userAgent: navigator.userAgent,
       measurement: "browser receive/decode/offscreen 2D draw; excludes application upscaler/projector and audio capture",
       sourceCapture: "OffscreenCanvas.convertToBlob; production uses HTMLCanvasElement.toBlob",
-      frameAge: c.mode === "single" ? "one request in flight; measured on client clock" : "unknown: baseline does not echo frame IDs",
+      frameAge: c.frameIds ? "correlated by echoed frame ID; measured on client clock"
+        : c.mode === "single" ? "one request in flight; measured on client clock" : "unknown: baseline does not echo frame IDs",
       elapsedSeconds: elapsed, receivedFps: measurements.received / elapsed,
       decodedDrawnFps: measurements.decodedDrawn / elapsed,
       outboundMbps: measurements.bytesSent * 8 / elapsed / 1e6,
