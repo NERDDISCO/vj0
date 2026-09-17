@@ -44,7 +44,8 @@ export async function runBenchmark(options) {
     const applied = await response.json();
     if (applied.maxPending !== c.serverConfig.maxPending ||
         applied.maxOutboundBytes !== c.serverConfig.maxOutboundBytes ||
-        (c.serverConfig.benchmarkVariant && applied.benchmarkVariant !== c.serverConfig.benchmarkVariant)) {
+        (c.serverConfig.benchmarkVariant && applied.benchmarkVariant !== c.serverConfig.benchmarkVariant) ||
+        (c.serverConfig.activeWorkers && applied.activeWorkers !== c.serverConfig.activeWorkers)) {
       throw new Error("Server did not confirm requested queue/buffer settings");
     }
   }
@@ -85,6 +86,9 @@ export async function runBenchmark(options) {
     encodeMs: [], decodeDrawMs: [], requestResponseMs: [], captureToDrawMs: [],
     inputBytes: [], outputBytes: [], workerTimingMs: [], telemetryMs: [],
     maxBufferedBytes: 0 };
+  const workerFrameCounts = {};
+  const workerLastActivity = {}, workerMaxGapMs = {};
+  let measurementStarted = 0;
   let telemetryTimer, sendTimer;
   const compilingWorkers = new Set();
   const observedVariants = new Map();
@@ -170,8 +174,21 @@ export async function runBenchmark(options) {
             measurements.errors.push(`Worker ${message.worker} compile failed: ${message.message || "unknown error"}`);
           }
         }
-        if (measuring && message.type === "stats" && Number.isFinite(message.timing?.total_ms)) {
-          measurements.workerTimingMs.push(message.timing.total_ms);
+        if (measuring && message.type === "stats") {
+          if (c.serverConfig?.activeWorkers && (!Number.isInteger(message.worker) ||
+              message.worker < 0 || message.worker >= c.serverConfig.activeWorkers)) {
+            measurements.errors.push('An unexpected worker produced a measured frame');
+          }
+          if (Number.isFinite(message.timing?.total_ms)) {
+            measurements.workerTimingMs.push(message.timing.total_ms);
+            workerFrameCounts[message.worker] = (workerFrameCounts[message.worker] || 0) + 1;
+            const now = performance.now();
+            workerMaxGapMs[message.worker] = Math.max(workerMaxGapMs[message.worker] || 0,
+              now - (workerLastActivity[message.worker] ?? measurementStarted));
+            workerLastActivity[message.worker] = now;
+          } else if (c.serverConfig?.activeWorkers) {
+            measurements.errors.push('Malformed worker timing in scaling trial');
+          }
         }
         if (message.type === "stats" && c.serverConfig?.benchmarkVariant) {
           observedVariants.set(message.worker, {variant:message.timing?.benchmark_variant, clock:message.timing?.stage_clock});
@@ -290,10 +307,14 @@ export async function runBenchmark(options) {
     if (c.serverConfig?.benchmarkVariant && !observedVariants.size) {
       throw new Error('No worker telemetry confirmed the requested compute variant');
     }
+    if (c.serverConfig?.activeWorkers && observedVariants.size !== c.serverConfig.activeWorkers) {
+      throw new Error('Not all requested active workers produced warmup frames');
+    }
     phase = "measure";
     measuring = true;
     measurements.maxBufferedBytes = 0;
     const started = performance.now();
+    measurementStarted = started;
     if (c.telemetryEveryMs > 0) {
       let busy = false;
       telemetryTimer = setInterval(async () => {
@@ -317,6 +338,20 @@ export async function runBenchmark(options) {
     clearInterval(sendTimer);
     clearInterval(telemetryTimer);
     const elapsed = (performance.now() - started) / 1000;
+    const measurementEnded = started + elapsed * 1000;
+    let finalWorkerHealth = null;
+    if (c.serverConfig?.activeWorkers) {
+      const response = await fetch(`${server}/debug`, {cache:'no-store', signal:AbortSignal.timeout(10000)});
+      if (!response.ok) throw new Error('Could not verify final scaling worker health');
+      finalWorkerHealth = (await response.json()).workers;
+      for (let worker=0; worker<c.serverConfig.activeWorkers; worker++) {
+        workerMaxGapMs[worker] = Math.max(workerMaxGapMs[worker] || 0,
+          measurementEnded - (workerLastActivity[worker] ?? started));
+        if (workerMaxGapMs[worker] > 2000 || !finalWorkerHealth?.find(w=>w.gpu===worker)?.ready) {
+          measurements.errors.push(`Worker ${worker} had an output gap over two seconds or was not ready at completion`);
+        }
+      }
+    }
     const stats = await pc.getStats();
     const transport = [];
     stats.forEach((s) => {
@@ -339,6 +374,9 @@ export async function runBenchmark(options) {
     if (!measurements.decodedDrawn) invalidReasons.push("no successfully decoded/drawn images");
     if (measurements.decodeErrors) invalidReasons.push("JPEG decode failures");
     if (measurements.sendErrors || measurements.errors.length) invalidReasons.push("transport or encode errors");
+    if (c.serverConfig?.activeWorkers && Object.keys(workerFrameCounts).length !== c.serverConfig.activeWorkers) {
+      invalidReasons.push('Not all requested active workers produced measured frames');
+    }
     return { status: invalidReasons.length ? "invalid" : "measured", invalidReasons,
       date: new Date().toISOString(), config: c, userAgent: navigator.userAgent,
       measurement: "browser receive/decode/offscreen 2D draw; excludes application upscaler/projector and audio capture",
@@ -346,6 +384,8 @@ export async function runBenchmark(options) {
       frameAge: c.frameIds ? "correlated by echoed frame ID; measured on client clock"
         : c.mode === "single" ? "one request in flight; measured on client clock" : "unknown: baseline does not echo frame IDs",
       workerVariants: Array.from(observedVariants, ([worker, value]) => ({worker, ...value})),
+      workerFrameCounts,
+      workerMaxGapMs, finalWorkerHealth,
       elapsedSeconds: elapsed, receivedFps: measurements.received / elapsed,
       decodedDrawnFps: measurements.decodedDrawn / elapsed,
       outboundMbps: measurements.bytesSent * 8 / elapsed / 1e6,

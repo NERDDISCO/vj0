@@ -1,0 +1,122 @@
+[
+  {
+    "name": "reinstall-complete-trt-environment",
+    "argv": [
+      "python3",
+      "-c",
+      "import pathlib,subprocess,csv,importlib.metadata,json,sys\nuv='/workspace/tools/uv/bin/uv';python='/workspace/envs/streamv2-trt/bin/python';requirements='/workspace/bench-20260917/streamv2-trt-requirements.txt'\nsubprocess.run([uv,'pip','install','--python',python,'--reinstall','--no-deps','--extra-index-url','https://download.pytorch.org/whl/cu128','--index-strategy','unsafe-best-match','-r',requirements],check=True)\nsubprocess.run([uv,'pip','install','--python',python,'--no-deps','-e','/workspace/streamdiffusionv2-20260917'],check=True)\nr=subprocess.run([uv,'pip','check','--python',python],capture_output=True,text=True);print(r.stdout+r.stderr)\nissues=[l for l in (r.stdout+r.stderr).splitlines() if l.startswith('The package')]\nassert len(issues)==3 and all('`streamdiffusionv2`' in l for l in issues) and all(any(('`'+n+'==') in l for l in issues) for n in ['torch','torchaudio','torchvision']),issues\nverify=\"import torch,torch.fft,tensorrt,diffusers,scipy,streamdiffusionv2;print('Verified complete imports',torch.__version__,tensorrt.__version__)\"\nsubprocess.run([python,'-c',verify],check=True)\npathlib.Path('/workspace/envs/streamv2-trt/freeze.txt').write_text(subprocess.check_output([uv,'pip','freeze','--python',python],text=True))\nprint(json.dumps({'status':'installed','accepted_dependency_overrides':issues}))\n"
+    ],
+    "cwd": "/workspace",
+    "env": {
+      "UV_CACHE_DIR": "/workspace/uv-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-env-taehv-baseline",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/trt-retry-20260917/trt-env-taehv-baseline",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/trt-retry-20260917/trt-taehv",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-fast",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/trt-retry-20260917/trt-fast",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--fast"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/trt-retry-20260917/trt-taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "live-compute-service",
+    "argv": [
+      "node",
+      "/workspace/livebench-20260917/server.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "PORT": "3001",
+      "WORKER_COUNT": "1",
+      "INFERENCE_SCRIPT": "/workspace/livebench-20260917/inference_server.py",
+      "PYTHONPATH": "/workspace/livebench-20260917",
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead"
+    },
+    "timeout_seconds": 21600
+  }
+]

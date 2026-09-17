@@ -26,7 +26,7 @@ async function main(){
   const channel=pc.createDataChannel('frames');channel.binaryType='arraybuffer';
   const pending=new Map(), ages=[], sizes=[], errors=[], workerMs=[];
   let id=0,phase='warmup',sent=0,received=0,bytesSent=0,bytesReceived=0,skips=0,warmReceived=0,timer;
-  let lastReceivedAt=null;
+  let lastReceivedAt=null,confirmedVariant=false;
   channel.onclose=()=>{if(phase==='measure')errors.push('Data channel closed during measurement');};
   channel.onerror=event=>{if(phase==='measure')errors.push('Data channel error: '+String(event));};
   pc.onconnectionstatechange=()=>{
@@ -45,6 +45,12 @@ async function main(){
   channel.onmessage=event=>{
     if(typeof event.data==='string'){
       try{const m=JSON.parse(event.data);if(phase==='measure'&&m.type==='stats'&&m.timing)workerMs.push(m.timing.total_ms);
+        if(m.type==='stats'&&c.serverConfig?.benchmarkVariant){
+          const expected=c.serverConfig.benchmarkVariant;
+          if(m.timing?.benchmark_variant!==expected||m.timing?.stage_clock!==(expected==='baseline'?'wall-clock':'cuda-events')||
+             m.width!==c.width||m.height!==c.height)errors.push('Worker variant, timing clock or dimensions mismatch');
+          else confirmedVariant=true;
+        }
         if(m.type==='compile'&&m.status!=='warmed'&&phase==='measure')errors.push('Compilation overlapped measurement');
         if((m.type==='error'||m.status==='error')&&phase==='measure')errors.push('Worker error: '+String(m.message));
       }catch{}return;
@@ -60,6 +66,13 @@ async function main(){
     }
   };
   try{
+    if(c.serverConfig){
+      const response=await fetch(c.server+'/benchmark/config',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(c.serverConfig),signal:AbortSignal.timeout(10000)});
+      if(!response.ok)throw new Error('Could not configure benchmark server');
+      const applied=await response.json();
+      for(const key of Object.keys(c.serverConfig))if(applied[key]!==c.serverConfig[key])throw new Error('Configuration acknowledgement mismatch: '+key);
+    }
     const debug=await (await fetch(c.server+'/debug',{signal:AbortSignal.timeout(10000)})).json();
     if(debug.protocol?.benchmarkFrameIds!==1)throw new Error('Server does not advertise IDs');
     await pc.setLocalDescription(await pc.createOffer());
@@ -74,6 +87,7 @@ async function main(){
     // Single-flight warmup cannot leave unacknowledged input in the pipe.
     for(let n=0;n<20;n++){const before=warmReceived;send();await until(()=>warmReceived>before,30,'warmup frame');}
     await until(()=>pending.size===0,10,'warmup completion');
+    if(errors.length||c.serverConfig?.benchmarkVariant&&!confirmedVariant)throw new Error('Warmup validation failed: '+errors.join('; '));
     phase='measure';const begin=performance.now();
     timer=setInterval(send,1000/c.sendFps);send();
     await wait(c.seconds*1000);

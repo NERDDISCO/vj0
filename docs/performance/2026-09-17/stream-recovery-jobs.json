@@ -1,0 +1,249 @@
+[
+  {
+    "name": "repair-trt10-install",
+    "cwd": "/workspace",
+    "argv": [
+      "python3",
+      "-c",
+      "import pathlib,subprocess,os\nuv='/workspace/tools/uv/bin/uv';original='/workspace/envs/streamv2/bin/python';venv=pathlib.Path('/workspace/envs/streamv2-trt')\nassert venv.exists(), 'Expected the interrupted isolated TRT environment'\nfreeze=subprocess.check_output([uv,'pip','freeze','--python',original],text=True)\nrequirements=pathlib.Path('/workspace/bench-20260917/streamv2-trt-requirements.txt')\nrequirements.write_text('\\n'.join(l for l in freeze.splitlines() if not l.startswith('-e ') and 'streamdiffusion' not in l.lower())+'\\ntensorrt-cu12==10.16.1.11\\nonnx==1.22.0\\nonnxscript==0.7.2\\n')\n# Repair the interrupted installation in the same isolated environment\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--extra-index-url','https://download.pytorch.org/whl/cu128','--index-strategy','unsafe-best-match','-r',str(requirements)],check=True)\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--no-deps','-e','/workspace/streamdiffusionv2-20260917'],check=True)\n(venv/'freeze.txt').write_text(subprocess.check_output([uv,'pip','freeze','--python',str(venv/'bin/python')],text=True))\n\nsubprocess.run([uv,'pip','check','--python',str(venv/'bin/python')],check=True)\n"
+    ],
+    "env": {
+      "UV_CACHE_DIR": "/workspace/uv-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "trt-env-taehv-baseline",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/trt-env-taehv-baseline",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/trt-taehv",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-fast",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/trt-fast",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--fast"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "trt-taehv-noise095",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2-trt/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/trt-taehv-noise095",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--tensorrt",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 1200
+  },
+  {
+    "name": "taehv-three-step",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/taehv-three-step",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--steps",
+      "3"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-512x288",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/taehv-512x288",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--width",
+      "512",
+      "--height",
+      "288"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-1024x576",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/taehv-1024x576",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--width",
+      "1024",
+      "--height",
+      "576"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-arrival30-single-anchor-corrected",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/taehv-arrival30-single-anchor-corrected",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-arrival30-single-wo-anchor-corrected",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/stream-recovery-20260917/taehv-arrival30-single-wo-anchor-corrected",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single-wo",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "live-compute-service",
+    "argv": [
+      "node",
+      "/workspace/livebench-20260917/server.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "PORT": "3001",
+      "WORKER_COUNT": "1",
+      "INFERENCE_SCRIPT": "/workspace/livebench-20260917/inference_server.py",
+      "PYTHONPATH": "/workspace/livebench-20260917",
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead"
+    },
+    "timeout_seconds": 21600
+  }
+]

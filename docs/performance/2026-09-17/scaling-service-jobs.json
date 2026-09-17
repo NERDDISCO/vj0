@@ -1,0 +1,35 @@
+[
+  {
+    "name": "install-wrtc010",
+    "argv": [
+      "npm",
+      "install",
+      "--prefix",
+      "/workspace/wrtc010-20260917",
+      "--ignore-scripts",
+      "--save-exact",
+      "@roamhq/wrtc@0.10.0"
+    ],
+    "cwd": "/workspace",
+    "timeout_seconds": 180
+  },
+  {
+    "name": "scaling-service",
+    "argv": [
+      "node",
+      "/workspace/scaling-livebench-20260917/server.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "PORT": "3001",
+      "WORKER_COUNT": "2",
+      "INFERENCE_SCRIPT": "/workspace/scaling-livebench-20260917/inference_server.py",
+      "PYTHONPATH": "/workspace/scaling-livebench-20260917",
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead",
+      "WARMUP_SHAPES": "512x288,768x448,1024x576"
+    },
+    "timeout_seconds": 21600
+  }
+]

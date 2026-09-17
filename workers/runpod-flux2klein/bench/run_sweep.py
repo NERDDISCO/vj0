@@ -43,8 +43,10 @@ def main():
     active = None
 
     def persist(status):
-        (a.output / 'sweep.json').write_text(json.dumps({'status': status,
+        temporary = a.output / 'sweep.json.tmp'
+        temporary.write_text(json.dumps({'status': status,
             'dispatcher_pid': a.dispatcher_pid, 'runner_pid': os.getpid(), 'jobs': results}, indent=2) + '\n')
+        temporary.replace(a.output / 'sweep.json')
 
     def interrupt(signum, frame):
         raise KeyboardInterrupt(f'signal {signum}')

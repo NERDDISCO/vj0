@@ -128,6 +128,11 @@ def main():
                 done = time.perf_counter()
                 timings.append((done - t0) * 1000)
                 count = len(decoded) if decoded is not None else 0
+                if count and pipe.use_tensorrt:
+                    vae = pipe.pipeline_manager.pipeline.vae
+                    decoder = getattr(vae, '_tensorrt_decoder', None)
+                    if getattr(vae, '_tensorrt_failed', True) or decoder is None or not decoder._engine_cache:
+                        raise RuntimeError('Requested TensorRT decoder fell back or did not execute a cached engine; refusing a false TensorRT result')
                 if count:
                     outputs.append(decoded)
                     if first_output is None:
@@ -193,6 +198,8 @@ def main():
                 'simulated_capture_to_decoded_ms': distribution(capture_ages),
                 'peak_allocated_bytes': torch.cuda.max_memory_allocated(),
                 'peak_reserved_bytes': torch.cuda.max_memory_reserved()}
+            if pipe.use_tensorrt:
+                run['tensorrt_engine_shapes'] = [list(shape) for shape in pipe.pipeline_manager.pipeline.vae._tensorrt_decoder._engine_cache]
             report['runs'].append(run)
             save()
             print(json.dumps(run), flush=True)

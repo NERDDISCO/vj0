@@ -43,7 +43,12 @@
       "/workspace/samehost-fixtures-20260917/512x288-30.jpg",
       "/workspace/samehost-fixtures-20260917/512x288-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/512x288-single-120.json"
+    "output": "/workspace/samehost-results-20260917/512x288-single-120.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "512x288-stream-60",
@@ -89,7 +94,12 @@
       "/workspace/samehost-fixtures-20260917/512x288-30.jpg",
       "/workspace/samehost-fixtures-20260917/512x288-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/512x288-stream-60.json"
+    "output": "/workspace/samehost-results-20260917/512x288-stream-60.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "768x448-single-120",
@@ -135,7 +145,12 @@
       "/workspace/samehost-fixtures-20260917/768x448-30.jpg",
       "/workspace/samehost-fixtures-20260917/768x448-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/768x448-single-120.json"
+    "output": "/workspace/samehost-results-20260917/768x448-single-120.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "768x448-stream-60",
@@ -181,7 +196,12 @@
       "/workspace/samehost-fixtures-20260917/768x448-30.jpg",
       "/workspace/samehost-fixtures-20260917/768x448-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/768x448-stream-60.json"
+    "output": "/workspace/samehost-results-20260917/768x448-stream-60.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "1024x576-single-120",
@@ -227,7 +247,12 @@
       "/workspace/samehost-fixtures-20260917/1024x576-30.jpg",
       "/workspace/samehost-fixtures-20260917/1024x576-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/1024x576-single-120.json"
+    "output": "/workspace/samehost-results-20260917/1024x576-single-120.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "1024x576-stream-60",
@@ -273,7 +298,12 @@
       "/workspace/samehost-fixtures-20260917/1024x576-30.jpg",
       "/workspace/samehost-fixtures-20260917/1024x576-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/1024x576-stream-60.json"
+    "output": "/workspace/samehost-results-20260917/1024x576-stream-60.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "512x288-stream-30",
@@ -319,7 +349,12 @@
       "/workspace/samehost-fixtures-20260917/512x288-30.jpg",
       "/workspace/samehost-fixtures-20260917/512x288-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/512x288-stream-30.json"
+    "output": "/workspace/samehost-results-20260917/512x288-stream-30.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   },
   {
     "name": "512x288-stream-120",
@@ -365,6 +400,11 @@
       "/workspace/samehost-fixtures-20260917/512x288-30.jpg",
       "/workspace/samehost-fixtures-20260917/512x288-31.jpg"
     ],
-    "output": "/workspace/samehost-results-20260917/512x288-stream-120.json"
+    "output": "/workspace/samehost-results-20260917/512x288-stream-120.json",
+    "serverConfig": {
+      "maxPending": 3,
+      "maxOutboundBytes": 1048576,
+      "benchmarkVariant": "baseline"
+    }
   }
 ]

@@ -131,3 +131,26 @@ TensorRT 11 removed `BuilderFlag.FP16`, which this pinned upstream exporter
 uses. The isolated decoder experiment therefore selects the compatible 10.x
 release `10.16.1.11`; it does not silently port the upstream exporter or change
 Klein's environment. See [NVIDIA's Python migration guide](https://docs.nvidia.com/deeplearning/tensorrt/latest/api/migration/tensorrt-10x-to-11x-python-api-patterns.html).
+
+## Extended measured comparisons
+
+Warm offline 832x480, same one-GPU PRO 6000, two steps:
+1.3B standard decoder 13.58–13.84 FPS; TAEHV 20.64–21.06 FPS.
+One-step TAEHV reaches 27.33–27.87 FPS; four-step TAEHV 12.94–13.20 FPS.
+These counts include pipeline fill/tail shortfalls; they are decoded outputs,
+not interpolated frames or browser display rates. Cold first clips are separate.
+
+The 14B model loads successfully. Standard decoder warm throughput is
+6.45–6.50 FPS, TAEHV 7.68–7.71 FPS. Peak allocated memory is approximately
+61.5 GB / 59.6 GB respectively (decimal GB, reserved memory is higher).
+Its noise-0.95 samples transform the simple waveform into stronger flowing
+rainbow imagery; 1.3B at 0.8–1.0 mainly recolours/preserves the waveform.
+These visual differences are why the model FPS figures are not equal-quality
+FLUX speedups. Full raw records are in `stream-results/`.
+
+TAEHV's first decode removes the frame-zero anchor latent. With 65 inputs and
+two steps, `single` emits 60 frames (one omitted anchor plus four undrained tail
+frames), while `single-wo` emits 64. The paced-input harness initially asserted
+the standard VAE's count and failed explicitly; the corrected reruns use
+source indices 1–4 for the first TAEHV output and preserve the verified rolling
+latent mapping for subsequent chunks.

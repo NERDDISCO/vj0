@@ -1,0 +1,452 @@
+[
+  {
+    "name": "scaling-512x288-active1-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-512x288-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-512x288-active1-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-512x288-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-512x288-active1-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-512x288-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 512,
+      "height": 288,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active1-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active1-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active1-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-768x448-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 768,
+      "height": 448,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active1-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active2-r0",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active1-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active2-r1",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active1-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 1
+      }
+    }
+  },
+  {
+    "name": "scaling-1024x576-active2-r2",
+    "options": {
+      "server": "https://9vj8k6guaxsbhw-3001.proxy.runpod.net",
+      "width": 1024,
+      "height": 576,
+      "steps": 2,
+      "alpha": 0.1,
+      "seed": 42,
+      "inputQuality": 0.85,
+      "outputQuality": 80,
+      "sendFps": 60,
+      "seconds": 60,
+      "warmupFrames": 20,
+      "mode": "stream",
+      "frameIds": true,
+      "telemetryEveryMs": 0,
+      "serverConfig": {
+        "maxPending": 3,
+        "maxOutboundBytes": 1048576,
+        "benchmarkVariant": "baseline",
+        "activeWorkers": 2
+      }
+    }
+  }
+]

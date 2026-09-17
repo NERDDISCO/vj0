@@ -14,13 +14,36 @@ Those early higher-resolution attempts were stopped; later candidate trials meas
 
 The first seven-job compute sweep, 30 live discovery trials, and 24 wrtc 0.10
 trials plus one clean replacement are complete. Checkpoint `5c64612` is pushed.
-StreamDiffusionV2 is running under runner 28436, manifest
-`/workspace/stream-sweep-20260917/sweep.json`; original Node 499 is paused.
-A follow-up waiter 30655 starts `post-stream-jobs.json` after that sweep finishes:
-two corrected paced-input tests (TAEHV omits frame zero) then the isolated
-configurable compute service on port 3001. Its manifest will be
-`/workspace/post-stream-20260917/sweep.json`. All files are in separate
-`/workspace/livebench-20260917/`; active Stream files are unchanged.
+The first Stream sweep stopped during TensorRT installation at the 120 GB
+workspace quota. Its manifest was truncated; completed per-job results and
+append-only runner log are preserved. `stream-quota-recovery.json` reconstructs
+job states explicitly from that log. Cleared 4.1 GiB of UV download cache and
+the reproducible 28.58 GB 14B causal checkpoint after all three selected 14B
+comparisons completed. Model revisions and generated samples are preserved;
+14B would need that checkpoint downloaded again before another run. The base
+14B model remains on container storage. No pod resize/restart occurred.
+
+The new recovery runner is 35784, manifest
+`/workspace/stream-recovery-20260917/sweep.json`. It repairs the isolated TRT
+environment, runs the remaining seven Stream options and two corrected paced
+tests, then starts the configurable compute service on port 3001.
+`stream-recovery-jobs.json` is the exact queue. Original Node 499 is paused.
+The old follow-up waiter 30655 was stopped; it must not be restarted.
+The recovery runner writes its manifest atomically. Its remaining original-env
+Stream tests and corrected paced tests completed. The first TRT repair exposed
+partially installed Torch files from the interrupted installation, so its TRT
+trials failed explicitly before inference. Waiter 36926 stopped the temporary
+service, waited for cleanup, and started `trt-retry-jobs.json` under
+`/workspace/trt-retry-20260917/sweep.json`. This performs a complete exact-version
+reinstall, validates imports and the three documented upstream Torch overrides,
+then runs four TRT comparisons and starts the final live compute service.
+Do not start WAN tests against the earlier temporary service.
+TensorRT results now
+require actual cached-engine execution and reject the upstream silent fallback.
+
+The upcoming dispatcher hash is `dbe212ac6fab113e4ec28fea64dc92d86303789be3d0a77a9265c233d63dd9b2`
+(generated with an explicit three-shape warmup fallback before launch).
+
 The next WAN queue is `browser-live-compute-jobs.json` (36 alternating trials).
 Only start it after the service's three shapes have warmed and no other client
 is attached. The harness requires worker telemetry to confirm the requested
@@ -41,7 +64,13 @@ A waiting follow-up process starts `dependency-and-attention-jobs.json` after
 that runner exits; remote job file is named `dependency-retry-jobs.json` and
 output is `/workspace/dependency-retry-20260917`. The dependency retry, constant
 cache/profile tests, and FA4 tests are serial and use separate environments.
-Do not start scaling tests before this follow-up finishes.
+Do not start scaling tests before this follow-up finishes. A second waiter
+(PID 31190) starts `scaling-service-jobs.json` afterwards; manifest
+`/workspace/scaling-service-20260917/sweep.json`. The isolated dispatcher keeps
+two workers loaded and switches one/two active GPUs between trials, avoiding
+startup/compilation differences. `browser-scaling-jobs.json` contains 18
+alternating trials. Worker IDs, counts, maximum output gap, and final readiness
+are verified; both loaded models are explicitly part of the experiment identity.
 
 Current spend observed at 10:46 UTC was $6.331/hour for the two test pods plus
 storage; account balance was $93.62. Existing older pods remain stopped.

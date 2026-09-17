@@ -61,6 +61,86 @@ def main():
             time.sleep(1)
         raise TimeoutError(expression)
 
+    def stress(folder):
+        """Separate lifecycle trial; deliberate disconnects aren't steady FPS."""
+        actions = []
+        for target in targets:
+            evaluate(target, 'window.vj0AppProbe.begin()')
+
+        def received_after(at, timeout=60):
+            expression = ('window.vj0AppProbe.snapshot().rows.find(r=>r.kind==="received"&&'
+                          'Number.isFinite(r.ageMs)&&r.at-r.ageMs>='+str(at)+')')
+            wait_for('main', '!!('+expression+')', timeout)
+            row = evaluate('main', expression)
+            wait_for('stage', 'window.vj0AppProbe.snapshot().rows.some(r=>r.kind==="webgl-frame-submitted"&&r.id>='+str(row['id'])+')', timeout)
+            return row
+
+        try:
+            prompts = ['luminous glass ribbons woven through a dark teal space, shimmering gradients',
+                       'rippling liquid metal sculpture with orange and purple reflections',
+                       'luminous glass ribbons woven through a dark teal space, shimmering gradients']
+            for index, prompt in enumerate(prompts):
+                before = evaluate('main', 'performance.timeOrigin+performance.now()')
+                evaluate('main', '(()=>{const t=document.querySelector("textarea.vp-prompt");Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,"value").set.call(t,'+json.dumps(prompt)+');t.dispatchEvent(new Event("input",{bubbles:true}));})()')
+                expression = 'window.vj0AppProbe.snapshot().events.find(e=>e.type==="settings-sent"&&e.at>='+str(before)+'&&e.data.prompt==='+json.dumps(prompt)+')'
+                wait_for('main', '!!('+expression+')')
+                sent = evaluate('main', expression)
+                row = received_after(sent['at'])
+                actions.append({'action':'prompt', 'index':index, 'prompt':prompt,
+                    'settings_sent_at':sent['at'], 'first_subsequent_capture_received_at':row['at'],
+                    'settings_to_new_capture_receive_ms':row['at']-sent['at'], 'frame_id':row['id']})
+                time.sleep(2)
+            for width, height in [(768,448),(1024,576),(512,288)]:
+                before = evaluate('main', 'performance.timeOrigin+performance.now()')
+                value = f'{width}x{height}'
+                evaluate('main', '(()=>{const s=Array.from(document.querySelectorAll("select")).find(s=>Array.from(s.options).some(o=>o.value==="512x288"));s.value='+json.dumps(value)+';s.dispatchEvent(new Event("change",{bubbles:true}));})()')
+                condition = 'window.vj0AppProbe.snapshot().rows.find(r=>r.kind==="worker-stats"&&r.at>='+str(before)+'&&r.width==='+str(width)+'&&r.height==='+str(height)+')'
+                wait_for('main', '!!('+condition+')', 180)
+                state = evaluate('main', condition)
+                row = received_after(state['at'], 180)
+                actions.append({'action':'resolution', 'width':width, 'height':height,
+                    'started_at':before, 'matching_worker_output_at':state['at'],
+                    'change_to_matching_worker_output_ms':state['at']-before, 'subsequent_frame_id':row['id']})
+                time.sleep(2)
+            # Exercise rapid preset input through the actual controlled field.
+            # React/app debounce may intentionally coalesce these changes.
+            evaluate('main', '(async()=>{const t=document.querySelector("textarea.vp-prompt");const set=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,"value").set;for(let i=0;i<10;i++){set.call(t,"rapid benchmark cue "+i+", luminous organic ribbons");t.dispatchEvent(new Event("input",{bubbles:true}));await new Promise(r=>setTimeout(r,100));}})()')
+            wait_for('main', 'window.vj0AppProbe.snapshot().events.some(e=>e.type==="settings-sent"&&e.data.prompt==="rapid benchmark cue 9, luminous organic ribbons")')
+            at = evaluate('main', 'performance.timeOrigin+performance.now()')
+            row = received_after(at)
+            actions.append({'action':'ten-rapid-prompts', 'final_prompt_observed':True, 'subsequent_frame_id':row['id']})
+            for index in range(3):
+                evaluate('main', '(()=>{if(!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]"))document.querySelector("button.vp-ai-chip").click()})()')
+                wait_for('main', '!!document.querySelector("[role=dialog][aria-label=\\"AI transport\\"]")')
+                evaluate('main', 'Array.from(document.querySelectorAll("button")).find(b=>/disconnect/i.test(b.textContent)).click()')
+                wait_for('main', '!window.vj0AppProbe.snapshot().channelStates.includes("open")')
+                time.sleep(2)
+                at = evaluate('main', 'performance.timeOrigin+performance.now()')
+                evaluate('main', 'Array.from(document.querySelectorAll("button")).find(b=>/connect/i.test(b.textContent)&&!/disconnect/i.test(b.textContent)&&!b.disabled).click()')
+                wait_for('main', 'window.vj0AppProbe.snapshot().channelStates.includes("open")', 60)
+                evaluate('main', '(()=>{const b=Array.from(document.querySelectorAll("button")).find(b=>/generate/i.test(b.textContent)&&!b.disabled);if(b)b.click()})()')
+                row = received_after(at)
+                actions.append({'action':'reconnect', 'index':index, 'connect_clicked_at':at,
+                    'new_capture_received_at':row['at'], 'reconnect_to_new_capture_receive_ms':row['at']-at,
+                    'frame_id':row['id']})
+                time.sleep(3)
+            raw = {target:evaluate(target, 'window.vj0AppProbe.end()') for target in targets}
+            problems = [target+': '+str(error) for target,data in raw.items() for error in data['errors']]
+            for target, data in raw.items():
+                if any(e.get('type')=='error' or e.get('status') in ['error','compile_failed'] or
+                       (e.get('type')=='connection' and e.get('state')=='failed') for e in data['events']):
+                    problems.append(target+': worker or connection failure')
+                (folder/(target+'-stress-raw.json')).write_text(json.dumps(data,indent=2)+'\n')
+            result = {'status':'failed' if problems else 'passed', 'actions':actions, 'errors':problems,
+                'measurement':'Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result'}
+            (folder/'stress.json').write_text(json.dumps(result,indent=2)+'\n')
+            if problems:
+                raise RuntimeError('; '.join(problems))
+            return result
+        except BaseException as error:
+            (folder/'stress-failure.json').write_text(json.dumps({'status':'failed','error':str(error),'completed_actions':actions},indent=2)+'\n')
+            raise
+
     progress = []
     try:
         command('main', 'Emulation.setDeviceMetricsOverride', {'width':1440, 'height':900, 'deviceScaleFactor':1, 'mobile':False})
@@ -116,7 +196,9 @@ def main():
             if not warm_stats or any(r['timing'].get('benchmark_variant') != expected_variant or
                 r['timing'].get('stage_clock') != expected_clock for r in warm_stats):
                 raise RuntimeError('Worker telemetry did not confirm requested warmup compute variant')
-            renderer = evaluate('stage', '(()=>{const g=document.querySelector("canvas").getContext("webgl2");const e=g.getExtension("WEBGL_debug_renderer_info");return {vendor:g.getParameter(g.VENDOR),renderer:e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER),userAgent:navigator.userAgent}})()')
+            renderer = evaluate('stage', '(()=>{const g=document.querySelector("canvas").getContext("webgl2");const e=g.getExtension("WEBGL_debug_renderer_info");return {vendor:g.getParameter(g.VENDOR),renderer:e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER),userAgent:navigator.userAgent,viewport:[innerWidth,innerHeight],glBuffer:[g.drawingBufferWidth,g.drawingBufferHeight],devicePixelRatio}})()')
+            if renderer['viewport'] != [1920,1080] or renderer['devicePixelRatio'] != 1:
+                raise RuntimeError('Stage viewport differs from the requested benchmark configuration')
             if job.get('telemetry'):
                 if job['layout'] != 'vj-next':
                     raise ValueError('Telemetry popover action currently targets vj-next')
@@ -149,6 +231,11 @@ def main():
             for target, data in raw.items():
                 (folder/(target+'-raw.json')).write_text(json.dumps(data, indent=2)+'\n')
                 rows = [r for r in data['rows'] if start<=r['at']<=end]
+                for row in rows:
+                    if row['kind'] in ['preview-image-loaded', 'bitmap-decoded'] and row.get('id'):
+                        if row.get('width') != job.get('width',512) or row.get('height') != job.get('height',288):
+                            problems.append(target+': decoded output dimensions differ from the requested resolution')
+                            break
                 kinds = sorted({r['kind'] for r in rows})
                 result = {}
                 for kind in kinds:
@@ -156,6 +243,7 @@ def main():
                     ids = {r['id'] for r in selected if r.get('id') is not None}
                     result[kind] = {'events':len(selected), 'unique_frames':len(ids),
                         'fps':len(ids)/seconds if ids else None,
+                        'dimensions':sorted({(r['width'],r['height']) for r in selected if r.get('width') and r.get('height')}),
                         'age_ms':distribution([r['ageMs'] for r in selected if r.get('ageMs') is not None]),
                         'duration_ms':distribution([r['ms'] for r in selected if r.get('ms') is not None])}
                 summary['targets'][target] = result
@@ -178,7 +266,7 @@ def main():
                         r['timing'].get('stage_clock') != expected_clock for r in stats):
                         problems.append('main: missing or mismatched compute variant telemetry')
             summary.update(status='invalid' if problems else 'measured', problems=problems,
-                measurement='Actual app capture and preview + 1920x1080 stage GL submission; excludes physical display presentation', config=job)
+                measurement='Actual app capture/preview + stage GL submission in a 1920x1080 viewport; actual GL buffer sizes recorded separately; excludes physical display presentation', config=job)
             (folder/'summary.json').write_text(json.dumps(summary, indent=2)+'\n')
             samples = evaluate('main', 'window.vj0AppProbe.sampleImages()')
             for sample, value in samples.items():
@@ -188,6 +276,11 @@ def main():
             print(json.dumps({'name':name, 'status':record['status'], 'summary':summary['targets']}), flush=True)
             if problems:
                 raise RuntimeError('; '.join(problems))
+            if job.get('stress'):
+                if job['layout'] != 'vj-next':
+                    raise ValueError('Lifecycle actions currently target vj-next')
+                record['stress_status'] = stress(folder)['status']
+                (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
     except BaseException as error:
         if progress and progress[-1]['status'] == 'running':
             progress[-1].update(status='failed', error=str(error))

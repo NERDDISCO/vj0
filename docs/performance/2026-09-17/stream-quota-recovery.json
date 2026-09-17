@@ -1,0 +1,453 @@
+{
+  "recovered_from": "append-only runner log; original sweep.json is zero bytes",
+  "status": "failed-storage-quota",
+  "runner_pid": 28436,
+  "jobs": [
+    {
+      "name": "download-taehv",
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,urllib.request,hashlib,json\nroot=pathlib.Path('/workspace/streamdiffusionv2-20260917/ckpts')\nrevision='011dfc2112197741c540e0bdd5b7b67bcc930771'\nurl=f'https://raw.githubusercontent.com/madebyollin/taehv/{revision}/taew2_1.pth'\ntarget=root/'taew2_1.pth'\nif target.exists():\n raise RuntimeError('Refusing to overwrite existing checkpoint without verification')\ndata=urllib.request.urlopen(url,timeout=120).read()\nif len(data)<1000000: raise RuntimeError('Unexpectedly small checkpoint')\ntarget.write_bytes(data)\nrecord={'repository':'madebyollin/taehv','revision':revision,'url':url,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}\n(root/'taew2_1-provenance.json').write_text(json.dumps(record,indent=2)+'\\n')\nprint(json.dumps(record))\n"
+      ],
+      "cwd": "/workspace",
+      "started_at": "2026-09-17T11:06:13.552815+00:00",
+      "status": "passed",
+      "pid": 28439,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:06:15.495965+00:00"
+    },
+    {
+      "name": "standard-single",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/standard-single",
+        "--frames",
+        "65",
+        "--repeats",
+        "3"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:06:15.501496+00:00",
+      "status": "passed",
+      "pid": 28442,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:08:42.955385+00:00"
+    },
+    {
+      "name": "standard-single-wo",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/standard-single-wo",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--mode",
+        "single-wo"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:08:42.958106+00:00",
+      "status": "passed",
+      "pid": 28881,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:09:50.739543+00:00"
+    },
+    {
+      "name": "taehv-single",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-single",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:09:50.746533+00:00",
+      "status": "passed",
+      "pid": 29307,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:10:55.130877+00:00"
+    },
+    {
+      "name": "taehv-single-wo",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-single-wo",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--mode",
+        "single-wo"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:10:55.136039+00:00",
+      "status": "passed",
+      "pid": 29713,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:12:00.475456+00:00"
+    },
+    {
+      "name": "taehv-one-step",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-one-step",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--steps",
+        "1"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:12:00.479364+00:00",
+      "status": "passed",
+      "pid": 30143,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:13:01.092746+00:00"
+    },
+    {
+      "name": "taehv-four-step",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-four-step",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--steps",
+        "4"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:13:01.098465+00:00",
+      "status": "passed",
+      "pid": 30549,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:14:08.985430+00:00"
+    },
+    {
+      "name": "taehv-noise095",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-noise095",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:14:08.992936+00:00",
+      "status": "passed",
+      "pid": 31001,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:15:14.486555+00:00"
+    },
+    {
+      "name": "taehv-noise100",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-noise100",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--noise-scale",
+        "1.0"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:15:14.491020+00:00",
+      "status": "passed",
+      "pid": 31420,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:16:19.309030+00:00"
+    },
+    {
+      "name": "taehv-detailed",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-detailed",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--scene",
+        "detailed",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:16:19.320779+00:00",
+      "status": "passed",
+      "pid": 31839,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:17:23.736810+00:00"
+    },
+    {
+      "name": "taehv-arrival30-single",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-arrival30-single",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--arrival-fps",
+        "30",
+        "--mode",
+        "single",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:17:23.743113+00:00",
+      "status": "failed",
+      "pid": 32257,
+      "returncode": 1,
+      "finished_at": "2026-09-17T11:18:16.170684+00:00"
+    },
+    {
+      "name": "taehv-arrival30-single-wo",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+        "--output",
+        "/workspace/stream-sweep-20260917/taehv-arrival30-single-wo",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--taehv",
+        "--arrival-fps",
+        "30",
+        "--mode",
+        "single-wo",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:18:16.174808+00:00",
+      "status": "failed",
+      "pid": 32521,
+      "returncode": 1,
+      "finished_at": "2026-09-17T11:19:08.373194+00:00"
+    },
+    {
+      "name": "download-wan14b",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/download_wan14b.py"
+      ],
+      "cwd": "/workspace",
+      "started_at": "2026-09-17T11:19:08.378760+00:00",
+      "status": "passed",
+      "pid": 32784,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:21:26.546470+00:00"
+    },
+    {
+      "name": "wan14b-standard",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+        "--output",
+        "/workspace/stream-sweep-20260917/wan14b-standard",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--model-type",
+        "T2V-14B",
+        "--config-path",
+        "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:21:26.550215+00:00",
+      "status": "passed",
+      "pid": 33361,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:23:03.981512+00:00"
+    },
+    {
+      "name": "wan14b-taehv",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+        "--output",
+        "/workspace/stream-sweep-20260917/wan14b-taehv",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--model-type",
+        "T2V-14B",
+        "--config-path",
+        "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml",
+        "--taehv"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:23:03.986455+00:00",
+      "status": "passed",
+      "pid": 33808,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:24:33.959226+00:00"
+    },
+    {
+      "name": "wan14b-taehv-noise095",
+      "argv": [
+        "/workspace/envs/streamv2/bin/python",
+        "/workspace/bench-20260917/streamv2.py",
+        "--checkpoint-folder",
+        "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v_14b",
+        "--output",
+        "/workspace/stream-sweep-20260917/wan14b-taehv-noise095",
+        "--frames",
+        "65",
+        "--repeats",
+        "3",
+        "--model-type",
+        "T2V-14B",
+        "--config-path",
+        "/workspace/streamdiffusionv2-20260917/configs/wan_causal_dmd_v2v_14b.yaml",
+        "--taehv",
+        "--noise-scale",
+        "0.95"
+      ],
+      "cwd": "/workspace/streamdiffusionv2-20260917",
+      "started_at": "2026-09-17T11:24:33.965365+00:00",
+      "status": "passed",
+      "pid": 34243,
+      "returncode": 0,
+      "finished_at": "2026-09-17T11:26:00.166141+00:00"
+    },
+    {
+      "name": "install-trt10-compatible",
+      "argv": [
+        "python3",
+        "-c",
+        "import pathlib,subprocess,os\nuv='/workspace/tools/uv/bin/uv';original='/workspace/envs/streamv2/bin/python';venv=pathlib.Path('/workspace/envs/streamv2-trt')\nif venv.exists():raise RuntimeError('TRT environment already exists')\nfreeze=subprocess.check_output([uv,'pip','freeze','--python',original],text=True)\nrequirements=pathlib.Path('/workspace/bench-20260917/streamv2-trt-requirements.txt')\nrequirements.write_text('\\n'.join(l for l in freeze.splitlines() if not l.startswith('-e ') and 'streamdiffusion' not in l.lower())+'\\ntensorrt-cu12==10.16.1.11\\nonnx==1.22.0\\nonnxscript==0.7.2\\n')\nsubprocess.run([uv,'venv','--python',original,str(venv)],check=True)\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--extra-index-url','https://download.pytorch.org/whl/cu128','--index-strategy','unsafe-best-match','-r',str(requirements)],check=True)\nsubprocess.run([uv,'pip','install','--python',str(venv/'bin/python'),'--no-deps','-e','/workspace/streamdiffusionv2-20260917'],check=True)\n(venv/'freeze.txt').write_text(subprocess.check_output([uv,'pip','freeze','--python',str(venv/'bin/python')],text=True))\n"
+      ],
+      "cwd": "/workspace",
+      "started_at": "2026-09-17T11:26:00.170749+00:00",
+      "status": "interrupted-storage-quota",
+      "pid": 34682,
+      "error": "Runner manifest was truncated to zero bytes after EDQUOT; process group ended and original dispatcher resumed"
+    }
+  ],
+  "provenance": {
+    "base_repository": "Wan-AI/Wan2.1-T2V-14B",
+    "base_revision": "a064a6c71f5be440641209c07bf2a5ce7a2ff5e4",
+    "causal_revision": "2373eb2b39278b3a1aa174964a724ee78ead96f0",
+    "base_path": "/opt/vj0-wan14b-base-20260917",
+    "shared_files_verified": [
+      {
+        "name": "models_t5_umt5-xxl-enc-bf16.pth",
+        "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+        "bytes": 11361920418
+      },
+      {
+        "name": "Wan2.1_VAE.pth",
+        "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+        "bytes": 507609880
+      }
+    ],
+    "container_free_before_bytes": 82858491904,
+    "base_shards_bytes": 57154077392,
+    "base_shards": [
+      {
+        "name": "diffusion_pytorch_model-00001-of-00006.safetensors",
+        "sha256": "569d54a07279b89f8281421fccf27ee2459ea853ce6845d3536b8664b0070078",
+        "size": 9887603256,
+        "pointerSize": 135
+      },
+      {
+        "name": "diffusion_pytorch_model-00002-of-00006.safetensors",
+        "sha256": "b17ff172f262b4da91c31e8c46d3b7707f62cecfff6e18dd0072ab29eb350e46",
+        "size": 9839059648,
+        "pointerSize": 135
+      },
+      {
+        "name": "diffusion_pytorch_model-00003-of-00006.safetensors",
+        "sha256": "741fd1508cd0288f0bb0f4fb3df6734da521d5ff23746170c848564a367e2cea",
+        "size": 9839059744,
+        "pointerSize": 135
+      },
+      {
+        "name": "diffusion_pytorch_model-00004-of-00006.safetensors",
+        "sha256": "47b08ba289b127fc64979bc877ee07e1c87aeb8eb8cd47bcfd112682847981ba",
+        "size": 9839059744,
+        "pointerSize": 135
+      },
+      {
+        "name": "diffusion_pytorch_model-00005-of-00006.safetensors",
+        "sha256": "29e35f4cf0e3a61f4726c960f1babf71d65677a8c99fe704257d665c9498ee88",
+        "size": 9839059744,
+        "pointerSize": 135
+      },
+      {
+        "name": "diffusion_pytorch_model-00006-of-00006.safetensors",
+        "sha256": "91ac087a40b814331e87f5f015af11ba999275d48d2af49591b6bf7727d3c146",
+        "size": 7910235256,
+        "pointerSize": 135
+      }
+    ],
+    "status": "downloaded"
+  }
+}

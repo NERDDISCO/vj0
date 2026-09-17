@@ -53,7 +53,8 @@
     if (!(event.target instanceof HTMLImageElement)) return;
     const value = urls.get(event.target.currentSrc || event.target.src);
     if (!value?.id) return;
-    record('preview-image-loaded', {id:value.id, ageMs:epoch()-value.capture});
+    record('preview-image-loaded', {id:value.id, ageMs:epoch()-value.capture,
+      width:event.target.naturalWidth,height:event.target.naturalHeight});
     loadedImages.set(event.target, value);
     if (pendingImageRaf.has(event.target)) return;
     pendingImageRaf.add(event.target);
@@ -71,7 +72,7 @@
     const value = meta.get(args[0]);
     const result = await bitmap(...args);
     if (value) meta.set(result, value);
-    record('bitmap-decoded', {id:value?.id, ms:epoch()-began});
+    record('bitmap-decoded', {id:value?.id, ms:epoch()-began,width:result.width,height:result.height});
     return result;
   };
   const texImage = WebGL2RenderingContext.prototype.texImage2D;
@@ -103,7 +104,7 @@
       if (typeof event.data === 'string') {
         try {
           const data=JSON.parse(event.data);
-          if (data.type === 'stats') record('worker-stats',{timing:data.timing,worker:data.worker});
+          if (data.type === 'stats') record('worker-stats',{timing:data.timing,worker:data.worker,width:data.width,height:data.height});
           else if (data.type === 'compile' || data.type === 'error') eventRecord({at:epoch(),...data});
         } catch { /* Other diagnostics are not measurements. */ }
         return;
