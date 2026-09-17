@@ -113,8 +113,11 @@ export async function runBenchmark(options) {
       try {
         const message = JSON.parse(event.data);
         if (message.type === "compile") {
-          if (message.status === "warmed") compilingWorkers.delete(message.worker);
+          if (message.status === "warmed" || message.status === "compile_failed") compilingWorkers.delete(message.worker);
           else compilingWorkers.add(message.worker);
+          if (message.status === "compile_failed") {
+            measurements.errors.push(`Worker ${message.worker} compile failed: ${message.message || "unknown error"}`);
+          }
         }
         if (measuring && message.type === "stats" && Number.isFinite(message.timing?.total_ms)) {
           measurements.workerTimingMs.push(message.timing.total_ms);

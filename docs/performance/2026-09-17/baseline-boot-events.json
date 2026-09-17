@@ -1,0 +1,122 @@
+[
+  {
+    "source": "container",
+    "line": "[worker 0] phase=loading_weights est=140s",
+    "ts": "2026-09-17T08:41:28.338226779Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=loaded est=?s",
+    "ts": "2026-09-17T08:41:31.738460810Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=applying_fp8 est=1s",
+    "ts": "2026-09-17T08:41:31.738485327Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] fp8 applied to transformer in 0.0s, vram=12.30GB",
+    "ts": "2026-09-17T08:41:31.780351559Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] fp8 applied to VAE linears in 0.0s, vram=12.30GB",
+    "ts": "2026-09-17T08:41:31.782018008Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=registering_compile_stubs est=1s",
+    "ts": "2026-09-17T08:41:31.782080351Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] compile stubs registered in 0.3s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)",
+    "ts": "2026-09-17T08:41:32.037810402Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup at 512\u00d7288, n_steps=4 (4 iters; first one triggers compile)",
+    "ts": "2026-09-17T08:41:32.040212060Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 1/4: 192770ms",
+    "ts": "2026-09-17T08:46:14.344411128Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 2/4: 75ms",
+    "ts": "2026-09-17T08:46:14.421553539Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 3/4: 56ms",
+    "ts": "2026-09-17T08:46:14.475605537Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 4/4: 58ms",
+    "ts": "2026-09-17T08:46:14.533440811Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY",
+    "ts": "2026-09-17T08:46:14.533595480Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY after first shape 512x288 \u2014 remaining 2 shapes warming in background",
+    "ts": "2026-09-17T08:46:14.533732323Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] [bg-warmup] 1/2: 768x448",
+    "ts": "2026-09-17T08:46:14.533735918Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup at 768\u00d7448, n_steps=4 (4 iters; first one triggers compile)",
+    "ts": "2026-09-17T08:46:14.533750760Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/torch/autograd/graph.py:869: UserWarning: Error detected in torch::autograd::NotImplemented. Traceback of forward call that caused the error:",
+    "ts": "2026-09-17T08:46:15.958769647Z"
+  },
+  {
+    "source": "container",
+    "line": "Exception in thread Thread-3 (_bg_warmup):",
+    "ts": "2026-09-17T08:46:15.966802630Z"
+  },
+  {
+    "source": "container",
+    "line": "Traceback (most recent call last):",
+    "ts": "2026-09-17T08:46:15.966817151Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 422, in _bg_warmup",
+    "ts": "2026-09-17T08:46:15.967004008Z"
+  },
+  {
+    "source": "container",
+    "line": "    warmup(pipe, prompt_cache, w, h, state[\"alpha\"], state[\"n_steps\"])",
+    "ts": "2026-09-17T08:46:15.967102774Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 316, in warmup",
+    "ts": "2026-09-17T08:46:15.967111968Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 285, in encode_image_to_latents",
+    "ts": "2026-09-17T08:46:15.967154741Z"
+  },
+  {
+    "source": "container",
+    "line": "RuntimeError: derivative for aten::_scaled_mm is not implemented",
+    "ts": "2026-09-17T08:46:15.971198283Z"
+  }
+]

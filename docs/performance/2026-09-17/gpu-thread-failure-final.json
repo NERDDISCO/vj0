@@ -1,0 +1,28 @@
+{
+  "scenario": "failure",
+  "calls": [
+    {
+      "kind": "warmup",
+      "shape": [
+        16,
+        16
+      ],
+      "on_owner_thread": true
+    },
+    {
+      "kind": "warmup",
+      "shape": [
+        32,
+        16
+      ],
+      "on_owner_thread": true
+    }
+  ],
+  "events": [
+    "ready",
+    "compile_failed",
+    "shutdown"
+  ],
+  "idle_seconds_after_frame": null,
+  "passed": true
+}

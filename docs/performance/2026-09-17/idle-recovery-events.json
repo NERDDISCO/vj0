@@ -1,0 +1,86 @@
+{
+  "worker_sha256": "1c617a310a65d2dd6dbe6589057005dc3f1c25a1a456076e9b6cc9bfd8a0eb4c",
+  "result": "all three shapes compiled on GPU",
+  "events": [
+    {
+      "source": "container",
+      "line": "[worker 0] compile stubs registered in 0.3s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)",
+      "ts": "2026-09-17T09:01:48.268427748Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warming up shapes: [(512, 288), (768, 448), (1024, 576)] (first=(512, 288), rest in background)",
+      "ts": "2026-09-17T09:01:48.271634318Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup at 512\u00d7288, n_steps=4 (4 iters; first one triggers compile)",
+      "ts": "2026-09-17T09:01:48.271648338Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup 1/4: 39439ms",
+      "ts": "2026-09-17T09:02:45.947631416Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmed 512x288 in 39617ms",
+      "ts": "2026-09-17T09:02:46.125160322Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] READY",
+      "ts": "2026-09-17T09:02:46.125203556Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] READY after first shape 512x288 \u2014 remaining 2 shapes warming when idle",
+      "ts": "2026-09-17T09:02:46.125267401Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] [idle-warmup] 768x448",
+      "ts": "2026-09-17T09:02:47.126982171Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup at 768\u00d7448, n_steps=2 (4 iters; first one triggers compile)",
+      "ts": "2026-09-17T09:02:47.127017814Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup 1/4: 199814ms",
+      "ts": "2026-09-17T09:07:31.839624772Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmed 768x448 in 200024ms",
+      "ts": "2026-09-17T09:07:32.049483284Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] [idle-warmup] 1024x576",
+      "ts": "2026-09-17T09:07:32.099509004Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup at 1024\u00d7576, n_steps=2 (4 iters; first one triggers compile)",
+      "ts": "2026-09-17T09:07:32.099524607Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmup 1/4: 186492ms",
+      "ts": "2026-09-17T09:12:09.678848654Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] warmed 1024x576 in 186827ms",
+      "ts": "2026-09-17T09:12:10.013928995Z"
+    },
+    {
+      "source": "container",
+      "line": "[worker 0] [idle-warmup] finished \u2014 3/3 shapes compiled",
+      "ts": "2026-09-17T09:12:10.013983926Z"
+    }
+  ]
+}

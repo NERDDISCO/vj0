@@ -303,10 +303,13 @@ def generate(pipe, image_latents, prompt_embeds, alpha, n_steps, height, width, 
     ).images[0]
 
 
+@torch.no_grad()
 def warmup(pipe, prompt_cache, width, height, alpha, n_steps):
     """Re-warm at a new (width, height). First iter JIT-compiles for the new
     shape — costs ~120-160s with fp8 on Blackwell. Subsequent iters are normal.
     Emits status messages on stdout so the frontend can show a progress overlay."""
+    # Grad mode is thread-local: setup_pipeline() disables it only in the main
+    # thread. Background shape warmup must also avoid FP8 autograd compilation.
     log(f"warmup at {width}×{height}, n_steps={n_steps} ({WARMUP_ITERS} iters; first one triggers compile)")
     # Tell the client we're going dark for ~150s.
     emit(status="compiling", width=width, height=height, n_steps=n_steps,
@@ -373,10 +376,9 @@ def main():
     # Warmup shapes from WARMUP_SHAPES env (comma-separated WxH list, e.g.
     # "512x288,768x448,256x144"). Order matters: first shape compiles before
     # the worker goes READY, so put the most-used production resolution first.
-    # Remaining shapes compile in a background thread — switching to one mid-set
-    # triggers the already-running background compile (or a ~35-150s cold compile
-    # if background hasn't reached it yet). With warm Inductor cache, each shape
-    # re-warms in <1s regardless.
+    # Remaining shapes compile on this same GPU execution thread while the
+    # frame queue is idle. Torch 2.11 CUDA-graph trees cannot safely reuse these
+    # compiled modules from a separately created Python thread.
     shapes_env = os.environ.get("WARMUP_SHAPES", "")
     shapes = []
     for s in shapes_env.split(","):
@@ -389,7 +391,7 @@ def main():
             log(f"WARMUP_SHAPES: skipping invalid token '{s}'")
     if not shapes:
         shapes = [(state["width"], state["height"])]
-    log(f"warming up shapes: {shapes} (first={shapes[0]}, rest in background)")
+    log(f"warming up shapes: {shapes} (first={shapes[0]}, rest when idle)")
 
     # Warm the FIRST shape synchronously — this is the "go live" resolution.
     first_w, first_h = shapes[0]
@@ -397,33 +399,19 @@ def main():
     state["width"], state["height"] = first_w, first_h
 
     emit(status="ready", width=state["width"], height=state["height"])
-    log(f"READY after first shape {first_w}x{first_h} — remaining {len(shapes)-1} shapes warming in background")
+    log(f"READY after first shape {first_w}x{first_h} — remaining {len(shapes)-1} shapes warming when idle")
 
-    # GPU lock — serialize all forward passes (warmup + inference). The
-    # background warmup thread and the main inference loop both hit the
-    # same GPU; without a lock, concurrent forward passes corrupt CUDA
-    # state or crash with "CUDA error: an illegal memory access".
+    # All model calls, including warmup, stay on this execution thread. Keep
+    # the GPU critical sections explicit; the reader thread only updates state.
     gpu_lock = threading.Lock()
 
     # Track which shapes are already compiled so the main loop can skip
-    # re-warmup for shapes the background thread already handled.
+    # re-warmup for shapes the idle warmup already handled.
     warmed_shapes = {(first_w, first_h)}
 
-    # Warm remaining shapes in a background thread so the main loop can
-    # start serving frames immediately. The thread acquires gpu_lock for
-    # each warmup call, yielding it between shapes so the main loop can
-    # interleave inference frames at the current resolution.
-    remaining_shapes = shapes[1:]
-    if remaining_shapes:
-        def _bg_warmup():
-            for i, (w, h) in enumerate(remaining_shapes):
-                log(f"[bg-warmup] {i+1}/{len(remaining_shapes)}: {w}x{h}")
-                with gpu_lock:
-                    warmup(pipe, prompt_cache, w, h, state["alpha"], state["n_steps"])
-                warmed_shapes.add((w, h))
-            log(f"[bg-warmup] done — all {len(shapes)} shapes compiled")
-        bg_thread = threading.Thread(target=_bg_warmup, daemon=True)
-        bg_thread.start()
+    # FIFO of optional startup shapes; queued live frames take precedence.
+    # An already-started compile still blocks GPU work until it finishes.
+    remaining_shapes = list(dict.fromkeys(shapes[1:]))
 
     # Frame queue: ONLY image_base64 requests go here. State-only messages
     # (prompt, seed, etc.) are applied immediately in the reader thread.
@@ -488,24 +476,44 @@ def main():
 
     last_size = (state["width"], state["height"])
     frame_count = 0
+    last_request_at = time.monotonic()
     log("entering main loop")
 
     while not shutdown.is_set():
         try:
             req = request_queue.get(timeout=0.05)
         except queue.Empty:
+            if shutdown.is_set():
+                break
+            if remaining_shapes and time.monotonic() - last_request_at >= 1.0:
+                w, h = remaining_shapes.pop(0)
+                if (w, h) not in warmed_shapes:
+                    log(f"[idle-warmup] {w}x{h}")
+                    with state_lock:
+                        warm_alpha, warm_steps = state["alpha"], state["n_steps"]
+                    try:
+                        with gpu_lock:
+                            warmup(pipe, prompt_cache, w, h, warm_alpha, warm_steps)
+                        warmed_shapes.add((w, h))
+                    except Exception as e:
+                        log(f"[idle-warmup] failed {w}x{h}: {e}")
+                        emit(status="compile_failed", width=w, height=h,
+                             message=f"warmup failed: {e}")
+                if not remaining_shapes:
+                    log(f"[idle-warmup] finished — {len(warmed_shapes)}/{len(set(shapes))} shapes compiled")
             continue
+        last_request_at = time.monotonic()
 
         # State was already applied by the reader thread. Re-apply in case
         # this frame message carried state fields (belt-and-suspenders).
         _apply_state(req)
 
-        # if resolution changed, re-warmup at new shape (skip if background
-        # thread already compiled it — just update last_size to avoid re-trigger)
+        # If resolution changed, re-warm at the new shape unless idle warmup
+        # already compiled it.
         new_size = (state["width"], state["height"])
         if new_size != last_size:
             if new_size in warmed_shapes:
-                log(f"resolution changed → {state['width']}×{state['height']}, already compiled by bg-warmup")
+                log(f"resolution changed → {state['width']}×{state['height']}, already compiled by idle warmup")
                 last_size = new_size
             else:
                 log(f"resolution changed → {state['width']}×{state['height']}, re-warming")
@@ -516,7 +524,9 @@ def main():
                     warmed_shapes.add(new_size)
                     last_size = new_size
                 except Exception as e:
-                    emit(status="error", message=f"warmup failed: {e}")
+                    emit(status="compile_failed", width=new_size[0], height=new_size[1],
+                         frame_dropped=True, message=f"warmup failed: {e}")
+                    last_request_at = time.monotonic()
                     continue
 
         # need an image to generate
@@ -538,16 +548,13 @@ def main():
             )
         except Exception as e:
             emit(status="error", message=f"decode input failed: {e}")
+            last_request_at = time.monotonic()
             continue
         t_decode_in = time.perf_counter()
 
         try:
-            # gpu_lock serializes against the background warmup thread.
-            # Hold it for ALL GPU work: prompt encoding + VAE encode +
-            # transformer + VAE decode. Prompt encoding runs the text
-            # encoder on GPU — doing it outside the lock can corrupt
-            # CUDA graph replay if a prompt change arrives while a
-            # compiled generate() is in flight, causing a permanent hang.
+            # Keep prompt encoding + VAE encode + transformer + VAE decode in
+            # one GPU critical section on the same thread as shape warmup.
             with gpu_lock:
                 embeds = prompt_cache.get(state["prompt"])
                 t_prompt = time.perf_counter()
@@ -591,6 +598,9 @@ def main():
             import traceback
             log(traceback.format_exc())
             emit(status="error", message=str(e))
+        finally:
+            # Count idle time from completion, including slow frames/errors.
+            last_request_at = time.monotonic()
 
     emit(status="shutdown")
 

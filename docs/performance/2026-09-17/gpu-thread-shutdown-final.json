@@ -1,0 +1,19 @@
+{
+  "scenario": "shutdown",
+  "calls": [
+    {
+      "kind": "warmup",
+      "shape": [
+        16,
+        16
+      ],
+      "on_owner_thread": true
+    }
+  ],
+  "events": [
+    "ready",
+    "shutdown"
+  ],
+  "idle_seconds_after_frame": null,
+  "passed": true
+}

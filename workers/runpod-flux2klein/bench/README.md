@@ -82,3 +82,27 @@ node --test workers/runpod-flux2klein/bench/test_browser.mjs
 
 Passing these checks validates bookkeeping and argument handling, not CUDA
 execution, performance, image quality or live transport.
+
+The live baseline exposed a background warmup grad-mode failure. In the worker
+environment, verify the real function's behavior in a fresh thread:
+
+```bash
+python3 bench/check_warmup_thread.py --worker-script /app/inference_server.py
+```
+
+The frozen original source exits 1; the no-grad correction exits 0. Tiny CPU
+operations replace model/GPU work in this check. Separately validate that all
+selected resolutions actually finish background compilation on the GPU.
+
+The warmup recovery also has dispatcher lifecycle/watchdog coverage:
+`node --test workers/runpod-flux2klein/bench/test_compile.mjs`.
+`check_gpu_thread.py --worker-script PATH --scenario idle-grace` exercises a
+slow frame and verifies a full second of idle time afterward; `shutdown` and
+`failure` cover early exit and terminal compile-failure reporting. These execute
+fake model operations in the actual loop and do not replace GPU recovery tests.
+
+`streamv2.py` is a separate, initially unvalidated staged-API benchmark for the
+pinned StreamDiffusionV2 environment. It records actual output counts and the
+first pass separately; offline output FPS is not capture-to-output age. Run only
+with the Klein dispatcher paused and its Python process stopped. See
+`docs/performance/2026-09-17/STREAMDIFFUSION.md` for environment/model identities.

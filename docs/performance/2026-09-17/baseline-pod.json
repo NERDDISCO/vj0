@@ -1,0 +1,74 @@
+{
+  "podId": "0pxb4bss2jmbhg",
+  "name": "vj0-perf-20260917-baseline",
+  "dataCenter": "EU-CZ-1",
+  "createdAt": "2026-09-17T08:38:41.521Z",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "gpuCount": 1,
+  "quotedCostPerHr": 2.09,
+  "image": "nerddisco/vj0-flux2klein-worker@sha256:689e0f1cbcc8053727da3539080312fa3645d01649daf2106472679b768ce490",
+  "apiLogCommand": "runpodctl pod logs 0pxb4bss2jmbhg --tail 50 --source both --max-wait 10s",
+  "captureWindowLines": 106,
+  "systemLogSamples": [
+    {
+      "source": "system",
+      "line": "794d27053ab7 Downloading",
+      "ts": "2026-09-17T08:39:21Z"
+    },
+    {
+      "source": "system",
+      "line": "794d27053ab7 Downloading",
+      "ts": "2026-09-17T08:39:21Z"
+    },
+    {
+      "source": "system",
+      "line": "794d27053ab7 Downloading",
+      "ts": "2026-09-17T08:39:35Z"
+    },
+    {
+      "source": "system",
+      "line": "794d27053ab7 Downloading",
+      "ts": "2026-09-17T08:39:35Z"
+    }
+  ],
+  "sshObservationDuringImagePull": {
+    "runtimeStatus": "initializing",
+    "error": "pod not ready: no container reported yet (image pull, container create or boot)"
+  },
+  "applicationLogsVerified": true,
+  "liveInferenceVerified": false,
+  "sshVerified": true,
+  "sshReadyAfterSeconds": 158,
+  "applicationLogSamples": [
+    {
+      "source": "container",
+      "line": "[entrypoint] no persisted inductor cache yet \u2014 first compile per shape will be cold (~150s)",
+      "ts": "2026-09-17T08:40:53.357676513Z"
+    },
+    {
+      "source": "container",
+      "line": "[entrypoint] PUBLIC_KEY detected, configuring sshd",
+      "ts": "2026-09-17T08:40:53.357699216Z"
+    },
+    {
+      "source": "container",
+      "line": "[entrypoint] sshd listening on :22",
+      "ts": "2026-09-17T08:40:53.369307636Z"
+    },
+    {
+      "source": "container",
+      "line": "[entrypoint] fetching Klein 4B + small decoder to /workspace/hf-cache (one-time, ~23 GB)...",
+      "ts": "2026-09-17T08:40:53.370403400Z"
+    }
+  ],
+  "initialWarmupOutcome": {
+    "firstShape": [
+      512,
+      288
+    ],
+    "firstReadyAt": "2026-09-17T08:46:14.533595480Z",
+    "backgroundWarmup": "failed at 768x448",
+    "error": "RuntimeError: derivative for aten::_scaled_mm is not implemented",
+    "evidence": "baseline-boot-events.json"
+  }
+}

@@ -61,5 +61,14 @@ correctness run and its old pin needs Blackwell compatibility verification.
 8. Any live integration prototype is a separate experimental backend. Do not
    replace the app's default or redesign its UI.
 
-Status: source inspected and comparison specified; CUDA execution pending funded
-Runpod access. No StreamDiffusionV2 FPS or quality result has been measured here.
+Status: the funded pod now has the isolated Python 3.11.16 environment at
+`/workspace/envs/streamv2`. Import passed with torch 2.11.0+cu128; the base Klein
+environment is unchanged. Explicit torch/vision/audio overrides resolved the
+upstream strict metadata. Both checkpoint downloads completed at pinned revisions:
+
+- Wan 1.3B: `37ec512624d61f7aa208f7ea8140a131f93afc9a`.
+- StreamDiffusionV2 causal checkpoint: `2373eb2b39278b3a1aa174964a724ee78ead96f0`.
+
+Source is at `/workspace/streamdiffusionv2-20260917`; download identities are in
+its `checkpoint-revisions.json`. No StreamDiffusionV2 GPU forward pass, FPS or
+quality result has been measured here yet.

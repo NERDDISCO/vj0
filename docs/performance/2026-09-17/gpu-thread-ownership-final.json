@@ -1,0 +1,36 @@
+{
+  "scenario": "ownership",
+  "calls": [
+    {
+      "kind": "warmup",
+      "shape": [
+        16,
+        16
+      ],
+      "on_owner_thread": true
+    },
+    {
+      "kind": "warmup",
+      "shape": [
+        32,
+        16
+      ],
+      "on_owner_thread": true
+    },
+    {
+      "kind": "encode",
+      "on_owner_thread": true
+    },
+    {
+      "kind": "generate",
+      "on_owner_thread": true
+    }
+  ],
+  "events": [
+    "ready",
+    "frame",
+    "shutdown"
+  ],
+  "idle_seconds_after_frame": -0.0006007500924170017,
+  "passed": true
+}

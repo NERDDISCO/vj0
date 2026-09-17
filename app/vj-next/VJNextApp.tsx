@@ -436,7 +436,7 @@ export function VJNextApp() {
                     : Date.now() -
                       (typeof data.elapsed_ms === "number" ? data.elapsed_ms : 0),
               }));
-            } else if (status === "warmed") {
+            } else if (status === "warmed" || status === "compile_failed") {
               setAiCompile(null);
             }
             return;
@@ -578,7 +578,7 @@ export function VJNextApp() {
       width: outWidth,
       height: outHeight,
     };
-    if (aiBackend === "klein") {
+    if (aiBackend === "klein" || aiBackend === "pod") {
       payload.alpha = alpha;
       payload.n_steps = steps;
     }

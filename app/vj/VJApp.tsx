@@ -345,7 +345,7 @@ export function VJApp() {
       width: s.outputWidth,
       height: s.outputHeight,
     };
-    if (s.backend === "klein") {
+    if (s.backend === "klein" || s.backend === "pod") {
       payload.alpha = s.kleinAlpha;
       payload.n_steps = s.kleinSteps;
     }
@@ -1128,7 +1128,7 @@ export function VJApp() {
                     ? prev.started_at
                     : Date.now() - (typeof data.elapsed_ms === "number" ? data.elapsed_ms : 0),
               }));
-            } else if (data.status === "warmed") {
+            } else if (data.status === "warmed" || data.status === "compile_failed") {
               setAiCompile(null);
             }
             return;

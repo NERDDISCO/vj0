@@ -115,7 +115,8 @@ function spawnWorker(gpu) {
     stdio: ["pipe", "pipe", "inherit"],
     env,
   });
-  const w = { proc, gpu, ready: false, stdoutBuf: "", framePending: 0, lastFrameAt: 0 };
+  const w = { proc, gpu, ready: false, stdoutBuf: "", framePending: 0, lastFrameAt: 0,
+    compileStartedAt: 0, compileFinishedAt: 0 };
   workers.push(w);
 
   proc.stdout.on("data", (chunk) => {
@@ -133,6 +134,9 @@ function spawnWorker(gpu) {
 
   proc.on("close", (code) => {
     console.log(`[worker ${gpu}] exited code=${code}, respawning in 3s...`);
+    if (latestCompileByWorker.has(w.gpu)) {
+      handleWorkerLine(w, JSON.stringify({ status: "compile_failed", message: `worker exited (${code})` }));
+    }
     w.ready = false;
     w.framePending = 0;
     // Auto-respawn: remove dead worker, spawn fresh one after a brief delay
@@ -202,15 +206,26 @@ function handleWorkerLine(w, line) {
   // a "compiling 512x288..." overlay during the ~150s JIT cost on shape change.
   // Also remember the latest status per worker so a client that connects
   // mid-compile gets the overlay immediately (replayed in pc.ondatachannel).
-  if (msg.status === "compiling" || msg.status === "compiling_progress" || msg.status === "warmed") {
+  if (["compiling", "compiling_progress", "warmed", "compile_failed"].includes(msg.status)) {
+    const terminal = msg.status === "warmed" || msg.status === "compile_failed";
+    if (terminal) {
+      w.compileStartedAt = 0;
+      w.compileFinishedAt = Date.now();
+    } else if (!w.compileStartedAt) {
+      w.compileStartedAt = Date.now();
+    }
     if (msg.status === "compiling") {
       console.log(`[worker ${w.gpu}] compiling ${msg.width}x${msg.height} (~${msg.est_seconds}s)`);
     } else if (msg.status === "warmed") {
       console.log(`[worker ${w.gpu}] warmed ${msg.width}x${msg.height} in ${msg.total_ms}ms`);
+    } else if (msg.status === "compile_failed") {
+      console.error(`[worker ${w.gpu}] compile failed ${msg.width}x${msg.height}: ${msg.message}`);
+      if (msg.frame_dropped) w.framePending = Math.max(0, w.framePending - 1);
     }
     const payload = {
       type: "compile",
       status: msg.status,
+      message: msg.message,
       width: msg.width,
       height: msg.height,
       n_steps: msg.n_steps,
@@ -222,8 +237,8 @@ function handleWorkerLine(w, line) {
       est_seconds: msg.est_seconds,
       worker: w.gpu,
     };
-    if (msg.status === "warmed") {
-      // Worker is ready at this shape — clear the "currently compiling" memo.
+    if (terminal) {
+      // Success and failure both end this compile attempt.
       latestCompileByWorker.delete(w.gpu);
     } else {
       latestCompileByWorker.set(w.gpu, payload);
@@ -900,14 +915,19 @@ app.listen(PORT, "0.0.0.0", () => {
 // dead one reboots (~30-60s warm, ~3 min cold).
 const WATCHDOG_INTERVAL_MS = 5000;
 const WATCHDOG_STALL_MS = 30000;
+const WATCHDOG_COMPILE_MS = 10 * 60 * 1000;
 
 setInterval(() => {
   const now = Date.now();
   for (const w of workers) {
-    if (!w.ready || w.framePending === 0) continue;
-    // lastFrameAt is 0 before the first frame — skip (still compiling).
-    if (w.lastFrameAt === 0) continue;
-    const stalled = now - w.lastFrameAt;
+    // Compilation legitimately exceeds the frame timeout, but must be bounded.
+    const compileExpired = w.compileStartedAt && now - w.compileStartedAt >= WATCHDOG_COMPILE_MS;
+    if (!compileExpired && (!w.ready || w.framePending === 0)) continue;
+    if (w.compileStartedAt && now - w.compileStartedAt < WATCHDOG_COMPILE_MS) continue;
+    if (!w.compileStartedAt && w.lastFrameAt === 0 && !w.compileFinishedAt) continue;
+    const stalled = w.compileStartedAt
+      ? now - w.compileStartedAt
+      : now - Math.max(w.lastFrameAt, w.compileFinishedAt);
     if (stalled > WATCHDOG_STALL_MS) {
       console.log(`[watchdog] worker ${w.gpu} stalled ${(stalled / 1000).toFixed(1)}s with pending=${w.framePending} stdoutBuf=${w.stdoutBuf.length}, killing for respawn`);
       w.ready = false;

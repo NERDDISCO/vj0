@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-09-17T08:41:59.838596+00:00",
+  "sourceSha256": {
+    "server.js": "a107a88a295eb7c9072db3e2a722f1a2bad16c2b4086d1afef29c519febc063d",
+    "inference_server.py": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+    "package.json": "d58e72f259688a6db9d19d637fac978108610fb700dbea45c65eaebbc77b049a",
+    "package-lock.json": "f36f782c9dbb33c6a06d6febfd153baa1ce28aba91638e097716206696a37e76"
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "torchao": "0.17.0+cu128",
+    "diffusers": "0.38.0.dev0",
+    "transformers": "5.7.0",
+    "pillow": "12.2.0",
+    "numpy": "2.4.4",
+    "huggingface-hub": "1.13.0"
+  },
+  "python": "3.12.3",
+  "config": {
+    "HF_HOME": "/workspace/hf-cache",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/torchinductor_root",
+    "INDUCTOR_PERSIST_DIR": "/workspace/torch-inductor-cache",
+    "COMPILE_MODE": "reduce-overhead",
+    "USE_VAE_FP8": "1",
+    "JPEG_QUALITY": "80",
+    "MAX_PENDING_PER_WORKER": "3",
+    "WARMUP_SHAPES": "512x288,768x448,1024x576",
+    "INFERENCE_SCRIPT": "/app/inference_server.py",
+    "PORT": "3000"
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 595.71.05, 97887 MiB, 25 %, 13181 MiB",
+  "configSource": "running dispatcher /proc/499/environ (allowlisted keys only); SSH login environment lacks container variables",
+  "modelRevisions": {
+    "black-forest-labs/FLUX.2-klein-4B": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+    "black-forest-labs/FLUX.2-small-decoder": "a3efc24f613ef42d9428af62fdbd6f5fd8856c4a"
+  }
+}

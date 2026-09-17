@@ -2,12 +2,18 @@
 
 ## Current next action
 
-Runpod account funding is required. Authentication works; the API refused the
-test pod for insufficient balance. Do not change credentials or keep retrying
-the same rejected create. When the user confirms funding, read PLAN.md and this
-file, verify balance/capacity, and resume at B00. All existing pods remain stopped.
+Funding was confirmed on 2026-09-17: approximately $100 available. The baseline
+pod `0pxb4bss2jmbhg` was created in EU-CZ-1 at $2.09/hour (one RTX PRO 6000).
+EU-RO-1 had no matching capacity. API system logs returned image-pull progress
+before SSH was ready. Continue B00 on this existing pod; inspect its current
+state before any new create. SSH and API container logs are verified, and original-image 512x288 WebRTC
+baselines are saved. A corrected main-thread warmup is currently running;
+all three shapes completed at 09:12:10 UTC. Inspect the API log stream
+before starting measurements. StreamDiffusionV2 downloads and isolated import
+succeeded, but its first GPU forward pass is pending.
+Existing older pods remain stopped. Evidence: `baseline-pod.json`.
 
-The branch contains preparation only. No new inference default is promoted.
+The branch contains preparation, live baseline evidence, and focused fixes under validation. No new inference default is promoted.
 
 ## Tool and infrastructure checks
 
@@ -52,7 +58,7 @@ runpodctl ssh info POD_ID
 The first three use the API, not SSH. Save actual JSONL output with timestamps.
 If no lines arrive, record whether the pod has started; a timeout by itself does
 not establish that logging is unsupported. The stopped pre-existing pod probe
-returned a timeout with no lines, so live logging is still unverified.
+returned a timeout with no lines, but the new running pod verified system and container logging successfully.
 
 `serverless logs ENDPOINT_ID` similarly reads workers' API logs. Existing
 serverless endpoints are unrelated and configured with zero max workers; leave

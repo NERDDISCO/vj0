@@ -1,0 +1,797 @@
+[
+  {
+    "source": "container",
+    "line": "[worker 0] exited code=null, respawning in 3s...",
+    "ts": "2026-09-17T08:55:33.844437215Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] respawning now",
+    "ts": "2026-09-17T08:55:36.845481984Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] spawning (CUDA_VISIBLE_DEVICES=0)",
+    "ts": "2026-09-17T08:55:36.845493511Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] torch=2.11.0+cu128 cuda=12.8 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)",
+    "ts": "2026-09-17T08:55:37.687128628Z"
+  },
+  {
+    "source": "container",
+    "line": "Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`",
+    "ts": "2026-09-17T08:55:39.235534056Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=loading_weights est=140s",
+    "ts": "2026-09-17T08:55:39.314792201Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] loading black-forest-labs/FLUX.2-klein-4B...",
+    "ts": "2026-09-17T08:55:39.314813733Z"
+  },
+  {
+    "source": "container",
+    "line": "Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.",
+    "ts": "2026-09-17T08:55:39.569540888Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]",
+    "ts": "2026-09-17T08:55:40.148430450Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:   0%|          | 0/398 [00:00<?, ?it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.256464372Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  10%|\u2589         | 38/398 [00:00<00:01, 352.06it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.364849704Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  21%|\u2588\u2588        | 84/398 [00:00<00:00, 394.68it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.471393398Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  32%|\u2588\u2588\u2588\u258f      | 129/398 [00:00<00:00, 407.20it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.611139518Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  43%|\u2588\u2588\u2588\u2588\u258e     | 170/398 [00:00<00:00, 354.95it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.726668465Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  55%|\u2588\u2588\u2588\u2588\u2588\u258d    | 217/398 [00:00<00:00, 373.18it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.832868250Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  67%|\u2588\u2588\u2588\u2588\u2588\u2588\u258b   | 267/398 [00:00<00:00, 404.05it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:40.933975929Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  81%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588  | 322/398 [00:00<00:00, 446.08it/s]\u001b[A",
+    "ts": "2026-09-17T08:55:41.040993726Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading weights:  92%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258f| 368/398 [00:00<00:00, 441.00it/s]\u001b[A\rLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 398/398 [00:00<00:00, 431.10it/s]",
+    "ts": "2026-09-17T08:55:41.071752170Z"
+  },
+  {
+    "source": "container",
+    "line": "\rLoading pipeline components...:  20%|\u2588\u2588        | 1/5 [00:01<00:05,  1.45s/it]\rLoading pipeline components...:  40%|\u2588\u2588\u2588\u2588      | 2/5 [00:01<00:02,  1.40it/s]\rLoading pipeline components...:  60%|\u2588\u2588\u2588\u2588\u2588\u2588    | 3/5 [00:02<00:01,  1.29it/s]\rLoading pipeline components...:  80%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588  | 4/5 [00:02<00:00,  1.58it/s]\rLoading pipeline components...: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 5/5 [00:02<00:00,  1.71it/s]",
+    "ts": "2026-09-17T08:55:42.554773018Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.",
+    "ts": "2026-09-17T08:55:42.555381820Z"
+  },
+  {
+    "source": "container",
+    "line": "  warnings.warn(",
+    "ts": "2026-09-17T08:55:42.555395441Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] loaded in 54.0s, vram=15.98GB",
+    "ts": "2026-09-17T08:56:33.309200473Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=loaded est=?s",
+    "ts": "2026-09-17T08:56:33.309294112Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=applying_fp8 est=1s",
+    "ts": "2026-09-17T08:56:33.309298008Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] applying TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor) on transformer...",
+    "ts": "2026-09-17T08:56:33.309299660Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] fp8 applied to transformer in 0.0s, vram=12.30GB",
+    "ts": "2026-09-17T08:56:33.351411316Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] fp8 applied to VAE linears in 0.0s, vram=12.30GB",
+    "ts": "2026-09-17T08:56:33.353072938Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] phase=registering_compile_stubs est=1s",
+    "ts": "2026-09-17T08:56:33.353083444Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] compiling transformer + vae.encoder + vae.decoder (mode=reduce-overhead)...",
+    "ts": "2026-09-17T08:56:33.353085567Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] compile stubs registered in 0.3s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)",
+    "ts": "2026-09-17T08:56:33.607993039Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warming up shapes: [(512, 288), (768, 448), (1024, 576)] (first=(512, 288), rest in background)",
+    "ts": "2026-09-17T08:56:33.610504120Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup at 512\u00d7288, n_steps=4 (4 iters; first one triggers compile)",
+    "ts": "2026-09-17T08:56:33.610515928Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] compiling 512x288 (~150s)",
+    "ts": "2026-09-17T08:56:33.610535466Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] encoding prompt (len=74 chars, max_seq=64) [cache: 0/32, hits=0 misses=1]",
+    "ts": "2026-09-17T08:56:33.610557289Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] prompt encoded in 201ms shape=(1, 64, 7680) [cached 1/32]",
+    "ts": "2026-09-17T08:56:33.811587252Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/diffusers/schedulers/scheduling_flow_match_euler_discrete.py:649: RuntimeWarning: divide by zero encountered in divide",
+    "ts": "2026-09-17T08:56:52.474685403Z"
+  },
+  {
+    "source": "container",
+    "line": "  return math.exp(mu) / (math.exp(mu) + (1 / t - 1) ** sigma)",
+    "ts": "2026-09-17T08:56:52.474707605Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py:2202: UserWarning: Dynamo detected a call to a `functools.lru_cache`-wrapped function at 'upsampling.py:156'. Dynamo ignores the cache wrapper and directly traces the wrapped function. Silent incorrectness is only a *potential* risk, not something we have observed. Enable TORCH_LOGS=+dynamo for a DEBUG stack trace.",
+    "ts": "2026-09-17T08:57:23.486097070Z"
+  },
+  {
+    "source": "container",
+    "line": "",
+    "ts": "2026-09-17T08:57:23.486106614Z"
+  },
+  {
+    "source": "container",
+    "line": "This call originates from:",
+    "ts": "2026-09-17T08:57:23.486107636Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/models/upsampling.py\", line 156, in forward",
+    "ts": "2026-09-17T08:57:23.486108847Z"
+  },
+  {
+    "source": "container",
+    "line": "    if dtype == torch.bfloat16 and is_torch_version(\"<\", \"2.1\"):",
+    "ts": "2026-09-17T08:57:23.486110089Z"
+  },
+  {
+    "source": "container",
+    "line": "",
+    "ts": "2026-09-17T08:57:23.486111081Z"
+  },
+  {
+    "source": "container",
+    "line": "  torch._dynamo.utils.warn_once(msg)",
+    "ts": "2026-09-17T08:57:23.486111622Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/variables/functions.py:2202: UserWarning: Dynamo detected a call to a `functools.lru_cache`-wrapped function at 'upsampling.py:180'. Dynamo ignores the cache wrapper and directly traces the wrapped function. Silent incorrectness is only a *potential* risk, not something we have observed. Enable TORCH_LOGS=+dynamo for a DEBUG stack trace.",
+    "ts": "2026-09-17T08:57:23.514694012Z"
+  },
+  {
+    "source": "container",
+    "line": "",
+    "ts": "2026-09-17T08:57:23.514706430Z"
+  },
+  {
+    "source": "container",
+    "line": "This call originates from:",
+    "ts": "2026-09-17T08:57:23.514707151Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/models/upsampling.py\", line 180, in forward",
+    "ts": "2026-09-17T08:57:23.514708132Z"
+  },
+  {
+    "source": "container",
+    "line": "    if dtype == torch.bfloat16 and is_torch_version(\"<\", \"2.1\"):",
+    "ts": "2026-09-17T08:57:23.514709344Z"
+  },
+  {
+    "source": "container",
+    "line": "",
+    "ts": "2026-09-17T08:57:23.514710486Z"
+  },
+  {
+    "source": "container",
+    "line": "  torch._dynamo.utils.warn_once(msg)",
+    "ts": "2026-09-17T08:57:23.514711017Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 1/4: 49817ms",
+    "ts": "2026-09-17T08:57:42.288460236Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/diffusers/schedulers/scheduling_flow_match_euler_discrete.py:649: RuntimeWarning: divide by zero encountered in divide",
+    "ts": "2026-09-17T08:57:42.290496068Z"
+  },
+  {
+    "source": "container",
+    "line": "  return math.exp(mu) / (math.exp(mu) + (1 / t - 1) ** sigma)",
+    "ts": "2026-09-17T08:57:42.290509688Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 2/4: 71ms",
+    "ts": "2026-09-17T08:57:42.359780114Z"
+  },
+  {
+    "source": "container",
+    "line": "/usr/local/lib/python3.12/dist-packages/diffusers/schedulers/scheduling_flow_match_euler_discrete.py:649: RuntimeWarning: divide by zero encountered in divide",
+    "ts": "2026-09-17T08:57:42.361563040Z"
+  },
+  {
+    "source": "container",
+    "line": "  return math.exp(mu) / (math.exp(mu) + (1 / t - 1) ** sigma)",
+    "ts": "2026-09-17T08:57:42.361568348Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 3/4: 54ms",
+    "ts": "2026-09-17T08:57:42.414026944Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup 4/4: 53ms",
+    "ts": "2026-09-17T08:57:42.467340408Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmed 512x288 in 49996ms",
+    "ts": "2026-09-17T08:57:42.467399706Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY",
+    "ts": "2026-09-17T08:57:42.467408970Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] replayed latest state: prompt,seed,width,height,captureWidth,captureHeight,alpha,n_steps",
+    "ts": "2026-09-17T08:57:42.467463892Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] READY after first shape 512x288 \u2014 remaining 2 shapes warming in background",
+    "ts": "2026-09-17T08:57:42.467471783Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] [bg-warmup] 1/2: 768x448",
+    "ts": "2026-09-17T08:57:42.467837927Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] warmup at 768\u00d7448, n_steps=4 (4 iters; first one triggers compile)",
+    "ts": "2026-09-17T08:57:42.468092384Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] compiling 768x448 (~150s)",
+    "ts": "2026-09-17T08:57:42.468127466Z"
+  },
+  {
+    "source": "container",
+    "line": "[worker 0] entering main loop",
+    "ts": "2026-09-17T08:57:42.468130361Z"
+  },
+  {
+    "source": "container",
+    "line": "Exception in thread Thread-3 (_bg_warmup):",
+    "ts": "2026-09-17T08:57:48.670391942Z"
+  },
+  {
+    "source": "container",
+    "line": "Traceback (most recent call last):",
+    "ts": "2026-09-17T08:57:48.670432643Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/lib/python3.12/threading.py\", line 1073, in _bootstrap_inner",
+    "ts": "2026-09-17T08:57:48.670433774Z"
+  },
+  {
+    "source": "container",
+    "line": "    self.run()",
+    "ts": "2026-09-17T08:57:48.670517258Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/lib/python3.12/threading.py\", line 1010, in run",
+    "ts": "2026-09-17T08:57:48.670535245Z"
+  },
+  {
+    "source": "container",
+    "line": "    self._target(*self._args, **self._kwargs)",
+    "ts": "2026-09-17T08:57:48.670609475Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 425, in _bg_warmup",
+    "ts": "2026-09-17T08:57:48.670640211Z"
+  },
+  {
+    "source": "container",
+    "line": "    warmup(pipe, prompt_cache, w, h, state[\"alpha\"], state[\"n_steps\"])",
+    "ts": "2026-09-17T08:57:48.670716214Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py\", line 124, in decorate_context",
+    "ts": "2026-09-17T08:57:48.670769012Z"
+  },
+  {
+    "source": "container",
+    "line": "    return func(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.670773929Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.670786929Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 319, in warmup",
+    "ts": "2026-09-17T08:57:48.670790934Z"
+  },
+  {
+    "source": "container",
+    "line": "    lat = encode_image_to_latents(pipe, fake_img, width, height)",
+    "ts": "2026-09-17T08:57:48.670844634Z"
+  },
+  {
+    "source": "container",
+    "line": "          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.670851524Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/app/inference_server.py\", line 285, in encode_image_to_latents",
+    "ts": "2026-09-17T08:57:48.670852586Z"
+  },
+  {
+    "source": "container",
+    "line": "    raw = retrieve_latents(pipe.vae.encode(t), sample_mode=\"argmax\")",
+    "ts": "2026-09-17T08:57:48.670900267Z"
+  },
+  {
+    "source": "container",
+    "line": "                           ^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.670920387Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/utils/accelerate_utils.py\", line 46, in wrapper",
+    "ts": "2026-09-17T08:57:48.670938093Z"
+  },
+  {
+    "source": "container",
+    "line": "    return method(self, *args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.670957331Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671015247Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/models/autoencoders/autoencoder_kl_flux2.py\", line 207, in encode",
+    "ts": "2026-09-17T08:57:48.671034366Z"
+  },
+  {
+    "source": "container",
+    "line": "    h = self._encode(x)",
+    "ts": "2026-09-17T08:57:48.671043960Z"
+  },
+  {
+    "source": "container",
+    "line": "        ^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671062878Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/models/autoencoders/autoencoder_kl_flux2.py\", line 181, in _encode",
+    "ts": "2026-09-17T08:57:48.671075797Z"
+  },
+  {
+    "source": "container",
+    "line": "    enc = self.encoder(x)",
+    "ts": "2026-09-17T08:57:48.671100314Z"
+  },
+  {
+    "source": "container",
+    "line": "          ^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671143718Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py\", line 472, in __call__",
+    "ts": "2026-09-17T08:57:48.671164519Z"
+  },
+  {
+    "source": "container",
+    "line": "    return super().__call__(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671178219Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671189526Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl",
+    "ts": "2026-09-17T08:57:48.671205089Z"
+  },
+  {
+    "source": "container",
+    "line": "    return self._call_impl(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671218138Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671228324Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py\", line 1790, in _call_impl",
+    "ts": "2026-09-17T08:57:48.671259229Z"
+  },
+  {
+    "source": "container",
+    "line": "    return forward_call(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671343004Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671347551Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py\", line 1024, in compile_wrapper",
+    "ts": "2026-09-17T08:57:48.671349023Z"
+  },
+  {
+    "source": "container",
+    "line": "    return fn(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671405126Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671409042Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl",
+    "ts": "2026-09-17T08:57:48.671409863Z"
+  },
+  {
+    "source": "container",
+    "line": "    return self._call_impl(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671518755Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671520728Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py\", line 1790, in _call_impl",
+    "ts": "2026-09-17T08:57:48.671521619Z"
+  },
+  {
+    "source": "container",
+    "line": "    return forward_call(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671630100Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671631592Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/diffusers/models/autoencoders/vae.py\", line 152, in forward",
+    "ts": "2026-09-17T08:57:48.671632624Z"
+  },
+  {
+    "source": "container",
+    "line": "    def forward(self, sample: torch.Tensor) -> torch.Tensor:",
+    "ts": "2026-09-17T08:57:48.671682568Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py\", line 1263, in _fn",
+    "ts": "2026-09-17T08:57:48.671686654Z"
+  },
+  {
+    "source": "container",
+    "line": "    return fn(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.671766833Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671771900Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/aot_autograd.py\", line 1200, in forward",
+    "ts": "2026-09-17T08:57:48.671772732Z"
+  },
+  {
+    "source": "container",
+    "line": "    return compiled_fn(full_args)",
+    "ts": "2026-09-17T08:57:48.671844568Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671848093Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 580, in runtime_wrapper",
+    "ts": "2026-09-17T08:57:48.671849525Z"
+  },
+  {
+    "source": "container",
+    "line": "    all_outs = call_func_at_runtime_with_args(",
+    "ts": "2026-09-17T08:57:48.671908984Z"
+  },
+  {
+    "source": "container",
+    "line": "               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671913200Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/utils.py\", line 138, in call_func_at_runtime_with_args",
+    "ts": "2026-09-17T08:57:48.671914242Z"
+  },
+  {
+    "source": "container",
+    "line": "    out = normalize_as_list(f(args))",
+    "ts": "2026-09-17T08:57:48.671940080Z"
+  },
+  {
+    "source": "container",
+    "line": "                            ^^^^^^^",
+    "ts": "2026-09-17T08:57:48.671945047Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 2298, in __call__",
+    "ts": "2026-09-17T08:57:48.671946139Z"
+  },
+  {
+    "source": "container",
+    "line": "    return self.compiled_fn(*args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.672086838Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672088520Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 783, in wrapper",
+    "ts": "2026-09-17T08:57:48.672089311Z"
+  },
+  {
+    "source": "container",
+    "line": "    return compiled_fn(runtime_args)",
+    "ts": "2026-09-17T08:57:48.672157533Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672166546Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 966, in inner_fn",
+    "ts": "2026-09-17T08:57:48.672167738Z"
+  },
+  {
+    "source": "container",
+    "line": "    unwrapped_outs = compiled_fn(unwrapped_args)",
+    "ts": "2026-09-17T08:57:48.672218333Z"
+  },
+  {
+    "source": "container",
+    "line": "                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672222289Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 1011, in inner_fn",
+    "ts": "2026-09-17T08:57:48.672223310Z"
+  },
+  {
+    "source": "container",
+    "line": "    outs = compiled_fn(args)",
+    "ts": "2026-09-17T08:57:48.672295467Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672302107Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/output_code.py\", line 656, in __call__",
+    "ts": "2026-09-17T08:57:48.672302958Z"
+  },
+  {
+    "source": "container",
+    "line": "    return self.current_callable(inputs)",
+    "ts": "2026-09-17T08:57:48.672351080Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672382647Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/tmp/torchinductor_root/xr/cxrv7uqrv6oximashjndoje2xrmxzcvzwym3woha3tfgw4joco4e.py\", line 6625, in call",
+    "ts": "2026-09-17T08:57:48.672388525Z"
+  },
+  {
+    "source": "container",
+    "line": "    (buf362,) = self.partitions[0](partition0_args)",
+    "ts": "2026-09-17T08:57:48.672865003Z"
+  },
+  {
+    "source": "container",
+    "line": "                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.672873575Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py\", line 1875, in run",
+    "ts": "2026-09-17T08:57:48.672874677Z"
+  },
+  {
+    "source": "container",
+    "line": "    return compiled_fn(new_inputs)  # type: ignore[arg-type]",
+    "ts": "2026-09-17T08:57:48.673002657Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.673011440Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/cudagraph_trees.py\", line 436, in deferred_cudagraphify",
+    "ts": "2026-09-17T08:57:48.673012602Z"
+  },
+  {
+    "source": "container",
+    "line": "    fn, out = cudagraphify(model, inputs, new_static_input_idxs, *args, **kwargs)",
+    "ts": "2026-09-17T08:57:48.673047333Z"
+  },
+  {
+    "source": "container",
+    "line": "              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.673062856Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/cudagraph_trees.py\", line 494, in cudagraphify",
+    "ts": "2026-09-17T08:57:48.673067163Z"
+  },
+  {
+    "source": "container",
+    "line": "    manager = get_container(device_index).get_tree_manager()",
+    "ts": "2026-09-17T08:57:48.673108654Z"
+  },
+  {
+    "source": "container",
+    "line": "              ^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.673112680Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/cudagraph_trees.py\", line 364, in get_container",
+    "ts": "2026-09-17T08:57:48.673114022Z"
+  },
+  {
+    "source": "container",
+    "line": "    container_dict = get_obj(local, \"tree_manager_containers\")",
+    "ts": "2026-09-17T08:57:48.673148784Z"
+  },
+  {
+    "source": "container",
+    "line": "                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.673163566Z"
+  },
+  {
+    "source": "container",
+    "line": "  File \"/usr/local/lib/python3.12/dist-packages/torch/_inductor/cudagraph_trees.py\", line 359, in get_obj",
+    "ts": "2026-09-17T08:57:48.673169314Z"
+  },
+  {
+    "source": "container",
+    "line": "    assert torch._C._is_key_in_tls(attr_name)",
+    "ts": "2026-09-17T08:57:48.673191347Z"
+  },
+  {
+    "source": "container",
+    "line": "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "ts": "2026-09-17T08:57:48.673207401Z"
+  },
+  {
+    "source": "container",
+    "line": "AssertionError",
+    "ts": "2026-09-17T08:57:48.673211637Z"
+  }
+]

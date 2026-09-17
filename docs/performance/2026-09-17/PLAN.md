@@ -47,9 +47,13 @@ baseline. A failed or slower experiment is a result, not something to omit.
   excluding storage. Re-query before provisioning.
 - Keep the test pod warm between runs per user authorization. Record IDs, actual
   hourly price, creation time, and final running state. Do not modify old pods.
-- Current obstacle: pod create returned `Your account balance is too low to rent
-  a pod. Please add funds to your account.` No test pod was created. User has
-  been asked to fund the account. Local preparation continues.
+- Funding resolved on 2026-09-17. Baseline pod `0pxb4bss2jmbhg` was created in
+  EU-CZ-1 after EU-RO-1 reported insufficient capacity. One PRO 6000 at $2.09/hour;
+  pinned image and original three-shape warmup. API system logs were received
+  while SSH was still unavailable. Container logs and original-image inference
+  are verified. Original warmup failed; the main-thread correction compiled all
+  three resolutions. See RESULTS.md for exact identities and measurements.
+
 
 ## Measurement contract
 
@@ -88,6 +92,8 @@ baseline. A failed or slower experiment is a result, not something to omit.
 | ID | Experiment | Values / comparison | Outcome needed |
 |---|---|---|---|
 | T00 | Tool update and API logs | installed version, auth, pod system/container logs, optional serverless logs | Real log evidence and limitations |
+| F00 | Fix warmup thread ownership/lifecycle | original background thread versus no-grad/main-thread warmup | Reproduced failure, thread regression, all selected shapes warm on GPU |
+| F01 | Forward dynamic-pod step/alpha settings | original app payload versus corrected payload in both layouts | Real transmitted values; label changed-step gains honestly |
 | B00 | Immutable image cold boot | pinned image, no old cache, one then two GPUs if available | Boot/compile time and environment |
 | B01 | Compute baseline | 256x144, 512x288, 768x448, 1024x576, 1280x720; 2/3/4 steps | FPS/latency/resolution frontier |
 | B02 | Baseline through WebRTC | local pod client then actual local browser/WAN; 30/60/120 send FPS | Compute versus transport bottleneck |
