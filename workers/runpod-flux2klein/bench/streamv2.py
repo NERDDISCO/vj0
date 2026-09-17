@@ -134,6 +134,7 @@ def main():
                         first_output = done - start
                 source_index = None
                 positions = None
+                output_start = output_end = None
                 if a.arrival_fps:
                     if a.mode == 'single':
                         positions = pipe.pipeline_manager.pipeline.kv_cache_starts.tolist()
@@ -154,14 +155,20 @@ def main():
                         if source_index is None:
                             raise RuntimeError('Decoded output has no verified source latent chunk')
                         source_chunk = chunks[source_index]
-                        if count != source_chunk.end_idx - source_chunk.start_idx:
+                        # TAEHV discards the separate frame-zero anchor latent
+                        # on first decode; emitted frames begin at input 1.
+                        output_start = source_chunk.start_idx + int(pipe.use_taehv and source_index == 0)
+                        output_end = source_chunk.end_idx
+                        if count != output_end - output_start:
                             raise RuntimeError('Decoded frame count differs from its source chunk')
                         capture_ages.extend((done - (start + frame_index/a.arrival_fps))*1000
-                            for frame_index in range(source_chunk.start_idx, source_chunk.end_idx))
+                            for frame_index in range(output_start, output_end))
                 records.append({'input_start': chunk.start_idx, 'input_end': chunk.end_idx,
                     'output_frames': count, 'elapsed_ms': timings[-1], 'noise_scale': noise_scale,
                     'adaptive_timestep': encoded.current_step,
                     'output_source_chunk_index': source_index,
+                    'output_source_frame_range': [output_start, output_end] if count and a.arrival_fps else None,
+                    'omitted_initial_source_frame': 0 if pipe.use_taehv and source_index == 0 and count else None,
                     'rolling_latent_positions': positions,
                     'chunk_submission_delay_ms': (t0 - available) * 1000 if available is not None else None,
                     'submitted_chunk_available_to_completion_ms': (done - available) * 1000 if available is not None else None})

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "taehv-arrival30-single-anchor-corrected",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/post-stream-20260917/taehv-arrival30-single-anchor-corrected",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "taehv-arrival30-single-wo-anchor-corrected",
+    "cwd": "/workspace/streamdiffusionv2-20260917",
+    "argv": [
+      "/workspace/envs/streamv2/bin/python",
+      "/workspace/livebench-20260917/streamv2.py",
+      "--checkpoint-folder",
+      "/workspace/streamdiffusionv2-20260917/ckpts/wan_causal_dmd_v2v",
+      "--output",
+      "/workspace/post-stream-20260917/taehv-arrival30-single-wo-anchor-corrected",
+      "--frames",
+      "65",
+      "--repeats",
+      "3",
+      "--taehv",
+      "--arrival-fps",
+      "30",
+      "--mode",
+      "single-wo",
+      "--noise-scale",
+      "0.95"
+    ],
+    "env": {
+      "HF_HOME": "/workspace/hf-streamv2-cache"
+    },
+    "timeout_seconds": 900
+  },
+  {
+    "name": "live-compute-service",
+    "argv": [
+      "node",
+      "/workspace/livebench-20260917/server.js"
+    ],
+    "cwd": "/app",
+    "env": {
+      "PORT": "3001",
+      "WORKER_COUNT": "1",
+      "INFERENCE_SCRIPT": "/workspace/livebench-20260917/inference_server.py",
+      "PYTHONPATH": "/workspace/livebench-20260917",
+      "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",
+      "USE_VAE_FP8": "1",
+      "COMPILE_MODE": "reduce-overhead"
+    },
+    "timeout_seconds": 21600
+  }
+]

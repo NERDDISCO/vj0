@@ -20,9 +20,17 @@ const send=(method,params={},session)=>new Promise((resolve,reject)=>{
 try{
   await new Promise((resolve,reject)=>{socket.addEventListener('open',resolve,{once:true});socket.addEventListener('error',reject,{once:true});});
   if(request.targetId)sessionId=(await send('Target.attachToTarget',{targetId:request.targetId,flatten:true})).sessionId;
-  const result=await send(request.method,request.params||{},sessionId);
-  if(result.exceptionDetails)throw new Error(JSON.stringify(result.exceptionDetails));
-  console.log(JSON.stringify(result));
+  for (const command of request.commands || [request]) {
+    const result=await send(command.method,command.params||{},sessionId);
+    if(result.exceptionDetails)throw new Error(JSON.stringify(result.exceptionDetails));
+    console.log(JSON.stringify(result));
+  }
+  clearTimeout(timer);
+  // New-document scripts are owned by the attached CDP session. Keep it alive
+  // during app navigation/reconnect tests; detaching removes those scripts.
+  if (request.keepAliveSeconds) {
+    await new Promise(resolve => setTimeout(resolve, request.keepAliveSeconds * 1000));
+  }
 }finally{
   if(sessionId)await send('Target.detachFromTarget',{sessionId}).catch(()=>{});
   clearTimeout(timer);socket.close();

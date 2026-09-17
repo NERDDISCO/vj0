@@ -1,0 +1,44 @@
+[
+  {
+    "size": "512x288",
+    "mse_pixels_0_255": 63.601808901186345,
+    "psnr_db": 30.09610893259876,
+    "note": "FP8 VAE versus BF16 VAE; diagnostic only, BF16 is a comparator, not perceptual ground truth",
+    "fp8": {
+      "path": "/tmp/vj0-quality-20260917/compute/baseline-secondary/512x288-2step-a-uncompressed.png",
+      "sha256": "9a4a1536d40c2497df39861ca257150edaed543eb37e21227c5849ec1a56a4f3"
+    },
+    "bf16": {
+      "path": "/tmp/vj0-quality-20260917/compute/vae-bf16/512x288-2step-a-uncompressed.png",
+      "sha256": "cfedd537267b04417e39dca25b3691b379a567ba0c66cc67e903b98546abc9ec"
+    }
+  },
+  {
+    "size": "768x448",
+    "mse_pixels_0_255": 41.24778432694693,
+    "psnr_db": 31.97679735992257,
+    "note": "FP8 VAE versus BF16 VAE; diagnostic only, BF16 is a comparator, not perceptual ground truth",
+    "fp8": {
+      "path": "/tmp/vj0-quality-20260917/compute/baseline-secondary/768x448-2step-a-uncompressed.png",
+      "sha256": "4248646e822d4675dee1ed8b136b61d17ec0d3efa757428a95a6fa029c9c75e8"
+    },
+    "bf16": {
+      "path": "/tmp/vj0-quality-20260917/compute/vae-bf16/768x448-2step-a-uncompressed.png",
+      "sha256": "4c47d809017b5fa4de280ff44309345108a32ffaa2b3c6442b404d6309b2d1a7"
+    }
+  },
+  {
+    "size": "1024x576",
+    "mse_pixels_0_255": 68.9502936469184,
+    "psnr_db": 29.745442407698963,
+    "note": "FP8 VAE versus BF16 VAE; diagnostic only, BF16 is a comparator, not perceptual ground truth",
+    "fp8": {
+      "path": "/tmp/vj0-quality-20260917/compute/baseline-secondary/1024x576-2step-a-uncompressed.png",
+      "sha256": "2db1be6ae7b2c29b7ea01a1db5a0e0d2e9b9598b79c406b66029c35b77a33b24"
+    },
+    "bf16": {
+      "path": "/tmp/vj0-quality-20260917/compute/vae-bf16/1024x576-2step-a-uncompressed.png",
+      "sha256": "55ea21573986be79e7742bcbe6972efa03b5a1324efdd4d03e119fc71b2936eb"
+    }
+  }
+]

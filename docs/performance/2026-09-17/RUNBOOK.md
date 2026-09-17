@@ -12,20 +12,26 @@ three startup shapes compiled with main-thread warmup, but the original dispatch
 subsequently restarted workers with phantom pending work and during compilation.
 Those early higher-resolution attempts were stopped; later candidate trials measured 14.03 FPS at 768x448 and 8.10 FPS at 1024x576.
 
-The first seven-job compute sweep and the following 30-trial live discovery
-batch are complete. Raw results are committed. The current service is wrtc
-0.10.0 on port 3001, controlled by `/workspace/wrtc010-service-20260917/sweep.json`
-(runner 26559, Node 26718 at launch). Original Node 499 remains paused while this
-service runs. Always verify manifest/process identity before signaling anything.
+The first seven-job compute sweep, 30 live discovery trials, and 24 wrtc 0.10
+trials plus one clean replacement are complete. Checkpoint `5c64612` is pushed.
+StreamDiffusionV2 is running under runner 28436, manifest
+`/workspace/stream-sweep-20260917/sweep.json`; original Node 499 is paused.
+A follow-up waiter 30655 starts `post-stream-jobs.json` after that sweep finishes:
+two corrected paced-input tests (TAEHV omits frame zero) then the isolated
+configurable compute service on port 3001. Its manifest will be
+`/workspace/post-stream-20260917/sweep.json`. All files are in separate
+`/workspace/livebench-20260917/`; active Stream files are unchanged.
+The next WAN queue is `browser-live-compute-jobs.json` (36 alternating trials).
+Only start it after the service's three shapes have warmed and no other client
+is attached. The harness requires worker telemetry to confirm the requested
+compute variant and timing clock.
 
-The 24-trial `browser-wrtc010-jobs.json` comparison is running from the Mac.
-`bench/after_browser.py` waits for every persisted result, runs the replacement
-for the trial affected by a local build, then terminates this test service,
-waits for process-group cleanup, and starts the 24 jobs in
-`stream-extended-jobs.json`. Transition record:
-`/tmp/vj0-stream-transition-20260917.json`. If any batch is incomplete/invalid,
-this transition fails for inspection rather than starting competing GPU work.
-The next GPU manifest will be `/workspace/stream-sweep-20260917/sweep.json`.
+Local app builds: current branch on port 18766, detached 7139e0f baseline on
+18767 (`/tmp/vj0-app-baseline-20260917`). A CDP init session must remain attached
+for its new-document probe to survive navigation; `bench/cdp.mjs` now supports
+command arrays and keepAliveSeconds for that purpose. The audio fixture has
+produced real analyser RMS around 0.14 at amplitude 0.2; GPU app/soak measurements
+remain pending. UI captures will be saved separately from timed runs.
 
 Second pod `9vj8k6guaxsbhw` has two PRO 6000 GPUs. GPU 0 is running the serial
 extended compute jobs; GPU 1 is deliberately idle during these isolated trials.

@@ -28,7 +28,7 @@ export async function runBenchmark(options) {
     prompt: "colorful abstract art, vibrant neon lights, psychedelic patterns",
     inputQuality: 0.85, outputQuality: null, sendFps: 60, seconds: 30,
     warmupFrames: 20, maxBufferedBytes: 256 * 1024, telemetryEveryMs: 0,
-    mode: "stream", frameIds: false, channelOptions: {}, ...options };
+    mode: "stream", frameIds: false, channelOptions: {}, inputScene: 'waveform', ...options };
   if (c.frameIds && c.outputQuality === null) c.outputQuality = 80;
   if (!c.server || !["stream", "single"].includes(c.mode) || c.seconds <= 0 || c.sendFps <= 0 ||
       c.warmupFrames < 1 || c.width % 16 || c.height % 16 || Math.min(c.width, c.height) < 16) {
@@ -56,6 +56,19 @@ export async function runBenchmark(options) {
   }
   const canvas = new OffscreenCanvas(c.width, c.height);
   const ctx = canvas.getContext("2d");
+  if (!['waveform', 'high-entropy'].includes(c.inputScene)) throw new Error('Unknown input scene');
+  let stressBackground;
+  if (c.inputScene === 'high-entropy') {
+    stressBackground = ctx.createImageData(c.width, c.height);
+    let random = 42;
+    for (let i=0; i<stressBackground.data.length; i+=4) {
+      for (let color=0; color<3; color++) {
+        random ^= random << 13; random ^= random >>> 17; random ^= random << 5;
+        stressBackground.data[i+color] = random & 255;
+      }
+      stressBackground.data[i+3] = 255;
+    }
+  }
   const output = new OffscreenCanvas(c.width, c.height);
   const outCtx = output.getContext("2d");
   const pc = new RTCPeerConnection({ iceServers: [{ urls: "stun:stun.l.google.com:19302" }] });
@@ -81,8 +94,11 @@ export async function runBenchmark(options) {
   const captures = new Map();
 
   function drawInput(index) {
-    ctx.fillStyle = "#0a0a0a";
-    ctx.fillRect(0, 0, c.width, c.height);
+    if (stressBackground) ctx.putImageData(stressBackground, 0, 0);
+    else {
+      ctx.fillStyle = "#0a0a0a";
+      ctx.fillRect(0, 0, c.width, c.height);
+    }
     ctx.strokeStyle = "#fff";
     ctx.lineWidth = Math.max(2, c.width / 128);
     ctx.beginPath();

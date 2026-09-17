@@ -305,3 +305,47 @@ On GPU 0 of the second pod (same PRO 6000 model), the additional compute
 frontier medians were 49.49/39.47/32.43 FPS at 256x144 for 2/3/4 steps,
 and 4.84/3.66/2.91 FPS at 1280x720. See `compute-resolution-frontier.json`.
 These include JPEG decode, inference and JPEG encode, excluding transport/display.
+
+## Secondary confirmation, compression and Stream discovery
+
+The second pod's final baseline repeat measured 28.64 / 13.95 / 8.24 FPS.
+The constants/no-stage-sync combination measured 29.38 / 14.20 / 8.34 FPS,
+approximately +2.6% / +1.8% / +1.2%. The small gain appears on both hosts;
+36 alternating live trials remain required before promotion.
+
+VAE FP8 versus BF16 sample comparisons have diagnostic PSNR 30.10 / 31.98 /
+29.75 dB at the three main sizes. The composition and appearance are similar
+on visual inspection; BF16 is a comparator, not perceptual ground truth.
+See `vae-quality-comparison.json` for exact sample identities. Disabling VAE
+FP8 has no demonstrated substantial throughput benefit.
+
+Re-encoding nine uncompressed outputs from the current GPU baseline gives
+median size ratios to JPEG 80 of 2.077 / 1.164 / 1 / 0.806 / 0.689 / 0.614
+for quality 95/85/80/70/60/50. Quality 60 has median PSNR 30.05 dB versus
+31.49 at quality 80. This is an offline compression diagnostic using the
+recorded local Pillow version, not an additional live FPS result.
+Raw data: `jpeg-current-worker.json`.
+
+Initial StreamDiffusionV2 1.3B warm repeat ranges at native 832x480:
+
+| Decoder / mode / steps | Decoded output FPS | Output/input frames per clip |
+|---|---:|---:|
+| Standard / single / 2 | 13.58–13.84 | 61/65 |
+| Standard / single-wo / 2 | 13.73–13.98 | 65/65 |
+| TAEHV / single / 2 | 20.64–21.06 | 60/65 |
+| TAEHV / single-wo / 2 | 21.04–21.24 | 64/65 |
+| TAEHV / single / 1 | 27.33–27.87 | See raw clip count |
+| TAEHV / single / 4 | 12.94–13.20 | See raw clip count |
+
+Each job has three clips, with the cold first clip explicitly excluded from
+these warm ranges. These are offline decoded throughput, not browser FPS or
+audio-to-display latency. Raw records are in `stream-results/`. At noise 0.8,
+the output mainly preserves/recolours the waveform, visibly different from
+FLUX's stronger abstract transformation. Higher-noise, 14B, TensorRT and paced
+input tests are still running/queued.
+
+The first paced TAEHV tests correctly stopped on a frame-count assertion:
+TAEHV deliberately removes the frame-zero anchor, so its first four outputs
+correspond to source frames 1–4. A corrected benchmark tracks this omission
+and is queued separately; failed attempts remain recorded. No upstream
+production/model code was changed for the correction.

@@ -1,0 +1,461 @@
+{
+  "kind": "offline JPEG compression; archived generated outputs; no live FPS measurement",
+  "python": "3.11.15",
+  "pillow": "11.3.0",
+  "numpy": "2.3.3",
+  "platform": "macOS-26.3.1-arm64-arm-64bit",
+  "summary": {
+    "95": {
+      "images": 9,
+      "median_bytes": 70060,
+      "median_bytes_relative_to_q80": 2.077050113895216,
+      "median_psnr_db": 32.354970133790516
+    },
+    "85": {
+      "images": 9,
+      "median_bytes": 38225,
+      "median_bytes_relative_to_q80": 1.1635825314581791,
+      "median_psnr_db": 31.868753200426593
+    },
+    "80": {
+      "images": 9,
+      "median_bytes": 32661,
+      "median_bytes_relative_to_q80": 1.0,
+      "median_psnr_db": 31.4916263471232
+    },
+    "70": {
+      "images": 9,
+      "median_bytes": 26220,
+      "median_bytes_relative_to_q80": 0.8058330405100146,
+      "median_psnr_db": 30.680754029754702
+    },
+    "60": {
+      "images": 9,
+      "median_bytes": 22480,
+      "median_bytes_relative_to_q80": 0.688795743185583,
+      "median_psnr_db": 30.04689330901423
+    },
+    "50": {
+      "images": 9,
+      "median_bytes": 20053,
+      "median_bytes_relative_to_q80": 0.6139738526070849,
+      "median_psnr_db": 29.56698978722402
+    }
+  },
+  "images": [
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/1024x576-2step-a-uncompressed.png",
+      "sha256": "2db1be6ae7b2c29b7ea01a1db5a0e0d2e9b9598b79c406b66029c35b77a33b24",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 72946,
+          "mse": 0.0006918204599060118,
+          "psnr_db": 31.600065983018713,
+          "bytes_relative_to_q80": 2.077050113895216
+        },
+        "85": {
+          "bytes": 40678,
+          "mse": 0.000775548571255058,
+          "psnr_db": 31.103909978922978,
+          "bytes_relative_to_q80": 1.158257403189066
+        },
+        "80": {
+          "bytes": 35120,
+          "mse": 0.0008362581138499081,
+          "psnr_db": 30.77659655432614,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 28704,
+          "mse": 0.0009694027830846608,
+          "psnr_db": 30.134957377836994,
+          "bytes_relative_to_q80": 0.8173120728929385
+        },
+        "60": {
+          "bytes": 24997,
+          "mse": 0.0010968426940962672,
+          "psnr_db": 29.598556531770154,
+          "bytes_relative_to_q80": 0.711759681093394
+        },
+        "50": {
+          "bytes": 22698,
+          "mse": 0.0012105109635740519,
+          "psnr_db": 29.170312728078326,
+          "bytes_relative_to_q80": 0.6462984054669704
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/1024x576-2step-b-uncompressed.png",
+      "sha256": "e214a2e3b2d1059caf5251cdeae29c2bc4abbbf01d72caa110c50213ff00f564",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 58939,
+          "mse": 0.0005814374308101833,
+          "psnr_db": 32.354970133790516,
+          "bytes_relative_to_q80": 2.0549124886688515
+        },
+        "85": {
+          "bytes": 33022,
+          "mse": 0.0006503163604065776,
+          "psnr_db": 31.868753200426593,
+          "bytes_relative_to_q80": 1.1513144132208353
+        },
+        "80": {
+          "bytes": 28682,
+          "mse": 0.0007022880017757416,
+          "psnr_db": 31.534847512150662,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 23894,
+          "mse": 0.0008142026490531862,
+          "psnr_db": 30.892674889532916,
+          "bytes_relative_to_q80": 0.8330660344466913
+        },
+        "60": {
+          "bytes": 21246,
+          "mse": 0.0009350863401778042,
+          "psnr_db": 30.291482871685428,
+          "bytes_relative_to_q80": 0.7407433233386793
+        },
+        "50": {
+          "bytes": 19328,
+          "mse": 0.0009993142448365688,
+          "psnr_db": 30.002979218458158,
+          "bytes_relative_to_q80": 0.6738721149152779
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/1024x576-2step-blank-uncompressed.png",
+      "sha256": "f7dbf9d06341b539e3bb77f9d4d15de6f26f0d1388d3619d6d818e670c164959",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 26867,
+          "mse": 1.3755243344348855e-05,
+          "psnr_db": 48.61531722091958,
+          "bytes_relative_to_q80": 2.371733757062147
+        },
+        "85": {
+          "bytes": 12003,
+          "mse": 1.712274934106972e-05,
+          "psnr_db": 47.66426500886075,
+          "bytes_relative_to_q80": 1.0595868644067796
+        },
+        "80": {
+          "bytes": 11328,
+          "mse": 1.8045799151877873e-05,
+          "psnr_db": 47.43623880599998,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 10255,
+          "mse": 2.213083644164726e-05,
+          "psnr_db": 46.55002171471434,
+          "bytes_relative_to_q80": 0.9052789548022598
+        },
+        "60": {
+          "bytes": 10457,
+          "mse": 2.0418954591150396e-05,
+          "psnr_db": 46.89966496672069,
+          "bytes_relative_to_q80": 0.9231108757062146
+        },
+        "50": {
+          "bytes": 10092,
+          "mse": 2.2145515686133876e-05,
+          "psnr_db": 46.54714202169255,
+          "bytes_relative_to_q80": 0.8908898305084746
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/512x288-2step-a-uncompressed.png",
+      "sha256": "9a4a1536d40c2497df39861ca257150edaed543eb37e21227c5849ec1a56a4f3",
+      "dimensions": [
+        512,
+        288
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 82605,
+          "mse": 0.0010993503965437412,
+          "psnr_db": 29.588638625979904,
+          "bytes_relative_to_q80": 2.038119911176906
+        },
+        "85": {
+          "bytes": 47160,
+          "mse": 0.0014949326869100332,
+          "psnr_db": 28.2537836209653,
+          "bytes_relative_to_q80": 1.1635825314581791
+        },
+        "80": {
+          "bytes": 40530,
+          "mse": 0.0017476043431088328,
+          "psnr_db": 27.57556884661796,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 32640,
+          "mse": 0.0022332551889121532,
+          "psnr_db": 26.510616482657007,
+          "bytes_relative_to_q80": 0.8053293856402665
+        },
+        "60": {
+          "bytes": 27797,
+          "mse": 0.002693561604246497,
+          "psnr_db": 25.696730872877446,
+          "bytes_relative_to_q80": 0.6858376511226252
+        },
+        "50": {
+          "bytes": 24648,
+          "mse": 0.00309857283718884,
+          "psnr_db": 25.088382905688782,
+          "bytes_relative_to_q80": 0.6081421169504071
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/512x288-2step-b-uncompressed.png",
+      "sha256": "7fe528d799247cd8d1deb2b4f1bca8f6e808d449314d530f2006dfd4829a47b5",
+      "dimensions": [
+        512,
+        288
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 81389,
+          "mse": 0.001035113469697535,
+          "psnr_db": 29.850120400018515,
+          "bytes_relative_to_q80": 2.0427940364439534
+        },
+        "85": {
+          "bytes": 46416,
+          "mse": 0.0014318483881652355,
+          "psnr_db": 28.44102965037294,
+          "bytes_relative_to_q80": 1.1650017569399127
+        },
+        "80": {
+          "bytes": 39842,
+          "mse": 0.001676542917266488,
+          "psnr_db": 27.755853247323582,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 32106,
+          "mse": 0.0021549167577177286,
+          "psnr_db": 26.66569501541344,
+          "bytes_relative_to_q80": 0.8058330405100146
+        },
+        "60": {
+          "bytes": 27443,
+          "mse": 0.0025935648009181023,
+          "psnr_db": 25.86102896569731,
+          "bytes_relative_to_q80": 0.688795743185583
+        },
+        "50": {
+          "bytes": 24323,
+          "mse": 0.0030144809279590845,
+          "psnr_db": 25.207874594875754,
+          "bytes_relative_to_q80": 0.6104864213643894
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/512x288-2step-blank-uncompressed.png",
+      "sha256": "35edb3e4ba4f2df0eb50883db1efd450ac2b249179b640cf99795db847137be3",
+      "dimensions": [
+        512,
+        288
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 41269,
+          "mse": 0.0012638703919947147,
+          "psnr_db": 28.982974600152907,
+          "bytes_relative_to_q80": 2.235711577008505
+        },
+        "85": {
+          "bytes": 22005,
+          "mse": 0.0014539683470502496,
+          "psnr_db": 28.374450479825136,
+          "bytes_relative_to_q80": 1.1921014139444173
+        },
+        "80": {
+          "bytes": 18459,
+          "mse": 0.0015923709142953157,
+          "psnr_db": 27.979557636905582,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 14484,
+          "mse": 0.00187443639151752,
+          "psnr_db": 27.27129292655959,
+          "bytes_relative_to_q80": 0.7846578904599383
+        },
+        "60": {
+          "bytes": 12149,
+          "mse": 0.0021670255810022354,
+          "psnr_db": 26.641359619508144,
+          "bytes_relative_to_q80": 0.6581613305162793
+        },
+        "50": {
+          "bytes": 10679,
+          "mse": 0.0024723855312913656,
+          "psnr_db": 26.06883806618275,
+          "bytes_relative_to_q80": 0.5785253805731622
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/768x448-2step-a-uncompressed.png",
+      "sha256": "4248646e822d4675dee1ed8b136b61d17ec0d3efa757428a95a6fa029c9c75e8",
+      "dimensions": [
+        768,
+        448
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 70060,
+          "mse": 0.000515051418915391,
+          "psnr_db": 32.88149412052975,
+          "bytes_relative_to_q80": 2.1313619908125703
+        },
+        "85": {
+          "bytes": 38373,
+          "mse": 0.0006360054248943925,
+          "psnr_db": 31.96539179962197,
+          "bytes_relative_to_q80": 1.167381582549968
+        },
+        "80": {
+          "bytes": 32871,
+          "mse": 0.0007093120948411524,
+          "psnr_db": 31.4916263471232,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 26342,
+          "mse": 0.0008549182675778866,
+          "psnr_db": 30.680754029754702,
+          "bytes_relative_to_q80": 0.8013750722521371
+        },
+        "60": {
+          "bytes": 22582,
+          "mse": 0.000989260501228273,
+          "psnr_db": 30.04689330901423,
+          "bytes_relative_to_q80": 0.6869885309239147
+        },
+        "50": {
+          "bytes": 20102,
+          "mse": 0.001104844151996076,
+          "psnr_db": 29.56698978722402,
+          "bytes_relative_to_q80": 0.6115420887712574
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/768x448-2step-b-uncompressed.png",
+      "sha256": "1be9d3cc47a2c62828de026d1060acb058424b1319aec0631b2099164fde58c4",
+      "dimensions": [
+        768,
+        448
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 70534,
+          "mse": 0.0003843859303742647,
+          "psnr_db": 34.152325171342056,
+          "bytes_relative_to_q80": 2.159578702427972
+        },
+        "85": {
+          "bytes": 38225,
+          "mse": 0.0005060815019533038,
+          "psnr_db": 32.957795365233096,
+          "bytes_relative_to_q80": 1.1703560821775205
+        },
+        "80": {
+          "bytes": 32661,
+          "mse": 0.0005677675362676382,
+          "psnr_db": 32.45829443129093,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 26220,
+          "mse": 0.0006895171827636659,
+          "psnr_db": 31.614549067376426,
+          "bytes_relative_to_q80": 0.8027923211169284
+        },
+        "60": {
+          "bytes": 22480,
+          "mse": 0.0007824370404705405,
+          "psnr_db": 31.06550598287951,
+          "bytes_relative_to_q80": 0.6882826612779768
+        },
+        "50": {
+          "bytes": 20053,
+          "mse": 0.0008697276934981346,
+          "psnr_db": 30.60616701085578,
+          "bytes_relative_to_q80": 0.6139738526070849
+        }
+      }
+    },
+    {
+      "input": "/tmp/vj0-quality-20260917/compute/baseline-secondary/768x448-2step-blank-uncompressed.png",
+      "sha256": "bbb074af621db4d078c615bb775d2a05af1db26800c08353b5346ea3b4ee2408",
+      "dimensions": [
+        768,
+        448
+      ],
+      "qualities": {
+        "95": {
+          "bytes": 12632,
+          "mse": 2.7950401999987662e-05,
+          "psnr_db": 45.53611941440497,
+          "bytes_relative_to_q80": 1.66057578546076
+        },
+        "85": {
+          "bytes": 8113,
+          "mse": 3.566447412595153e-05,
+          "psnr_db": 44.47764175284996,
+          "bytes_relative_to_q80": 1.0665176810832129
+        },
+        "80": {
+          "bytes": 7607,
+          "mse": 3.8260084693320096e-05,
+          "psnr_db": 44.17254072944352,
+          "bytes_relative_to_q80": 1.0
+        },
+        "70": {
+          "bytes": 6990,
+          "mse": 4.099741636309773e-05,
+          "psnr_db": 43.87243511441361,
+          "bytes_relative_to_q80": 0.9188904955961614
+        },
+        "60": {
+          "bytes": 6818,
+          "mse": 4.7380177420563996e-05,
+          "psnr_db": 43.24403317344203,
+          "bytes_relative_to_q80": 0.8962797423425792
+        },
+        "50": {
+          "bytes": 6626,
+          "mse": 5.095155938761309e-05,
+          "psnr_db": 42.928425197425014,
+          "bytes_relative_to_q80": 0.8710398317339293
+        }
+      }
+    }
+  ]
+}
