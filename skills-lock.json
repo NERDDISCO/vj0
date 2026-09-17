@@ -2,9 +2,10 @@
   "version": 1,
   "skills": {
     "runpodctl": {
-      "source": "runpod/skills",
+      "source": "runpod/runpod-plugins-official",
       "sourceType": "github",
-      "computedHash": "5f499fae0e1007c90915a10df00e804181995f0da2fd433831a6b97f16a39264"
+      "skillPath": "plugins/runpod/skills/runpodctl/SKILL.md",
+      "computedHash": "4d17354b4af4156c8d380b269393befd0561b660c68a4dc4435340ca6f6032d2"
     }
   }
 }
