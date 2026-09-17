@@ -1,0 +1,46 @@
+✖ next: healthy 60 Hz input captures all available frames at 60 FPS (20.263333ms)
+✖ legacy: healthy 60 Hz input captures all available frames at 60 FPS (15.036417ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 181.458125
+
+✖ failing tests:
+
+test at workers/runpod-flux2klein/bench/test_capture.mjs:46:3
+✖ next: healthy 60 Hz input captures all available frames at 60 FPS (20.263333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  400 !== 600
+  
+      at TestContext.<anonymous> (file:///Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/test_capture.mjs:55:12)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 400,
+    expected: 600,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workers/runpod-flux2klein/bench/test_capture.mjs:46:3
+✖ legacy: healthy 60 Hz input captures all available frames at 60 FPS (15.036417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  400 !== 600
+  
+      at TestContext.<anonymous> (file:///Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/test_capture.mjs:55:12)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 400,
+    expected: 600,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

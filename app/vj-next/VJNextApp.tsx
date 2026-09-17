@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AudioEngine } from "@/src/lib/audio-engine";
 import type { AudioFeatures } from "@/src/lib/audio-features";
 import { WebRtcAiTransport } from "@/src/lib/ai/webrtc-transport";
+import { isCaptureFrameDue, advanceCaptureFrameDeadline } from "@/src/lib/ai/capture-cadence";
 import type {
   AiTransportStatus,
   AiIncomingFrame,
@@ -648,7 +649,7 @@ export function VJNextApp() {
   // images — without it, the worker has no source to img2img against.
   const senderRef = useRef<{
     running: boolean;
-    lastFrameTime: number;
+    nextFrameTime: number;
     pendingEncode: boolean;
     captureCanvas: HTMLCanvasElement | null;
     captureCtx: CanvasRenderingContext2D | null;
@@ -657,7 +658,7 @@ export function VJNextApp() {
     generation: number;
   }>({
     running: false,
-    lastFrameTime: 0,
+    nextFrameTime: 0,
     pendingEncode: false,
     captureCanvas: null,
     captureCtx: null,
@@ -666,18 +667,15 @@ export function VJNextApp() {
     generation: 0,
   });
 
-  const aiFrameLoop = useCallback(() => {
+  const aiFrameLoop = useCallback((timestamp: number) => {
     const sender = senderRef.current;
     if (!sender.running) return;
     sender.rafId = requestAnimationFrame(aiFrameLoop);
 
-    const now = performance.now();
-    const frameInterval = 1000 / aiFrameRate;
-    if (now - sender.lastFrameTime < frameInterval) return;
+    if (!isCaptureFrameDue(timestamp, sender.nextFrameTime)) return;
 
     const src = inputCanvasRef.current;
     if (!src || src.width === 0 || src.height === 0) return;
-    sender.lastFrameTime = now;
     if (!aiTransport.isConnected() || !aiTransport.canSend(256 * 1024) || sender.pendingEncode) return;
 
     const capW = outWidth;
@@ -695,6 +693,7 @@ export function VJNextApp() {
 
     ctx.drawImage(src, 0, 0, capW, capH);
 
+    sender.nextFrameTime = advanceCaptureFrameDeadline(timestamp, sender.nextFrameTime, aiFrameRate);
     sender.pendingEncode = true;
     const generation = sender.generation;
     sender.captureCanvas.toBlob(
@@ -732,7 +731,7 @@ export function VJNextApp() {
     if (generating && aiStatus === "connected") {
       if (!sender.running) {
         sender.running = true;
-        sender.lastFrameTime = 0;
+        sender.nextFrameTime = 0;
         sender.rafId = requestAnimationFrame(aiFrameLoop);
       }
     } else {

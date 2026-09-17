@@ -1,0 +1,23 @@
+{
+  "recordedUtc": "2026-09-17T19:54:31.831205+00:00",
+  "scope": "isolated browser capture, no React app, GPU, WebRTC or WAN",
+  "sourceBefore": "01aa639ba661feb4298797cb292abfbd396bcb8a",
+  "browser60Trials": 12,
+  "fpsSetting": 60,
+  "jpegQuality": 0.85,
+  "sourceCanvas": [
+    1280,
+    720
+  ],
+  "source": "animated white waveform on black, redrawn once per browser animation frame",
+  "helper": "src/lib/ai/capture-cadence.ts",
+  "helperSha256": "16249e762aeda2f977058dccedd9a748d299d9d4684edce2aed47c2e87d211d3",
+  "timedProbeSha256": "57282a2cbab5673e2fa033ad199e05b90d4cda21ed660bac6672aee168f33345",
+  "noCodeBuildDuringMatrix": true,
+  "browserClosed": true,
+  "browser30Trials": 6,
+  "fps30TrialSeconds": 8,
+  "helperRuntimeFunctionsSha256": "65f8a899cf7aa8831973c8c77c5a36d99612dfb44ff273a2708e952c2c605880",
+  "timedHelperFunctionsMatchCurrentProduction": true,
+  "helperCommentUpdatedAfter60ProbePreparation": true
+}

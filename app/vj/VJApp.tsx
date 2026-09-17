@@ -1,6 +1,7 @@
 "use client";
 
 import { createLatestFrameDecoder } from "@/src/lib/ai/latest-frame-decoder";
+import { isCaptureFrameDue, advanceCaptureFrameDeadline } from "@/src/lib/ai/capture-cadence";
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { AudioEngine } from "@/src/lib/audio-engine";
 import { VisualEngine, SCENES } from "@/src/lib/scenes";
@@ -1329,7 +1330,8 @@ export function VJApp() {
     captureCanvas: HTMLCanvasElement | null;
     captureCtx: CanvasRenderingContext2D | null;
     debugCtx: CanvasRenderingContext2D | null;
-    lastFrameTime: number;
+    nextFrameTime: number;
+    nextDebugFrameTime: number;
     resolution: number;
     frameCount: number;
     pendingEncode: boolean;
@@ -1340,7 +1342,8 @@ export function VJApp() {
     captureCanvas: null,
     captureCtx: null,
     debugCtx: null,
-    lastFrameTime: 0,
+    nextFrameTime: 0,
+    nextDebugFrameTime: 0,
     resolution: 0,
     frameCount: 0,
     pendingEncode: false,
@@ -1348,34 +1351,30 @@ export function VJApp() {
     generation: 0,
   });
 
-  const aiFrameLoop = useCallback(() => {
+  const aiFrameLoop = useCallback((timestamp: number) => {
     const sender = aiFrameSenderRef.current;
     if (!sender.running) return;
 
     sender.rafId = requestAnimationFrame(aiFrameLoop);
 
-    const now = performance.now();
-    const frameInterval = 1000 / aiFrameRate;
-
-    if (now - sender.lastFrameTime < frameInterval) {
-      return;
-    }
+    const captureDue = isCaptureFrameDue(timestamp, sender.nextFrameTime);
+    const debugDue = aiShowCaptureDebug && isCaptureFrameDue(timestamp, sender.nextDebugFrameTime);
+    if (!captureDue && !debugDue) return;
 
     const src = canvasRef.current;
     if (!src) {
       return;
     }
-    sender.lastFrameTime = now;
     const connected = aiTransport.isConnected();
     const admitted = connected && aiTransport.canSend(256 * 1024);
-    const maySend = admitted && !sender.pendingEncode;
-    if (!maySend && 'diag' in aiTransport) {
+    const maySend = captureDue && admitted && !sender.pendingEncode;
+    if (captureDue && !maySend && 'diag' in aiTransport) {
       if (!connected) (aiTransport as any).diag.sendSkippedNotConnected++;
       else if (!admitted) (aiTransport as any).diag.sendSkippedBackpressure++;
       else (aiTransport as any).diag.sendSkippedPendingEncode++;
     }
     // Capture debug remains useful while disconnected or congested.
-    if (!maySend && !aiShowCaptureDebug) return;
+    if (!maySend && !debugDue) return;
 
     // Capture at the output resolution — VisualEngine already renders at
     // the same dimensions, so this is a straight 1:1 copy. No crop, no
@@ -1400,7 +1399,10 @@ export function VJApp() {
 
     sender.frameCount++;
 
-    const debugCanvas = aiDebugCanvasRef.current;
+    if (debugDue) {
+      sender.nextDebugFrameTime = advanceCaptureFrameDeadline(timestamp, sender.nextDebugFrameTime, aiFrameRate);
+    }
+    const debugCanvas = debugDue ? aiDebugCanvasRef.current : null;
     if (debugCanvas) {
       if (!sender.debugCtx || debugCanvas.width !== capW || debugCanvas.height !== capH) {
         debugCanvas.width = capW;
@@ -1412,6 +1414,7 @@ export function VJApp() {
 
     if (!maySend) return;
 
+    sender.nextFrameTime = advanceCaptureFrameDeadline(timestamp, sender.nextFrameTime, aiFrameRate);
     sender.pendingEncode = true;
     const generation = sender.generation;
     sender.captureCanvas.toBlob(
@@ -1466,7 +1469,8 @@ export function VJApp() {
     if (aiSendFrames || aiShowCaptureDebug) {
       if (!sender.running) {
         sender.running = true;
-        sender.lastFrameTime = 0;
+        sender.nextFrameTime = 0;
+        sender.nextDebugFrameTime = 0;
         sender.rafId = requestAnimationFrame(aiFrameLoop);
       }
     } else {

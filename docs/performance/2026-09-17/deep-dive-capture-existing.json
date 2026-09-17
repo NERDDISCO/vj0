@@ -1,0 +1,446 @@
+{
+  "source-order-next-1024x576-confirmation": {
+    "seconds": 60.210800048828126,
+    "browser": {
+      "encode-start": {
+        "count": 2301,
+        "fps": 38.215735352029824,
+        "interval_ms": {
+          "count": 2300,
+          "mean": 26.165739109205163,
+          "p50": 32.300048828125,
+          "p95": 33.900146484375,
+          "p99": 34.699951171875,
+          "min": 16.5,
+          "max": 49.5
+        }
+      },
+      "encode-done": {
+        "count": 2301,
+        "fps": 38.215735352029824,
+        "interval_ms": {
+          "count": 2300,
+          "mean": 26.166260933254076,
+          "p50": 29.0,
+          "p95": 37.300048828125,
+          "p99": 40.50100097656252,
+          "min": 7.7998046875,
+          "max": 47.5
+        }
+      },
+      "sent": {
+        "count": 2301,
+        "fps": 38.215735352029824,
+        "interval_ms": {
+          "count": 2300,
+          "mean": 26.16626082710598,
+          "p50": 29.0,
+          "p95": 37.599853515625,
+          "p99": 41.10009765625,
+          "min": 7.699951171875,
+          "max": 47.39990234375
+        }
+      },
+      "received": {
+        "count": 1025,
+        "fps": 17.02352400514149,
+        "interval_ms": {
+          "count": 1024,
+          "mean": 58.62744140625,
+          "p50": 53.9000244140625,
+          "p95": 137.85000000000002,
+          "p99": 170.58702636718743,
+          "min": 0.2001953125,
+          "max": 196.199951171875
+        }
+      },
+      "encode_duration_ms": {
+        "count": 2301,
+        "mean": 7.4314634347158846,
+        "p50": 6.89990234375,
+        "p95": 12.099853515625,
+        "p99": 14.5,
+        "min": 2.800048828125,
+        "max": 24.900146484375
+      },
+      "send_buffer_bytes_after_send": {
+        "count": 2301,
+        "mean": 11797.093437635811,
+        "p50": 8204.0,
+        "p95": 32610.0,
+        "p99": 40928.0,
+        "min": 8104,
+        "max": 57274
+      },
+      "observed_encode_pending_fraction": 0.2840403525801159
+    },
+    "worker_delivered_frames": {
+      "queue_wait_ms": {
+        "count": 1025,
+        "mean": 181.26761658536586,
+        "p50": 205.071,
+        "p95": 221.644,
+        "p99": 229.5544,
+        "min": 24.639,
+        "max": 240.589
+      },
+      "decode_in_ms": {
+        "count": 1025,
+        "mean": 0.6814146341463415,
+        "p50": 0.66,
+        "p95": 0.7879999999999996,
+        "p99": 0.86,
+        "min": 0.59,
+        "max": 1.21
+      },
+      "prompt_ms": {
+        "count": 1025,
+        "mean": 1.951219512195122e-05,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "min": 0,
+        "max": 0.01
+      },
+      "vae_encode_ms": {
+        "count": 1025,
+        "mean": 17.818292682926828,
+        "p50": 17.54,
+        "p95": 17.94,
+        "p99": 27.305999999999997,
+        "min": 17.19,
+        "max": 35.5
+      },
+      "transformer_plus_decode_ms": {
+        "count": 1025,
+        "mean": 92.11725853658537,
+        "p50": 92.17,
+        "p95": 93.804,
+        "p99": 95.86280000000001,
+        "min": 88.1,
+        "max": 100.57
+      },
+      "jpeg_ms": {
+        "count": 1025,
+        "mean": 0.7218731707317073,
+        "p50": 0.72,
+        "p95": 0.76,
+        "p99": 0.82,
+        "min": 0.69,
+        "max": 0.98
+      },
+      "total_ms": {
+        "count": 1025,
+        "mean": 111.39353170731707,
+        "p50": 111.15,
+        "p95": 114.452,
+        "p99": 122.1964,
+        "min": 107.01,
+        "max": 130.75
+      }
+    },
+    "limits": [
+      "No rAF-attempt, deadline-skip, pending-skip or pre-send buffer samples in these old logs.",
+      "Encode pending fraction excludes Blob.arrayBuffer and callback completion.",
+      "Worker queue/stage timing describes delivered frames; discarded results are not represented.",
+      "Independent duration percentiles cannot be added to reconstruct latency percentiles.",
+      "This is analysis of existing trials, not a new FPS or causal optimization benchmark."
+    ]
+  },
+  "source-order-next-512x288-confirmation": {
+    "seconds": 60.204300048828124,
+    "browser": {
+      "encode-start": {
+        "count": 2263,
+        "fps": 37.58867719024414,
+        "interval_ms": {
+          "count": 2262,
+          "mean": 26.59787804884367,
+          "p50": 32.0,
+          "p95": 34.199951171875,
+          "p99": 45.516921386718714,
+          "min": 16.5,
+          "max": 50.599853515625
+        }
+      },
+      "encode-done": {
+        "count": 2263,
+        "fps": 37.58867719024414,
+        "interval_ms": {
+          "count": 2262,
+          "mean": 26.597656897587864,
+          "p50": 28.599853515625,
+          "p95": 38.59509277343748,
+          "p99": 43.60009765625,
+          "min": 7.5,
+          "max": 53.099853515625
+        }
+      },
+      "sent": {
+        "count": 2263,
+        "fps": 37.58867719024414,
+        "interval_ms": {
+          "count": 2262,
+          "mean": 26.597701149425287,
+          "p50": 28.5,
+          "p95": 38.800048828125,
+          "p99": 44.09994873046875,
+          "min": 7.2998046875,
+          "max": 53.89990234375
+        }
+      },
+      "received": {
+        "count": 2019,
+        "fps": 33.53581053782719,
+        "interval_ms": {
+          "count": 2018,
+          "mean": 29.817789915177464,
+          "p50": 20.1500244140625,
+          "p95": 100.800048828125,
+          "p99": 123.82999999999993,
+          "min": 0.099853515625,
+          "max": 186.0
+        }
+      },
+      "encode_duration_ms": {
+        "count": 2263,
+        "mean": 7.158068809896984,
+        "p50": 6.400146484375,
+        "p95": 12.990014648437509,
+        "p99": 20.53794433593751,
+        "min": 1.800048828125,
+        "max": 35.699951171875
+      },
+      "send_buffer_bytes_after_send": {
+        "count": 2263,
+        "mean": 3419.9650905877156,
+        "p50": 3419.0,
+        "p95": 3457.9,
+        "p99": 3469.0,
+        "min": 3335,
+        "max": 10250
+      },
+      "observed_encode_pending_fraction": 0.26908225695520244
+    },
+    "worker_delivered_frames": {
+      "queue_wait_ms": {
+        "count": 2019,
+        "mean": 12.081636948984647,
+        "p50": 0.052,
+        "p95": 42.06519999999998,
+        "p99": 73.72676,
+        "min": 0.009,
+        "max": 140.18
+      },
+      "decode_in_ms": {
+        "count": 2019,
+        "mean": 0.24723130262506193,
+        "p50": 0.23,
+        "p95": 0.3,
+        "p99": 0.36819999999999936,
+        "min": 0.18,
+        "max": 7.34
+      },
+      "prompt_ms": {
+        "count": 2019,
+        "mean": 8.915304606240714e-05,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "min": 0,
+        "max": 0.03
+      },
+      "vae_encode_ms": {
+        "count": 2019,
+        "mean": 5.990208023774145,
+        "p50": 4.14,
+        "p95": 14.621999999999998,
+        "p99": 25.545199999999976,
+        "min": 3.81,
+        "max": 61.84
+      },
+      "transformer_plus_decode_ms": {
+        "count": 2019,
+        "mean": 28.403600792471522,
+        "p50": 27.59,
+        "p95": 32.3,
+        "p99": 44.24179999999997,
+        "min": 26.11,
+        "max": 72.17
+      },
+      "jpeg_ms": {
+        "count": 2019,
+        "mean": 0.26620108964834077,
+        "p50": 0.26,
+        "p95": 0.31,
+        "p99": 0.3381999999999994,
+        "min": 0.22,
+        "max": 3.51
+      },
+      "total_ms": {
+        "count": 2019,
+        "mean": 34.945131253095596,
+        "p50": 32.54,
+        "p95": 46.260999999999996,
+        "p99": 64.47899999999994,
+        "min": 30.39,
+        "max": 105.9
+      }
+    },
+    "limits": [
+      "No rAF-attempt, deadline-skip, pending-skip or pre-send buffer samples in these old logs.",
+      "Encode pending fraction excludes Blob.arrayBuffer and callback completion.",
+      "Worker queue/stage timing describes delivered frames; discarded results are not represented.",
+      "Independent duration percentiles cannot be added to reconstruct latency percentiles.",
+      "This is analysis of existing trials, not a new FPS or causal optimization benchmark."
+    ]
+  },
+  "source-order-next-768x448-ten-minute-soak": {
+    "seconds": 600.2528999023438,
+    "browser": {
+      "encode-start": {
+        "count": 22219,
+        "fps": 37.01606440154617,
+        "interval_ms": {
+          "count": 22218,
+          "mean": 27.01459177023908,
+          "p50": 32.0,
+          "p95": 34.699951171875,
+          "p99": 50.0,
+          "min": 15.0,
+          "max": 82.0
+        }
+      },
+      "encode-done": {
+        "count": 22220,
+        "fps": 37.01773036600908,
+        "interval_ms": {
+          "count": 22219,
+          "mean": 27.01470362982906,
+          "p50": 28.199951171875,
+          "p95": 40.60009765625,
+          "p99": 48.300048828125,
+          "min": 5.699951171875,
+          "max": 87.900146484375
+        }
+      },
+      "sent": {
+        "count": 22220,
+        "fps": 37.01773036600908,
+        "interval_ms": {
+          "count": 22219,
+          "mean": 27.014694630721454,
+          "p50": 28.10009765625,
+          "p95": 40.699951171875,
+          "p99": 48.2001513671875,
+          "min": 5.60009765625,
+          "max": 92.39990234375
+        }
+      },
+      "received": {
+        "count": 16182,
+        "fps": 26.958636938918044,
+        "interval_ms": {
+          "count": 16181,
+          "mean": 37.092781660517154,
+          "p50": 29.0,
+          "p95": 82.400146484375,
+          "p99": 131.83984375000014,
+          "min": 0.099853515625,
+          "max": 264.0
+        }
+      },
+      "encode_duration_ms": {
+        "count": 22220,
+        "mean": 8.47948745191902,
+        "p50": 7.400146484375,
+        "p95": 18.89990234375,
+        "p99": 23.199951171875,
+        "min": 1.89990234375,
+        "max": 60.199951171875
+      },
+      "send_buffer_bytes_after_send": {
+        "count": 22220,
+        "mean": 7657.460261026103,
+        "p50": 5690.0,
+        "p95": 17869.0,
+        "p99": 35447.10000000001,
+        "min": 3777,
+        "max": 141953
+      },
+      "observed_encode_pending_fraction": 0.313921198704642
+    },
+    "worker_delivered_frames": {
+      "queue_wait_ms": {
+        "count": 16182,
+        "mean": 81.74219960449882,
+        "p50": 78.5455,
+        "p95": 123.49185000000001,
+        "p99": 128.16647,
+        "min": 0.018,
+        "max": 174.108
+      },
+      "decode_in_ms": {
+        "count": 16182,
+        "mean": 0.42940613026819924,
+        "p50": 0.42,
+        "p95": 0.52,
+        "p99": 0.56,
+        "min": 0.33,
+        "max": 0.94
+      },
+      "prompt_ms": {
+        "count": 16182,
+        "mean": 4.5729823260412805e-05,
+        "p50": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "min": 0,
+        "max": 0.02
+      },
+      "vae_encode_ms": {
+        "count": 16182,
+        "mean": 9.003277098010134,
+        "p50": 8.74,
+        "p95": 9.12,
+        "p99": 18.429500000000026,
+        "min": 8.36,
+        "max": 42.57
+      },
+      "transformer_plus_decode_ms": {
+        "count": 16182,
+        "mean": 53.57055555555556,
+        "p50": 53.51,
+        "p95": 55.6,
+        "p99": 57.71570000000002,
+        "min": 50.69,
+        "max": 72.42
+      },
+      "jpeg_ms": {
+        "count": 16182,
+        "mean": 0.45944382647385984,
+        "p50": 0.45,
+        "p95": 0.53,
+        "p99": 0.56,
+        "min": 0.41,
+        "max": 1.04
+      },
+      "total_ms": {
+        "count": 16182,
+        "mean": 63.50560066740823,
+        "p50": 63.17,
+        "p95": 66.29950000000001,
+        "p99": 74.78190000000001,
+        "min": 59.93,
+        "max": 101.73
+      }
+    },
+    "limits": [
+      "No rAF-attempt, deadline-skip, pending-skip or pre-send buffer samples in these old logs.",
+      "Encode pending fraction excludes Blob.arrayBuffer and callback completion.",
+      "Worker queue/stage timing describes delivered frames; discarded results are not represented.",
+      "Independent duration percentiles cannot be added to reconstruct latency percentiles.",
+      "This is analysis of existing trials, not a new FPS or causal optimization benchmark."
+    ]
+  }
+}

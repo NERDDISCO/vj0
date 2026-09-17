@@ -1,0 +1,70 @@
+{
+  "boundary": "Actual app with local browser WebRTC JPEG echo; no GPU/model/WAN. Unique submissions, not physical display FPS.",
+  "buildId": "gnnxKcQmt4pHnefUWfVCv",
+  "origin": "http://127.0.0.1:18767",
+  "fixture": {
+    "vj0-ai-settings-storage": {
+      "version": 8,
+      "state": {
+        "backend": "pod",
+        "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+        "autoConnect": false,
+        "sendFrames": false,
+        "showAi": true,
+        "showCaptureDebug": false,
+        "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+        "captureSize": 512,
+        "outputWidth": 512,
+        "outputHeight": 288,
+        "frameRate": 60,
+        "seed": 42,
+        "kleinSteps": 2,
+        "kleinAlpha": 0.1,
+        "sceneId": "waveform",
+        "stageSharpen": 0.6,
+        "stageScanlines": true,
+        "stageVignette": true,
+        "stagePixelate": false,
+        "stagePixelateSize": 8
+      }
+    },
+    "vj0-composer-scenes": {
+      "version": 1,
+      "state": {
+        "scenes": [
+          {
+            "id": "benchmark-waveform",
+            "name": "Benchmark waveform",
+            "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+            "background": "#0a0a0a",
+            "createdAt": 0,
+            "elements": [
+              {
+                "id": "benchmark-wave",
+                "kind": "waveform",
+                "name": "Waveform",
+                "props": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "size": 0.48,
+                  "aspect": 4,
+                  "rotation": 0,
+                  "color": "#ffffff",
+                  "opacity": 1,
+                  "stroke": 0.012,
+                  "text": ""
+                },
+                "bindings": {}
+              }
+            ]
+          }
+        ],
+        "activeSceneId": "benchmark-waveform",
+        "selectedElementId": null
+      }
+    }
+  },
+  "runnerSha": "6cbceecf0e653730a8cc720389f04e4fe57ad67d38602eaf044d77489fbf6e56",
+  "probeSha": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685",
+  "loopbackSha": "ef36c6f795b4ce410d580b926b8855cd27f296978ca1c911dbaa02f80100a622"
+}

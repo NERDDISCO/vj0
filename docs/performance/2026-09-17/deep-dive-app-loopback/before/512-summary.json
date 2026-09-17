@@ -1,0 +1,37 @@
+{
+  "width": 512,
+  "height": 288,
+  "seconds": 30.0022001953125,
+  "targets": {
+    "main": {
+      "fps": {
+        "encode-start": 38.63050017848626,
+        "encode-done": 38.63050017848626,
+        "sent": 38.63050017848626,
+        "received": 38.63050017848626,
+        "stage-post": 38.63050017848626,
+        "preview-image-loaded": 38.63050017848626,
+        "preview-image-raf": 38.597169289635104
+      },
+      "errors": [],
+      "channelStates": [
+        "open"
+      ],
+      "sourceOrderValid": true,
+      "visible": true
+    },
+    "stage": {
+      "fps": {
+        "stage-message": 38.63050017848626,
+        "bitmap-decoded": 38.63050017848626,
+        "webgl-frame-submitted": 38.63050017848626
+      },
+      "errors": [],
+      "channelStates": [],
+      "sourceOrderValid": true,
+      "visible": true
+    }
+  },
+  "audioActive": true,
+  "status": "passed"
+}
