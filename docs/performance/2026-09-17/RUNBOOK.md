@@ -2,23 +2,23 @@
 
 ## Current next action
 
-Checkpoint at 13:01 UTC, 2026-09-17. Continue the selected plan until every row
+Checkpoint at 13:11 UTC, 2026-09-17. Continue the selected plan until every row
 has a measured, failed, or concretely unsuitable outcome. Funding and warm paid
 pods are authorized. No UI redesign, main deployment, or stable image overwrite.
 Original snapshot `a10fdbe` is pushed; perf branch `perf/2026-09-live-bench` last
-pushed checkpoint is `51315b3`; newer local commits also need the final push.
+pushed checkpoint is `97bc5bd`; newer local changes also need the final push.
 
 **Active Mac queues:**
-- `/tmp/vj0-app-comparison-20260917`: eleven/twelve jobs started; the Next layout's
-  six comparisons passed, legacy comparisons continue. Smoke4 passed.
+- `/tmp/vj0-app-comparison-20260917`: all twelve app comparisons passed and are pushed
+  under app-comparison/ (raw frame logs gzip-compressed). Smoke4 passed.
 - `/tmp/vj0-after-app-comparisons.py` (PID 80695) waits for all twelve measured
   app trials and closed tabs, then runs thirteen `browser-responsive-jobs.json`
   trials into `/tmp/vj0-browser-responsive-20260917`. Last trial restores JPEG80.
-- `/tmp/vj0-finish-queues-20260917.py` (PID 96095) waits for those thirteen trials.
+- `/tmp/vj0-finish-queues-20260917.py` (PID 1155) waits for those thirteen trials.
   It starts Pod A same-host tests and Pod B scaling in parallel on separate GPUs.
   Pod A then transitions to the five explicit TRT/native tests. Pod B runs
   eighteen scaling trials, twelve frame-aware buffer trials, transitions to the
-  isolated Torch2.13 service, runs eighteen alternating within-stack live trials,
+  isolated Torch2.13 service, runs twenty-seven alternating baseline/combined/combined-two-GPU live trials,
   then the actual-app ten-minute soak plus prompt/resolution/reconnect stress.
   Every transition stops on failed prerequisites; inspect any failure and resume
   deliberately. No additional Mac WAN or app client may overlap timed batches.
@@ -40,15 +40,17 @@ The final TRT service now has no automatic six-hour timeout; keep it warm.
 
 **Pod B** `9vj8k6guaxsbhw`, two PRO6000 GPUs, $4.18 GPU/hour.
 Runner48800 `/workspace/scaling-service-20260917/sweep.json`: both Torch2.13
-confirmations and the late original control passed. Node60552 is warming two
+confirmations and the late original control passed. Node60552 has warmed both three-shape
 workers on3001; original Node567 remains paused. Latest staged source hashes:
 server5c1396ab0e1907b75a078a1ebdbfa0f0e29c75391b7c95c917ebdfaf48798179,
 workerbdff1fa8918c2985a91a5c77b8b6d494cc24178a81b972cf77576f9b6a036b11.
 `scaling-extended-source.jsonl` preserves prior and final identities.
 Waiter58492 `/workspace/scaling-livebench-20260917/wait-telemetry-service.py`
-waits for both workers' three-shape completion, then runs eight same-host
+finished both workers' three-shape wait and all eight same-host
 sync/async telemetry controls into `/workspace/telemetry-controlled-20260917`.
-Its log is `/workspace/telemetry-service-waiter.log`. The Mac coordinator will
+Its log is `/workspace/telemetry-service-waiter.log`.
+All eight controls measured; async mean28.59FPS versus sync28.73FPS with polling.
+Delivered-frame queue p95 approximately69ms; GPU0 utilization78–81%. The Mac coordinator will
 not begin scaling until all eight controls are measured. These loopback clients
 can overlap Pod A WAN tests; they share neither GPU nor Mac network workload.
 Latest samehost client SHA8a3d4ba25d04257d0c359fc38db785dcc2f76e8e68cd2e597b8569d2342a26f6.
@@ -60,11 +62,13 @@ Torch2.13. All12 dependency-retry jobs completed; collect their final JSONL and
 environment files, including FA4, normalization, all-constants and profiling.
 
 The future new-stack service uses the same generated dispatcher/worker but
-WORKER_COUNT1 and the isolated venv's PATH plus its separate caches. Its manifest
+WORKER_COUNT2 and the isolated venv's PATH plus its separate caches. Its manifest
 will be `/workspace/torch213-live-service-20260917/sweep.json`. Current-stack
 versus refreshed-stack WAN batches are sequential; within-stack baseline versus
-combined is alternating. Preserve that distinction. The final app soak explicitly
-uses the new-stack combined variant, pending3, JPEG80 and telemetry enabled.
+combined/combined-two-GPU is alternating. Preserve that distinction. The final
+app soak explicitly uses768x448, new-stack combined, two active workers, pending3,
+JPEG80 and telemetry enabled. Stress rotates1024→512→768, three actual changes.
+Coordinator warmup guard requires both workers to finish all three shapes.
 
 **Actual app:** production builds18766 candidate source4a02d2f and18767 baseline
 7139e0f. Main/stage targets and persistent CDP requests are listed in `/tmp/vj0-*
@@ -179,3 +183,6 @@ distinguish generated FPS, browser decoded/drawn FPS and actual app display FPS.
   the stable image tag or main branch before review.
 - State exactly which test resources remain running and their hourly cost.
 - Provide tweet-ready log/API conclusions limited to what actually worked.
+
+Latest account check13:08UTC: balance$78.3258, total spend$6.331/hour. A transient
+503 from the account endpoint cleared on retry; benchmark services were unaffected.

@@ -8,7 +8,7 @@
     "cwd": "/app",
     "env": {
       "PORT": "3001",
-      "WORKER_COUNT": "1",
+      "WORKER_COUNT": "2",
       "INFERENCE_SCRIPT": "/workspace/scaling-livebench-20260917/inference_server.py",
       "PYTHONPATH": "/workspace/scaling-livebench-20260917",
       "NODE_PATH": "/workspace/wrtc010-20260917/node_modules:/app/node_modules",

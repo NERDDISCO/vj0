@@ -61,7 +61,7 @@ def main():
             time.sleep(1)
         raise TimeoutError(expression)
 
-    def stress(folder):
+    def stress(folder, initial_size):
         """Separate lifecycle trial; deliberate disconnects aren't steady FPS."""
         actions, intentional_disconnects = [], []
         for target in targets:
@@ -100,7 +100,9 @@ def main():
                     'settings_sent_at':sent['at'], 'first_subsequent_capture_received_at':row['at'],
                     'settings_to_new_capture_receive_ms':row['at']-sent['at'], 'frame_id':row['id']})
                 time.sleep(2)
-            for width, height in [(768,448),(1024,576),(512,288)]:
+            shapes = [(512,288),(768,448),(1024,576)]
+            index = shapes.index(initial_size)
+            for width, height in shapes[index+1:] + shapes[:index+1]:
                 before = evaluate('main', 'performance.timeOrigin+performance.now()')
                 value = f'{width}x{height}'
                 evaluate('main', '(()=>{const s=Array.from(document.querySelectorAll("select")).find(s=>Array.from(s.options).some(o=>o.value==="512x288"));s.value='+json.dumps(value)+';s.dispatchEvent(new Event("change",{bubbles:true}));})()')
@@ -184,12 +186,15 @@ def main():
             server = job['server'].rstrip('/')
             request = urllib.request.Request(server+'/benchmark/config', data=json.dumps({
                 'maxPending':job.get('maxPending',3), 'maxOutboundBytes':1048576,
+                **({'activeWorkers':job['activeWorkers']} if 'activeWorkers' in job else {}),
                 'benchmarkVariant':job.get('variant','baseline')}).encode(), headers={
                     'Content-Type':'application/json', 'User-Agent':'Mozilla/5.0 vj0-performance-benchmark'})
             with urllib.request.urlopen(request, timeout=15) as response:
                 applied = json.load(response)
             if applied.get('benchmarkVariant') != job.get('variant','baseline'):
                 raise RuntimeError('Server did not confirm compute variant')
+            if 'activeWorkers' in job and applied.get('activeWorkers') != job['activeWorkers']:
+                raise RuntimeError('Server did not confirm active workers')
             origin = job['origin'].rstrip('/')
             # The stage's first visit seeds shared localStorage too. Complete
             # both init scripts before applying the final per-run fixture.
@@ -224,6 +229,8 @@ def main():
             if not warm_stats or any(r['timing'].get('benchmark_variant') != expected_variant or
                 r['timing'].get('stage_clock') != expected_clock for r in warm_stats):
                 raise RuntimeError('Worker telemetry did not confirm requested warmup compute variant')
+            if 'activeWorkers' in job and {r.get('worker') for r in warm_stats} != set(range(job['activeWorkers'])):
+                raise RuntimeError('Not all requested workers produced warmup frames')
             renderer = evaluate('stage', '(()=>{const g=document.querySelector("canvas").getContext("webgl2");const e=g.getExtension("WEBGL_debug_renderer_info");return {vendor:g.getParameter(g.VENDOR),renderer:e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER),userAgent:navigator.userAgent,viewport:[innerWidth,innerHeight],glBuffer:[g.drawingBufferWidth,g.drawingBufferHeight],devicePixelRatio}})()')
             renderer['mainViewport'] = evaluate('main', '[innerWidth,innerHeight]')
             renderer['focusEmulation'] = True
@@ -308,6 +315,17 @@ def main():
                     if not stats or any(r['timing'].get('benchmark_variant') != expected_variant or
                         r['timing'].get('stage_clock') != expected_clock for r in stats):
                         problems.append('main: missing or mismatched compute variant telemetry')
+                    if 'activeWorkers' in job:
+                        expected_workers = set(range(job['activeWorkers']))
+                        if {r.get('worker') for r in stats} != expected_workers:
+                            problems.append('main: measured worker identities differ from the requested pool')
+                        summary['worker_activity'] = {}
+                        for worker in sorted(expected_workers):
+                            at = [start] + [r['at'] for r in stats if r.get('worker') == worker] + [end]
+                            gap = max(b-a for a,b in zip(at,at[1:]))
+                            summary['worker_activity'][str(worker)] = {'frames':len(at)-2, 'max_gap_ms':gap}
+                            if gap > 2000:
+                                problems.append('main: worker '+str(worker)+' had an output gap over two seconds')
             summary.update(status='invalid' if problems else 'measured', problems=problems,
                 measurement='Actual app capture/preview + stage GL submission in a 1920x1080 viewport; actual GL buffer sizes recorded separately; excludes physical display presentation', config=job)
             (folder/'summary.json').write_text(json.dumps(summary, indent=2)+'\n')
@@ -325,7 +343,7 @@ def main():
                 record['stress_status'] = 'running'
                 (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
                 try:
-                    record['stress_status'] = stress(folder)['status']
+                    record['stress_status'] = stress(folder, (job.get('width',512), job.get('height',288)))['status']
                 except BaseException as error:
                     record.update(stress_status='failed', stress_error=str(error))
                     (a.output/'progress.json').write_text(json.dumps(progress, indent=2)+'\n')
