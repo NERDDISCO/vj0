@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-09-18T05:36:54.365969+00:00",
+  "apps": [
+    {
+      "name": "corrected",
+      "origin": "http://127.0.0.1:18766",
+      "directory": "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133",
+      "commit": "4170cee0d92dece12d5a78142bd1def9dd7550c9",
+      "build_id": "NoZBlZ3CHhwlKH9k4dmE_",
+      "build_id_in_served_html": true,
+      "served_html_sha256": "f736c069b7900cf8ebc811d22eee5ee81f69c86856e2736f57072e29024ed4ee"
+    },
+    {
+      "name": "baseline",
+      "origin": "http://127.0.0.1:18767",
+      "directory": "/tmp/vj0-capture-app-baseline-20260917",
+      "commit": "01aa639ba661feb4298797cb292abfbd396bcb8a",
+      "build_id": "gnnxKcQmt4pHnefUWfVCv",
+      "build_id_in_served_html": true,
+      "served_html_sha256": "80434ed431ede3d41bc8ed10ebbe72faa3168c2ce2a6741acf493dff02049f2a"
+    }
+  ]
+}

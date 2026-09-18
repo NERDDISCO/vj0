@@ -1,0 +1,23 @@
+[
+  {
+    "name": "before-512-r0",
+    "status": "failed",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18767",
+      "variant": "combined",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "before-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 60,
+      "outputCast": "cpu"
+    },
+    "error": "Capture/encoder/worker work did not drain while connected; policy unchanged"
+  }
+]

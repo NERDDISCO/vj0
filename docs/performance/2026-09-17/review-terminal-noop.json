@@ -1,0 +1,1410 @@
+{
+  "audit_utc": "2026-09-17T20:20:02.690744+00:00",
+  "reviewer": "/root/model_deep_dive",
+  "status": "passed_with_limitations",
+  "scope": "Independent audit of terminal-noop full compute matrix; does not accept the whole ongoing optimization task or establish actual app FPS.",
+  "input_directory": "/tmp/vj0-terminal-results-20260917/terminal-noop-full-20260917",
+  "artifact_sha256": {
+    "result.json": "935ee851adbf2a3d379f1b107e266775c1fb12ad1ee928b967ce2ab2a690c627",
+    "records.jsonl": "77e81b6b51ccdc970900422462e6dde404cc6b3a182738795d67e425bdbd4050"
+  },
+  "run_started_utc": "2026-09-17T19:57:21.092958+00:00",
+  "run_finished_utc": "2026-09-17T20:16:46.629031+00:00",
+  "run_status": "complete",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "torchao": "0.17.0+cu128",
+    "diffusers": "0.38.0.dev0",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0"
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "arguments": {
+    "worker_script": "/workspace/baseline-20260917/inference_server.py",
+    "output": "/workspace/terminal-noop-full-20260917",
+    "sizes": [
+      [
+        512,
+        288
+      ],
+      [
+        768,
+        448
+      ],
+      [
+        1024,
+        576
+      ]
+    ],
+    "steps": "2,3,4",
+    "alphas": "0.05,0.10,0.18",
+    "seeds": "42,123",
+    "frames": 100,
+    "repeats": 3,
+    "warmup": 8,
+    "quality_phases": 3
+  },
+  "record_counts": {
+    "warmup": 9,
+    "quality": 162,
+    "measured": 54
+  },
+  "quality": {
+    "cases": 162,
+    "exact_cartesian_coverage": true,
+    "checks_all_true": true,
+    "checked_boolean_fields": [
+      "pixels_equal",
+      "jpeg_equal",
+      "callback_latents_equal",
+      "latents_finite",
+      "reference_terminal_latents_equal",
+      "actual_generate_pixels_equal",
+      "actual_generate_jpeg_equal",
+      "traced_and_actual_generate_equal",
+      "global_rng_unchanged"
+    ],
+    "global_rng_comparisons": 648,
+    "global_rng_all_unchanged": true,
+    "traced_reference_and_candidate_latent_snapshots": 972,
+    "pixel_mse_all_zero": true,
+    "one_terminal_skip_per_candidate": true,
+    "source_snapshots_do_not_alias": "Callback uses detach().float().cpu().numpy().copy(); images/JPEG are materialized before the next variant.",
+    "png_pairs": [
+      {
+        "reference": "512x288-2step-reference.png",
+        "candidate": "512x288-2step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          512,
+          288
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "1dee8f75b16371d57479f3416bd587c4440efd510fa3956e9a6f6408907d055a",
+        "bytes": 280215
+      },
+      {
+        "reference": "512x288-3step-reference.png",
+        "candidate": "512x288-3step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          512,
+          288
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "1ac1a184dc6bea72dbdd66d9080a489d82e9171518cdd138a9cc784a1fbae226",
+        "bytes": 252632
+      },
+      {
+        "reference": "512x288-4step-reference.png",
+        "candidate": "512x288-4step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          512,
+          288
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "5671ceaceb8e50aafeba665a653155b5fcdb431059204208f7b0d3769cfad973",
+        "bytes": 240674
+      },
+      {
+        "reference": "768x448-2step-reference.png",
+        "candidate": "768x448-2step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          768,
+          448
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "9bcf2f913ff589de3dc278dab5d0464091413107510df704a79f3fda1e67a346",
+        "bytes": 639369
+      },
+      {
+        "reference": "768x448-3step-reference.png",
+        "candidate": "768x448-3step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          768,
+          448
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "6dbc1b143d89c736dbc4011b9e4ebaed9793afecbb81e92f162adda6bbdb448a",
+        "bytes": 546498
+      },
+      {
+        "reference": "768x448-4step-reference.png",
+        "candidate": "768x448-4step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          768,
+          448
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "01a3dc87f1c0c5873d1bf847f846aef37d995531555c679f18c24a93bf2678b3",
+        "bytes": 473048
+      },
+      {
+        "reference": "1024x576-2step-reference.png",
+        "candidate": "1024x576-2step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "5663000262d07feaa1912128253572fa4bd7be150bfe0deefcbdf2177a8e1b5b",
+        "bytes": 947097
+      },
+      {
+        "reference": "1024x576-3step-reference.png",
+        "candidate": "1024x576-3step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "c07944d1f55f8329bf5a53f3f7b8d216b5b259f632a088be6cf1fa98a262d550",
+        "bytes": 694055
+      },
+      {
+        "reference": "1024x576-4step-reference.png",
+        "candidate": "1024x576-4step-terminal-noop.png",
+        "png_bytes_equal": true,
+        "dimensions": [
+          1024,
+          576
+        ],
+        "png_header_matches_dimensions": true,
+        "sha256": "3434f9a7873d86242509a5b38a3bb64a3659405391a08993542c351b6acfdc24",
+        "bytes": 540115
+      }
+    ]
+  },
+  "source_identity": {
+    "worker_sha256": {
+      "expected": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+      "actual": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+      "match": true,
+      "local_path": "/tmp/vj0-baseline-20260917/inference_server.py"
+    },
+    "pipeline_sha256": {
+      "expected": "76cc461fd6d277926ae9df402a070b639145f3e647a1d87721338bc31bd384a9",
+      "actual": "76cc461fd6d277926ae9df402a070b639145f3e647a1d87721338bc31bd384a9",
+      "match": true,
+      "local_path": "/tmp/vj0-deep-model-research-20260917/diffusers-pinned-pipeline.txt"
+    },
+    "scheduler_sha256": {
+      "expected": "56a330bc5765578ac9738265c76a3213ab42ad61befe8c040777c538da52045d",
+      "actual": "56a330bc5765578ac9738265c76a3213ab42ad61befe8c040777c538da52045d",
+      "match": true,
+      "local_path": "/tmp/vj0-deep-model-research-20260917/scheduler-euler-pinned.txt"
+    },
+    "benchmark_sha256": {
+      "expected": "6a6f5912dbfaf0e098699b8be6400a5474a982bc4c2495658595997376eed5b2",
+      "actual": "6a6f5912dbfaf0e098699b8be6400a5474a982bc4c2495658595997376eed5b2",
+      "match": true,
+      "local_path": "workers/runpod-flux2klein/bench/bench_terminal_noop.py"
+    },
+    "helper_sha256": {
+      "expected": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "actual": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "match": true,
+      "local_path": "workers/runpod-flux2klein/bench/terminal_noop.py"
+    }
+  },
+  "measurement_validation": {
+    "trials": 54,
+    "frames": 5400,
+    "baseline_frames": 2700,
+    "candidate_frames": 2700,
+    "alternating_order_verified": true,
+    "max_fps_recalculation_error": 0.0,
+    "max_wall_minus_sum_frame_ms": 0.3209942951798439,
+    "clock": "time.perf_counter on one worker host; final CUDA synchronize included in each measured frame. UTC labels are separate bookkeeping clocks.",
+    "included": "Input JPEG decode, input VAE encode, generation+decode, output JPEG encode, final GPU synchronization.",
+    "excluded": "Model/prompt loading, IPC, WAN/WebRTC, browser capture/rendering, projector/display/audio acquisition.",
+    "raw_per_frame_durations_saved": false
+  },
+  "summary": [
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "baseline_median_fps": 29.31718841507867,
+      "candidate_median_fps": 30.26017417620027,
+      "ratio_of_medians": 1.0321649452795614,
+      "gain_percent": 3.2164945279561374,
+      "baseline_fps": [
+        24.58196745114211,
+        29.31718841507867,
+        29.93695515574412
+      ],
+      "candidate_fps": [
+        32.49001546044052,
+        30.127361712582434,
+        30.26017417620027
+      ],
+      "p95_improved_pairs": 0,
+      "p99_improved_pairs": 2
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 3,
+      "baseline_median_fps": 22.30345210447042,
+      "candidate_median_fps": 29.616760450706522,
+      "ratio_of_medians": 1.3279002870040126,
+      "gain_percent": 32.790028700401265,
+      "baseline_fps": [
+        21.99309832393516,
+        22.30345210447042,
+        22.723658695791478
+      ],
+      "candidate_fps": [
+        29.557620426405386,
+        29.616760450706522,
+        29.988559490398565
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 2
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 4,
+      "baseline_median_fps": 18.576391942116718,
+      "candidate_median_fps": 22.79279876011529,
+      "ratio_of_medians": 1.2269766287843582,
+      "gain_percent": 22.69766287843582,
+      "baseline_fps": [
+        18.675684039590077,
+        18.576391942116718,
+        18.4491727107561
+      ],
+      "candidate_fps": [
+        22.229023774474516,
+        22.79279876011529,
+        22.9921332574534
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 2
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "baseline_median_fps": 14.645171838050453,
+      "candidate_median_fps": 21.591563416921126,
+      "ratio_of_medians": 1.4743127397674405,
+      "gain_percent": 47.43127397674405,
+      "baseline_fps": [
+        14.69959551204172,
+        14.645171838050453,
+        13.72229857367641
+      ],
+      "candidate_fps": [
+        21.675260430015044,
+        21.591563416921126,
+        21.10380449339009
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 3,
+      "baseline_median_fps": 10.975157277198353,
+      "candidate_median_fps": 14.584032455548476,
+      "ratio_of_medians": 1.328822183336526,
+      "gain_percent": 32.88221833365259,
+      "baseline_fps": [
+        10.987153099716641,
+        10.975157277198353,
+        10.963944666400046
+      ],
+      "candidate_fps": [
+        14.545539294886401,
+        14.584032455548476,
+        14.62145461994796
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 4,
+      "baseline_median_fps": 8.776970297636865,
+      "candidate_median_fps": 10.955224741172229,
+      "ratio_of_medians": 1.2481783997972333,
+      "gain_percent": 24.81783997972333,
+      "baseline_fps": [
+        8.810753129829685,
+        8.748486778709228,
+        8.776970297636865
+      ],
+      "candidate_fps": [
+        10.955224741172229,
+        10.894164290145392,
+        10.96966525530536
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "baseline_median_fps": 8.248517307334271,
+      "candidate_median_fps": 11.943518036104292,
+      "ratio_of_medians": 1.4479593836197162,
+      "gain_percent": 44.79593836197162,
+      "baseline_fps": [
+        8.172277715159073,
+        8.253278789100596,
+        8.248517307334271
+      ],
+      "candidate_fps": [
+        11.894605163402597,
+        11.952917204261839,
+        11.943518036104292
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 3,
+      "baseline_median_fps": 6.418368183142733,
+      "candidate_median_fps": 8.470053739922744,
+      "ratio_of_medians": 1.3196584393784978,
+      "gain_percent": 31.96584393784978,
+      "baseline_fps": [
+        6.430042752319231,
+        6.39513889516624,
+        6.418368183142733
+      ],
+      "candidate_fps": [
+        8.470053739922744,
+        8.439748388983487,
+        8.490172858561069
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 4,
+      "baseline_median_fps": 5.15458025302571,
+      "candidate_median_fps": 6.405055796070702,
+      "ratio_of_medians": 1.2425950284333958,
+      "gain_percent": 24.259502843339575,
+      "baseline_fps": [
+        5.15458025302571,
+        5.153500277623022,
+        5.155802741334033
+      ],
+      "candidate_fps": [
+        6.405055796070702,
+        6.397075435616265,
+        6.405618849498994
+      ],
+      "p95_improved_pairs": 3,
+      "p99_improved_pairs": 3
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "repeat": 0,
+      "baseline_fps": 24.58196745114211,
+      "candidate_fps": 32.49001546044052,
+      "fps_ratio": 1.3217011829918028,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 40.67806186154485,
+        "p50": 33.15884340554476,
+        "p95": 52.631770749576376,
+        "p99": 67.78595482930803,
+        "min": 32.21900202333927,
+        "max": 574.7885028831661
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 30.77794305048883,
+        "p50": 22.836772724986076,
+        "p95": 55.77027432154864,
+        "p99": 61.01547711528838,
+        "min": 21.903987042605877,
+        "max": 61.161540914326906
+      },
+      "fps_improved": true,
+      "p95_improved": false,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "repeat": 1,
+      "baseline_fps": 29.31718841507867,
+      "candidate_fps": 30.127361712582434,
+      "fps_ratio": 1.0276347542620106,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 34.10894392989576,
+        "p50": 32.322084065526724,
+        "p95": 36.24527140054852,
+        "p99": 63.4129594406113,
+        "min": 32.127766869962215,
+        "max": 63.89325577765703
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 33.191711753606796,
+        "p50": 22.26771484129131,
+        "p95": 55.95871054101735,
+        "p99": 60.16095614060765,
+        "min": 21.91315032541752,
+        "max": 70.93788823112845
+      },
+      "fps_improved": true,
+      "p95_improved": false,
+      "p99_improved": true,
+      "max_improved": false
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 2,
+      "repeat": 2,
+      "baseline_fps": 29.93695515574412,
+      "candidate_fps": 30.26017417620027,
+      "fps_ratio": 1.0107966564660513,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 33.4027739148587,
+        "p50": 32.646699575707316,
+        "p95": 37.192745693027966,
+        "p99": 53.72411088552327,
+        "min": 32.14096603915095,
+        "max": 55.72328669950366
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 33.046000939793885,
+        "p50": 22.581950528547168,
+        "p95": 56.18565417826176,
+        "p99": 60.46260958537466,
+        "min": 21.85422321781516,
+        "max": 72.69174512475729
+      },
+      "fps_improved": true,
+      "p95_improved": false,
+      "p99_improved": false,
+      "max_improved": false
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 3,
+      "repeat": 0,
+      "baseline_fps": 21.99309832393516,
+      "candidate_fps": 29.557620426405386,
+      "fps_ratio": 1.3439498151216707,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 45.46758806332946,
+        "p50": 42.79809235595167,
+        "p95": 57.312126690521836,
+        "p99": 57.66019095201047,
+        "min": 42.572233360260725,
+        "max": 60.32277923077345
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 33.83151308167726,
+        "p50": 32.47201140038669,
+        "p95": 36.320228758268044,
+        "p99": 59.902986399829395,
+        "min": 32.281162682920694,
+        "max": 60.77934522181749
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": false,
+      "max_improved": false
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 3,
+      "repeat": 1,
+      "baseline_fps": 22.30345210447042,
+      "candidate_fps": 29.616760450706522,
+      "fps_ratio": 1.3279002870040126,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 44.83534240629524,
+        "p50": 43.151425663381815,
+        "p95": 56.764328526332974,
+        "p99": 56.989955320023,
+        "min": 42.574645951390266,
+        "max": 57.0288710296154
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 33.76389980316162,
+        "p50": 32.76832471601665,
+        "p95": 36.17909655440598,
+        "p99": 55.55302999913694,
+        "min": 32.29175880551338,
+        "max": 57.720836251974106
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": false
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 3,
+      "repeat": 2,
+      "baseline_fps": 22.723658695791478,
+      "candidate_fps": 29.988559490398565,
+      "fps_ratio": 1.319706473850207,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 44.00580519810319,
+        "p50": 43.21393836289644,
+        "p95": 47.13028464466331,
+        "p99": 57.299532783217735,
+        "min": 42.689235880970955,
+        "max": 58.4180080331862
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 33.345381543040276,
+        "p50": 32.8545980155468,
+        "p95": 35.53480161353946,
+        "p99": 35.717064030468485,
+        "min": 32.18967793509364,
+        "max": 39.767449256032705
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 4,
+      "repeat": 0,
+      "baseline_fps": 18.675684039590077,
+      "candidate_fps": 22.229023774474516,
+      "fps_ratio": 1.1902655735314331,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 53.54483282659203,
+        "p50": 53.51015483029187,
+        "p95": 53.984149219468236,
+        "p99": 54.18259688653052,
+        "min": 53.33351902663708,
+        "max": 54.33831596747041
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 44.9853378161788,
+        "p50": 43.88578329235315,
+        "p95": 52.06584529951215,
+        "p99": 56.710952450521354,
+        "min": 43.14008401706815,
+        "max": 69.65278508141637
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": false,
+      "max_improved": false
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 4,
+      "repeat": 1,
+      "baseline_fps": 18.576391942116718,
+      "candidate_fps": 22.79279876011529,
+      "fps_ratio": 1.2269766287843582,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 53.83089812472463,
+        "p50": 53.906101267784834,
+        "p95": 54.19492821674794,
+        "p99": 55.42010687757284,
+        "min": 53.25284926220775,
+        "max": 56.92696012556553
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 43.87229817453772,
+        "p50": 43.71091444045305,
+        "p95": 45.497917593456805,
+        "p99": 46.42092917580159,
+        "min": 43.15029922872782,
+        "max": 48.66824997588992
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "steps": 4,
+      "repeat": 2,
+      "baseline_fps": 18.4491727107561,
+      "candidate_fps": 22.9921332574534,
+      "fps_ratio": 1.246241965313095,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 54.20217713341117,
+        "p50": 54.051656974479556,
+        "p95": 54.80774422176182,
+        "p99": 57.16400832869115,
+        "min": 53.57433622702956,
+        "max": 63.18787066265941
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 43.49241123069078,
+        "p50": 43.248088797554374,
+        "p95": 44.029847462661564,
+        "p99": 46.81161424610764,
+        "min": 43.13029861077666,
+        "max": 46.998327132314444
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "repeat": 0,
+      "baseline_fps": 14.69959551204172,
+      "candidate_fps": 21.675260430015044,
+      "fps_ratio": 1.4745480861877422,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 68.02733993623406,
+        "p50": 67.9066707380116,
+        "p95": 68.1738029466942,
+        "p99": 71.47897776216269,
+        "min": 67.72772129625082,
+        "max": 71.72805489972234
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 46.13441505469382,
+        "p50": 45.716797234490514,
+        "p95": 48.984129750169814,
+        "p99": 54.381167627871065,
+        "min": 45.626494102180004,
+        "max": 59.878797736018896
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "repeat": 1,
+      "baseline_fps": 14.645171838050453,
+      "candidate_fps": 21.591563416921126,
+      "fps_ratio": 1.4743127397674405,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 68.28073272947222,
+        "p50": 68.12330661341548,
+        "p95": 68.44491006340832,
+        "p99": 71.86586591880769,
+        "min": 68.00350919365883,
+        "max": 72.64191703870893
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 46.31330855190754,
+        "p50": 45.72520009241998,
+        "p95": 49.46610596962273,
+        "p99": 53.55886699166149,
+        "min": 45.596149284392595,
+        "max": 54.0186301805079
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 2,
+      "repeat": 2,
+      "baseline_fps": 13.72229857367641,
+      "candidate_fps": 21.10380449339009,
+      "fps_ratio": 1.5379205152898858,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 72.87193570751697,
+        "p50": 72.7344851475209,
+        "p95": 76.9782125018537,
+        "p99": 83.65090387873352,
+        "min": 68.05833103135228,
+        "max": 84.38003901392221
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 47.383256987668574,
+        "p50": 46.20450455695391,
+        "p95": 53.24893593788147,
+        "p99": 54.088740781880915,
+        "min": 45.50510412082076,
+        "max": 54.62767230346799
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 3,
+      "repeat": 0,
+      "baseline_fps": 10.987153099716641,
+      "candidate_fps": 14.545539294886401,
+      "fps_ratio": 1.3238678994344342,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 91.01429260335863,
+        "p50": 90.81549965776503,
+        "p95": 91.07712351251394,
+        "p99": 94.25173496361825,
+        "min": 90.68010933697224,
+        "max": 100.20628478378057
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 68.7484171660617,
+        "p50": 68.29433492384851,
+        "p95": 71.27806881908327,
+        "p99": 80.72049109265208,
+        "min": 68.11963068321347,
+        "max": 81.79235830903053
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 3,
+      "repeat": 1,
+      "baseline_fps": 10.975157277198353,
+      "candidate_fps": 14.584032455548476,
+      "fps_ratio": 1.328822183336526,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 91.11358569934964,
+        "p50": 90.83646046929061,
+        "p95": 92.00975087005645,
+        "p99": 95.3770728269592,
+        "min": 90.62582813203335,
+        "max": 98.5913029871881
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 68.56599856633693,
+        "p50": 68.30585212446749,
+        "p95": 70.00723937526345,
+        "p99": 72.52617109101266,
+        "min": 68.16089199855924,
+        "max": 72.74876581504941
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 3,
+      "repeat": 2,
+      "baseline_fps": 10.963944666400046,
+      "candidate_fps": 14.62145461994796,
+      "fps_ratio": 1.3335943462718003,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 91.2068175431341,
+        "p50": 90.7704015262425,
+        "p95": 93.53959423024207,
+        "p99": 99.22231672797353,
+        "min": 90.61623364686966,
+        "max": 102.05277893692255
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 68.39149390347302,
+        "p50": 68.32384341396391,
+        "p95": 68.59533470124006,
+        "p99": 68.97523099556567,
+        "min": 68.2355328463018,
+        "max": 71.91029470413923
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 4,
+      "repeat": 0,
+      "baseline_fps": 8.810753129829685,
+      "candidate_fps": 10.955224741172229,
+      "fps_ratio": 1.2433925431507349,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 113.49607621785253,
+        "p50": 113.3514754474163,
+        "p95": 113.63932588137686,
+        "p99": 116.62957692984494,
+        "min": 113.20445220917463,
+        "max": 122.4982738494873
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 91.27961864229292,
+        "p50": 90.90756042860448,
+        "p95": 94.02177997399122,
+        "p99": 97.61556713376199,
+        "min": 90.78572504222393,
+        "max": 105.81495985388756
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 4,
+      "repeat": 1,
+      "baseline_fps": 8.748486778709228,
+      "candidate_fps": 10.894164290145392,
+      "fps_ratio": 1.2452627026491023,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 114.30340917780995,
+        "p50": 113.56281815096736,
+        "p95": 116.28317041322589,
+        "p99": 124.45128750056041,
+        "min": 113.26288897544146,
+        "max": 150.0152819789946
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 91.79071517661214,
+        "p50": 91.3618637714535,
+        "p95": 94.79746352881193,
+        "p99": 95.72872666176414,
+        "min": 90.85849300026894,
+        "max": 107.97361703589559
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "steps": 4,
+      "repeat": 2,
+      "baseline_fps": 8.776970297636865,
+      "candidate_fps": 10.96966525530536,
+      "fps_ratio": 1.2498236730115018,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 113.93234458286315,
+        "p50": 113.45992120914161,
+        "p95": 117.07526661921293,
+        "p99": 120.30760891269895,
+        "min": 113.32016438245773,
+        "max": 126.9145836122334
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 91.15941325668246,
+        "p50": 90.95884603448212,
+        "p95": 92.04644076526165,
+        "p99": 93.95800477825108,
+        "min": 90.80929961055517,
+        "max": 98.3078540302813
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "repeat": 0,
+      "baseline_fps": 8.172277715159073,
+      "candidate_fps": 11.894605163402597,
+      "fps_ratio": 1.4554822508465217,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 122.36169673968107,
+        "p50": 120.97406759858131,
+        "p95": 130.59065868146718,
+        "p99": 132.61246882844716,
+        "min": 120.28040084987879,
+        "max": 134.04090702533722
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 84.06929764896631,
+        "p50": 83.55587930418551,
+        "p95": 86.89050432294607,
+        "p99": 93.06508099194618,
+        "min": 82.8880607150495,
+        "max": 96.09409514814615
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "repeat": 1,
+      "baseline_fps": 8.253278789100596,
+      "candidate_fps": 11.952917204261839,
+      "fps_ratio": 1.4482628673645486,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 121.16215849295259,
+        "p50": 121.01822346448898,
+        "p95": 121.26449418719858,
+        "p99": 129.25702874548733,
+        "min": 120.45119283720851,
+        "max": 129.95852204039693
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 83.65978955291212,
+        "p50": 83.54297047480941,
+        "p95": 84.6005487954244,
+        "p99": 86.63635139353573,
+        "min": 83.01713177934289,
+        "max": 87.41374081000686
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 2,
+      "repeat": 2,
+      "baseline_fps": 8.248517307334271,
+      "candidate_fps": 11.943518036104292,
+      "fps_ratio": 1.4479593836197162,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 121.23139820992947,
+        "p50": 121.01583951152861,
+        "p95": 122.30664489325136,
+        "p99": 124.45402303244921,
+        "min": 120.4935060814023,
+        "max": 129.6822028234601
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 83.7259113136679,
+        "p50": 83.52070138789713,
+        "p95": 83.82421946153045,
+        "p99": 90.85715963039549,
+        "min": 82.89595181122422,
+        "max": 93.09979109093547
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 3,
+      "repeat": 0,
+      "baseline_fps": 6.430042752319231,
+      "candidate_fps": 8.470053739922744,
+      "fps_ratio": 1.3172624298442972,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 155.51767867989838,
+        "p50": 155.40908905677497,
+        "p95": 156.2538948841393,
+        "p99": 158.31324868835512,
+        "min": 154.74520483985543,
+        "max": 162.09163470193744
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 118.06107774376869,
+        "p50": 117.94670950621367,
+        "p95": 118.62483487930149,
+        "p99": 119.44706974551082,
+        "min": 117.65516269952059,
+        "max": 119.63769886642694
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 3,
+      "repeat": 1,
+      "baseline_fps": 6.39513889516624,
+      "candidate_fps": 8.439748388983487,
+      "fps_ratio": 1.3197130707141738,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 156.3669241266325,
+        "p50": 155.714777065441,
+        "p95": 159.8149813944474,
+        "p99": 164.73200123757127,
+        "min": 155.34356189891696,
+        "max": 168.85923594236374
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 118.48521865904331,
+        "p50": 118.01700363866985,
+        "p95": 121.76643805578351,
+        "p99": 124.86359719187021,
+        "min": 117.66350595280528,
+        "max": 124.95875777676702
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 3,
+      "repeat": 2,
+      "baseline_fps": 6.418368183142733,
+      "candidate_fps": 8.490172858561069,
+      "fps_ratio": 1.322793055228546,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 155.8005752088502,
+        "p50": 155.71848186664283,
+        "p95": 156.38178829103708,
+        "p99": 157.43907411117107,
+        "min": 155.01768887043,
+        "max": 159.4040240161121
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 117.78166680131108,
+        "p50": 117.76865599676967,
+        "p95": 118.15849139820784,
+        "p99": 119.50448460876943,
+        "min": 117.15622385963798,
+        "max": 121.85646407306194
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 4,
+      "repeat": 0,
+      "baseline_fps": 5.15458025302571,
+      "candidate_fps": 6.405055796070702,
+      "fps_ratio": 1.2425950284333958,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 193.9998405240476,
+        "p50": 193.95917374640703,
+        "p95": 194.61666997522116,
+        "p99": 198.11612140387297,
+        "min": 192.4552172422409,
+        "max": 200.46411594375968
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 156.12503052689135,
+        "p50": 156.00156597793102,
+        "p95": 156.63862226065248,
+        "p99": 158.6702264007181,
+        "min": 155.63836926594377,
+        "max": 159.40869227051735
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 4,
+      "repeat": 1,
+      "baseline_fps": 5.153500277623022,
+      "candidate_fps": 6.397075435616265,
+      "fps_ratio": 1.241306896478295,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 194.04084380716085,
+        "p50": 193.9337810035795,
+        "p95": 195.0417120475322,
+        "p99": 195.58163250330836,
+        "min": 193.42838786542416,
+        "max": 197.0496396534145
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 156.3189492188394,
+        "p50": 156.0433527920395,
+        "p95": 158.7148740887642,
+        "p99": 159.72842681221667,
+        "min": 155.65554378554225,
+        "max": 163.36537105962634
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "steps": 4,
+      "repeat": 2,
+      "baseline_fps": 5.155802741334033,
+      "candidate_fps": 6.405618849498994,
+      "fps_ratio": 1.2424096054228753,
+      "baseline_timing_ms": {
+        "count": 100,
+        "mean": 193.95445064175874,
+        "p50": 193.83119465783238,
+        "p95": 194.53814264852554,
+        "p99": 195.27708527166396,
+        "min": 193.39566864073277,
+        "max": 196.37065520510077
+      },
+      "candidate_timing_ms": {
+        "count": 100,
+        "mean": 156.1106393765658,
+        "p50": 155.9532294049859,
+        "p95": 156.9736143341288,
+        "p99": 158.5051943967119,
+        "min": 155.71937803179026,
+        "max": 159.67421419918537
+      },
+      "fps_improved": true,
+      "p95_improved": true,
+      "p99_improved": true,
+      "max_improved": true
+    }
+  ],
+  "paired_outcomes": {
+    "pairs": 27,
+    "fps_improved": 27,
+    "p95_improved": 24,
+    "p99_improved": 24,
+    "max_improved": 22
+  },
+  "limitations": [
+    "One synthetic prompt, three waveform phases, three alphas, two seeds, three sizes and steps2/3/4; no arbitrary-prompt or long temporal quality guarantee.",
+    "Equality for162 cases is asserted by the source-verified GPU harness; only9 saved lossless PNG pairs were independently compared byte-for-byte in this audit. Per-case raw latent tensors/JPEGs were not retained.",
+    "Per-frame timing arrays were not saved, so reported p95/p99 cannot be independently recomputed; source calculation and all recorded aggregates/denominators were checked.",
+    "512x288/two-step p95 is worse in all3 matched pairs despite+3.22% median FPS. Preserve these tails; timing alone does not establish CPU causation.",
+    "FPS improved27/27pairs, p95 improved24/27 and p99 improved24/27. No universal tail-latency improvement claim.",
+    "The strict no-op guard preserves deterministic zero-to-zero Euler output for finite original predictions. Removing a nonfinite original prediction would change failure behavior; finite latent guards cover tested cases, not all possible inputs.",
+    "Initial smoke has older helper source and is separate from this full-matrix audit.",
+    "No measured result here establishes current WebRTC or actual-projector throughput.",
+    "Full stdout verifies successful FP8 configuration/application logs and reduce-overhead compilation registration with no BF16 fallback warning. No measured-frame CUDA trace, GPU clock/driver record or resolved model-weight commit appears in this log; these are not independently established by this audit."
+  ],
+  "failures": [],
+  "runtime_stdout_validation": {
+    "path": "/tmp/vj0-terminal-results-20260917/terminal-noop-full-20260917.log",
+    "sha256": "41bea72e21c27903220f19907a24031e55d66696a94579807bdcd92b7e7a1c64",
+    "bytes": 121449,
+    "stdout_measurement_records": 225,
+    "stdout_records_equal_jsonl_and_manifest": true,
+    "cuda_runtime": "12.8",
+    "gpu_compute_capability": [
+      12,
+      0
+    ],
+    "fp8_configuration": "TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor)",
+    "transformer_fp8_application_success_logged": true,
+    "vae_linears_fp8_application_success_logged": true,
+    "fp8_failure_or_bf16_fallback_logged": false,
+    "vram_gb_after_model_load": 15.98,
+    "vram_gb_after_quantization": 12.3,
+    "compile_mode": "reduce-overhead",
+    "compiled_modules_registered": [
+      "transformer",
+      "vae.encoder",
+      "vae.decoder"
+    ],
+    "warmup_cells_completed": 9,
+    "exception_traceback_found": false,
+    "model_id_logged": "black-forest-labs/FLUX.2-klein-4B",
+    "resolved_weight_revision_logged": false,
+    "per_measured_frame_cuda_kernel_trace_available": false,
+    "primary_runtime_log_lines": [
+      "torch=2.11.0+cu128 cuda=12.8 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)",
+      "applying TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor) on transformer...",
+      "fp8 applied to transformer in 0.0s, vram=12.30GB",
+      "fp8 applied to VAE linears in 0.0s, vram=12.30GB",
+      "compiling transformer + vae.encoder + vae.decoder (mode=reduce-overhead)..."
+    ],
+    "preserved_warnings": [
+      {
+        "kind": "TorchAO checkpoint tensor importer",
+        "present": true,
+        "interpretation": "Loader integration warning is preserved. The later dynamic TorchAO configuration and successful transformer/VAE quantize calls are explicitly logged; no fallback warning appears."
+      },
+      {
+        "kind": "HF unauthenticated/deprecated local_dir_use_symlinks",
+        "present": true,
+        "interpretation": "Download/rate-limit and deprecated argument warnings; do not establish a model-load failure."
+      },
+      {
+        "kind": "Scheduler divide by zero at t=0",
+        "present": true,
+        "interpretation": "Exponential shift evaluates1/t at requested zero. Recorded actual sigmas end0,0 and all162 traced finite-latent guards pass; the warning remains visible."
+      },
+      {
+        "kind": "Dynamo ignores functools.lru_cache wrapper",
+        "warning_count": 2,
+        "interpretation": "Two upsampling version-check wrapper warnings are preserved. Successful warmup/paired equality establishes tested behavior, not universal graph correctness."
+      }
+    ],
+    "interpretation": "Runtime stdout confirms the requested FP8 configuration ran successfully on transformer and VAE linears, with logged VRAM reduction, and compile stubs registered in reduce-overhead mode. It does not prove the dtype of every executed kernel or resolve the loaded weight commit, host driver or GPU clocks."
+  },
+  "runtime_stdout_review_utc": "2026-09-17T20:23:37.374053+00:00"
+}

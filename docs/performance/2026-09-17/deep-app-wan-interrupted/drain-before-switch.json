@@ -1,0 +1,17 @@
+{
+  "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+  "endpoint": "/debug",
+  "quiet_required_ms": 500,
+  "samples": [],
+  "status": "failed",
+  "initial": {
+    "url": "http://127.0.0.1:18766/vj-next",
+    "probe": true,
+    "open": false,
+    "compileEvents": [],
+    "stop": true,
+    "stopped": false,
+    "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer"
+  },
+  "error": "Cannot drain active generation without its connected probe"
+}

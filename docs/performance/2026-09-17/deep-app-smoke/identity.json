@@ -1,0 +1,116 @@
+{
+  "jobs": [
+    {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18767",
+      "variant": "combined",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "smoke-before-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 15,
+      "outputCast": "cpu"
+    },
+    {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "smoke-compute-capture-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 15,
+      "outputCast": "gpu"
+    },
+    {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": true,
+      "name": "smoke-latest-input-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 15,
+      "outputCast": "gpu"
+    }
+  ],
+  "fixture": {
+    "vj0-ai-settings-storage": {
+      "version": 8,
+      "state": {
+        "backend": "pod",
+        "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+        "autoConnect": false,
+        "sendFrames": false,
+        "showAi": true,
+        "showCaptureDebug": false,
+        "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+        "captureSize": 512,
+        "outputWidth": 512,
+        "outputHeight": 288,
+        "frameRate": 60,
+        "seed": 42,
+        "kleinSteps": 2,
+        "kleinAlpha": 0.1,
+        "sceneId": "waveform",
+        "stageSharpen": 0.6,
+        "stageScanlines": true,
+        "stageVignette": true,
+        "stagePixelate": false,
+        "stagePixelateSize": 8
+      }
+    },
+    "vj0-composer-scenes": {
+      "version": 1,
+      "state": {
+        "scenes": [
+          {
+            "id": "benchmark-waveform",
+            "name": "Benchmark waveform",
+            "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+            "background": "#0a0a0a",
+            "createdAt": 0,
+            "elements": [
+              {
+                "id": "benchmark-wave",
+                "kind": "waveform",
+                "name": "Waveform",
+                "props": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "size": 0.48,
+                  "aspect": 4,
+                  "rotation": 0,
+                  "color": "#ffffff",
+                  "opacity": 1,
+                  "stroke": 0.012,
+                  "text": ""
+                },
+                "bindings": {}
+              }
+            ]
+          }
+        ],
+        "activeSceneId": "benchmark-waveform",
+        "selectedElementId": null
+      }
+    }
+  },
+  "harness_sha256": "80f5bb5a7020bd0bd6d8dc73a32c01e4084583c28de77b8c4a52fec764fbfa9c",
+  "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685"
+}

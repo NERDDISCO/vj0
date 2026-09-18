@@ -1,0 +1,47 @@
+{
+  "status": "complete",
+  "started_utc": "2026-09-18T06:27:54.821559+00:00",
+  "argv": [
+    "/usr/bin/python3",
+    "/workspace/terminal-post-live-code-20260918-05b/bench/bench_post_live.py",
+    "--worker-script",
+    "/workspace/terminal-post-live-code-20260918-05b/inference_server.py",
+    "--output",
+    "/workspace/terminal-post-live-20260918-05b",
+    "--frames",
+    "100",
+    "--pairs",
+    "3",
+    "--profile-frames",
+    "20",
+    "--warmup",
+    "4",
+    "--expected-native-threads",
+    "128"
+  ],
+  "environment": {
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/torchinductor_root",
+    "HF_HOME": "/workspace/hf-cache",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+    "INDUCTOR_PERSIST_DIR": "/workspace/torch-inductor-cache",
+    "PATH": "/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "HF_HUB_OFFLINE": "1",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "COMPILE_MODE": "reduce-overhead",
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONPATH": "/workspace/terminal-post-live-code-20260918-05b/bench"
+  },
+  "sources": {
+    "inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "bench/bench_post_live.py": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
+    "bench/metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "bench/bench_terminal_followup.py": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4"
+  },
+  "child_pid": 12762,
+  "exit_code": 0,
+  "result_status": "complete",
+  "finished_utc": "2026-09-18T06:34:38.457444+00:00"
+}

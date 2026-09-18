@@ -1,0 +1,2003 @@
+{
+  "status": "passed_with_all_age_tails_retained",
+  "cohort": "Separate two-trial rotating-audio soak cohort; not additional formal repeats",
+  "input_audit": "/tmp/vj0-deep-app-soaks-audit-20260918-05b.json",
+  "input_audit_sha256": "b9d5bebf5ba22148e4b040d69473fd4c9c838333f63b8bebf8106161657c6e4d",
+  "script_sha256": "e5765a812a4a6379ee2aae57f21213fe6223b5d35d1edbfaec110440182ff33d",
+  "trials": [
+    {
+      "name": "compute-capture-768-three-minute-soak",
+      "config": {
+        "name": "compute-capture-768-three-minute-soak",
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "origin": "http://127.0.0.1:18766",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "width": 768,
+        "height": 448,
+        "seconds": 180,
+        "outputCast": "gpu",
+        "audioCycle": true,
+        "stress": false
+      },
+      "elapsed_seconds": 180.3132998046875,
+      "audit_status": "passed",
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 3807,
+          "unique_frames": 3807,
+          "fps": 21.11325123617438,
+          "dimensions": [],
+          "age_ms": {
+            "count": 3807,
+            "mean": 289.3139731164426,
+            "p50": 210.5,
+            "p95": 767.4600097656248,
+            "p99": 2618.0700976562503,
+            "min": 165.39990234375,
+            "max": 3536.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 564.0,
+          "final_silence_ms": 64.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 417,
+              "percent": 10.95350669818755
+            },
+            "500": {
+              "frames": 285,
+              "percent": 7.486209613869188
+            },
+            "1000": {
+              "frames": 101,
+              "percent": 2.6530076175466246
+            }
+          }
+        },
+        "main/received": {
+          "events": 3822,
+          "unique_frames": 3822,
+          "fps": 21.196439775324006,
+          "dimensions": [],
+          "age_ms": {
+            "count": 3822,
+            "mean": 271.7002090462086,
+            "p50": 189.10009765625,
+            "p95": 756.9799926757812,
+            "p99": 2624.6720874023435,
+            "min": 138.39990234375,
+            "max": 3526.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 579.39990234375,
+          "final_silence_ms": 1.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 377,
+              "percent": 9.863945578231293
+            },
+            "500": {
+              "frames": 285,
+              "percent": 7.456828885400314
+            },
+            "1000": {
+              "frames": 101,
+              "percent": 2.642595499738357
+            }
+          }
+        },
+        "main/sent": {
+          "events": 8519,
+          "unique_frames": 8519,
+          "fps": 47.245544334376035,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 1393.800048828125,
+          "final_silence_ms": 0.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 3821,
+          "unique_frames": 3821,
+          "fps": 21.19089387271403,
+          "dimensions": [
+            [
+              2304,
+              1344
+            ]
+          ],
+          "age_ms": {
+            "count": 3821,
+            "mean": 276.38088774412785,
+            "p50": 193.199951171875,
+            "p95": 760.800048828125,
+            "p99": 2627.2602539062505,
+            "min": 140.5,
+            "max": 3529.300048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 575.199951171875,
+          "final_silence_ms": 76.89990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 379,
+              "percent": 9.918869405914682
+            },
+            "500": {
+              "frames": 287,
+              "percent": 7.511122742737503
+            },
+            "1000": {
+              "frames": 101,
+              "percent": 2.6432870976184244
+            }
+          }
+        }
+      },
+      "worker_activity": {
+        "0": {
+          "frames": 3822,
+          "max_gap_ms": 579.5
+        }
+      },
+      "audio_rms": {
+        "0": {
+          "count": 122,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0,
+          "max": 0
+        },
+        "0.2": {
+          "count": 124,
+          "mean": 0.14157378184096547,
+          "p50": 0.1412679590177275,
+          "p95": 0.14520783256718,
+          "p99": 0.14520829015007083,
+          "min": 0.1374505461949038,
+          "max": 0.1452084088020374
+        },
+        "0.6": {
+          "count": 114,
+          "mean": 0.4240646564725508,
+          "p50": 0.4227698250858929,
+          "p95": 0.4302790553270097,
+          "p99": 0.4306712706297939,
+          "min": 0.41746616934370523,
+          "max": 0.4306717404730036
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-raf": {
+            "frames": 3807,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3807,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "received": {
+            "frames": 3822,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3822,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "sent": {
+            "frames": 8519,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 0,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 3821,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3821,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          }
+        }
+      },
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "viewport": [
+          1920,
+          1080
+        ],
+        "glBuffer": [
+          2304,
+          1344
+        ],
+        "devicePixelRatio": 1,
+        "mainViewport": [
+          1440,
+          900
+        ],
+        "focusEmulation": true
+      },
+      "episodes": {
+        "threshold_ms": 1000,
+        "frames_above_threshold": 101,
+        "groups": [
+          {
+            "frames": 83,
+            "first": {
+              "id": 976,
+              "capture_relative_s": 13.64739990234375,
+              "send_relative_s": 13.657099853515625,
+              "receive_relative_s": 14.6682998046875,
+              "age_ms": 1020.89990234375,
+              "buffered_bytes_at_send": 126230,
+              "encode_to_send_ms": 9.699951171875,
+              "worker_timing": {
+                "queue_wait_ms": 23.351,
+                "decode_in_ms": 0.4,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.02,
+                "transformer_plus_decode_ms": 38.3,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.43,
+                "total_ms": 47.18
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 4.10009765625,
+              "receive_to_preview_raf_ms": 12.900146484375
+            },
+            "peak": {
+              "id": 1079,
+              "capture_relative_s": 15.94889990234375,
+              "send_relative_s": 15.95589990234375,
+              "receive_relative_s": 19.475699951171876,
+              "age_ms": 3526.800048828125,
+              "buffered_bytes_at_send": 264659,
+              "encode_to_send_ms": 7.0,
+              "worker_timing": {
+                "queue_wait_ms": 74.139,
+                "decode_in_ms": 0.39,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.12,
+                "transformer_plus_decode_ms": 37.58,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.43,
+                "total_ms": 46.56
+              },
+              "worker_stat_after_receive_ms": 0.2998046875,
+              "receive_to_stage_ms": 2.5,
+              "receive_to_preview_raf_ms": 5.699951171875
+            },
+            "last": {
+              "id": 1117,
+              "capture_relative_s": 19.11439990234375,
+              "send_relative_s": 19.123499755859374,
+              "receive_relative_s": 20.243599853515626,
+              "age_ms": 1129.199951171875,
+              "buffered_bytes_at_send": 186258,
+              "encode_to_send_ms": 9.099853515625,
+              "worker_timing": {
+                "queue_wait_ms": 90.741,
+                "decode_in_ms": 0.38,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.15,
+                "transformer_plus_decode_ms": 35.75,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.43,
+                "total_ms": 44.73
+              },
+              "worker_stat_after_receive_ms": 0.60009765625,
+              "receive_to_stage_ms": 3.5,
+              "receive_to_preview_raf_ms": 7.800048828125
+            },
+            "age_ms": {
+              "count": 83,
+              "mean": 2458.5566200348267,
+              "p50": 2603.800048828125,
+              "p95": 3455.0298095703124,
+              "p99": 3516.87796875,
+              "min": 1020.89990234375,
+              "max": 3526.800048828125
+            },
+            "worker_total_ms": {
+              "count": 83,
+              "mean": 46.32385542168675,
+              "p50": 47.07,
+              "p95": 47.318,
+              "p99": 48.3502,
+              "min": 44.39,
+              "max": 49.08
+            },
+            "worker_queue_ms": {
+              "count": 83,
+              "mean": 47.62701204819277,
+              "p50": 50.385,
+              "p95": 87.6491,
+              "p99": 91.65156000000002,
+              "min": 0.028,
+              "max": 93.941
+            },
+            "receive_to_stage_ms": {
+              "count": 83,
+              "mean": 5.1097279743975905,
+              "p50": 4.400146484375,
+              "p95": 10.350146484375003,
+              "p99": 13.082231445312567,
+              "min": 1.5,
+              "max": 21.199951171875
+            },
+            "audio_context_samples": 17,
+            "audio_context_max_gap_ms": 502.10009765625,
+            "context_window_relative_s": [
+              12.64739990234375,
+              21.243599853515626
+            ],
+            "per_second": [
+              {
+                "relative_second": 12,
+                "sent": 59,
+                "received": 20,
+                "max_receive_age_ms": 295.099853515625,
+                "max_buffered_bytes_at_send": 90648
+              },
+              {
+                "relative_second": 13,
+                "sent": 60,
+                "received": 21,
+                "max_receive_age_ms": 773.900146484375,
+                "max_buffered_bytes_at_send": 222843
+              },
+              {
+                "relative_second": 14,
+                "sent": 44,
+                "received": 21,
+                "max_receive_age_ms": 1216.699951171875,
+                "max_buffered_bytes_at_send": 264727
+              },
+              {
+                "relative_second": 15,
+                "sent": 39,
+                "received": 12,
+                "max_receive_age_ms": 1398.10009765625,
+                "max_buffered_bytes_at_send": 264659
+              },
+              {
+                "relative_second": 16,
+                "sent": 0,
+                "received": 10,
+                "max_receive_age_ms": 2576.199951171875,
+                "max_buffered_bytes_at_send": null
+              },
+              {
+                "relative_second": 17,
+                "sent": 30,
+                "received": 9,
+                "max_receive_age_ms": 3187.5,
+                "max_buffered_bytes_at_send": 264423
+              },
+              {
+                "relative_second": 18,
+                "sent": 0,
+                "received": 18,
+                "max_receive_age_ms": 3302.699951171875,
+                "max_buffered_bytes_at_send": null
+              },
+              {
+                "relative_second": 19,
+                "sent": 29,
+                "received": 20,
+                "max_receive_age_ms": 3526.800048828125,
+                "max_buffered_bytes_at_send": 265575
+              },
+              {
+                "relative_second": 20,
+                "sent": 54,
+                "received": 22,
+                "max_receive_age_ms": 2736.60009765625,
+                "max_buffered_bytes_at_send": 129799
+              },
+              {
+                "relative_second": 21,
+                "sent": 54,
+                "received": 21,
+                "max_receive_age_ms": 195.89990234375,
+                "max_buffered_bytes_at_send": 3777
+              }
+            ]
+          },
+          {
+            "frames": 9,
+            "first": {
+              "id": 4262,
+              "capture_relative_s": 82.22839990234375,
+              "send_relative_s": 82.24369995117188,
+              "receive_relative_s": 83.25869995117188,
+              "age_ms": 1030.300048828125,
+              "buffered_bytes_at_send": 189930,
+              "encode_to_send_ms": 15.300048828125,
+              "worker_timing": {
+                "queue_wait_ms": 48.225,
+                "decode_in_ms": 0.4,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.05,
+                "transformer_plus_decode_ms": 38.08,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 47.01
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 7.699951171875,
+              "receive_to_preview_raf_ms": 3.199951171875
+            },
+            "peak": {
+              "id": 4271,
+              "capture_relative_s": 82.39349975585938,
+              "send_relative_s": 82.40739990234376,
+              "receive_relative_s": 83.60839990234375,
+              "age_ms": 1214.900146484375,
+              "buffered_bytes_at_send": 270375,
+              "encode_to_send_ms": 13.900146484375,
+              "worker_timing": {
+                "queue_wait_ms": 75.464,
+                "decode_in_ms": 0.41,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.13,
+                "transformer_plus_decode_ms": 37.66,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.45,
+                "total_ms": 46.69
+              },
+              "worker_stat_after_receive_ms": 1.199951171875,
+              "receive_to_stage_ms": 9.900146484375,
+              "receive_to_preview_raf_ms": 19.5
+            },
+            "last": {
+              "id": 4271,
+              "capture_relative_s": 82.39349975585938,
+              "send_relative_s": 82.40739990234376,
+              "receive_relative_s": 83.60839990234375,
+              "age_ms": 1214.900146484375,
+              "buffered_bytes_at_send": 270375,
+              "encode_to_send_ms": 13.900146484375,
+              "worker_timing": {
+                "queue_wait_ms": 75.464,
+                "decode_in_ms": 0.41,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.13,
+                "transformer_plus_decode_ms": 37.66,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.45,
+                "total_ms": 46.69
+              },
+              "worker_stat_after_receive_ms": 1.199951171875,
+              "receive_to_stage_ms": 9.900146484375,
+              "receive_to_preview_raf_ms": 19.5
+            },
+            "age_ms": {
+              "count": 9,
+              "mean": 1117.666775173611,
+              "p50": 1094.300048828125,
+              "p95": 1210.300146484375,
+              "p99": 1213.980146484375,
+              "min": 1030.300048828125,
+              "max": 1214.900146484375
+            },
+            "worker_total_ms": {
+              "count": 9,
+              "mean": 46.27333333333333,
+              "p50": 46.69,
+              "p95": 47.016,
+              "p99": 47.019200000000005,
+              "min": 44.5,
+              "max": 47.02
+            },
+            "worker_queue_ms": {
+              "count": 9,
+              "mean": 60.90611111111111,
+              "p50": 67.694,
+              "p95": 80.6934,
+              "p99": 82.96188,
+              "min": 11.765,
+              "max": 83.529
+            },
+            "receive_to_stage_ms": {
+              "count": 9,
+              "mean": 5.533338758680555,
+              "p50": 4.0,
+              "p95": 10.26005859375,
+              "p99": 10.45201171875,
+              "min": 2.699951171875,
+              "max": 10.5
+            },
+            "audio_context_samples": 7,
+            "audio_context_max_gap_ms": 500.800048828125,
+            "context_window_relative_s": [
+              81.22839990234375,
+              84.60839990234375
+            ],
+            "per_second": [
+              {
+                "relative_second": 81,
+                "sent": 55,
+                "received": 22,
+                "max_receive_age_ms": 241.800048828125,
+                "max_buffered_bytes_at_send": 160671
+              },
+              {
+                "relative_second": 82,
+                "sent": 28,
+                "received": 18,
+                "max_receive_age_ms": 855.5,
+                "max_buffered_bytes_at_send": 270375
+              },
+              {
+                "relative_second": 83,
+                "sent": 29,
+                "received": 21,
+                "max_receive_age_ms": 1214.900146484375,
+                "max_buffered_bytes_at_send": 264511
+              },
+              {
+                "relative_second": 84,
+                "sent": 48,
+                "received": 22,
+                "max_receive_age_ms": 857.10009765625,
+                "max_buffered_bytes_at_send": 253400
+              }
+            ]
+          },
+          {
+            "frames": 1,
+            "first": {
+              "id": 4397,
+              "capture_relative_s": 86.62849975585938,
+              "send_relative_s": 86.6417998046875,
+              "receive_relative_s": 87.62909985351563,
+              "age_ms": 1000.60009765625,
+              "buffered_bytes_at_send": 262924,
+              "encode_to_send_ms": 13.300048828125,
+              "worker_timing": {
+                "queue_wait_ms": 56.817,
+                "decode_in_ms": 0.42,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.07,
+                "transformer_plus_decode_ms": 35.79,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 44.75
+              },
+              "worker_stat_after_receive_ms": 1.0,
+              "receive_to_stage_ms": 4.5,
+              "receive_to_preview_raf_ms": 16.800048828125
+            },
+            "peak": {
+              "id": 4397,
+              "capture_relative_s": 86.62849975585938,
+              "send_relative_s": 86.6417998046875,
+              "receive_relative_s": 87.62909985351563,
+              "age_ms": 1000.60009765625,
+              "buffered_bytes_at_send": 262924,
+              "encode_to_send_ms": 13.300048828125,
+              "worker_timing": {
+                "queue_wait_ms": 56.817,
+                "decode_in_ms": 0.42,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.07,
+                "transformer_plus_decode_ms": 35.79,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 44.75
+              },
+              "worker_stat_after_receive_ms": 1.0,
+              "receive_to_stage_ms": 4.5,
+              "receive_to_preview_raf_ms": 16.800048828125
+            },
+            "last": {
+              "id": 4397,
+              "capture_relative_s": 86.62849975585938,
+              "send_relative_s": 86.6417998046875,
+              "receive_relative_s": 87.62909985351563,
+              "age_ms": 1000.60009765625,
+              "buffered_bytes_at_send": 262924,
+              "encode_to_send_ms": 13.300048828125,
+              "worker_timing": {
+                "queue_wait_ms": 56.817,
+                "decode_in_ms": 0.42,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.07,
+                "transformer_plus_decode_ms": 35.79,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 44.75
+              },
+              "worker_stat_after_receive_ms": 1.0,
+              "receive_to_stage_ms": 4.5,
+              "receive_to_preview_raf_ms": 16.800048828125
+            },
+            "age_ms": {
+              "count": 1,
+              "mean": 1000.60009765625,
+              "p50": 1000.60009765625,
+              "p95": 1000.60009765625,
+              "p99": 1000.60009765625,
+              "min": 1000.60009765625,
+              "max": 1000.60009765625
+            },
+            "worker_total_ms": {
+              "count": 1,
+              "mean": 44.75,
+              "p50": 44.75,
+              "p95": 44.75,
+              "p99": 44.75,
+              "min": 44.75,
+              "max": 44.75
+            },
+            "worker_queue_ms": {
+              "count": 1,
+              "mean": 56.817,
+              "p50": 56.817,
+              "p95": 56.817,
+              "p99": 56.817,
+              "min": 56.817,
+              "max": 56.817
+            },
+            "receive_to_stage_ms": {
+              "count": 1,
+              "mean": 4.5,
+              "p50": 4.5,
+              "p95": 4.5,
+              "p99": 4.5,
+              "min": 4.5,
+              "max": 4.5
+            },
+            "audio_context_samples": 6,
+            "audio_context_max_gap_ms": 500.5,
+            "context_window_relative_s": [
+              85.62849975585938,
+              88.62909985351563
+            ],
+            "per_second": [
+              {
+                "relative_second": 85,
+                "sent": 24,
+                "received": 20,
+                "max_receive_age_ms": 909,
+                "max_buffered_bytes_at_send": 271156
+              },
+              {
+                "relative_second": 86,
+                "sent": 21,
+                "received": 21,
+                "max_receive_age_ms": 961.60009765625,
+                "max_buffered_bytes_at_send": 262924
+              },
+              {
+                "relative_second": 87,
+                "sent": 21,
+                "received": 21,
+                "max_receive_age_ms": 1000.60009765625,
+                "max_buffered_bytes_at_send": 270493
+              },
+              {
+                "relative_second": 88,
+                "sent": 22,
+                "received": 21,
+                "max_receive_age_ms": 1086.7001953125,
+                "max_buffered_bytes_at_send": 269541
+              }
+            ]
+          },
+          {
+            "frames": 3,
+            "first": {
+              "id": 4416,
+              "capture_relative_s": 87.3952998046875,
+              "send_relative_s": 87.42039990234375,
+              "receive_relative_s": 88.43709985351562,
+              "age_ms": 1041.800048828125,
+              "buffered_bytes_at_send": 252950,
+              "encode_to_send_ms": 25.10009765625,
+              "worker_timing": {
+                "queue_wait_ms": 63.179,
+                "decode_in_ms": 0.4,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.09,
+                "transformer_plus_decode_ms": 38.11,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.45,
+                "total_ms": 47.08
+              },
+              "worker_stat_after_receive_ms": 0.300048828125,
+              "receive_to_stage_ms": 2.800048828125,
+              "receive_to_preview_raf_ms": 15.10009765625
+            },
+            "peak": {
+              "id": 4418,
+              "capture_relative_s": 87.46149975585938,
+              "send_relative_s": 87.47209985351563,
+              "receive_relative_s": 88.54819995117188,
+              "age_ms": 1086.7001953125,
+              "buffered_bytes_at_send": 270493,
+              "encode_to_send_ms": 10.60009765625,
+              "worker_timing": {
+                "queue_wait_ms": 16.72,
+                "decode_in_ms": 0.42,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.08,
+                "transformer_plus_decode_ms": 38.07,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 47.04
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 2.800048828125,
+              "receive_to_preview_raf_ms": 13.39990234375
+            },
+            "last": {
+              "id": 4418,
+              "capture_relative_s": 87.46149975585938,
+              "send_relative_s": 87.47209985351563,
+              "receive_relative_s": 88.54819995117188,
+              "age_ms": 1086.7001953125,
+              "buffered_bytes_at_send": 270493,
+              "encode_to_send_ms": 10.60009765625,
+              "worker_timing": {
+                "queue_wait_ms": 16.72,
+                "decode_in_ms": 0.42,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.08,
+                "transformer_plus_decode_ms": 38.07,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.44,
+                "total_ms": 47.04
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 2.800048828125,
+              "receive_to_preview_raf_ms": 13.39990234375
+            },
+            "age_ms": {
+              "count": 3,
+              "mean": 1067.7333984375,
+              "p50": 1074.699951171875,
+              "p95": 1085.5001708984375,
+              "p99": 1086.4601904296876,
+              "min": 1041.800048828125,
+              "max": 1086.7001953125
+            },
+            "worker_total_ms": {
+              "count": 3,
+              "mean": 46.27,
+              "p50": 47.04,
+              "p95": 47.076,
+              "p99": 47.0792,
+              "min": 44.69,
+              "max": 47.08
+            },
+            "worker_queue_ms": {
+              "count": 3,
+              "mean": 26.642333333333337,
+              "p50": 16.72,
+              "p95": 58.5331,
+              "p99": 62.24982,
+              "min": 0.028,
+              "max": 63.179
+            },
+            "receive_to_stage_ms": {
+              "count": 3,
+              "mean": 3.10009765625,
+              "p50": 2.800048828125,
+              "p95": 3.6101806640625,
+              "p99": 3.6821923828125,
+              "min": 2.800048828125,
+              "max": 3.7001953125
+            },
+            "audio_context_samples": 6,
+            "audio_context_max_gap_ms": 500.5,
+            "context_window_relative_s": [
+              86.3952998046875,
+              89.54819995117188
+            ],
+            "per_second": [
+              {
+                "relative_second": 86,
+                "sent": 21,
+                "received": 21,
+                "max_receive_age_ms": 961.60009765625,
+                "max_buffered_bytes_at_send": 262924
+              },
+              {
+                "relative_second": 87,
+                "sent": 21,
+                "received": 21,
+                "max_receive_age_ms": 1000.60009765625,
+                "max_buffered_bytes_at_send": 270493
+              },
+              {
+                "relative_second": 88,
+                "sent": 22,
+                "received": 21,
+                "max_receive_age_ms": 1086.7001953125,
+                "max_buffered_bytes_at_send": 269541
+              },
+              {
+                "relative_second": 89,
+                "sent": 29,
+                "received": 20,
+                "max_receive_age_ms": 1174.5,
+                "max_buffered_bytes_at_send": 269311
+              }
+            ]
+          },
+          {
+            "frames": 5,
+            "first": {
+              "id": 4435,
+              "capture_relative_s": 88.3612998046875,
+              "send_relative_s": 88.38089990234376,
+              "receive_relative_s": 89.39869995117188,
+              "age_ms": 1037.400146484375,
+              "buffered_bytes_at_send": 234287,
+              "encode_to_send_ms": 19.60009765625,
+              "worker_timing": {
+                "queue_wait_ms": 0.041,
+                "decode_in_ms": 0.44,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.12,
+                "transformer_plus_decode_ms": 38.21,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.46,
+                "total_ms": 47.27
+              },
+              "worker_stat_after_receive_ms": 0.699951171875,
+              "receive_to_stage_ms": 4.0,
+              "receive_to_preview_raf_ms": 13.199951171875
+            },
+            "peak": {
+              "id": 4439,
+              "capture_relative_s": 88.44489990234375,
+              "send_relative_s": 88.45459985351563,
+              "receive_relative_s": 89.61939990234374,
+              "age_ms": 1174.5,
+              "buffered_bytes_at_send": 269541,
+              "encode_to_send_ms": 9.699951171875,
+              "worker_timing": {
+                "queue_wait_ms": 34.036,
+                "decode_in_ms": 0.41,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.12,
+                "transformer_plus_decode_ms": 37.85,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.45,
+                "total_ms": 46.87
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 6.10009765625,
+              "receive_to_preview_raf_ms": 8.199951171875
+            },
+            "last": {
+              "id": 4439,
+              "capture_relative_s": 88.44489990234375,
+              "send_relative_s": 88.45459985351563,
+              "receive_relative_s": 89.61939990234374,
+              "age_ms": 1174.5,
+              "buffered_bytes_at_send": 269541,
+              "encode_to_send_ms": 9.699951171875,
+              "worker_timing": {
+                "queue_wait_ms": 34.036,
+                "decode_in_ms": 0.41,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.12,
+                "transformer_plus_decode_ms": 37.85,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.45,
+                "total_ms": 46.87
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 6.10009765625,
+              "receive_to_preview_raf_ms": 8.199951171875
+            },
+            "age_ms": {
+              "count": 5,
+              "mean": 1098.439990234375,
+              "p50": 1119.39990234375,
+              "p95": 1165.439990234375,
+              "p99": 1172.687998046875,
+              "min": 1031.699951171875,
+              "max": 1174.5
+            },
+            "worker_total_ms": {
+              "count": 5,
+              "mean": 46.504000000000005,
+              "p50": 46.87,
+              "p95": 47.228,
+              "p99": 47.2616,
+              "min": 44.65,
+              "max": 47.27
+            },
+            "worker_queue_ms": {
+              "count": 5,
+              "mean": 14.283199999999999,
+              "p50": 16.214,
+              "p95": 31.445999999999998,
+              "p99": 33.518,
+              "min": 0.039,
+              "max": 34.036
+            },
+            "receive_to_stage_ms": {
+              "count": 5,
+              "mean": 6.50009765625,
+              "p50": 6.10009765625,
+              "p95": 9.3201171875,
+              "p99": 9.9441015625,
+              "min": 4.0,
+              "max": 10.10009765625
+            },
+            "audio_context_samples": 6,
+            "audio_context_max_gap_ms": 501.099853515625,
+            "context_window_relative_s": [
+              87.3612998046875,
+              90.61939990234374
+            ],
+            "per_second": [
+              {
+                "relative_second": 87,
+                "sent": 21,
+                "received": 21,
+                "max_receive_age_ms": 1000.60009765625,
+                "max_buffered_bytes_at_send": 270493
+              },
+              {
+                "relative_second": 88,
+                "sent": 22,
+                "received": 21,
+                "max_receive_age_ms": 1086.7001953125,
+                "max_buffered_bytes_at_send": 269541
+              },
+              {
+                "relative_second": 89,
+                "sent": 29,
+                "received": 20,
+                "max_receive_age_ms": 1174.5,
+                "max_buffered_bytes_at_send": 269311
+              },
+              {
+                "relative_second": 90,
+                "sent": 47,
+                "received": 21,
+                "max_receive_age_ms": 831.900146484375,
+                "max_buffered_bytes_at_send": 245996
+              }
+            ]
+          }
+        ],
+        "worker_pairing_errors": [],
+        "interpretation_limit": "Timings paired by binary-then-stats order. Ages include uninstrumented transport and host/IPC intervals. No server arrival/send timestamps identify exact packet loss or upstream/downstream cause. Endpoint RTC snapshots do not measure episode RTT."
+      },
+      "stress": null
+    },
+    {
+      "name": "latest-input-768-three-minute-soak",
+      "config": {
+        "name": "latest-input-768-three-minute-soak",
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "origin": "http://127.0.0.1:18766",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "width": 768,
+        "height": 448,
+        "seconds": 180,
+        "outputCast": "gpu",
+        "audioCycle": true,
+        "stress": true
+      },
+      "elapsed_seconds": 180.31199975585938,
+      "audit_status": "passed",
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 3802,
+          "unique_frames": 3802,
+          "fps": 21.085673749655427,
+          "dimensions": [],
+          "age_ms": {
+            "count": 3802,
+            "mean": 149.72233062214377,
+            "p50": 132.699951171875,
+            "p95": 167.09486083984373,
+            "p99": 594.555903320305,
+            "min": 83.39990234375,
+            "max": 2231.199951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 508.300048828125,
+          "final_silence_ms": 0.39990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 44,
+              "percent": 1.157285639137296
+            },
+            "500": {
+              "frames": 40,
+              "percent": 1.0520778537611783
+            },
+            "1000": {
+              "frames": 33,
+              "percent": 0.8679642293529721
+            }
+          }
+        },
+        "main/received": {
+          "events": 3810,
+          "unique_frames": 3810,
+          "fps": 21.13004129042272,
+          "dimensions": [],
+          "age_ms": {
+            "count": 3810,
+            "mean": 130.2792927098712,
+            "p50": 110.400146484375,
+            "p95": 143.5,
+            "p99": 604.2319067382762,
+            "min": 73.699951171875,
+            "max": 2227.099853515625
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 513.599853515625,
+          "final_silence_ms": 17.39990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 45,
+              "percent": 1.1811023622047243
+            },
+            "500": {
+              "frames": 41,
+              "percent": 1.0761154855643045
+            },
+            "1000": {
+              "frames": 34,
+              "percent": 0.8923884514435696
+            }
+          }
+        },
+        "main/sent": {
+          "events": 8776,
+          "unique_frames": 8776,
+          "fps": 48.6711922217191,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 1177.699951171875,
+          "final_silence_ms": 29.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 3810,
+          "unique_frames": 3810,
+          "fps": 21.13004129042272,
+          "dimensions": [
+            [
+              2304,
+              1344
+            ]
+          ],
+          "age_ms": {
+            "count": 3810,
+            "mean": 134.8271880382628,
+            "p50": 114.0,
+            "p95": 147.300048828125,
+            "p99": 606.7859155273387,
+            "min": 75.89990234375,
+            "max": 2230.5
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 517.199951171875,
+          "final_silence_ms": 15.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 45,
+              "percent": 1.1811023622047243
+            },
+            "500": {
+              "frames": 41,
+              "percent": 1.0761154855643045
+            },
+            "1000": {
+              "frames": 34,
+              "percent": 0.8923884514435696
+            }
+          }
+        }
+      },
+      "worker_activity": {
+        "0": {
+          "frames": 3810,
+          "max_gap_ms": 514.5
+        }
+      },
+      "audio_rms": {
+        "0": {
+          "count": 124,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0,
+          "max": 0
+        },
+        "0.2": {
+          "count": 122,
+          "mean": 0.14138893247524179,
+          "p50": 0.14206411216846518,
+          "p95": 0.1449464075752574,
+          "p99": 0.1452994601208092,
+          "min": 0.1374500914412394,
+          "max": 0.14529949324313485
+        },
+        "0.6": {
+          "count": 115,
+          "mean": 0.423921083477181,
+          "p50": 0.4249160706484895,
+          "p95": 0.430809051695379,
+          "p99": 0.43093113810065325,
+          "min": 0.4178423503973581,
+          "max": 0.4309509762212594
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-raf": {
+            "frames": 3802,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3802,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "received": {
+            "frames": 3810,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3810,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "sent": {
+            "frames": 8776,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 0,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 3810,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 3810,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          }
+        }
+      },
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "viewport": [
+          1920,
+          1080
+        ],
+        "glBuffer": [
+          2304,
+          1344
+        ],
+        "devicePixelRatio": 1,
+        "mainViewport": [
+          1440,
+          900
+        ],
+        "focusEmulation": true
+      },
+      "episodes": {
+        "threshold_ms": 1000,
+        "frames_above_threshold": 34,
+        "groups": [
+          {
+            "frames": 34,
+            "first": {
+              "id": 1447,
+              "capture_relative_s": 24.286999755859377,
+              "send_relative_s": 24.294999755859376,
+              "receive_relative_s": 25.490999755859374,
+              "age_ms": 1204,
+              "buffered_bytes_at_send": 26439,
+              "encode_to_send_ms": 8.0,
+              "worker_timing": {
+                "queue_wait_ms": 0.069,
+                "decode_in_ms": 1.17,
+                "prompt_ms": 0.01,
+                "vae_encode_ms": 9.67,
+                "transformer_plus_decode_ms": 44.83,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.88,
+                "total_ms": 56.64
+              },
+              "worker_stat_after_receive_ms": 1.5,
+              "receive_to_stage_ms": 7.400146484375,
+              "receive_to_preview_raf_ms": 15.800048828125
+            },
+            "peak": {
+              "id": 1488,
+              "capture_relative_s": 24.987699951171876,
+              "send_relative_s": 25.005499755859375,
+              "receive_relative_s": 27.2147998046875,
+              "age_ms": 2227.099853515625,
+              "buffered_bytes_at_send": 181296,
+              "encode_to_send_ms": 17.7998046875,
+              "worker_timing": {
+                "queue_wait_ms": 0.047,
+                "decode_in_ms": 0.41,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.03,
+                "transformer_plus_decode_ms": 37.61,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.43,
+                "total_ms": 46.53
+              },
+              "worker_stat_after_receive_ms": 0.5,
+              "receive_to_stage_ms": 3.400146484375,
+              "receive_to_preview_raf_ms": 4.10009765625
+            },
+            "last": {
+              "id": 1504,
+              "capture_relative_s": 25.270499755859376,
+              "send_relative_s": 25.278499755859375,
+              "receive_relative_s": 27.384499755859373,
+              "age_ms": 2114,
+              "buffered_bytes_at_send": 241728,
+              "encode_to_send_ms": 8.0,
+              "worker_timing": {
+                "queue_wait_ms": 0.032,
+                "decode_in_ms": 0.38,
+                "prompt_ms": 0,
+                "vae_encode_ms": 8.13,
+                "transformer_plus_decode_ms": 37.92,
+                "stage_clock": "cuda-events",
+                "benchmark_variant": "terminal-noop",
+                "output_cast": "gpu",
+                "torch_threads": 128,
+                "terminal_skips": 1,
+                "jpeg_ms": 0.43,
+                "total_ms": 46.89
+              },
+              "worker_stat_after_receive_ms": 0.800048828125,
+              "receive_to_stage_ms": 9.000244140625,
+              "receive_to_preview_raf_ms": 22.400146484375
+            },
+            "age_ms": {
+              "count": 34,
+              "mean": 1795.4558751723346,
+              "p50": 1839.25,
+              "p95": 2177.6599365234374,
+              "p99": 2211.556901855469,
+              "min": 1204,
+              "max": 2227.099853515625
+            },
+            "worker_total_ms": {
+              "count": 34,
+              "mean": 46.563529411764705,
+              "p50": 46.754999999999995,
+              "p95": 47.995000000000005,
+              "p99": 54.323400000000014,
+              "min": 44.49,
+              "max": 56.64
+            },
+            "worker_queue_ms": {
+              "count": 34,
+              "mean": 0.032558823529411765,
+              "p50": 0.032,
+              "p95": 0.04505,
+              "p99": 0.061740000000000045,
+              "min": 0.023,
+              "max": 0.069
+            },
+            "receive_to_stage_ms": {
+              "count": 34,
+              "mean": 5.5529928768382355,
+              "p50": 4.10009765625,
+              "p95": 11.94501953125,
+              "p99": 12.80204833984375,
+              "min": 1.800048828125,
+              "max": 13.0
+            },
+            "audio_context_samples": 10,
+            "audio_context_max_gap_ms": 500.5,
+            "context_window_relative_s": [
+              23.286999755859377,
+              28.384499755859373
+            ],
+            "per_second": [
+              {
+                "relative_second": 23,
+                "sent": 45,
+                "received": 21,
+                "max_receive_age_ms": 155.900146484375,
+                "max_buffered_bytes_at_send": 3777
+              },
+              {
+                "relative_second": 24,
+                "sent": 57,
+                "received": 13,
+                "max_receive_age_ms": 707.5,
+                "max_buffered_bytes_at_send": 177519
+              },
+              {
+                "relative_second": 25,
+                "sent": 23,
+                "received": 10,
+                "max_receive_age_ms": 1534.89990234375,
+                "max_buffered_bytes_at_send": 264390
+              },
+              {
+                "relative_second": 26,
+                "sent": 25,
+                "received": 16,
+                "max_receive_age_ms": 2076.800048828125,
+                "max_buffered_bytes_at_send": 222595
+              },
+              {
+                "relative_second": 27,
+                "sent": 42,
+                "received": 21,
+                "max_receive_age_ms": 2227.099853515625,
+                "max_buffered_bytes_at_send": 264142
+              },
+              {
+                "relative_second": 28,
+                "sent": 51,
+                "received": 21,
+                "max_receive_age_ms": 130.800048828125,
+                "max_buffered_bytes_at_send": 3777
+              }
+            ]
+          }
+        ],
+        "worker_pairing_errors": [],
+        "interpretation_limit": "Timings paired by binary-then-stats order. Ages include uninstrumented transport and host/IPC intervals. No server arrival/send timestamps identify exact packet loss or upstream/downstream cause. Endpoint RTC snapshots do not measure episode RTT."
+      },
+      "stress": {
+        "status": "passed",
+        "raw_result": {
+          "status": "passed",
+          "actions": [
+            {
+              "action": "prompt",
+              "index": 0,
+              "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+              "settings_sent_at": 1789712790255.5,
+              "first_subsequent_capture_received_at": 1789712790390.4,
+              "settings_to_new_capture_receive_ms": 134.89990234375,
+              "frame_id": 8999
+            },
+            {
+              "action": "prompt",
+              "index": 1,
+              "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+              "settings_sent_at": 1789712792658.4,
+              "first_subsequent_capture_received_at": 1789712792778,
+              "settings_to_new_capture_receive_ms": 119.60009765625,
+              "frame_id": 9125
+            },
+            {
+              "action": "prompt",
+              "index": 2,
+              "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+              "settings_sent_at": 1789712795071.9,
+              "first_subsequent_capture_received_at": 1789712795201.4,
+              "settings_to_new_capture_receive_ms": 129.5,
+              "frame_id": 9250
+            },
+            {
+              "action": "resolution",
+              "width": 1024,
+              "height": 576,
+              "started_at": 1789712797431.3,
+              "matching_worker_output_at": 1789712797667.5999,
+              "change_to_matching_worker_output_ms": 236.2998046875,
+              "subsequent_frame_id": 9384,
+              "main_decoded_frame_id": 9384,
+              "stage_decoded_frame_id": 9384
+            },
+            {
+              "action": "resolution",
+              "width": 512,
+              "height": 288,
+              "started_at": 1789712801154.3,
+              "matching_worker_output_at": 1789712801338.4,
+              "change_to_matching_worker_output_ms": 184.099853515625,
+              "subsequent_frame_id": 9589,
+              "main_decoded_frame_id": 9589,
+              "stage_decoded_frame_id": 9589
+            },
+            {
+              "action": "resolution",
+              "width": 768,
+              "height": 448,
+              "started_at": 1789712804938.2,
+              "matching_worker_output_at": 1789712805139.0999,
+              "change_to_matching_worker_output_ms": 200.89990234375,
+              "subsequent_frame_id": 9794,
+              "main_decoded_frame_id": 9794,
+              "stage_decoded_frame_id": 9794
+            },
+            {
+              "action": "ten-rapid-prompts",
+              "final_prompt_observed": true,
+              "subsequent_frame_id": 10028
+            },
+            {
+              "action": "reconnect",
+              "index": 0,
+              "connect_clicked_at": 1789712813805.5,
+              "disconnect_clicked_at": 1789712811554.3,
+              "new_capture_received_at": 1789712825018.9,
+              "reconnect_to_new_capture_receive_ms": 11213.39990234375,
+              "frame_id": 10116
+            },
+            {
+              "action": "reconnect",
+              "index": 1,
+              "connect_clicked_at": 1789712830641.8,
+              "disconnect_clicked_at": 1789712828430.5999,
+              "new_capture_received_at": 1789712841871.7,
+              "reconnect_to_new_capture_receive_ms": 11229.89990234375,
+              "frame_id": 10307
+            },
+            {
+              "action": "reconnect",
+              "index": 2,
+              "connect_clicked_at": 1789712848501.9,
+              "disconnect_clicked_at": 1789712846293.5999,
+              "new_capture_received_at": 1789712859718.5,
+              "reconnect_to_new_capture_receive_ms": 11216.60009765625,
+              "frame_id": 10536
+            }
+          ],
+          "errors": [],
+          "source_order": {
+            "main": {
+              "received": {
+                "frames": 744,
+                "missing_ids": 0,
+                "reversals": 0,
+                "duplicate_ids": 0,
+                "status": "passed"
+              },
+              "preview-image-raf": {
+                "frames": 727,
+                "missing_ids": 0,
+                "reversals": 0,
+                "duplicate_ids": 0,
+                "status": "passed"
+              }
+            },
+            "stage": {
+              "webgl-frame-submitted": {
+                "frames": 745,
+                "missing_ids": 0,
+                "reversals": 0,
+                "duplicate_ids": 0,
+                "status": "passed"
+              }
+            }
+          },
+          "measurement": "Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result"
+        },
+        "failure": null,
+        "independent_errors": [],
+        "boundaries": {
+          "main/received": {
+            "events": 744,
+            "unique_frames": 744,
+            "fps": 10.076262694994103,
+            "dimensions": [],
+            "age_ms": {
+              "count": 744,
+              "mean": 104.59919722362231,
+              "p50": 105.4500732421875,
+              "p95": 142.900146484375,
+              "p99": 171.25700683593752,
+              "min": 46.5,
+              "max": 181.89990234375
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "max_event_gap_ms": 13396.10009765625,
+            "final_silence_ms": 10.5,
+            "age_over_ms": {
+              "250": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "500": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "1000": {
+                "frames": 0,
+                "percent": 0.0
+              }
+            }
+          },
+          "main/preview-image-raf": {
+            "events": 727,
+            "unique_frames": 727,
+            "fps": 9.846025509759023,
+            "dimensions": [],
+            "age_ms": {
+              "count": 727,
+              "mean": 124.46258872345685,
+              "p50": 126.300048828125,
+              "p95": 163.56003417968753,
+              "p99": 189.9919384765625,
+              "min": 51.400146484375,
+              "max": 204.099853515625
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "max_event_gap_ms": 13396.300048828125,
+            "final_silence_ms": 41.89990234375,
+            "age_over_ms": {
+              "250": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "500": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "1000": {
+                "frames": 0,
+                "percent": 0.0
+              }
+            }
+          },
+          "stage/webgl-frame-submitted": {
+            "events": 745,
+            "unique_frames": 745,
+            "fps": 10.081995740889392,
+            "dimensions": [
+              [
+                2048,
+                1152
+              ],
+              [
+                2304,
+                1344
+              ]
+            ],
+            "age_ms": {
+              "count": 745,
+              "mean": 109.06206710098574,
+              "p50": 109.5,
+              "p95": 147.26015624999997,
+              "p99": 176.01211914062497,
+              "min": 48,
+              "max": 188
+            },
+            "duration_ms": {
+              "count": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "p99": null,
+              "min": null,
+              "max": null
+            },
+            "max_event_gap_ms": 13395.599853515625,
+            "final_silence_ms": 28.099853515625,
+            "age_over_ms": {
+              "250": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "500": {
+                "frames": 0,
+                "percent": 0.0
+              },
+              "1000": {
+                "frames": 0,
+                "percent": 0.0
+              }
+            }
+          }
+        },
+        "ordering": {
+          "main/received": {
+            "frames": 744,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 744,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "main/preview-image-raf": {
+            "frames": 727,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 727,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          },
+          "stage/webgl-frame-submitted": {
+            "frames": 745,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "capture_timestamps": 745,
+            "capture_reversals": 0,
+            "capture_duplicates": 0,
+            "negative_ages": 0
+          }
+        },
+        "bindings": {
+          "stress.json": {
+            "file": "stress.json",
+            "stored_sha256": "4827cce82cdaba26b0c89377dc6ec59cb131e6b6f67d0c32a5982b5fc3ee99ce",
+            "uncompressed_sha256": "4827cce82cdaba26b0c89377dc6ec59cb131e6b6f67d0c32a5982b5fc3ee99ce"
+          },
+          "main-stress-raw.json": {
+            "file": "main-stress-raw.json",
+            "stored_sha256": "0edac1f9e22d81f15ceb7031ff556d89ec96fff2d3788eff8c2c792b847cd4ab",
+            "uncompressed_sha256": "0edac1f9e22d81f15ceb7031ff556d89ec96fff2d3788eff8c2c792b847cd4ab"
+          },
+          "stage-stress-raw.json": {
+            "file": "stage-stress-raw.json",
+            "stored_sha256": "032eb41334ebbda0b4673e0cb43a58b255640105a7f9b5d133c24d2e26b23d2a",
+            "uncompressed_sha256": "032eb41334ebbda0b4673e0cb43a58b255640105a7f9b5d133c24d2e26b23d2a"
+          }
+        },
+        "scope": "Lifecycle observations use each target own window, separate from steady FPS. Settings-to-new-capture receipt proves a subsequent capture, not that the worker used the new prompt revision or visually followed it."
+      }
+    }
+  ],
+  "cleanup": {
+    "status": "pages-closed",
+    "errors": []
+  },
+  "stress_actions": [
+    {
+      "action": "prompt",
+      "index": 0,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789712790255.5,
+      "first_subsequent_capture_received_at": 1789712790390.4,
+      "settings_to_new_capture_receive_ms": 134.89990234375,
+      "frame_id": 8999
+    },
+    {
+      "action": "prompt",
+      "index": 1,
+      "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+      "settings_sent_at": 1789712792658.4,
+      "first_subsequent_capture_received_at": 1789712792778,
+      "settings_to_new_capture_receive_ms": 119.60009765625,
+      "frame_id": 9125
+    },
+    {
+      "action": "prompt",
+      "index": 2,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789712795071.9,
+      "first_subsequent_capture_received_at": 1789712795201.4,
+      "settings_to_new_capture_receive_ms": 129.5,
+      "frame_id": 9250
+    },
+    {
+      "action": "resolution",
+      "width": 1024,
+      "height": 576,
+      "started_at": 1789712797431.3,
+      "matching_worker_output_at": 1789712797667.5999,
+      "change_to_matching_worker_output_ms": 236.2998046875,
+      "subsequent_frame_id": 9384,
+      "main_decoded_frame_id": 9384,
+      "stage_decoded_frame_id": 9384
+    },
+    {
+      "action": "resolution",
+      "width": 512,
+      "height": 288,
+      "started_at": 1789712801154.3,
+      "matching_worker_output_at": 1789712801338.4,
+      "change_to_matching_worker_output_ms": 184.099853515625,
+      "subsequent_frame_id": 9589,
+      "main_decoded_frame_id": 9589,
+      "stage_decoded_frame_id": 9589
+    },
+    {
+      "action": "resolution",
+      "width": 768,
+      "height": 448,
+      "started_at": 1789712804938.2,
+      "matching_worker_output_at": 1789712805139.0999,
+      "change_to_matching_worker_output_ms": 200.89990234375,
+      "subsequent_frame_id": 9794,
+      "main_decoded_frame_id": 9794,
+      "stage_decoded_frame_id": 9794
+    },
+    {
+      "action": "ten-rapid-prompts",
+      "final_prompt_observed": true,
+      "subsequent_frame_id": 10028
+    },
+    {
+      "action": "reconnect",
+      "index": 0,
+      "connect_clicked_at": 1789712813805.5,
+      "disconnect_clicked_at": 1789712811554.3,
+      "new_capture_received_at": 1789712825018.9,
+      "reconnect_to_new_capture_receive_ms": 11213.39990234375,
+      "frame_id": 10116
+    },
+    {
+      "action": "reconnect",
+      "index": 1,
+      "connect_clicked_at": 1789712830641.8,
+      "disconnect_clicked_at": 1789712828430.5999,
+      "new_capture_received_at": 1789712841871.7,
+      "reconnect_to_new_capture_receive_ms": 11229.89990234375,
+      "frame_id": 10307
+    },
+    {
+      "action": "reconnect",
+      "index": 2,
+      "connect_clicked_at": 1789712848501.9,
+      "disconnect_clicked_at": 1789712846293.5999,
+      "new_capture_received_at": 1789712859718.5,
+      "reconnect_to_new_capture_receive_ms": 11216.60009765625,
+      "frame_id": 10536
+    }
+  ],
+  "stress_counts": {
+    "main/received": 744,
+    "main/preview-image-raf": 727,
+    "stage/webgl-frame-submitted": 745
+  },
+  "limitations": [
+    "The two 180-second runs are sequential, with one observation per policy and changing audio levels. They cannot establish a general causal tail improvement.",
+    "The 1920x1080 stage viewport used a 2304x1344 WebGL buffer at 768x448 input. Stage submissions and preview RAF observations are not physical display presentation.",
+    "Stress uses separate main and stage windows and includes deliberate disconnects. Its event rates and long gaps are not steady-state FPS or continuity failures.",
+    "Settings-to-subsequent-capture receipt proves a newer capture, not which model prompt revision produced the image or semantic adherence.",
+    "Reconnect times include app signaling, control flow and generation until a new captured frame arrives; they are not network handshake-only times.",
+    "Inter-trial drain establishes observed encoder/worker quiescence, not complete SCTP drain. Epochs and warmup mitigate stale-session effects without proving contamination or its absence."
+  ]
+}

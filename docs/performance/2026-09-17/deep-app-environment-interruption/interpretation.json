@@ -1,0 +1,6 @@
+{
+  "formal_failure_utc": "2026-09-17T23:56:55Z",
+  "clamshell_sleep_local": "2026-09-18T01:56:56+02:00",
+  "pod_stop_verified_utc": "2026-09-18T00:12:04.945274Z",
+  "interpretation": "The app disconnect coincides with local clamshell sleep; this is an interrupted environment observation, not a completed mailbox stability trial. Supervisor stopped the pod during the next maintenance wake. Local caffeinate cannot prevent lid-close sleep."
+}

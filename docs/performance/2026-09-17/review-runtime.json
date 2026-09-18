@@ -1,0 +1,56 @@
+{
+  "status": "passed_with_limitations",
+  "review_utc": "2026-09-17T23:53:44.615893+00:00",
+  "reviewer": "independent model_deep_dive subagent; did not implement these runtime controls",
+  "scope": "Read-only review of runtime opt-ins, boot integration, packaging, cache/workflow triggers and claims; subsequent edits only clarify runtime documentation. No deployment or runtime source changes.",
+  "source_sha256": {
+    "workers/runpod-flux2klein/worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "workers/runpod-flux2klein/inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "workers/runpod-flux2klein/Dockerfile": "b6217e2153807e0c4a0e168ddbf9828f2bdc5d40069713241d2023f70c1234ff",
+    "workers/runpod-flux2klein/.dockerignore": "20cc09f975121b43ed667c115428655019755bcb9b56870e7d49aa8b4cdd9d68",
+    "workers/runpod-flux2klein/entrypoint.sh": "e3271e7446f8e0dda9ef59ab07f390dd8909948198a72b5a58e322f7641d9073",
+    "workers/runpod-flux2klein/requirements.txt": "6e022cd3e99d510da3038242b4f8f43148ef1ab1d7b4aef04ef974c1faa76b4b",
+    "workers/runpod-flux2klein/test_worker_runtime.py": "bcf60609c07f0bbb411b60512f9306d24f60682fbbc2b62bcf959121b393bfc0",
+    "workers/runpod-flux2klein/RUNTIME-OPTIMIZATIONS.md": "80c22b312d02c1ce58e69bb14226d76f5ea6a67c7ebd05ec86d0a82ffdc9b2dd",
+    "workers/runpod-flux2klein/bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "workers/runpod-flux2klein/bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    ".github/workflows/runpod-flux2klein-docker.yml": "1a7059a3b2483a6b552f270f9d0b62868367d7abe475aecf465dc41a50c5e93e"
+  },
+  "findings": [],
+  "defaults": {
+    "TORCH_NUM_THREADS": "0, preserve native selection",
+    "USE_TERMINAL_NOOP": "0, off",
+    "USE_GPU_OUTPUT_CAST": "0, off"
+  },
+  "reviewed_controls": [
+    "Thread parsing rejects values outside 0..256 and applies explicit budgets before setup/model work; zero leaves native selection unchanged.",
+    "Disabled terminal/cast flags do not import or install optional optimization helpers.",
+    "Terminal helper bytes, pipeline source and scheduler source/exact class gate installation; failures restore original class call method. Per-step schedule/index/dtype/conditioning guards retain original prediction when unsupported.",
+    "GPU cast checks helper bytes, exact processor class, inherited method identity and method source hash; failures restore original processor method. The patch is instance-scoped and CPU tensors use the original converter.",
+    "Production leaves duplicate cast-comparison mode disabled. Runtime inference errors use existing error handling, without a second speculative inference.",
+    "Docker copies the runtime and both exact helpers after dependency installation; helper changes invalidate source layers, not dependency layers. Existing compiler cache hydration remains unchanged.",
+    "Docker ignore rules retain the copied runtime/helpers. Main-branch workflow path filters include all added runtime/helper files; the reviewed branch does not itself auto-publish through the main push trigger."
+  ],
+  "validation": {
+    "command": "python3 -m unittest discover -s workers/runpod-flux2klein -p 'test_worker_runtime.py' -v",
+    "tests_run": 21,
+    "failures": 0,
+    "errors": 0,
+    "observed_result": "Ran 21 tests in 0.023s; OK",
+    "execution_scope": "CPU-only local tests; no Torch/CUDA/model execution. Tests were run during the preceding independent review and not repeated for these wording-only changes.",
+    "additional_checks": "worker_runtime.py and inference_server.py parsed and compiled successfully without execution."
+  },
+  "documentation_corrections": [
+    "Four-thread setting explicitly rejected for the current quality-preservation goal.",
+    "Measured512\u00d7288 PSNR corrected to29.44\u201330.57dB.",
+    "Individual-file deployments must include worker_runtime.py and exact bench/terminal_noop.py plus bench/gpu_output_cast.py; inference_server.py alone is insufficient even with optimization flags off. Rebuilt image is the alternative."
+  ],
+  "limitations": [
+    "Review assumes one pipeline instance per Python worker and one-time boot configuration. These functions are not promised as dynamic or idempotent runtime toggles; restart the worker after configuration changes.",
+    "Full GPU proof of the integrated production opt-ins across all intended resolutions/steps remains pending; passing CPU guard tests does not establish speed, output equality or application performance.",
+    "Terminal-noop finite-output equivalence is not universal: zero multiplied by a nonfinite original prediction need not equal removing that prediction. Source guards do not replace workload quality testing.",
+    "Existing package resolution and compiler-cache behavior were not rebuilt or benchmarked in this review. Diffusers is source-pinned; other pre-existing dependency/weight-fetch behavior is unchanged.",
+    "A future push to main or explicit workflow dispatch can publish the image; no such action was taken in this review.",
+    "TORCH_NUM_THREADS=0 preserves the environment-native choice, which is not guaranteed to be 128 on every host. Lower thread budgets remain unaccepted for the present exact-quality goal."
+  ]
+}

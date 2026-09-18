@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "actions": [
+    {
+      "action": "prompt",
+      "index": 0,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789712790255.5,
+      "first_subsequent_capture_received_at": 1789712790390.4,
+      "settings_to_new_capture_receive_ms": 134.89990234375,
+      "frame_id": 8999
+    },
+    {
+      "action": "prompt",
+      "index": 1,
+      "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+      "settings_sent_at": 1789712792658.4,
+      "first_subsequent_capture_received_at": 1789712792778,
+      "settings_to_new_capture_receive_ms": 119.60009765625,
+      "frame_id": 9125
+    },
+    {
+      "action": "prompt",
+      "index": 2,
+      "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+      "settings_sent_at": 1789712795071.9,
+      "first_subsequent_capture_received_at": 1789712795201.4,
+      "settings_to_new_capture_receive_ms": 129.5,
+      "frame_id": 9250
+    },
+    {
+      "action": "resolution",
+      "width": 1024,
+      "height": 576,
+      "started_at": 1789712797431.3,
+      "matching_worker_output_at": 1789712797667.5999,
+      "change_to_matching_worker_output_ms": 236.2998046875,
+      "subsequent_frame_id": 9384,
+      "main_decoded_frame_id": 9384,
+      "stage_decoded_frame_id": 9384
+    },
+    {
+      "action": "resolution",
+      "width": 512,
+      "height": 288,
+      "started_at": 1789712801154.3,
+      "matching_worker_output_at": 1789712801338.4,
+      "change_to_matching_worker_output_ms": 184.099853515625,
+      "subsequent_frame_id": 9589,
+      "main_decoded_frame_id": 9589,
+      "stage_decoded_frame_id": 9589
+    },
+    {
+      "action": "resolution",
+      "width": 768,
+      "height": 448,
+      "started_at": 1789712804938.2,
+      "matching_worker_output_at": 1789712805139.0999,
+      "change_to_matching_worker_output_ms": 200.89990234375,
+      "subsequent_frame_id": 9794,
+      "main_decoded_frame_id": 9794,
+      "stage_decoded_frame_id": 9794
+    },
+    {
+      "action": "ten-rapid-prompts",
+      "final_prompt_observed": true,
+      "subsequent_frame_id": 10028
+    },
+    {
+      "action": "reconnect",
+      "index": 0,
+      "connect_clicked_at": 1789712813805.5,
+      "disconnect_clicked_at": 1789712811554.3,
+      "new_capture_received_at": 1789712825018.9,
+      "reconnect_to_new_capture_receive_ms": 11213.39990234375,
+      "frame_id": 10116
+    },
+    {
+      "action": "reconnect",
+      "index": 1,
+      "connect_clicked_at": 1789712830641.8,
+      "disconnect_clicked_at": 1789712828430.5999,
+      "new_capture_received_at": 1789712841871.7,
+      "reconnect_to_new_capture_receive_ms": 11229.89990234375,
+      "frame_id": 10307
+    },
+    {
+      "action": "reconnect",
+      "index": 2,
+      "connect_clicked_at": 1789712848501.9,
+      "disconnect_clicked_at": 1789712846293.5999,
+      "new_capture_received_at": 1789712859718.5,
+      "reconnect_to_new_capture_receive_ms": 11216.60009765625,
+      "frame_id": 10536
+    }
+  ],
+  "errors": [],
+  "source_order": {
+    "main": {
+      "received": {
+        "frames": 744,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      },
+      "preview-image-raf": {
+        "frames": 727,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      }
+    },
+    "stage": {
+      "webgl-frame-submitted": {
+        "frames": 745,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      }
+    }
+  },
+  "measurement": "Lifecycle/input response trial; intentional disconnects and prompt work are excluded from the preceding steady-state FPS result"
+}

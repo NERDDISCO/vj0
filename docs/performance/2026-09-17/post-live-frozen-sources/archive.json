@@ -1,0 +1,74 @@
+[
+  {
+    "original": "RUN.txt",
+    "archive": "RUN.txt",
+    "bytes": 610,
+    "sha256": "129ca0c0bedad6c41f52727ea28a161f60fa9738d374750b2cf9f75f843afd39",
+    "archive_bytes": 610,
+    "archive_sha256": "129ca0c0bedad6c41f52727ea28a161f60fa9738d374750b2cf9f75f843afd39"
+  },
+  {
+    "original": "bench/bench_post_live.py",
+    "archive": "bench/bench_post_live.py",
+    "bytes": 22244,
+    "sha256": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
+    "archive_bytes": 22244,
+    "archive_sha256": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613"
+  },
+  {
+    "original": "bench/bench_terminal_followup.py",
+    "archive": "bench/bench_terminal_followup.py",
+    "bytes": 11001,
+    "sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4",
+    "archive_bytes": 11001,
+    "archive_sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4"
+  },
+  {
+    "original": "bench/gpu_output_cast.py",
+    "archive": "bench/gpu_output_cast.py",
+    "bytes": 1764,
+    "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "archive_bytes": 1764,
+    "archive_sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+  },
+  {
+    "original": "bench/metrics.py",
+    "archive": "bench/metrics.py",
+    "bytes": 1382,
+    "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "archive_bytes": 1382,
+    "archive_sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac"
+  },
+  {
+    "original": "bench/terminal_noop.py",
+    "archive": "bench/terminal_noop.py",
+    "bytes": 4293,
+    "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "archive_bytes": 4293,
+    "archive_sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+  },
+  {
+    "original": "inference_server.py",
+    "archive": "inference_server.py",
+    "bytes": 30573,
+    "sha256": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "archive_bytes": 30573,
+    "archive_sha256": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad"
+  },
+  {
+    "original": "sources.json",
+    "archive": "sources.json",
+    "bytes": 675,
+    "sha256": "4fdfe06a3c61d3c8f861bc48f669337b858fe9c1dd6bc21f1295ba248ccf1e9a",
+    "archive_bytes": 675,
+    "archive_sha256": "4fdfe06a3c61d3c8f861bc48f669337b858fe9c1dd6bc21f1295ba248ccf1e9a"
+  },
+  {
+    "original": "worker_runtime.py",
+    "archive": "worker_runtime.py",
+    "bytes": 6232,
+    "sha256": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "archive_bytes": 6232,
+    "archive_sha256": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba"
+  }
+]

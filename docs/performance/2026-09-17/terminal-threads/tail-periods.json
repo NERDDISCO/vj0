@@ -1,0 +1,50 @@
+[
+  {
+    "threads": 128,
+    "repeat": 0,
+    "frames": 150,
+    "frames_over40ms": 45,
+    "median_interval_between_slow_frames_ms": 100.01103114336729,
+    "cgroup_throttled_periods": 49
+  },
+  {
+    "threads": 128,
+    "repeat": 1,
+    "frames": 150,
+    "frames_over40ms": 48,
+    "median_interval_between_slow_frames_ms": 100.00157682225108,
+    "cgroup_throttled_periods": 50
+  },
+  {
+    "threads": 128,
+    "repeat": 2,
+    "frames": 150,
+    "frames_over40ms": 46,
+    "median_interval_between_slow_frames_ms": 100.05444521084428,
+    "cgroup_throttled_periods": 49
+  },
+  {
+    "threads": 4,
+    "repeat": 0,
+    "frames": 150,
+    "frames_over40ms": 0,
+    "median_interval_between_slow_frames_ms": null,
+    "cgroup_throttled_periods": 0
+  },
+  {
+    "threads": 4,
+    "repeat": 1,
+    "frames": 150,
+    "frames_over40ms": 0,
+    "median_interval_between_slow_frames_ms": null,
+    "cgroup_throttled_periods": 0
+  },
+  {
+    "threads": 4,
+    "repeat": 2,
+    "frames": 150,
+    "frames_over40ms": 0,
+    "median_interval_between_slow_frames_ms": null,
+    "cgroup_throttled_periods": 0
+  }
+]

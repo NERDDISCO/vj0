@@ -1,6 +1,6 @@
 # Keep the build context small + fast on Blacksmith.
-# Only `Dockerfile`, `entrypoint.sh`, `server.js`, `inference_server.py`,
-# `package.json`, and `requirements.txt` are needed for the image.
+# Runtime also includes worker_runtime.py and the audited bench/terminal_noop.py
+# and bench/gpu_output_cast.py helpers. Dockerfile copies them explicitly.
 
 # bench scripts (~30 files, irrelevant to runtime)
 bench_*.py

@@ -1,0 +1,3162 @@
+{
+  "updated_utc": "2026-09-18T05:34:58.340938+00:00",
+  "root": "/tmp/vj0-deep-app-wan-20260918",
+  "planned_trials": 18,
+  "cohort_status": "partial",
+  "progress_records": [
+    {
+      "name": "before-512-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/before-512-r0/summary.json"
+    },
+    {
+      "name": "compute-capture-512-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-512-r0/summary.json"
+    },
+    {
+      "name": "latest-input-512-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "name": "latest-input-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/latest-input-512-r0/summary.json"
+    },
+    {
+      "name": "before-768-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/before-768-r0/summary.json"
+    },
+    {
+      "name": "compute-capture-768-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-768-r0/summary.json"
+    },
+    {
+      "name": "latest-input-768-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "name": "latest-input-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/latest-input-768-r0/summary.json"
+    },
+    {
+      "name": "before-1024-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-1024-r0",
+        "width": 1024,
+        "height": 576,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/before-1024-r0/summary.json"
+    },
+    {
+      "name": "compute-capture-1024-r0",
+      "status": "measured",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-1024-r0",
+        "width": 1024,
+        "height": 576,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-1024-r0/summary.json"
+    },
+    {
+      "name": "latest-input-1024-r0",
+      "status": "failed",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "name": "latest-input-1024-r0",
+        "width": 1024,
+        "height": 576,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "error": "App disconnected during measurement"
+    }
+  ],
+  "environment_interruption": {
+    "interpretation": {
+      "formal_failure_utc": "2026-09-17T23:56:55Z",
+      "clamshell_sleep_local": "2026-09-18T01:56:56+02:00",
+      "pod_stop_verified_utc": "2026-09-18T00:12:04.945274Z",
+      "interpretation": "The app disconnect coincides with local clamshell sleep; this is an interrupted environment observation, not a completed mailbox stability trial. Supervisor stopped the pod during the next maintenance wake. Local caffeinate cannot prevent lid-close sleep."
+    },
+    "power_events": "2026-09-18 01:56:56 +0200 Sleep               \tEntering Sleep state due to 'Clamshell Sleep':TCPKeepAlive=active Using Batt (Charge:86%) 901 secs  \n2026-09-18 02:11:57 +0200 DarkWake            \tDarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:86%) 45 secs   \n2026-09-18 02:12:42 +0200 Sleep               \tEntering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:86%) 905 secs  \n2026-09-18 07:29:46 +0200 DarkWake            \tDarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) USB-C_plug SMC.OutboxNotEmpty nub-spmi-a0.0x3F/ Using BATT (Charge:85%) 0 secs    \n2026-09-18 07:29:46 +0200 Wake                \tDarkWake to FullWake from Deep Idle [CDNVAP] : due to Notification Using AC (Charge:85%)           \n",
+    "evidence_sha256": {
+      "interpretation.json": "74118c2add83814828f8eb909d78e55f9cca5e66742693c7fc3b85ab308d1dd4",
+      "power-events.txt": "3a15f8cc992acb9f9d67e993414fa19e9e37f38ffd87c532a0859d40d6767964"
+    },
+    "limitation": "The sleep/disconnect invalidates the unfinished trial; it is not an intrinsic mailbox failure. Preserve all8 earlier complete trials and the independent6.86s transport-age outlier. No reverse-order repeat was completed."
+  },
+  "completed_summaries": 8,
+  "identity_sha256": "1b51332cc566ef94f7ec18cc8dc158b1e895a1f51c45e106ec3394cc90e4fcaa",
+  "harness_sha256": "80f5bb5a7020bd0bd6d8dc73a32c01e4084583c28de77b8c4a52fec764fbfa9c",
+  "probe_sha256": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685",
+  "cleanup": {
+    "status": "failed",
+    "errors": [
+      "final drain: Cannot drain active generation without its connected probe"
+    ]
+  },
+  "trials": [
+    {
+      "name": "before-512-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.2525,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 1703,
+          "unique_frames": 1703,
+          "fps": 28.26438736981868,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1703,
+            "mean": 145.02008074560518,
+            "p50": 148.5,
+            "p95": 171.18996582031252,
+            "p99": 186.0,
+            "min": 99.60009765625,
+            "max": 232.39990234375
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 141.60009765625,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/received": {
+          "events": 1790,
+          "unique_frames": 1790,
+          "fps": 29.708310858470604,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1790,
+            "mean": 132.40318378469797,
+            "p50": 131.10009765625,
+            "p95": 158.7550048828125,
+            "p99": 177.20988037109365,
+            "min": 82.10009765625,
+            "max": 270.400146484375
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 140.900146484375,
+          "age_over_ms": {
+            "250": {
+              "frames": 1,
+              "percent": 0.055865921787709494
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/sent": {
+          "events": 2275,
+          "unique_frames": 2275,
+          "fps": 37.75776938716236,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 104.10009765625,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 1787,
+          "unique_frames": 1787,
+          "fps": 29.658520393344677,
+          "dimensions": [
+            [
+              2048,
+              1152
+            ]
+          ],
+          "age_ms": {
+            "count": 1787,
+            "mean": 136.86722220157736,
+            "p50": 137.599853515625,
+            "p95": 163.2999755859375,
+            "p99": 183.92186035156274,
+            "min": 87,
+            "max": 278.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 142.800048828125,
+          "age_over_ms": {
+            "250": {
+              "frames": 1,
+              "percent": 0.05595970900951315
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 1790,
+        "max_gap_ms": 141.10009765625
+      },
+      "failures": [],
+      "summary_sha256": "d88cfc90c26f14e60cbeebfce6d647cfd217234e93e792ddc04e8a7db6b17803",
+      "raw_sha256": {
+        "main": "def3b3947a1fb79d5c5b906bd2fb273ca6b4dc2183371ff166473c9ece9c0242",
+        "stage": "2cd1f891dfeb13272886d85a16255857abafeaef2c89f8f5e7eef879ccdf970e"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 1790,
+          "mean": 33.41317877094972,
+          "p50": 32.79,
+          "p95": 36.1395,
+          "p99": 46.933099999999875,
+          "min": 31.92,
+          "max": 58.09
+        },
+        "queue_wait_ms": {
+          "count": 1790,
+          "mean": 43.969765921787705,
+          "p50": 39.723,
+          "p95": 65.06569999999999,
+          "p99": 69.05265,
+          "min": 0.022,
+          "max": 82.82
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14116941519847828,
+          "p50": 0.14208814036387107,
+          "p95": 0.14493645649836287,
+          "p99": 0.1452350475160407,
+          "min": 0.13743604164343326,
+          "max": 0.14523514295082293
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 2295,
+        "framesToWorker": 1809,
+        "framesFromWorker": 1808,
+        "framesToClient": 1808,
+        "droppedByWorker": 2,
+        "droppedInbound": 486,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "compute-capture-512-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.308999755859375,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 1881,
+          "unique_frames": 1881,
+          "fps": 31.18937484645067,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1881,
+            "mean": 312.55619309875067,
+            "p50": 123.300048828125,
+            "p95": 587.5,
+            "p99": 6520.339892578126,
+            "min": 75.699951171875,
+            "max": 6886.2998046875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 1533.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 149,
+              "percent": 7.9213184476342375
+            },
+            "500": {
+              "frames": 105,
+              "percent": 5.582137161084529
+            },
+            "1000": {
+              "frames": 72,
+              "percent": 3.827751196172249
+            }
+          }
+        },
+        "main/received": {
+          "events": 2323,
+          "unique_frames": 2323,
+          "fps": 38.518297590805375,
+          "dimensions": [],
+          "age_ms": {
+            "count": 2323,
+            "mean": 289.61829595939383,
+            "p50": 109.39990234375,
+            "p95": 547.2101562500004,
+            "p99": 6517.53995605469,
+            "min": 58.5,
+            "max": 6863.699951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 1519.099853515625,
+          "age_over_ms": {
+            "250": {
+              "frames": 187,
+              "percent": 8.04993542832544
+            },
+            "500": {
+              "frames": 127,
+              "percent": 5.467068445975032
+            },
+            "1000": {
+              "frames": 84,
+              "percent": 3.6160137752905723
+            }
+          }
+        },
+        "main/sent": {
+          "events": 3013,
+          "unique_frames": 3013,
+          "fps": 49.9593760831238,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 5018.900146484375,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 2309,
+          "unique_frames": 2309,
+          "fps": 38.28615976632355,
+          "dimensions": [
+            [
+              2048,
+              1152
+            ]
+          ],
+          "age_ms": {
+            "count": 2309,
+            "mean": 295.06635771793117,
+            "p50": 112.800048828125,
+            "p95": 555.4201660156249,
+            "p99": 6523.832060546876,
+            "min": 60.699951171875,
+            "max": 6872.300048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 1528.099853515625,
+          "age_over_ms": {
+            "250": {
+              "frames": 188,
+              "percent": 8.142052836725856
+            },
+            "500": {
+              "frames": 127,
+              "percent": 5.500216543958423
+            },
+            "1000": {
+              "frames": 84,
+              "percent": 3.6379385015158077
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 2323,
+        "max_gap_ms": 1519.699951171875
+      },
+      "failures": [],
+      "summary_sha256": "e670e430cd9877f2b5ad19b8258057cbf88b2222ddb6c8ab8d480076ff84a16c",
+      "raw_sha256": {
+        "main": "fc190f0044f0d3fc810a6bd4608e9f02ad67f9d6a1223b1b063d9f9f1bf78531",
+        "stage": "a798b837844f8c11e281fee14a231a84a94059960e004a43e2d32c3144bd3749"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 2323,
+          "mean": 22.690116229014205,
+          "p50": 21.94,
+          "p95": 25.75,
+          "p99": 34.931200000000004,
+          "min": 21.67,
+          "max": 60.53
+        },
+        "queue_wait_ms": {
+          "count": 2323,
+          "mean": 31.1063710718898,
+          "p50": 33.609,
+          "p95": 43.9567,
+          "p99": 54.02610000000003,
+          "min": 0.012,
+          "max": 77.662
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14110853539979135,
+          "p50": 0.14123423186618286,
+          "p95": 0.14521449702791103,
+          "p99": 0.1453050431130822,
+          "min": 0.1374467537933744,
+          "max": 0.14530505662197649
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 3059,
+        "framesToWorker": 2367,
+        "framesFromWorker": 2358,
+        "framesToClient": 2358,
+        "droppedByWorker": 8,
+        "droppedInbound": 692,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "long_age_episode": {
+        "frames_over_1s": 84,
+        "first": {
+          "id": 805,
+          "capture_relative_s": 11.802699951171874,
+          "send_relative_s": 11.810999755859376,
+          "receive_relative_s": 13.32139990234375,
+          "age_ms": 1518.699951171875,
+          "buffered_bytes_at_send": 136821,
+          "encode_to_send_ms": 8.2998046875,
+          "worker_timing": {
+            "queue_wait_ms": 0.059,
+            "decode_in_ms": 0.72,
+            "prompt_ms": 0.01,
+            "vae_encode_ms": 5.03,
+            "transformer_plus_decode_ms": 27.58,
+            "stage_clock": "cuda-events",
+            "benchmark_variant": "terminal-noop",
+            "output_cast": "gpu",
+            "torch_threads": 128,
+            "terminal_skips": 1,
+            "jpeg_ms": 0.79,
+            "total_ms": 34.22
+          },
+          "receive_to_stage_ms": 7.199951171875,
+          "receive_to_preview_raf_ms": 16.699951171875
+        },
+        "peak": {
+          "id": 874,
+          "capture_relative_s": 12.953199951171875,
+          "send_relative_s": 12.959499755859374,
+          "receive_relative_s": 19.81689990234375,
+          "age_ms": 6863.699951171875,
+          "buffered_bytes_at_send": 265097,
+          "encode_to_send_ms": 6.2998046875,
+          "worker_timing": {
+            "queue_wait_ms": 35.718,
+            "decode_in_ms": 0.22,
+            "prompt_ms": 0.01,
+            "vae_encode_ms": 3.8,
+            "transformer_plus_decode_ms": 17.65,
+            "stage_clock": "cuda-events",
+            "benchmark_variant": "terminal-noop",
+            "output_cast": "gpu",
+            "torch_threads": 128,
+            "terminal_skips": 1,
+            "jpeg_ms": 0.22,
+            "total_ms": 21.93
+          },
+          "receive_to_stage_ms": 8.60009765625,
+          "receive_to_preview_raf_ms": 22.599853515625
+        },
+        "last": {
+          "id": 912,
+          "capture_relative_s": 18.586099853515623,
+          "send_relative_s": 18.5912998046875,
+          "receive_relative_s": 20.241099853515625,
+          "age_ms": 1655,
+          "buffered_bytes_at_send": 254630,
+          "encode_to_send_ms": 5.199951171875,
+          "worker_timing": {
+            "queue_wait_ms": 42.387,
+            "decode_in_ms": 0.19,
+            "prompt_ms": 0,
+            "vae_encode_ms": 3.91,
+            "transformer_plus_decode_ms": 17.69,
+            "stage_clock": "cuda-events",
+            "benchmark_variant": "terminal-noop",
+            "output_cast": "gpu",
+            "torch_threads": 128,
+            "terminal_skips": 1,
+            "jpeg_ms": 0.23,
+            "total_ms": 22.04
+          },
+          "receive_to_stage_ms": 1.900146484375,
+          "receive_to_preview_raf_ms": 17.39990234375
+        },
+        "worker_total_ms": {
+          "count": 84,
+          "mean": 24.09166666666667,
+          "p50": 22.105,
+          "p95": 33.67649999999999,
+          "p99": 34.6548,
+          "min": 21.86,
+          "max": 35.02
+        },
+        "worker_queue_ms": {
+          "count": 84,
+          "mean": 12.8625,
+          "p50": 6.4175,
+          "p95": 36.554399999999994,
+          "p99": 42.46163,
+          "min": 0.012,
+          "max": 42.826
+        },
+        "receive_to_stage_ms": {
+          "count": 84,
+          "mean": 5.113179524739583,
+          "p50": 4.400146484375,
+          "p95": 10.180249023437495,
+          "p99": 11.5512109375,
+          "min": 1.800048828125,
+          "max": 11.800048828125
+        },
+        "per_second": [
+          {
+            "second": 0,
+            "sent": 59,
+            "received": 43,
+            "max_receive_age_ms": 152.7001953125,
+            "max_buffered_bytes_at_send": 3459
+          },
+          {
+            "second": 1,
+            "sent": 59,
+            "received": 45,
+            "max_receive_age_ms": 160.599853515625,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 2,
+            "sent": 60,
+            "received": 40,
+            "max_receive_age_ms": 208.89990234375,
+            "max_buffered_bytes_at_send": 10318
+          },
+          {
+            "second": 3,
+            "sent": 60,
+            "received": 43,
+            "max_receive_age_ms": 189.89990234375,
+            "max_buffered_bytes_at_send": 3469
+          },
+          {
+            "second": 4,
+            "sent": 60,
+            "received": 42,
+            "max_receive_age_ms": 189.300048828125,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 5,
+            "sent": 59,
+            "received": 44,
+            "max_receive_age_ms": 164,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 6,
+            "sent": 60,
+            "received": 41,
+            "max_receive_age_ms": 187.400146484375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 7,
+            "sent": 58,
+            "received": 42,
+            "max_receive_age_ms": 207.39990234375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 8,
+            "sent": 60,
+            "received": 44,
+            "max_receive_age_ms": 158.5,
+            "max_buffered_bytes_at_send": 6888
+          },
+          {
+            "second": 9,
+            "sent": 58,
+            "received": 44,
+            "max_receive_age_ms": 158.89990234375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 10,
+            "sent": 60,
+            "received": 43,
+            "max_receive_age_ms": 169.599853515625,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 11,
+            "sent": 60,
+            "received": 30,
+            "max_receive_age_ms": 440.5,
+            "max_buffered_bytes_at_send": 170938
+          },
+          {
+            "second": 12,
+            "sent": 58,
+            "received": 11,
+            "max_receive_age_ms": 722.800048828125,
+            "max_buffered_bytes_at_send": 265097
+          },
+          {
+            "second": 13,
+            "sent": 0,
+            "received": 1,
+            "max_receive_age_ms": 1518.699951171875,
+            "max_buffered_bytes_at_send": null
+          },
+          {
+            "second": 14,
+            "sent": 0,
+            "received": 6,
+            "max_receive_age_ms": 3018.900146484375,
+            "max_buffered_bytes_at_send": null
+          },
+          {
+            "second": 15,
+            "sent": 0,
+            "received": 6,
+            "max_receive_age_ms": 3938.300048828125,
+            "max_buffered_bytes_at_send": null
+          },
+          {
+            "second": 16,
+            "sent": 0,
+            "received": 8,
+            "max_receive_age_ms": 4025.60009765625,
+            "max_buffered_bytes_at_send": null
+          },
+          {
+            "second": 17,
+            "sent": 2,
+            "received": 5,
+            "max_receive_age_ms": 5686.800048828125,
+            "max_buffered_bytes_at_send": 131590
+          },
+          {
+            "second": 18,
+            "sent": 39,
+            "received": 13,
+            "max_receive_age_ms": 6491.10009765625,
+            "max_buffered_bytes_at_send": 264952
+          },
+          {
+            "second": 19,
+            "sent": 16,
+            "received": 33,
+            "max_receive_age_ms": 6863.699951171875,
+            "max_buffered_bytes_at_send": 177000
+          },
+          {
+            "second": 20,
+            "sent": 60,
+            "received": 44,
+            "max_receive_age_ms": 1822.400146484375,
+            "max_buffered_bytes_at_send": 201076
+          },
+          {
+            "second": 21,
+            "sent": 60,
+            "received": 45,
+            "max_receive_age_ms": 153.099853515625,
+            "max_buffered_bytes_at_send": 3460
+          },
+          {
+            "second": 22,
+            "sent": 60,
+            "received": 44,
+            "max_receive_age_ms": 163.300048828125,
+            "max_buffered_bytes_at_send": 3456
+          },
+          {
+            "second": 23,
+            "sent": 59,
+            "received": 35,
+            "max_receive_age_ms": 311.699951171875,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 24,
+            "sent": 60,
+            "received": 33,
+            "max_receive_age_ms": 663.5,
+            "max_buffered_bytes_at_send": 3459
+          },
+          {
+            "second": 25,
+            "sent": 59,
+            "received": 61,
+            "max_receive_age_ms": 547.7001953125,
+            "max_buffered_bytes_at_send": 3470
+          },
+          {
+            "second": 26,
+            "sent": 60,
+            "received": 46,
+            "max_receive_age_ms": 121.2998046875,
+            "max_buffered_bytes_at_send": 3460
+          },
+          {
+            "second": 27,
+            "sent": 60,
+            "received": 44,
+            "max_receive_age_ms": 151.7001953125,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 28,
+            "sent": 60,
+            "received": 45,
+            "max_receive_age_ms": 154.2998046875,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 29,
+            "sent": 55,
+            "received": 44,
+            "max_receive_age_ms": 122.39990234375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 30,
+            "sent": 56,
+            "received": 46,
+            "max_receive_age_ms": 123.39990234375,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 31,
+            "sent": 52,
+            "received": 45,
+            "max_receive_age_ms": 121.099853515625,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 32,
+            "sent": 51,
+            "received": 44,
+            "max_receive_age_ms": 122.699951171875,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 33,
+            "sent": 49,
+            "received": 43,
+            "max_receive_age_ms": 123,
+            "max_buffered_bytes_at_send": 3468
+          },
+          {
+            "second": 34,
+            "sent": 47,
+            "received": 46,
+            "max_receive_age_ms": 126.099853515625,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 35,
+            "sent": 51,
+            "received": 40,
+            "max_receive_age_ms": 154,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 36,
+            "sent": 53,
+            "received": 42,
+            "max_receive_age_ms": 156.199951171875,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 37,
+            "sent": 54,
+            "received": 44,
+            "max_receive_age_ms": 127.89990234375,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 38,
+            "sent": 49,
+            "received": 43,
+            "max_receive_age_ms": 124.300048828125,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 39,
+            "sent": 55,
+            "received": 44,
+            "max_receive_age_ms": 171.39990234375,
+            "max_buffered_bytes_at_send": 3459
+          },
+          {
+            "second": 40,
+            "sent": 52,
+            "received": 44,
+            "max_receive_age_ms": 128.89990234375,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 41,
+            "sent": 50,
+            "received": 43,
+            "max_receive_age_ms": 158.699951171875,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 42,
+            "sent": 48,
+            "received": 41,
+            "max_receive_age_ms": 179,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 43,
+            "sent": 58,
+            "received": 41,
+            "max_receive_age_ms": 144.5,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 44,
+            "sent": 52,
+            "received": 43,
+            "max_receive_age_ms": 130.5,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 45,
+            "sent": 46,
+            "received": 44,
+            "max_receive_age_ms": 130.199951171875,
+            "max_buffered_bytes_at_send": 3454
+          },
+          {
+            "second": 46,
+            "sent": 44,
+            "received": 43,
+            "max_receive_age_ms": 140.39990234375,
+            "max_buffered_bytes_at_send": 3454
+          },
+          {
+            "second": 47,
+            "sent": 38,
+            "received": 39,
+            "max_receive_age_ms": 170.099853515625,
+            "max_buffered_bytes_at_send": 3469
+          },
+          {
+            "second": 48,
+            "sent": 35,
+            "received": 28,
+            "max_receive_age_ms": 373.199951171875,
+            "max_buffered_bytes_at_send": 3454
+          },
+          {
+            "second": 49,
+            "sent": 55,
+            "received": 46,
+            "max_receive_age_ms": 122.900146484375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 50,
+            "sent": 60,
+            "received": 45,
+            "max_receive_age_ms": 158,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 51,
+            "sent": 60,
+            "received": 45,
+            "max_receive_age_ms": 126.400146484375,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 52,
+            "sent": 60,
+            "received": 44,
+            "max_receive_age_ms": 187.400146484375,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 53,
+            "sent": 59,
+            "received": 44,
+            "max_receive_age_ms": 138.199951171875,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 54,
+            "sent": 60,
+            "received": 43,
+            "max_receive_age_ms": 155.800048828125,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 55,
+            "sent": 59,
+            "received": 43,
+            "max_receive_age_ms": 138.60009765625,
+            "max_buffered_bytes_at_send": 3458
+          },
+          {
+            "second": 56,
+            "sent": 56,
+            "received": 41,
+            "max_receive_age_ms": 181,
+            "max_buffered_bytes_at_send": 3466
+          },
+          {
+            "second": 57,
+            "sent": 59,
+            "received": 42,
+            "max_receive_age_ms": 139.89990234375,
+            "max_buffered_bytes_at_send": 3452
+          },
+          {
+            "second": 58,
+            "sent": 52,
+            "received": 45,
+            "max_receive_age_ms": 142,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 59,
+            "sent": 54,
+            "received": 42,
+            "max_receive_age_ms": 128.800048828125,
+            "max_buffered_bytes_at_send": 3457
+          },
+          {
+            "second": 60,
+            "sent": 18,
+            "received": 15,
+            "max_receive_age_ms": 120,
+            "max_buffered_bytes_at_send": 3457
+          }
+        ],
+        "audio_samples_episode": 20,
+        "max_audio_sample_gap_episode_ms": 501.39990234375,
+        "server_bracketed_event_loop_lag_ms": 37,
+        "server_bracketed_event_loop_checks": 122
+      },
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "latest-input-512-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "name": "latest-input-512-r0",
+        "width": 512,
+        "height": 288,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.369699951171874,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 2074,
+          "unique_frames": 2074,
+          "fps": 34.35498274262568,
+          "dimensions": [],
+          "age_ms": {
+            "count": 2074,
+            "mean": 112.60487040535348,
+            "p50": 93.2501220703125,
+            "p95": 137.27485351562495,
+            "p99": 797.1999999999998,
+            "min": 51.199951171875,
+            "max": 1284
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 430.10009765625,
+          "age_over_ms": {
+            "250": {
+              "frames": 47,
+              "percent": 2.266152362584378
+            },
+            "500": {
+              "frames": 33,
+              "percent": 1.5911282545805208
+            },
+            "1000": {
+              "frames": 15,
+              "percent": 0.7232401157184185
+            }
+          }
+        },
+        "main/received": {
+          "events": 2464,
+          "unique_frames": 2464,
+          "fps": 40.8151771831387,
+          "dimensions": [],
+          "age_ms": {
+            "count": 2464,
+            "mean": 98.19293995646687,
+            "p50": 78.89990234375,
+            "p95": 126.46507568359367,
+            "p99": 752.6011230468731,
+            "min": 47.5,
+            "max": 1276.5
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 426.39990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 58,
+              "percent": 2.353896103896104
+            },
+            "500": {
+              "frames": 37,
+              "percent": 1.5016233766233766
+            },
+            "1000": {
+              "frames": 17,
+              "percent": 0.689935064935065
+            }
+          }
+        },
+        "main/sent": {
+          "events": 3122,
+          "unique_frames": 3122,
+          "fps": 51.714684726363245,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 663.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 2461,
+          "unique_frames": 2461,
+          "fps": 40.765483379750144,
+          "dimensions": [
+            [
+              2048,
+              1152
+            ]
+          ],
+          "age_ms": {
+            "count": 2461,
+            "mean": 102.62141576563135,
+            "p50": 81.800048828125,
+            "p95": 132.5,
+            "p99": 762.7001953125023,
+            "min": 50.699951171875,
+            "max": 1280
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 429.89990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 58,
+              "percent": 2.3567655424624134
+            },
+            "500": {
+              "frames": 39,
+              "percent": 1.5847216578626575
+            },
+            "1000": {
+              "frames": 17,
+              "percent": 0.6907761072734661
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 2464,
+        "max_gap_ms": 427.60009765625
+      },
+      "failures": [],
+      "summary_sha256": "e47ecff89d3599a17ada682aef5aa36eb8870398bb29de20b6d10cc599b99179",
+      "raw_sha256": {
+        "main": "d592f93ad410fcd0762ca0b23960868a0cf11bdc573d06a916ecb3c60f5418cf",
+        "stage": "cda480141ddb469bb38e892ef24e1fbbd0b508a08cd1413ea84d2147676b4e92"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 2464,
+          "mean": 22.37090909090909,
+          "p50": 21.91,
+          "p95": 23.27,
+          "p99": 31.143999999999977,
+          "min": 21.64,
+          "max": 55.49
+        },
+        "queue_wait_ms": {
+          "count": 2464,
+          "mean": 0.02525284090909091,
+          "p50": 0.024,
+          "p95": 0.028,
+          "p99": 0.037,
+          "min": 0.008,
+          "max": 2.857
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 121,
+          "mean": 0.14138130494370948,
+          "p50": 0.14013756778780978,
+          "p95": 0.145234326763894,
+          "p99": 0.1452995822302229,
+          "min": 0.13743587131070642,
+          "max": 0.14529961553491885
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": true,
+        "effectiveMaxPending": 1,
+        "waitingCapacity": 1
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 3149,
+        "framesToWorker": 2485,
+        "framesFromWorker": 2485,
+        "framesToClient": 2485,
+        "droppedByWorker": 0,
+        "droppedInbound": 0,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 2485,
+        "mailboxReplaced": 663
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "before-768-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.26989990234375,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 857,
+          "unique_frames": 857,
+          "fps": 14.219369890917529,
+          "dimensions": [],
+          "age_ms": {
+            "count": 857,
+            "mean": 288.90992008596487,
+            "p50": 286.0,
+            "p95": 332.32001953125,
+            "p99": 354.487880859375,
+            "min": 232.10009765625,
+            "max": 411.699951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 172.400146484375,
+          "age_over_ms": {
+            "250": {
+              "frames": 830,
+              "percent": 96.84947491248542
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/received": {
+          "events": 864,
+          "unique_frames": 864,
+          "fps": 14.335514102395267,
+          "dimensions": [],
+          "age_ms": {
+            "count": 864,
+            "mean": 274.71944144920064,
+            "p50": 272.4500732421875,
+            "p95": 315.27001953125,
+            "p99": 350.0940307617188,
+            "min": 221.599853515625,
+            "max": 397.39990234375
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 165.5,
+          "age_over_ms": {
+            "250": {
+              "frames": 766,
+              "percent": 88.6574074074074
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/sent": {
+          "events": 2213,
+          "unique_frames": 2213,
+          "fps": 36.718162857176765,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 76.199951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 865,
+          "unique_frames": 865,
+          "fps": 14.352106132606373,
+          "dimensions": [
+            [
+              2304,
+              1344
+            ]
+          ],
+          "age_ms": {
+            "count": 865,
+            "mean": 280.2398858042811,
+            "p50": 277.39990234375,
+            "p95": 327.580078125,
+            "p99": 359.86,
+            "min": 225,
+            "max": 399.199951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 167.800048828125,
+          "age_over_ms": {
+            "250": {
+              "frames": 797,
+              "percent": 92.13872832369943
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 865,
+        "max_gap_ms": 165.900146484375
+      },
+      "failures": [],
+      "summary_sha256": "4110fa3e707a189e1c06e3832a46b10b018b445eee868e563045a04496d816d3",
+      "raw_sha256": {
+        "main": "28d4ab5473ad169e26cde02949d45e25ed98b0421d21b4b851e6f26dcbabd98c",
+        "stage": "86b2231bd060375e35fb9fdc10a63602e340a52434c87faab57668a70e828de7"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 865,
+          "mean": 69.63986127167631,
+          "p50": 69.59,
+          "p95": 70.27,
+          "p99": 78.3828,
+          "min": 67.31,
+          "max": 87.33
+        },
+        "queue_wait_ms": {
+          "count": 865,
+          "mean": 101.64993410404624,
+          "p50": 84.527,
+          "p95": 137.58360000000002,
+          "p99": 141.29956,
+          "min": 13.019,
+          "max": 158.233
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 121,
+          "mean": 0.14125507449556854,
+          "p50": 0.14302287015263634,
+          "p95": 0.1444160009583218,
+          "p99": 0.14441728240497728,
+          "min": 0.13747172546133696,
+          "max": 0.14441760855530206
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 2229,
+        "framesToWorker": 871,
+        "framesFromWorker": 871,
+        "framesToClient": 871,
+        "droppedByWorker": 0,
+        "droppedInbound": 1358,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "compute-capture-768-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.2775,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 1217,
+          "unique_frames": 1217,
+          "fps": 20.189954792418398,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1217,
+            "mean": 218.89638326828268,
+            "p50": 217.89990234375,
+            "p95": 258.539990234375,
+            "p99": 298.9759667968739,
+            "min": 168.89990234375,
+            "max": 440
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 297.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 114,
+              "percent": 9.367296631059984
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/received": {
+          "events": 1290,
+          "unique_frames": 1290,
+          "fps": 21.40102028119945,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1290,
+            "mean": 204.09806428657944,
+            "p50": 198.9500732421875,
+            "p95": 247.57491455078122,
+            "p99": 308.22197265625,
+            "min": 152.89990234375,
+            "max": 452.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 140.39990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 62,
+              "percent": 4.8062015503875966
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/sent": {
+          "events": 3301,
+          "unique_frames": 3301,
+          "fps": 54.76338600638712,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 252.199951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 1289,
+          "unique_frames": 1289,
+          "fps": 21.38443034299697,
+          "dimensions": [
+            [
+              2304,
+              1344
+            ]
+          ],
+          "age_ms": {
+            "count": 1289,
+            "mean": 210.1070864420699,
+            "p50": 206.699951171875,
+            "p95": 258.080078125,
+            "p99": 342.3760546874995,
+            "min": 158.000244140625,
+            "max": 457.199951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 273.10009765625,
+          "age_over_ms": {
+            "250": {
+              "frames": 83,
+              "percent": 6.439100077579519
+            },
+            "500": {
+              "frames": 0,
+              "percent": 0.0
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 1290,
+        "max_gap_ms": 171.300048828125
+      },
+      "failures": [],
+      "summary_sha256": "3723ff0c2c7fe4b0c3bf173251974f25086dd75ecf543537bb5ffe940cefc5c5",
+      "raw_sha256": {
+        "main": "5e200732e464fa310f544da50664d6e8325ce68e7092d998190e9e8d6f059a2d",
+        "stage": "bc66b04ef576a8cb5b3eb60b12940c07b7e240d4153ecac45ced7cb6240dc99d"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 1290,
+          "mean": 46.1285503875969,
+          "p50": 46.66,
+          "p95": 47.07,
+          "p99": 47.7311,
+          "min": 44.44,
+          "max": 53.62
+        },
+        "queue_wait_ms": {
+          "count": 1290,
+          "mean": 75.81648759689922,
+          "p50": 80.429,
+          "p95": 91.13915,
+          "p99": 93.03911000000001,
+          "min": 0.025,
+          "max": 96.657
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14152940039445888,
+          "p50": 0.1422268476231507,
+          "p95": 0.14512445135593438,
+          "p99": 0.14529649379944404,
+          "min": 0.13743544031301547,
+          "max": 0.14529977922928258
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 3345,
+        "framesToWorker": 1308,
+        "framesFromWorker": 1307,
+        "framesToClient": 1307,
+        "droppedByWorker": 1,
+        "droppedInbound": 2037,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "latest-input-768-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": true,
+        "name": "latest-input-768-r0",
+        "width": 768,
+        "height": 448,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.27910009765625,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 1201,
+          "unique_frames": 1201,
+          "fps": 19.92398688856168,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1201,
+            "mean": 153.96103385525083,
+            "p50": 150.39990234375,
+            "p95": 206.0,
+            "p99": 276.5,
+            "min": 90.699951171875,
+            "max": 576.199951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 495.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 21,
+              "percent": 1.7485428809325563
+            },
+            "500": {
+              "frames": 2,
+              "percent": 0.16652789342214822
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/received": {
+          "events": 1244,
+          "unique_frames": 1244,
+          "fps": 20.637335295063053,
+          "dimensions": [],
+          "age_ms": {
+            "count": 1244,
+            "mean": 137.0923628730406,
+            "p50": 130.2501220703125,
+            "p95": 191.57006835937497,
+            "p99": 259.1259863281249,
+            "min": 77.300048828125,
+            "max": 560.400146484375
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 330.0,
+          "age_over_ms": {
+            "250": {
+              "frames": 18,
+              "percent": 1.4469453376205788
+            },
+            "500": {
+              "frames": 1,
+              "percent": 0.08038585209003216
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/sent": {
+          "events": 3232,
+          "unique_frames": 3232,
+          "fps": 53.617256972382464,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 440.300048828125,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 1240,
+          "unique_frames": 1240,
+          "fps": 20.5709773037606,
+          "dimensions": [
+            [
+              2304,
+              1344
+            ]
+          ],
+          "age_ms": {
+            "count": 1240,
+            "mean": 142.40167511970765,
+            "p50": 135.849853515625,
+            "p95": 199.04476318359372,
+            "p99": 278.16091308593747,
+            "min": 82.099853515625,
+            "max": 574.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 503.5,
+          "age_over_ms": {
+            "250": {
+              "frames": 25,
+              "percent": 2.0161290322580645
+            },
+            "500": {
+              "frames": 2,
+              "percent": 0.16129032258064516
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 1244,
+        "max_gap_ms": 414.300048828125
+      },
+      "failures": [],
+      "summary_sha256": "e60b36a9c6a33970bf5f7beeb3da322617793b84449e24314535ddf86baaa591",
+      "raw_sha256": {
+        "main": "6a96b35dae86e6318cb9b5f6a9355c3544233182f935e769b9db285cf9f2c204",
+        "stage": "09471da8140a1940ca8779a3719e5d70ddde20ba3cbc23becb13815295a789e2"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 1244,
+          "mean": 46.13755627009647,
+          "p50": 46.65,
+          "p95": 47.12,
+          "p99": 47.2971,
+          "min": 44.37,
+          "max": 55.61
+        },
+        "queue_wait_ms": {
+          "count": 1244,
+          "mean": 0.028984726688102896,
+          "p50": 0.027,
+          "p95": 0.038,
+          "p99": 0.05356999999999994,
+          "min": 0.021,
+          "max": 0.091
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 119,
+          "mean": 0.14136990262889892,
+          "p50": 0.14176493781004348,
+          "p95": 0.14506688510901228,
+          "p99": 0.14528374999632704,
+          "min": 0.1374273577790227,
+          "max": 0.1452839142868689
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": true,
+        "effectiveMaxPending": 1,
+        "waitingCapacity": 1
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 3267,
+        "framesToWorker": 1256,
+        "framesFromWorker": 1256,
+        "framesToClient": 1256,
+        "droppedByWorker": 0,
+        "droppedInbound": 0,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 1256,
+        "mailboxReplaced": 2011
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "before-1024-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18767",
+        "variant": "combined",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "before-1024-r0",
+        "width": 1024,
+        "height": 576,
+        "seconds": 60,
+        "outputCast": "cpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.42149975585937,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 501,
+          "unique_frames": 501,
+          "fps": 8.291750486571058,
+          "dimensions": [],
+          "age_ms": {
+            "count": 501,
+            "mean": 452.32634486885604,
+            "p50": 437.699951171875,
+            "p95": 498.300048828125,
+            "p99": 933.89990234375,
+            "min": 366,
+            "max": 1165.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 428.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 501,
+              "percent": 100.0
+            },
+            "500": {
+              "frames": 25,
+              "percent": 4.990019960079841
+            },
+            "1000": {
+              "frames": 4,
+              "percent": 0.7984031936127745
+            }
+          }
+        },
+        "main/received": {
+          "events": 504,
+          "unique_frames": 504,
+          "fps": 8.341401687089448,
+          "dimensions": [],
+          "age_ms": {
+            "count": 504,
+            "mean": 437.75694831969247,
+            "p50": 424.1500244140625,
+            "p95": 481.0848754882812,
+            "p99": 925.4490014648438,
+            "min": 360.400146484375,
+            "max": 1152.5
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 249.89990234375,
+          "age_over_ms": {
+            "250": {
+              "frames": 504,
+              "percent": 100.0
+            },
+            "500": {
+              "frames": 18,
+              "percent": 3.5714285714285716
+            },
+            "1000": {
+              "frames": 4,
+              "percent": 0.7936507936507936
+            }
+          }
+        },
+        "main/sent": {
+          "events": 2191,
+          "unique_frames": 2191,
+          "fps": 36.26192677859718,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 486.5,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 504,
+          "unique_frames": 504,
+          "fps": 8.341401687089448,
+          "dimensions": [
+            [
+              2048,
+              1152
+            ]
+          ],
+          "age_ms": {
+            "count": 504,
+            "mean": 444.5203300354973,
+            "p50": 429.8001708984375,
+            "p95": 488.9849853515625,
+            "p99": 932.1401953125,
+            "min": 364.400146484375,
+            "max": 1154.900146484375
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 430.699951171875,
+          "age_over_ms": {
+            "250": {
+              "frames": 504,
+              "percent": 100.0
+            },
+            "500": {
+              "frames": 22,
+              "percent": 4.365079365079365
+            },
+            "1000": {
+              "frames": 4,
+              "percent": 0.7936507936507936
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 504,
+        "max_gap_ms": 234.699951171875
+      },
+      "failures": [],
+      "summary_sha256": "7f30b085ede7e086fbec2ea7201281cf020e3970ae09f5fce93cdbf23be93625",
+      "raw_sha256": {
+        "main": "48d3e864ac908433bd56f11547bec8f40e2181d90d978b33cec1bfbff03a01a4",
+        "stage": "59462d28dc3455419a3268accbf70a2ec41a6cac4abbc34bcb6166ffd6dd4a1a"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 504,
+          "mean": 119.94859126984126,
+          "p50": 120.475,
+          "p95": 122.5885,
+          "p99": 123.00880000000001,
+          "min": 116.65,
+          "max": 123.07
+        },
+        "queue_wait_ms": {
+          "count": 504,
+          "mean": 198.39358531746032,
+          "p50": 223.736,
+          "p95": 238.67915,
+          "p99": 240.28246000000001,
+          "min": 27.775,
+          "max": 243.092
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 120,
+          "mean": 0.14174082471816696,
+          "p50": 0.14143117117462056,
+          "p95": 0.1452090343876655,
+          "p99": 0.1452094806294049,
+          "min": 0.13744766842987677,
+          "max": 0.14520958780795354
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 2207,
+        "framesToWorker": 507,
+        "framesFromWorker": 506,
+        "framesToClient": 506,
+        "droppedByWorker": 0,
+        "droppedInbound": 1700,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    },
+    {
+      "name": "compute-capture-1024-r0",
+      "config": {
+        "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+        "layout": "vj-next",
+        "sendFps": 60,
+        "activeWorkers": 1,
+        "maxPending": 3,
+        "origin": "http://127.0.0.1:18766",
+        "variant": "terminal-noop",
+        "workerThreads": 128,
+        "mailbox": false,
+        "name": "compute-capture-1024-r0",
+        "width": 1024,
+        "height": 576,
+        "seconds": 60,
+        "outputCast": "gpu"
+      },
+      "raw_status": "measured",
+      "raw_problems": [],
+      "elapsed_seconds": 60.373900146484374,
+      "boundaries": {
+        "main/preview-image-raf": {
+          "events": 718,
+          "unique_frames": 718,
+          "fps": 11.892556191631257,
+          "dimensions": [],
+          "age_ms": {
+            "count": 718,
+            "mean": 338.06489550237205,
+            "p50": 333.25,
+            "p95": 385.4599243164062,
+            "p99": 414.2180249023439,
+            "min": 283.099853515625,
+            "max": 548.800048828125
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 278.5,
+          "age_over_ms": {
+            "250": {
+              "frames": 718,
+              "percent": 100.0
+            },
+            "500": {
+              "frames": 1,
+              "percent": 0.1392757660167131
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/received": {
+          "events": 728,
+          "unique_frames": 728,
+          "fps": 12.058190678979882,
+          "dimensions": [],
+          "age_ms": {
+            "count": 728,
+            "mean": 318.37952934516653,
+            "p50": 312.2001953125,
+            "p95": 358.72998046875,
+            "p99": 388.72205810546876,
+            "min": 247.400146484375,
+            "max": 539.199951171875
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 212.800048828125,
+          "age_over_ms": {
+            "250": {
+              "frames": 727,
+              "percent": 99.86263736263736
+            },
+            "500": {
+              "frames": 1,
+              "percent": 0.13736263736263737
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        },
+        "main/sent": {
+          "events": 3192,
+          "unique_frames": 3192,
+          "fps": 52.87052836168102,
+          "dimensions": [],
+          "age_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 376.60009765625,
+          "age_over_ms": {
+            "250": {
+              "frames": 0,
+              "percent": null
+            },
+            "500": {
+              "frames": 0,
+              "percent": null
+            },
+            "1000": {
+              "frames": 0,
+              "percent": null
+            }
+          }
+        },
+        "stage/webgl-frame-submitted": {
+          "events": 728,
+          "unique_frames": 728,
+          "fps": 12.058190678979882,
+          "dimensions": [
+            [
+              2048,
+              1152
+            ]
+          ],
+          "age_ms": {
+            "count": 728,
+            "mean": 325.8334632286659,
+            "p50": 318.35009765625,
+            "p95": 379.0599853515625,
+            "p99": 414.94903564453125,
+            "min": 251.400146484375,
+            "max": 549.099853515625
+          },
+          "duration_ms": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "min": null,
+            "max": null
+          },
+          "max_event_gap_ms": 236.800048828125,
+          "age_over_ms": {
+            "250": {
+              "frames": 728,
+              "percent": 100.0
+            },
+            "500": {
+              "frames": 1,
+              "percent": 0.13736263736263737
+            },
+            "1000": {
+              "frames": 0,
+              "percent": 0.0
+            }
+          }
+        }
+      },
+      "ordering": {
+        "main": {
+          "preview-image-loaded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "preview-image-raf": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "received": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "sent": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-post": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        },
+        "stage": {
+          "bitmap-decoded": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "stage-message": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          },
+          "webgl-frame-submitted": {
+            "reversals": 0,
+            "duplicates": 0,
+            "missing_ids": 0
+          }
+        }
+      },
+      "worker_activity": {
+        "frames": 728,
+        "max_gap_ms": 212.699951171875
+      },
+      "failures": [],
+      "summary_sha256": "cad459240b1185d45cbebd506eab797cd60a832002f8db09af855b46cacbf907",
+      "raw_sha256": {
+        "main": "3562cf83c2f21a86bfc2a333977a674a25af00e968013c23d9c81d59bc9ecf63",
+        "stage": "519694b5199aa46e3b055220556c24b4391cf26bebcd81afc702a81bbd9e6484"
+      },
+      "worker_timings": {
+        "total_ms": {
+          "count": 728,
+          "mean": 82.44564560439561,
+          "p50": 83.52,
+          "p95": 84.29,
+          "p99": 84.7857,
+          "min": 78.43,
+          "max": 95.11
+        },
+        "queue_wait_ms": {
+          "count": 728,
+          "mean": 149.19034203296704,
+          "p50": 152.034,
+          "p95": 165.8405,
+          "p99": 167.61717,
+          "min": 0.077,
+          "max": 170.763
+        }
+      },
+      "audio_rms": {
+        "0.2": {
+          "count": 119,
+          "mean": 0.14131873960586208,
+          "p50": 0.1412338498955779,
+          "p95": 0.14495283742972076,
+          "p99": 0.1452997051539951,
+          "min": 0.13743565683052955,
+          "max": 0.1452997769183561
+        }
+      },
+      "final_channel_states": [
+        "open"
+      ],
+      "mailbox_ack": {
+        "enabled": false,
+        "effectiveMaxPending": 3,
+        "waitingCapacity": 0
+      },
+      "server_bracketed_deltas": {
+        "framesFromClient": 3220,
+        "framesToWorker": 735,
+        "framesFromWorker": 735,
+        "framesToClient": 735,
+        "droppedByWorker": 0,
+        "droppedInbound": 2485,
+        "droppedOutbound": 0,
+        "mailboxDispatched": 0,
+        "mailboxReplaced": 0
+      },
+      "final_server_ready": true,
+      "native_stack_identity_scope": "Same declared PodA/Torch2.11/native128 experiment; worker0/128 threads/cast/variant verified per frame. Runtime/package and served-build identity need external saved provenance; origin alone is not a source hash.",
+      "worker_pair_errors": [],
+      "audit_status": "passed_arithmetic_with_all_outliers_retained"
+    }
+  ],
+  "comparisons": [
+    {
+      "width": 512,
+      "repeat": 0,
+      "trial_names": [
+        "before-512-r0",
+        "compute-capture-512-r0",
+        "latest-input-512-r0"
+      ],
+      "compute_capture_vs_before_stage_fps_gain_pct": 29.089918372714575,
+      "mailbox_vs_same_compute_capture_stage_fps_gain_pct": 6.475769908914719,
+      "stage_p99_ms": [
+        183.92186035156274,
+        6523.832060546876,
+        762.7001953125023
+      ],
+      "qualification": "Before\u2192compute-capture changes app capture cadence,terminal skip,and output cast together. Compute-capture\u2192latest-input changes mailbox policy. Same1GPU/native128 cohort; the planned repeat1 reverses order,not an isolated per-feature or concurrent control. An incomplete cohort cannot claim completed counterbalancing."
+    },
+    {
+      "width": 768,
+      "repeat": 0,
+      "trial_names": [
+        "before-768-r0",
+        "compute-capture-768-r0",
+        "latest-input-768-r0"
+      ],
+      "compute_capture_vs_before_stage_fps_gain_pct": 48.998552166597676,
+      "mailbox_vs_same_compute_capture_stage_fps_gain_pct": -3.8039500056299747,
+      "stage_p99_ms": [
+        359.86,
+        342.3760546874995,
+        278.16091308593747
+      ],
+      "qualification": "Before\u2192compute-capture changes app capture cadence,terminal skip,and output cast together. Compute-capture\u2192latest-input changes mailbox policy. Same1GPU/native128 cohort; the planned repeat1 reverses order,not an isolated per-feature or concurrent control. An incomplete cohort cannot claim completed counterbalancing."
+    }
+  ],
+  "measurement_scope": "Unique main receipts,currently loaded image observed at RAF,and stage GL submissions divided by each shared frozen window. Not compositor/physical display FPS. Age starts at JPEG encode start; all outliers retained.",
+  "gate_scope": "Measured status checks channel/compile/probe/order/dimensions/variant/thread/cast and <=2s worker-stat arrival gap. It does not enforce a frame-age percentile or maximum threshold; substantial ages can validly coexist with passed continuity.",
+  "transport_mechanism": "src/lib/ai/webrtc-transport.ts creates frames with default reliable ordered delivery;canSend uses a256KiB bufferedAmount threshold. A frame admitted below the threshold may bring the buffer above it. Server mailbox cannot evict a JPEG already queued in browser/SCTP. Effective mailbox admission is1inflight+1latest waiting frame; mailbox-off admits pending3.",
+  "episode_interpretation": "The6.86s compute-capture512r0 delay is already present at receive. Client buffer saturation/no new sends and tens-of-ms worker processing/queue plus <=11.8ms receive\u2192stage on the84 frames aged>1s support transport backlog before/after worker processing,not a multi-second measured inference operation. Exact network direction,packet-loss cause,IPC/host-scheduling contribution are not resolved by these timestamps. Final22ms RTT is an end snapshot,not an episode RTT.",
+  "comparison_limits": "Do not mix these1GPU/Torch2.11/native128 trials with prior2GPU/Torch2.13 results or lower-thread quality-changing tests. A future40/30FPS send cap would trade throughput/freshness and is not an image-quality change; no such live trial is implied or launched here."
+}

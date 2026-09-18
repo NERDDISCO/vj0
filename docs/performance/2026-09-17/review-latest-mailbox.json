@@ -1,0 +1,85 @@
+{
+  "reviewer": "/root/capture_deep_dive",
+  "atUtc": "2026-09-17T20:37:52.400468+00:00",
+  "status": "accepted_for_isolated_live_experiment",
+  "sourceSha256": {
+    "workers/runpod-flux2klein/bench/latest_mailbox.py": "c948af1d8ee02244030e9e4930d400b27c8f4abddd9f877ccaafbf166bfb730e",
+    "workers/runpod-flux2klein/bench/latest_mailbox_runtime.js": "9b087f0c6c9002c55bbef1f37ce670ab983b2716afd32c62e28d23bdde9ddd85",
+    "workers/runpod-flux2klein/bench/latest_mailbox_test.mjs": "1f9402eebbfff614a8a875461918a345b47ccfc9f36de4a23d8f7f79ade28634",
+    "workers/runpod-flux2klein/bench/app_batch.py": "ee4f0b617eb22978c5d3a344fe7772628e7deba840b3b5fc3aa6bcb5569413d0",
+    "workers/runpod-flux2klein/bench/test_app_drain.py": "f5f11e69711dfe43ca710e0609653e24d3195fca969724f52e9f75bb16022a31"
+  },
+  "findings": [
+    {
+      "severity": "correctness",
+      "status": "fixed",
+      "issue": "Baseline bootstrap images/settings could survive an accepted policy switch and overwrite newer mailbox input or settings on READY.",
+      "fix": "Reject policy changes while any bootstrap request is buffered.",
+      "evidence": "/tmp/vj0-mailbox-independent-20260917/bootstrap-witness.json"
+    },
+    {
+      "severity": "protocol_accounting",
+      "status": "fixed",
+      "issue": "Invalid integral source IDs 0/negative were treated as unrelated responses, retaining an occupied worker slot until watchdog recovery.",
+      "fix": "Pass all invalid source IDs to ordinary protocol rejection/accounting; mismatched valid positive IDs remain rejected without releasing another request."
+    }
+  ],
+  "validation": {
+    "mailboxNodeTests": 11,
+    "mailboxNodeTestsPassed": true,
+    "appDrainCpuTests": 6,
+    "appDrainCpuTestsPassed": true,
+    "generatedNodeSyntaxChecked": true,
+    "independentBootstrapWitness": [
+      {
+        "fixed": false,
+        "kind": "image",
+        "switchAccepted": true,
+        "error": null,
+        "dispatchedIds": [
+          1
+        ],
+        "latestPrompt": "new prompt"
+      },
+      {
+        "fixed": false,
+        "kind": "settings",
+        "switchAccepted": true,
+        "error": null,
+        "dispatchedIds": [],
+        "latestPrompt": "old prompt"
+      },
+      {
+        "fixed": true,
+        "kind": "image",
+        "switchAccepted": false,
+        "error": "Drain all bootstrap requests before changing mailbox policy",
+        "dispatchedIds": []
+      },
+      {
+        "fixed": true,
+        "kind": "settings",
+        "switchAccepted": false,
+        "error": "Drain all bootstrap requests before changing mailbox policy",
+        "dispatchedIds": []
+      }
+    ]
+  },
+  "reviewedInvariants": [
+    "One physical frame per worker and one global waiting frame",
+    "Immediate refill after output/accounting, without another browser capture tick",
+    "Monotonic successful source delivery across workers",
+    "Reconnect preserves physical old-epoch occupancy until its actual completion",
+    "Settings/compile invalidate waiting input; worker exit excludes dead process before refill",
+    "Policy changes require fully drained workers and bootstrap queue",
+    "App drain stops capture before closing old channel and waits for encode/worker/input quiet",
+    "App measurements preserve separate input/receive/main-RAF/projector boundaries and save source ordering/worker telemetry/RTC evidence"
+  ],
+  "limitations": [
+    "No live GPU, WAN or complete app result is established by this review.",
+    "Waiting input has no TTL; a stopped sender during a long compile can leave an old input that dispatches afterward.",
+    "Source-less error/drop acknowledgements rely on the current worker emitting exactly one acknowledgement for its sole occupied request.",
+    "Initial about:blank drain needs ready workers and a generated /debug compileStartedAt field (or externally established idle compilation); original production /debug omits that field.",
+    "App encode timestamp excludes audio acquisition and prior canvas copy; GL submissions are not physical display presentation."
+  ]
+}

@@ -1,0 +1,3 @@
+HF_HUB_OFFLINE=1 COMPILE_MODE=reduce-overhead python3 bench/bench_post_live.py --worker-script inference_server.py --output /workspace/terminal-post-live-20260917 --frames 100 --pairs 3 --profile-frames 20 --warmup 4 --expected-native-threads 128
+
+Do not run while the live app worker owns the GPU. Root coordinates launch and preserves the paused original dispatcher. CPU/GPU cast isolation at 1024 is optional via --cast-pairs-1024. Input JPEG85/output JPEG80. This script unsets TORCH_NUM_THREADS, proving the native-preserving runtime default, and opts in to USE_TERMINAL_NOOP=1 and USE_GPU_OUTPUT_CAST=1.

@@ -1,0 +1,389 @@
+{
+  "status": "passed_with_limitations",
+  "audit_utc": "2026-09-17T20:36:33.787967+00:00",
+  "failures": [],
+  "measurement_scope": "Single GPU offline real worker function benchmark; JPEG decode + VAE encode + generation/VAE decode + JPEG encode + final CUDA synchronization. Excludes IPC, WebRTC, app capture and display.",
+  "run_started_utc": "2026-09-17T20:16:53.129957+00:00",
+  "run_finished_utc": "2026-09-17T20:23:57.131840+00:00",
+  "runtime": {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "versions": {
+      "torch": "2.11.0+cu128",
+      "torchao": "0.17.0+cu128",
+      "diffusers": "0.38.0.dev0",
+      "numpy": "2.4.4",
+      "pillow": "12.2.0"
+    },
+    "initial_torch_threads": 128,
+    "thread_budgets": [
+      128,
+      1,
+      4,
+      8,
+      16
+    ],
+    "torch_interop_threads": 128,
+    "mark_step_begin": false,
+    "cpu_affinity_count": 256
+  },
+  "record_counts": {
+    "warmup": 5,
+    "quality": 15,
+    "measured": 30
+  },
+  "timed_frames": 4500,
+  "quality": {
+    "cases": 15,
+    "all_quality_fields_true": true,
+    "global_rng_comparisons": 60,
+    "within_thread_comparisons_only": true,
+    "saved_final_16_thread_png_pair_byte_equal": true,
+    "png_sha256": "c010a612be9ae5d2604f9e8699d00d416c9b5be9ee453fcb155bceac7d601160"
+  },
+  "record_consistency": {
+    "manifest_equals_jsonl": true,
+    "manifest_equals_stdout": true,
+    "stdout_sha256": "f935ec41695accfc9913776135eed3287778f352fba759c76ac5caef86ed981b"
+  },
+  "archive_checks": [
+    {
+      "archive": "docs/performance/2026-09-17/terminal-threads/512x288-2step-reference.png",
+      "sha256": "c010a612be9ae5d2604f9e8699d00d416c9b5be9ee453fcb155bceac7d601160",
+      "matches_archive_manifest": true,
+      "matches_local_original": true
+    },
+    {
+      "archive": "docs/performance/2026-09-17/terminal-threads/result.json.gz",
+      "sha256": "7a9dbe0c9fd81254312dd7ad122880d1d8ca477ad47440ba5b17512b93d43f2a",
+      "matches_archive_manifest": true,
+      "matches_local_original": true
+    },
+    {
+      "archive": "docs/performance/2026-09-17/terminal-threads/512x288-2step-terminal-noop.png",
+      "sha256": "c010a612be9ae5d2604f9e8699d00d416c9b5be9ee453fcb155bceac7d601160",
+      "matches_archive_manifest": true,
+      "matches_local_original": true
+    },
+    {
+      "archive": "docs/performance/2026-09-17/terminal-threads/records.jsonl.gz",
+      "sha256": "1e8f38b7c3f29d92bea9a0c20930aa778e243a0607b716723db5195a8c51a166",
+      "matches_archive_manifest": true,
+      "matches_local_original": true
+    },
+    {
+      "archive": "docs/performance/2026-09-17/thread-sweep-frozen-sources/metrics.py.gz",
+      "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+      "matches_archive_manifest": true,
+      "matches_local_original": null
+    },
+    {
+      "archive": "docs/performance/2026-09-17/thread-sweep-frozen-sources/bench_terminal_noop.py.gz",
+      "sha256": "6a6f5912dbfaf0e098699b8be6400a5474a982bc4c2495658595997376eed5b2",
+      "matches_archive_manifest": true,
+      "matches_local_original": null
+    },
+    {
+      "archive": "docs/performance/2026-09-17/thread-sweep-frozen-sources/bench_terminal_followup.py.gz",
+      "sha256": "271507a2ff60deb386415eaf673be77190c1e40f23a346abecb55aadac112f8f",
+      "matches_archive_manifest": true,
+      "matches_local_original": null
+    },
+    {
+      "archive": "docs/performance/2026-09-17/thread-sweep-frozen-sources/inference_server.py.gz",
+      "sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+      "matches_archive_manifest": true,
+      "matches_local_original": null
+    },
+    {
+      "archive": "docs/performance/2026-09-17/thread-sweep-frozen-sources/terminal_noop.py.gz",
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "matches_archive_manifest": true,
+      "matches_local_original": null
+    }
+  ],
+  "source_checks": [
+    {
+      "file": "bench_terminal_followup.py",
+      "frozen_sha256": "271507a2ff60deb386415eaf673be77190c1e40f23a346abecb55aadac112f8f",
+      "manifest_key": "benchmark_sha256",
+      "matches_manifest": true,
+      "current_working_copy_sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4",
+      "current_matches_frozen": false
+    },
+    {
+      "file": "bench_terminal_noop.py",
+      "frozen_sha256": "6a6f5912dbfaf0e098699b8be6400a5474a982bc4c2495658595997376eed5b2",
+      "manifest_key": "followup_base_benchmark_sha256",
+      "matches_manifest": true,
+      "current_working_copy_sha256": "6a6f5912dbfaf0e098699b8be6400a5474a982bc4c2495658595997376eed5b2",
+      "current_matches_frozen": true
+    },
+    {
+      "file": "inference_server.py",
+      "frozen_sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+      "manifest_key": "worker_sha256",
+      "matches_manifest": true,
+      "current_working_copy_sha256": "30bdf26094f07c5376165dcb9180f35448e08f989aec9cf33de3f7ff3d421cee",
+      "current_matches_frozen": false
+    },
+    {
+      "file": "terminal_noop.py",
+      "frozen_sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "manifest_key": "helper_sha256",
+      "matches_manifest": true,
+      "current_working_copy_sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "current_matches_frozen": true
+    }
+  ],
+  "generated_source": {
+    "reconstructed_sha256": "718ab7478cedb4713d607f1b901197f8bd90fa71f57a1eeda80fd38aa4370dfe",
+    "matches_manifest": true
+  },
+  "timing_checks": {
+    "all_distributions_independently_recomputed": true,
+    "all_fps_recomputed": true,
+    "frame_end_and_wall_coverage_checked": true,
+    "outside_per_frame_bookkeeping_ms_range": [
+      0.10287156328558922,
+      0.23415964096784592
+    ],
+    "all_CPU_and_cgroup_deltas_recomputed": true
+  },
+  "summary_by_threads": [
+    {
+      "threads": 128,
+      "baseline": {
+        "fps_runs": [
+          28.893433816559508,
+          29.259285658628578,
+          29.911582141294193
+        ],
+        "median_fps": 29.259285658628578,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 33.60106982290745,
+        "pooled_p95_ms": 36.13103420939298,
+        "pooled_p99_ms": 43.707571579143384,
+        "max_ms": 82.6458279043436,
+        "frames_over40ms": 9,
+        "mean_process_cpu_cores": 28.71437162582343,
+        "cgroup_throttled_periods_total": 28,
+        "cgroup_throttled_seconds_total": 17.8763474
+      },
+      "terminal-noop": {
+        "fps_runs": [
+          30.622674180026195,
+          30.078839478221,
+          30.44328553984792
+        ],
+        "median_fps": 30.44328553984792,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 23.766186786815524,
+        "pooled_p95_ms": 54.18516013305634,
+        "pooled_p99_ms": 54.54418024048209,
+        "max_ms": 66.25128071755171,
+        "frames_over40ms": 139,
+        "mean_process_cpu_cores": 31.21333317645254,
+        "cgroup_throttled_periods_total": 148,
+        "cgroup_throttled_seconds_total": 364.81054041799996
+      },
+      "same_thread_terminal_gain_percent": 4.046578221468566
+    },
+    {
+      "threads": 1,
+      "baseline": {
+        "fps_runs": [
+          31.33553436483616,
+          31.33569510995447,
+          31.39155034859659
+        ],
+        "median_fps": 31.33569510995447,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 31.86023677699268,
+        "pooled_p95_ms": 32.13109530042857,
+        "pooled_p99_ms": 32.666868097148836,
+        "max_ms": 33.33576116710901,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 1.001244789320409,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "terminal-noop": {
+        "fps_runs": [
+          46.284538910264466,
+          46.27544117985075,
+          46.27473676639115
+        ],
+        "median_fps": 46.27544117985075,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 21.59037906676531,
+        "pooled_p95_ms": 21.74179283902049,
+        "pooled_p99_ms": 21.950201611034572,
+        "max_ms": 22.705100942403078,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 1.0006383045041787,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "same_thread_terminal_gain_percent": 47.67644699590641
+    },
+    {
+      "threads": 4,
+      "baseline": {
+        "fps_runs": [
+          31.393052928487784,
+          31.410627090044546,
+          31.42078247210555
+        ],
+        "median_fps": 31.410627090044546,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 31.827002996578813,
+        "pooled_p95_ms": 31.9150683702901,
+        "pooled_p99_ms": 32.039433252066374,
+        "max_ms": 32.96208893880248,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 1.5522604390775834,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "terminal-noop": {
+        "fps_runs": [
+          46.35901677121948,
+          46.34766793742199,
+          46.341650980952764
+        ],
+        "median_fps": 46.34766793742199,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 21.568206837400794,
+        "pooled_p95_ms": 21.652295696549118,
+        "pooled_p99_ms": 21.7035389598459,
+        "max_ms": 21.73726772889495,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 1.8107183269800418,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "same_thread_terminal_gain_percent": 47.55409945989799
+    },
+    {
+      "threads": 8,
+      "baseline": {
+        "fps_runs": [
+          31.420042067683873,
+          31.39211368141706,
+          31.419807216017265
+        ],
+        "median_fps": 31.419807216017265,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 31.803777907043695,
+        "pooled_p95_ms": 31.913891760632396,
+        "pooled_p99_ms": 32.606777027249336,
+        "max_ms": 35.73529375717044,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 2.3480963027859088,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "terminal-noop": {
+        "fps_runs": [
+          46.381811702228276,
+          46.36326646546518,
+          46.472297070004224
+        ],
+        "median_fps": 46.381811702228276,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 21.53506292961538,
+        "pooled_p95_ms": 21.653065318241715,
+        "pooled_p99_ms": 21.745802578516304,
+        "max_ms": 22.04201789572835,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 3.10080378816998,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "same_thread_terminal_gain_percent": 47.61965719058787
+    },
+    {
+      "threads": 16,
+      "baseline": {
+        "fps_runs": [
+          31.283105912717172,
+          31.290702822072795,
+          31.271318632664514
+        ],
+        "median_fps": 31.283105912717172,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 31.95052081719041,
+        "pooled_p95_ms": 32.03760159667581,
+        "pooled_p99_ms": 32.249443284235895,
+        "max_ms": 34.749825950711966,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 4.337683607263904,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "terminal-noop": {
+        "fps_runs": [
+          46.14899493389818,
+          46.150751775897135,
+          46.1145834220081
+        ],
+        "median_fps": 46.14899493389818,
+        "pooled_frames": 450,
+        "pooled_p50_ms": 21.654790500178933,
+        "pooled_p95_ms": 21.72849897760898,
+        "pooled_p99_ms": 21.979938810691237,
+        "max_ms": 25.256979279220104,
+        "frames_over40ms": 0,
+        "mean_process_cpu_cores": 5.694534850879502,
+        "cgroup_throttled_periods_total": 0,
+        "cgroup_throttled_seconds_total": 0.0
+      },
+      "same_thread_terminal_gain_percent": 47.520502160681374
+    }
+  ],
+  "combined_default_baseline_to_4thread_terminal": {
+    "baseline_fps": 29.259285658628578,
+    "candidate_fps": 46.34766793742199,
+    "gain_percent": 58.403279144151064
+  },
+  "tail_periods_checks": [
+    {
+      "threads": 128,
+      "repeat": 0,
+      "recomputed": true
+    },
+    {
+      "threads": 128,
+      "repeat": 1,
+      "recomputed": true
+    },
+    {
+      "threads": 128,
+      "repeat": 2,
+      "recomputed": true
+    },
+    {
+      "threads": 4,
+      "repeat": 0,
+      "recomputed": true
+    },
+    {
+      "threads": 4,
+      "repeat": 1,
+      "recomputed": true
+    },
+    {
+      "threads": 4,
+      "repeat": 2,
+      "recomputed": true
+    }
+  ],
+  "limitations": [
+    "Thread budgets run sequentially in one process in order 128,1,4,8,16; thread order is not randomized. Baseline/candidate order alternates within each three-repeat budget. Thermal/load/order effects are not isolated from the thread-count effect.",
+    "Exact baseline/candidate quality checks are paired within each thread budget. They do not establish cross-thread-budget output equality. PNG filenames are overwritten each budget and retain only the final 16-thread fixture pair.",
+    "The quality matrix here has one prompt, one seed, one alpha, three input phases, one resolution and two requested steps; it does not universally establish arbitrary prompt/input equivalence.",
+    "Interop threads remain 128. Affinity count 256 is not a CPU quota. Process CPU-core estimates derive from coarse process CPU time; cgroup throttling applies to the whole cgroup and can aggregate multiple CPUs, so throttled_seconds/wall is not a stall fraction.",
+    "The roughly 100ms slow-frame recurrence at 128 threads coincides with cgroup throttling. Reducing threads removes those observed tails, which supports a CPU scheduling/throttling explanation; it is not a per-frame causal trace or proof of the account CPU quota.",
+    "No browser/WebRTC result is established by this offline run. The source files are frozen historical copies; current working files may contain later experiments and are intentionally reported separately."
+  ]
+}

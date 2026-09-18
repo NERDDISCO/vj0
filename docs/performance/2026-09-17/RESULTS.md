@@ -1,5 +1,9 @@
 # Live image performance results — 2026-09-17
 
+For the subsequent capture, Python/GPU and model investigation, see the
+[September 18 follow-up](DEEP-DIVE.md). It retains a separate repeated
+single-GPU comparison; the two-GPU results below remain historical evidence.
+
 **All selected experiments now have results.** The final audit found and led to
 a correction for out-of-order output from multiple GPUs. The corrected
 three-resolution app tests and ten-minute soak/lifecycle checks passed. Original
@@ -217,11 +221,15 @@ from 2.1.9 to **2.14.0-dd55bcf**, and the official project skill to 1.2.0.
 application logs also worked through the API, including model/compile output.
 Live serverless-worker logs were not exercised. [Evidence and tweet draft](RUNPOD-LOGS.md).
 
-Both task pods remain running as requested: one PRO 6000 in **0pxb4bss2jmbhg**
-and two in **9vj8k6guaxsbhw**, EU-CZ-1. GPU prices total **$6.27/hour**;
-the account quote including storage is **$6.331/hour**. At 17:32 UTC, the balance
-was **$50.36**. Both services reported healthy with all workers ready. Five
-unrelated old pods remain stopped. [Final resources](final-resources.json),
+At this report's September 17 snapshot, both task pods were running as requested:
+one PRO 6000 in **0pxb4bss2jmbhg** and two in **9vj8k6guaxsbhw**, EU-CZ-1.
+The running GPU price quote totaled **$6.27/hour**, or **$6.331/hour** including
+storage. At 17:32 UTC, the balance was **$50.36**. Both services reported healthy
+with all workers ready; five unrelated old pods were stopped.
+**September 18 update: both task pods are now verified stopped**, at 06:36:54 UTC,
+after the follow-up measurements and artifact backup.
+[Current stop verification](deep-operations/vj0-both-pods-stopped-20260918-final.json),
+[historical resource snapshot](final-resources.json),
 [corrected two-GPU service](final-source-order-service/),
 [retained one-GPU service](final-baseline-retained-service/).
 The corrected service uses isolated workspace files and a pinned environment;

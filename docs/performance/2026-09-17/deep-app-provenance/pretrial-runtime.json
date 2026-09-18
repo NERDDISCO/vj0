@@ -1,0 +1,81 @@
+{
+  "captured_epoch": 1789710205.1411927,
+  "runtime": {
+    "pid": 1701,
+    "port": 3001,
+    "worker_count": 1,
+    "original_dispatcher_paused": 500,
+    "log": "/workspace/vj0-deep-live-20260918-05b/service.log"
+  },
+  "prelaunch": {
+    "captured_epoch": 1789710120.4229326,
+    "paused_original_node": 500,
+    "terminated_descendants": [
+      521,
+      759,
+      828,
+      830,
+      832,
+      834,
+      836,
+      838,
+      840,
+      842,
+      844,
+      846,
+      848,
+      850,
+      852,
+      854,
+      856,
+      858,
+      860,
+      862,
+      864,
+      866,
+      868,
+      870,
+      872,
+      874,
+      876,
+      878,
+      880,
+      882,
+      884,
+      886,
+      888,
+      890
+    ],
+    "gpu_idle": true,
+    "sources": {
+      "gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+      "terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+      "compute.py": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe",
+      "inference_server.py": "f74b6b0730e1268c8295a5f4d1f2e4a2a47ef264902005c596eb3dcab876407d",
+      "server.js": "86f0fd86943c721a87613f9bc8b61fa5c9f5ecc8485b200816cd33f0a853d6e1"
+    }
+  },
+  "sources": {
+    "gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "compute.py": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe",
+    "inference_server.py": "f74b6b0730e1268c8295a5f4d1f2e4a2a47ef264902005c596eb3dcab876407d",
+    "server.js": "86f0fd86943c721a87613f9bc8b61fa5c9f5ecc8485b200816cd33f0a853d6e1"
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "torchao": "0.17.0+cu128",
+    "diffusers": "0.38.0.dev0",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0"
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, GPU-119c6914-e07b-f089-82eb-f11b72700026, 595.71.05",
+  "cpu_control": {
+    "/sys/fs/cgroup/cpu/cpu.cfs_quota_us": "3112500",
+    "/sys/fs/cgroup/cpu/cpu.cfs_period_us": "100000"
+  },
+  "node_cwd": "/workspace/vj0-deep-live-20260918-05b",
+  "worker_script": "/workspace/vj0-deep-live-20260918-05b/inference_server.py"
+}

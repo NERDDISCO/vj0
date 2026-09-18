@@ -1,0 +1,190 @@
+{
+  "comparison": "Separate sequential processes, identical frozen harness and four Torch intraop threads; median of three 100-frame trials. Timing includes JPEG I/O and generation, excludes IPC/network/WebRTC/browser.",
+  "rows": [
+    {
+      "size": [
+        512,
+        288
+      ],
+      "variant": "baseline",
+      "cpu": {
+        "fps_median": 30.593790498696084,
+        "fps_trials": [
+          30.875067166937676,
+          30.593790498696084,
+          30.313281685133557
+        ],
+        "p95_ms_median": 34.12843837868422,
+        "cpu_cores_median": 1.5641653349528903
+      },
+      "gpu": {
+        "fps_median": 31.109652332471022,
+        "fps_trials": [
+          31.109652332471022,
+          31.162045864286142,
+          31.067502551466827
+        ],
+        "p95_ms_median": 32.626413949765265,
+        "cpu_cores_median": 1.430337905170735
+      },
+      "gpu_vs_cpu_pct": 1.6861651510522213
+    },
+    {
+      "size": [
+        512,
+        288
+      ],
+      "variant": "terminal-noop",
+      "cpu": {
+        "fps_median": 45.16452102715736,
+        "fps_trials": [
+          45.181175643764504,
+          44.69270940906335,
+          45.16452102715736
+        ],
+        "p95_ms_median": 22.653902089223266,
+        "cpu_cores_median": 1.82080137844371
+      },
+      "gpu": {
+        "fps_median": 45.57996816108751,
+        "fps_trials": [
+          45.4927978427426,
+          45.57996816108751,
+          45.76381597370283
+        ],
+        "p95_ms_median": 22.320018033497036,
+        "cpu_cores_median": 1.7893652045717794
+      },
+      "gpu_vs_cpu_pct": 0.9198528501616066
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "variant": "baseline",
+      "cpu": {
+        "fps_median": 14.729833527466907,
+        "fps_trials": [
+          14.760794986825507,
+          14.711051386511093,
+          14.729833527466907
+        ],
+        "p95_ms_median": 68.58966080471873,
+        "cpu_cores_median": 1.4479426357499987
+      },
+      "gpu": {
+        "fps_median": 14.703776320147718,
+        "fps_trials": [
+          14.742428451509847,
+          14.703776320147718,
+          14.703769066412807
+        ],
+        "p95_ms_median": 68.47150751855224,
+        "cpu_cores_median": 1.1867654903465414
+      },
+      "gpu_vs_cpu_pct": -0.17690089484446725
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "variant": "terminal-noop",
+      "cpu": {
+        "fps_median": 21.9615987124938,
+        "fps_trials": [
+          21.97923364229186,
+          21.812270638133217,
+          21.9615987124938
+        ],
+        "p95_ms_median": 46.23951185494661,
+        "cpu_cores_median": 1.5307234302608175
+      },
+      "gpu": {
+        "fps_median": 21.882648761091918,
+        "fps_trials": [
+          21.882648761091918,
+          21.777914831569067,
+          21.89547708743394
+        ],
+        "p95_ms_median": 46.23330291360617,
+        "cpu_cores_median": 1.2765063141973971
+      },
+      "gpu_vs_cpu_pct": -0.35949091154720003
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "variant": "baseline",
+      "cpu": {
+        "fps_median": 8.224252696506552,
+        "fps_trials": [
+          8.251336402757815,
+          8.224252696506552,
+          8.211296604028439
+        ],
+        "p95_ms_median": 122.18596059828997,
+        "cpu_cores_median": 1.225413651779479
+      },
+      "gpu": {
+        "fps_median": 8.481937609581795,
+        "fps_trials": [
+          8.52122302097386,
+          8.481937609581795,
+          8.442059313722673
+        ],
+        "p95_ms_median": 119.46521084755659,
+        "cpu_cores_median": 1.1111338268552131
+      },
+      "gpu_vs_cpu_pct": 3.133231949265136
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "variant": "terminal-noop",
+      "cpu": {
+        "fps_median": 11.909299286743185,
+        "fps_trials": [
+          11.936693827037976,
+          11.909299286743185,
+          11.8862893194966
+        ],
+        "p95_ms_median": 84.64307296089828,
+        "cpu_cores_median": 1.2991714226209792
+      },
+      "gpu": {
+        "fps_median": 12.452389313509922,
+        "fps_trials": [
+          12.482872043104457,
+          12.452389313509922,
+          12.392607417956354
+        ],
+        "p95_ms_median": 80.69204261992127,
+        "cpu_cores_median": 1.1680341176072266
+      },
+      "gpu_vs_cpu_pct": 4.560218142903483
+    }
+  ],
+  "quality": {
+    "cpu": {
+      "quality_fixtures": 9,
+      "all_original_quality_gates_passed": true,
+      "same_tensor_cpu_gpu_cast_checks": 0,
+      "timing_reference_checks": 0,
+      "total_cgroup_throttled_periods": 0
+    },
+    "gpu": {
+      "quality_fixtures": 9,
+      "all_original_quality_gates_passed": true,
+      "same_tensor_cpu_gpu_cast_checks": 36,
+      "timing_reference_checks": 0,
+      "total_cgroup_throttled_periods": 0
+    }
+  },
+  "recommendation": "Negligible at 512 and 768, but 1024 shows +4.56% for terminal-noop and +3.13% for baseline. Separate sequential processes cannot isolate output-cast from compilation, clocks or allocator variation; confirm the 1024 effect with a same-process processor toggle before promotion."
+}

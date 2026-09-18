@@ -103,7 +103,10 @@ RUN npm install --omit=dev --silent && \
     npm cache clean --force
 
 # Source files (these change more often)
-COPY server.js inference_server.py ./
+COPY server.js inference_server.py worker_runtime.py ./
+# Keep the measured helper byte-for-byte; its runtime import also checks SHA256.
+COPY bench/terminal_noop.py ./bench/terminal_noop.py
+COPY bench/gpu_output_cast.py ./bench/gpu_output_cast.py
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
@@ -122,6 +125,9 @@ ENV PORT=3000 \
     INFERENCE_SCRIPT=/app/inference_server.py \
     COMPILE_MODE=reduce-overhead \
     USE_VAE_FP8=1 \
+    TORCH_NUM_THREADS=0 \
+    USE_TERMINAL_NOOP=0 \
+    USE_GPU_OUTPUT_CAST=0 \
     JPEG_QUALITY=80 \
     MAX_PENDING_PER_WORKER=3 \
     WARMUP_SHAPES=512x288,768x448,288x512,256x144,448x768,1024x576,576x1024,1280x720,720x1280

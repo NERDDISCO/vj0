@@ -1,0 +1,377 @@
+{
+  "window_start": 1789688713299.5,
+  "window_end": 1789688728615.5,
+  "seconds": 15.316,
+  "renderer": {
+    "vendor": "WebKit",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "glBuffer": [
+      2048,
+      1152
+    ],
+    "devicePixelRatio": 1,
+    "mainViewport": [
+      1440,
+      900
+    ],
+    "focusEmulation": true
+  },
+  "targets": {
+    "main": {
+      "encode-done": {
+        "events": 883,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 883,
+          "mean": 6.290033809190969,
+          "p50": 5.5,
+          "p95": 10.590087890624998,
+          "p99": 18.90786621093747,
+          "min": 2.5,
+          "max": 76.7001953125
+        }
+      },
+      "encode-start": {
+        "events": 883,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preview-image-loaded": {
+        "events": 560,
+        "unique_frames": 560,
+        "fps": 36.563071297989026,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 560,
+          "mean": 80.45036315917969,
+          "p50": 75.6500244140625,
+          "p95": 115.04000244140622,
+          "p99": 158.65306884765616,
+          "min": 54.2998046875,
+          "max": 206
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preview-image-raf": {
+        "events": 522,
+        "unique_frames": 522,
+        "fps": 34.08200574562549,
+        "dimensions": [],
+        "age_ms": {
+          "count": 522,
+          "mean": 90.48218802382662,
+          "p50": 87.199951171875,
+          "p95": 120.590087890625,
+          "p99": 152.63184570312498,
+          "min": 67.199951171875,
+          "max": 204.599853515625
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "received": {
+        "events": 616,
+        "unique_frames": 616,
+        "fps": 40.21937842778793,
+        "dimensions": [],
+        "age_ms": {
+          "count": 616,
+          "mean": 79.17791312081474,
+          "p50": 73.550048828125,
+          "p95": 116.04986572265625,
+          "p99": 156.77500000000003,
+          "min": 52.7998046875,
+          "max": 204.099853515625
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "sent": {
+        "events": 883,
+        "unique_frames": 883,
+        "fps": 57.65212849307913,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "stage-post": {
+        "events": 615,
+        "unique_frames": 615,
+        "fps": 40.15408722904152,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "worker-stats": {
+        "events": 616,
+        "unique_frames": 0,
+        "fps": null,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    },
+    "stage": {
+      "bitmap-decoded": {
+        "events": 614,
+        "unique_frames": 614,
+        "fps": 40.088796030295114,
+        "dimensions": [
+          [
+            512,
+            288
+          ]
+        ],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 614,
+          "mean": 0.9319221422027687,
+          "p50": 0.699951171875,
+          "p95": 2.234985351562502,
+          "p99": 7.4869873046875,
+          "min": 0.199951171875,
+          "max": 14.60009765625
+        }
+      },
+      "stage-message": {
+        "events": 615,
+        "unique_frames": 615,
+        "fps": 40.15408722904152,
+        "dimensions": [],
+        "age_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "webgl-frame-submitted": {
+        "events": 614,
+        "unique_frames": 614,
+        "fps": 40.088796030295114,
+        "dimensions": [
+          [
+            2048,
+            1152
+          ]
+        ],
+        "age_ms": {
+          "count": 614,
+          "mean": 84.49075804471192,
+          "p50": 77.9500732421875,
+          "p95": 128.5100830078125,
+          "p99": 170.670048828125,
+          "min": 54.699951171875,
+          "max": 206.300048828125
+        },
+        "duration_ms": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "min": null,
+          "max": null
+        }
+      }
+    }
+  },
+  "audio_rms_by_fixture_level": {
+    "0.2": {
+      "count": 30,
+      "mean": 0.1410392137995479,
+      "p50": 0.14144157082348796,
+      "p95": 0.14509424384659678,
+      "p99": 0.1451595528715277,
+      "min": 0.13747342270532914,
+      "max": 0.14515958509200103
+    }
+  },
+  "source_order": {
+    "main": {
+      "received": {
+        "frames": 616,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      },
+      "preview-image-raf": {
+        "frames": 522,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      }
+    },
+    "stage": {
+      "webgl-frame-submitted": {
+        "frames": 614,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "status": "passed"
+      }
+    }
+  },
+  "worker_activity": {
+    "0": {
+      "frames": 616,
+      "max_gap_ms": 97.0
+    }
+  },
+  "status": "measured",
+  "problems": [],
+  "measurement": "Actual app capture/preview + stage GL submission in a 1920x1080 viewport; actual GL buffer sizes recorded separately; excludes physical display presentation",
+  "config": {
+    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "layout": "vj-next",
+    "sendFps": 60,
+    "activeWorkers": 1,
+    "maxPending": 3,
+    "origin": "http://127.0.0.1:18766",
+    "variant": "terminal-noop",
+    "workerThreads": 128,
+    "mailbox": true,
+    "name": "smoke-latest-input-512-r0",
+    "width": 512,
+    "height": 288,
+    "seconds": 15,
+    "outputCast": "gpu"
+  }
+}

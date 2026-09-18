@@ -1,0 +1,1257 @@
+{
+  "status": "passed",
+  "input_directory": "docs/performance/2026-09-17/terminal-production-proof",
+  "result_sha256": "593fef2fb3974ce4de7a52016ab3380dd63220951fae05b362b36bfed51e0f1e",
+  "record_counts": {
+    "boot-proof": 1,
+    "warmup": 3,
+    "quality": 27,
+    "compute-measured": 18,
+    "profile": 2
+  },
+  "errors": [],
+  "warnings": [],
+  "compute": [
+    {
+      "size": [
+        512,
+        288
+      ],
+      "variants": {
+        "baseline": {
+          "fps_trials": [
+            28.792443934659122,
+            29.3665048768833,
+            29.527532745957288
+          ],
+          "median_fps": 29.3665048768833,
+          "median_trial_p50_ms": 32.31820138171315,
+          "median_trial_p95_ms": 41.36952122207731,
+          "worst_frame_ms": 78.03514180704951,
+          "throttled_periods": [
+            17,
+            29,
+            11
+          ],
+          "average_cpu_cores": [
+            28.19644034521169,
+            30.66450439244155,
+            27.82379410651557
+          ]
+        },
+        "optimized": {
+          "fps_trials": [
+            43.12606344134549,
+            42.232828105764604,
+            41.17840309077219
+          ],
+          "median_fps": 42.232828105764604,
+          "median_trial_p50_ms": 21.70190238393843,
+          "median_trial_p95_ms": 34.78042597416788,
+          "worst_frame_ms": 52.70047020167112,
+          "throttled_periods": [
+            12,
+            17,
+            21
+          ],
+          "average_cpu_cores": [
+            28.730583464624377,
+            29.57142623965634,
+            29.953170408227706
+          ]
+        }
+      },
+      "paired_improvement_pct": [
+        49.78257330018505,
+        43.812919796967066,
+        39.45764939134666
+      ],
+      "median_fps_improvement_pct": 43.812919796967066
+    },
+    {
+      "size": [
+        768,
+        448
+      ],
+      "variants": {
+        "baseline": {
+          "fps_trials": [
+            14.376224952059319,
+            14.32635416712726,
+            14.389103743503624
+          ],
+          "median_fps": 14.376224952059319,
+          "median_trial_p50_ms": 69.25025396049023,
+          "median_trial_p95_ms": 70.5061353975907,
+          "worst_frame_ms": 85.29825462028384,
+          "throttled_periods": [
+            11,
+            0,
+            0
+          ],
+          "average_cpu_cores": [
+            21.974059839222654,
+            16.771862823455887,
+            16.538835842783094
+          ]
+        },
+        "optimized": {
+          "fps_trials": [
+            21.317602175955155,
+            21.25060783744655,
+            21.027778630699913
+          ],
+          "median_fps": 21.25060783744655,
+          "median_trial_p50_ms": 46.88226501457393,
+          "median_trial_p95_ms": 47.768423962406814,
+          "worst_frame_ms": 59.42275281995535,
+          "throttled_periods": [
+            0,
+            0,
+            0
+          ],
+          "average_cpu_cores": [
+            12.83106474970738,
+            12.684487818171817,
+            15.251447840846653
+          ]
+        }
+      },
+      "paired_improvement_pct": [
+        48.283727105296315,
+        48.332280422100936,
+        46.13681995442913
+      ],
+      "median_fps_improvement_pct": 47.817719243482706
+    },
+    {
+      "size": [
+        1024,
+        576
+      ],
+      "variants": {
+        "baseline": {
+          "fps_trials": [
+            8.511062690478672,
+            8.523742989169893,
+            8.537073065628128
+          ],
+          "median_fps": 8.523742989169893,
+          "median_trial_p50_ms": 117.22835199907422,
+          "median_trial_p95_ms": 117.78607636224478,
+          "worst_frame_ms": 131.94205705076456,
+          "throttled_periods": [
+            0,
+            0,
+            0
+          ],
+          "average_cpu_cores": [
+            12.455940247515539,
+            11.342544795688383,
+            12.090202875542552
+          ]
+        },
+        "optimized": {
+          "fps_trials": [
+            12.719694176107872,
+            12.736399818903585,
+            12.71524402419992
+          ],
+          "median_fps": 12.719694176107872,
+          "median_trial_p50_ms": 78.53017398156226,
+          "median_trial_p95_ms": 78.85020279791206,
+          "worst_frame_ms": 85.63232980668545,
+          "throttled_periods": [
+            0,
+            0,
+            0
+          ],
+          "average_cpu_cores": [
+            11.139908159435247,
+            9.436398625825667,
+            9.35714807740869
+          ]
+        }
+      },
+      "paired_improvement_pct": [
+        49.44895412810666,
+        49.42261674344493,
+        48.94149231771132
+      ],
+      "median_fps_improvement_pct": 49.2266272254956
+    }
+  ],
+  "profiles": {
+    "512x288": {
+      "trace_sha256": "02367e9efae4f0db570b25c824a2f486dfb7362d5a7253a09ac89b30091760f1",
+      "kernel_events": 19800,
+      "summed_kernel_duration_ms": 351.421544,
+      "kernel_active_union_ms": 351.3629130859375,
+      "kernel_categories": {
+        "other_or_unclassified": {
+          "count": 1300,
+          "duration_us": 6939.863000000012,
+          "share_of_summed_kernel_duration_pct": 1.9747972537506158
+        },
+        "other_triton_named": {
+          "count": 14060,
+          "duration_us": 69072.72999999886,
+          "share_of_summed_kernel_duration_pct": 19.65523491069713
+        },
+        "cudnn_named": {
+          "count": 1240,
+          "duration_us": 96343.17600000004,
+          "share_of_summed_kernel_duration_pct": 27.415273094355317
+        },
+        "explicitly_named_fp8_gemm": {
+          "count": 2160,
+          "duration_us": 150939.62899999964,
+          "share_of_summed_kernel_duration_pct": 42.951159818477045
+        },
+        "explicitly_named_attention": {
+          "count": 1040,
+          "duration_us": 28126.14600000002,
+          "share_of_summed_kernel_duration_pct": 8.003534922719485
+        }
+      },
+      "top_kernels": [
+        {
+          "name": "void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16_s16816fprop_optimized_bf16_128x128_32x3_nhwc_align8>(cutlass_tensorop_bf16_s16816fprop_optimized_bf16_128x128_32x3_nhwc_align8::Params)",
+          "count": 600,
+          "duration_us": 63548.876999999906,
+          "share_of_summed_kernel_duration_pct": 18.08337538918784
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 400,
+          "duration_us": 61641.379000000015,
+          "share_of_summed_kernel_duration_pct": 17.54058055131646
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 400,
+          "duration_us": 37404.81799999999,
+          "share_of_summed_kernel_duration_pct": 10.643860240964623
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x64x64_stage6_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 900,
+          "duration_us": 27471.43500000002,
+          "share_of_summed_kernel_duration_pct": 7.817231319204499
+        },
+        {
+          "name": "void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16_s16816fprop_optimized_bf16_256x64_32x4_nhwc_align8>(cutlass_tensorop_bf16_s16816fprop_optimized_bf16_256x64_32x4_nhwc_align8::Params)",
+          "count": 140,
+          "duration_us": 18307.753,
+          "share_of_summed_kernel_duration_pct": 5.209627386987976
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 280,
+          "duration_us": 16035.267999999993,
+          "share_of_summed_kernel_duration_pct": 4.562972382820102
+        },
+        {
+          "name": "void pytorch_flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, false, false, false, true, true, false, true, false>(pytorch_flash::Flash_fwd_params)",
+          "count": 500,
+          "duration_us": 15479.385000000007,
+          "share_of_summed_kernel_duration_pct": 4.404791130278571
+        },
+        {
+          "name": "void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16_s16816fprop_optimized_bf16_64x128_64x3_nhwc_align8>(cutlass_tensorop_bf16_s16816fprop_optimized_bf16_64x128_64x3_nhwc_align8::Params)",
+          "count": 360,
+          "duration_us": 11467.742999999995,
+          "share_of_summed_kernel_duration_pct": 3.2632441567099812
+        },
+        {
+          "name": "fmha_cutlassF_bf16_aligned_32x128_gmem_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_t, cutlass::arch::Sm80, true, 32, 128, 65536, true, true>::Params)",
+          "count": 40,
+          "duration_us": 8273.385999999999,
+          "share_of_summed_kernel_duration_pct": 2.354262606051267
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 100,
+          "duration_us": 7957.577,
+          "share_of_summed_kernel_duration_pct": 2.2643964594270867
+        },
+        {
+          "name": "void pytorch_flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, 4, 2, true>(pytorch_flash::Flash_fwd_params)",
+          "count": 500,
+          "duration_us": 4373.375000000004,
+          "share_of_summed_kernel_duration_pct": 1.2444811863896437
+        },
+        {
+          "name": "triton_red_fused__fused_rms_norm__scaled_dot_product_flash_attention__to_copy_add_mul_neg_permute_split_split_with_sizes_stack_unbind_unsqueeze_view_40",
+          "count": 400,
+          "duration_us": 3945.7460000000074,
+          "share_of_summed_kernel_duration_pct": 1.1227957042952401
+        },
+        {
+          "name": "triton_poi_fused__scaled_mm__to_copy_cat_clamp_div_mul_permute_silu_split_split_with_sizes_t_view_44",
+          "count": 400,
+          "duration_us": 3436.630000000007,
+          "share_of_summed_kernel_duration_pct": 0.9779224007962377
+        },
+        {
+          "name": "triton_red_fused_mm_silu_t_3",
+          "count": 20,
+          "duration_us": 3053.1369999999997,
+          "share_of_summed_kernel_duration_pct": 0.8687961942367425
+        },
+        {
+          "name": "triton_per_fused_abs_amax_cat_mul_permute_silu_split_split_with_sizes_view_41",
+          "count": 400,
+          "duration_us": 2595.556000000002,
+          "share_of_summed_kernel_duration_pct": 0.7385876148788424
+        },
+        {
+          "name": "triton_poi_fused_convolution_silu_6",
+          "count": 460,
+          "duration_us": 1749.606,
+          "share_of_summed_kernel_duration_pct": 0.49786532154101515
+        },
+        {
+          "name": "void convolve_common_engine_float_NHWC<__nv_bfloat16, __nv_bfloat16, 128, 6, 7, 3, 3, 5, true, false, false, false, false>(int, int, int, __nv_bfloat16 const*, __nv_bfloat16 const*, int, __nv_bfloat16*, conv_kernel_common_params, unsigned long long, unsigned long, float, float, bool, __nv_bfloat16 const*, __nv_bfloat16 const*, bool, bool)",
+          "count": 20,
+          "duration_us": 1601.995,
+          "share_of_summed_kernel_duration_pct": 0.45586135151691215
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x1_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x1_tn_align8::Params)",
+          "count": 20,
+          "duration_us": 1492.1399999999999,
+          "share_of_summed_kernel_duration_pct": 0.42460117356948385
+        },
+        {
+          "name": "triton_poi_fused_add_constant_pad_nd_convolution_div_silu_9",
+          "count": 20,
+          "duration_us": 1456.7089999999998,
+          "share_of_summed_kernel_duration_pct": 0.41451898008848315
+        },
+        {
+          "name": "triton_poi_fused_convolution_silu_30",
+          "count": 240,
+          "duration_us": 1409.1339999999998,
+          "share_of_summed_kernel_duration_pct": 0.4009811077490456
+        },
+        {
+          "name": "triton_per_fused_convolution_native_group_norm_1",
+          "count": 60,
+          "duration_us": 1390.5369999999998,
+          "share_of_summed_kernel_duration_pct": 0.39568917265926074
+        },
+        {
+          "name": "triton_red_fused_add_mm_mul_native_layer_norm_split_unsqueeze_view_47",
+          "count": 120,
+          "duration_us": 1364.2030000000007,
+          "share_of_summed_kernel_duration_pct": 0.3881956081781943
+        },
+        {
+          "name": "triton_poi_fused_convolution_native_group_norm_silu_5",
+          "count": 180,
+          "duration_us": 1341.1649999999997,
+          "share_of_summed_kernel_duration_pct": 0.38163994863103773
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x2_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x2_tn_align8::Params)",
+          "count": 20,
+          "duration_us": 1309.801,
+          "share_of_summed_kernel_duration_pct": 0.3727150547150291
+        },
+        {
+          "name": "triton_poi_fused__to_copy_arange_cat_clone_cos_div_expand_mul_pow_reciprocal_select_sin_unsqueeze_view_16",
+          "count": 20,
+          "duration_us": 1239.5919999999999,
+          "share_of_summed_kernel_duration_pct": 0.35273648447688793
+        },
+        {
+          "name": "triton_red_fused_add_mm_mul_native_layer_norm_split_unsqueeze_view_46",
+          "count": 120,
+          "duration_us": 1201.6029999999996,
+          "share_of_summed_kernel_duration_pct": 0.34192639026137783
+        },
+        {
+          "name": "triton_red_fused_abs_amax_mul_silu_split_view_27",
+          "count": 100,
+          "duration_us": 1108.4150000000004,
+          "share_of_summed_kernel_duration_pct": 0.31540894942969133
+        },
+        {
+          "name": "triton_per_fused__to_copy_clone_convolution_native_group_norm_21",
+          "count": 80,
+          "duration_us": 1090.8219999999992,
+          "share_of_summed_kernel_duration_pct": 0.3104027111098229
+        },
+        {
+          "name": "triton_poi_fused_convolution_native_group_norm_silu_55",
+          "count": 60,
+          "duration_us": 1044.678,
+          "share_of_summed_kernel_duration_pct": 0.297272042035078
+        },
+        {
+          "name": "triton_red_fused_abs_amax_37",
+          "count": 400,
+          "duration_us": 1021.8019999999979,
+          "share_of_summed_kernel_duration_pct": 0.2907624809707164
+        }
+      ],
+      "host_ranges": {
+        "vj0/frame": {
+          "count": 20,
+          "inclusive_total_ms": 464.49339100000003,
+          "inclusive_mean_ms": 23.224669549999998,
+          "inclusive_p95_ms": 24.497821300000002
+        },
+        "vj0/input_jpeg_decode": {
+          "count": 20,
+          "inclusive_total_ms": 5.589558,
+          "inclusive_mean_ms": 0.2794779,
+          "inclusive_p95_ms": 0.3249774000000001
+        },
+        "vj0/vae_encode": {
+          "count": 20,
+          "inclusive_total_ms": 25.165592,
+          "inclusive_mean_ms": 1.2582796,
+          "inclusive_p95_ms": 1.4853581500000017
+        },
+        "vj0/generate_and_decode": {
+          "count": 20,
+          "inclusive_total_ms": 426.223166,
+          "inclusive_mean_ms": 21.3111583,
+          "inclusive_p95_ms": 22.526010550000002
+        },
+        "vj0/transformer": {
+          "count": 20,
+          "inclusive_total_ms": 30.145024000000003,
+          "inclusive_mean_ms": 1.5072512000000002,
+          "inclusive_p95_ms": 2.2996917000000003
+        },
+        "vj0/vae_decoder": {
+          "count": 20,
+          "inclusive_total_ms": 8.076318,
+          "inclusive_mean_ms": 0.4038159,
+          "inclusive_p95_ms": 0.6052070000000003
+        },
+        "vj0/output_tensor_to_numpy": {
+          "count": 20,
+          "inclusive_total_ms": 83.59363,
+          "inclusive_mean_ms": 4.179681500000001,
+          "inclusive_p95_ms": 4.184777599999999
+        },
+        "vj0/output_jpeg_encode": {
+          "count": 20,
+          "inclusive_total_ms": 6.359363,
+          "inclusive_mean_ms": 0.31796815000000006,
+          "inclusive_p95_ms": 0.3292738
+        },
+        "vj0/completion_sync": {
+          "count": 20,
+          "inclusive_total_ms": 0.522372,
+          "inclusive_mean_ms": 0.0261186,
+          "inclusive_p95_ms": 0.03161355000000002
+        }
+      },
+      "gpu_annotation_ranges": {
+        "vj0/vae_decoder": {
+          "count": 20,
+          "inclusive_total_ms": 86.460627,
+          "inclusive_mean_ms": 4.32303135
+        },
+        "vj0/vae_encode": {
+          "count": 20,
+          "inclusive_total_ms": 72.045375,
+          "inclusive_mean_ms": 3.6022687500000004
+        },
+        "vj0/transformer": {
+          "count": 20,
+          "inclusive_total_ms": 209.064143,
+          "inclusive_mean_ms": 10.45320715
+        },
+        "vj0/output_tensor_to_numpy": {
+          "count": 20,
+          "inclusive_total_ms": 0.765616,
+          "inclusive_mean_ms": 0.0382808
+        },
+        "vj0/generate_and_decode": {
+          "count": 20,
+          "inclusive_total_ms": 343.691316,
+          "inclusive_mean_ms": 17.1845658
+        }
+      },
+      "compiled_graph_call_counts": {
+        "## Call CompiledFxGraph fvinx7wfgmefpva6udlfuhcbpqzkzpudfslfipiplflns2x6xnn4 ##": 20,
+        "## Call CompiledFxGraph fvswsji56imt5qppflin5iudfvaoxog22figc6rheplajbu75nik ##": 20,
+        "## Call CompiledFxGraph f7ajbwvnaws7dabxtmf7nopklkebmimyv4bluahtjflprajmst3z ##": 20
+      },
+      "copy_activity": {
+        "Memcpy HtoD (Pageable -> Device)": {
+          "count": 80,
+          "duration_us": 366.30699999999996
+        },
+        "Memcpy DtoD (Device -> Device)": {
+          "count": 120,
+          "duration_us": 140.60899999999998
+        },
+        "Memset (Unknown)": {
+          "count": 500,
+          "duration_us": 296.22200000000015
+        },
+        "Memcpy DtoH (Device -> Pinned)": {
+          "count": 100,
+          "duration_us": 45.53000000000002
+        },
+        "Memcpy DtoH (Device -> Pageable)": {
+          "count": 20,
+          "duration_us": 649.4769999999999
+        }
+      },
+      "cuda_runtime_counts": {
+        "cudaStreamSynchronize": 200,
+        "cudaGraphLaunch": 60,
+        "cudaDeviceSynchronize": 21
+      },
+      "top_exclusive_host_operators": [
+        {
+          "name": "cudaStreamSynchronize",
+          "count": 200,
+          "self_host_total_ms": 217.5878019999999,
+          "self_host_ms_per_frame": 10.879390099999995
+        },
+        {
+          "name": "cudaMemcpyAsync",
+          "count": 320,
+          "self_host_total_ms": 84.6909230000001,
+          "self_host_ms_per_frame": 4.234546150000005
+        },
+        {
+          "name": "vj0/generate_and_decode",
+          "count": 20,
+          "self_host_total_ms": 73.06384400000003,
+          "self_host_ms_per_frame": 3.653192200000001
+        },
+        {
+          "name": "cudaGraphLaunch",
+          "count": 60,
+          "self_host_total_ms": 14.322811000000224,
+          "self_host_ms_per_frame": 0.7161405500000112
+        },
+        {
+          "name": "Torch-Compiled Region: 1/0",
+          "count": 20,
+          "self_host_total_ms": 11.05597099999989,
+          "self_host_ms_per_frame": 0.5527985499999944
+        },
+        {
+          "name": "TorchDynamo Cache Lookup",
+          "count": 60,
+          "self_host_total_ms": 9.882861999999834,
+          "self_host_ms_per_frame": 0.4941430999999917
+        },
+        {
+          "name": "vj0/output_jpeg_encode",
+          "count": 20,
+          "self_host_total_ms": 6.359362999999798,
+          "self_host_ms_per_frame": 0.31796814999998985
+        },
+        {
+          "name": "aten::copy_",
+          "count": 560,
+          "self_host_total_ms": 6.2182349999995274,
+          "self_host_ms_per_frame": 0.3109117499999764
+        },
+        {
+          "name": "vj0/vae_encode",
+          "count": 20,
+          "self_host_total_ms": 6.0899519999994425,
+          "self_host_ms_per_frame": 0.3044975999999721
+        },
+        {
+          "name": "vj0/input_jpeg_decode",
+          "count": 20,
+          "self_host_total_ms": 5.589557999999921,
+          "self_host_ms_per_frame": 0.27947789999999606
+        },
+        {
+          "name": "cudaLaunchKernel",
+          "count": 1120,
+          "self_host_total_ms": 3.727496999999695,
+          "self_host_ms_per_frame": 0.18637484999998477
+        },
+        {
+          "name": "Torch-Compiled Region: 0/0",
+          "count": 20,
+          "self_host_total_ms": 2.032488000000028,
+          "self_host_ms_per_frame": 0.1016244000000014
+        },
+        {
+          "name": "aten::cudnn_convolution",
+          "count": 40,
+          "self_host_total_ms": 1.790674999999932,
+          "self_host_ms_per_frame": 0.0895337499999966
+        },
+        {
+          "name": "Torch-Compiled Region: 2/0",
+          "count": 20,
+          "self_host_total_ms": 1.7212699999999241,
+          "self_host_ms_per_frame": 0.0860634999999962
+        },
+        {
+          "name": "## Call CompiledFxGraph fvswsji56imt5qppflin5iudfvaoxog22figc6rheplajbu75nik ##",
+          "count": 20,
+          "self_host_total_ms": 1.300609999999744,
+          "self_host_ms_per_frame": 0.06503049999998721
+        },
+        {
+          "name": "## Call CompiledFxGraph fvinx7wfgmefpva6udlfuhcbpqzkzpudfslfipiplflns2x6xnn4 ##",
+          "count": 20,
+          "self_host_total_ms": 1.2162909999999023,
+          "self_host_ms_per_frame": 0.06081454999999512
+        },
+        {
+          "name": "## Call CompiledFxGraph f7ajbwvnaws7dabxtmf7nopklkebmimyv4bluahtjflprajmst3z ##",
+          "count": 20,
+          "self_host_total_ms": 0.9686410000001524,
+          "self_host_ms_per_frame": 0.04843205000000762
+        },
+        {
+          "name": "aten::mul",
+          "count": 200,
+          "self_host_total_ms": 0.9642880000006312,
+          "self_host_ms_per_frame": 0.04821440000003156
+        },
+        {
+          "name": "aten::add",
+          "count": 220,
+          "self_host_total_ms": 0.8847960000006783,
+          "self_host_ms_per_frame": 0.04423980000003391
+        },
+        {
+          "name": "Pregraph bytecode",
+          "count": 60,
+          "self_host_total_ms": 0.8540120000000725,
+          "self_host_ms_per_frame": 0.04270060000000362
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 280,
+          "self_host_total_ms": 0.6963139999997686,
+          "self_host_ms_per_frame": 0.03481569999998843
+        },
+        {
+          "name": "aten::cat",
+          "count": 120,
+          "self_host_total_ms": 0.6417520000000259,
+          "self_host_ms_per_frame": 0.03208760000000129
+        },
+        {
+          "name": "vj0/frame",
+          "count": 20,
+          "self_host_total_ms": 0.6333400000004367,
+          "self_host_ms_per_frame": 0.03166700000002184
+        },
+        {
+          "name": "aten::_to_copy",
+          "count": 260,
+          "self_host_total_ms": 0.6247280000000842,
+          "self_host_ms_per_frame": 0.03123640000000421
+        },
+        {
+          "name": "vj0/transformer",
+          "count": 20,
+          "self_host_total_ms": 0.607570999999989,
+          "self_host_ms_per_frame": 0.03037854999999945
+        },
+        {
+          "name": "aten::empty",
+          "count": 460,
+          "self_host_total_ms": 0.5636679999995329,
+          "self_host_ms_per_frame": 0.028183399999976644
+        },
+        {
+          "name": "vj0/vae_decoder",
+          "count": 20,
+          "self_host_total_ms": 0.5405690000002469,
+          "self_host_ms_per_frame": 0.027028450000012343
+        },
+        {
+          "name": "aten::as_strided",
+          "count": 1320,
+          "self_host_total_ms": 0.5151860000011658,
+          "self_host_ms_per_frame": 0.02575930000005829
+        },
+        {
+          "name": "aten::narrow",
+          "count": 240,
+          "self_host_total_ms": 0.44728399999994645,
+          "self_host_ms_per_frame": 0.022364199999997322
+        },
+        {
+          "name": "AOTDispatcher Runtime Wrapper Prologue",
+          "count": 60,
+          "self_host_total_ms": 0.40170299999999454,
+          "self_host_ms_per_frame": 0.020085149999999725
+        }
+      ],
+      "compilation_event_names": [],
+      "interpretation_limits": [
+        "CPU user_annotation and GPU gpu_user_annotation ranges are separated; both are inclusive/nested and must not be added across parent/child ranges or devices.",
+        "Kernel shares use only kernel events, never compiled-wrapper rows. Category matching is conservative name-based attribution.",
+        "Exclusive host operator durations are wall time, not per-thread CPU cycles. Synchronization and pageable transfer calls can wait for earlier GPU work; they do not establish the cause of CPU quota throttling.",
+        "The host output-conversion range includes waiting for the asynchronous decoder. Use GPU copy activity and the separate GPU annotation to assess the actual conversion/copy work.",
+        "GPU kernel/copy durations are not end-to-end latency or throughput. Profiling is untimed diagnostic evidence."
+      ]
+    },
+    "1024x576": {
+      "trace_sha256": "f64992a61bd965d6e61d3adab113dce6c6e61167e2e826c9801323fcca7535ef",
+      "kernel_events": 19660,
+      "summed_kernel_duration_ms": 1387.4901470000002,
+      "kernel_active_union_ms": 1386.2045625,
+      "kernel_categories": {
+        "other_or_unclassified": {
+          "count": 1300,
+          "duration_us": 15079.121999999994,
+          "share_of_summed_kernel_duration_pct": 1.0867912851564194
+        },
+        "other_triton_named": {
+          "count": 14420,
+          "duration_us": 340704.6579999969,
+          "share_of_summed_kernel_duration_pct": 24.555465041439092
+        },
+        "cudnn_named": {
+          "count": 1240,
+          "duration_us": 325064.6039999998,
+          "share_of_summed_kernel_duration_pct": 23.42824593766285
+        },
+        "explicitly_named_fp8_gemm": {
+          "count": 2160,
+          "duration_us": 507636.8979999985,
+          "share_of_summed_kernel_duration_pct": 36.586702910835044
+        },
+        "explicitly_named_attention": {
+          "count": 540,
+          "duration_us": 199004.86500000005,
+          "share_of_summed_kernel_duration_pct": 14.342794824906242
+        }
+      },
+      "top_kernels": [
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 1300,
+          "duration_us": 455745.4339999994,
+          "share_of_summed_kernel_duration_pct": 32.846751019126295
+        },
+        {
+          "name": "void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16_s16816fprop_optimized_bf16_128x128_32x3_nhwc_align8>(cutlass_tensorop_bf16_s16816fprop_optimized_bf16_128x128_32x3_nhwc_align8::Params)",
+          "count": 1000,
+          "duration_us": 256924.79600000006,
+          "share_of_summed_kernel_duration_pct": 18.517233910130248
+        },
+        {
+          "name": "void pytorch_flash::flash_fwd_kernel<Flash_fwd_kernel_traits<128, 128, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 128, 64, 4, cutlass::bfloat16_t> >, false, false, false, false, false, true, false, false>(pytorch_flash::Flash_fwd_params)",
+          "count": 500,
+          "duration_us": 130853.67299999995,
+          "share_of_summed_kernel_duration_pct": 9.430962323078749
+        },
+        {
+          "name": "fmha_cutlassF_bf16_aligned_32x128_gmem_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_t, cutlass::arch::Sm80, true, 32, 128, 65536, true, true>::Params)",
+          "count": 40,
+          "duration_us": 68151.192,
+          "share_of_summed_kernel_duration_pct": 4.9118325018274875
+        },
+        {
+          "name": "void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16_s16816fprop_optimized_bf16_256x64_32x4_nhwc_align8>(cutlass_tensorop_bf16_s16816fprop_optimized_bf16_256x64_32x4_nhwc_align8::Params)",
+          "count": 160,
+          "duration_us": 64343.40300000001,
+          "share_of_summed_kernel_duration_pct": 4.637395309734045
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x128x64_stage3_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 100,
+          "duration_us": 34130.463999999985,
+          "share_of_summed_kernel_duration_pct": 2.4598707294459787
+        },
+        {
+          "name": "triton_per_fused_abs_amax_cat_mul_permute_silu_split_split_with_sizes_view_41",
+          "count": 400,
+          "duration_us": 28413.959000000003,
+          "share_of_summed_kernel_duration_pct": 2.0478674433426445
+        },
+        {
+          "name": "triton_per_fused_convolution_native_group_norm_1",
+          "count": 60,
+          "duration_us": 25978.866000000005,
+          "share_of_summed_kernel_duration_pct": 1.872363998848635
+        },
+        {
+          "name": "triton_per_fused_clone_native_group_norm_47",
+          "count": 20,
+          "duration_us": 19317.514,
+          "share_of_summed_kernel_duration_pct": 1.39226314808562
+        },
+        {
+          "name": "triton_per_fused_add_convolution_div_native_group_norm_silu_7",
+          "count": 20,
+          "duration_us": 16754.878,
+          "share_of_summed_kernel_duration_pct": 1.2075673500260178
+        },
+        {
+          "name": "triton_red_fused__fused_rms_norm__scaled_dot_product_flash_attention__to_copy_add_mul_neg_permute_split_split_with_sizes_stack_unbind_unsqueeze_view_40",
+          "count": 400,
+          "duration_us": 16439.04699999999,
+          "share_of_summed_kernel_duration_pct": 1.1848045937871436
+        },
+        {
+          "name": "triton_poi_fused__scaled_mm__to_copy_cat_clamp_div_mul_permute_silu_split_split_with_sizes_t_view_44",
+          "count": 400,
+          "duration_us": 15998.846000000005,
+          "share_of_summed_kernel_duration_pct": 1.1530781702913242
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x64x64_stage6_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 500,
+          "duration_us": 11670.588999999996,
+          "share_of_summed_kernel_duration_pct": 0.8411295046118981
+        },
+        {
+          "name": "triton_per_fused_add_clone_convolution_div_native_group_norm_silu_54",
+          "count": 20,
+          "duration_us": 10624.955000000002,
+          "share_of_summed_kernel_duration_pct": 0.7657679604408753
+        },
+        {
+          "name": "triton_per_fused_add_clone_convolution_div_native_group_norm_silu_59",
+          "count": 20,
+          "duration_us": 9858.585,
+          "share_of_summed_kernel_duration_pct": 0.7105336943340469
+        },
+        {
+          "name": "triton_poi_fused_convolution_native_group_norm_silu_5",
+          "count": 180,
+          "duration_us": 8348.306000000011,
+          "share_of_summed_kernel_duration_pct": 0.6016839844268826
+        },
+        {
+          "name": "triton_poi_fused_add_constant_pad_nd_convolution_div_silu_9",
+          "count": 20,
+          "duration_us": 7799.4980000000005,
+          "share_of_summed_kernel_duration_pct": 0.5621299738137888
+        },
+        {
+          "name": "triton_per_fused_add_convolution_div_native_group_norm_silu_17",
+          "count": 20,
+          "duration_us": 7050.568000000001,
+          "share_of_summed_kernel_duration_pct": 0.5081526535697988
+        },
+        {
+          "name": "triton_red_fused_abs_amax_mul_silu_split_view_27",
+          "count": 100,
+          "duration_us": 6273.1820000000025,
+          "share_of_summed_kernel_duration_pct": 0.45212443587896717
+        },
+        {
+          "name": "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x128x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas",
+          "count": 260,
+          "duration_us": 6090.410999999994,
+          "share_of_summed_kernel_duration_pct": 0.43895165765094213
+        },
+        {
+          "name": "triton_per_fused_convolution_native_group_norm_silu_51",
+          "count": 60,
+          "duration_us": 5872.929999999999,
+          "share_of_summed_kernel_duration_pct": 0.4232772400365016
+        },
+        {
+          "name": "triton_poi_fused__to_copy__unsafe_index_add_arange_clone_convolution_div_mul_silu_unsqueeze_46",
+          "count": 20,
+          "duration_us": 5732.547,
+          "share_of_summed_kernel_duration_pct": 0.41315947449391144
+        },
+        {
+          "name": "triton_poi_fused_add_convolution_div_silu_56",
+          "count": 20,
+          "duration_us": 5709.375000000001,
+          "share_of_summed_kernel_duration_pct": 0.4114894085802831
+        },
+        {
+          "name": "triton_poi_fused_convolution_native_group_norm_silu_52",
+          "count": 60,
+          "duration_us": 5377.118999999998,
+          "share_of_summed_kernel_duration_pct": 0.3875428601512078
+        },
+        {
+          "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x1_tn_align8>(cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_32x32_128x1_tn_align8::Params)",
+          "count": 20,
+          "duration_us": 5330.459,
+          "share_of_summed_kernel_duration_pct": 0.38417995338744554
+        },
+        {
+          "name": "void convolve_common_engine_float_NHWC<__nv_bfloat16, __nv_bfloat16, 128, 6, 7, 3, 3, 5, true, false, false, false, false>(int, int, int, __nv_bfloat16 const*, __nv_bfloat16 const*, int, __nv_bfloat16*, conv_kernel_common_params, unsigned long long, unsigned long, float, float, bool, __nv_bfloat16 const*, __nv_bfloat16 const*, bool, bool)",
+          "count": 20,
+          "duration_us": 5325.535,
+          "share_of_summed_kernel_duration_pct": 0.38382506798442867
+        },
+        {
+          "name": "triton_poi_fused_add_convolution_div_native_group_norm_silu_8",
+          "count": 20,
+          "duration_us": 4967.451999999999,
+          "share_of_summed_kernel_duration_pct": 0.3580171009315282
+        },
+        {
+          "name": "triton_red_fused_add_mm_mul_native_layer_norm_split_unsqueeze_view_47",
+          "count": 120,
+          "duration_us": 4855.704,
+          "share_of_summed_kernel_duration_pct": 0.3499631338282937
+        },
+        {
+          "name": "triton_poi_fused_clone_native_group_norm_silu_49",
+          "count": 20,
+          "duration_us": 4607.74,
+          "share_of_summed_kernel_duration_pct": 0.33209172763949
+        },
+        {
+          "name": "triton_poi_fused__to_copy_arange_cat_clone_cos_div_expand_mul_pow_reciprocal_select_sin_unsqueeze_view_16",
+          "count": 20,
+          "duration_us": 3963.2200000000007,
+          "share_of_summed_kernel_duration_pct": 0.2856395058782353
+        }
+      ],
+      "host_ranges": {
+        "vj0/frame": {
+          "count": 20,
+          "inclusive_total_ms": 1608.20101,
+          "inclusive_mean_ms": 80.4100505,
+          "inclusive_p95_ms": 80.7772368
+        },
+        "vj0/input_jpeg_decode": {
+          "count": 20,
+          "inclusive_total_ms": 15.901404000000001,
+          "inclusive_mean_ms": 0.7950702,
+          "inclusive_p95_ms": 0.8271886500000001
+        },
+        "vj0/vae_encode": {
+          "count": 20,
+          "inclusive_total_ms": 53.398001,
+          "inclusive_mean_ms": 2.6699000500000003,
+          "inclusive_p95_ms": 2.8348791
+        },
+        "vj0/generate_and_decode": {
+          "count": 20,
+          "inclusive_total_ms": 1521.843276,
+          "inclusive_mean_ms": 76.09216380000001,
+          "inclusive_p95_ms": 76.7109928
+        },
+        "vj0/transformer": {
+          "count": 20,
+          "inclusive_total_ms": 50.802921999999995,
+          "inclusive_mean_ms": 2.5401461,
+          "inclusive_p95_ms": 2.7820404499999998
+        },
+        "vj0/vae_decoder": {
+          "count": 20,
+          "inclusive_total_ms": 14.260825,
+          "inclusive_mean_ms": 0.71304125,
+          "inclusive_p95_ms": 0.7662519000000001
+        },
+        "vj0/output_tensor_to_numpy": {
+          "count": 20,
+          "inclusive_total_ms": 351.85742999999997,
+          "inclusive_mean_ms": 17.5928715,
+          "inclusive_p95_ms": 17.60600255
+        },
+        "vj0/output_jpeg_encode": {
+          "count": 20,
+          "inclusive_total_ms": 15.190185999999999,
+          "inclusive_mean_ms": 0.7595092999999999,
+          "inclusive_p95_ms": 0.7854674
+        },
+        "vj0/completion_sync": {
+          "count": 20,
+          "inclusive_total_ms": 1.1266720000000001,
+          "inclusive_mean_ms": 0.056333600000000005,
+          "inclusive_p95_ms": 0.0640742
+        }
+      },
+      "gpu_annotation_ranges": {
+        "vj0/vae_decoder": {
+          "count": 20,
+          "inclusive_total_ms": 355.502823,
+          "inclusive_mean_ms": 17.77514115
+        },
+        "vj0/generate_and_decode": {
+          "count": 20,
+          "inclusive_total_ms": 1180.667332,
+          "inclusive_mean_ms": 59.033366599999994
+        },
+        "vj0/vae_encode": {
+          "count": 20,
+          "inclusive_total_ms": 305.979475,
+          "inclusive_mean_ms": 15.29897375
+        },
+        "vj0/transformer": {
+          "count": 20,
+          "inclusive_total_ms": 755.602302,
+          "inclusive_mean_ms": 37.7801151
+        },
+        "vj0/output_tensor_to_numpy": {
+          "count": 20,
+          "inclusive_total_ms": 3.918109,
+          "inclusive_mean_ms": 0.19590545
+        }
+      },
+      "compiled_graph_call_counts": {
+        "## Call CompiledFxGraph fuctmyympltaez7ba46kc6ch3a3qd4egieo4d5xkxraveykrlze7 ##": 20,
+        "## Call CompiledFxGraph f7ubkeg575ftvndnywlv3x23hakisb3potsntd46qgx2oqfye4ku ##": 20,
+        "## Call CompiledFxGraph fxoipytk7km3o7nonhgjvgvjtlit7ijwz4ulal7tzdgy4oyi2xgy ##": 20
+      },
+      "copy_activity": {
+        "Memcpy DtoH (Device -> Pinned)": {
+          "count": 100,
+          "duration_us": 45.66400000000001
+        },
+        "Memcpy DtoH (Device -> Pageable)": {
+          "count": 20,
+          "duration_us": 3756.79
+        },
+        "Memcpy HtoD (Pageable -> Device)": {
+          "count": 80,
+          "duration_us": 1818.5990000000008
+        },
+        "Memcpy DtoD (Device -> Device)": {
+          "count": 120,
+          "duration_us": 146.40099999999995
+        },
+        "Memset (Unknown)": {
+          "count": 500,
+          "duration_us": 275.4580000000003
+        }
+      },
+      "cuda_runtime_counts": {
+        "cudaStreamSynchronize": 200,
+        "cudaGraphLaunch": 60,
+        "cudaDeviceSynchronize": 21
+      },
+      "top_exclusive_host_operators": [
+        {
+          "name": "cudaStreamSynchronize",
+          "count": 200,
+          "self_host_total_ms": 970.1374749999993,
+          "self_host_ms_per_frame": 48.50687374999996
+        },
+        {
+          "name": "cudaMemcpyAsync",
+          "count": 320,
+          "self_host_total_ms": 355.0862510000005,
+          "self_host_ms_per_frame": 17.754312550000027
+        },
+        {
+          "name": "vj0/generate_and_decode",
+          "count": 20,
+          "self_host_total_ms": 114.91147400000027,
+          "self_host_ms_per_frame": 5.745573700000013
+        },
+        {
+          "name": "cudaGraphLaunch",
+          "count": 60,
+          "self_host_total_ms": 27.62805900000064,
+          "self_host_ms_per_frame": 1.381402950000032
+        },
+        {
+          "name": "TorchDynamo Cache Lookup",
+          "count": 60,
+          "self_host_total_ms": 25.894288000000525,
+          "self_host_ms_per_frame": 1.2947144000000261
+        },
+        {
+          "name": "vj0/vae_encode",
+          "count": 20,
+          "self_host_total_ms": 17.010768000001008,
+          "self_host_ms_per_frame": 0.8505384000000504
+        },
+        {
+          "name": "vj0/input_jpeg_decode",
+          "count": 20,
+          "self_host_total_ms": 15.90140399999998,
+          "self_host_ms_per_frame": 0.7950701999999991
+        },
+        {
+          "name": "vj0/output_jpeg_encode",
+          "count": 20,
+          "self_host_total_ms": 15.190186000000132,
+          "self_host_ms_per_frame": 0.7595093000000066
+        },
+        {
+          "name": "Torch-Compiled Region: 1/2",
+          "count": 20,
+          "self_host_total_ms": 13.179167000000866,
+          "self_host_ms_per_frame": 0.6589583500000433
+        },
+        {
+          "name": "aten::copy_",
+          "count": 560,
+          "self_host_total_ms": 9.94645000000119,
+          "self_host_ms_per_frame": 0.4973225000000595
+        },
+        {
+          "name": "cudaLaunchKernel",
+          "count": 1120,
+          "self_host_total_ms": 4.820020999999508,
+          "self_host_ms_per_frame": 0.24100104999997538
+        },
+        {
+          "name": "aten::cudnn_convolution",
+          "count": 40,
+          "self_host_total_ms": 4.375643000000926,
+          "self_host_ms_per_frame": 0.2187821500000463
+        },
+        {
+          "name": "Torch-Compiled Region: 0/2",
+          "count": 20,
+          "self_host_total_ms": 2.802751999999659,
+          "self_host_ms_per_frame": 0.14013759999998293
+        },
+        {
+          "name": "Torch-Compiled Region: 2/2",
+          "count": 20,
+          "self_host_total_ms": 2.282991999999358,
+          "self_host_ms_per_frame": 0.1141495999999679
+        },
+        {
+          "name": "## Call CompiledFxGraph fuctmyympltaez7ba46kc6ch3a3qd4egieo4d5xkxraveykrlze7 ##",
+          "count": 20,
+          "self_host_total_ms": 2.207073999999835,
+          "self_host_ms_per_frame": 0.11035369999999176
+        },
+        {
+          "name": "## Call CompiledFxGraph f7ubkeg575ftvndnywlv3x23hakisb3potsntd46qgx2oqfye4ku ##",
+          "count": 20,
+          "self_host_total_ms": 2.0426949999993087,
+          "self_host_ms_per_frame": 0.10213474999996543
+        },
+        {
+          "name": "Pregraph bytecode",
+          "count": 60,
+          "self_host_total_ms": 1.4584869999997208,
+          "self_host_ms_per_frame": 0.07292434999998604
+        },
+        {
+          "name": "## Call CompiledFxGraph fxoipytk7km3o7nonhgjvgvjtlit7ijwz4ulal7tzdgy4oyi2xgy ##",
+          "count": 20,
+          "self_host_total_ms": 1.4397620000004827,
+          "self_host_ms_per_frame": 0.07198810000002413
+        },
+        {
+          "name": "aten::add",
+          "count": 220,
+          "self_host_total_ms": 1.2547160000009199,
+          "self_host_ms_per_frame": 0.062735800000046
+        },
+        {
+          "name": "aten::mul",
+          "count": 200,
+          "self_host_total_ms": 1.2439770000003127,
+          "self_host_ms_per_frame": 0.06219885000001563
+        },
+        {
+          "name": "aten::cat",
+          "count": 120,
+          "self_host_total_ms": 1.0163779999991667,
+          "self_host_ms_per_frame": 0.05081889999995833
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 280,
+          "self_host_total_ms": 0.8953170000000819,
+          "self_host_ms_per_frame": 0.04476585000000409
+        },
+        {
+          "name": "aten::as_strided",
+          "count": 1320,
+          "self_host_total_ms": 0.8313950000018194,
+          "self_host_ms_per_frame": 0.04156975000009097
+        },
+        {
+          "name": "vj0/frame",
+          "count": 20,
+          "self_host_total_ms": 0.7414710000011255,
+          "self_host_ms_per_frame": 0.03707355000005628
+        },
+        {
+          "name": "aten::empty",
+          "count": 460,
+          "self_host_total_ms": 0.7281059999980889,
+          "self_host_ms_per_frame": 0.036405299999904446
+        },
+        {
+          "name": "vj0/transformer",
+          "count": 20,
+          "self_host_total_ms": 0.7052239999993944,
+          "self_host_ms_per_frame": 0.035261199999969725
+        },
+        {
+          "name": "vj0/completion_sync",
+          "count": 20,
+          "self_host_total_ms": 0.6630150000004651,
+          "self_host_ms_per_frame": 0.03315075000002325
+        },
+        {
+          "name": "vj0/vae_decoder",
+          "count": 20,
+          "self_host_total_ms": 0.6139949999993405,
+          "self_host_ms_per_frame": 0.030699749999967024
+        },
+        {
+          "name": "aten::_foreach_copy_",
+          "count": 60,
+          "self_host_total_ms": 0.4939739999995163,
+          "self_host_ms_per_frame": 0.024698699999975815
+        },
+        {
+          "name": "vj0/output_tensor_to_numpy",
+          "count": 20,
+          "self_host_total_ms": 0.4758319999994783,
+          "self_host_ms_per_frame": 0.023791599999973913
+        }
+      ],
+      "compilation_event_names": [],
+      "interpretation_limits": [
+        "CPU user_annotation and GPU gpu_user_annotation ranges are separated; both are inclusive/nested and must not be added across parent/child ranges or devices.",
+        "Kernel shares use only kernel events, never compiled-wrapper rows. Category matching is conservative name-based attribution.",
+        "Exclusive host operator durations are wall time, not per-thread CPU cycles. Synchronization and pageable transfer calls can wait for earlier GPU work; they do not establish the cause of CPU quota throttling.",
+        "The host output-conversion range includes waiting for the asynchronous decoder. Use GPU copy activity and the separate GPU annotation to assess the actual conversion/copy work.",
+        "GPU kernel/copy durations are not end-to-end latency or throughput. Profiling is untimed diagnostic evidence."
+      ]
+    }
+  },
+  "audit_notes": [
+    "The initial checker counted both CPU user_annotation and GPU gpu_user_annotation records as host ranges. The corrected checker separates these categories: each trace has 20 CPU transformer calls and 20 corresponding GPU annotations. Measured data was not changed."
+  ],
+  "quality_scope": {
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "alpha": 0.1,
+    "seed": 42,
+    "phases": 3,
+    "steps": [
+      2,
+      3,
+      4
+    ],
+    "sizes": [
+      [
+        512,
+        288
+      ],
+      [
+        768,
+        448
+      ],
+      [
+        1024,
+        576
+      ]
+    ]
+  },
+  "measurement_scope": "Offline JPEG85 input/JPEG80 output, VAE/inference/output conversion and CUDA completion; excludes IPC, WebRTC, browser and physical display.",
+  "quality_fixtures": 27,
+  "same_tensor_cast_checks": 54
+}

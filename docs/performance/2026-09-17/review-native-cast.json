@@ -1,0 +1,526 @@
+{
+  "status": "passed_with_limitations",
+  "audit_utc": "2026-09-17T23:42:10.773015+00:00",
+  "failures": [],
+  "run_started_utc": "2026-09-17T20:48:12.916850+00:00",
+  "run_finished_utc": "2026-09-17T20:50:01.811646+00:00",
+  "measurement_scope": "input JPEG85 decode, VAE, generation/decode, output JPEG80, CUDA sync; no IPC/network/browser",
+  "record_counts": {
+    "native-quality": 3,
+    "native-cast-measured": 6,
+    "thread-quality": 18
+  },
+  "timed_frames": 900,
+  "native_threads": 128,
+  "records_match_jsonl_and_projected_stdout": true,
+  "source_checks": [
+    {
+      "file": "bench_thread_diagnostic.py",
+      "archive": "terminal-native-cast-diagnostic/sources/bench_thread_diagnostic.py.gz",
+      "sha256": "84ec8366ba5f9047c8145c5c9219cb5621c37f448e325e481df0d6a18718fdf6",
+      "provenance": "Hash recorded in diagnostic manifest"
+    },
+    {
+      "file": "inference_server.py",
+      "archive": "terminal-native-cast-diagnostic/sources/inference_server.py.gz",
+      "sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+      "provenance": "Hash recorded in diagnostic manifest"
+    },
+    {
+      "file": "gpu_output_cast.py",
+      "archive": "terminal-native-cast-diagnostic/sources/gpu_output_cast.py.gz",
+      "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+      "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+    },
+    {
+      "file": "bench_terminal_followup.py",
+      "archive": "terminal-native-cast-diagnostic/sources/bench_terminal_followup.py.gz",
+      "sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4",
+      "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+    },
+    {
+      "file": "metrics.py",
+      "archive": "terminal-native-cast-diagnostic/sources/metrics.py.gz",
+      "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+      "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+    },
+    {
+      "file": "terminal_noop.py",
+      "archive": "terminal-native-cast-diagnostic/sources/terminal_noop.py.gz",
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+    }
+  ],
+  "runtime_log_checks": {
+    "torch_cuda_gpu": true,
+    "model": true,
+    "transformer_fp8": true,
+    "vae_linear_fp8": true,
+    "compile_reduce_overhead": true
+  },
+  "native_quality": {
+    "three_phase_three_variant_pixel_and_jpeg_gate_passed": true,
+    "global_rng_calls_checked": 9,
+    "same_CUDA_tensor_cast_comparisons": 3,
+    "all_cast_comparisons_exact_and_finite": true,
+    "PNG_triplets": [
+      {
+        "phase": 0,
+        "three_pngs_byte_equal": true,
+        "sha256": "345f4078e77641d34084420ad35cc35e688923bc6de8d2a841f64149752e0ed1"
+      },
+      {
+        "phase": 1,
+        "three_pngs_byte_equal": true,
+        "sha256": "be8080d194ba98b6991822533efc8f5fe43dcd6e4e4a5d0c39973ed792efdbfe"
+      },
+      {
+        "phase": 2,
+        "three_pngs_byte_equal": true,
+        "sha256": "5623e88f8bf28d9202437c1328db99597475ac3df9d3d2cb3a6f21e27472ed4d"
+      }
+    ],
+    "input_fixture_hashes_reconstructed": true
+  },
+  "timing": {
+    "cpu": {
+      "median_fps": 33.280814191732595,
+      "fps_runs": [
+        32.599029629852566,
+        33.280814191732595,
+        33.86011588138629
+      ],
+      "median_trial_p95_ms": 54.63155065663159,
+      "pooled_p95_ms": 54.64303425978869,
+      "pooled_p99_ms": 61.6050088964402,
+      "max_frame_ms": 77.03263219445944,
+      "frames_over40ms": 91,
+      "throttled_periods": 136,
+      "throttled_periods_per_trial": [
+        46,
+        45,
+        45
+      ],
+      "cgroup_throttled_seconds": 207.47807306099998
+    },
+    "gpu": {
+      "median_fps": 45.11181156975449,
+      "fps_runs": [
+        45.17820724246405,
+        45.11181156975449,
+        44.97827712796532
+      ],
+      "median_trial_p95_ms": 22.444167034700513,
+      "pooled_p95_ms": 22.444928949698806,
+      "pooled_p99_ms": 25.47293403651565,
+      "max_frame_ms": 40.34059680998325,
+      "frames_over40ms": 1,
+      "throttled_periods": 35,
+      "throttled_periods_per_trial": [
+        0,
+        22,
+        13
+      ],
+      "cgroup_throttled_seconds": 7.695460942
+    },
+    "gain_percent": 35.54900222651665
+  },
+  "timing_integrity": {
+    "all_raw_distributions_and_FPS_recomputed": true,
+    "all_CPU_cgroup_deltas_recomputed": true,
+    "source_ensures_zero_reference_cast_comparisons_during_timing": true,
+    "source_ensures_exactly_one_selected_GPU_cast_per_GPU_timed_frame": true,
+    "source_ensures_one_terminal_skip_per_timed_frame": true,
+    "timed_pairs_precede_any_thread_change": true
+  },
+  "thread_diagnosis": {
+    "retained_npz_files": 18,
+    "retained_arrays": 108,
+    "reference_anchor_cases": 3,
+    "nontrivial_reference_comparisons": 15,
+    "all_recorded_stage_metrics_recomputed": true,
+    "all_27_PNG_files_decoded_and_checked": true,
+    "first_changed_retained_stage_at_four_threads": "encoded VAE-derived latents; does not isolate encoder versus subsequent latent patching/normalization or a specific kernel",
+    "fixed_seed_noise_unchanged": true,
+    "native_return_all_stages_exact": true,
+    "four_thread_repeat_differences_identical": true,
+    "cases": [
+      {
+        "label": "native-first",
+        "repeat": 0,
+        "phase": 0,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-first",
+        "repeat": 0,
+        "phase": 1,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-first",
+        "repeat": 0,
+        "phase": 2,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-first",
+        "repeat": 1,
+        "phase": 0,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-first",
+        "repeat": 1,
+        "phase": 1,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-first",
+        "repeat": 1,
+        "phase": 2,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 0,
+        "phase": 0,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 59.305130570023145,
+          "max_abs": 87.0,
+          "changed_fraction": 0.5828292281539352,
+          "psnr_255_db": 30.39988094453633
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.0177252818266425e-08,
+          "max_abs": 0.0078125,
+          "changed_fraction": 0.0007595486111111111,
+          "psnr_255_db": 128.05449797688402
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 0,
+        "phase": 1,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 57.00767234519676,
+          "max_abs": 94.0,
+          "changed_fraction": 0.5868959780092593,
+          "psnr_255_db": 30.571470519857584
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.4209064147507888e-08,
+          "max_abs": 0.0078125,
+          "changed_fraction": 0.002048068576388889,
+          "psnr_255_db": 126.60514885963485
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 0,
+        "phase": 2,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 73.92360432942708,
+          "max_abs": 95.0,
+          "changed_fraction": 0.5920161494502315,
+          "psnr_255_db": 29.44297227030596
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.6952526493696496e-08,
+          "max_abs": 0.015625,
+          "changed_fraction": 0.001071506076388889,
+          "psnr_255_db": 125.83845929095537
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 1,
+        "phase": 0,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 59.305130570023145,
+          "max_abs": 87.0,
+          "changed_fraction": 0.5828292281539352,
+          "psnr_255_db": 30.39988094453633
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.0177252818266425e-08,
+          "max_abs": 0.0078125,
+          "changed_fraction": 0.0007595486111111111,
+          "psnr_255_db": 128.05449797688402
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 1,
+        "phase": 1,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 57.00767234519676,
+          "max_abs": 94.0,
+          "changed_fraction": 0.5868959780092593,
+          "psnr_255_db": 30.571470519857584
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.4209064147507888e-08,
+          "max_abs": 0.0078125,
+          "changed_fraction": 0.002048068576388889,
+          "psnr_255_db": 126.60514885963485
+        }
+      },
+      {
+        "label": "four",
+        "repeat": 1,
+        "phase": 2,
+        "first_changed_retained_stage": "encoded",
+        "pixels": {
+          "exact": false,
+          "mse": 73.92360432942708,
+          "max_abs": 95.0,
+          "changed_fraction": 0.5920161494502315,
+          "psnr_255_db": 29.44297227030596
+        },
+        "encoded": {
+          "exact": false,
+          "mse": 1.6952526493696496e-08,
+          "max_abs": 0.015625,
+          "changed_fraction": 0.001071506076388889,
+          "psnr_255_db": 125.83845929095537
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 0,
+        "phase": 0,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 0,
+        "phase": 1,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 0,
+        "phase": 2,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 1,
+        "phase": 0,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 1,
+        "phase": 1,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      },
+      {
+        "label": "native-return",
+        "repeat": 1,
+        "phase": 2,
+        "first_changed_retained_stage": null,
+        "pixels": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        },
+        "encoded": {
+          "exact": true,
+          "mse": 0.0,
+          "max_abs": 0.0,
+          "changed_fraction": 0.0,
+          "psnr_255_db": null
+        }
+      }
+    ]
+  },
+  "acceptance": {
+    "native128_terminal_skip_plus_gpu_output_cast": "passes tested offline exact-quality gate; actual app/WebRTC remains pending",
+    "lower_thread_budget": "rejected as a quality-preserving optimization; four-thread encoded latents and output pixels change",
+    "entire_project_work": "ongoing"
+  },
+  "archive": "terminal-native-cast-diagnostic/archive.json",
+  "limitations": [
+    "The native cast A/B measures the cast increment with terminal skipping enabled in both timing arms. Do not label 33.28\u219245.11 FPS as original baseline\u2192all optimizations; the untouched baseline was quality-checked here but not timed in this diagnostic.",
+    "This diagnostic covers only 512\u00d7288, two steps, alpha0.1, seed42, one prompt, three quality phases and three150-frame timing repeats per cast. It does not establish higher-resolution or arbitrary-input equivalence.",
+    "The retained quality PNGs confirm pixel equality; JPEG byte equality and RNG checks are runtime records/source gates because JPEG bytes and raw RNG states were not separately retained.",
+    "Three native-first r0 diagnostic rows define their own per-phase reference; they are reference anchors, not independent repeatability tests. Native-first r1 and native-return provide independent repeat/return comparisons.",
+    "Throttling decreases but does not disappear: GPU cast has 35 throttled cgroup periods across three trials versus136 for CPU cast; only the first GPU trial has zero. Cgroup throttle counters can aggregate CPUs and other processes, and are not the fraction of time this process was stalled.",
+    "The first retained difference at four threads occurs in VAE-derived encoded latents. Fixed noise and return-to128 exactness support configuration-dependent numerical differences; they do not identify a particular compiled kernel or prove a hardware/compiler defect.",
+    "The diagnostic pins its own source and original worker hashes. It does not record separate imported-helper hashes/package versions/model revision; audit-time helper copies are archived with that limitation. Torch/CUDA/GPU, FP8 application and reduce-overhead compilation are confirmed by stdout.",
+    "Warnings retained in stdout include offline cached model loading, TorchAO serialized Tensor import warning followed by successful dynamic FP8 application, deprecated HF symlink flag, terminal-zero scheduler division warning, and Dynamo cache-wrapper tracing warnings. No traceback appears."
+  ]
+}

@@ -1,0 +1,106 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                vj0/generate_and_decode         0.00%       0.000us         0.00%       0.000us       0.000us        1.181s        84.72%        1.181s      59.033ms            20  
+                                        vj0/transformer         0.00%       0.000us         0.00%       0.000us       0.000us     755.602ms        54.22%     755.602ms      37.780ms            20  
+## Call CompiledFxGraph f7ubkeg575ftvndnywlv3x23haki...         0.13%       2.043ms         1.02%      16.411ms     820.544us     751.544ms        53.93%     751.654ms      37.583ms            20  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128...         0.00%       0.000us         0.00%       0.000us       0.000us     455.745ms        32.70%     455.745ms     350.573us          1300  
+                                        vj0/vae_decoder         0.00%       0.000us         0.00%       0.000us       0.000us     355.503ms        25.51%     355.503ms      17.775ms            20  
+## Call CompiledFxGraph fxoipytk7km3o7nonhgjvgvjtlit...         0.09%       1.440ms         0.54%       8.628ms     431.407us     348.431ms        25.00%     348.570ms      17.428ms            20  
+                                         vj0/vae_encode         0.00%       0.000us         0.00%       0.000us       0.000us     305.979ms        21.96%     305.979ms      15.299ms            20  
+## Call CompiledFxGraph fuctmyympltaez7ba46kc6ch3a3q...         0.14%       2.207ms         0.61%       9.794ms     489.690us     285.201ms        20.47%     285.347ms      14.267ms            20  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us     256.925ms        18.44%     256.925ms     256.925us          1000  
+void pytorch_flash::flash_fwd_kernel<Flash_fwd_kerne...         0.00%       0.000us         0.00%       0.000us       0.000us     130.854ms         9.39%     130.854ms     261.707us           500  
+fmha_cutlassF_bf16_aligned_32x128_gmem_sm80(PyTorchM...         0.00%       0.000us         0.00%       0.000us       0.000us      68.151ms         4.89%      68.151ms       1.704ms            40  
+void cutlass__5x_cudnn::Kernel<cutlass_tensorop_bf16...         0.00%       0.000us         0.00%       0.000us       0.000us      64.343ms         4.62%      64.343ms     402.146us           160  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128...         0.00%       0.000us         0.00%       0.000us       0.000us      34.130ms         2.45%      34.130ms     341.305us           100  
+triton_per_fused_abs_amax_cat_mul_permute_silu_split...         0.00%       0.000us         0.00%       0.000us       0.000us      28.414ms         2.04%      28.414ms      71.035us           400  
+       triton_per_fused_convolution_native_group_norm_1         0.00%       0.000us         0.00%       0.000us       0.000us      25.979ms         1.86%      25.979ms     432.981us            60  
+            triton_per_fused_clone_native_group_norm_47         0.00%       0.000us         0.00%       0.000us       0.000us      19.318ms         1.39%      19.318ms     965.876us            20  
+triton_per_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us      16.755ms         1.20%      16.755ms     837.744us            20  
+triton_red_fused__fused_rms_norm__scaled_dot_product...         0.00%       0.000us         0.00%       0.000us       0.000us      16.439ms         1.18%      16.439ms      41.098us           400  
+triton_poi_fused__scaled_mm__to_copy_cat_clamp_div_m...         0.00%       0.000us         0.00%       0.000us       0.000us      15.999ms         1.15%      15.999ms      39.997us           400  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x...         0.00%       0.000us         0.00%       0.000us       0.000us      11.671ms         0.84%      11.671ms      23.341us           500  
+triton_per_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us      10.625ms         0.76%      10.625ms     531.248us            20  
+triton_per_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us       9.859ms         0.71%       9.859ms     492.929us            20  
+triton_poi_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       8.348ms         0.60%       8.348ms      46.379us           180  
+triton_poi_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us       7.799ms         0.56%       7.799ms     389.975us            20  
+triton_per_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us       7.051ms         0.51%       7.051ms     352.528us            20  
+       triton_red_fused_abs_amax_mul_silu_split_view_27         0.00%       0.000us         0.00%       0.000us       0.000us       6.273ms         0.45%       6.273ms      62.732us           100  
+                                            aten::copy_         0.62%       9.946ms        38.31%     616.111ms       1.100ms       6.260ms         0.45%       8.264ms      14.758us           560  
+sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize64x...         0.00%       0.000us         0.00%       0.000us       0.000us       6.090ms         0.44%       6.090ms      23.425us           260  
+triton_per_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       5.873ms         0.42%       5.873ms      97.882us            60  
+triton_poi_fused__to_copy__unsafe_index_add_arange_c...         0.00%       0.000us         0.00%       0.000us       0.000us       5.733ms         0.41%       5.733ms     286.627us            20  
+           triton_poi_fused_add_convolution_div_silu_56         0.00%       0.000us         0.00%       0.000us       0.000us       5.709ms         0.41%       5.709ms     285.469us            20  
+triton_poi_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       5.377ms         0.39%       5.377ms      89.619us            60  
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_...         0.00%       0.000us         0.00%       0.000us       0.000us       5.330ms         0.38%       5.330ms     266.523us            20  
+void convolve_common_engine_float_NHWC<__nv_bfloat16...         0.00%       0.000us         0.00%       0.000us       0.000us       5.326ms         0.38%       5.326ms     266.277us            20  
+triton_poi_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us       4.967ms         0.36%       4.967ms     248.373us            20  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       4.856ms         0.35%       4.856ms      40.464us           120  
+       triton_poi_fused_clone_native_group_norm_silu_49         0.00%       0.000us         0.00%       0.000us       0.000us       4.608ms         0.33%       4.608ms     230.387us            20  
+triton_poi_fused__to_copy_arange_cat_clone_cos_div_e...         0.00%       0.000us         0.00%       0.000us       0.000us       3.963ms         0.28%       3.963ms     198.161us            20  
+                             vj0/output_tensor_to_numpy         0.00%       0.000us         0.00%       0.000us       0.000us       3.918ms         0.28%       3.918ms     195.903us            20  
+triton_poi_fused__to_copy__unsafe_index_add_arange_c...         0.00%       0.000us         0.00%       0.000us       0.000us       3.819ms         0.27%       3.819ms     190.927us            20  
+                       Memcpy DtoH (Device -> Pageable)         0.00%       0.000us         0.00%       0.000us       0.000us       3.757ms         0.27%       3.757ms     187.839us            20  
+triton_poi_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us       3.718ms         0.27%       3.718ms     185.913us            20  
+triton_per_fused__to_copy_clone_convolution_native_g...         0.00%       0.000us         0.00%       0.000us       0.000us       3.661ms         0.26%       3.661ms      45.766us            80  
+triton_poi_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us       3.532ms         0.25%       3.532ms     176.614us            20  
+triton_poi_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us       3.522ms         0.25%       3.522ms     176.108us            20  
+            triton_per_fused_clone_native_group_norm_33         0.00%       0.000us         0.00%       0.000us       0.000us       3.496ms         0.25%       3.496ms     174.799us            20  
+triton_per_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       3.331ms         0.24%       3.331ms      83.264us            40  
+triton_per_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       3.265ms         0.23%       3.265ms      81.634us            40  
+triton_per_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us       3.223ms         0.23%       3.223ms     161.174us            20  
+sm80_xmma_fprop_implicit_gemm_indexed_bf16bf16_bf16f...         0.00%       0.000us         0.00%       0.000us       0.000us       3.193ms         0.23%       3.193ms     159.657us            20  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       3.135ms         0.22%       3.135ms      26.124us           120  
+triton_poi_fused__scaled_mm__to_copy_clamp_div_t_vie...         0.00%       0.000us         0.00%       0.000us       0.000us       3.108ms         0.22%       3.108ms       7.770us           400  
+triton_per_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       3.099ms         0.22%       3.099ms      51.656us            60  
+                           triton_red_fused_mm_silu_t_3         0.00%       0.000us         0.00%       0.000us       0.000us       2.982ms         0.21%       2.982ms     149.121us            20  
+triton_red_fused_add_mm_mul_native_layer_norm_split_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.662ms         0.19%       2.662ms      19.012us           140  
+triton_poi_fused__scaled_mm__to_copy_clamp_div_mul_s...         0.00%       0.000us         0.00%       0.000us       0.000us       2.571ms         0.18%       2.571ms      25.711us           100  
+triton_poi_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.535ms         0.18%       2.535ms      63.371us            40  
+triton_red_fused__unsafe_view_add_mm_mul_native_laye...         0.00%       0.000us         0.00%       0.000us       0.000us       2.511ms         0.18%       2.511ms      31.387us            80  
+triton_per_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us       2.348ms         0.17%       2.348ms     117.406us            20  
+            triton_per_fused_clone_native_group_norm_57         0.00%       0.000us         0.00%       0.000us       0.000us       2.311ms         0.17%       2.311ms     115.574us            20  
+triton_red_fused__unsafe_view_add_mm_mul_native_laye...         0.00%       0.000us         0.00%       0.000us       0.000us       2.263ms         0.16%       2.263ms      22.634us           100  
+           triton_poi_fused_add_convolution_div_silu_42         0.00%       0.000us         0.00%       0.000us       0.000us       2.250ms         0.16%       2.250ms     112.497us            20  
+triton_poi_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.242ms         0.16%       2.242ms      37.369us            60  
+       triton_per_fused_convolution_native_group_norm_2         0.00%       0.000us         0.00%       0.000us       0.000us       2.181ms         0.16%       2.181ms       6.414us           340  
+triton_per_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us       2.124ms         0.15%       2.124ms      21.240us           100  
+                    triton_poi_fused_convolution_silu_6         0.00%       0.000us         0.00%       0.000us       0.000us       2.105ms         0.15%       2.105ms       4.576us           460  
+                       Memcpy HtoD (Pageable -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us       1.819ms         0.13%       1.819ms      22.732us            80  
+triton_per_fused__to_copy_add_clone_convolution_div_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.819ms         0.13%       1.819ms      90.927us            20  
+triton_poi_fused__to_copy__unsafe_index_add_arange_c...         0.00%       0.000us         0.00%       0.000us       0.000us       1.817ms         0.13%       1.817ms      90.868us            20  
+           triton_poi_fused__fused_rms_norm_cat_view_14         0.00%       0.000us         0.00%       0.000us       0.000us       1.778ms         0.13%       1.778ms       8.891us           200  
+       triton_poi_fused_clone_native_group_norm_silu_35         0.00%       0.000us         0.00%       0.000us       0.000us       1.718ms         0.12%       1.718ms      85.908us            20  
+triton_poi_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us       1.717ms         0.12%       1.717ms      85.860us            20  
+                   triton_poi_fused_convolution_silu_27         0.00%       0.000us         0.00%       0.000us       0.000us       1.664ms         0.12%       1.664ms       6.934us           240  
+       triton_poi_fused_clone_native_group_norm_silu_58         0.00%       0.000us         0.00%       0.000us       0.000us       1.588ms         0.11%       1.588ms      79.391us            20  
+triton_poi_fused__to_copy_clone_convolution_native_g...         0.00%       0.000us         0.00%       0.000us       0.000us       1.498ms         0.11%       1.498ms      18.722us            80  
+triton_poi_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us       1.444ms         0.10%       1.444ms      72.184us            20  
+triton_poi_fused__scaled_dot_product_flash_attention...         0.00%       0.000us         0.00%       0.000us       0.000us       1.431ms         0.10%       1.431ms      14.313us           100  
+triton_poi_fused__to_copy__unsafe_index_add_arange_c...         0.00%       0.000us         0.00%       0.000us       0.000us       1.359ms         0.10%       1.359ms      67.952us            20  
+                           triton_red_fused_abs_amax_37         0.00%       0.000us         0.00%       0.000us       0.000us       1.350ms         0.10%       1.350ms       3.374us           400  
+triton_per_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us       1.204ms         0.09%       1.204ms      60.178us            20  
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.099ms         0.08%       1.099ms      54.962us            20  
+triton_poi_fused_convolution_native_group_norm_silu_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.019ms         0.07%       1.019ms      25.471us            40  
+triton_poi_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us     968.546us         0.07%     968.546us      48.427us            20  
+triton_per_fused_add_clone_convolution_div_native_gr...         0.00%       0.000us         0.00%       0.000us       0.000us     965.798us         0.07%     965.798us      24.145us            40  
+                          triton_red_fused_mm_silu_t_35         0.00%       0.000us         0.00%       0.000us       0.000us     935.396us         0.07%     935.396us      46.770us            20  
+            triton_per_fused_clone_native_group_norm_43         0.00%       0.000us         0.00%       0.000us       0.000us     921.002us         0.07%     921.002us      46.050us            20  
+            triton_per_fused_clone_native_group_norm_29         0.00%       0.000us         0.00%       0.000us       0.000us     893.381us         0.06%     893.381us      44.669us            20  
+               triton_per_fused__fused_rms_norm_view_13         0.00%       0.000us         0.00%       0.000us       0.000us     878.149us         0.06%     878.149us       4.391us           200  
+            triton_per_fused_clone_native_group_norm_34         0.00%       0.000us         0.00%       0.000us       0.000us     855.876us         0.06%     855.876us       3.566us           240  
+triton_per_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us     819.300us         0.06%     819.300us      40.965us            20  
+triton_poi_fused__scaled_mm__to_copy_clamp_div_permu...         0.00%       0.000us         0.00%       0.000us       0.000us     809.440us         0.06%     809.440us       8.094us           100  
+triton_poi_fused__scaled_mm__to_copy_clamp_div_t_vie...         0.00%       0.000us         0.00%       0.000us       0.000us     805.667us         0.06%     805.667us       8.057us           100  
+triton_per_fused_add_convolution_div_native_group_no...         0.00%       0.000us         0.00%       0.000us       0.000us     800.612us         0.06%     800.612us      40.031us            20  
+triton_poi_fused_add_constant_pad_nd_convolution_div...         0.00%       0.000us         0.00%       0.000us       0.000us     700.772us         0.05%     700.772us       7.008us           100  
+       triton_per_fused_convolution_native_group_norm_4         0.00%       0.000us         0.00%       0.000us       0.000us     699.121us         0.05%     699.121us       1.092us           640  
+                           triton_red_fused_abs_amax_22         0.00%       0.000us         0.00%       0.000us       0.000us     641.381us         0.05%     641.381us       6.414us           100  
+                   triton_poi_fused_convolution_silu_39         0.00%       0.000us         0.00%       0.000us       0.000us     623.647us         0.04%     623.647us       5.197us           120  
+                          triton_red_fused_mm_silu_t_48         0.00%       0.000us         0.00%       0.000us       0.000us     617.155us         0.04%     617.155us      30.858us            20  
+       triton_poi_fused_clone_native_group_norm_silu_44         0.00%       0.000us         0.00%       0.000us       0.000us     616.449us         0.04%     616.449us      30.822us            20  
+triton_red_fused_add_cat_mm_mul_native_layer_norm_sp...         0.00%       0.000us         0.00%       0.000us       0.000us     599.106us         0.04%     599.106us      29.955us            20  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 1.608s
+Self CUDA time total: 1.394s

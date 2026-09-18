@@ -1,0 +1,47 @@
+[
+  {
+    "original": "sources.json",
+    "archive": "sources.json.gz",
+    "sha256": "c199a3b430dc4a74f05a046c478f29ff68c92f52965879a3acd55b8e254fa4fa"
+  },
+  {
+    "original": "metrics.py",
+    "archive": "metrics.py.gz",
+    "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac"
+  },
+  {
+    "original": "runner.py",
+    "archive": "runner.py.gz",
+    "sha256": "4650f05212fbc9307ecb754475421d9c895492a4bcf77c9f785188cca5efabad"
+  },
+  {
+    "original": "bench_terminal_noop.py",
+    "archive": "bench_terminal_noop.py.gz",
+    "sha256": "669d9614e57f2b2f21d2ae74b66de6513984cd04dc0c15b2d28d0b0894972cc4"
+  },
+  {
+    "original": "bench_terminal_followup.py",
+    "archive": "bench_terminal_followup.py.gz",
+    "sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4"
+  },
+  {
+    "original": "gpu_output_cast.py",
+    "archive": "gpu_output_cast.py.gz",
+    "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+  },
+  {
+    "original": "generated_benchmark.py",
+    "archive": "generated_benchmark.py.gz",
+    "sha256": "dba050794420bb9f445a4b7bcb1e5086e5309ae8c962bc0877204a2e1e14dfb6"
+  },
+  {
+    "original": "inference_server.py",
+    "archive": "inference_server.py.gz",
+    "sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9"
+  },
+  {
+    "original": "terminal_noop.py",
+    "archive": "terminal_noop.py.gz",
+    "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+  }
+]

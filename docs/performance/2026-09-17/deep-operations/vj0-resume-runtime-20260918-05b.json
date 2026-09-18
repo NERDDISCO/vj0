@@ -1,0 +1,23 @@
+{
+  "run_tag": "20260918-05b",
+  "pod_id": "0pxb4bss2jmbhg",
+  "ssh": {
+    "host": "213.192.2.81",
+    "port": 40032,
+    "key": "/Users/nerddisco/.runpod/ssh/RunPod-Key-Go",
+    "known_hosts": "/tmp/vj0-perf-known-hosts"
+  },
+  "original_node_pid": 500,
+  "live_pgid": 1701,
+  "live_directory": "/workspace/vj0-deep-live-20260918-05b",
+  "formal_directory": "/tmp/vj0-deep-app-wan-20260918-05b",
+  "targets_directory": "/tmp/vj0-deep-app-targets-20260918-05b",
+  "formal_log": "/tmp/vj0-deep-app-wan-20260918-05b.log",
+  "app_origin": "http://127.0.0.1:18766",
+  "app_server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+  "artifact_root": "/tmp/vj0-terminal-results-20260917",
+  "post_frozen_directory": "/tmp/vj0-terminal-results-20260917/post-live-frozen-sources",
+  "expected_app_sha": "80f5bb5a7020bd0bd6d8dc73a32c01e4084583c28de77b8c4a52fec764fbfa9c",
+  "expected_probe_sha": "791c4a43f7b7f93bc59efa76bf8506afe813624926f62dcef48387bb339ab685",
+  "expected_post_sha": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613"
+}

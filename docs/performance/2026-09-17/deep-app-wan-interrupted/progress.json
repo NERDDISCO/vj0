@@ -1,0 +1,191 @@
+[
+  {
+    "name": "before-512-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18767",
+      "variant": "combined",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "before-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 60,
+      "outputCast": "cpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/before-512-r0/summary.json"
+  },
+  {
+    "name": "compute-capture-512-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "compute-capture-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-512-r0/summary.json"
+  },
+  {
+    "name": "latest-input-512-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": true,
+      "name": "latest-input-512-r0",
+      "width": 512,
+      "height": 288,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/latest-input-512-r0/summary.json"
+  },
+  {
+    "name": "before-768-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18767",
+      "variant": "combined",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "before-768-r0",
+      "width": 768,
+      "height": 448,
+      "seconds": 60,
+      "outputCast": "cpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/before-768-r0/summary.json"
+  },
+  {
+    "name": "compute-capture-768-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "compute-capture-768-r0",
+      "width": 768,
+      "height": 448,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-768-r0/summary.json"
+  },
+  {
+    "name": "latest-input-768-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": true,
+      "name": "latest-input-768-r0",
+      "width": 768,
+      "height": 448,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/latest-input-768-r0/summary.json"
+  },
+  {
+    "name": "before-1024-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18767",
+      "variant": "combined",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "before-1024-r0",
+      "width": 1024,
+      "height": 576,
+      "seconds": 60,
+      "outputCast": "cpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/before-1024-r0/summary.json"
+  },
+  {
+    "name": "compute-capture-1024-r0",
+    "status": "measured",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": false,
+      "name": "compute-capture-1024-r0",
+      "width": 1024,
+      "height": 576,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "summary": "/tmp/vj0-deep-app-wan-20260918/compute-capture-1024-r0/summary.json"
+  },
+  {
+    "name": "latest-input-1024-r0",
+    "status": "failed",
+    "config": {
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "origin": "http://127.0.0.1:18766",
+      "variant": "terminal-noop",
+      "workerThreads": 128,
+      "mailbox": true,
+      "name": "latest-input-1024-r0",
+      "width": 1024,
+      "height": 576,
+      "seconds": 60,
+      "outputCast": "gpu"
+    },
+    "error": "App disconnected during measurement"
+  }
+]

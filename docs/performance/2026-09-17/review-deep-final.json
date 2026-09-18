@@ -1,0 +1,205 @@
+{
+  "verdict": "passed_with_explicit_measurement_and_deployment_limits",
+  "reviewed_at_utc": "2026-09-18T06:42:52.036690+00:00",
+  "reviewer": "independent final_grader agent",
+  "reviewed_base_commit": "4170cee0d92dece12d5a78142bd1def9dd7550c9",
+  "scope": "Independent read-only review of the current performance-branch working tree, runtime integration, completed formal app/soak evidence, completed production GPU probe, report claims and saved shutdown records. This reviewer wrote only this review file. No CPU test rerun, live GPU/browser/network/build/deployment or resource mutation was performed.",
+  "verification_mode": "Manual independent artifact review, not an automatic Codex Stop hook.",
+  "blocking_findings": [],
+  "decision": "The reviewed runtime opt-ins and reported bounded experiments are supported by the preserved evidence. All selected follow-up measurement and shutdown gates are terminal. No additional experiment is required to report these results. Production publishing/deployment and proposed future experiments remain outside this acceptance. Final Git commit/push of the presently reviewed working tree is a separate doer closeout operation, not certified by this artifact.",
+  "runtime_review": {
+    "status": "passed",
+    "defaults": {
+      "TORCH_NUM_THREADS": "0 preserves environment-native selection",
+      "USE_TERMINAL_NOOP": "0, opt-in only",
+      "USE_GPU_OUTPUT_CAST": "0, opt-in only",
+      "latest_input_mailbox": "benchmark-only; production server.js unchanged"
+    },
+    "source_guards": "Exact audited helper hashes, pinned pipeline/scheduler source/class checks, per-step scheduler/dtype/conditioning checks and exact image-processor/method/source checks agree with implementation. Unsupported installation restores original behavior; runtime failures follow existing worker error handling.",
+    "integration": "Runtime companion is loaded from the worker own directory; thread choice precedes model work; both optional patches install before main-thread warmup. Docker copies companion and exact helpers. Main-only publication workflow tracks those files, while defaults remain off. Companion is mandatory even with flags off and individual-file deployment instructions say so.",
+    "validation_scope": "Prior review-runtime.json source bindings match reviewed runtime code and records 21 CPU guard/packaging tests. They were not rerun without a new concern. Completed production GPU proof exercises actual setup_pipeline and production callables at native128. No replacement Docker image was built/deployed in this final review."
+  },
+  "formal_app_independent_reconciliation": {
+    "status": "passed",
+    "steady_trials": 20,
+    "formal_matched_trials": 18,
+    "separate_soaks": 2,
+    "raw_event_groups": 220,
+    "common_window_events": 446752,
+    "age_samples": 119793,
+    "archive_files_verified": 244,
+    "gzip_files_verified": 42,
+    "checks": "Raw counts, unique source IDs, observed durations, rates, age means/min/max/p50/p95/p99 and strictly increasing source IDs/reconstructed capture timestamps reconcile. All stored/uncompressed manifest hashes and sizes verify across final formal/soak/provenance archives. Current harness hash matches formal identity.",
+    "stage_fps_medians": {
+      "512x288": {
+        "before": 26.840733005554,
+        "capture_compute": 38.92506655326265,
+        "latest_input": 34.54322605947116
+      },
+      "768x448": {
+        "before": 14.243345322968036,
+        "capture_compute": 21.314527663166317,
+        "latest_input": 20.769696090331337
+      },
+      "1024x576": {
+        "before": 8.255492377515486,
+        "capture_compute": 12.109432759772407,
+        "latest_input": 12.031583102951842
+      }
+    },
+    "median_matched_capture_compute_gains_pct": [
+      44.91265242045643,
+      49.65625818164755,
+      46.685543369383
+    ],
+    "identity": "One PRO6000, Torch2.11/CUDA12.8/native128. Before frontend01aa639 and corrected4170cee are bound to served build IDs/hashes. Both before and candidate generated workers share prior constant-cache/event timing; candidate adds terminal skip/GPU cast and capture scheduling. This is not an untouched baked-worker comparison.",
+    "tails_retained": "Latest-input512r1 stage p95/p99/max2074.9/2395.66/3008.10ms and19.7175%>1s. Sequential768FIFO/latest soaks21.1909/21.1300FPS, p99 2627.26/606.786ms, maxima3529.30/2230.50ms,2.6433%/0.8924%>1s. Connected/order-pass status is not a low-latency guarantee.",
+    "stress": "Separate final soak audit records passed prompt/resolution/rapid-input/reconnect recovery. Approximately11.2-second reconnects are retained; settings/new-capture receipt is not proof of prompt semantic execution."
+  },
+  "production_probe_independent_reconciliation": {
+    "status": "passed",
+    "result_status": "complete",
+    "records": 51,
+    "quality_fixtures": 27,
+    "same_tensor_cast_checks": 54,
+    "byte_identical_saved_png_pairs": 9,
+    "timed_trials": 18,
+    "timed_frames": 1800,
+    "archive_files_verified": 28,
+    "checks": "result records exactly match records.jsonl. All27 quality rows retain exact pixels/JPEG assertions, unchanged global RNG and skip counts[0,1,1,0]. All54 cast checks are exact and finite. Nine retained baseline/optimized PNG pairs are byte-identical. FPS equals100/wall_seconds; all timing distributions independently recompute from100 retained frame times per trial. Pair order alternates baseline/optimized then optimized/baseline. Timed reference comparisons are zero and skip/cast counts match selected paths.",
+    "source_identity": "Current worker/runtime/terminal helper/GPU cast helper/probe/CPU diagnostic hashes exactly match the actually measured manifest. Boot logs confirm FP8 application, unchanged native128 and both source-guarded opt-ins enabled.",
+    "compute": [
+      {
+        "size": [
+          512,
+          288
+        ],
+        "fps_medians": {
+          "baseline": 29.3665048768833,
+          "optimized": 42.232828105764604
+        },
+        "ratio_of_medians_gain_pct": 43.812919796967066,
+        "median_trial_p95_ms": {
+          "baseline": 41.36952122207731,
+          "optimized": 34.78042597416788
+        }
+      },
+      {
+        "size": [
+          768,
+          448
+        ],
+        "fps_medians": {
+          "baseline": 14.376224952059319,
+          "optimized": 21.25060783744655
+        },
+        "ratio_of_medians_gain_pct": 47.817719243482706,
+        "median_trial_p95_ms": {
+          "baseline": 70.5061353975907,
+          "optimized": 47.768423962406814
+        }
+      },
+      {
+        "size": [
+          1024,
+          576
+        ],
+        "fps_medians": {
+          "baseline": 8.523742989169893,
+          "optimized": 12.719694176107872
+        },
+        "ratio_of_medians_gain_pct": 49.2266272254956,
+        "median_trial_p95_ms": {
+          "baseline": 117.78607636224478,
+          "optimized": 78.85020279791206
+        }
+      }
+    ],
+    "optimized_throttled_cgroup_periods": {
+      "512x288": [
+        12,
+        17,
+        21
+      ],
+      "768x448": [
+        0,
+        0,
+        0
+      ],
+      "1024x576": [
+        0,
+        0,
+        0
+      ]
+    },
+    "quality_scope": "Three sizes,steps2/3/4,three input phases,alpha0.1,seed42,one fixed prompt. Exact JPEG/RNG/four-path equality is supported by source-checked runtime assertions; raw JPEG/RNG states for all cases were not independently retained. The nine two-step PNG pairs were independently byte-compared. Wider162case evidence applies to terminal skipping separately.",
+    "profiles": "Two separate untimed20-frame warmed traces contain actual CUDA kernel events. First3 profile outputs per size are recorded exact. FP8-name shares42.9512%/36.5867% and cuDNN-name shares27.4153%/23.4282% of summed kernel time independently reconcile. Conservative explicit flash_fwd/fmha grouping excludes fused support operations; its reported8.00%/14.34% shares are kernel-name attribution, not a complete causal attention budget or end-to-end latency. CPU user frame ranges are20per trace; they must not be double-counted with device annotations.",
+    "separation": "Production flags do not install the generated live worker constant-cache/event bundle. These JPEG85-input/JPEG80-output offline values cannot be substituted for app FPS or added to the earlier cast-only gain."
+  },
+  "shutdown_and_preservation": {
+    "status": "passed_from_saved_records_and_local_artifact_hashes",
+    "verified_stop_utc": "2026-09-18T06:36:54.465584+00:00",
+    "pods": [
+      {
+        "id": "0pxb4bss2jmbhg",
+        "name": "vj0-perf-20260917-baseline",
+        "desiredStatus": "EXITED",
+        "runtimeStatus": "stopped"
+      },
+      {
+        "id": "9vj8k6guaxsbhw",
+        "name": "vj0-perf-20260917-scaling",
+        "desiredStatus": "EXITED",
+        "runtimeStatus": "stopped"
+      }
+    ],
+    "post_probe_finished_utc": "2026-09-18T06:34:36.421987+00:00",
+    "cache": "Optional additive cache copy timed out at100.0003seconds after14,043/67,863files and541,327,250/1,903,672,178bytes. No destination files were deleted. Partial preservation is accurately reported and does not invalidate saved results. Future starts may recompile.",
+    "local_cleanup": "Saved cleanup identifies only owned processes and explicitly preserves unrelated port8765. Service/supervisor/stop records and all selected result archives are local before confirmed pod stop. No new remote state query was made by this reviewer."
+  },
+  "report_corrections_confirmed": [
+    "Completed formal/soak/production gates replace stale pending statements.",
+    "Before baseline names exact frontend commits and shared generated combined worker.",
+    "Production opt-ins are explicitly distinct from the live benchmark configuration.",
+    "WAN tails, failed cross-thread quality, incomplete SCTP drain, and partial cache copy are preserved.",
+    "Proposed admission/kernel/NVFP4/multi-GPU work is future bounded research, without invented gains."
+  ],
+  "remaining_limitations": [
+    "No replacement stable image or main-branch deployment was performed; a rebuilt packaged image itself is untested.",
+    "Terminal no-op equivalence is finite-fixture evidence, not arbitrary-input/prompt proof; dropping a nonfinite zero-weight prediction could change failure behavior.",
+    "Lower CPU thread budgets are rejected because they changed encoded latents/output; native128 still experiences throttling at512.",
+    "Formal app rates count unique WebGL submissions, not physical display presentation; encode-based age excludes audio acquisition and prior canvas work.",
+    "Two trials per arm with reversed order reduce one order bias but do not eliminate WAN/time variation; sequential180second soaks do not establish long-term tail distributions.",
+    "The mailbox has mixed throughput/tail results and cannot evict browser/SCTP queued bytes; no matched FIFO pending1 trial or complete network-drain proof exists in this follow-up.",
+    "One-GPU original-stack results do not revalidate earlier two-GPU newer-stack throughput. The latter pod lacked restart capacity.",
+    "Compiler cache persistence is partial; code/results/model checkpoints were not claimed to be lost.",
+    "Shutdown is verified by the saved06:36:54UTC API record, not a new final-answer-time resource query.",
+    "Historical Sept17 RESULTS contains its then-running resource snapshot; current Sept18 state is stopped and DEEP-DIVE must govern current reporting."
+  ],
+  "source_and_evidence_sha256": {
+    "workers/runpod-flux2klein/worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "workers/runpod-flux2klein/inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "workers/runpod-flux2klein/Dockerfile": "b6217e2153807e0c4a0e168ddbf9828f2bdc5d40069713241d2023f70c1234ff",
+    "workers/runpod-flux2klein/.dockerignore": "20cc09f975121b43ed667c115428655019755bcb9b56870e7d49aa8b4cdd9d68",
+    ".github/workflows/runpod-flux2klein-docker.yml": "1a7059a3b2483a6b552f270f9d0b62868367d7abe475aecf465dc41a50c5e93e",
+    "workers/runpod-flux2klein/bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "workers/runpod-flux2klein/bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "workers/runpod-flux2klein/bench/app_batch.py": "80f5bb5a7020bd0bd6d8dc73a32c01e4084583c28de77b8c4a52fec764fbfa9c",
+    "workers/runpod-flux2klein/bench/bench_post_live.py": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
+    "workers/runpod-flux2klein/bench/audit_post_live.py": "3730698cba54bf855720be11859632ec98330239fb05081137103c3663eef5dd",
+    "workers/runpod-flux2klein/RUNTIME-OPTIMIZATIONS.md": "9b388dd3503fe8d9e8e2e42ccf22cb1bdc4988f7190d604f7ea440ddaa27036b",
+    "docs/performance/2026-09-17/DEEP-DIVE.md": "f62809c08d069b8c9216f6781fda7c171d7c14c0f79652a7e3cd1c0331ddad1b",
+    "docs/performance/2026-09-17/NEXT-EXPERIMENTS.md": "9416b200a6333e72109547f7492fa4af2723671b6577e66387fc5d313e81b747",
+    "docs/performance/2026-09-17/review-runtime.json": "1fdb81d36ce6d70176a4dd8f467371f52231064d6f889f10528ca3667db8c50f",
+    "docs/performance/2026-09-17/review-formal-app.json": "148042e520e95164f3df0627b49519beef6ae7959d05f17bbfff3a61e023febf",
+    "docs/performance/2026-09-17/review-app-final.json": "88c5ae1155c3cbf648b5e8d8d73feb98b621e7d1454668db2516549b17a405b2",
+    "docs/performance/2026-09-17/review-soaks.json": "cdce7e2cf5236efcc414a0496b0ff642dcb82edcb2eecc34ab55bca27123f5e3",
+    "docs/performance/2026-09-17/review-soaks-audit.json": "b9d5bebf5ba22148e4b040d69473fd4c9c838333f63b8bebf8106161657c6e4d",
+    "docs/performance/2026-09-17/review-production-proof.json": "51e6fd8903775a24771a9c3e8049b882def8bec543ab62e855f6f0fd58a90d67",
+    "docs/performance/2026-09-17/terminal-production-proof/archive.json": "4e088ecb6a89491519c91ecc89a3556f732ec8f0fbc2476568693e0f44bbfc6c",
+    "docs/performance/2026-09-17/terminal-production-proof/result.json.gz": "7ed795eef4eee0648fc8b7ba3067c9a41575a3885323046d6f54a8d5f9d92709",
+    "docs/performance/2026-09-17/deep-operations/vj0-both-pods-stopped-20260918-final.json": "96f82e995e60f3a53e148004898a2095b5a043f13cac5fbbf61eda6b33bc1354",
+    "docs/performance/2026-09-17/deep-operations/cache-persist-20260918-05b.json": "ba3f8b280fd937c1a9087eb4e526c551c72c18cd5bbe1179908d25dd7d175b7d",
+    "docs/performance/2026-09-17/deep-operations/post-status-20260918-05b.json": "498a656ed3a8000c71c10485d87b240a7c7ea6d3c54bd9bb8c99f54ca10a531a"
+  }
+}

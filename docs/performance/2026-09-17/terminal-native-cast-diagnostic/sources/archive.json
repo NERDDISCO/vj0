@@ -1,0 +1,38 @@
+[
+  {
+    "file": "bench_thread_diagnostic.py",
+    "archive": "terminal-native-cast-diagnostic/sources/bench_thread_diagnostic.py.gz",
+    "sha256": "84ec8366ba5f9047c8145c5c9219cb5621c37f448e325e481df0d6a18718fdf6",
+    "provenance": "Hash recorded in diagnostic manifest"
+  },
+  {
+    "file": "inference_server.py",
+    "archive": "terminal-native-cast-diagnostic/sources/inference_server.py.gz",
+    "sha256": "89cb3a1408bd710a34abfadc246d07ef6f92520abd8c84e088450dd0089882b9",
+    "provenance": "Hash recorded in diagnostic manifest"
+  },
+  {
+    "file": "gpu_output_cast.py",
+    "archive": "terminal-native-cast-diagnostic/sources/gpu_output_cast.py.gz",
+    "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+  },
+  {
+    "file": "bench_terminal_followup.py",
+    "archive": "terminal-native-cast-diagnostic/sources/bench_terminal_followup.py.gz",
+    "sha256": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4",
+    "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+  },
+  {
+    "file": "metrics.py",
+    "archive": "terminal-native-cast-diagnostic/sources/metrics.py.gz",
+    "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+  },
+  {
+    "file": "terminal_noop.py",
+    "archive": "terminal-native-cast-diagnostic/sources/terminal_noop.py.gz",
+    "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "provenance": "Current helper archived at audit time; individual helper hash not recorded by this diagnostic"
+  }
+]

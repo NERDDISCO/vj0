@@ -1,0 +1,38 @@
+[
+  {
+    "name": "compute-capture-768-three-minute-soak",
+    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "origin": "http://127.0.0.1:18766",
+    "layout": "vj-next",
+    "sendFps": 60,
+    "activeWorkers": 1,
+    "maxPending": 3,
+    "variant": "terminal-noop",
+    "workerThreads": 128,
+    "mailbox": false,
+    "width": 768,
+    "height": 448,
+    "seconds": 180,
+    "outputCast": "gpu",
+    "audioCycle": true,
+    "stress": false
+  },
+  {
+    "name": "latest-input-768-three-minute-soak",
+    "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+    "origin": "http://127.0.0.1:18766",
+    "layout": "vj-next",
+    "sendFps": 60,
+    "activeWorkers": 1,
+    "maxPending": 3,
+    "variant": "terminal-noop",
+    "workerThreads": 128,
+    "mailbox": true,
+    "width": 768,
+    "height": 448,
+    "seconds": 180,
+    "outputCast": "gpu",
+    "audioCycle": true,
+    "stress": true
+  }
+]
