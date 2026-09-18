@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "source_result_sha256": "37908b968d3d655110337577715390af75d7971213e57c3bbb2ba090d554ee26",
+  "fixtures": [
+    {
+      "candidate": "channels-last",
+      "phase": 0,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 60.60197166160301,
+        "max_abs_error": 78.0,
+        "fraction_changed": 0.5953165690104166,
+        "finite": true
+      },
+      "pixel_psnr_db": 30.305936068695317,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    },
+    {
+      "candidate": "channels-last",
+      "phase": 1,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 75.7643613462095,
+        "max_abs_error": 109.0,
+        "fraction_changed": 0.5932504159432871,
+        "finite": true
+      },
+      "pixel_psnr_db": 29.336153941589313,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    },
+    {
+      "candidate": "channels-last",
+      "phase": 2,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 73.18797697844329,
+        "max_abs_error": 94.0,
+        "fraction_changed": 0.5862946686921297,
+        "finite": true
+      },
+      "pixel_psnr_db": 29.486406180715452,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    },
+    {
+      "candidate": "conv-1x1-as-mm",
+      "phase": 0,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 71.55472592954283,
+        "max_abs_error": 95.0,
+        "fraction_changed": 0.5922738534432871,
+        "finite": true
+      },
+      "pixel_psnr_db": 29.58442038253002,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    },
+    {
+      "candidate": "conv-1x1-as-mm",
+      "phase": 1,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 80.61957239221644,
+        "max_abs_error": 95.0,
+        "fraction_changed": 0.5943219220196759,
+        "finite": true
+      },
+      "pixel_psnr_db": 29.066398705511673,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    },
+    {
+      "candidate": "conv-1x1-as-mm",
+      "phase": 2,
+      "first_differing_stage": "encoded_latents",
+      "pixels": {
+        "exact": false,
+        "shape": [
+          288,
+          512,
+          3
+        ],
+        "mse": 89.56264015480325,
+        "max_abs_error": 109.0,
+        "fraction_changed": 0.5906259042245371,
+        "finite": true
+      },
+      "pixel_psnr_db": 28.609534735071183,
+      "stage_arrays_recomputed": true,
+      "png_recomputed": true,
+      "traced_untraced_baseline_exact": true,
+      "traced_untraced_candidate_match_against_baseline_metrics": true
+    }
+  ],
+  "timing_cells": 0,
+  "promotions": [],
+  "scope": "Recomputed saved stage arrays and traced PNGs. Untraced pixel/JPEG/RNG assertions are independently inspected records, not replayed GPU calls.",
+  "conclusion": "Both variants failed exact-output gate; visual differences are quantified, not asserted to be perceptually worse. No FPS benefit measured or claimed.",
+  "archive_parity": {
+    "passed": true,
+    "archive_result_sha256": "7c6e635ce19d70848a26b4bc5bea5c12b1f376d9a130ce246a5e55c4ec447ed8",
+    "note": "Only compressed/raw source-file SHA differs; every substantive audit field is identical."
+  }
+}

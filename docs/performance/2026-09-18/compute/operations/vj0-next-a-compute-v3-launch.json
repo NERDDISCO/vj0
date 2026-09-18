@@ -1,0 +1,23 @@
+{
+  "pid": 16479,
+  "pgid": 16479,
+  "command": [
+    "/usr/bin/python3",
+    "/workspace/vj0-next-a-compute-v3/run_compute_a_v3.py",
+    "--bundle",
+    "/workspace/vj0-next-a-compute-v3",
+    "--expected-manifest-sha256",
+    "c972422994348d030126dbfc2bdf1a81f793e6acc2cbab2d665ddaec9d4e7bc2",
+    "--output-root",
+    "/workspace/n03-a-20260918-v3",
+    "--original-pid",
+    "496",
+    "--released-live-pgid",
+    "1089",
+    "--jobs",
+    "n03"
+  ],
+  "log": "/workspace/vj0-next-a-compute-v3-launch.log",
+  "manifest_sha256": "c972422994348d030126dbfc2bdf1a81f793e6acc2cbab2d665ddaec9d4e7bc2",
+  "all_source_hashes_verified": true
+}

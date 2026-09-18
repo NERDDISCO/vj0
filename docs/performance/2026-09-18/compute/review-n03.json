@@ -1,0 +1,218 @@
+{
+  "status": "passed-independent-evidence-audit; neither candidate advances",
+  "reviewed_at_utc": "2026-09-18T09:47:50.544779+00:00",
+  "scope": "Local archived N03 v3 generated-source/runtime-trace, quality-record and timing/gate audit; no GPU/browser/network actions.",
+  "findings": [],
+  "frozen_manifest_sha256": "c972422994348d030126dbfc2bdf1a81f793e6acc2cbab2d665ddaec9d4e7bc2",
+  "probe_sha256": "a4133a81648ba4af7da164086a27ab0366e67a1465bb5c4fd3b162eb2536a93c",
+  "archive_manifest_sha256": "f2e5942c6127b16a52d8199c4d2093501b7d76ca865beceb59fd753c75d9de12",
+  "artifact_bindings": {
+    "micro-0-baseline.json.gz": {
+      "stored_sha256": "cd9c38275a97d7d95306eaf4c6ca79f6bea573a0d07886756aceb6be8f97ce85",
+      "decompressed_sha256": "8a752eed244093c5b2e1ec70325ce7014709e44ccee114d92fde02937d634699"
+    },
+    "micro-0-candidate.json.gz": {
+      "stored_sha256": "3b07e1b194434bb91e8bf86f84a8e60ed65e12aaba042f24b008ff0d5ab63620",
+      "decompressed_sha256": "d02adf06532d5f87b22be0e16c9e39d1d292dc84cf8ee953c8ccfa859e9695c0"
+    },
+    "micro-0-generated-0.py.gz": {
+      "stored_sha256": "1eff97ae1601dc4e94f7575e2712e5ad3ee1577a0e6775e379b7f8f7623e2456",
+      "decompressed_sha256": "4fb5a4c2a570faf58a79df4231250498a541c7e724ec720e8117ef26ace5edde"
+    },
+    "micro-0-generated-1.py.gz": {
+      "stored_sha256": "5eb03f6dafb0e90ac5b17827d0349b0e73012ef3825fb60c0562187c1a86a454",
+      "decompressed_sha256": "01a1a4443e565e31c9b74d416367e6886110e4c9d3529f3786831cabed206c6b"
+    },
+    "micro-0-generated-2.py.gz": {
+      "stored_sha256": "78838482650b8440f14d8daef3d313d4f4e4c1f7b5f6096bddba7d0079a98ab8",
+      "decompressed_sha256": "9e4c103b4785d8f709d66d5578414e0d0b9c3ce914cd950437583b69deb0b947"
+    },
+    "micro-1-baseline.json.gz": {
+      "stored_sha256": "e199b30bcbea06b3bf58f085d291d501e4fa3f008d305aac7d1c115714d404c3",
+      "decompressed_sha256": "897d79854f3076f73543e9ed9cce22cad5fb7d226025c203057228eebdd23d50"
+    },
+    "micro-1-candidate.json.gz": {
+      "stored_sha256": "dca288440477b8a206fbb4a3a159d9d92be86443747e727ca7fdcad4d9d9a8e1",
+      "decompressed_sha256": "8657df420082ece531bd2839565db0f9017758d845f2de1b9e030897da78ea0c"
+    },
+    "micro-1-generated-0.py.gz": {
+      "stored_sha256": "6c9479cdb3c137a879c9732d9f6003bdecbb9a1380ac274892f2297b6361a900",
+      "decompressed_sha256": "44f95a669402d7119ceb9480cd568eac6ab6178a1c3925c47f859fa879afd728"
+    },
+    "micro-1-generated-1.py.gz": {
+      "stored_sha256": "169d45f57149a3e621df8331c95b90f263431101448d99ace57bdb6eb87f64aa",
+      "decompressed_sha256": "9f3a5498d8a517968757ae3bc69f6aad256f1d876ba7c59199b5263a1f965bbb"
+    },
+    "micro-1-generated-2.py.gz": {
+      "stored_sha256": "10036f5fc7a4aa8e12de7e0f3e2afaf281203f890d9a73df3163cf3bf0bbc1a3",
+      "decompressed_sha256": "631bb781ca85b21516235cb56bd554a94a42615003a60dcab2d27875c10c36da"
+    },
+    "records.jsonl.gz": {
+      "stored_sha256": "f69d602b0fc349e6a7f1685d38d1810a8d91c0f7b0385bc0eafe10615552bcd8",
+      "decompressed_sha256": "1707b1c8b8cbfa6a0e669ef0b3540610b63858cfcdad8b234886a35cff358790"
+    },
+    "result.json.gz": {
+      "stored_sha256": "10902e62b1de418cbc83d2718fbc2a474ba030080b7f1ff8932cbfcecefbcda6",
+      "decompressed_sha256": "1cfa8d8dec984d077bff2ce274ff07aa841926e2ba2c1cab2906ffb211e88480"
+    }
+  },
+  "checks": [
+    "Frozen source manifest matches every listed file",
+    "Archived result records exactly equal archived JSONL records",
+    "All six generated-wrapper decompressed hashes match their proof records",
+    "Raw saved profiler kernel events independently recounted; exactly three candidate template launches and three baseline cuBLAS launches per family",
+    "Candidate runtime symbols join uniquely to generated FP8 signatures, actual tl.dot, exact shapes, and allowlisted tiles",
+    "All twelve micro timing rows, alternating order, medians and gate decisions independently recalculated"
+  ],
+  "families": [
+    {
+      "shape": [
+        2368,
+        27648,
+        3072
+      ],
+      "runtime_kernel_counts": {
+        "baseline": {
+          "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas": 3
+        },
+        "candidate": {
+          "triton_tem_fused__scaled_mm_0": 3
+        }
+      },
+      "matched_template": [
+        {
+          "kernel_name": "triton_tem_fused__scaled_mm_0",
+          "source_sha256": "6c59eaf845954b3b73e20727daea9b9bc0996c01d8527aeef876948999f03156",
+          "status": "verified",
+          "shape": [
+            2368,
+            27648,
+            3072
+          ],
+          "tile": [
+            64,
+            128,
+            64,
+            4,
+            4
+          ],
+          "fp8_signature": {
+            "arg_A": "*fp8e4nv",
+            "arg_B": "*fp8e4nv",
+            "in_ptr2": "*fp32",
+            "in_ptr3": "*fp32",
+            "out_ptr0": "*bf16"
+          },
+          "dot_calls_in_source": 1,
+          "runtime_launches": 3
+        }
+      ],
+      "recorded_quality": {
+        "exact": true,
+        "shape": [
+          2368,
+          27648
+        ],
+        "mse": 0.0,
+        "max_abs_error": 0.0,
+        "fraction_changed": 0.0,
+        "finite": true
+      },
+      "paired_iterations_each": 100,
+      "paired_repeats": 3,
+      "alternating_order_verified": true,
+      "median_ms_per_call": {
+        "baseline": 0.764534683227539,
+        "candidate": 0.7524310302734375
+      },
+      "throughput_delta_pct": 1.6086062997299644,
+      "latency_delta_pct": -1.5831398129650731,
+      "paired_throughput_delta_pct": [
+        6.071584727876211,
+        1.4180820955512985,
+        0.8264706450537895
+      ],
+      "every_pair_faster": true,
+      "median_latency_gate_passed": false,
+      "eligible": false
+    },
+    {
+      "shape": [
+        2368,
+        3072,
+        12288
+      ],
+      "runtime_kernel_counts": {
+        "baseline": {
+          "sm89_xmma_gemm_e4m3bf16_e4m3f32_f32_tn_n_tilesize128x64x64_stage4_warpsize2x2x1_tensor16x8x32_execute_kernel__5x_cublas": 3
+        },
+        "candidate": {
+          "triton_tem_fused__scaled_mm_0": 3
+        }
+      },
+      "matched_template": [
+        {
+          "kernel_name": "triton_tem_fused__scaled_mm_0",
+          "source_sha256": "c582629c44ed6ce3fd78ffe9d80fe13d189de2d7668c5704692ca670d321b630",
+          "status": "verified",
+          "shape": [
+            2368,
+            3072,
+            12288
+          ],
+          "tile": [
+            128,
+            64,
+            64,
+            4,
+            4
+          ],
+          "fp8_signature": {
+            "arg_A": "*fp8e4nv",
+            "arg_B": "*fp8e4nv",
+            "in_ptr2": "*fp32",
+            "in_ptr3": "*fp32",
+            "out_ptr0": "*bf16"
+          },
+          "dot_calls_in_source": 1,
+          "runtime_launches": 3
+        }
+      ],
+      "recorded_quality": {
+        "exact": true,
+        "shape": [
+          2368,
+          3072
+        ],
+        "mse": 0.0,
+        "max_abs_error": 0.0,
+        "fraction_changed": 0.0,
+        "finite": true
+      },
+      "paired_iterations_each": 100,
+      "paired_repeats": 3,
+      "alternating_order_verified": true,
+      "median_ms_per_call": {
+        "baseline": 0.39558910369873046,
+        "candidate": 0.4148096084594727
+      },
+      "throughput_delta_pct": -4.633572696670085,
+      "latency_delta_pct": 4.858704292163729,
+      "paired_throughput_delta_pct": [
+        2.277079360333123,
+        -4.633572696670085,
+        1.9633406322364877
+      ],
+      "every_pair_faster": false,
+      "median_latency_gate_passed": false,
+      "eligible": false
+    }
+  ],
+  "advancement_gate": "exact and finite outputs AND candidate faster in every matched pair AND candidate median milliseconds < baseline median milliseconds \u00d7 0.98 (strictly more than 2% latency reduction; approximately >2.0408% reciprocal-throughput improvement).",
+  "timing_scope_correction": {
+    "actual": "CUDA event interval around 100 repeated compiled GEMM calls, divided by 100; three alternating-order matched pairs. This is isolated microbenchmark call time.",
+    "generic_result_metadata": "The top-level result timing_boundary describes a complete JPEG/worker pipeline. That inherited metadata does not apply to these micro-measured rows; use their explicit timing_scope. No full-pipeline timing rows exist."
+  },
+  "quality_limit": "The recorded exact/finite verdict comes from compare_array over captured real-model operand results converted from BF16 to FP32, with byte equality, array equality, finite checks, zero MSE and zero maximum error. Raw operand/output tensors were not retained, so independent offline numerical recomputation is unavailable. This is not full-model image-quality verification.",
+  "conclusion": "Actual Triton GEMM execution is established. The first family improves reciprocal median throughput by 1.6086%, below the required gate; the second loses 4.6336% and regresses in one pair. Neither advances, so full-pipeline performance/quality and live FPS remain unmeasured. The earlier PyCodeCache API failure is a preserved harness failure, not backend incompatibility."
+}

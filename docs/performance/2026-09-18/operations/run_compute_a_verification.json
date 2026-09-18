@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-09-18T08:10:35.581108+00:00",
+  "runner_sha256": "e574e8181d40900e933e94c863452416b28e2f1909297b327c286c6551cff135",
+  "frozen_v2_manifest_sha256": "1ac64980fc0b482f8c646f2fdcae63a94bb5dcbf223165172948e30a50775c9b",
+  "source_proof_self_test": {
+    "source_proof_self_test": "passed",
+    "negative_cases": 18,
+    "scope": "Pure generated-source/runtime-event fixtures; no GPU or compiler execution"
+  },
+  "checks": [
+    "required frozen source hashes match",
+    "modified source rejected",
+    "missing/partial result summarized without rewriting evidence",
+    "atomic controller status write",
+    "owned subprocess group terminated"
+  ],
+  "reviewed_failure_paths": [
+    "SIGTERM/SIGINT raise into finally/owned-child cleanup",
+    "35-minute per-job process cap",
+    "no pod lifecycle operations",
+    "original dispatcher paused and released live group absent required",
+    "GPU idle before each job and release confirmed between jobs"
+  ],
+  "scope": "Local CPU tests only. /proc enumeration was mocked for the Mac owned-child test; actual remote scheduler/GPUs were not accessed.",
+  "gpu_or_remote_actions": false
+}

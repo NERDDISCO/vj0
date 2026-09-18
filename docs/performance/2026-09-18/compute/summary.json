@@ -1,0 +1,75 @@
+{
+  "status": "complete",
+  "native_threads": 128,
+  "n03": {
+    "status": "rejected-no-repeatable-above-threshold-gain",
+    "shapes": [
+      {
+        "shape": [
+          2368,
+          27648,
+          3072
+        ],
+        "baseline_median_ms": 0.764534683227539,
+        "candidate_median_ms": 0.7524310302734375,
+        "latency_change_pct": -1.5831398129650731,
+        "reciprocal_throughput_change_pct": 1.6086062997299644,
+        "every_pair_faster": true,
+        "passed": false,
+        "quality_exact_finite": true,
+        "actual_fp8_template_execution_proved": true,
+        "pairs": 3,
+        "repeated_calls_per_cell": 100
+      },
+      {
+        "shape": [
+          2368,
+          3072,
+          12288
+        ],
+        "baseline_median_ms": 0.39558910369873046,
+        "candidate_median_ms": 0.4148096084594727,
+        "latency_change_pct": 4.858704292163729,
+        "reciprocal_throughput_change_pct": -4.633572696670085,
+        "every_pair_faster": false,
+        "passed": false,
+        "quality_exact_finite": true,
+        "actual_fp8_template_execution_proved": true,
+        "pairs": 3,
+        "repeated_calls_per_cell": 100
+      }
+    ],
+    "full_pipeline_cells": 0,
+    "scope": "CUDA-event interval around repeated compiled micro-GEMM calls; not pipeline FPS",
+    "gate": "Every paired candidate faster and candidate median < baseline median * 0.98; exact finite micro output required",
+    "first_attempt": "Preserved v2 PyCodeCache.cache harness API failure before candidate compile; corrected and independently reviewed as v3"
+  },
+  "n04": {
+    "status": "rejected-exact-output-gate",
+    "variants": [
+      "channels-last",
+      "conv-1x1-as-mm"
+    ],
+    "quality_fixtures": 6,
+    "sizes": [
+      [
+        512,
+        288
+      ]
+    ],
+    "steps": [
+      2
+    ],
+    "timing_cells": 0,
+    "first_differing_stage": "encoded_latents",
+    "note": "Perceptual degradation or speed regression not established; timing intentionally stopped after exact-output failure"
+  },
+  "promotions": [],
+  "production_changes": false,
+  "app_confirmation_needed": false,
+  "limitations": [
+    "Fixed prompt/alpha0.1/seed42 and three waveform phases for VAE fixtures",
+    "No raw N03 micro output tensors retained; exact/finite comparator records independently inspected",
+    "No exhaustive tile search or relaxed-quality study"
+  ]
+}

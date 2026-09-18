@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "scope": "CPU-only API/schema/tile-filter preflight; no CUDA initialization or numerical execution",
+  "torch": "2.11.0+cu128",
+  "native_threads": 128,
+  "cuda_initialized": false,
+  "choice_signature": "(self, template_choices: 'dict[str, Generator[KernelTemplateChoice, None, None]]', kernel_inputs: 'KernelInputs', templates: 'list[Union[KernelTemplate, ExternKernelChoice]]', op_name: 'str', kwarg_overrides: 'Optional[dict[str, dict[str, Any]]]' = None) -> 'list[KernelTemplateChoice]'",
+  "scaled_mm_signature": "(mat_a, mat_b, scale_a, scale_b, bias=None, scale_result=None, out_dtype=None, use_fast_accum=False, layout=None)",
+  "compile_signature": "(gm: 'torch.fx.GraphModule', example_inputs: 'list[InputType]', options: 'Optional[dict[str, Any]]' = None)",
+  "schema": "aten::_scaled_mm(Tensor self, Tensor mat2, Tensor scale_a, Tensor scale_b, Tensor? bias=None, Tensor? scale_result=None, ScalarType? out_dtype=None, bool use_fast_accum=False) -> Tensor",
+  "generic_template_uid": "triton::mm",
+  "mnk_symbolic_exists": true,
+  "tile_allowlist_filter_passed": true,
+  "oversized_and_tma_rejected": true,
+  "schema_binding_defaults_passed": true,
+  "backend_closure_created": true,
+  "configuration": {
+    "conv_1x1_as_mm": false,
+    "max_autotune_gemm": false,
+    "max_autotune_gemm_backends": "ATEN,TRITON,CPP",
+    "fx_graph_cache": true,
+    "recompile_limit": 8
+  },
+  "reduce_overhead_mode": {
+    "triton.cudagraphs": true
+  }
+}

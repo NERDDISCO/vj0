@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "torch": "2.11.0+cu128",
+  "native_threads": 128,
+  "cuda_initialized": false,
+  "source_sha256": "a4133a81648ba4af7da164086a27ab0366e67a1465bb5c4fd3b162eb2536a93c",
+  "tracked_calls": 3,
+  "unique_archived_modules": 2,
+  "checks": [
+    "actual loader cache hit",
+    "actual loader cache miss",
+    "same new module reused",
+    "archive deduplication",
+    "exact classmethod restored",
+    "exception restoration"
+  ],
+  "scope": "CPU-only installed-Torch2.11 API validation; no CUDA execution",
+  "independent_review": {
+    "agent": "benchmark_review",
+    "source_sha256": "a4133a81648ba4af7da164086a27ab0366e67a1465bb5c4fd3b162eb2536a93c",
+    "result": "No false-pass or API hook blocker; independently tested fake-loader cache hits/misses, invalid module, loader/body error, exact descriptor restoration and 18 source-proof negatives."
+  },
+  "frozen_manifest_sha256": "c972422994348d030126dbfc2bdf1a81f793e6acc2cbab2d665ddaec9d4e7bc2",
+  "timing_scope_note": "Compared to v2, the same 600-second compile alarm also encloses untimed quality/profiling/source-proof work. Measured micro and pipeline loops are unchanged."
+}

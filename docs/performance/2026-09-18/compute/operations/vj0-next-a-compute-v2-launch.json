@@ -1,0 +1,23 @@
+{
+  "runner_pid": 12480,
+  "command": [
+    "python3",
+    "/workspace/vj0-next-a-compute-v2/run_compute_a.py",
+    "--bundle",
+    "/workspace/vj0-next-a-compute-v2",
+    "--expected-manifest-sha256",
+    "1ac64980fc0b482f8c646f2fdcae63a94bb5dcbf223165172948e30a50775c9b",
+    "--output-root",
+    "/workspace/n03-n04-a-20260918-v2",
+    "--original-pid",
+    "496",
+    "--released-live-pgid",
+    "1089",
+    "--job-seconds",
+    "2100",
+    "--expected-native-threads",
+    "128"
+  ],
+  "log": "/workspace/vj0-next-a-compute-v2-launch.log",
+  "source_verified": true
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "torch": "2.11.0+cu128",
+  "native_threads": 128,
+  "cuda_initialized": false,
+  "source_sha256": "a4133a81648ba4af7da164086a27ab0366e67a1465bb5c4fd3b162eb2536a93c",
+  "tracked_calls": 3,
+  "unique_archived_modules": 2,
+  "checks": [
+    "actual loader cache hit",
+    "actual loader cache miss",
+    "same new module reused",
+    "archive deduplication",
+    "exact classmethod restored",
+    "exception restoration"
+  ],
+  "scope": "CPU-only installed-Torch2.11 API validation; no CUDA execution"
+}
