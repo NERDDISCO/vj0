@@ -1,0 +1,454 @@
+{
+  "status": "passed-independent-evidence-audit; no candidate promoted",
+  "reviewed_at_utc": "2026-09-18T09:36:04.600725+00:00",
+  "scope": "Local read-only N01/N02 final evidence review. No browser, GPU, network or remote actions; no new performance trials.",
+  "findings": [],
+  "reviewed_sha256": {
+    "docs/performance/2026-09-18/input/RESULTS.md": "c26438e7352789ec7df427622684cbc51ec4a48fc5fd06dfd790a0bf543c9570",
+    "docs/performance/2026-09-18/input/README.md": "7f995df21b4af7d07c86b94828c073baef6cf4eef253b91ee7eb5c24002e8e31",
+    "docs/performance/2026-09-18/input/RESULTS-512.md": "1615040bf38e37e2987f13e92e3817ef4ecc5833ebb014c15aef1191e5134fb7",
+    "docs/performance/2026-09-18/input/archive-only-validation.json": "36887801aa7f2540129f1876942d9aba91c0a03d1796c3f166bd5a399612a00f",
+    "docs/performance/2026-09-18/input/results-512-archived.json": "b3e2ec67f1fb8ac7031932279523c2e95c5bab2856d237b5ed26b4f5df8a69d1",
+    "docs/performance/2026-09-18/input/results-768x448-archived.json": "0600b0c3db28f67d940b4eb3dc491477d5a226a12b76693712eeb3d5f045e4d2",
+    "docs/performance/2026-09-18/input/results-1024x576-archived.json": "ed6003bf5f2073e2cc6437e932dc5227a9b355862c5cd6a7ad8502a353ebb8c9",
+    "docs/performance/2026-09-18/input/encode-duration-archived.json": "3c8afb9adef1d6687441a8450b3927f461aaabd3e5066f9b95aa915fc97c0bba",
+    "docs/performance/2026-09-18/input/selection-512-archived.json": "519a279b68c927215ba920c2dbd11b1e06f7943e80fb127783c5bd38a189cf36",
+    "docs/performance/2026-09-18/input/selection-1024-archived.json": "479a051258d62ceda0bbb28cbc69397da7a4d3ee476c267a4b5595179bdf9e8b"
+  },
+  "checks": {
+    "selected_windows": 48,
+    "comparisons": 8,
+    "pairs_per_comparison": 3,
+    "alternating_pair_order_verified": true,
+    "requested_seconds_each": 60,
+    "observed_seconds_range": [
+      60.3285,
+      60.61459985351563
+    ],
+    "independent_structural_and_continuity_passes": 47,
+    "retained_complete_window_continuity_failures": [
+      {
+        "name": "buffer64-512x288-r1-candidate",
+        "source_summary": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/buffer64-512x288-r1-candidate/summary.json.gz",
+        "failures": [
+          "Worker 0: arrival gap over 2 seconds"
+        ]
+      }
+    ],
+    "raw_metric_arithmetic_errors": [],
+    "verified_from_raw": [
+      "common main/stage interval and frame counts/FPS",
+      "all target metric distributions and source ages",
+      "source IDs and capture timestamps monotonic, no missing IDs/duplicates",
+      "frozen snapshots and error events",
+      "worker 0 configuration, variant, terminal skip, thread count, output cast and dimensions",
+      "actual audio RMS and successful post-window RTC state",
+      "input surfaces and all 19 planned pulse outcomes per trial using frozen v5 metric source",
+      "encode callback distributions and over-16.67ms fractions"
+    ],
+    "pulse_opportunities": 912,
+    "all_comparisons_fail_at_least_one_promotion_gate": true,
+    "pooled_and_every_matched_pair_temporal_preservation_checked": true,
+    "tables_match_reported_rounding": true,
+    "common_harness_sha256": "e88a388dbc4c91e4a7dc1986309af56a3351de256564ef7e7e70312c811452f5",
+    "common_probe_sha256": "d18a9c31ddc66bac49a7fa521001032a7430a5e82bc8138107fbb7c9d8b4e266",
+    "common_fixture_sha256": "d874ba9414dfbd6a03921cea2279d3534f4f4c8be3c89ba0b8c2f72be620e373",
+    "frozen_harness_and_server_manifest_hashes_verified": true,
+    "selected_job_exact_cohort_identity_membership_verified": true,
+    "mailbox_and_input_threshold_acknowledgements_verified": true,
+    "selected_transition_drain_and_cleanup_valid": true,
+    "cleanup_qualification": "Live-channel final drains contain passed ordered ACKs. Three cohorts ending in premeasurement connection failures had closed channels and idle cleanup, not a fabricated ACK. Final live ACK epoch 75 has source/received watermark 146611."
+  },
+  "failure_accounting": {
+    "additional_retained_excluded_timed_windows": [
+      {
+        "root": "docs/performance/2026-09-18/input/archived-cohorts/screen-512",
+        "name": "rate30-512x288-r0-control",
+        "status": "measured"
+      },
+      {
+        "root": "docs/performance/2026-09-18/input/archived-cohorts/screen-512",
+        "name": "rate30-512x288-r0-candidate",
+        "status": "measured"
+      },
+      {
+        "root": "docs/performance/2026-09-18/input/archived-cohorts/screen-512",
+        "name": "rate30-512x288-r1-candidate",
+        "status": "measured"
+      }
+    ],
+    "premeasurement_connection_failure_count": 3,
+    "premeasurement_connection_failures": [
+      {
+        "cohort": "screen-512",
+        "name": "rate30-512x288-r1-control",
+        "error": "window.vj0AppProbe.snapshot().channelStates.includes(\"open\")"
+      },
+      {
+        "cohort": "screen-512-recovery",
+        "name": "rate30-512x288-r0-control",
+        "error": "window.vj0AppProbe.snapshot().channelStates.includes(\"open\")"
+      },
+      {
+        "cohort": "rates-1024x576",
+        "name": "rate30-1024x576-r0-candidate",
+        "error": "window.vj0AppProbe.snapshot().channelStates.includes(\"open\")"
+      }
+    ],
+    "excluded_wrong_shape_setup": "768x432 triggered an excluded compile and failed original drain. Subsequent fresh no-input barrier passed; no timed wrong-shape result included.",
+    "selection_qualification": "The partial 512 rate30 trio is explicitly excluded in favor of the complete replacement cohort. All prior records remain. The sole complete-window continuity failure stays in descriptive medians and fails eligibility; it was not replaced by a successful retry."
+  },
+  "comparisons": {
+    "rate40-512x288": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 51,
+          "stage_unobserved_in_window": 3,
+          "no_admitted_capture": 3
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 57,
+          "stage_unobserved_in_window": 0,
+          "no_admitted_capture": 0
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": true
+        },
+        {
+          "pair": 1,
+          "preserved": true
+        },
+        {
+          "pair": 2,
+          "preserved": true
+        }
+      ],
+      "failed_gates": [
+        "p95_age_at_least_10pct_lower",
+        "p99_age_no_more_than_10pct_worse"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-512x288": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 57,
+          "stage_unobserved_in_window": 0,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 56,
+          "stage_unobserved_in_window": 1,
+          "no_admitted_capture": 1
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": false
+        },
+        {
+          "pair": 1,
+          "preserved": true
+        },
+        {
+          "pair": 2,
+          "preserved": true
+        }
+      ],
+      "failed_gates": [
+        "stage_fps_at_least_95pct",
+        "p95_age_at_least_10pct_lower",
+        "no_increase_in_unobserved_impulses",
+        "no_fewer_impulses_within_1000ms",
+        "no_increase_in_uncaptured_impulses",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "buffer64-512x288": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 57,
+          "stage_unobserved_in_window": 0,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 55,
+          "stage_unobserved_in_window": 0,
+          "no_admitted_capture": 0
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": true
+        },
+        {
+          "pair": 1,
+          "preserved": false
+        },
+        {
+          "pair": 2,
+          "preserved": true
+        }
+      ],
+      "failed_gates": [
+        "all_trials_passed_continuity_and_structure",
+        "p95_age_at_least_10pct_lower",
+        "no_fewer_impulses_within_1000ms",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "buffer16-512x288": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 56,
+          "stage_unobserved_in_window": 1,
+          "no_admitted_capture": 1
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 55,
+          "stage_unobserved_in_window": 2,
+          "no_admitted_capture": 2
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": true
+        },
+        {
+          "pair": 1,
+          "preserved": true
+        },
+        {
+          "pair": 2,
+          "preserved": false
+        }
+      ],
+      "failed_gates": [
+        "no_increase_in_unobserved_impulses",
+        "no_fewer_impulses_within_1000ms",
+        "no_increase_in_uncaptured_impulses",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate40-768x448": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 57,
+          "stage_unobserved_in_window": 0,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 52,
+          "stage_unobserved_in_window": 3,
+          "no_admitted_capture": 0
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": false
+        },
+        {
+          "pair": 1,
+          "preserved": false
+        },
+        {
+          "pair": 2,
+          "preserved": false
+        }
+      ],
+      "failed_gates": [
+        "p95_age_at_least_10pct_lower",
+        "p99_age_no_more_than_10pct_worse",
+        "no_increase_in_unobserved_impulses",
+        "no_fewer_impulses_within_1000ms",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-768x448": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 55,
+          "stage_unobserved_in_window": 2,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 52,
+          "stage_unobserved_in_window": 5,
+          "no_admitted_capture": 0
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": false
+        },
+        {
+          "pair": 1,
+          "preserved": true
+        },
+        {
+          "pair": 2,
+          "preserved": true
+        }
+      ],
+      "failed_gates": [
+        "p95_age_at_least_10pct_lower",
+        "no_increase_in_unobserved_impulses",
+        "no_fewer_impulses_within_1000ms",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate40-1024x576": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 48,
+          "stage_unobserved_in_window": 9,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 47,
+          "stage_unobserved_in_window": 10,
+          "no_admitted_capture": 1
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": true
+        },
+        {
+          "pair": 1,
+          "preserved": false
+        },
+        {
+          "pair": 2,
+          "preserved": false
+        }
+      ],
+      "failed_gates": [
+        "p95_age_at_least_10pct_lower",
+        "no_increase_in_unobserved_impulses",
+        "no_fewer_impulses_within_1000ms",
+        "no_increase_in_uncaptured_impulses",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-1024x576": {
+      "pooled_temporal_counts": {
+        "control": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 49,
+          "stage_unobserved_in_window": 8,
+          "no_admitted_capture": 0
+        },
+        "candidate": {
+          "expected_count": 57,
+          "stage_response_within_1000ms": 51,
+          "stage_unobserved_in_window": 5,
+          "no_admitted_capture": 0
+        }
+      },
+      "matched_pair_temporal_checks": [
+        {
+          "pair": 0,
+          "preserved": false
+        },
+        {
+          "pair": 1,
+          "preserved": true
+        },
+        {
+          "pair": 2,
+          "preserved": true
+        }
+      ],
+      "failed_gates": [
+        "p95_age_at_least_10pct_lower",
+        "p99_age_no_more_than_10pct_worse",
+        "all_matched_pairs_preserve_temporal_response"
+      ],
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    }
+  },
+  "archive_reproduction": {
+    "cohorts": [
+      {
+        "cohort": "screen-512",
+        "files": 134,
+        "manifest_sha256": "d7c879d7f8f4d8034f7c9af916b657ab415205894eddcd7337848224dc1b90d8"
+      },
+      {
+        "cohort": "screen-512-recovery",
+        "files": 10,
+        "manifest_sha256": "aa5fbda277601f846decd3bb2ab21724eb608ef04d4ca0b5a59c13d3e8525a1d"
+      },
+      {
+        "cohort": "screen-512-recovery2",
+        "files": 130,
+        "manifest_sha256": "c20cf298115c3ba2e2255afbffe692a56a7cdd55be15c5f36045be15060f72b5"
+      },
+      {
+        "cohort": "screen-512-remaining",
+        "files": 130,
+        "manifest_sha256": "50758a07e821e9bd75c6188be89f4f06615ffbb58d208bab24d077ee7eb8c748"
+      },
+      {
+        "cohort": "rates-768x448",
+        "files": 173,
+        "manifest_sha256": "1942f4bdd9415513184a9c772974a0fb7ff23e58075d0c95b14028b61c2e8158"
+      },
+      {
+        "cohort": "rates-1024x576",
+        "files": 104,
+        "manifest_sha256": "7aaab6e32fc85fa55e7df107f2e662294754be19ed19da888c8a8353a4aa4c1f"
+      },
+      {
+        "cohort": "rates-1024x576-remaining",
+        "files": 74,
+        "manifest_sha256": "cfaa346fa0a8b7b64da93d620cce4cc53f0b173750c99a0ecb4f7c60ad823acd"
+      }
+    ],
+    "files_verified": 755,
+    "original_paths_absent_for_all_seven_cohorts": true,
+    "all_archive_and_decompressed_original_hashes_and_sizes_match": true,
+    "reports_reproduced_as_equal_json_objects": 4,
+    "external_raw_backup_not_used": true,
+    "method": "Ran current summarize.py twice with archived selections and once with archived 768 cohort; ran encode_report.py with the three authoritative reports. Independently recomputed every selected raw window with audit_app.audit_trial and frozen-v5 input_metrics.summarize_input. All reproduction outputs were temporary local files."
+  },
+  "limits": [
+    "No rate or byte threshold meets all predeclared gates; no promotion or higher-resolution 16KiB/ten-minute hold is justified by these records.",
+    "16KiB latency tails improve descriptively, but its 55/57 delivered pulses versus control 56/57 and loss in one matched pair fail preservation. This small sample does not identify a causal loss mechanism.",
+    "1024 rate30 improves pooled pulses from 49/57 to 51/57 but fails one matched pair and worsens age tails; pooled improvement alone is insufficient.",
+    "Requested 60FPS differs from achieved input; rates and encoding tables preserve this distinction. Callback latency includes scheduling/readback/encoding and callback delay, and is only part of the capture busy interval.",
+    "Headless stage WebGL submission is not physical display presentation. Capture age excludes audio acquisition and physical display; impulse metadata does not establish perceptual beat strength or image equivalence.",
+    "Background user workloads and sequential paired windows limit causal attribution. Connection failures remain unexplained; successful later cleanup does not erase them.",
+    "Archive/source hashes establish reproducibility and retained provenance, not independent remote execution attestation beyond the saved evidence."
+  ]
+}

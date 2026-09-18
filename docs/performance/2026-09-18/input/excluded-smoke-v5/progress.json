@@ -1,0 +1,28 @@
+[
+  {
+    "name": "excluded-setup-smoke",
+    "status": "measured",
+    "config": {
+      "name": "excluded-setup-smoke",
+      "comparison": "rate40",
+      "pair": 0,
+      "role": "control",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "origin": "http://127.0.0.1:18768",
+      "layout": "vj-next",
+      "width": 512,
+      "height": 288,
+      "seconds": 8,
+      "sendFps": 60,
+      "thresholdBytes": 262144,
+      "variant": "terminal-noop",
+      "mailbox": true,
+      "workerThreads": 128,
+      "outputCast": "gpu",
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "inputImpulses": true
+    },
+    "summary": "docs/performance/2026-09-18/input/excluded-smoke-v5/excluded-setup-smoke/summary.json"
+  }
+]

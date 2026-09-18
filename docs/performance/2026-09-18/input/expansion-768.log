@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/docs/performance/2026-09-18/input/frozen-harness-v5/app_batch.py", line 369, in main
+    wait_for('main', 'window.vj0AppProbe.snapshot().rows.filter(r=>r.kind==="received").length>=40', 120)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/docs/performance/2026-09-18/input/frozen-harness-v5/app_batch.py", line 79, in wait_for
+    time.sleep(1)
+    ~~~~~~~~~~^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/docs/performance/2026-09-18/input/frozen-harness-v5/app_batch.py", line 565, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/docs/performance/2026-09-18/input/frozen-harness-v5/app_batch.py", line 561, in main
+    raise RuntimeError('Client termination unconfirmed: '+ '; '.join(cleanup_errors))
+RuntimeError: Client termination unconfirmed: final drain: Capture/encoder/worker work did not drain while connected; policy unchanged

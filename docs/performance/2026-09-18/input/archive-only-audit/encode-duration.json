@@ -1,0 +1,2291 @@
+{
+  "source_reports": {
+    "docs/performance/2026-09-18/input/results-512-archived.json": "b3e2ec67f1fb8ac7031932279523c2e95c5bab2856d237b5ed26b4f5df8a69d1",
+    "docs/performance/2026-09-18/input/results-768x448-archived.json": "0600b0c3db28f67d940b4eb3dc491477d5a226a12b76693712eeb3d5f045e4d2",
+    "docs/performance/2026-09-18/input/results-1024x576-archived.json": "ed6003bf5f2073e2cc6437e932dc5227a9b355862c5cd6a7ad8502a353ebb8c9"
+  },
+  "script_sha256": "03e671f2df7a1460019797836697cd64b1c10e6cdfa0f378c43186dc6e7b4545",
+  "meaning": "Encode duration is canvas.toBlob invocation to its callback. It includes scheduling/readback/encoding/callback delay, not isolated JPEG CPU time. Only events in each common measured window enter distributions. No samples are winsorized or removed for being slow. Stage FPS is WebGL submission, not physical monitor presentation.",
+  "comparisons": {
+    "rate40-512x288": {
+      "trials": [
+        {
+          "name": "rate40-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r0-control/main-raw.json.gz",
+          "raw_sha256": "e036ad2dc1e379e549f00b1c7ef5e26d3bee3ec39be006cad8705325e7c97bf7",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 52.61135805406441,
+          "stage_fps": 40.721224253995715,
+          "encode_done_ms": {
+            "count": 3177,
+            "mean": 8.959645252990242,
+            "p50": 7.0,
+            "p95": 21.0,
+            "p99": 26.824072265624977,
+            "min": 2,
+            "max": 146.800048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 3176,
+            "mean": 19.00610828159438,
+            "p50": 16.800048828125,
+            "p95": 33.5,
+            "p99": 34.9249267578125,
+            "min": 11.300048828125,
+            "max": 150.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.13220018885741266,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3630,
+              "rejected": 0,
+              "maxBufferedBytes": 11237
+            },
+            "before-send": {
+              "calls": 3185,
+              "rejected": 0,
+              "maxBufferedBytes": 5738
+            }
+          }
+        },
+        {
+          "name": "rate40-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "c783a8ed63651e20d92aea7225392c73a8047c812dcfa159817edacd7ac209bf",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 38.7488428225038,
+          "stage_fps": 37.45721472842035,
+          "encode_done_ms": {
+            "count": 2340,
+            "mean": 9.822564332098024,
+            "p50": 8.0,
+            "p95": 22.89991455078125,
+            "p99": 30.261010742187512,
+            "min": 2.400146484375,
+            "max": 57.10009765625
+          },
+          "encode_start_interval_ms": {
+            "count": 2338,
+            "mean": 25.811762252559614,
+            "p50": 31.800048828125,
+            "p95": 35.099853515625,
+            "p99": 36.66300537109376,
+            "min": 10.800048828125,
+            "max": 68.0
+          },
+          "fraction_encode_done_over_16_667ms": 0.1405982905982906,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2346,
+              "rejected": 0,
+              "maxBufferedBytes": 81852
+            },
+            "before-encode": {
+              "calls": 2570,
+              "rejected": 0,
+              "maxBufferedBytes": 85274
+            }
+          }
+        },
+        {
+          "name": "rate40-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "5fdd8cd21e78205aefd182fa02a90832cf94481dfc84fee3a945ec50b031a596",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 37.487276517867826,
+          "stage_fps": 36.04736788340667,
+          "encode_done_ms": {
+            "count": 2265,
+            "mean": 12.741057770246965,
+            "p50": 10.5,
+            "p95": 26.39990234375,
+            "p99": 39.300048828125,
+            "min": 2.39990234375,
+            "max": 86.800048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2265,
+            "mean": 26.666004415011038,
+            "p50": 32.5,
+            "p95": 34.699951171875,
+            "p99": 50.07198242187503,
+            "min": 10.400146484375,
+            "max": 97.900146484375
+          },
+          "fraction_encode_done_over_16_667ms": 0.2600441501103753,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2273,
+              "rejected": 0,
+              "maxBufferedBytes": 68253
+            },
+            "before-encode": {
+              "calls": 2682,
+              "rejected": 0,
+              "maxBufferedBytes": 71658
+            }
+          }
+        },
+        {
+          "name": "rate40-512x288-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r1-control/main-raw.json.gz",
+          "raw_sha256": "1ba731c8275f75e69d68500e14a55c1f0a44eff5fd4ddf18f5407953406b7709",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 37.10621206593834,
+          "stage_fps": 27.37017784247928,
+          "encode_done_ms": {
+            "count": 2241,
+            "mean": 13.950690892911926,
+            "p50": 11.0,
+            "p95": 28.300048828125,
+            "p99": 53.619970703124984,
+            "min": 2.800048828125,
+            "max": 184.89990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 2241,
+            "mean": 26.94364131874721,
+            "p50": 17.39990234375,
+            "p95": 35.400146484375,
+            "p99": 68.70014648437495,
+            "min": 9.599853515625,
+            "max": 3049.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.2824631860776439,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3581,
+              "rejected": 576,
+              "maxBufferedBytes": 265186
+            },
+            "before-send": {
+              "calls": 2247,
+              "rejected": 0,
+              "maxBufferedBytes": 261739
+            }
+          }
+        },
+        {
+          "name": "rate40-512x288-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r2-control/main-raw.json.gz",
+          "raw_sha256": "20240d6054b19dec7c68b894b0f6a5248d7763b8dec76a938ae84be063564d18",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 42.41442577039816,
+          "stage_fps": 37.975899371934005,
+          "encode_done_ms": {
+            "count": 2561,
+            "mean": 13.826513919733502,
+            "p50": 11.5,
+            "p95": 27.10009765625,
+            "p99": 43.04003906250001,
+            "min": 1.699951171875,
+            "max": 135.300048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2560,
+            "mean": 23.57964849472046,
+            "p50": 17.599853515625,
+            "p95": 35.0,
+            "p99": 51.04104003906249,
+            "min": 11.89990234375,
+            "max": 148.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.36352987114408436,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2567,
+              "rejected": 0,
+              "maxBufferedBytes": 5696
+            },
+            "before-encode": {
+              "calls": 3591,
+              "rejected": 0,
+              "maxBufferedBytes": 5710
+            }
+          }
+        },
+        {
+          "name": "rate40-512x288-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512/rate40-512x288-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "56ed9395c2590e6f573b6bd1c95a5c462d7abe60fe35117d86b180ffc41b4581",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 37.14201956325866,
+          "stage_fps": 36.11489859406953,
+          "encode_done_ms": {
+            "count": 2242,
+            "mean": 11.593176672439506,
+            "p50": 8.5,
+            "p95": 26.0,
+            "p99": 41.81287353515635,
+            "min": 2,
+            "max": 178.099853515625
+          },
+          "encode_start_interval_ms": {
+            "count": 2241,
+            "mean": 26.929361979166668,
+            "p50": 32.300048828125,
+            "p95": 35.10009765625,
+            "p99": 50.800048828125,
+            "min": 9.300048828125,
+            "max": 183.7998046875
+          },
+          "fraction_encode_done_over_16_667ms": 0.2604817127564674,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2685,
+              "rejected": 0,
+              "maxBufferedBytes": 11149
+            },
+            "before-send": {
+              "calls": 2248,
+              "rejected": 0,
+              "maxBufferedBytes": 5647
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 42.41442577039816,
+          "stage_fps": 37.975899371934005,
+          "encode_done_p50_ms": 11.0,
+          "encode_done_p95_ms": 27.10009765625,
+          "fraction_encode_done_over_16_667ms": 0.2824631860776439
+        },
+        "candidate": {
+          "requested_fps": [
+            40
+          ],
+          "send_fps": 37.487276517867826,
+          "stage_fps": 36.11489859406953,
+          "encode_done_p50_ms": 8.5,
+          "encode_done_p95_ms": 26.0,
+          "fraction_encode_done_over_16_667ms": 0.2600441501103753
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-512x288": {
+      "trials": [
+        {
+          "name": "rate30-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r0-control/main-raw.json.gz",
+          "raw_sha256": "adc7c0b379b573d5d9b38e358b492ac6c6cb540e1246a0370c43ce644dfd7b75",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 43.64758727074948,
+          "stage_fps": 37.752844832059495,
+          "encode_done_ms": {
+            "count": 2636,
+            "mean": 14.37234381298013,
+            "p50": 11.699951171875,
+            "p95": 28.0250244140625,
+            "p99": 49.83498535156286,
+            "min": 2.10009765625,
+            "max": 156.300048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2635,
+            "mean": 22.91502840740631,
+            "p50": 17.39990234375,
+            "p95": 34.7998779296875,
+            "p99": 60.28187011718565,
+            "min": 11.800048828125,
+            "max": 167.699951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.3160091047040971,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2646,
+              "rejected": 0,
+              "maxBufferedBytes": 5690
+            },
+            "before-encode": {
+              "calls": 3600,
+              "rejected": 0,
+              "maxBufferedBytes": 11297
+            }
+          }
+        },
+        {
+          "name": "rate30-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "de6066bca9883cc22c64f898e8866f571ab5324af548ff0d13580fc1bfc00218",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.309060819197352,
+          "stage_fps": 29.292511377741004,
+          "encode_done_ms": {
+            "count": 1771,
+            "mean": 14.814683755867096,
+            "p50": 12.0,
+            "p95": 27.4500732421875,
+            "p99": 54.900097656249955,
+            "min": 2.89990234375,
+            "max": 153.2001953125
+          },
+          "encode_start_interval_ms": {
+            "count": 1770,
+            "mean": 34.12225983183263,
+            "p50": 33.300048828125,
+            "p95": 35.699951171875,
+            "p99": 66.56198486328124,
+            "min": 13.2998046875,
+            "max": 167.0
+          },
+          "fraction_encode_done_over_16_667ms": 0.3743647656691135,
+          "admission_checks": {
+            "before-send": {
+              "calls": 1775,
+              "rejected": 0,
+              "maxBufferedBytes": 5699
+            },
+            "before-encode": {
+              "calls": 1902,
+              "rejected": 0,
+              "maxBufferedBytes": 5706
+            }
+          }
+        },
+        {
+          "name": "rate30-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "a579f60f2c3df89d5673a9c95093f4d1156b179963035b90ad3f05aeb6098948",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.445734036805014,
+          "stage_fps": 29.396022611869498,
+          "encode_done_ms": {
+            "count": 1777,
+            "mean": 13.51615078850415,
+            "p50": 10.199951171875,
+            "p95": 27.820019531250004,
+            "p99": 48.256074218750065,
+            "min": 2.099853515625,
+            "max": 147.5
+          },
+          "encode_start_interval_ms": {
+            "count": 1776,
+            "mean": 33.95056303556975,
+            "p50": 33.39990234375,
+            "p95": 35.82501220703125,
+            "p99": 61.47491455078125,
+            "min": 11.89990234375,
+            "max": 151.2998046875
+          },
+          "fraction_encode_done_over_16_667ms": 0.325267304445695,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1896,
+              "rejected": 0,
+              "maxBufferedBytes": 5749
+            },
+            "before-send": {
+              "calls": 1781,
+              "rejected": 0,
+              "maxBufferedBytes": 5662
+            }
+          }
+        },
+        {
+          "name": "rate30-512x288-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r1-control/main-raw.json.gz",
+          "raw_sha256": "b174bc5e317e54ebbeccfc108dd92b18dae0cc033891bfeda6ef34d80d1c690b",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 50.749898889930506,
+          "stage_fps": 39.38377723191799,
+          "encode_done_ms": {
+            "count": 3063,
+            "mean": 9.671037286004326,
+            "p50": 7.5,
+            "p95": 22.38991699218751,
+            "p99": 35.07598144531252,
+            "min": 2,
+            "max": 126.400146484375
+          },
+          "encode_start_interval_ms": {
+            "count": 3063,
+            "mean": 19.701991575355045,
+            "p50": 16.89990234375,
+            "p95": 33.699951171875,
+            "p99": 48.53803710937501,
+            "min": 11.099853515625,
+            "max": 132.5
+          },
+          "fraction_encode_done_over_16_667ms": 0.16291217760365653,
+          "admission_checks": {
+            "before-send": {
+              "calls": 3074,
+              "rejected": 0,
+              "maxBufferedBytes": 5683
+            },
+            "before-encode": {
+              "calls": 3620,
+              "rejected": 0,
+              "maxBufferedBytes": 11226
+            }
+          }
+        },
+        {
+          "name": "rate30-512x288-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r2-control/main-raw.json.gz",
+          "raw_sha256": "aee0e51e1cf348b146c5f8f032d605d3a33635a0b681f84b28397bacb1d85b4b",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 50.145484998485365,
+          "stage_fps": 39.48046110845083,
+          "encode_done_ms": {
+            "count": 3028,
+            "mean": 10.407924475726553,
+            "p50": 8.199951171875,
+            "p95": 23.66500244140626,
+            "p99": 30.045932617187503,
+            "min": 2.400146484375,
+            "max": 110.400146484375
+          },
+          "encode_start_interval_ms": {
+            "count": 3027,
+            "mean": 19.94212092792472,
+            "p50": 17.0,
+            "p95": 34.0,
+            "p99": 35.6000341796875,
+            "min": 12.0,
+            "max": 117.10009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.1763540290620872,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3630,
+              "rejected": 0,
+              "maxBufferedBytes": 5722
+            },
+            "before-send": {
+              "calls": 3040,
+              "rejected": 0,
+              "maxBufferedBytes": 5686
+            }
+          }
+        },
+        {
+          "name": "rate30-512x288-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/rate30-512x288-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "2eebba4b6e8b22efe574066bbb058e8e42bbb525e6e74ea8e2794f3164c46a9f",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.332867069927158,
+          "stage_fps": 29.29987171889237,
+          "encode_done_ms": {
+            "count": 1778,
+            "mean": 14.098819968670908,
+            "p50": 10.7998046875,
+            "p95": 28.10009765625,
+            "p99": 54.845849609375,
+            "min": 3.5,
+            "max": 210.5
+          },
+          "encode_start_interval_ms": {
+            "count": 1777,
+            "mean": 34.0908835115363,
+            "p50": 33.300048828125,
+            "p95": 35.59990234375,
+            "p99": 66.17205078125001,
+            "min": 15.0,
+            "max": 217.5
+          },
+          "fraction_encode_done_over_16_667ms": 0.29190101237345334,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1908,
+              "rejected": 0,
+              "maxBufferedBytes": 5710
+            },
+            "before-send": {
+              "calls": 1781,
+              "rejected": 0,
+              "maxBufferedBytes": 5575
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 50.145484998485365,
+          "stage_fps": 39.38377723191799,
+          "encode_done_p50_ms": 8.199951171875,
+          "encode_done_p95_ms": 23.66500244140626,
+          "fraction_encode_done_over_16_667ms": 0.1763540290620872
+        },
+        "candidate": {
+          "requested_fps": [
+            30
+          ],
+          "send_fps": 29.332867069927158,
+          "stage_fps": 29.29987171889237,
+          "encode_done_p50_ms": 10.7998046875,
+          "encode_done_p95_ms": 27.820019531250004,
+          "fraction_encode_done_over_16_667ms": 0.325267304445695
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "buffer64-512x288": {
+      "trials": [
+        {
+          "name": "buffer64-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/buffer64-512x288-r0-control/main-raw.json.gz",
+          "raw_sha256": "7b5aac90cc5aa80e2fd37594807bd412c25d978641e0bbb5fd031a2f90c68701",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 42.70700819585607,
+          "stage_fps": 37.704092573222816,
+          "encode_done_ms": {
+            "count": 2578,
+            "mean": 14.690535469143958,
+            "p50": 12.0,
+            "p95": 27.89990234375,
+            "p99": 51.09203369140626,
+            "min": 2.699951171875,
+            "max": 129.199951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 2577,
+            "mean": 23.411719053162592,
+            "p50": 17.5,
+            "p95": 35.0,
+            "p99": 64.8999609375,
+            "min": 11.800048828125,
+            "max": 133.800048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.3467804499612102,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3599,
+              "rejected": 0,
+              "maxBufferedBytes": 11294
+            },
+            "before-send": {
+              "calls": 2586,
+              "rejected": 0,
+              "maxBufferedBytes": 5668
+            }
+          }
+        },
+        {
+          "name": "buffer64-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/buffer64-512x288-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "02d740221f0ce448516d74ab5eb0606e8a5309fb5850cfd91be0e92db76a47ed",
+          "requested_fps": 60,
+          "threshold_bytes": 65536,
+          "send_fps": 43.88674225280371,
+          "stage_fps": 37.97445282478449,
+          "encode_done_ms": {
+            "count": 2650,
+            "mean": 12.767392762382075,
+            "p50": 10.5,
+            "p95": 26.300048828125,
+            "p99": 40.39990234375,
+            "min": 2.300048828125,
+            "max": 196.400146484375
+          },
+          "encode_start_interval_ms": {
+            "count": 2648,
+            "mean": 22.795845976769023,
+            "p50": 17.5,
+            "p95": 34.699951171875,
+            "p99": 50.70594238281254,
+            "min": 10.900146484375,
+            "max": 203.0
+          },
+          "fraction_encode_done_over_16_667ms": 0.3241509433962264,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3609,
+              "rejected": 0,
+              "maxBufferedBytes": 11338
+            },
+            "before-send": {
+              "calls": 2658,
+              "rejected": 0,
+              "maxBufferedBytes": 5690
+            }
+          }
+        },
+        {
+          "name": "buffer64-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "invalid",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2/buffer64-512x288-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "509273da2997ecdef8fb2c4806a735b377a8a335d9964abc0a4015a3809e0b61",
+          "requested_fps": 60,
+          "threshold_bytes": 65536,
+          "send_fps": 51.20299692516804,
+          "stage_fps": 35.737669592315406,
+          "encode_done_ms": {
+            "count": 3089,
+            "mean": 9.02780697700004,
+            "p50": 7.10009765625,
+            "p95": 21.199951171875,
+            "p99": 27.300048828125,
+            "min": 1.89990234375,
+            "max": 62.5
+          },
+          "encode_start_interval_ms": {
+            "count": 3088,
+            "mean": 19.531735751295336,
+            "p50": 16.800048828125,
+            "p95": 33.60009765625,
+            "p99": 35.52602539062502,
+            "min": 11.699951171875,
+            "max": 500.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.13629006150857884,
+          "admission_checks": {
+            "before-send": {
+              "calls": 3098,
+              "rejected": 0,
+              "maxBufferedBytes": 64930
+            },
+            "before-encode": {
+              "calls": 3622,
+              "rejected": 82,
+              "maxBufferedBytes": 68315
+            }
+          }
+        },
+        {
+          "name": "buffer64-512x288-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer64-512x288-r1-control/main-raw.json.gz",
+          "raw_sha256": "1f5001374e08d855f8c04b0394d0fe8765a55fda5051243d232c38017eb6c85e",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 43.15746435589592,
+          "stage_fps": 34.81401900285736,
+          "encode_done_ms": {
+            "count": 2607,
+            "mean": 14.354314256089374,
+            "p50": 11.39990234375,
+            "p95": 28.070068359374982,
+            "p99": 51.77581054687502,
+            "min": 2.5,
+            "max": 203.300048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2606,
+            "mean": 23.170222507105,
+            "p50": 17.300048828125,
+            "p95": 35.0,
+            "p99": 66.08486328124995,
+            "min": 10.800048828125,
+            "max": 217.7001953125
+          },
+          "fraction_encode_done_over_16_667ms": 0.3241273494438051,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3599,
+              "rejected": 0,
+              "maxBufferedBytes": 11348
+            },
+            "before-send": {
+              "calls": 2612,
+              "rejected": 0,
+              "maxBufferedBytes": 5738
+            }
+          }
+        },
+        {
+          "name": "buffer64-512x288-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer64-512x288-r2-control/main-raw.json.gz",
+          "raw_sha256": "5e2099e61d0a9136b982a91ae69cfa0bbf3768778704bc97e1653f403c7b0bdf",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 41.84280635315632,
+          "stage_fps": 36.07823920711578,
+          "encode_done_ms": {
+            "count": 2526,
+            "mean": 14.831991816359858,
+            "p50": 12.2001953125,
+            "p95": 28.39990234375,
+            "p99": 50.8751220703125,
+            "min": 2.199951171875,
+            "max": 188.800048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2525,
+            "mean": 23.9002772083849,
+            "p50": 17.699951171875,
+            "p95": 35.300048828125,
+            "p99": 64.13593750000024,
+            "min": 10.10009765625,
+            "max": 199.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.3681710213776722,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2533,
+              "rejected": 0,
+              "maxBufferedBytes": 5658
+            },
+            "before-encode": {
+              "calls": 3590,
+              "rejected": 0,
+              "maxBufferedBytes": 11328
+            }
+          }
+        },
+        {
+          "name": "buffer64-512x288-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer64-512x288-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "6d71bf03ca6f9439235fe7e664053d22c674097bf02cea4251c04bacd3da7455",
+          "requested_fps": 60,
+          "threshold_bytes": 65536,
+          "send_fps": 43.967654343907235,
+          "stage_fps": 38.15498139674662,
+          "encode_done_ms": {
+            "count": 2655,
+            "mean": 13.090813140007063,
+            "p50": 10.39990234375,
+            "p95": 26.900146484375,
+            "p99": 45.79204101562501,
+            "min": 1.5,
+            "max": 178
+          },
+          "encode_start_interval_ms": {
+            "count": 2653,
+            "mean": 22.7460233513652,
+            "p50": 17.5,
+            "p95": 34.699951171875,
+            "p99": 50.848095703125004,
+            "min": 12.89990234375,
+            "max": 184.0
+          },
+          "fraction_encode_done_over_16_667ms": 0.31902071563088513,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3603,
+              "rejected": 0,
+              "maxBufferedBytes": 11415
+            },
+            "before-send": {
+              "calls": 2660,
+              "rejected": 0,
+              "maxBufferedBytes": 5708
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 42.70700819585607,
+          "stage_fps": 36.07823920711578,
+          "encode_done_p50_ms": 12.0,
+          "encode_done_p95_ms": 28.070068359374982,
+          "fraction_encode_done_over_16_667ms": 0.3467804499612102
+        },
+        "candidate": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 43.967654343907235,
+          "stage_fps": 37.97445282478449,
+          "encode_done_p50_ms": 10.39990234375,
+          "encode_done_p95_ms": 26.300048828125,
+          "fraction_encode_done_over_16_667ms": 0.31902071563088513
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "buffer16-512x288": {
+      "trials": [
+        {
+          "name": "buffer16-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r0-control/main-raw.json.gz",
+          "raw_sha256": "7a7d88598a543870b7a1777aadadfeea1d8e388435e394856bf5d26845e7ba16",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 49.94856035694932,
+          "stage_fps": 36.44671070822173,
+          "encode_done_ms": {
+            "count": 3015,
+            "mean": 9.681195179700456,
+            "p50": 7.39990234375,
+            "p95": 22.5999267578125,
+            "p99": 35.25783203125004,
+            "min": 1.89990234375,
+            "max": 91.900146484375
+          },
+          "encode_start_interval_ms": {
+            "count": 3014,
+            "mean": 20.023158609432027,
+            "p50": 16.89990234375,
+            "p95": 33.800048828125,
+            "p99": 48.58708496093749,
+            "min": 13.300048828125,
+            "max": 583.699951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.17114427860696518,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3622,
+              "rejected": 34,
+              "maxBufferedBytes": 262935
+            },
+            "before-send": {
+              "calls": 3024,
+              "rejected": 0,
+              "maxBufferedBytes": 259499
+            }
+          }
+        },
+        {
+          "name": "buffer16-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "213a061a4521b1ff72fd036bec81de3d06d65660de24abee0dca291091dfc30e",
+          "requested_fps": 60,
+          "threshold_bytes": 16384,
+          "send_fps": 50.70470110923687,
+          "stage_fps": 37.79263226653209,
+          "encode_done_ms": {
+            "count": 3063,
+            "mean": 9.85285972124449,
+            "p50": 7.699951171875,
+            "p95": 23.400146484375,
+            "p99": 28.714023437500032,
+            "min": 1.5,
+            "max": 84.89990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 3061,
+            "mean": 19.725285886199362,
+            "p50": 17.0,
+            "p95": 33.900146484375,
+            "p99": 35.599951171875,
+            "min": 10.39990234375,
+            "max": 99.2998046875
+          },
+          "fraction_encode_done_over_16_667ms": 0.16356513222331048,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3631,
+              "rejected": 9,
+              "maxBufferedBytes": 19887
+            },
+            "before-send": {
+              "calls": 3073,
+              "rejected": 0,
+              "maxBufferedBytes": 14325
+            }
+          }
+        },
+        {
+          "name": "buffer16-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "bccc9b60f8f304032bba0633a4f6c5a168fe8dd75d220af0ec73029e3115d8cb",
+          "requested_fps": 60,
+          "threshold_bytes": 16384,
+          "send_fps": 43.436269415516925,
+          "stage_fps": 37.30681873521896,
+          "encode_done_ms": {
+            "count": 2622,
+            "mean": 14.17124649152603,
+            "p50": 11.0,
+            "p95": 28.300048828125,
+            "p99": 46.55805664062499,
+            "min": 2.60009765625,
+            "max": 203.39990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 2621,
+            "mean": 23.025410092909432,
+            "p50": 17.199951171875,
+            "p95": 34.800048828125,
+            "p99": 51.88007812500002,
+            "min": 11.800048828125,
+            "max": 216.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.32646834477498093,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3607,
+              "rejected": 0,
+              "maxBufferedBytes": 11292
+            },
+            "before-send": {
+              "calls": 2631,
+              "rejected": 0,
+              "maxBufferedBytes": 5704
+            }
+          }
+        },
+        {
+          "name": "buffer16-512x288-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r1-control/main-raw.json.gz",
+          "raw_sha256": "2af5054340334b2d36c86e606801cd0368d8d5df860d3d852262a27fc08d9826",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 42.982434520008916,
+          "stage_fps": 35.14787131077415,
+          "encode_done_ms": {
+            "count": 2595,
+            "mean": 14.527014560001204,
+            "p50": 11.699951171875,
+            "p95": 28.430102539062517,
+            "p99": 51.44212890624996,
+            "min": 2.60009765625,
+            "max": 155.60009765625
+          },
+          "encode_start_interval_ms": {
+            "count": 2593,
+            "mean": 23.273351349335954,
+            "p50": 17.5,
+            "p95": 35.5,
+            "p99": 66.0,
+            "min": 8.800048828125,
+            "max": 166.89990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.3229287090558767,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2604,
+              "rejected": 0,
+              "maxBufferedBytes": 136533
+            },
+            "before-encode": {
+              "calls": 3578,
+              "rejected": 0,
+              "maxBufferedBytes": 136533
+            }
+          }
+        },
+        {
+          "name": "buffer16-512x288-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r2-control/main-raw.json.gz",
+          "raw_sha256": "7ed9374403747ab12bdcc2d131ab98662eb9624bf992f7b1a49c52cefc39e81c",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 43.730088853302334,
+          "stage_fps": 36.77566351502631,
+          "encode_done_ms": {
+            "count": 2641,
+            "mean": 13.096100905048987,
+            "p50": 11.0,
+            "p95": 26.39990234375,
+            "p99": 45.06005859374999,
+            "min": 2.2998046875,
+            "max": 191.300048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2639,
+            "mean": 22.873853769479442,
+            "p50": 17.400146484375,
+            "p95": 34.60009765625,
+            "p99": 51.0,
+            "min": 11.800048828125,
+            "max": 200.800048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.32260507383566833,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2649,
+              "rejected": 0,
+              "maxBufferedBytes": 170207
+            },
+            "before-encode": {
+              "calls": 3608,
+              "rejected": 0,
+              "maxBufferedBytes": 170207
+            }
+          }
+        },
+        {
+          "name": "buffer16-512x288-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining/buffer16-512x288-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "10c983bb32d77c3edfdc3925738f2c0b20a066899eefca1a683fec30768318d0",
+          "requested_fps": 60,
+          "threshold_bytes": 16384,
+          "send_fps": 45.24040173211787,
+          "stage_fps": 36.215504607665366,
+          "encode_done_ms": {
+            "count": 2732,
+            "mean": 9.660466251401218,
+            "p50": 7.60009765625,
+            "p95": 22.145031738281233,
+            "p99": 27.73798828125001,
+            "min": 1.800048828125,
+            "max": 75.099853515625
+          },
+          "encode_start_interval_ms": {
+            "count": 2731,
+            "mean": 22.102856060909467,
+            "p50": 16.900146484375,
+            "p95": 34.0,
+            "p99": 68.05012207031241,
+            "min": 11.199951171875,
+            "max": 1199.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.1650805270863836,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3629,
+              "rejected": 409,
+              "maxBufferedBytes": 20645
+            },
+            "before-send": {
+              "calls": 2742,
+              "rejected": 0,
+              "maxBufferedBytes": 14992
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 43.730088853302334,
+          "stage_fps": 36.44671070822173,
+          "encode_done_p50_ms": 11.0,
+          "encode_done_p95_ms": 26.39990234375,
+          "fraction_encode_done_over_16_667ms": 0.32260507383566833
+        },
+        "candidate": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 45.24040173211787,
+          "stage_fps": 37.30681873521896,
+          "encode_done_p50_ms": 7.699951171875,
+          "encode_done_p95_ms": 23.400146484375,
+          "fraction_encode_done_over_16_667ms": 0.1650805270863836
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate40-768x448": {
+      "trials": [
+        {
+          "name": "rate40-768x448-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r0-control/main-raw.json.gz",
+          "raw_sha256": "4c53cbefc9731d0f7086e042f1c9713f005635e7ba1e29998e19905d8c580856",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 45.30930975041152,
+          "stage_fps": 20.566515508507937,
+          "encode_done_ms": {
+            "count": 2734,
+            "mean": 13.870630829370885,
+            "p50": 10.89990234375,
+            "p95": 28.5,
+            "p99": 52.70195068359379,
+            "min": 2.800048828125,
+            "max": 127.5
+          },
+          "encode_start_interval_ms": {
+            "count": 2734,
+            "mean": 22.060936303407324,
+            "p50": 17.0,
+            "p95": 34.699951171875,
+            "p99": 65.4669677734375,
+            "min": 12.699951171875,
+            "max": 133.60009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.27029992684711046,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2740,
+              "rejected": 0,
+              "maxBufferedBytes": 96316
+            },
+            "before-encode": {
+              "calls": 3592,
+              "rejected": 0,
+              "maxBufferedBytes": 101985
+            }
+          }
+        },
+        {
+          "name": "rate40-768x448-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "f00231ece0b1ae9111c5dadc35d0180c91d679375f178af80a549205644be2e1",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 35.29183703864155,
+          "stage_fps": 20.727740908610603,
+          "encode_done_ms": {
+            "count": 2130,
+            "mean": 15.66173193130135,
+            "p50": 12.39990234375,
+            "p95": 30.79993896484375,
+            "p99": 56.59699218750003,
+            "min": 3.599853515625,
+            "max": 186.10009765625
+          },
+          "encode_start_interval_ms": {
+            "count": 2129,
+            "mean": 28.329638236114373,
+            "p50": 32.400146484375,
+            "p95": 36.52001953124998,
+            "p99": 66.5,
+            "min": 12.5,
+            "max": 199.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.3455399061032864,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2135,
+              "rejected": 0,
+              "maxBufferedBytes": 39604
+            },
+            "before-encode": {
+              "calls": 2736,
+              "rejected": 0,
+              "maxBufferedBytes": 39604
+            }
+          }
+        },
+        {
+          "name": "rate40-768x448-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "7ddc6c14aa623e612b21f6d0c4eca65f4e4a3535b4693f016ebd0f50c3a760bf",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 34.751310220794345,
+          "stage_fps": 20.562709525596272,
+          "encode_done_ms": {
+            "count": 2099,
+            "mean": 14.948692434455396,
+            "p50": 11.599853515625,
+            "p95": 29.31003417968749,
+            "p99": 60.03199707031247,
+            "min": 2.800048828125,
+            "max": 204.5
+          },
+          "encode_start_interval_ms": {
+            "count": 2099,
+            "mean": 28.76679371129109,
+            "p50": 32.60009765625,
+            "p95": 35.89990234375,
+            "p99": 67.2021923828125,
+            "min": 13.0,
+            "max": 216.199951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.38113387327298714,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2781,
+              "rejected": 0,
+              "maxBufferedBytes": 11489
+            },
+            "before-send": {
+              "calls": 2105,
+              "rejected": 0,
+              "maxBufferedBytes": 9174
+            }
+          }
+        },
+        {
+          "name": "rate40-768x448-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r1-control/main-raw.json.gz",
+          "raw_sha256": "7adb1dec8c4514a95e5dd6e01b6bccbd877bd8663ba00fc2937ac63dd8885254",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 47.32992638854868,
+          "stage_fps": 21.204867265433077,
+          "encode_done_ms": {
+            "count": 2857,
+            "mean": 11.127931909290776,
+            "p50": 8.10009765625,
+            "p95": 23.899951171875,
+            "p99": 29.943945312500006,
+            "min": 2.2998046875,
+            "max": 141.800048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2856,
+            "mean": 21.124509838114932,
+            "p50": 17.0,
+            "p95": 34.199951171875,
+            "p99": 35.64503173828123,
+            "min": 12.5,
+            "max": 149.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.2513125656282814,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3621,
+              "rejected": 0,
+              "maxBufferedBytes": 18214
+            },
+            "before-send": {
+              "calls": 2864,
+              "rejected": 0,
+              "maxBufferedBytes": 9333
+            }
+          }
+        },
+        {
+          "name": "rate40-768x448-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r2-control/main-raw.json.gz",
+          "raw_sha256": "cb8fdbdc6d0461ab7707b5a1e2329f12b175094ce89dc7016044bab152272601",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 50.8107534534096,
+          "stage_fps": 21.20839855777703,
+          "encode_done_ms": {
+            "count": 3069,
+            "mean": 10.561680072524641,
+            "p50": 8.699951171875,
+            "p95": 22.85996093749999,
+            "p99": 29.39606445312505,
+            "min": 2.2998046875,
+            "max": 71.699951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 3068,
+            "mean": 19.675293366632374,
+            "p50": 17.0,
+            "p95": 34.099853515625,
+            "p99": 35.699951171875,
+            "min": 12.400146484375,
+            "max": 84.199951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.1681329423264907,
+          "admission_checks": {
+            "before-send": {
+              "calls": 3074,
+              "rejected": 0,
+              "maxBufferedBytes": 9253
+            },
+            "before-encode": {
+              "calls": 3628,
+              "rejected": 0,
+              "maxBufferedBytes": 18454
+            }
+          }
+        },
+        {
+          "name": "rate40-768x448-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate40-768x448-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "f58d0ec724d4c527c32c1739dad4b73cb5375f93c8a61abfb24d40c2eb43a001",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 35.24503411512358,
+          "stage_fps": 19.990956850072447,
+          "encode_done_ms": {
+            "count": 2128,
+            "mean": 14.353993466025905,
+            "p50": 11.6500244140625,
+            "p95": 28.5,
+            "p99": 53.16504882812501,
+            "min": 3.199951171875,
+            "max": 111.10009765625
+          },
+          "encode_start_interval_ms": {
+            "count": 2127,
+            "mean": 28.372308484477845,
+            "p50": 32.60009765625,
+            "p95": 35.270092773437504,
+            "p99": 65.97397460937498,
+            "min": 13.199951171875,
+            "max": 933.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.3092105263157895,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2749,
+              "rejected": 107,
+              "maxBufferedBytes": 266265
+            },
+            "before-send": {
+              "calls": 2133,
+              "rejected": 0,
+              "maxBufferedBytes": 260618
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 47.32992638854868,
+          "stage_fps": 21.204867265433077,
+          "encode_done_p50_ms": 8.699951171875,
+          "encode_done_p95_ms": 23.899951171875,
+          "fraction_encode_done_over_16_667ms": 0.2513125656282814
+        },
+        "candidate": {
+          "requested_fps": [
+            40
+          ],
+          "send_fps": 35.24503411512358,
+          "stage_fps": 20.562709525596272,
+          "encode_done_p50_ms": 11.6500244140625,
+          "encode_done_p95_ms": 29.31003417968749,
+          "fraction_encode_done_over_16_667ms": 0.3455399061032864
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-768x448": {
+      "trials": [
+        {
+          "name": "rate30-768x448-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r0-control/main-raw.json.gz",
+          "raw_sha256": "c3bd6a9aab42908bb44b85da4f4ef93b3923a96b34615bbb3f5c36f61b4a66d0",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 42.04820132020857,
+          "stage_fps": 20.957830839268652,
+          "encode_done_ms": {
+            "count": 2538,
+            "mean": 15.34570591462889,
+            "p50": 12.300048828125,
+            "p95": 28.93013916015627,
+            "p99": 52.76301269531251,
+            "min": 3.699951171875,
+            "max": 208.300048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2538,
+            "mean": 23.7770685386808,
+            "p50": 17.599853515625,
+            "p95": 35.199951171875,
+            "p99": 65.25193847656254,
+            "min": 11.39990234375,
+            "max": 215.900146484375
+          },
+          "fraction_encode_done_over_16_667ms": 0.35736800630417653,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3587,
+              "rejected": 0,
+              "maxBufferedBytes": 22818
+            },
+            "before-send": {
+              "calls": 2546,
+              "rejected": 0,
+              "maxBufferedBytes": 17090
+            }
+          }
+        },
+        {
+          "name": "rate30-768x448-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "f7aa9021851531cd588c888a3fecc7142b693b459ccbd5bfc0521a5e7fac3336",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 28.846408582245118,
+          "stage_fps": 20.55016822650183,
+          "encode_done_ms": {
+            "count": 1742,
+            "mean": 16.441906023518225,
+            "p50": 13.0499267578125,
+            "p95": 30.199951171875,
+            "p99": 56.930988769531176,
+            "min": 3,
+            "max": 277.60009765625
+          },
+          "encode_start_interval_ms": {
+            "count": 1742,
+            "mean": 34.642594662654275,
+            "p50": 33.300048828125,
+            "p95": 38.49000244140626,
+            "p99": 66.800048828125,
+            "min": 12.800048828125,
+            "max": 284.10009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.4425947187141217,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1972,
+              "rejected": 0,
+              "maxBufferedBytes": 11451
+            },
+            "before-send": {
+              "calls": 1747,
+              "rejected": 0,
+              "maxBufferedBytes": 9144
+            }
+          }
+        },
+        {
+          "name": "rate30-768x448-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "fc1ebca299417c4f4d2dd08840e0c922cc3570acf046c1264af01cf007be76b0",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.22838713950966,
+          "stage_fps": 20.368791037731945,
+          "encode_done_ms": {
+            "count": 1765,
+            "mean": 13.5321287679267,
+            "p50": 9.599853515625,
+            "p95": 29.300048828125,
+            "p99": 55.63588867187499,
+            "min": 2.39990234375,
+            "max": 175.699951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 1765,
+            "mean": 34.19099141842245,
+            "p50": 33.39990234375,
+            "p95": 36.0,
+            "p99": 65.83583984375,
+            "min": 14.60009765625,
+            "max": 183.599853515625
+          },
+          "fraction_encode_done_over_16_667ms": 0.2963172804532578,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1918,
+              "rejected": 0,
+              "maxBufferedBytes": 153169
+            },
+            "before-send": {
+              "calls": 1769,
+              "rejected": 0,
+              "maxBufferedBytes": 153169
+            }
+          }
+        },
+        {
+          "name": "rate30-768x448-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r1-control/main-raw.json.gz",
+          "raw_sha256": "033b181d1a6043d97fb8253039a467cf55341dfcd5dd95c367907bd943d47cd6",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 49.82524701985445,
+          "stage_fps": 21.185668530051146,
+          "encode_done_ms": {
+            "count": 3008,
+            "mean": 10.266457415641622,
+            "p50": 7.7998046875,
+            "p95": 23.599853515625,
+            "p99": 31.572104492187435,
+            "min": 2,
+            "max": 176.39990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 3008,
+            "mean": 20.06781914893617,
+            "p50": 16.900146484375,
+            "p95": 34.0,
+            "p99": 38.493010253906235,
+            "min": 11.5,
+            "max": 184.699951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.18118351063829788,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3617,
+              "rejected": 0,
+              "maxBufferedBytes": 153195
+            },
+            "before-send": {
+              "calls": 3015,
+              "rejected": 0,
+              "maxBufferedBytes": 153195
+            }
+          }
+        },
+        {
+          "name": "rate30-768x448-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r2-control/main-raw.json.gz",
+          "raw_sha256": "f7ad11c14a3492b1edb8fb51962ab1f99aa0b2cbae0145a7ad2a15f8e3a733a4",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 46.82099217727323,
+          "stage_fps": 21.05040009102026,
+          "encode_done_ms": {
+            "count": 2827,
+            "mean": 12.89699295092523,
+            "p50": 10.2998046875,
+            "p95": 27.300048828125,
+            "p99": 47.57203613281189,
+            "min": 2.800048828125,
+            "max": 147.89990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 2827,
+            "mean": 21.35344886847254,
+            "p50": 17.0,
+            "p95": 34.39990234375,
+            "p99": 61.146025390622185,
+            "min": 9.099853515625,
+            "max": 150.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.23841528121683764,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3607,
+              "rejected": 0,
+              "maxBufferedBytes": 199050
+            },
+            "before-send": {
+              "calls": 2836,
+              "rejected": 0,
+              "maxBufferedBytes": 199050
+            }
+          }
+        },
+        {
+          "name": "rate30-768x448-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448/rate30-768x448-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "cdec5d650b4fd16ef936c9351a949cd21277b831d2847b67237f2eea43e7a199",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 28.839926010237257,
+          "stage_fps": 20.77269799933229,
+          "encode_done_ms": {
+            "count": 1741,
+            "mean": 15.983917990064977,
+            "p50": 12.10009765625,
+            "p95": 31.300048828125,
+            "p99": 62.83994140624996,
+            "min": 3.89990234375,
+            "max": 242.2998046875
+          },
+          "encode_start_interval_ms": {
+            "count": 1741,
+            "mean": 34.661688684663986,
+            "p50": 33.300048828125,
+            "p95": 39.10009765625,
+            "p99": 67.71997070312499,
+            "min": 13.7998046875,
+            "max": 249.699951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.33716255025847214,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1959,
+              "rejected": 0,
+              "maxBufferedBytes": 11396
+            },
+            "before-send": {
+              "calls": 1745,
+              "rejected": 0,
+              "maxBufferedBytes": 9125
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 46.82099217727323,
+          "stage_fps": 21.05040009102026,
+          "encode_done_p50_ms": 10.2998046875,
+          "encode_done_p95_ms": 27.300048828125,
+          "fraction_encode_done_over_16_667ms": 0.23841528121683764
+        },
+        "candidate": {
+          "requested_fps": [
+            30
+          ],
+          "send_fps": 28.846408582245118,
+          "stage_fps": 20.55016822650183,
+          "encode_done_p50_ms": 12.10009765625,
+          "encode_done_p95_ms": 30.199951171875,
+          "fraction_encode_done_over_16_667ms": 0.33716255025847214
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate40-1024x576": {
+      "trials": [
+        {
+          "name": "rate40-1024x576-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r0-control/main-raw.json.gz",
+          "raw_sha256": "2f3e88ed128e7ef98c10081f3f3e40e7988bb1abc4f3bc74a01f37faf9ab847f",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 52.945475189030155,
+          "stage_fps": 12.262801765221381,
+          "encode_done_ms": {
+            "count": 3195,
+            "mean": 9.498967197280908,
+            "p50": 7.5,
+            "p95": 21.630053710937517,
+            "p99": 28.71194824218749,
+            "min": 2.800048828125,
+            "max": 86.5
+          },
+          "encode_start_interval_ms": {
+            "count": 3194,
+            "mean": 18.888415810161632,
+            "p50": 16.7998046875,
+            "p95": 33.800048828125,
+            "p99": 35.300048828125,
+            "min": 11.89990234375,
+            "max": 100.10009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.12269170579029734,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3618,
+              "rejected": 0,
+              "maxBufferedBytes": 37694
+            },
+            "before-send": {
+              "calls": 3202,
+              "rejected": 0,
+              "maxBufferedBytes": 25569
+            }
+          }
+        },
+        {
+          "name": "rate40-1024x576-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "d195d36a664d998f955cbf6775934b3a99a17f5c86eee16682e4cc5d7c917351",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 39.432045993008266,
+          "stage_fps": 12.260384048246268,
+          "encode_done_ms": {
+            "count": 2380,
+            "mean": 10.161261345358456,
+            "p50": 8.7998046875,
+            "p95": 21.39990234375,
+            "p99": 26.5,
+            "min": 3.199951171875,
+            "max": 78
+          },
+          "encode_start_interval_ms": {
+            "count": 2379,
+            "mean": 25.35216479564024,
+            "p50": 31.39990234375,
+            "p95": 34.5,
+            "p99": 35.300048828125,
+            "min": 13.599853515625,
+            "max": 83.300048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.10756302521008404,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2545,
+              "rejected": 0,
+              "maxBufferedBytes": 36935
+            },
+            "before-send": {
+              "calls": 2384,
+              "rejected": 0,
+              "maxBufferedBytes": 25293
+            }
+          }
+        },
+        {
+          "name": "rate40-1024x576-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "7b22bf7c0cb9c885cfdda74674c849b121f71e0149daa507f058c02f293ff577",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 38.19431223659308,
+          "stage_fps": 12.129386792705482,
+          "encode_done_ms": {
+            "count": 2305,
+            "mean": 12.550151144760033,
+            "p50": 10.60009765625,
+            "p95": 24.0,
+            "p99": 30.796044921875005,
+            "min": 3.5,
+            "max": 224.800048828125
+          },
+          "encode_start_interval_ms": {
+            "count": 2303,
+            "mean": 26.18936174453159,
+            "p50": 32.199951171875,
+            "p95": 34.5,
+            "p99": 36.1000927734375,
+            "min": 14.0,
+            "max": 233.400146484375
+          },
+          "fraction_encode_done_over_16_667ms": 0.2017353579175705,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2664,
+              "rejected": 11,
+              "maxBufferedBytes": 273179
+            },
+            "before-send": {
+              "calls": 2309,
+              "rejected": 0,
+              "maxBufferedBytes": 262054
+            }
+          }
+        },
+        {
+          "name": "rate40-1024x576-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r1-control/main-raw.json.gz",
+          "raw_sha256": "f48e348bd103148d55af4f6a7148eb840474470b1eec9162165d8d9ef3732c07",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 45.574382736187424,
+          "stage_fps": 12.238179085044514,
+          "encode_done_ms": {
+            "count": 2752,
+            "mean": 13.889497180317724,
+            "p50": 11.699951171875,
+            "p95": 25.0,
+            "p99": 37.343095703124845,
+            "min": 5,
+            "max": 172.39990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 2751,
+            "mean": 21.941948400155624,
+            "p50": 17.199951171875,
+            "p95": 34.599853515625,
+            "p99": 49.75,
+            "min": 12.5,
+            "max": 182.199951171875
+          },
+          "fraction_encode_done_over_16_667ms": 0.2754360465116279,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2757,
+              "rejected": 0,
+              "maxBufferedBytes": 49080
+            },
+            "before-encode": {
+              "calls": 3616,
+              "rejected": 0,
+              "maxBufferedBytes": 57250
+            }
+          }
+        },
+        {
+          "name": "rate40-1024x576-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r2-control/main-raw.json.gz",
+          "raw_sha256": "28e3b15eab187d8f86420a0e73c8c764a1eb9a6d1b1acc5b989611fc533dc9b2",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 47.501727298654814,
+          "stage_fps": 12.210942804014161,
+          "encode_done_ms": {
+            "count": 2867,
+            "mean": 12.260901853935952,
+            "p50": 10.5,
+            "p95": 22.89990234375,
+            "p99": 37.70203125000005,
+            "min": 2.900146484375,
+            "max": 187.39990234375
+          },
+          "encode_start_interval_ms": {
+            "count": 2867,
+            "mean": 21.043599581444017,
+            "p50": 16.900146484375,
+            "p95": 34.10009765625,
+            "p99": 49.5999365234375,
+            "min": 12.900146484375,
+            "max": 199.800048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.2326473665852808,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3609,
+              "rejected": 0,
+              "maxBufferedBytes": 37631
+            },
+            "before-send": {
+              "calls": 2872,
+              "rejected": 0,
+              "maxBufferedBytes": 33374
+            }
+          }
+        },
+        {
+          "name": "rate40-1024x576-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate40-1024x576-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "f02c746ed314cade4c470019d863c5a35efa5efabfe8f02d4f5d704f63752c2a",
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "send_fps": 38.44981469819468,
+          "stage_fps": 12.20918286625139,
+          "encode_done_ms": {
+            "count": 2321,
+            "mean": 11.142265612377477,
+            "p50": 8.699951171875,
+            "p95": 23.400146484375,
+            "p99": 35.81982421875089,
+            "min": 2.699951171875,
+            "max": 208.900146484375
+          },
+          "encode_start_interval_ms": {
+            "count": 2319,
+            "mean": 26.01543760443618,
+            "p50": 31.800048828125,
+            "p95": 34.89990234375,
+            "p99": 46.48400878906433,
+            "min": 13.0,
+            "max": 217.10009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.17837139164153382,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2638,
+              "rejected": 0,
+              "maxBufferedBytes": 25313
+            },
+            "before-send": {
+              "calls": 2325,
+              "rejected": 0,
+              "maxBufferedBytes": 23780
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 47.501727298654814,
+          "stage_fps": 12.238179085044514,
+          "encode_done_p50_ms": 10.5,
+          "encode_done_p95_ms": 22.89990234375,
+          "fraction_encode_done_over_16_667ms": 0.2326473665852808
+        },
+        "candidate": {
+          "requested_fps": [
+            40
+          ],
+          "send_fps": 38.44981469819468,
+          "stage_fps": 12.20918286625139,
+          "encode_done_p50_ms": 8.7998046875,
+          "encode_done_p95_ms": 23.400146484375,
+          "fraction_encode_done_over_16_667ms": 0.17837139164153382
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-1024x576": {
+      "trials": [
+        {
+          "name": "rate30-1024x576-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576/rate30-1024x576-r0-control/main-raw.json.gz",
+          "raw_sha256": "94d4d467792dd65c5a6005ff3fc86a8ff95eaa5ca398726de6c7fb9803e7546a",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 54.09023224711158,
+          "stage_fps": 12.209648136637439,
+          "encode_done_ms": {
+            "count": 3265,
+            "mean": 9.243645464442956,
+            "p50": 7.60009765625,
+            "p95": 21.100048828125,
+            "p99": 27.536035156250012,
+            "min": 2.800048828125,
+            "max": 89
+          },
+          "encode_start_interval_ms": {
+            "count": 3264,
+            "mean": 18.488602956136067,
+            "p50": 16.7998046875,
+            "p95": 33.5,
+            "p99": 35.0,
+            "min": 13.2998046875,
+            "max": 101.2001953125
+          },
+          "fraction_encode_done_over_16_667ms": 0.10137825421133231,
+          "admission_checks": {
+            "before-send": {
+              "calls": 3271,
+              "rejected": 0,
+              "maxBufferedBytes": 261859
+            },
+            "before-encode": {
+              "calls": 3622,
+              "rejected": 0,
+              "maxBufferedBytes": 261859
+            }
+          }
+        },
+        {
+          "name": "rate30-1024x576-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining/rate30-1024x576-r0-candidate/main-raw.json.gz",
+          "raw_sha256": "d0d8ff02a007c67871d05dd0a069f0b5b8a668385b6952ef4009e14c5ddb1818",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.64560928832471,
+          "stage_fps": 12.060072082136559,
+          "encode_done_ms": {
+            "count": 1792,
+            "mean": 14.021313122340612,
+            "p50": 11.9000244140625,
+            "p95": 24.79991455078125,
+            "p99": 41.20895996093749,
+            "min": 3.599853515625,
+            "max": 206.199951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 1791,
+            "mean": 33.7322165842232,
+            "p50": 33.39990234375,
+            "p95": 35.4000244140625,
+            "p99": 50.90991210937499,
+            "min": 14.699951171875,
+            "max": 217.39990234375
+          },
+          "fraction_encode_done_over_16_667ms": 0.29910714285714285,
+          "admission_checks": {
+            "before-send": {
+              "calls": 1795,
+              "rejected": 0,
+              "maxBufferedBytes": 205132
+            },
+            "before-encode": {
+              "calls": 1877,
+              "rejected": 0,
+              "maxBufferedBytes": 205132
+            }
+          }
+        },
+        {
+          "name": "rate30-1024x576-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining/rate30-1024x576-r1-candidate/main-raw.json.gz",
+          "raw_sha256": "e474033ff1481ca8f6119a3dda949bebb531e50a98943b757d918960dbfef302",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.881797967558573,
+          "stage_fps": 12.158115137576493,
+          "encode_done_ms": {
+            "count": 1804,
+            "mean": 11.444955356369526,
+            "p50": 8.89990234375,
+            "p95": 23.80001220703125,
+            "p99": 29.394140625000006,
+            "min": 3.10009765625,
+            "max": 77.5
+          },
+          "encode_start_interval_ms": {
+            "count": 1803,
+            "mean": 33.46195238296416,
+            "p50": 33.39990234375,
+            "p95": 35.39990234375,
+            "p99": 50.39990234375,
+            "min": 14.60009765625,
+            "max": 82.10009765625
+          },
+          "fraction_encode_done_over_16_667ms": 0.20454545454545456,
+          "admission_checks": {
+            "before-send": {
+              "calls": 1808,
+              "rejected": 0,
+              "maxBufferedBytes": 40701
+            },
+            "before-encode": {
+              "calls": 1839,
+              "rejected": 0,
+              "maxBufferedBytes": 49122
+            }
+          }
+        },
+        {
+          "name": "rate30-1024x576-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining/rate30-1024x576-r1-control/main-raw.json.gz",
+          "raw_sha256": "dac3be6b2e1ce3b8971699615a52463baa181674890538ffc13bf07feec0a9f6",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 54.46698864389819,
+          "stage_fps": 12.188417039194,
+          "encode_done_ms": {
+            "count": 3289,
+            "mean": 8.842746937590263,
+            "p50": 7.39990234375,
+            "p95": 20.199951171875,
+            "p99": 25.0,
+            "min": 3.199951171875,
+            "max": 87.699951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 3288,
+            "mean": 18.353527950834472,
+            "p50": 16.699951171875,
+            "p95": 33.39990234375,
+            "p99": 34.5,
+            "min": 13.39990234375,
+            "max": 349.800048828125
+          },
+          "fraction_encode_done_over_16_667ms": 0.0896929157798723,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3627,
+              "rejected": 20,
+              "maxBufferedBytes": 269930
+            },
+            "before-send": {
+              "calls": 3294,
+              "rejected": 0,
+              "maxBufferedBytes": 261710
+            }
+          }
+        },
+        {
+          "name": "rate30-1024x576-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining/rate30-1024x576-r2-control/main-raw.json.gz",
+          "raw_sha256": "0420e922a28a136d5900f5eeafcdf70c5f95d78228004d0d7b311cb3d56b561a",
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "send_fps": 51.63140685752504,
+          "stage_fps": 12.17096986538836,
+          "encode_done_ms": {
+            "count": 3118,
+            "mean": 10.998300881474503,
+            "p50": 9.300048828125,
+            "p95": 22.800048828125,
+            "p99": 29.90010498046875,
+            "min": 3.5,
+            "max": 159.7001953125
+          },
+          "encode_start_interval_ms": {
+            "count": 3118,
+            "mean": 19.365266243259903,
+            "p50": 16.89990234375,
+            "p95": 33.800048828125,
+            "p99": 35.18297607421874,
+            "min": 13.599853515625,
+            "max": 168.5
+          },
+          "fraction_encode_done_over_16_667ms": 0.1404746632456703,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3624,
+              "rejected": 0,
+              "maxBufferedBytes": 43673
+            },
+            "before-send": {
+              "calls": 3126,
+              "rejected": 0,
+              "maxBufferedBytes": 35508
+            }
+          }
+        },
+        {
+          "name": "rate30-1024x576-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "source_raw": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining/rate30-1024x576-r2-candidate/main-raw.json.gz",
+          "raw_sha256": "ce748099a4e2841f306d3ffa9038c21371ae057e3af20692a82dd207b2985b15",
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "send_fps": 29.723738208235922,
+          "stage_fps": 12.227490968605412,
+          "encode_done_ms": {
+            "count": 1794,
+            "mean": 14.058247679983626,
+            "p50": 11.699951171875,
+            "p95": 25.09993896484375,
+            "p99": 39.59799316406241,
+            "min": 4,
+            "max": 124.699951171875
+          },
+          "encode_start_interval_ms": {
+            "count": 1793,
+            "mean": 33.6389292234558,
+            "p50": 33.300048828125,
+            "p95": 35.4,
+            "p99": 51.00798828124999,
+            "min": 14.2998046875,
+            "max": 135.400146484375
+          },
+          "fraction_encode_done_over_16_667ms": 0.30992196209587514,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 1864,
+              "rejected": 0,
+              "maxBufferedBytes": 147772
+            },
+            "before-send": {
+              "calls": 1798,
+              "rejected": 0,
+              "maxBufferedBytes": 147772
+            }
+          }
+        }
+      ],
+      "median_trials": {
+        "control": {
+          "requested_fps": [
+            60
+          ],
+          "send_fps": 54.09023224711158,
+          "stage_fps": 12.188417039194,
+          "encode_done_p50_ms": 7.60009765625,
+          "encode_done_p95_ms": 21.100048828125,
+          "fraction_encode_done_over_16_667ms": 0.10137825421133231
+        },
+        "candidate": {
+          "requested_fps": [
+            30
+          ],
+          "send_fps": 29.723738208235922,
+          "stage_fps": 12.158115137576493,
+          "encode_done_p50_ms": 11.699951171875,
+          "encode_done_p95_ms": 24.79991455078125,
+          "fraction_encode_done_over_16_667ms": 0.29910714285714285
+        }
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    }
+  }
+}

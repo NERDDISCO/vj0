@@ -1,0 +1,46 @@
+{
+  "status": "promotion-blocked-pending-temporal-review",
+  "reason": "Median impulse counts hide a pooled and matched-pair loss; scalar latency eligibility is insufficient.",
+  "control_within_1000ms": 56,
+  "candidate_within_1000ms": 55,
+  "expected_each_role": 57,
+  "trials": [
+    {
+      "role": "control",
+      "pair": 0,
+      "within_1000ms": 18,
+      "no_admitted_capture": 1
+    },
+    {
+      "role": "candidate",
+      "pair": 0,
+      "within_1000ms": 19,
+      "no_admitted_capture": 0
+    },
+    {
+      "role": "candidate",
+      "pair": 1,
+      "within_1000ms": 19,
+      "no_admitted_capture": 0
+    },
+    {
+      "role": "control",
+      "pair": 1,
+      "within_1000ms": 19,
+      "no_admitted_capture": 0
+    },
+    {
+      "role": "control",
+      "pair": 2,
+      "within_1000ms": 19,
+      "no_admitted_capture": 0
+    },
+    {
+      "role": "candidate",
+      "pair": 2,
+      "within_1000ms": 17,
+      "no_admitted_capture": 2
+    }
+  ],
+  "interpretation": "One extra missed response in this small cohort does not prove a causal regression, but it does not establish the requested temporal preservation. No defaults promoted."
+}

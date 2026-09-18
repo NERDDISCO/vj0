@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "purpose": "excluded fresh connection, no image capture, then ordered barrier",
+  "before": {
+    "protocol": {
+      "benchmarkFrameIds": 1
+    },
+    "uptime_s": "4817",
+    "stats": {
+      "framesFromClient": 81706,
+      "framesToWorker": 64278,
+      "framesFromWorker": 64277,
+      "framesToClient": 64277,
+      "droppedByWorker": 0,
+      "droppedInbound": 0,
+      "droppedOutbound": 0,
+      "lastClientFrameAt": 1789721290013,
+      "lastWorkerFrameAt": 1789721107337,
+      "lastSentToClientAt": 1789721107337,
+      "channelBufferedAmount": 0,
+      "channelState": "closed",
+      "eventLoopLagMs": 1,
+      "eventLoopLagTotal": 3387,
+      "eventLoopChecks": 9628,
+      "startedAt": 1789716777540,
+      "mailboxDispatched": 64278,
+      "mailboxReplaced": 17427,
+      "mailboxCleared": 1,
+      "mailboxLastClearReason": "pending frames cleared"
+    },
+    "memory": {
+      "rss": 54571008,
+      "heapTotal": 17801216,
+      "heapUsed": 13133048,
+      "external": 2169480,
+      "arrayBuffers": 123115
+    },
+    "workers": [
+      {
+        "gpu": 0,
+        "ready": true,
+        "framePending": 0,
+        "framesProduced": 64277,
+        "framesDispatched": 64278,
+        "compileStartedAt": 0,
+        "mailboxFlightSource": null,
+        "lastFrameAt": 1789721107337,
+        "stdoutBufLen": 0
+      }
+    ],
+    "channel": null,
+    "connection": null
+  },
+  "barrier": {
+    "before": {
+      "at": 1789721606644.2,
+      "channels": [
+        {
+          "readyState": "open",
+          "bufferedAmount": 0,
+          "ordered": true,
+          "maxRetransmits": null,
+          "maxPacketLifeTime": null
+        }
+      ]
+    },
+    "ack": {
+      "type": "vj0-input-barrier-ack",
+      "nonce": "input-1789721606644-nycerz93ezj",
+      "status": "passed",
+      "detail": "All prior inputs admitted/dropped and workers idle; prior output precedes this ordered ack",
+      "client_epoch": 46,
+      "receivedAtBarrier": 81706,
+      "sourceAtBarrier": 81706,
+      "elapsedMs": 0
+    },
+    "receivedAt": 1789721606665.3,
+    "after": [
+      {
+        "readyState": "open",
+        "bufferedAmount": 0,
+        "ordered": true,
+        "maxRetransmits": null,
+        "maxPacketLifeTime": null
+      }
+    ]
+  },
+  "after": {
+    "protocol": {
+      "benchmarkFrameIds": 1
+    },
+    "uptime_s": "4829",
+    "stats": {
+      "framesFromClient": 81706,
+      "framesToWorker": 64278,
+      "framesFromWorker": 64277,
+      "framesToClient": 64277,
+      "droppedByWorker": 0,
+      "droppedInbound": 0,
+      "droppedOutbound": 0,
+      "lastClientFrameAt": 1789721290013,
+      "lastWorkerFrameAt": 1789721107337,
+      "lastSentToClientAt": 1789721107337,
+      "channelBufferedAmount": 0,
+      "channelState": "closed",
+      "eventLoopLagMs": 1,
+      "eventLoopLagTotal": 3397,
+      "eventLoopChecks": 9652,
+      "startedAt": 1789716777540,
+      "mailboxDispatched": 64278,
+      "mailboxReplaced": 17427,
+      "mailboxCleared": 1,
+      "mailboxLastClearReason": "pending frames cleared"
+    },
+    "memory": {
+      "rss": 56668160,
+      "heapTotal": 17801216,
+      "heapUsed": 13598160,
+      "external": 2170402,
+      "arrayBuffers": 124037
+    },
+    "workers": [
+      {
+        "gpu": 0,
+        "ready": true,
+        "framePending": 0,
+        "framesProduced": 64277,
+        "framesDispatched": 64278,
+        "compileStartedAt": 0,
+        "mailboxFlightSource": null,
+        "lastFrameAt": 1789721107337,
+        "stdoutBufLen": 0
+      }
+    ],
+    "channel": {
+      "readyState": "open",
+      "bufferedAmount": 0,
+      "label": "frames"
+    },
+    "connection": {
+      "connectionState": "connected",
+      "iceConnectionState": "connected"
+    }
+  },
+  "local_cleanup": "navigated-to-blank"
+}

@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "id": "CPHD1qOIoD_zhYa5HWi",
+      "timestamp": 1789718684969.496,
+      "type": "candidate-pair",
+      "bytesDiscardedOnSend": 0,
+      "bytesReceived": 30712348,
+      "bytesSent": 9815518,
+      "consentRequestsSent": 26,
+      "currentRoundTripTime": 0.019,
+      "lastPacketReceivedTimestamp": 1789718684959,
+      "lastPacketSentTimestamp": 1789718684959,
+      "localCandidateId": "IHD1qOIoD",
+      "nominated": true,
+      "packetsDiscardedOnSend": 0,
+      "packetsReceived": 29747,
+      "packetsSent": 20609,
+      "priority": 7241540809772645000,
+      "remoteCandidateId": "IzhYa5HWi",
+      "requestsReceived": 28,
+      "requestsSent": 27,
+      "responsesReceived": 27,
+      "responsesSent": 28,
+      "state": "succeeded",
+      "totalRoundTripTime": 0.614,
+      "transportId": "T01",
+      "writable": true
+    }
+  ]
+]

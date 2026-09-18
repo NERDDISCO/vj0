@@ -1,0 +1,50 @@
+{
+  "protocol": {
+    "benchmarkFrameIds": 1
+  },
+  "uptime_s": "5735",
+  "stats": {
+    "framesFromClient": 110358,
+    "framesToWorker": 78981,
+    "framesFromWorker": 78979,
+    "framesToClient": 78979,
+    "droppedByWorker": 0,
+    "droppedInbound": 0,
+    "droppedOutbound": 0,
+    "lastClientFrameAt": 1789722512146,
+    "lastWorkerFrameAt": 1789722512124,
+    "lastSentToClientAt": 1789722512125,
+    "channelBufferedAmount": 0,
+    "channelState": "open",
+    "eventLoopLagMs": 1,
+    "eventLoopLagTotal": 3750,
+    "eventLoopChecks": 11463,
+    "startedAt": 1789716777540,
+    "mailboxDispatched": 78981,
+    "mailboxReplaced": 31375,
+    "mailboxCleared": 1,
+    "mailboxLastClearReason": "pending frames cleared"
+  },
+  "workers": [
+    {
+      "gpu": 0,
+      "ready": true,
+      "framePending": 1,
+      "framesProduced": 78979,
+      "framesDispatched": 78981,
+      "compileStartedAt": 0,
+      "mailboxFlightSource": 110357,
+      "lastFrameAt": 1789722512124,
+      "stdoutBufLen": 0
+    }
+  ],
+  "channel": {
+    "readyState": "open",
+    "bufferedAmount": 0,
+    "label": "frames"
+  },
+  "connection": {
+    "connectionState": "connected",
+    "iceConnectionState": "connected"
+  }
+}

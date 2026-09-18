@@ -1,0 +1,112 @@
+{
+  "status": "excluded-premeasurement-connection-failure",
+  "trial": "rate30-1024x576-r0-candidate",
+  "cohort": "rates-1024x576",
+  "timed_window_created": false,
+  "retained_completed_windows": 7,
+  "cleanup_status": "pages-closed; no errors",
+  "prior_ordered_ack": "passed",
+  "events": [
+    {
+      "at": "2026-09-18T09:20:39.620Z",
+      "method": "Network.responseReceived",
+      "params": {
+        "requestId": "4ED7DF13ADEFF7007EAF4EC3B32F7244",
+        "loaderId": "",
+        "timestamp": 605614.681538,
+        "type": "Preflight",
+        "response": {
+          "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "access-control-allow-headers": "Content-Type",
+            "access-control-allow-methods": "GET, POST, OPTIONS",
+            "access-control-allow-origin": "*",
+            "cf-cache-status": "DYNAMIC",
+            "cf-ray": "a3cf46a78b76198f-FRA",
+            "content-length": "2",
+            "content-type": "text/plain; charset=utf-8",
+            "date": "Fri, 18 Sep 2026 09:20:39 GMT",
+            "etag": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\"",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=63072000; includeSubDomains",
+            "x-powered-by": "Express"
+          },
+          "mimeType": "text/plain",
+          "charset": "utf-8",
+          "connectionReused": true,
+          "connectionId": 437,
+          "remoteIPAddress": "104.18.7.228",
+          "remotePort": 443,
+          "fromDiskCache": false,
+          "fromServiceWorker": false,
+          "fromPrefetchCache": false,
+          "encodedDataLength": 97,
+          "timing": {
+            "requestTime": 605614.65761,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.278,
+            "sendEnd": 0.342,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 23.432,
+            "receiveHeadersEnd": 23.466
+          },
+          "responseTime": 1789723239620.01,
+          "protocol": "h2",
+          "alternateProtocolUsage": "unspecifiedReason",
+          "securityState": "secure",
+          "securityDetails": {
+            "protocol": "TLS 1.3",
+            "keyExchange": "",
+            "keyExchangeGroup": "X25519MLKEM768",
+            "cipher": "AES_128_GCM",
+            "certificateId": 0,
+            "subjectName": "runpod.net",
+            "sanList": [
+              "runpod.net",
+              "*.dev-proxy.runpod.net",
+              "*.proxy.runpod.net",
+              "*.runpod.net"
+            ],
+            "issuer": "WE1",
+            "validFrom": 1787543874,
+            "validTo": 1795323452,
+            "signedCertificateTimestampList": [],
+            "certificateTransparencyCompliance": "unknown",
+            "serverSignatureAlgorithm": 1027,
+            "encryptedClientHello": false
+          }
+        },
+        "hasExtraInfo": true
+      }
+    },
+    {
+      "at": "2026-09-18T09:20:39.621Z",
+      "method": "Network.loadingFailed",
+      "params": {
+        "requestId": "39031.78",
+        "timestamp": 605614.682506,
+        "type": "Fetch",
+        "errorText": "net::ERR_FAILED",
+        "canceled": false
+      }
+    }
+  ],
+  "interpretation": "Offer Fetch failed with net::ERR_FAILED after OPTIONS 200 with expected allow-origin/method/header values. CDP supplied neither corsErrorStatus nor blockedReason. No POST response or connected ICE/channel state was recorded. Health returned 200; later debug showed ready, pending=0, compile=0, no channel. Cause remains unresolved; do not equate this with the separately observed Python proxy 403.",
+  "continuation_jobs": "jobs-rates-1024x576-remaining.json",
+  "continuation_cohort": "rates-1024x576-remaining",
+  "continuation_policy": "Only the five cells that never produced a timed window are run; the seven completed windows are never repeated."
+}

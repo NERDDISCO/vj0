@@ -1,0 +1,80 @@
+{
+  "reviewed_utc": "2026-09-18T07:49:50.929222+00:00",
+  "status": "source_corrections_verified_browser_rate_qualification_pending",
+  "scope": "Independent preparation review only; no browser, network, GPU, build, service or production-source action by reviewer. Existing excluded smoke read from disk. No performance candidate is promoted.",
+  "source_bindings": {
+    "workers/runpod-flux2klein/bench/input_20260918/barrier_runtime.js": "414f5bb9c12ff807ed2ef353178e688c7c397327fb5b6ea23fbe29ce6c6d401a",
+    "workers/runpod-flux2klein/bench/input_20260918/prepare_harness.py": "cf6a0a8533a684c14d4bfd8f0ba9bcbefc13ad3cbf052f08a25d282251864257",
+    "workers/runpod-flux2klein/bench/input_20260918/input_metrics.py": "3836f025132fedffc3a7642d2781034b891c7194031a845be1012902f320718d",
+    "workers/runpod-flux2klein/bench/input_20260918/summarize.py": "cbb2fd1a20aec3567b7f942b9d69f55315c71fb72db08ece1899e6b7fe2d0346",
+    "workers/runpod-flux2klein/bench/input_20260918/setup_targets.mjs": "57036b3471c94711573fc8b7b37f0a92722c724a12d06a8487577f79a28e4eae",
+    "workers/runpod-flux2klein/bench/input_20260918/input_probe_extra.js": "deb604c4defc11d55d31c10ae5acefc5713958d046d52f5393cd8c58fc7bab46",
+    "docs/performance/2026-09-18/input/frozen-harness-v5/app_batch.py": "e88a388dbc4c91e4a7dc1986309af56a3351de256564ef7e7e70312c811452f5",
+    "docs/performance/2026-09-18/input/frozen-harness-v5/app_probe.js": "d18a9c31ddc66bac49a7fa521001032a7430a5e82bc8138107fbb7c9d8b4e266",
+    "docs/performance/2026-09-18/input/frozen-harness-v5/input_metrics.py": "3836f025132fedffc3a7642d2781034b891c7194031a845be1012902f320718d",
+    "docs/performance/2026-09-18/input/frozen-server/server.js": "8abdfb33cd5c72cba3efbac662ca2bef5805e16ffca06c96285b18ebc0b4674c",
+    "docs/performance/2026-09-18/scaling/jobs-v2.json": "d67f41357632f3bcb0893526e81cb47cb0ee876017d6a6f98ac493b7090105b8"
+  },
+  "findings": [
+    {
+      "priority": "P1",
+      "area": "summary status and lifecycle eligibility",
+      "original_file": "workers/runpod-flux2klein/bench/input_20260918/summarize.py",
+      "original_problem": "Accepted passed while actual app summaries emit measured; valid comparisons never reached gates. Cleanup and transition evidence were also absent from eligibility.",
+      "resolution": "Current summarizer accepts measured and gates on transition drain/ACK and acknowledged cleanup.",
+      "status": "resolved_before_formal_timing"
+    },
+    {
+      "priority": "P1",
+      "area": "stale analyser RMS impulse attribution",
+      "original_file": "workers/runpod-flux2klein/bench/input_20260918/input_metrics.py",
+      "original_problem": "An earlier pulse RMS could identify a later input as a response without current-pulse analyser coverage. Frozen v4 CPU reproduction scored a 3030 ms stale RMS capture as a 160 ms stage response despite no current analyser sample.",
+      "resolution": "v5 requires audioAt inside this pulse acquisition interval and capture minus audioAt from 0 to 100 ms, plus per-pulse analyser samples.",
+      "status": "resolved_before_formal_timing"
+    },
+    {
+      "priority": "P1",
+      "area": "censored or omitted impulses",
+      "original_file": "workers/runpod-flux2klein/bench/input_20260918/input_metrics.py",
+      "original_problem": "A pulse with only 500 ms observation was scored as a failed 1000 ms response; missing offsets silently disappeared from counts.",
+      "resolution": "v5 predeclares pulses, ends scheduling early, labels missing/duplicate/censored events, requires acquisition tail plus complete response interval, and blocks expansion for incomplete temporal coverage.",
+      "status": "resolved_before_formal_timing"
+    },
+    {
+      "priority": "P1",
+      "area": "actual rate separation",
+      "artifact": "docs/performance/2026-09-18/input/excluded-smoke-v5",
+      "problem": "Requested 60 FPS had approximately 30 Hz analyser/encode cadence. Median analyser and encode-start interval were both 33.300 ms; 248 sends over 8.3837998046875 s. At this cadence 60/40/30 requested caps may not produce distinct treatments.",
+      "required_followup": "Requalify the intended browser/cadence and report achieved input FPS; do not attribute an age change to a cap that did not alter admission cadence. Capture agent is replacing the excluded Chrome153 context with pinned Chrome149 and requalifying before formal timing.",
+      "status": "runtime_qualification_pending"
+    }
+  ],
+  "checks": {
+    "compiled_admission_patches": "Both archived original and delivered chunk hashes match their manifest. Exactly two replacements in each legacy and Next chunk: immediately before encode and before send. Calls retain original transport.canSend with selected threshold and preserve JPEG/reliability semantics.",
+    "requested_rate_scheduling": "Per-job frameRate is seeded before app navigation. The unchanged app uses absolute admitted-capture deadlines, at most one capture per RAF, and records achieved input FPS. Renderer cadence is not modified by the rate setting.",
+    "ordered_barrier": "Reliable ordered browser channel is checked. The in-band nonce reaches server after earlier inputs; ACK waits for empty bootstrap/mailbox, all worker pending/flight/compile state idle, and outgoing buffer empty. Earlier output sends precede ACK on the same ordered channel. Post-barrier snapshots are retained before navigation/config changes.",
+    "source_age_and_order": "Base app harness uses observed common main/stage wall time, validates IDs/order and requested worker telemetry, and records capture-to-receive/RAF/GL ages. Input metrics retain all tail fractions and gaps; renderer events are not physical display presentation.",
+    "cpu_checks": {
+      "python": 7,
+      "node_barrier": 11,
+      "node_admission": 5,
+      "failed": 0
+    },
+    "frozen_v5_hashes": "All five files matched frozen-harness-v5/sources.json.",
+    "excluded_smoke": "measured with no problems, two complete pulse indices and stage responses, both admission sites exercised, final ordered ACK passed and pages-closed cleanup. Its ~30 Hz cadence remains excluded from rate-cap qualification."
+  },
+  "n06": {
+    "jobs": 36,
+    "unique_names": 36,
+    "grid": "3 resolutions x 1/2 active workers x baseline/terminal-noop configuration bundles x 3 repeats",
+    "ordering": "Within each resolution, r0 and r2 forward, r1 reversed; alternating order is not a perfectly symmetric count of directions.",
+    "configuration": "Same requested 60 FPS, 256 KiB input threshold, mailbox enabled, 128 CPU threads and 60-second windows. Baseline CPU output cast versus terminal-noop GPU output cast is a bundle comparison, not terminal-skip-only attribution.",
+    "routing": "Dispatcher admits only GPU IDs below activeWorkers; warmup and measured worker-ID/clock/thread/cast checks cover the requested pool. Report one/two active GPUs on the same two-GPU host with both models loaded.",
+    "qualification": "Reuse corrected v5-or-later probe/harness. Input summarize.py expects comparison/role/pair fields and is not the N06 scaling aggregator."
+  },
+  "limitations": [
+    "No timed performance result or image-quality promotion is inferred from preparation checks or excluded smoke.",
+    "Impulse metadata tests sampled input and model/output delivery, not perceptual strength, semantic adherence, or physical display timing.",
+    "Raw callback/input-admission counters have their own recording boundaries; use the common frozen interval for FPS/age claims."
+  ]
+}

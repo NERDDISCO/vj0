@@ -1,0 +1,72 @@
+{
+  "source": "passive-connections.jsonl",
+  "from_utc": "2026-09-18T09:20:38",
+  "events": [
+    {
+      "at": "2026-09-18T09:20:38.686Z",
+      "method": "Page.frameNavigated",
+      "url": "http://127.0.0.1:18768/_not-found"
+    },
+    {
+      "at": "2026-09-18T09:20:38.982Z",
+      "method": "Page.frameNavigated",
+      "url": "http://127.0.0.1:18768/vj-next"
+    },
+    {
+      "at": "2026-09-18T09:20:39.457Z",
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "text": "[VJ0-DIAG t=0s] status: idle \u2192 connecting"
+    },
+    {
+      "at": "2026-09-18T09:20:39.475Z",
+      "method": "Network.requestWillBeSent",
+      "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/healthz",
+      "httpMethod": "GET"
+    },
+    {
+      "at": "2026-09-18T09:20:39.520Z",
+      "method": "Network.responseReceived",
+      "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/healthz",
+      "status": 200
+    },
+    {
+      "at": "2026-09-18T09:20:39.596Z",
+      "method": "Network.requestWillBeSent",
+      "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+      "httpMethod": "POST"
+    },
+    {
+      "at": "2026-09-18T09:20:39.597Z",
+      "method": "Network.requestWillBeSent",
+      "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+      "httpMethod": "OPTIONS"
+    },
+    {
+      "at": "2026-09-18T09:20:39.620Z",
+      "method": "Network.responseReceived",
+      "url": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+      "status": 200
+    },
+    {
+      "at": "2026-09-18T09:20:39.621Z",
+      "method": "Network.loadingFailed",
+      "requestId": "39031.78",
+      "timestamp": 605614.682506,
+      "type": "Fetch",
+      "errorText": "net::ERR_FAILED",
+      "canceled": false
+    },
+    {
+      "at": "2026-09-18T09:20:39.621Z",
+      "method": "Runtime.consoleAPICalled",
+      "type": "log",
+      "text": "[VJ0-DIAG t=0s] status: connecting \u2192 error"
+    },
+    {
+      "at": "2026-09-18T09:21:41.599Z",
+      "method": "Page.frameNavigated",
+      "url": "about:blank"
+    }
+  ]
+}

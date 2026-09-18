@@ -1,0 +1,6545 @@
+{
+  "started": 1789718496535.1,
+  "at": 1789718505009.8,
+  "measuring": false,
+  "rows": [
+    {
+      "kind": "stage-message",
+      "at": 1789718496549.4001,
+      "id": 86
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496549.8,
+      "id": 86,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496550,
+      "id": 86,
+      "ageMs": 131.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496674.1,
+      "id": 87
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496674.7002,
+      "id": 87,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496674.7002,
+      "id": 87,
+      "ageMs": 221.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496698.9001,
+      "id": 90
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496699.3,
+      "id": 90,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496699.3,
+      "id": 90,
+      "ageMs": 148.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496716,
+      "id": 91
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496716.5,
+      "id": 91,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496716.6,
+      "id": 91,
+      "ageMs": 131.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496862.8,
+      "id": 92
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496863.3,
+      "id": 92,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496863.4001,
+      "id": 92,
+      "ageMs": 262.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496888.8,
+      "id": 95
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496889.3,
+      "id": 95,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496889.5,
+      "id": 95,
+      "ageMs": 237.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496897.3,
+      "id": 96
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496897.7002,
+      "id": 96,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496897.9001,
+      "id": 96,
+      "ageMs": 230.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496921.5,
+      "id": 97
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496922.2002,
+      "id": 97,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496922.2002,
+      "id": 97,
+      "ageMs": 236.400390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718496961.2002,
+      "id": 98
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718496961.8,
+      "id": 98,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718496961.9001,
+      "id": 98,
+      "ageMs": 259.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497013.8,
+      "id": 99
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497014.5,
+      "id": 99,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497014.6,
+      "id": 99,
+      "ageMs": 296.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497017.7002,
+      "id": 100
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497018.3,
+      "id": 100,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497018.4001,
+      "id": 100,
+      "ageMs": 265.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497064.1,
+      "id": 101
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497064.9001,
+      "id": 101,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497065,
+      "id": 101,
+      "ageMs": 297.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497080.4001,
+      "id": 102
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497081,
+      "id": 102,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497081.2002,
+      "id": 102,
+      "ageMs": 294.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497097.9001,
+      "id": 104
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497098.6,
+      "id": 104,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497098.6,
+      "id": 104,
+      "ageMs": 278.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497116.7002,
+      "id": 105
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497117.4001,
+      "id": 105,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497117.5,
+      "id": 105,
+      "ageMs": 265.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497140.4001,
+      "id": 107
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497141,
+      "id": 107,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497141.1,
+      "id": 107,
+      "ageMs": 238.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497173.5,
+      "id": 108
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497174.2002,
+      "id": 108,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497174.4001,
+      "id": 108,
+      "ageMs": 237.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497201.3,
+      "id": 111
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497202.9001,
+      "id": 111,
+      "ms": 1.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497203,
+      "id": 111,
+      "ageMs": 217.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497245.6,
+      "id": 112
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497246.2002,
+      "id": 112,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497246.3,
+      "id": 112,
+      "ageMs": 243.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497291,
+      "id": 114
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497291.7002,
+      "id": 114,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497291.9001,
+      "id": 114,
+      "ageMs": 239.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497315.4001,
+      "id": 115
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497316.3,
+      "id": 115,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497316.4001,
+      "id": 115,
+      "ageMs": 246.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497327.2002,
+      "id": 117
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497328.1,
+      "id": 117,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497328.3,
+      "id": 117,
+      "ageMs": 225.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497357.3,
+      "id": 119
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497358.8,
+      "id": 119,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497359,
+      "id": 119,
+      "ageMs": 224.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497364.5,
+      "id": 120
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497365.1,
+      "id": 120,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497365.3,
+      "id": 120,
+      "ageMs": 213.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497393.5,
+      "id": 123
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497394.8,
+      "id": 123,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497395,
+      "id": 123,
+      "ageMs": 176.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497427.1,
+      "id": 124
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497428.2002,
+      "id": 124,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497428.3,
+      "id": 124,
+      "ageMs": 192.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497448.8,
+      "id": 128
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497449.8,
+      "id": 128,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497449.9001,
+      "id": 128,
+      "ageMs": 131.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497499.1,
+      "id": 129
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497499.9001,
+      "id": 129,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497500.1,
+      "id": 129,
+      "ageMs": 164.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497535.1,
+      "id": 130
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497536.3,
+      "id": 132
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497537.1,
+      "id": 130,
+      "ms": 1.10009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497537.2002,
+      "id": 130,
+      "ageMs": 168.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497538.5,
+      "id": 132,
+      "ms": 1.2998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497538.7002,
+      "id": 132,
+      "ageMs": 103.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497579.3,
+      "id": 134
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497580.2002,
+      "id": 134,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497580.4001,
+      "id": 134,
+      "ageMs": 111.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497631.8,
+      "id": 136
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497632.6,
+      "id": 136,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497632.7002,
+      "id": 136,
+      "ageMs": 130.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497633.4001,
+      "id": 137
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497634.1,
+      "id": 137,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497634.3,
+      "id": 137,
+      "ageMs": 114.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497679.4001,
+      "id": 138
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497680.3,
+      "id": 138,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497680.5,
+      "id": 138,
+      "ageMs": 128.5,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497709,
+      "id": 139
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497709.3,
+      "id": 140
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497709.8,
+      "id": 139,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497710,
+      "id": 139,
+      "ageMs": 123.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497710.9001,
+      "id": 140,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497711.2002,
+      "id": 140,
+      "ageMs": 109.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497739.9001,
+      "id": 141
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497741,
+      "id": 141,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497741.2002,
+      "id": 141,
+      "ageMs": 119.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497749.6,
+      "id": 142
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497750.5,
+      "id": 142,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497750.6,
+      "id": 142,
+      "ageMs": 98.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497780.1,
+      "id": 143
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497780.8,
+      "id": 143,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497781,
+      "id": 143,
+      "ageMs": 94.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497814.5,
+      "id": 144
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497815.4001,
+      "id": 144,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497815.5,
+      "id": 144,
+      "ageMs": 96,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497861.3,
+      "id": 145
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497862.4001,
+      "id": 145,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497862.6,
+      "id": 145,
+      "ageMs": 110.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497887.5,
+      "id": 146
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497888.7002,
+      "id": 146,
+      "ms": 0.7001953125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497888.9001,
+      "id": 146,
+      "ageMs": 102.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497901.3,
+      "id": 147
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497902.9001,
+      "id": 147,
+      "ms": 1.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497903.1,
+      "id": 147,
+      "ageMs": 101.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497932.1,
+      "id": 148
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497932.9001,
+      "id": 148,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497933.1,
+      "id": 148,
+      "ageMs": 114.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497955.5,
+      "id": 149
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497956.3,
+      "id": 149,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497956.4001,
+      "id": 149,
+      "ageMs": 104.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718497985.2002,
+      "id": 150
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718497986.4001,
+      "id": 150,
+      "ms": 1.10009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718497986.8,
+      "id": 150,
+      "ageMs": 116.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498025.2002,
+      "id": 151
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498026,
+      "id": 151,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498026.1,
+      "id": 151,
+      "ageMs": 123.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498129.4001,
+      "id": 152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498130.4001,
+      "id": 152,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498130.5,
+      "id": 152,
+      "ageMs": 211.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498159.1,
+      "id": 155
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498160.1,
+      "id": 155,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498160.2002,
+      "id": 155,
+      "ageMs": 174.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498162,
+      "id": 157
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498162.8,
+      "id": 157,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498163,
+      "id": 157,
+      "ageMs": 126.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498196.5,
+      "id": 158
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498197.4001,
+      "id": 158,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498197.5,
+      "id": 158,
+      "ageMs": 129.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498226.5,
+      "id": 159
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498227.1,
+      "id": 159,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498227.3,
+      "id": 159,
+      "ageMs": 141.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498255.4001,
+      "id": 161
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498256.3,
+      "id": 161,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498256.6,
+      "id": 161,
+      "ageMs": 136.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498266.7002,
+      "id": 162
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498267.4001,
+      "id": 162,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498267.5,
+      "id": 162,
+      "ageMs": 131.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498300.9001,
+      "id": 163
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498301.9001,
+      "id": 163,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498302.1,
+      "id": 163,
+      "ageMs": 132.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498317.2002,
+      "id": 164
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498318.9001,
+      "id": 164,
+      "ms": 1.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498319,
+      "id": 164,
+      "ageMs": 116.5,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498340.6,
+      "id": 165
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498341.4001,
+      "id": 165,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498341.5,
+      "id": 165,
+      "ageMs": 104.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498373.9001,
+      "id": 166
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498374.7002,
+      "id": 166,
+      "ms": 0.7001953125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498374.8,
+      "id": 166,
+      "ageMs": 106.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498414.1,
+      "id": 167
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498415.1,
+      "id": 167,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498415.1,
+      "id": 167,
+      "ageMs": 96.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498463.5,
+      "id": 168
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498464.5,
+      "id": 168,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498464.7002,
+      "id": 168,
+      "ageMs": 112.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498507.6,
+      "id": 169
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498508.1,
+      "id": 170
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498509.1,
+      "id": 169,
+      "ms": 1.10009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498509.2002,
+      "id": 169,
+      "ageMs": 123.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498509.8,
+      "id": 170,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498509.8,
+      "id": 170,
+      "ageMs": 108.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498545,
+      "id": 171
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498546,
+      "id": 171,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498546.1,
+      "id": 171,
+      "ageMs": 126.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498564.1,
+      "id": 172
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498565.1,
+      "id": 172,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498565.2002,
+      "id": 172,
+      "ageMs": 111.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498578,
+      "id": 173
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498578.7002,
+      "id": 173,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498578.8,
+      "id": 173,
+      "ageMs": 110.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498594.4001,
+      "id": 174
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498595.3,
+      "id": 174,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498595.4001,
+      "id": 174,
+      "ageMs": 108.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498626.7002,
+      "id": 175
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498627.6,
+      "id": 175,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498627.7002,
+      "id": 175,
+      "ageMs": 107.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498652.6,
+      "id": 176
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498654.9001,
+      "id": 176,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498655,
+      "id": 176,
+      "ageMs": 98.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498681.9001,
+      "id": 177
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498682.8,
+      "id": 177,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498683.1,
+      "id": 177,
+      "ageMs": 114.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498710.4001,
+      "id": 178
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498711.2002,
+      "id": 178,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498711.4001,
+      "id": 178,
+      "ageMs": 125.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498733.4001,
+      "id": 180
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498734,
+      "id": 180,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498734.2002,
+      "id": 180,
+      "ageMs": 115.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498741.4001,
+      "id": 181
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498742,
+      "id": 181,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498742.2002,
+      "id": 181,
+      "ageMs": 105.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498765.3,
+      "id": 182
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498765.9001,
+      "id": 182,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498766,
+      "id": 182,
+      "ageMs": 112.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498793.8,
+      "id": 183
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498794.4001,
+      "id": 183,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498794.6,
+      "id": 183,
+      "ageMs": 126.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498874.4001,
+      "id": 184
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498875.1,
+      "id": 184,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498875.2002,
+      "id": 184,
+      "ageMs": 190.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498883.2002,
+      "id": 187
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498883.8,
+      "id": 187,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498883.9001,
+      "id": 187,
+      "ageMs": 132.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498908.4001,
+      "id": 189
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498909.3,
+      "id": 189,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498909.4001,
+      "id": 189,
+      "ageMs": 122.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498932.4001,
+      "id": 190
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498933.2002,
+      "id": 190,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498933.3,
+      "id": 190,
+      "ageMs": 130.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498950.4001,
+      "id": 193
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498951.1,
+      "id": 193,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498951.2002,
+      "id": 193,
+      "ageMs": 99.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718498967,
+      "id": 194
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718498969.1,
+      "id": 194,
+      "ms": 1.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718498969.2002,
+      "id": 194,
+      "ageMs": 99.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499007.4001,
+      "id": 196
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499008.2002,
+      "id": 196,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499008.4001,
+      "id": 196,
+      "ageMs": 89.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499017,
+      "id": 197
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499018.1,
+      "id": 197,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499018.3,
+      "id": 197,
+      "ageMs": 82.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499042.9001,
+      "id": 198
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499043.6,
+      "id": 198,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499043.7002,
+      "id": 198,
+      "ageMs": 75.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499080.3,
+      "id": 200
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499081.1,
+      "id": 200,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499081.2002,
+      "id": 200,
+      "ageMs": 77.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499106,
+      "id": 201
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499107,
+      "id": 201,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499107.2002,
+      "id": 201,
+      "ageMs": 89.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499143.8,
+      "id": 202
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499144.3,
+      "id": 203
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499145,
+      "id": 202,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499145.2002,
+      "id": 202,
+      "ageMs": 93.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499146.2002,
+      "id": 203,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499146.3,
+      "id": 203,
+      "ageMs": 76.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499172.2002,
+      "id": 205
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499173.4001,
+      "id": 205,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499173.5,
+      "id": 205,
+      "ageMs": 71.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499225.2002,
+      "id": 206
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499225.7002,
+      "id": 206,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499225.8,
+      "id": 206,
+      "ageMs": 105.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499246.2002,
+      "id": 207
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499247,
+      "id": 207,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499247.1,
+      "id": 207,
+      "ageMs": 95.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499247.6,
+      "id": 208
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499248.2002,
+      "id": 208,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499248.2002,
+      "id": 208,
+      "ageMs": 63.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499283.7002,
+      "id": 209
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499284.1,
+      "id": 209,
+      "ms": 0.199951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499284.2002,
+      "id": 209,
+      "ageMs": 81.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499293.4001,
+      "id": 210
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499294.1,
+      "id": 210,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499294.2002,
+      "id": 210,
+      "ageMs": 74.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499333,
+      "id": 211
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499333.5,
+      "id": 211,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499333.6,
+      "id": 211,
+      "ageMs": 98.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499358.1,
+      "id": 213
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499358.8,
+      "id": 213,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499358.9001,
+      "id": 213,
+      "ageMs": 88.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499382.1,
+      "id": 214
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499382.6,
+      "id": 214,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499382.6,
+      "id": 214,
+      "ageMs": 81.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499404.1,
+      "id": 215
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499404.7002,
+      "id": 215,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499404.9001,
+      "id": 215,
+      "ageMs": 84.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499415.5,
+      "id": 217
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499415.9001,
+      "id": 217,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499416,
+      "id": 217,
+      "ageMs": 62.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499451.3,
+      "id": 218
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499453,
+      "id": 218,
+      "ms": 1.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499453.1,
+      "id": 218,
+      "ageMs": 84.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499459,
+      "id": 219
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499459.5,
+      "id": 219,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499459.6,
+      "id": 219,
+      "ageMs": 74.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499528.3,
+      "id": 220
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499529,
+      "id": 220,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499529.1,
+      "id": 220,
+      "ageMs": 110.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499562.8,
+      "id": 221
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499563.5,
+      "id": 221,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499563.5,
+      "id": 221,
+      "ageMs": 94.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499584.8,
+      "id": 222
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499587,
+      "id": 222,
+      "ms": 1.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499587.4001,
+      "id": 222,
+      "ageMs": 68.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499617.5,
+      "id": 223
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499618.2002,
+      "id": 223,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499618.3,
+      "id": 223,
+      "ageMs": 82.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499623.2002,
+      "id": 224
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499624.1,
+      "id": 224,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499624.2002,
+      "id": 224,
+      "ageMs": 71.900390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499656.2002,
+      "id": 225
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499657,
+      "id": 225,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499657.2002,
+      "id": 225,
+      "ageMs": 88.400390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499690,
+      "id": 226
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499690.9001,
+      "id": 226,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499691,
+      "id": 226,
+      "ageMs": 88.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499715.6,
+      "id": 227
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499716.4001,
+      "id": 227,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499716.5,
+      "id": 227,
+      "ageMs": 81.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499757.9001,
+      "id": 228
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499759,
+      "id": 228,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499759.2002,
+      "id": 228,
+      "ageMs": 90.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499784.4001,
+      "id": 229
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499790.7002,
+      "id": 229,
+      "ms": 6,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499790.9001,
+      "id": 229,
+      "ageMs": 89.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499792.7002,
+      "id": 230
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499793.6,
+      "id": 230,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499793.7002,
+      "id": 230,
+      "ageMs": 74.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499826.6,
+      "id": 232
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499827.5,
+      "id": 232,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499827.7002,
+      "id": 232,
+      "ageMs": 73.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499864.7002,
+      "id": 233
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499866,
+      "id": 233,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499866.1,
+      "id": 233,
+      "ageMs": 97.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499892.8,
+      "id": 234
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499893.6,
+      "id": 234,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499893.8,
+      "id": 234,
+      "ageMs": 91.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499933.7002,
+      "id": 235
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499935.5,
+      "id": 235,
+      "ms": 1.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499935.7002,
+      "id": 235,
+      "ageMs": 99.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499958.2002,
+      "id": 236
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499958.9001,
+      "id": 236,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499959.1,
+      "id": 236,
+      "ageMs": 89.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499975.5,
+      "id": 237
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499976.2002,
+      "id": 237,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499976.3,
+      "id": 237,
+      "ageMs": 75.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718499992.2002,
+      "id": 239
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718499992.9001,
+      "id": 239,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718499993,
+      "id": 239,
+      "ageMs": 57.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500014.6,
+      "id": 240
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500015.3,
+      "id": 240,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500015.4001,
+      "id": 240,
+      "ageMs": 63.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500098.9001,
+      "id": 241
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500099.7002,
+      "id": 241,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500099.8,
+      "id": 241,
+      "ageMs": 130.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500118.4001,
+      "id": 245
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500120.5,
+      "id": 245,
+      "ms": 1.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500120.6,
+      "id": 245,
+      "ageMs": 84.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500148.4001,
+      "id": 246
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500149.4001,
+      "id": 246,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500149.5,
+      "id": 246,
+      "ageMs": 81.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500177.7002,
+      "id": 247
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500178.6,
+      "id": 247,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500178.7002,
+      "id": 247,
+      "ageMs": 94.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500208.1,
+      "id": 248
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500209.1,
+      "id": 248,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500209.3,
+      "id": 248,
+      "ageMs": 107.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500211.4001,
+      "id": 250
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500212.1,
+      "id": 250,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500212.2002,
+      "id": 250,
+      "ageMs": 76.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500247.1,
+      "id": 251
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500248.2002,
+      "id": 251,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500248.2002,
+      "id": 251,
+      "ageMs": 94.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500288.7002,
+      "id": 252
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500289.7002,
+      "id": 252,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500289.8,
+      "id": 252,
+      "ageMs": 104.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500316,
+      "id": 253
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500316.7002,
+      "id": 253,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500316.7002,
+      "id": 253,
+      "ageMs": 97.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500348.1,
+      "id": 254
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500348.7002,
+      "id": 254,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500348.8,
+      "id": 254,
+      "ageMs": 95.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500366.2002,
+      "id": 255
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500366.9001,
+      "id": 255,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500367,
+      "id": 255,
+      "ageMs": 97.5,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500373.5,
+      "id": 256
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500374.3,
+      "id": 256,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500374.5,
+      "id": 256,
+      "ageMs": 73.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500413.4001,
+      "id": 257
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500414.1,
+      "id": 257,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500414.2002,
+      "id": 257,
+      "ageMs": 95.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500436.2002,
+      "id": 258
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500437,
+      "id": 258,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500437.2002,
+      "id": 258,
+      "ageMs": 84.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500474.5,
+      "id": 259
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500475.1,
+      "id": 259,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500475.2002,
+      "id": 259,
+      "ageMs": 88.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500497.6,
+      "id": 260
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500498.3,
+      "id": 260,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500498.4001,
+      "id": 260,
+      "ageMs": 80.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500524,
+      "id": 261
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500524.9001,
+      "id": 261,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500525,
+      "id": 261,
+      "ageMs": 89.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500529.6,
+      "id": 262
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500530.3,
+      "id": 262,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500530.5,
+      "id": 262,
+      "ageMs": 77.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500549.9001,
+      "id": 263
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500550.4001,
+      "id": 263,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500550.4001,
+      "id": 263,
+      "ageMs": 65.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500577.9001,
+      "id": 264
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500578.6,
+      "id": 264,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500578.6,
+      "id": 264,
+      "ageMs": 76.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500597.7002,
+      "id": 265
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500598.4001,
+      "id": 265,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500598.5,
+      "id": 265,
+      "ageMs": 80.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500615.7002,
+      "id": 266
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500616.3,
+      "id": 266,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500616.4001,
+      "id": 266,
+      "ageMs": 80.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500659.1,
+      "id": 268
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500659.7002,
+      "id": 268,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500659.8,
+      "id": 268,
+      "ageMs": 75.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500678.3,
+      "id": 269
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500679,
+      "id": 269,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500679.1,
+      "id": 269,
+      "ageMs": 76.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500691.5,
+      "id": 270
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500692.1,
+      "id": 270,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500692.2002,
+      "id": 270,
+      "ageMs": 74.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500711,
+      "id": 272
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500711.7002,
+      "id": 272,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500711.7002,
+      "id": 272,
+      "ageMs": 59.400390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500731.7002,
+      "id": 273
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500732.6,
+      "id": 273,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500732.6,
+      "id": 273,
+      "ageMs": 64.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500774.2002,
+      "id": 275
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500774.9001,
+      "id": 275,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500774.9001,
+      "id": 275,
+      "ageMs": 73.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500792.6,
+      "id": 276
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500793.5,
+      "id": 276,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500793.7002,
+      "id": 276,
+      "ageMs": 75.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500810.4001,
+      "id": 277
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500811.2002,
+      "id": 277,
+      "ms": 0.7001953125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500811.3,
+      "id": 277,
+      "ageMs": 75.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500828.2002,
+      "id": 279
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500828.9001,
+      "id": 279,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500829,
+      "id": 279,
+      "ageMs": 59.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500846.8,
+      "id": 280
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500847.6,
+      "id": 280,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500847.7002,
+      "id": 280,
+      "ageMs": 61.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500891,
+      "id": 282
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500891.9001,
+      "id": 282,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500892.1,
+      "id": 282,
+      "ageMs": 72.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500908.1,
+      "id": 283
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500908.9001,
+      "id": 283,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500909.1,
+      "id": 283,
+      "ageMs": 73.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500927.7002,
+      "id": 284
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500928.3,
+      "id": 284,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500928.5,
+      "id": 284,
+      "ageMs": 75.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500946.3,
+      "id": 286
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500947,
+      "id": 286,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500947.1,
+      "id": 286,
+      "ageMs": 61.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718500963.9001,
+      "id": 287
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718500964.5,
+      "id": 287,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718500964.6,
+      "id": 287,
+      "ageMs": 63.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501007,
+      "id": 288
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501007.9001,
+      "id": 288,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501008,
+      "id": 288,
+      "ageMs": 88.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501025.2002,
+      "id": 290
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501026,
+      "id": 290,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501026.3,
+      "id": 290,
+      "ageMs": 74.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501045.1,
+      "id": 291
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501046,
+      "id": 291,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501046.1,
+      "id": 291,
+      "ageMs": 76.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501064.3,
+      "id": 293
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501065.3,
+      "id": 293,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501065.5,
+      "id": 293,
+      "ageMs": 63.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501085.9001,
+      "id": 294
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501087.8,
+      "id": 294,
+      "ms": 1.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501088,
+      "id": 294,
+      "ageMs": 68.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501115.6,
+      "id": 295
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501116.4001,
+      "id": 295,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501116.5,
+      "id": 295,
+      "ageMs": 81.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501135.2002,
+      "id": 296
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501137.2002,
+      "id": 296,
+      "ms": 1.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501137.4001,
+      "id": 296,
+      "ageMs": 84.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501158,
+      "id": 297
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501158.8,
+      "id": 297,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501158.9001,
+      "id": 297,
+      "ageMs": 89.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501176.8,
+      "id": 298
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501177.5,
+      "id": 298,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501177.6,
+      "id": 298,
+      "ageMs": 74.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501196.8,
+      "id": 299
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501197.7002,
+      "id": 299,
+      "ms": 0.7001953125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501197.8,
+      "id": 299,
+      "ageMs": 79.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501230.4001,
+      "id": 300
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501231.3,
+      "id": 300,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501231.4001,
+      "id": 300,
+      "ageMs": 80.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501249.2002,
+      "id": 302
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501250.3,
+      "id": 302,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501250.4001,
+      "id": 302,
+      "ageMs": 64.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501271.9001,
+      "id": 303
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501273,
+      "id": 303,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501273.2002,
+      "id": 303,
+      "ageMs": 71.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501292.3,
+      "id": 304
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501293.4001,
+      "id": 304,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501293.5,
+      "id": 304,
+      "ageMs": 75.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501317.3,
+      "id": 305
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501318.3,
+      "id": 305,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501318.4001,
+      "id": 305,
+      "ageMs": 83.600341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501342.3,
+      "id": 306
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501343.1,
+      "id": 306,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501343.3,
+      "id": 306,
+      "ageMs": 90.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501366.9001,
+      "id": 307
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501367.9001,
+      "id": 307,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501368,
+      "id": 307,
+      "ageMs": 81.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501381.6,
+      "id": 308
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501382.5,
+      "id": 308,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501382.6,
+      "id": 308,
+      "ageMs": 79.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501424.5,
+      "id": 309
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501425.7002,
+      "id": 309,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501425.9001,
+      "id": 309,
+      "ageMs": 90.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501459.4001,
+      "id": 310
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501459.9001,
+      "id": 311
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501461.3,
+      "id": 310,
+      "ms": 1.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501461.6,
+      "id": 310,
+      "ageMs": 108.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501462.4001,
+      "id": 311,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501462.5,
+      "id": 311,
+      "ageMs": 77.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501483.4001,
+      "id": 312
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501484.3,
+      "id": 312,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501484.5,
+      "id": 312,
+      "ageMs": 66.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501531.8,
+      "id": 313
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501532.8,
+      "id": 313,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501532.8,
+      "id": 313,
+      "ageMs": 95.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501550.3,
+      "id": 314
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501551.5,
+      "id": 314,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501551.8,
+      "id": 314,
+      "ageMs": 82.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501575.9001,
+      "id": 315
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501576.7002,
+      "id": 315,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501576.9001,
+      "id": 315,
+      "ageMs": 74.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501610,
+      "id": 316
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501610.3,
+      "id": 317
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501610.7002,
+      "id": 316,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501610.8,
+      "id": 316,
+      "ageMs": 92.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501611.5,
+      "id": 317,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501611.6,
+      "id": 317,
+      "ageMs": 76.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501635,
+      "id": 318
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501637.7002,
+      "id": 318,
+      "ms": 1.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501637.9001,
+      "id": 318,
+      "ageMs": 86.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501680.2002,
+      "id": 319
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501681.1,
+      "id": 319,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501681.4001,
+      "id": 319,
+      "ageMs": 96.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501710.4001,
+      "id": 320
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501710.9001,
+      "id": 321
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501711.6,
+      "id": 320,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501711.8,
+      "id": 320,
+      "ageMs": 93.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501712.6,
+      "id": 321,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501712.6,
+      "id": 321,
+      "ageMs": 75.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501739.4001,
+      "id": 322
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501740.4001,
+      "id": 322,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501740.6,
+      "id": 322,
+      "ageMs": 88.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501777,
+      "id": 323
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501778.2002,
+      "id": 323,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501778.3,
+      "id": 323,
+      "ageMs": 91.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501813.4001,
+      "id": 324
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501814.4001,
+      "id": 324,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501814.5,
+      "id": 324,
+      "ageMs": 94.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501842.3,
+      "id": 325
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501843.2002,
+      "id": 325,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501843.4001,
+      "id": 325,
+      "ageMs": 91.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501868.8,
+      "id": 326
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501870.1,
+      "id": 326,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501870.2002,
+      "id": 326,
+      "ageMs": 84.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501912.3,
+      "id": 327
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501912.8,
+      "id": 327,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501912.9001,
+      "id": 327,
+      "ageMs": 93.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501933,
+      "id": 328
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501933.6,
+      "id": 328,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501933.7002,
+      "id": 328,
+      "ageMs": 81.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501956,
+      "id": 330
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501956.9001,
+      "id": 330,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501957.1,
+      "id": 330,
+      "ageMs": 72.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501977.1,
+      "id": 331
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501977.8,
+      "id": 331,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501977.9001,
+      "id": 331,
+      "ageMs": 76.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718501990.8,
+      "id": 332
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718501991.6,
+      "id": 332,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718501991.7002,
+      "id": 332,
+      "ageMs": 73.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502014.9001,
+      "id": 333
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502015.5,
+      "id": 333,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502015.5,
+      "id": 333,
+      "ageMs": 64.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502033,
+      "id": 334
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502033.8,
+      "id": 334,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502034,
+      "id": 334,
+      "ageMs": 66.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502076.3,
+      "id": 335
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502077,
+      "id": 335,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502077.1,
+      "id": 335,
+      "ageMs": 92.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502097.3,
+      "id": 337
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502098.1,
+      "id": 337,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502098.3,
+      "id": 337,
+      "ageMs": 78.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502116.5,
+      "id": 338
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502117.4001,
+      "id": 338,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502117.5,
+      "id": 338,
+      "ageMs": 81.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502135.9001,
+      "id": 339
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502137.1,
+      "id": 339,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502137.2002,
+      "id": 339,
+      "ageMs": 83.900390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502156.9001,
+      "id": 341
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502157.7002,
+      "id": 341,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502157.8,
+      "id": 341,
+      "ageMs": 72.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502174.1,
+      "id": 342
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502174.8,
+      "id": 342,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502174.9001,
+      "id": 342,
+      "ageMs": 72.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502215.7002,
+      "id": 343
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502216.7002,
+      "id": 343,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502217,
+      "id": 343,
+      "ageMs": 81.800048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502239.1,
+      "id": 344
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502239.9001,
+      "id": 344,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502240,
+      "id": 344,
+      "ageMs": 88.5,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502258.2002,
+      "id": 346
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502259.1,
+      "id": 346,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502259.3,
+      "id": 346,
+      "ageMs": 73.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502274.6,
+      "id": 347
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502275.4001,
+      "id": 347,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502275.6,
+      "id": 347,
+      "ageMs": 72.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502293.2002,
+      "id": 348
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502293.9001,
+      "id": 348,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502294.1,
+      "id": 348,
+      "ageMs": 75.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502310.2002,
+      "id": 349
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502311.1,
+      "id": 349,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502311.1,
+      "id": 349,
+      "ageMs": 75.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502343.9001,
+      "id": 351
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502344.9001,
+      "id": 351,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502344.9001,
+      "id": 351,
+      "ageMs": 76.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502365.9001,
+      "id": 352
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502366.4001,
+      "id": 352,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502366.5,
+      "id": 352,
+      "ageMs": 80,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502390.7002,
+      "id": 354
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502391.4001,
+      "id": 354,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502391.5,
+      "id": 354,
+      "ageMs": 73.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502408.5,
+      "id": 355
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502409.2002,
+      "id": 355,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502409.3,
+      "id": 355,
+      "ageMs": 71.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502431.5,
+      "id": 357
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502432.5,
+      "id": 357,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502432.6,
+      "id": 357,
+      "ageMs": 64.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502449.9001,
+      "id": 358
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502450.7002,
+      "id": 358,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502450.8,
+      "id": 358,
+      "ageMs": 65.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502492.2002,
+      "id": 360
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502493,
+      "id": 360,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502493.2002,
+      "id": 360,
+      "ageMs": 73.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502517.1,
+      "id": 361
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502517.9001,
+      "id": 361,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502518,
+      "id": 361,
+      "ageMs": 81,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502529.3,
+      "id": 362
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502530.3,
+      "id": 362,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502530.4001,
+      "id": 362,
+      "ageMs": 61.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502561,
+      "id": 363
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502561.8,
+      "id": 363,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502561.9001,
+      "id": 363,
+      "ageMs": 76.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502590.6,
+      "id": 364
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502591.6,
+      "id": 364,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502591.7002,
+      "id": 364,
+      "ageMs": 89.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502617.1,
+      "id": 365
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502618,
+      "id": 365,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502618.2002,
+      "id": 365,
+      "ageMs": 82.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502649.2002,
+      "id": 366
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502650,
+      "id": 366,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502650.1,
+      "id": 366,
+      "ageMs": 81.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502692,
+      "id": 367
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502693,
+      "id": 367,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502693.1,
+      "id": 367,
+      "ageMs": 90.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502723.7002,
+      "id": 368
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502724.7002,
+      "id": 368,
+      "ms": 0.7001953125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502725,
+      "id": 368,
+      "ageMs": 90.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502728.4001,
+      "id": 369
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502729.2002,
+      "id": 369,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502729.4001,
+      "id": 369,
+      "ageMs": 60.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502750.3,
+      "id": 370
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502750.9001,
+      "id": 370,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502751.1,
+      "id": 370,
+      "ageMs": 64.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502800.5,
+      "id": 371
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502803.5,
+      "id": 371,
+      "ms": 1.099853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502803.7002,
+      "id": 371,
+      "ageMs": 101.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502824.9001,
+      "id": 372
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502825.9001,
+      "id": 372,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502826.1,
+      "id": 372,
+      "ageMs": 91.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502849,
+      "id": 373
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502850.1,
+      "id": 373,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502850.1,
+      "id": 373,
+      "ageMs": 80.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502858.4001,
+      "id": 374
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502859.5,
+      "id": 374,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502859.6,
+      "id": 374,
+      "ageMs": 74.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502889.9001,
+      "id": 375
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502891,
+      "id": 375,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502891.1,
+      "id": 375,
+      "ageMs": 89.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502922.5,
+      "id": 377
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502923.5,
+      "id": 377,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502923.7002,
+      "id": 377,
+      "ageMs": 88.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502951.2002,
+      "id": 378
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502953.3,
+      "id": 378,
+      "ms": 1.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502953.5,
+      "id": 378,
+      "ageMs": 85,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718502991,
+      "id": 379
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718502991.8,
+      "id": 379,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718502992,
+      "id": 379,
+      "ageMs": 89.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503016,
+      "id": 380
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503017.1,
+      "id": 380,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503017.2002,
+      "id": 380,
+      "ageMs": 80.900390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503041.1,
+      "id": 381
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503042.1,
+      "id": 381,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503042.2002,
+      "id": 381,
+      "ageMs": 74.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503057.3,
+      "id": 382
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503058.3,
+      "id": 382,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503058.4001,
+      "id": 382,
+      "ageMs": 72.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503085.7002,
+      "id": 383
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503087.8,
+      "id": 383,
+      "ms": 1.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503088,
+      "id": 383,
+      "ageMs": 85,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503127.1,
+      "id": 384
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503128,
+      "id": 384,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503128.1,
+      "id": 384,
+      "ageMs": 93.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503155.2002,
+      "id": 385
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503156.2002,
+      "id": 385,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503156.4001,
+      "id": 385,
+      "ageMs": 103.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503209.7002,
+      "id": 386
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503209.9001,
+      "id": 388
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503210.4001,
+      "id": 386,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503210.5,
+      "id": 386,
+      "ageMs": 141.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503210.9001,
+      "id": 388,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503211,
+      "id": 388,
+      "ageMs": 76.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503259.8,
+      "id": 389
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503260,
+      "id": 390
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503260.8,
+      "id": 389,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503261.1,
+      "id": 389,
+      "ageMs": 93.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503261.7002,
+      "id": 390,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503261.9001,
+      "id": 390,
+      "ageMs": 60.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503310.9001,
+      "id": 391
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503311.6,
+      "id": 391,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503311.8,
+      "id": 391,
+      "ageMs": 92.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503337.1,
+      "id": 392
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503338.2002,
+      "id": 392,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503338.5,
+      "id": 392,
+      "ageMs": 86.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503355.8,
+      "id": 393
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503357.2002,
+      "id": 393,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503357.3,
+      "id": 393,
+      "ageMs": 88.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503389.6,
+      "id": 394
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503390.4001,
+      "id": 394,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503390.5,
+      "id": 394,
+      "ageMs": 88.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503390.9001,
+      "id": 395
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503391.6,
+      "id": 395,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503391.7002,
+      "id": 395,
+      "ageMs": 73.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503424.9001,
+      "id": 396
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503425.9001,
+      "id": 396,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503426.1,
+      "id": 396,
+      "ageMs": 74.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503456.9001,
+      "id": 397
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503457.9001,
+      "id": 397,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503458.1,
+      "id": 397,
+      "ageMs": 90.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503489.9001,
+      "id": 398
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503491,
+      "id": 398,
+      "ms": 0.7998046875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503491.1,
+      "id": 398,
+      "ageMs": 88.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503523.9001,
+      "id": 399
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503524.8,
+      "id": 399,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503524.9001,
+      "id": 399,
+      "ageMs": 90.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503550.6,
+      "id": 400
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503551.5,
+      "id": 400,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503551.7002,
+      "id": 400,
+      "ageMs": 83.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503595.2002,
+      "id": 401
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503596.5,
+      "id": 401,
+      "ms": 1,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503596.6,
+      "id": 401,
+      "ageMs": 92.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503617.5,
+      "id": 402
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503620.9001,
+      "id": 402,
+      "ms": 1.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503621.1,
+      "id": 402,
+      "ageMs": 86.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503649.5,
+      "id": 403
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503650.4001,
+      "id": 403,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503650.6,
+      "id": 403,
+      "ageMs": 81.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503657.9001,
+      "id": 404
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503658.6,
+      "id": 404,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503658.8,
+      "id": 404,
+      "ageMs": 72.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503699.2002,
+      "id": 405
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503700.3,
+      "id": 405,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503700.6,
+      "id": 405,
+      "ageMs": 99.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503726.8,
+      "id": 406
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503727.5,
+      "id": 406,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503727.7002,
+      "id": 406,
+      "ageMs": 92.900390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503762.6,
+      "id": 407
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503763.4001,
+      "id": 407,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503763.5,
+      "id": 407,
+      "ageMs": 94.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503792.4001,
+      "id": 408
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503793,
+      "id": 408,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503793.1,
+      "id": 408,
+      "ageMs": 90.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503827.5,
+      "id": 409
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503828.3,
+      "id": 409,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503828.4001,
+      "id": 409,
+      "ageMs": 93.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503858.8,
+      "id": 410
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503859.4001,
+      "id": 410,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503859.4001,
+      "id": 410,
+      "ageMs": 89.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503883.6,
+      "id": 411
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503884.4001,
+      "id": 411,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503884.4001,
+      "id": 411,
+      "ageMs": 82.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503926.7002,
+      "id": 412
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503927.6,
+      "id": 412,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503927.8,
+      "id": 412,
+      "ageMs": 91.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503948.8,
+      "id": 413
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503949.5,
+      "id": 413,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503949.6,
+      "id": 413,
+      "ageMs": 81.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718503994.9001,
+      "id": 414
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718503995.7002,
+      "id": 414,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718503995.9001,
+      "id": 414,
+      "ageMs": 94.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504032,
+      "id": 415
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504032.1,
+      "id": 416
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504032.7002,
+      "id": 415,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504032.8,
+      "id": 415,
+      "ageMs": 97.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504033.7002,
+      "id": 416,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504033.9001,
+      "id": 416,
+      "ageMs": 81.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504055.4001,
+      "id": 418
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504056.1,
+      "id": 418,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504056.4001,
+      "id": 418,
+      "ageMs": 71.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504098.5,
+      "id": 419
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504099.6,
+      "id": 419,
+      "ms": 0.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504099.6,
+      "id": 419,
+      "ageMs": 96.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504120.8,
+      "id": 420
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504121.9001,
+      "id": 420,
+      "ms": 0.900146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504122.1,
+      "id": 420,
+      "ageMs": 87.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504154.1,
+      "id": 421
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504155.1,
+      "id": 421,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504155.3,
+      "id": 421,
+      "ageMs": 86.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504157.8,
+      "id": 422
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504158.5,
+      "id": 422,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504158.6,
+      "id": 422,
+      "ageMs": 73.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504195.7002,
+      "id": 423
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504196.2002,
+      "id": 423,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504196.4001,
+      "id": 423,
+      "ageMs": 92.400146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504216.8,
+      "id": 424
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504217.4001,
+      "id": 424,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504217.6,
+      "id": 424,
+      "ageMs": 83.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504251.5,
+      "id": 425
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504252.8,
+      "id": 425,
+      "ms": 1.199951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504252.9001,
+      "id": 425,
+      "ageMs": 83.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504303.7002,
+      "id": 426
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504304.6,
+      "id": 426,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504304.7002,
+      "id": 426,
+      "ageMs": 103.100341796875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504309.1,
+      "id": 427
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504309.5,
+      "id": 427,
+      "ms": 0.199951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504309.6,
+      "id": 427,
+      "ageMs": 74.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504329.6,
+      "id": 428
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504330.3,
+      "id": 428,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504330.5,
+      "id": 428,
+      "ageMs": 61.10009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504374,
+      "id": 429
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504374.5,
+      "id": 429,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504374.6,
+      "id": 429,
+      "ageMs": 89.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504396.1,
+      "id": 430
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504396.8,
+      "id": 430,
+      "ms": 0.599853515625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504396.8,
+      "id": 430,
+      "ageMs": 76.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504412.6,
+      "id": 431
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504413.1,
+      "id": 431,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504413.1,
+      "id": 431,
+      "ageMs": 77.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504436.4001,
+      "id": 433
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504438.1,
+      "id": 433,
+      "ms": 1.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504438.3,
+      "id": 433,
+      "ageMs": 69.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504448.9001,
+      "id": 434
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504449.5,
+      "id": 434,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504449.6,
+      "id": 434,
+      "ageMs": 64.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504474,
+      "id": 435
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504474.8,
+      "id": 435,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504474.9001,
+      "id": 435,
+      "ageMs": 72.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504512.5,
+      "id": 436
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504513.4001,
+      "id": 436,
+      "ms": 0.60009765625,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504513.5,
+      "id": 436,
+      "ageMs": 93.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504532.8,
+      "id": 437
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504533.7002,
+      "id": 437,
+      "ms": 0.800048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504533.7002,
+      "id": 437,
+      "ageMs": 81.30029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504558.5,
+      "id": 439
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504559.4001,
+      "id": 439,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504559.5,
+      "id": 439,
+      "ageMs": 74.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504573.9001,
+      "id": 440
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504574.6,
+      "id": 440,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504574.8,
+      "id": 440,
+      "ageMs": 72.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504593.4001,
+      "id": 441
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504594.1,
+      "id": 441,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504594.4001,
+      "id": 441,
+      "ageMs": 76.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504612.6,
+      "id": 443
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504613.3,
+      "id": 443,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504613.4001,
+      "id": 443,
+      "ageMs": 61.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504631.4001,
+      "id": 444
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504632,
+      "id": 444,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504632.1,
+      "id": 444,
+      "ageMs": 64.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504676.7002,
+      "id": 446
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504677.5,
+      "id": 446,
+      "ms": 0.5,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504677.5,
+      "id": 446,
+      "ageMs": 76,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504695,
+      "id": 447
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504695.8,
+      "id": 447,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504695.8,
+      "id": 447,
+      "ageMs": 77.500244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504712.4001,
+      "id": 448
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504712.9001,
+      "id": 448,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504712.9001,
+      "id": 448,
+      "ageMs": 77.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504730.6,
+      "id": 450
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504731.2002,
+      "id": 450,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504731.3,
+      "id": 450,
+      "ageMs": 62.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504749.3,
+      "id": 451
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504749.8,
+      "id": 451,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504749.8,
+      "id": 451,
+      "ageMs": 64.300048828125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504791.8,
+      "id": 453
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504792.3,
+      "id": 453,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504792.4001,
+      "id": 453,
+      "ageMs": 75.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504813.8,
+      "id": 454
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504814.2002,
+      "id": 454,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504814.4001,
+      "id": 454,
+      "ageMs": 79.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504828.1,
+      "id": 455
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504828.7002,
+      "id": 455,
+      "ms": 0.400146484375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504828.9001,
+      "id": 455,
+      "ageMs": 74.7001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504850.9001,
+      "id": 457
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504853,
+      "id": 457,
+      "ms": 1.89990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504853.1,
+      "id": 457,
+      "ageMs": 67.000244140625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504889.1,
+      "id": 458
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504890.1,
+      "id": 458,
+      "ms": 0.699951171875,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504890.2002,
+      "id": 458,
+      "ageMs": 88.2001953125,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504913.7002,
+      "id": 459
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504914,
+      "id": 460
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504914.3,
+      "id": 459,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504914.3,
+      "id": 459,
+      "ageMs": 94.900146484375,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504914.6,
+      "id": 460,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504914.7002,
+      "id": 460,
+      "ageMs": 77.80029296875,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504957.7002,
+      "id": 461
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504958.1,
+      "id": 461,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504958.2002,
+      "id": 461,
+      "ageMs": 90.400390625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504979.1,
+      "id": 462
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504979.8,
+      "id": 462,
+      "ms": 0.300048828125,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504980,
+      "id": 462,
+      "ageMs": 94.60009765625,
+      "width": 2048,
+      "height": 1152
+    },
+    {
+      "kind": "stage-message",
+      "at": 1789718504993.4001,
+      "id": 463
+    },
+    {
+      "kind": "bitmap-decoded",
+      "at": 1789718504994,
+      "id": 463,
+      "ms": 0.39990234375,
+      "width": 512,
+      "height": 288
+    },
+    {
+      "kind": "webgl-frame-submitted",
+      "at": 1789718504994.1,
+      "id": 463,
+      "ageMs": 92.500244140625,
+      "width": 2048,
+      "height": 1152
+    }
+  ],
+  "events": [],
+  "errors": [],
+  "rms": [],
+  "rafDiagnostics": {},
+  "previewRafMeaning": "current loaded image observed at an animation-frame callback; not paint/compositor/display presentation",
+  "channelStates": [],
+  "captureAgeMeaning": "canvas encode start to receive/load/GL submission; excludes audio analyser acquisition and physical presentation"
+}

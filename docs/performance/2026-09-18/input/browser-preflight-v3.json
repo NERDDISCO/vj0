@@ -1,0 +1,18 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "url": "http://127.0.0.1:18768/vj-next",
+      "probe": true,
+      "input": {
+        "thresholdBytes": 65536,
+        "channels": [],
+        "checks": {},
+        "samples": [],
+        "impulses": [],
+        "audioRms": []
+      },
+      "canvas": true
+    }
+  }
+}

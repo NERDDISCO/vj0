@@ -1,0 +1,28 @@
+[
+  {
+    "name": "excluded-1024-dimension-qualification",
+    "status": "measured",
+    "config": {
+      "name": "excluded-1024-dimension-qualification",
+      "comparison": "rate40",
+      "pair": 0,
+      "role": "control",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "origin": "http://127.0.0.1:18768",
+      "layout": "vj-next",
+      "width": 1024,
+      "height": 576,
+      "seconds": 8,
+      "sendFps": 60,
+      "thresholdBytes": 262144,
+      "variant": "terminal-noop",
+      "mailbox": true,
+      "workerThreads": 128,
+      "outputCast": "gpu",
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "inputImpulses": true
+    },
+    "summary": "docs/performance/2026-09-18/input/excluded-1024-qualification/excluded-1024-dimension-qualification/summary.json"
+  }
+]

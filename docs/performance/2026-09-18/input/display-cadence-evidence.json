@@ -1,0 +1,25 @@
+{
+  "observed_epoch": 1789717991.947702,
+  "displays": [
+    {
+      "_spdisplays_pixels": "5120 x 2880",
+      "_spdisplays_resolution": "2560 x 1440 @ 30.00Hz",
+      "spdisplays_main": "spdisplays_yes",
+      "spdisplays_pixelresolution": "spdisplays_5k-uhgplus",
+      "spdisplays_resolution": "2560 x 1440 @ 30.00Hz"
+    },
+    {
+      "_spdisplays_pixels": "5120 x 2880",
+      "_spdisplays_resolution": "2560 x 1440 @ 120.00Hz",
+      "spdisplays_pixelresolution": "spdisplays_3024x1964Retina"
+    }
+  ],
+  "power": [
+    "Battery Power:",
+    "lowpowermode         0",
+    "AC Power:",
+    "lowpowermode         0"
+  ],
+  "mutation": "none; read-only system_profiler and pmset",
+  "interpretation": "30Hz main display is consistent with headed rAF cadence at both tested Chrome versions. Headless results are 60Hz and do not measure physical display presentation."
+}

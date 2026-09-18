@@ -1,0 +1,128 @@
+[
+  {
+    "trial": "screen-512/rate40-512x288-r1-control",
+    "status": "measured",
+    "problems": [],
+    "largest_received_gap_ms": 1345.599853515625,
+    "gap_start": 1789718810255.8,
+    "gap_end": 1789718811601.4,
+    "sent_during_gap": 43,
+    "worker_timings": {
+      "queue_wait_ms": {
+        "median": 0.026,
+        "p95": 0.042,
+        "max": 29.545
+      },
+      "total_ms": {
+        "median": 23.1,
+        "p95": 27.07,
+        "max": 68.68
+      },
+      "vae_encode_ms": {
+        "median": 3.82,
+        "p95": 4.16,
+        "max": 49.12
+      },
+      "transformer_plus_decode_ms": {
+        "median": 18.78,
+        "p95": 20.03,
+        "max": 60.88
+      }
+    },
+    "rtc_stats": [
+      [
+        {
+          "id": "CPBInmKXjB_Xa6FT+5E",
+          "timestamp": 1789718844181.015,
+          "type": "candidate-pair",
+          "bytesDiscardedOnSend": 0,
+          "bytesReceived": 23235222,
+          "bytesSent": 10365598,
+          "consentRequestsSent": 28,
+          "currentRoundTripTime": 0.021,
+          "lastPacketReceivedTimestamp": 1789718844180,
+          "lastPacketSentTimestamp": 1789718844180,
+          "localCandidateId": "IBInmKXjB",
+          "nominated": true,
+          "packetsDiscardedOnSend": 0,
+          "packetsReceived": 25929,
+          "packetsSent": 19222,
+          "priority": 7241540809772645000,
+          "remoteCandidateId": "IXa6FT+5E",
+          "requestsReceived": 29,
+          "requestsSent": 29,
+          "responsesReceived": 28,
+          "responsesSent": 29,
+          "state": "succeeded",
+          "totalRoundTripTime": 1.245,
+          "transportId": "T01",
+          "writable": true
+        }
+      ]
+    ]
+  },
+  {
+    "trial": "screen-512-recovery2/buffer64-512x288-r1-candidate",
+    "status": "invalid",
+    "problems": [
+      "main: worker 0 had an output gap over two seconds"
+    ],
+    "largest_received_gap_ms": 2522.400146484375,
+    "gap_start": 1789720254073.0999,
+    "gap_end": 1789720256595.5,
+    "sent_during_gap": 149,
+    "worker_timings": {
+      "queue_wait_ms": {
+        "median": 0.026,
+        "p95": 0.034,
+        "max": 12.227
+      },
+      "total_ms": {
+        "median": 22.94,
+        "p95": 35.31,
+        "max": 74.26
+      },
+      "vae_encode_ms": {
+        "median": 3.82,
+        "p95": 3.88,
+        "max": 49.69
+      },
+      "transformer_plus_decode_ms": {
+        "median": 18.62,
+        "p95": 29.52,
+        "max": 62.66
+      }
+    },
+    "rtc_stats": [
+      [
+        {
+          "id": "CPIdRiwXlI_WiMKoRPm",
+          "timestamp": 1789720278670.7,
+          "type": "candidate-pair",
+          "bytesDiscardedOnSend": 0,
+          "bytesReceived": 30606868,
+          "bytesSent": 13171282,
+          "consentRequestsSent": 26,
+          "currentRoundTripTime": 0.02,
+          "lastPacketReceivedTimestamp": 1789720278669,
+          "lastPacketSentTimestamp": 1789720278663,
+          "localCandidateId": "IIdRiwXlI",
+          "nominated": true,
+          "packetsDiscardedOnSend": 0,
+          "packetsReceived": 34759,
+          "packetsSent": 24486,
+          "priority": 7241540809772645000,
+          "remoteCandidateId": "IWiMKoRPm",
+          "requestsReceived": 29,
+          "requestsSent": 27,
+          "responsesReceived": 27,
+          "responsesSent": 29,
+          "state": "succeeded",
+          "totalRoundTripTime": 0.672,
+          "transportId": "T01",
+          "writable": true
+        }
+      ]
+    ]
+  }
+]

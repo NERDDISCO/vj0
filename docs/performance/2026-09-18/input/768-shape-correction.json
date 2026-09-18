@@ -1,0 +1,10 @@
+{
+  "status": "cancelled-before-first-timed-window",
+  "reason": "Preparation mistake: jobs used768x432 but existing UI/prewarmed resolution is768x448. Wrong-shape compile started during excluded warmup; no timed768 result accepted.",
+  "attempted_jobs": "jobs-expansion-768.json",
+  "replacement_jobs": "jobs-rates-768x448.json",
+  "local_action": "SIGINT own harness PID14752 to trigger generationStop and cleanup; coordinating agent owns remote compile recovery.",
+  "additional_scope_correction": "No16KiB expansion: pooled/matched temporal rule fails512screen despite median scalar eligibility.",
+  "remote_recovery": "Worker retained; coordinating agent observed excluded warmup complete after190.102seconds, pending0/compile0/no channel at08:52:24UTC. No worker restart.",
+  "fresh_recovery_barrier": "post-compile-fresh-barrier.json"
+}

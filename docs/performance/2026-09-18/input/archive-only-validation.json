@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "at_utc": "2026-09-18T09:32:12.471492+00:00",
+  "backup_root": "/tmp/vj0-input-raw-20260918-qo9qt4u_",
+  "cohorts": [
+    {
+      "cohort": "screen-512",
+      "original_path": "docs/performance/2026-09-18/input/screen-512",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/screen-512",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/screen-512",
+      "manifest_sha256": "d7c879d7f8f4d8034f7c9af916b657ab415205894eddcd7337848224dc1b90d8",
+      "files": 134,
+      "original_bytes": 64402683,
+      "archive_bytes": 5834587
+    },
+    {
+      "cohort": "screen-512-recovery",
+      "original_path": "docs/performance/2026-09-18/input/screen-512-recovery",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/screen-512-recovery",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery",
+      "manifest_sha256": "aa5fbda277601f846decd3bb2ab21724eb608ef04d4ca0b5a59c13d3e8525a1d",
+      "files": 10,
+      "original_bytes": 33130,
+      "archive_bytes": 33130
+    },
+    {
+      "cohort": "screen-512-recovery2",
+      "original_path": "docs/performance/2026-09-18/input/screen-512-recovery2",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/screen-512-recovery2",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-recovery2",
+      "manifest_sha256": "c20cf298115c3ba2e2255afbffe692a56a7cdd55be15c5f36045be15060f72b5",
+      "files": 130,
+      "original_bytes": 65061851,
+      "archive_bytes": 5847924
+    },
+    {
+      "cohort": "screen-512-remaining",
+      "original_path": "docs/performance/2026-09-18/input/screen-512-remaining",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/screen-512-remaining",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/screen-512-remaining",
+      "manifest_sha256": "50758a07e821e9bd75c6188be89f4f06615ffbb58d208bab24d077ee7eb8c748",
+      "files": 130,
+      "original_bytes": 66182812,
+      "archive_bytes": 5957809
+    },
+    {
+      "cohort": "rates-768x448",
+      "original_path": "docs/performance/2026-09-18/input/rates-768x448",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/rates-768x448",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/rates-768x448",
+      "manifest_sha256": "1942f4bdd9415513184a9c772974a0fb7ff23e58075d0c95b14028b61c2e8158",
+      "files": 173,
+      "original_bytes": 72146311,
+      "archive_bytes": 7089634
+    },
+    {
+      "cohort": "rates-1024x576",
+      "original_path": "docs/performance/2026-09-18/input/rates-1024x576",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/rates-1024x576",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576",
+      "manifest_sha256": "7aaab6e32fc85fa55e7df107f2e662294754be19ed19da888c8a8353a4aa4c1f",
+      "files": 104,
+      "original_bytes": 38311930,
+      "archive_bytes": 4059537
+    },
+    {
+      "cohort": "rates-1024x576-remaining",
+      "original_path": "docs/performance/2026-09-18/input/rates-1024x576-remaining",
+      "backup_path": "/tmp/vj0-input-raw-20260918-qo9qt4u_/rates-1024x576-remaining",
+      "archive_path": "docs/performance/2026-09-18/input/archived-cohorts/rates-1024x576-remaining",
+      "manifest_sha256": "cfaa346fa0a8b7b64da93d620cce4cc53f0b173750c99a0ecb4f7c60ad823acd",
+      "files": 74,
+      "original_bytes": 25857516,
+      "archive_bytes": 2713372
+    }
+  ],
+  "scope": "Only redundant raw directories with fully verified archived counterparts moved. Unarchived failures, frozen sources and browser targets untouched.",
+  "raw_paths_unavailable_during_recomputation": true,
+  "recomputations": [
+    {
+      "original_report": "docs/performance/2026-09-18/input/results-512-archived.json",
+      "recomputed_report": "docs/performance/2026-09-18/input/archive-only-audit/results-512.json",
+      "json_equal": true,
+      "original_sha256": "b3e2ec67f1fb8ac7031932279523c2e95c5bab2856d237b5ed26b4f5df8a69d1",
+      "recomputed_sha256": "0cc26702289763c304c91d728d1f2e87e1d98b9f75d66bd10cfc03ae781f2320"
+    },
+    {
+      "original_report": "docs/performance/2026-09-18/input/results-768x448-archived.json",
+      "recomputed_report": "docs/performance/2026-09-18/input/archive-only-audit/results-768x448.json",
+      "json_equal": true,
+      "original_sha256": "0600b0c3db28f67d940b4eb3dc491477d5a226a12b76693712eeb3d5f045e4d2",
+      "recomputed_sha256": "0600b0c3db28f67d940b4eb3dc491477d5a226a12b76693712eeb3d5f045e4d2"
+    },
+    {
+      "original_report": "docs/performance/2026-09-18/input/results-1024x576-archived.json",
+      "recomputed_report": "docs/performance/2026-09-18/input/archive-only-audit/results-1024x576.json",
+      "json_equal": true,
+      "original_sha256": "ed6003bf5f2073e2cc6437e932dc5227a9b355862c5cd6a7ad8502a353ebb8c9",
+      "recomputed_sha256": "ed6003bf5f2073e2cc6437e932dc5227a9b355862c5cd6a7ad8502a353ebb8c9"
+    },
+    {
+      "original_report": "docs/performance/2026-09-18/input/encode-duration-archived.json",
+      "recomputed_report": "docs/performance/2026-09-18/input/archive-only-audit/encode-duration.json",
+      "json_equal": true,
+      "original_sha256": "3c8afb9adef1d6687441a8450b3927f461aaabd3e5066f9b95aa915fc97c0bba",
+      "recomputed_sha256": "3c8afb9adef1d6687441a8450b3927f461aaabd3e5066f9b95aa915fc97c0bba"
+    }
+  ]
+}

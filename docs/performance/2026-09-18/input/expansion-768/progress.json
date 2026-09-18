@@ -1,0 +1,28 @@
+[
+  {
+    "name": "rate40-768x432-r0-control",
+    "status": "failed",
+    "config": {
+      "name": "rate40-768x432-r0-control",
+      "comparison": "rate40",
+      "pair": 0,
+      "role": "control",
+      "server": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net",
+      "origin": "http://127.0.0.1:18768",
+      "layout": "vj-next",
+      "width": 768,
+      "height": 432,
+      "seconds": 60,
+      "sendFps": 60,
+      "thresholdBytes": 262144,
+      "variant": "terminal-noop",
+      "mailbox": true,
+      "workerThreads": 128,
+      "outputCast": "gpu",
+      "activeWorkers": 1,
+      "maxPending": 3,
+      "inputImpulses": true
+    },
+    "error": ""
+  }
+]

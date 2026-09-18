@@ -1,0 +1,46 @@
+[
+  {
+    "name": "headed153",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "visibility": "visible",
+    "durationMs": 3001.300000000003,
+    "frames": 89,
+    "rafFps": 29.65381667943888,
+    "meanDt": 33.72247191011239,
+    "minDt": 31.5,
+    "maxDt": 67.5
+  },
+  {
+    "name": "headless149",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+    "visibility": "visible",
+    "durationMs": 3016.6000000000004,
+    "frames": 181,
+    "rafFps": 60.001325996154605,
+    "meanDt": 16.666298342541438,
+    "minDt": 16.599999999998545,
+    "maxDt": 16.80000000000109
+  },
+  {
+    "name": "headed153-repeat",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "visibility": "visible",
+    "durationMs": 3031.5,
+    "frames": 91,
+    "rafFps": 30.018142833580736,
+    "meanDt": 33.31318681318681,
+    "minDt": 31.39999999999418,
+    "maxDt": 35.29999999998836
+  },
+  {
+    "name": "headless149-repeat",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+    "visibility": "visible",
+    "durationMs": 3016.5,
+    "frames": 180,
+    "rafFps": 59.67180507210343,
+    "meanDt": 16.758333333333333,
+    "minDt": 16.599999999998545,
+    "maxDt": 33.400000000001455
+  }
+]

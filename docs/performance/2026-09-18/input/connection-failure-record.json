@@ -1,0 +1,29 @@
+{
+  "status": "two-premeasurement-connection-timeouts-retained",
+  "failed_attempts": [
+    {
+      "cohort": "screen-512",
+      "job": "rate30-512x288-r1-control",
+      "timeout_seconds": 60,
+      "completed_prior_timed_trials": 9,
+      "cleanup": "pages-closed",
+      "client_failure_snapshot": "not captured by frozen-v5 before cleanup",
+      "server_evidence": "screen-512/after-failure-debug.json"
+    },
+    {
+      "cohort": "screen-512-recovery",
+      "job": "rate30-512x288-r0-control",
+      "timeout_seconds": 60,
+      "completed_prior_timed_trials": 0,
+      "cleanup": "pages-closed",
+      "client_failure_snapshot": "screen-512-recovery/early-client-diagnostic.json",
+      "network_timing": "screen-512-recovery/early-network-resources.json"
+    }
+  ],
+  "bounded_diagnostic": {
+    "path": "signaling-diagnostic.json",
+    "outcome": "unchanged app opened channel; browser OPTIONS and POST200; no loadingFailed",
+    "capture_generation_started": false
+  },
+  "interpretation": "Cause of the two failed setup attempts remains unknown. ResourceTiming status0 alone does not prove HTTP failure. No failures removed; no partial rate30 medians used."
+}

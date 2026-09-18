@@ -1,0 +1,772 @@
+{
+  "comparisons": {
+    "rate40-512x288": {
+      "trials": [
+        {
+          "name": "rate40-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "stage_fps": 40.721224253995715,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2459,
+            "mean": 78.56804295524731,
+            "p50": 77.2998046875,
+            "p95": 99.80981445312499,
+            "p99": 119.58970703125033,
+            "min": 49.7998046875,
+            "max": 213.89990234375
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 89.599853515625,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3630,
+              "rejected": 0,
+              "maxBufferedBytes": 11237
+            },
+            "before-send": {
+              "calls": 3185,
+              "rejected": 0,
+              "maxBufferedBytes": 5738
+            }
+          },
+          "send_fps": 52.61135805406441,
+          "receive_fps": 40.704664179065254
+        },
+        {
+          "name": "rate40-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "stage_fps": 37.45721472842035,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2262,
+            "mean": 84.41233171350022,
+            "p50": 78.2000732421875,
+            "p95": 114.48000488281242,
+            "p99": 265.7238916015623,
+            "min": 49.800048828125,
+            "max": 349.89990234375
+          },
+          "age_fractions": {
+            "250": 0.01282051282051282,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 226.199951171875,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2346,
+              "rejected": 0,
+              "maxBufferedBytes": 81852
+            },
+            "before-encode": {
+              "calls": 2570,
+              "rejected": 0,
+              "maxBufferedBytes": 85274
+            }
+          },
+          "send_fps": 38.7488428225038,
+          "receive_fps": 37.45721472842035
+        },
+        {
+          "name": "rate40-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "stage_fps": 36.04736788340667,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2178,
+            "mean": 85.54392849840737,
+            "p50": 79.39990234375,
+            "p95": 116.0899780273438,
+            "p99": 229.58385742187502,
+            "min": 55.099853515625,
+            "max": 375.89990234375
+          },
+          "age_fractions": {
+            "250": 0.0073461891643709825,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 180.800048828125,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2273,
+              "rejected": 0,
+              "maxBufferedBytes": 68253
+            },
+            "before-encode": {
+              "calls": 2682,
+              "rejected": 0,
+              "maxBufferedBytes": 71658
+            }
+          },
+          "send_fps": 37.487276517867826,
+          "receive_fps": 36.11357057924397
+        },
+        {
+          "name": "rate40-512x288-r1-control",
+          "role": "control",
+          "pair": 1,
+          "status": "measured",
+          "stage_fps": 27.37017784247928,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 1653,
+            "mean": 562.456570144718,
+            "p50": 122.39990234375,
+            "p95": 2505.8400390625,
+            "p99": 3562.5239257812505,
+            "min": 58.199951171875,
+            "max": 3720.699951171875
+          },
+          "age_fractions": {
+            "250": 0.3666061705989111,
+            "500": 0.31518451300665457,
+            "1000": 0.21294615849969753
+          },
+          "max_gap_ms": 1343.39990234375,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 3,
+            "stage_response_within_1000ms": 13,
+            "stage_unobserved_in_window": 3,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3581,
+              "rejected": 576,
+              "maxBufferedBytes": 265186
+            },
+            "before-send": {
+              "calls": 2247,
+              "rejected": 0,
+              "maxBufferedBytes": 261739
+            }
+          },
+          "send_fps": 37.10621206593834,
+          "receive_fps": 27.403293605144107
+        },
+        {
+          "name": "rate40-512x288-r2-control",
+          "role": "control",
+          "pair": 2,
+          "status": "measured",
+          "stage_fps": 37.975899371934005,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2293,
+            "mean": 84.02157423748909,
+            "p50": 81.7998046875,
+            "p95": 108.599853515625,
+            "p99": 125.707958984375,
+            "min": 51.099853515625,
+            "max": 208.499755859375
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 131.0,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-send": {
+              "calls": 2567,
+              "rejected": 0,
+              "maxBufferedBytes": 5696
+            },
+            "before-encode": {
+              "calls": 3591,
+              "rejected": 0,
+              "maxBufferedBytes": 5710
+            }
+          },
+          "send_fps": 42.41442577039816,
+          "receive_fps": 37.975899371934005
+        },
+        {
+          "name": "rate40-512x288-r2-candidate",
+          "role": "candidate",
+          "pair": 2,
+          "status": "measured",
+          "stage_fps": 36.11489859406953,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2180,
+            "mean": 79.51762908095614,
+            "p50": 77.400390625,
+            "p95": 106.20520019531251,
+            "p99": 125.51004882812504,
+            "min": 48.7001953125,
+            "max": 246.900146484375
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 141.800048828125,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 40,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 2685,
+              "rejected": 0,
+              "maxBufferedBytes": 11149
+            },
+            "before-send": {
+              "calls": 2248,
+              "rejected": 0,
+              "maxBufferedBytes": 5647
+            }
+          },
+          "send_fps": 37.14201956325866,
+          "receive_fps": 36.11489859406953
+        }
+      ],
+      "treatment_observation": {
+        "candidate_send_fps_fraction_of_control": 0.8838331731943643,
+        "threshold_rejections_by_role": {
+          "control": 576,
+          "candidate": 0
+        },
+        "meaning": "Requested rate is not achieved rate. Zero admission rejections means the threshold did not bind in these trials; it does not establish behavior under a congested link."
+      },
+      "median_trials": {
+        "control": {
+          "stage_fps": 37.975899371934005,
+          "send_fps": 42.41442577039816,
+          "receive_fps": 37.975899371934005,
+          "p95_age_ms": 108.599853515625,
+          "p99_age_ms": 125.707958984375,
+          "missed_stage_impulses": 0,
+          "impulses_within_1000ms": 19
+        },
+        "candidate": {
+          "stage_fps": 36.11489859406953,
+          "send_fps": 37.487276517867826,
+          "receive_fps": 36.11489859406953,
+          "p95_age_ms": 114.48000488281242,
+          "p99_age_ms": 229.58385742187502,
+          "missed_stage_impulses": 0,
+          "impulses_within_1000ms": 19
+        }
+      },
+      "gates": {
+        "stage_fps_at_least_95pct": true,
+        "p95_age_at_least_10pct_lower": false,
+        "p99_age_no_more_than_10pct_worse": false,
+        "no_increase_in_unobserved_impulses": true,
+        "no_fewer_impulses_within_1000ms": true,
+        "complete_temporal_coverage": true,
+        "all_transition_barriers_verified": true,
+        "final_cleanup_verified": true
+      },
+      "decision": "not-promoted; inspect tradeoff or one bounded follow-up batch"
+    },
+    "rate30-512x288": {
+      "trials": [
+        {
+          "name": "rate30-512x288-r0-control",
+          "role": "control",
+          "pair": 0,
+          "status": "measured",
+          "stage_fps": 39.05007412853512,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 2357,
+            "mean": 81.30343447957547,
+            "p50": 78.7001953125,
+            "p95": 109.51997070312498,
+            "p99": 129.10009765625,
+            "min": 53.800048828125,
+            "max": 196.400146484375
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 102.60009765625,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 60,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-encode": {
+              "calls": 3626,
+              "rejected": 0,
+              "maxBufferedBytes": 41068
+            },
+            "before-send": {
+              "calls": 3185,
+              "rejected": 0,
+              "maxBufferedBytes": 41068
+            }
+          },
+          "send_fps": 52.60245454310522,
+          "receive_fps": 39.05007412853512
+        },
+        {
+          "name": "rate30-512x288-r0-candidate",
+          "role": "candidate",
+          "pair": 0,
+          "status": "measured",
+          "stage_fps": 29.534194591782096,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 1783,
+            "mean": 79.47200680581359,
+            "p50": 78.300048828125,
+            "p95": 108.300048828125,
+            "p99": 123.78999511718753,
+            "min": 48.900146484375,
+            "max": 165.10009765625
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 99.900146484375,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-send": {
+              "calls": 1802,
+              "rejected": 0,
+              "maxBufferedBytes": 5637
+            },
+            "before-encode": {
+              "calls": 1895,
+              "rejected": 0,
+              "maxBufferedBytes": 5643
+            }
+          },
+          "send_fps": 29.78265949300292,
+          "receive_fps": 29.534194591782096
+        },
+        {
+          "name": "rate30-512x288-r1-candidate",
+          "role": "candidate",
+          "pair": 1,
+          "status": "measured",
+          "stage_fps": 29.251922730614798,
+          "transition_drain_valid": true,
+          "age_ms": {
+            "count": 1766,
+            "mean": 84.88390380582885,
+            "p50": 83.9501953125,
+            "p95": 112.97503662109375,
+            "p99": 131.52515869140612,
+            "min": 53.400146484375,
+            "max": 206.400146484375
+          },
+          "age_fractions": {
+            "250": 0.0,
+            "500": 0.0,
+            "1000": 0.0
+          },
+          "max_gap_ms": 175.300048828125,
+          "impulses": {
+            "count": 19,
+            "expected_count": 19,
+            "valid_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "invalid_indices": [],
+            "censored_indices": [],
+            "no_admitted_capture": 0,
+            "stage_response_within_1000ms": 19,
+            "stage_unobserved_in_window": 0,
+            "meaning": "Impulse metadata follows encoded input through the actual model/output; not perceptual beat-strength equivalence."
+          },
+          "requested_fps": 30,
+          "threshold_bytes": 262144,
+          "admission_checks": {
+            "before-send": {
+              "calls": 1780,
+              "rejected": 0,
+              "maxBufferedBytes": 5035
+            },
+            "before-encode": {
+              "calls": 1912,
+              "rejected": 0,
+              "maxBufferedBytes": 5710
+            }
+          },
+          "send_fps": 29.4009982145194,
+          "receive_fps": 29.268486673270864
+        },
+        {
+          "name": "rate30-512x288-r1-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "rate30-512x288-r2-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "rate30-512x288-r2-candidate",
+          "role": "candidate",
+          "status": "missing"
+        }
+      ],
+      "decision": "incomplete-or-failed; do not mix into a complete-cohort median"
+    },
+    "buffer64-512x288": {
+      "trials": [
+        {
+          "name": "buffer64-512x288-r0-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer64-512x288-r0-candidate",
+          "role": "candidate",
+          "status": "missing"
+        },
+        {
+          "name": "buffer64-512x288-r1-candidate",
+          "role": "candidate",
+          "status": "missing"
+        },
+        {
+          "name": "buffer64-512x288-r1-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer64-512x288-r2-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer64-512x288-r2-candidate",
+          "role": "candidate",
+          "status": "missing"
+        }
+      ],
+      "decision": "incomplete-or-failed; do not mix into a complete-cohort median"
+    },
+    "buffer16-512x288": {
+      "trials": [
+        {
+          "name": "buffer16-512x288-r0-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer16-512x288-r0-candidate",
+          "role": "candidate",
+          "status": "missing"
+        },
+        {
+          "name": "buffer16-512x288-r1-candidate",
+          "role": "candidate",
+          "status": "missing"
+        },
+        {
+          "name": "buffer16-512x288-r1-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer16-512x288-r2-control",
+          "role": "control",
+          "status": "missing"
+        },
+        {
+          "name": "buffer16-512x288-r2-candidate",
+          "role": "candidate",
+          "status": "missing"
+        }
+      ],
+      "decision": "incomplete-or-failed; do not mix into a complete-cohort median"
+    }
+  },
+  "cleanup": {
+    "status": "pages-closed",
+    "errors": []
+  },
+  "interpretation": "Stage submission is not physical presentation; age is capture encode start to submission; impulse IDs/RMS are not perceptual visual-equivalence proof."
+}
