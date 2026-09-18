@@ -1,6 +1,6 @@
 {
   "verdict": "passed_with_explicit_measurement_and_deployment_limits",
-  "reviewed_at_utc": "2026-09-18T06:42:52.036690+00:00",
+  "reviewed_at_utc": "2026-09-18T06:43:34.351462+00:00",
   "reviewer": "independent final_grader agent",
   "reviewed_base_commit": "4170cee0d92dece12d5a78142bd1def9dd7550c9",
   "scope": "Independent read-only review of the current performance-branch working tree, runtime integration, completed formal app/soak evidence, completed production GPU probe, report claims and saved shutdown records. This reviewer wrote only this review file. No CPU test rerun, live GPU/browser/network/build/deployment or resource mutation was performed.",
@@ -134,7 +134,8 @@
     },
     "quality_scope": "Three sizes,steps2/3/4,three input phases,alpha0.1,seed42,one fixed prompt. Exact JPEG/RNG/four-path equality is supported by source-checked runtime assertions; raw JPEG/RNG states for all cases were not independently retained. The nine two-step PNG pairs were independently byte-compared. Wider162case evidence applies to terminal skipping separately.",
     "profiles": "Two separate untimed20-frame warmed traces contain actual CUDA kernel events. First3 profile outputs per size are recorded exact. FP8-name shares42.9512%/36.5867% and cuDNN-name shares27.4153%/23.4282% of summed kernel time independently reconcile. Conservative explicit flash_fwd/fmha grouping excludes fused support operations; its reported8.00%/14.34% shares are kernel-name attribution, not a complete causal attention budget or end-to-end latency. CPU user frame ranges are20per trace; they must not be double-counted with device annotations.",
-    "separation": "Production flags do not install the generated live worker constant-cache/event bundle. These JPEG85-input/JPEG80-output offline values cannot be substituted for app FPS or added to the earlier cast-only gain."
+    "separation": "Production flags do not install the generated live worker constant-cache/event bundle. These JPEG85-input/JPEG80-output offline values cannot be substituted for app FPS or added to the earlier cast-only gain.",
+    "profile_range_check": "Separately inspected operator rows distinguish host annotations from device annotations. Device VAE encoder+decoder ranges7.9253/33.0741ms, transformer10.4532/37.7801ms, and output conversion0.038279/0.195903ms per frame match reported512/1024numbers; host output conversion4.1797/17.5929ms is explicitly qualified as waiting rather than an equally removable GPU-copy cost. No host/device duplicate range sum is used."
   },
   "shutdown_and_preservation": {
     "status": "passed_from_saved_records_and_local_artifact_hashes",
@@ -162,7 +163,8 @@
     "Before baseline names exact frontend commits and shared generated combined worker.",
     "Production opt-ins are explicitly distinct from the live benchmark configuration.",
     "WAN tails, failed cross-thread quality, incomplete SCTP drain, and partial cache copy are preserved.",
-    "Proposed admission/kernel/NVFP4/multi-GPU work is future bounded research, without invented gains."
+    "Proposed admission/kernel/NVFP4/multi-GPU work is future bounded research, without invented gains.",
+    "RESULTS now dates the former running-pod snapshot and explicitly links the September18 verified stopped state."
   ],
   "remaining_limitations": [
     "No replacement stable image or main-branch deployment was performed; a rebuilt packaged image itself is untested.",
@@ -173,8 +175,7 @@
     "The mailbox has mixed throughput/tail results and cannot evict browser/SCTP queued bytes; no matched FIFO pending1 trial or complete network-drain proof exists in this follow-up.",
     "One-GPU original-stack results do not revalidate earlier two-GPU newer-stack throughput. The latter pod lacked restart capacity.",
     "Compiler cache persistence is partial; code/results/model checkpoints were not claimed to be lost.",
-    "Shutdown is verified by the saved06:36:54UTC API record, not a new final-answer-time resource query.",
-    "Historical Sept17 RESULTS contains its then-running resource snapshot; current Sept18 state is stopped and DEEP-DIVE must govern current reporting."
+    "Shutdown is verified by the saved06:36:54UTC API record, not a new final-answer-time resource query."
   ],
   "source_and_evidence_sha256": {
     "workers/runpod-flux2klein/worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
@@ -188,7 +189,7 @@
     "workers/runpod-flux2klein/bench/bench_post_live.py": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
     "workers/runpod-flux2klein/bench/audit_post_live.py": "3730698cba54bf855720be11859632ec98330239fb05081137103c3663eef5dd",
     "workers/runpod-flux2klein/RUNTIME-OPTIMIZATIONS.md": "9b388dd3503fe8d9e8e2e42ccf22cb1bdc4988f7190d604f7ea440ddaa27036b",
-    "docs/performance/2026-09-17/DEEP-DIVE.md": "f62809c08d069b8c9216f6781fda7c171d7c14c0f79652a7e3cd1c0331ddad1b",
+    "docs/performance/2026-09-17/DEEP-DIVE.md": "45ff8912f8424e93ab7831e0793479db79a6e8241dd200529e9c777fdabab8b6",
     "docs/performance/2026-09-17/NEXT-EXPERIMENTS.md": "9416b200a6333e72109547f7492fa4af2723671b6577e66387fc5d313e81b747",
     "docs/performance/2026-09-17/review-runtime.json": "1fdb81d36ce6d70176a4dd8f467371f52231064d6f889f10528ca3667db8c50f",
     "docs/performance/2026-09-17/review-formal-app.json": "148042e520e95164f3df0627b49519beef6ae7959d05f17bbfff3a61e023febf",
@@ -200,6 +201,7 @@
     "docs/performance/2026-09-17/terminal-production-proof/result.json.gz": "7ed795eef4eee0648fc8b7ba3067c9a41575a3885323046d6f54a8d5f9d92709",
     "docs/performance/2026-09-17/deep-operations/vj0-both-pods-stopped-20260918-final.json": "96f82e995e60f3a53e148004898a2095b5a043f13cac5fbbf61eda6b33bc1354",
     "docs/performance/2026-09-17/deep-operations/cache-persist-20260918-05b.json": "ba3f8b280fd937c1a9087eb4e526c551c72c18cd5bbe1179908d25dd7d175b7d",
-    "docs/performance/2026-09-17/deep-operations/post-status-20260918-05b.json": "498a656ed3a8000c71c10485d87b240a7c7ea6d3c54bd9bb8c99f54ca10a531a"
+    "docs/performance/2026-09-17/deep-operations/post-status-20260918-05b.json": "498a656ed3a8000c71c10485d87b240a7c7ea6d3c54bd9bb8c99f54ca10a531a",
+    "docs/performance/2026-09-17/RESULTS.md": "a8ae29ebde44387bc4a064a2b6505b0c17f0f190e89da5fe33bf61b2768cd972"
   }
 }
