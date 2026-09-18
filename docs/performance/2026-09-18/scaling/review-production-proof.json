@@ -1,0 +1,259 @@
+{
+  "status": "passed-quality-timing-only",
+  "scope": "N06 production quality/timing proof only; CUDA attribution profiles deliberately omitted",
+  "errors": [],
+  "original_auditor": {
+    "status": "failed",
+    "input_directory": "docs/performance/2026-09-18/scaling/production-proof",
+    "result_sha256": "d8a001de9f6d22180dbf2b78fabb327d0c997b73194070e1877f6490a193e204",
+    "record_counts": {
+      "boot-proof": 1,
+      "warmup": 3,
+      "quality": 27,
+      "compute-measured": 18
+    },
+    "errors": [
+      "Expected both requested CUDA profiles"
+    ],
+    "warnings": [],
+    "compute": [
+      {
+        "size": [
+          512,
+          288
+        ],
+        "variants": {
+          "baseline": {
+            "fps_trials": [
+              32.08596285254634,
+              32.121510253794625,
+              31.977472511361558
+            ],
+            "median_fps": 32.08596285254634,
+            "median_trial_p50_ms": 31.12295246683061,
+            "median_trial_p95_ms": 31.325112306512892,
+            "worst_frame_ms": 41.2643919698894,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              26.586428819619897,
+              26.7218843801318,
+              26.81950619527888
+            ]
+          },
+          "optimized": {
+            "fps_trials": [
+              44.662115464075,
+              45.51809256385356,
+              45.519586155468744
+            ],
+            "median_fps": 45.51809256385356,
+            "median_trial_p50_ms": 21.964404033496976,
+            "median_trial_p95_ms": 22.058117110282183,
+            "worst_frame_ms": 33.99458434432745,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              26.49356689328928,
+              25.449165552450584,
+              25.409032991982574
+            ]
+          }
+        },
+        "paired_improvement_pct": [
+          39.195185350439374,
+          41.70595406072586,
+          42.34891809943919
+        ],
+        "median_fps_improvement_pct": 41.86294727397046
+      },
+      {
+        "size": [
+          768,
+          448
+        ],
+        "variants": {
+          "baseline": {
+            "fps_trials": [
+              15.632683812871198,
+              15.51087225036005,
+              15.567976441348684
+            ],
+            "median_fps": 15.567976441348684,
+            "median_trial_p50_ms": 63.84925381280482,
+            "median_trial_p95_ms": 66.08922644518316,
+            "worst_frame_ms": 75.52709290757775,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              17.846271840773767,
+              18.01742920601825,
+              19.793125247530707
+            ]
+          },
+          "optimized": {
+            "fps_trials": [
+              22.039365936770473,
+              21.405585382755618,
+              22.1944650014469
+            ],
+            "median_fps": 22.039365936770473,
+            "median_trial_p50_ms": 45.21404067054391,
+            "median_trial_p95_ms": 45.7727120956406,
+            "worst_frame_ms": 65.60716172680259,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              13.208192005906525,
+              14.273244333221472,
+              16.907743438102276
+            ]
+          }
+        },
+        "paired_improvement_pct": [
+          40.98261181886325,
+          38.00375012603649,
+          42.56486759896556
+        ],
+        "median_fps_improvement_pct": 41.568597690279915
+      },
+      {
+        "size": [
+          1024,
+          576
+        ],
+        "variants": {
+          "baseline": {
+            "fps_trials": [
+              9.15439041433177,
+              9.112305419494941,
+              9.12439542401332
+            ],
+            "median_fps": 9.12439542401332,
+            "median_trial_p50_ms": 109.18791475705802,
+            "median_trial_p95_ms": 113.26525730546562,
+            "worst_frame_ms": 132.47831584885716,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              14.338521705967832,
+              11.494262056150939,
+              12.046939278324812
+            ]
+          },
+          "optimized": {
+            "fps_trials": [
+              13.040592986480988,
+              13.082434238138559,
+              12.958641536273959
+            ],
+            "median_fps": 13.040592986480988,
+            "median_trial_p50_ms": 76.2648859526962,
+            "median_trial_p95_ms": 79.94348269421606,
+            "worst_frame_ms": 90.11782240122557,
+            "throttled_periods": [
+              0,
+              0,
+              0
+            ],
+            "average_cpu_cores": [
+              11.100152750092585,
+              9.489997796345694,
+              9.680105227596606
+            ]
+          }
+        },
+        "paired_improvement_pct": [
+          42.4517897561494,
+          43.568873472457284,
+          42.02191963502349
+        ],
+        "median_fps_improvement_pct": 42.92007722682789
+      }
+    ],
+    "profiles": {},
+    "audit_notes": [
+      "The initial checker counted both CPU user_annotation and GPU gpu_user_annotation records as host ranges. The corrected checker separates these categories: each trace has 20 CPU transformer calls and 20 corresponding GPU annotations. Measured data was not changed."
+    ],
+    "quality_scope": {
+      "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+      "alpha": 0.1,
+      "seed": 42,
+      "phases": 3,
+      "steps": [
+        2,
+        3,
+        4
+      ],
+      "sizes": [
+        [
+          512,
+          288
+        ],
+        [
+          768,
+          448
+        ],
+        [
+          1024,
+          576
+        ]
+      ]
+    },
+    "measurement_scope": "Offline JPEG85 input/JPEG80 output, VAE/inference/output conversion and CUDA completion; excludes IPC, WebRTC, browser and physical display.",
+    "quality_fixtures": 27,
+    "same_tensor_cast_checks": 54
+  },
+  "bindings": {
+    "result": {
+      "path": "docs/performance/2026-09-18/scaling/production-proof/result.json",
+      "stored_sha256": "d8a001de9f6d22180dbf2b78fabb327d0c997b73194070e1877f6490a193e204",
+      "payload_sha256": "d8a001de9f6d22180dbf2b78fabb327d0c997b73194070e1877f6490a193e204"
+    },
+    "runner_state": {
+      "path": "docs/performance/2026-09-18/scaling/production-run-status.json",
+      "stored_sha256": "38cf87eac3df2984324a1c2f35fa31e992a7be196e07f7b4ca221238b2565a50",
+      "payload_sha256": "38cf87eac3df2984324a1c2f35fa31e992a7be196e07f7b4ca221238b2565a50"
+    },
+    "source_manifest": {
+      "path": "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/docs/performance/2026-09-18/scaling/frozen-production/hashes.json",
+      "stored_sha256": "d99680eec848e7c489a895c51229a32b46c86421c80bb75fc456ca13f432455d",
+      "payload_sha256": "d99680eec848e7c489a895c51229a32b46c86421c80bb75fc456ca13f432455d"
+    },
+    "historical_auditor": {
+      "path": "/Users/nerddisco/.t3/worktrees/vj0/t3code-78489133/workers/runpod-flux2klein/bench/audit_post_live.py",
+      "sha256": "3730698cba54bf855720be11859632ec98330239fb05081137103c3663eef5dd"
+    }
+  },
+  "profile_coverage": {
+    "status": "not-measured",
+    "required_profiles": 0,
+    "historical_full_audit_required_profiles": 2,
+    "launch_declaration_verified": true
+  },
+  "limitations": [
+    "A scoped quality/timing pass is not a pass of the historical full-profile audit.",
+    "No CUDA kernel attribution or browser/live FPS is established by this proof.",
+    "Quality checks cover terminal skip and GPU output cast through production generate with per-frame noise. They do not prove pixel equivalence of the complete live wrapper, including its constant cache and event timing.",
+    "Saved runner argv and hashes are evidence, not independent attestation of remote execution."
+  ],
+  "coverage_difference": {
+    "expected_original_error": "Expected both requested CUDA profiles",
+    "meaning": "The historical failed verdict below is retained. Only this predeclared coverage difference permits a separate quality/timing-only conclusion."
+  }
+}

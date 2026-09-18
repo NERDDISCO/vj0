@@ -1,0 +1,49 @@
+{
+  "at": "2026-09-18T09:08:30.330114+00:00",
+  "reviewer": "remaining_plan_review",
+  "mode": "independent read-only preflight",
+  "coverage": "N03/N04/N05/N06 and root launch/comparison utilities",
+  "findings": [
+    {
+      "item": "A and C guard horizons",
+      "state": "Root will rearm before A compute; current guards remain active until replacements verified."
+    },
+    {
+      "item": "C source/log preservation",
+      "state": "Patched launch_c.py before first launch: pinned manifest and file validation; refuse existing runtime or service log; exclusive creation."
+    },
+    {
+      "item": "Production proof interrupt cleanup",
+      "state": "Patched before first run: SIGTERM/SIGINT handlers, owned child-group cleanup, failure state, exclusive log."
+    },
+    {
+      "item": "Quality limits",
+      "state": "N05 synthetic sequences do not measure WAN beat latency. Cross-stack nine static fixtures do not prove temporal equivalence or isolate stack from physical hardware."
+    },
+    {
+      "item": "N04 early exceptions",
+      "state": "If first-variant exception prevents second, investigate and run independent second variant if shared environment remains valid; never claim it was tested."
+    }
+  ],
+  "utility_sha256": {
+    "launch_c.py": "5028ea47213935e729519e91f4a563a00673536337096b449a67dd8871a44334",
+    "production_proof_c.py": "ae476372714cf5b8c80d05d8f38fee2ad6c336d16d89ddd97667710855eaa33e",
+    "compare_stack_images.py": "aaa18b0fbb50a35725b98458e931ab881c8adbc68050db4f6462250cae40e0ea"
+  },
+  "followup_review": {
+    "launcher_manifest": "Exact reviewed frozen manifest and all seven files verified",
+    "interrupt_checks": {
+      "SIGTERM": {
+        "runner_exit": 143,
+        "finally_executed": true,
+        "parent_and_term_ignoring_grandchild_absent": true
+      },
+      "SIGINT": {
+        "runner_exit": 130,
+        "finally_executed": true,
+        "parent_and_term_ignoring_grandchild_absent": true
+      }
+    },
+    "method": "Reviewer extracted actual interrupted/stop_owned_group functions and executed isolated local subprocess tests; no GPU/network"
+  }
+}

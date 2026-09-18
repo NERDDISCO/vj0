@@ -1,0 +1,147 @@
+{
+  "status": "compared",
+  "purpose": "Cross-stack visual assessment; no timing or automatic acceptance",
+  "old_versions": {
+    "torch": "2.11.0+cu128",
+    "torchao": "0.17.0+cu128",
+    "diffusers": "0.38.0.dev0",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0"
+  },
+  "new_versions": {
+    "torch": "2.13.0+cu132",
+    "torchao": "0.18.0+cu132",
+    "diffusers": "0.38.0.dev0",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0"
+  },
+  "common_source_sha256": {
+    "worker": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "runtime": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "terminal_helper": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "probe": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
+    "gpu_cast_helper": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "cpu_diagnostics": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4"
+  },
+  "rows": [
+    {
+      "fixture": "512x288-phase0-optimized.png",
+      "pixels_equal": false,
+      "mse": 123.51264784071181,
+      "psnr_db": 27.21368928728254,
+      "fraction_changed": 0.6157859519675926,
+      "max_absolute_error": 130.0,
+      "png_sha256": [
+        "3bf1127c04d9a20f643ef1fdafcead05dd6349fe0d3833688cb63df9fccf2f2c",
+        "fc85f164af0cba15085cf6493427d594590b926d24aa08fb26abce64d9571483"
+      ],
+      "paired_preview": "512x288-phase0-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "512x288-phase1-optimized.png",
+      "pixels_equal": false,
+      "mse": 99.69966634114583,
+      "psnr_db": 28.143866559809453,
+      "fraction_changed": 0.6028578016493056,
+      "max_absolute_error": 117.0,
+      "png_sha256": [
+        "427bcd33b201565946435d9af00c274eb367e82aa1377479d2195c7fa32ed8ac",
+        "fbe89411aa136171e1e0f841b73dd73e9514619554f9ae400c598e4249f51fa7"
+      ],
+      "paired_preview": "512x288-phase1-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "512x288-phase2-optimized.png",
+      "pixels_equal": false,
+      "mse": 112.65567581741898,
+      "psnr_db": 27.613272836354987,
+      "fraction_changed": 0.5991165726273148,
+      "max_absolute_error": 111.0,
+      "png_sha256": [
+        "61439ebcbb44b1eae4a4a10a466d73874f96eb77fa42216b8d99dced1ec0608e",
+        "3724167f44a8ba78000c1320a424560624828bca0bebca5dfd131eb6f338c403"
+      ],
+      "paired_preview": "512x288-phase2-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "768x448-phase0-optimized.png",
+      "pixels_equal": false,
+      "mse": 37.952333480592756,
+      "psnr_db": 32.33841877432467,
+      "fraction_changed": 0.38508145771329366,
+      "max_absolute_error": 112.0,
+      "png_sha256": [
+        "a0a74c4fae8016f09a07de90dd5b90afac4f1572e83b4f67c714ee2cfe6a991d",
+        "39bca80903598f83dcdebd5498ef478e27100ec80223b34c26db1ad49c3ac18a"
+      ],
+      "paired_preview": "768x448-phase0-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "768x448-phase1-optimized.png",
+      "pixels_equal": false,
+      "mse": 30.850501650855655,
+      "psnr_db": 33.238181305074946,
+      "fraction_changed": 0.39686318049355157,
+      "max_absolute_error": 96.0,
+      "png_sha256": [
+        "48eba3c901aa3fb6b501d3ee1ef322185b240938f6148a5254b982851619e2d4",
+        "1af7d9d5550a2940a0ae9076f30ffa205e3b831faa8ba13e13504e0fd0dfecc5"
+      ],
+      "paired_preview": "768x448-phase1-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "768x448-phase2-optimized.png",
+      "pixels_equal": false,
+      "mse": 40.50480240110367,
+      "psnr_db": 32.05573843019842,
+      "fraction_changed": 0.3837774367559524,
+      "max_absolute_error": 96.0,
+      "png_sha256": [
+        "f7d033e39e5154ed5a4d568c2df6c0c88dcb37ef4d5fb9dfaecd5a52175062ff",
+        "a85df84c526f068dd24af0408dc29dd9ca4cc1cd05fc6b7e99db440f7d4f1433"
+      ],
+      "paired_preview": "768x448-phase2-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "1024x576-phase0-optimized.png",
+      "pixels_equal": false,
+      "mse": 60.02849833170573,
+      "psnr_db": 30.347228816534834,
+      "fraction_changed": 0.30133621780960645,
+      "max_absolute_error": 196.0,
+      "png_sha256": [
+        "f3baed2a5eb92a7345b3a329a5d91a380949c75a4074bfe7e5756a8f0e16a1db",
+        "7710654ad6c0968633b76166a6a56a7524a54dbe02c2d58a59c8d3db848acefd"
+      ],
+      "paired_preview": "1024x576-phase0-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "1024x576-phase1-optimized.png",
+      "pixels_equal": false,
+      "mse": 24.215923168041087,
+      "psnr_db": 34.28979330840963,
+      "fraction_changed": 0.37982121220341436,
+      "max_absolute_error": 170.0,
+      "png_sha256": [
+        "5d777c18785dfe72b901b5752f26684a12ae515ae63131b70a19eaa931203dcc",
+        "eb86262016f579225d1ebfe21eb36b7fce62596fc0a44c0227deb04b0519501d"
+      ],
+      "paired_preview": "1024x576-phase1-optimized-stack-pair.webp"
+    },
+    {
+      "fixture": "1024x576-phase2-optimized.png",
+      "pixels_equal": false,
+      "mse": 45.0104409677011,
+      "psnr_db": 31.597670931215852,
+      "fraction_changed": 0.26167919017650465,
+      "max_absolute_error": 164.0,
+      "png_sha256": [
+        "7d9f2c24ed368a7b184dd1821084994a031fb6ece92844aaa7861c12009f5abd",
+        "4e34673a5fccaa929f83960a57e3757afb8cda6d834a3110df22db4284e3f71d"
+      ],
+      "paired_preview": "1024x576-phase2-optimized-stack-pair.webp"
+    }
+  ],
+  "all_pixels_equal": false,
+  "limitations": "Nine fixed production fixtures, one prompt and seed; different physical GPU. Scalar metrics do not accept visual or temporal quality."
+}

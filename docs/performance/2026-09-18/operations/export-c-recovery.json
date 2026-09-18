@@ -1,0 +1,6 @@
+{
+  "initial_source_sha256": "5b08e6ed702fa42acabd86ac1787a732112e10532f0ac3a2289d0a8b7c93144c",
+  "initial_error": "FileNotFoundError reading optional /sys/fs/cgroup/cpu.max; exporter exited before transferring or saving files",
+  "correction": "Read available cgroup v1/v2 metadata paths; preserve absent-path evidence and all primary live files",
+  "corrected_source_sha256": "c5999b4d35f7152209c46ea3f83c65fbac548c7608192c402c0e27509882c76e"
+}

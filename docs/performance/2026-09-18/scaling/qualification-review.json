@@ -1,0 +1,307 @@
+{
+  "status": "passed",
+  "at_utc": "2026-09-18T10:46:32.513963+00:00",
+  "excluded_from_formal_performance": true,
+  "cells": [
+    {
+      "name": "n06-qualification-512-workers2-baseline",
+      "status": "passed",
+      "dimensions": [
+        512,
+        288
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "baseline",
+      "output_cast": "cpu",
+      "worker_frames": {
+        "0": 146,
+        "1": 152
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 296,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 246,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 294,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "f9bb238cceb241dd64724f122fe7675eadba7c05726e7be79de32d1f78320b73"
+    },
+    {
+      "name": "n06-qualification-512-workers2-terminal-noop",
+      "status": "passed",
+      "dimensions": [
+        512,
+        288
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "terminal-noop",
+      "output_cast": "gpu",
+      "worker_frames": {
+        "0": 216,
+        "1": 216
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 428,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 348,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 428,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "23b32437e84248d6583227f68bdc97584f51d8fcb314f8c56dac51e9a212e49e"
+    },
+    {
+      "name": "n06-qualification-768-workers2-baseline",
+      "status": "passed",
+      "dimensions": [
+        768,
+        448
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "baseline",
+      "output_cast": "cpu",
+      "worker_frames": {
+        "0": 120,
+        "1": 120
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 238,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 213,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 238,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "877184bea332451b69a8a36ef537c535e9a4a5c47d0fb9e0469f2b01cab4b427"
+    },
+    {
+      "name": "n06-qualification-768-workers2-terminal-noop",
+      "status": "passed",
+      "dimensions": [
+        768,
+        448
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "terminal-noop",
+      "output_cast": "gpu",
+      "worker_frames": {
+        "0": 147,
+        "1": 148
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 292,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 230,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 291,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "0cd69b070902ed7301424dd77ded25124c18bb268e351513d96c1a125764a940"
+    },
+    {
+      "name": "n06-qualification-1024-workers2-baseline",
+      "status": "passed",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "baseline",
+      "output_cast": "cpu",
+      "worker_frames": {
+        "0": 71,
+        "1": 70
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 140,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 120,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 140,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "48ac2aefc9860dc2b378a0bfe436751fa3e942f455cfd595f9c8c8e031fa20f4"
+    },
+    {
+      "name": "n06-qualification-1024-workers2-terminal-noop",
+      "status": "passed",
+      "dimensions": [
+        1024,
+        576
+      ],
+      "active_workers": [
+        0,
+        1
+      ],
+      "thread_count": 128,
+      "variant": "terminal-noop",
+      "output_cast": "gpu",
+      "worker_frames": {
+        "0": 105,
+        "1": 105
+      },
+      "source_order": {
+        "main": {
+          "received": {
+            "frames": 209,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          },
+          "preview-image-raf": {
+            "frames": 207,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        },
+        "stage": {
+          "webgl-frame-submitted": {
+            "frames": 209,
+            "missing_ids": 0,
+            "reversals": 0,
+            "duplicate_ids": 0,
+            "status": "passed"
+          }
+        }
+      },
+      "summary_sha256": "54aeb49296150b70a424bfc7d7129cd332c3c7d8525ff2a19aad1e7458b0734d"
+    }
+  ],
+  "cleanup": {
+    "status": "pages-closed",
+    "errors": []
+  },
+  "ordered_barrier": {
+    "type": "vj0-input-barrier-ack",
+    "nonce": "input-1789728363656-khlv2bbljbn",
+    "status": "passed",
+    "detail": "All prior inputs admitted/dropped and workers idle; prior output precedes this ordered ack",
+    "client_epoch": 6,
+    "receivedAtBarrier": 3358,
+    "sourceAtBarrier": 3358,
+    "elapsedMs": 1
+  },
+  "cleanup_path": "docs/performance/2026-09-18/scaling/qualification-01/cleanup.json",
+  "ordered_barrier_path": "docs/performance/2026-09-18/scaling/qualification-01/drain-before-switch.json",
+  "input_log_prefixes_preserved": true,
+  "root_formal_release": "Root authorized formal matrix after all six qualifiers pass; independent proof review and heavy analysis complete."
+}

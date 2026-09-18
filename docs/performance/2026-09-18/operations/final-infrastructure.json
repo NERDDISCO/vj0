@@ -1,0 +1,26 @@
+{
+  "observed_utc": "2026-09-18T11:54:11.966714+00:00",
+  "pods": [
+    {
+      "id": "0pxb4bss2jmbhg",
+      "desiredStatus": "EXITED",
+      "runtimeStatus": "stopped",
+      "costPerHr": 2.09
+    },
+    {
+      "id": "v09w5n4ljqcjvj",
+      "desiredStatus": "EXITED",
+      "runtimeStatus": "stopped",
+      "costPerHr": 4.18
+    },
+    {
+      "id": "9vj8k6guaxsbhw",
+      "desiredStatus": "EXITED",
+      "runtimeStatus": "stopped",
+      "costPerHr": 4.18
+    }
+  ],
+  "clientBalance": 8.2752197856,
+  "currentSpendPerHr": 0.122,
+  "note": "Stopped pods retain storage; account spend is not necessarily zero."
+}

@@ -1,0 +1,73 @@
+{
+  "recorded_epoch": 1789716891.3263092,
+  "account": {
+    "clientBalance": 31.4899737365,
+    "currentSpendPerHr": 6.376
+  },
+  "pods": [
+    {
+      "id": "v09w5n4ljqcjvj",
+      "name": "vj0-perf-next-20260918",
+      "runtimeStatus": "running",
+      "desiredStatus": "RUNNING",
+      "costPerHr": 4.18,
+      "gpuCount": 2
+    },
+    {
+      "id": "9vj8k6guaxsbhw",
+      "name": "vj0-perf-20260917-scaling",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 4.18,
+      "gpuCount": 2
+    },
+    {
+      "id": "0pxb4bss2jmbhg",
+      "name": "vj0-perf-20260917-baseline",
+      "runtimeStatus": "running",
+      "desiredStatus": "RUNNING",
+      "costPerHr": 2.09,
+      "gpuCount": 1
+    },
+    {
+      "id": "f3xpnbnofqzfdu",
+      "name": "vj0-pro6k-2x-is1",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 4.18,
+      "gpuCount": 2
+    },
+    {
+      "id": "dz02kp6d6quwmq",
+      "name": "vj0-flux2-5090x2-is2",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 1.98,
+      "gpuCount": 2
+    },
+    {
+      "id": "d6d75sgdh21tmn",
+      "name": "vj0-flux2-5090-ro-v2",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 0.99,
+      "gpuCount": 1
+    },
+    {
+      "id": "astt1jyau6hsaq",
+      "name": "vj0-zimage-5090-ro",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 0.99,
+      "gpuCount": 1
+    },
+    {
+      "id": "3m90zbu8fwyyqk",
+      "name": "vj0-flux2-5090-ro",
+      "runtimeStatus": "stopped",
+      "desiredStatus": "EXITED",
+      "costPerHr": 0.99,
+      "gpuCount": 1
+    }
+  ]
+}

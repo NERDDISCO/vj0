@@ -1,0 +1,243 @@
+{
+  "status": "failed",
+  "released": false,
+  "started_epoch": 1789732276.177616,
+  "owned_pgid": 34687,
+  "original_paused_pid": 568,
+  "runtime": {
+    "pid": 34687,
+    "port": 3001,
+    "worker_count": 2,
+    "original_dispatcher_paused": 568,
+    "log": "/workspace/vj0-next-live-c-20260918/service.log",
+    "python_prefix": "/workspace/envs/klein-torch213-cu132",
+    "sources": {
+      "metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+      "server.js": "8abdfb33cd5c72cba3efbac662ca2bef5805e16ffca06c96285b18ebc0b4674c",
+      "gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+      "generator-proof.json": "3896091d126e4d4a9c0db7153b9ec795264ca72bbc3b2a978f1d43302419ce30",
+      "inference_server.py": "f74b6b0730e1268c8295a5f4d1f2e4a2a47ef264902005c596eb3dcab876407d",
+      "terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "compute.py": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe"
+    }
+  },
+  "runtime_sha256": "2ed46727de86ba3ed3b55fcb9488f753091db4ab87caca49d4a5b9136219c108",
+  "capture_completion": {
+    "status": "complete",
+    "owned_pgid": 34687,
+    "runtime_sha256": "2ed46727de86ba3ed3b55fcb9488f753091db4ab87caca49d4a5b9136219c108",
+    "completed_epoch": 1789732234.874202,
+    "ordered_barrier_passed": true,
+    "cleanup_acknowledged": true,
+    "critical_artifacts_saved": true,
+    "browser_completion_sha256": "1c2f17b5f8e2235d72834a5baa2a5c2c36001a7d2a6c630bf6783b46979423e6",
+    "browser_completion_path": "docs/performance/2026-09-18/scaling/browser-completion.json",
+    "service_snapshot_bytes": 831459,
+    "service_snapshot_sha256": "61585c5dda802db4edebf43f0ef93f7518acf131eb043b0825c8b9aa29360f89",
+    "evidence": {
+      "status": "browser-work-complete-and-safely-drained",
+      "owned_pgid": 34687,
+      "ordered_barrier_passed": true,
+      "cleanup_acknowledged": true,
+      "critical_browser_artifacts_saved": true,
+      "completed_epoch": 1789732234.874202,
+      "completed_utc": "2026-09-18T11:50:34.874216+00:00",
+      "ordered_barrier_evidence": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/drain-before-switch.json",
+      "ordered_barrier_sha256": "656174fc68265aadf02443bf3fefcd6a633eedfa03ca1757f7aa653c175d9c73",
+      "ordered_barrier_ack": {
+        "type": "vj0-input-barrier-ack",
+        "nonce": "input-1789732158532-5shxb0izhpm",
+        "status": "passed",
+        "detail": "All prior inputs admitted/dropped and workers idle; prior output precedes this ordered ack",
+        "client_epoch": 50,
+        "receivedAtBarrier": 139762,
+        "sourceAtBarrier": 139762,
+        "elapsedMs": 0
+      },
+      "cleanup_evidence": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/cleanup.json",
+      "cleanup_sha256": "6265f89e41fee29cf415e98428968a763b306f30512d854b5b0f22478a490f44",
+      "cleanup": {
+        "status": "pages-closed",
+        "errors": []
+      },
+      "worker_idle_after_barrier": [
+        {
+          "gpu": 0,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 55947,
+          "framesDispatched": 55947,
+          "compileStartedAt": 0,
+          "mailboxFlightSource": null,
+          "lastFrameAt": 1789732157788,
+          "stdoutBufLen": 0
+        },
+        {
+          "gpu": 1,
+          "ready": true,
+          "framePending": 0,
+          "framesProduced": 31669,
+          "framesDispatched": 31669,
+          "compileStartedAt": 0,
+          "mailboxFlightSource": null,
+          "lastFrameAt": 1789732157820,
+          "stdoutBufLen": 0
+        }
+      ],
+      "owned_browser_targets_blank": true,
+      "critical_browser_artifacts": [
+        {
+          "cohort": "qualification-01",
+          "jobs": 6,
+          "identity": "docs/performance/2026-09-18/scaling/qualification-01/identity.json",
+          "progress": "docs/performance/2026-09-18/scaling/qualification-01/progress.json",
+          "cleanup": "docs/performance/2026-09-18/scaling/qualification-01/cleanup.json"
+        },
+        {
+          "cohort": "matrix-01",
+          "jobs": 36,
+          "identity": "docs/performance/2026-09-18/scaling/matrix-01/identity.json",
+          "progress": "docs/performance/2026-09-18/scaling/matrix-01/progress.json",
+          "cleanup": "docs/performance/2026-09-18/scaling/matrix-01/cleanup.json"
+        },
+        {
+          "cohort": "hold-01",
+          "jobs": 1,
+          "identity": "docs/performance/2026-09-18/scaling/hold-01/identity.json",
+          "progress": "docs/performance/2026-09-18/scaling/hold-01/progress.json",
+          "cleanup": "docs/performance/2026-09-18/scaling/hold-01/cleanup.json"
+        },
+        {
+          "cohort": "lifecycle-contingency-01",
+          "jobs": 1,
+          "identity": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/identity.json",
+          "progress": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/progress.json",
+          "cleanup": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/cleanup.json"
+        }
+      ],
+      "lifecycle_status": "passed",
+      "lifecycle_actions": 10,
+      "lifecycle_evidence": "docs/performance/2026-09-18/scaling/lifecycle-contingency-01/n06-lifecycle-after-failed-hold/stress.json",
+      "retained_negatives": [
+        {
+          "cohort": "matrix-01",
+          "trial": "n06-1024-workers2-terminal-noop-r2",
+          "classification": "complete continuity-negative, included descriptively; never rerun"
+        },
+        {
+          "cohort": "hold-01",
+          "trial": "n06-768-workers2-selected-hold",
+          "classification": "complete 600-second continuity-negative; never rerun"
+        }
+      ],
+      "no_performance_failure_repaired_by_contingency": true,
+      "passive_logger_stop_requested_pid": 6772,
+      "remote_scope": "Root owns remote runtime hash, service-log preservation, process release, cache persistence and pod stop.",
+      "local_archive_status": "pending; originals and full aggregate saved locally"
+    }
+  },
+  "capture_completion_path": "/workspace/capture-completion.json",
+  "capture_completion_sha256": "449d3dc9c623bd7679582efb794fcf724200818a48671e4671e432f0cf4a19c5",
+  "critical_artifacts_saved": true,
+  "debug_observed_epoch": 1789732276.1776223,
+  "debug_before": {
+    "protocol": {
+      "benchmarkFrameIds": 1
+    },
+    "uptime_s": "4336",
+    "stats": {
+      "framesFromClient": 139762,
+      "framesToWorker": 87616,
+      "framesFromWorker": 87616,
+      "framesToClient": 87432,
+      "droppedByWorker": 0,
+      "droppedInbound": 0,
+      "droppedOutbound": 0,
+      "lastClientFrameAt": 1789732157778,
+      "lastWorkerFrameAt": 1789732157820,
+      "lastSentToClientAt": 1789732157820,
+      "channelBufferedAmount": 0,
+      "channelState": "closed",
+      "eventLoopLagMs": 1,
+      "eventLoopLagTotal": 2505,
+      "eventLoopChecks": 8668,
+      "startedAt": 1789727940535,
+      "mailboxDispatched": 87616,
+      "mailboxReplaced": 52138,
+      "droppedStaleSource": 180,
+      "mailboxCleared": 8,
+      "mailboxLastClearReason": "client unavailable"
+    },
+    "memory": {
+      "rss": 46178304,
+      "heapTotal": 13082624,
+      "heapUsed": 11427728,
+      "external": 2556355,
+      "arrayBuffers": 473171
+    },
+    "workers": [
+      {
+        "gpu": 0,
+        "ready": true,
+        "framePending": 0,
+        "framesProduced": 55947,
+        "framesDispatched": 55947,
+        "compileStartedAt": 0,
+        "mailboxFlightSource": null,
+        "lastFrameAt": 1789732157788,
+        "stdoutBufLen": 0
+      },
+      {
+        "gpu": 1,
+        "ready": true,
+        "framePending": 0,
+        "framesProduced": 31669,
+        "framesDispatched": 31669,
+        "compileStartedAt": 0,
+        "mailboxFlightSource": null,
+        "lastFrameAt": 1789732157820,
+        "stdoutBufLen": 0
+      }
+    ],
+    "channel": null,
+    "connection": null
+  },
+  "members_before": [
+    {
+      "pid": 34687,
+      "state": "S"
+    },
+    {
+      "pid": 34694,
+      "state": "S"
+    },
+    {
+      "pid": 34695,
+      "state": "S"
+    },
+    {
+      "pid": 35360,
+      "state": "S"
+    },
+    {
+      "pid": 35426,
+      "state": "S"
+    }
+  ],
+  "members_after": [
+    {
+      "pid": 34694,
+      "state": "Z"
+    }
+  ],
+  "live_members_after": [],
+  "zombie_members_after": [
+    {
+      "pid": 34694,
+      "state": "Z"
+    }
+  ],
+  "gpu_compute_after": "34694, [No data]",
+  "original_state_after": "T",
+  "finished_epoch": 1789732278.4457152
+}

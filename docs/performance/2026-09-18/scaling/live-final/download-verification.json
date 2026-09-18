@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "observed_epoch": 1789732380.273444,
+    "original_dispatcher_state": "T",
+    "cgroup_files": {
+      "/proc/self/cgroup": "13:cpu,cpuacct:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n12:net_cls,net_prio:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n11:misc:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n10:memory:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n9:cpuset:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n8:blkio:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n7:freezer:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n6:hugetlb:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n5:pids:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n4:perf_event:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n3:rdma:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n2:devices:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n1:name=systemd:/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n0::/docker/6cad470ca896c2d08672deb97bc3506743372fdd6f3f437863ba263d71de5b97\n",
+      "/sys/fs/cgroup/cpu/cpu.cfs_quota_us": "6225000\n",
+      "/sys/fs/cgroup/cpu/cpu.cfs_period_us": "100000\n",
+      "/sys/fs/cgroup/cpu/cpu.stat": "nr_periods 129588\nnr_throttled 978\nthrottled_time 1317438741624\nnr_bursts 0\nburst_time 0\n",
+      "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us": "6225000\n",
+      "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us": "100000\n",
+      "/sys/fs/cgroup/cpu,cpuacct/cpu.stat": "nr_periods 129588\nnr_throttled 978\nthrottled_time 1317438741624\nnr_bursts 0\nburst_time 0\n"
+    },
+    "gpu_snapshot": "0, GPU-0206151d-df78-ffdc-6b65-49ad98939446, NVIDIA RTX PRO 6000 Blackwell Server Edition, 595.71.05, 0 MiB, 0 %\n1, GPU-cc26e017-ede9-fa32-23a5-317422f2738b, NVIDIA RTX PRO 6000 Blackwell Server Edition, 595.71.05, 0 MiB, 0 %\n",
+    "compute_processes": ""
+  },
+  "files": [
+    {
+      "name": "metrics.py",
+      "remote": "/workspace/vj0-next-live-c-20260918/metrics.py",
+      "bytes": 1382,
+      "sha256": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac"
+    },
+    {
+      "name": "server.js",
+      "remote": "/workspace/vj0-next-live-c-20260918/server.js",
+      "bytes": 48700,
+      "sha256": "8abdfb33cd5c72cba3efbac662ca2bef5805e16ffca06c96285b18ebc0b4674c"
+    },
+    {
+      "name": "gpu_output_cast.py",
+      "remote": "/workspace/vj0-next-live-c-20260918/gpu_output_cast.py",
+      "bytes": 1764,
+      "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+    },
+    {
+      "name": "generator-proof.json",
+      "remote": "/workspace/vj0-next-live-c-20260918/generator-proof.json",
+      "bytes": 331,
+      "sha256": "3896091d126e4d4a9c0db7153b9ec795264ca72bbc3b2a978f1d43302419ce30"
+    },
+    {
+      "name": "inference_server.py",
+      "remote": "/workspace/vj0-next-live-c-20260918/inference_server.py",
+      "bytes": 32883,
+      "sha256": "f74b6b0730e1268c8295a5f4d1f2e4a2a47ef264902005c596eb3dcab876407d"
+    },
+    {
+      "name": "terminal_noop.py",
+      "remote": "/workspace/vj0-next-live-c-20260918/terminal_noop.py",
+      "bytes": 4293,
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+    },
+    {
+      "name": "compute.py",
+      "remote": "/workspace/vj0-next-live-c-20260918/compute.py",
+      "bytes": 17117,
+      "sha256": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe"
+    },
+    {
+      "name": "hashes.json",
+      "remote": "/workspace/vj0-next-live-c-20260918/hashes.json",
+      "bytes": 623,
+      "sha256": "8eaf61588016d923acd829b327a6a49d0580fc21866a8b7c55fbec6745a51d56"
+    },
+    {
+      "name": "runtime.json",
+      "remote": "/workspace/vj0-next-live-c-20260918/runtime.json",
+      "bytes": 865,
+      "sha256": "2ed46727de86ba3ed3b55fcb9488f753091db4ab87caca49d4a5b9136219c108"
+    },
+    {
+      "name": "service.log",
+      "remote": "/workspace/vj0-next-live-c-20260918/service.log",
+      "bytes": 832054,
+      "sha256": "ca6d3b24c0fb6a41410c348b0268699d29b77bb492554bd02a34a4980aa885d0"
+    },
+    {
+      "name": "release.json",
+      "remote": "/workspace/vj0-next-live-c-20260918/release.json",
+      "bytes": 8589,
+      "sha256": "52c9f630d30367d860ea6df8e4b82c3b526cb9f0e241d6e80576e22405ad331c"
+    },
+    {
+      "name": "release-verification.json",
+      "remote": "/workspace/vj0-next-live-c-20260918/release-verification.json",
+      "bytes": 8968,
+      "sha256": "ab6af5d342420fe208b930a5c74b7c0c6a9a034e4a0d5f0d2f76ca524e5c7e30"
+    },
+    {
+      "name": "release_live_c.py",
+      "remote": "/workspace/release_live_c.py",
+      "bytes": 7448,
+      "sha256": "4a012b3a67f591e66308f07dc7b38b1dedf7d70116d609ea33f3390f9eb7b68c"
+    },
+    {
+      "name": "persist_c_caches.py",
+      "remote": "/workspace/persist_c_caches.py",
+      "bytes": 10410,
+      "sha256": "3aa4d073418f51d4cad1bdc3902c5ad93bd311204cfb6f4c39f31b74f4cc91b4"
+    },
+    {
+      "name": "capture-completion.json",
+      "remote": "/workspace/capture-completion.json",
+      "bytes": 4735,
+      "sha256": "449d3dc9c623bd7679582efb794fcf724200818a48671e4671e432f0cf4a19c5"
+    },
+    {
+      "name": "vj0-next-c-remote-guard2.json",
+      "remote": "/workspace/vj0-next-c-remote-guard2.json",
+      "bytes": 132,
+      "sha256": "c9b487ca3e01987dcdfe833ca6dce5d650d11974d2e1962235d1bd3dcd8abac7"
+    }
+  ],
+  "all_seven_frozen_sources_still_match": true
+}

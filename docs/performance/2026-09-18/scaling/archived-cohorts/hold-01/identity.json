@@ -1,0 +1,87 @@
+{
+  "jobs": [
+    {
+      "server": "https://v09w5n4ljqcjvj-3001.proxy.runpod.net",
+      "origin": "http://127.0.0.1:18768",
+      "layout": "vj-next",
+      "sendFps": 60,
+      "maxPending": 3,
+      "workerThreads": 128,
+      "mailbox": true,
+      "seconds": 600,
+      "name": "n06-768-workers2-selected-hold",
+      "width": 768,
+      "height": 448,
+      "activeWorkers": 2,
+      "variant": "terminal-noop",
+      "outputCast": "gpu",
+      "thresholdBytes": 262144,
+      "inputImpulses": true,
+      "stress": true
+    }
+  ],
+  "fixture": {
+    "vj0-ai-settings-storage": {
+      "version": 8,
+      "state": {
+        "backend": "pod",
+        "podUrl": "https://0pxb4bss2jmbhg-3001.proxy.runpod.net/webrtc/offer",
+        "autoConnect": false,
+        "sendFrames": false,
+        "showAi": true,
+        "showCaptureDebug": false,
+        "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+        "captureSize": 512,
+        "outputWidth": 512,
+        "outputHeight": 288,
+        "frameRate": 60,
+        "seed": 42,
+        "kleinSteps": 2,
+        "kleinAlpha": 0.1,
+        "sceneId": "waveform",
+        "stageSharpen": 0.6,
+        "stageScanlines": true,
+        "stageVignette": true,
+        "stagePixelate": false,
+        "stagePixelateSize": 8
+      }
+    },
+    "vj0-composer-scenes": {
+      "version": 1,
+      "state": {
+        "scenes": [
+          {
+            "id": "benchmark-waveform",
+            "name": "Benchmark waveform",
+            "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+            "background": "#0a0a0a",
+            "createdAt": 0,
+            "elements": [
+              {
+                "id": "benchmark-wave",
+                "kind": "waveform",
+                "name": "Waveform",
+                "props": {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "size": 0.48,
+                  "aspect": 4,
+                  "rotation": 0,
+                  "color": "#ffffff",
+                  "opacity": 1,
+                  "stroke": 0.012,
+                  "text": ""
+                },
+                "bindings": {}
+              }
+            ]
+          }
+        ],
+        "activeSceneId": "benchmark-waveform",
+        "selectedElementId": null
+      }
+    }
+  },
+  "harness_sha256": "e88a388dbc4c91e4a7dc1986309af56a3351de256564ef7e7e70312c811452f5",
+  "probe_sha256": "d18a9c31ddc66bac49a7fa521001032a7430a5e82bc8138107fbb7c9d8b4e266"
+}

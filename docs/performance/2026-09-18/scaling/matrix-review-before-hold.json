@@ -1,0 +1,20 @@
+{
+  "status": "complete-with-failed-outcomes",
+  "trial_status_counts": {
+    "passed": 35,
+    "continuity-failed": 1
+  },
+  "validation_gates": {
+    "complete_36_valid_windows": true,
+    "all_trial_continuity_passed": false,
+    "all_cohort_source_and_lifecycle_checks_passed": true,
+    "no_failed_connection_or_setup_attempts": true
+  },
+  "eligibility": "blocked by retained failures or incomplete evidence",
+  "common_errors": [],
+  "failed_attempts": [],
+  "at_utc": "2026-09-18T11:36:13.547050+00:00",
+  "source_report": "results-matrix-v1.json",
+  "continuation": "Predeclared 600-second 768x448 selected/two-worker hold and lifecycle; failed 1024 window retained and never rerun.",
+  "capture_was_paused_during_offline_audit": true
+}

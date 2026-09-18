@@ -1,0 +1,58 @@
+{
+  "at_utc": "2026-09-18T09:56:28.929359+00:00",
+  "status": "browser-ready; GPU proof/warmup and explicit slot grant pending",
+  "git_head": "74e4751a7d34f06ba740a2eb1fb762072559414c",
+  "browser": {
+    "Browser": "Chrome/149.0.7827.22",
+    "Protocol-Version": "1.3",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+    "V8-Version": "14.9.207.8",
+    "WebKit-Version": "537.36 (@e44bf5d2837ae8a8b51feb6025022cfc81bf3865)",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:18779/devtools/browser/fb0971b2-535c-47cd-82e3-45e7d54db9a7"
+  },
+  "targets": {
+    "main": {
+      "target_file": "docs/performance/2026-09-18/input/browser-targets-v6-headless149/main.json",
+      "id": "E8389CBD40F22B61EEA57DA9F3761002",
+      "url": "about:blank"
+    },
+    "stage": {
+      "target_file": "docs/performance/2026-09-18/input/browser-targets-v6-headless149/stage.json",
+      "id": "5598B3FAB5E181E9780F7714B40DB731",
+      "url": "about:blank"
+    }
+  },
+  "setup_pid": 73222,
+  "next_http_readiness": {
+    "url": "http://127.0.0.1:18768/vj-next",
+    "status": 200,
+    "saved_response_sha256": "f736c069b7900cf8ebc811d22eee5ee81f69c86856e2736f57072e29024ed4ee"
+  },
+  "served_original_chunks_match_pinned": true,
+  "chunk_manifest": "docs/performance/2026-09-18/input/browser-targets-v6-headless149/chunk-patches.json",
+  "interceptor_errors_present": false,
+  "harness_sources_verified": {
+    "metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "app_batch.py": "e88a388dbc4c91e4a7dc1986309af56a3351de256564ef7e7e70312c811452f5",
+    "cdp.mjs": "3d46761b99e14db347305eb3b0dd14927ac99c0b30de3025bfabb6f6f94bd91d",
+    "app_probe.js": "d18a9c31ddc66bac49a7fa521001032a7430a5e82bc8138107fbb7c9d8b4e266",
+    "input_metrics.py": "3836f025132fedffc3a7642d2781034b891c7194031a845be1012902f320718d"
+  },
+  "plans_sha256": {
+    "PLAN.md": "82acec26b0e78cb1e54891439e3f0b3c7f664a8810b5104464bdfb6f5220d34f",
+    "jobs-v2.json": "d67f41357632f3bcb0893526e81cb47cb0ee876017d6a6f98ac493b7090105b8",
+    "jobs-hold-prepared.json": "4b5365d26fe38fc2511069556d90a825ae280e8191ba3bae02822c5f22a81353",
+    "jobs-lifecycle-contingency.json": "559163cb81963496ba62eb1a55dd16915f10f41928de3dd65243acc2f3e4e657"
+  },
+  "aggregator_sha256": "b7a961432cd9a67fe32f28d828144e44ef603ddf500b51da5067f5971b77062a",
+  "fixture": "docs/performance/2026-09-18/input/fixture.json",
+  "fixture_sha256": "80c0a59eb8d6b0b05e03ba6f9eb400cad158584979208217ac7e9ac2e0c0a94d",
+  "new_passive_log": "docs/performance/2026-09-18/scaling/passive-connections-n06.jsonl",
+  "new_passive_log_exists": false,
+  "browser_actions_performed": [],
+  "estimated_exclusive_slot_minutes": {
+    "matrix": 50,
+    "hold_and_lifecycle": 13,
+    "excluding_remote_warmup_and_recoveries": true
+  }
+}

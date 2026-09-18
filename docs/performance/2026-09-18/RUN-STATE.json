@@ -1,0 +1,93 @@
+{
+  "status": "complete",
+  "updated_utc": "2026-09-18T12:02:12.762798+00:00",
+  "base_commit": "5004163253c609453fe3d0f8f692ce63b5fd6a2a",
+  "branch": "perf/2026-09-live-bench",
+  "scope": "All five approved groups completed under their predeclared gates; no production-default or UI changes. Final independent audit/checkpoint delivery is handled locally with pods stopped.",
+  "experiments": {
+    "N01_N02": {
+      "state": "complete; all capture/admission candidates rejected",
+      "report": "input/RESULTS.md"
+    },
+    "N03": {
+      "state": "complete; neither bounded native FP8 candidate passed its timing gate",
+      "report": "compute/RESULTS.md"
+    },
+    "N04": {
+      "state": "complete; both candidates failed exact-output quality; timing expansion omitted by design",
+      "report": "compute/RESULTS.md"
+    },
+    "N05": {
+      "state": "complete; small measured speed gains with visible image changes; no promotion recommended",
+      "report": "nvfp4/MODEL-RESULTS.md"
+    },
+    "N06": {
+      "state": "complete; 36 planned matrix windows, 35 passed and 1 complete continuity-negative; 600s hold also continuity-negative; separate planned lifecycle passed",
+      "report": "scaling/RESULTS.md",
+      "source_selection": "scaling/selection-v1.json",
+      "archived_selection": "scaling/selection-archived-v1.json",
+      "archive_validation": "scaling/archive-only-validation.json",
+      "qualification_windows_excluded": 7,
+      "timed_reruns": 0
+    }
+  },
+  "pods": {
+    "A": {
+      "id": "0pxb4bss2jmbhg",
+      "runtimeStatus": "stopped",
+      "evidence": "operations/pod-a-stop.json",
+      "persistent_cache": "/workspace/torchinductor-A-20260918-final.tar",
+      "cache_bytes": 2914877440
+    },
+    "C": {
+      "id": "v09w5n4ljqcjvj",
+      "runtimeStatus": "stopped",
+      "verified_utc": "2026-09-18T11:53:53.406440+00:00",
+      "evidence": "operations/pod-c-stop.json",
+      "persistent_cache": "/workspace/vj0-C-20260918-final-caches.tar",
+      "cache_bytes": 6503802880,
+      "cache_sha256": "5aed5496268f6d7600a7486d5a8d77cc440412c960903489af6e5e0ab58fe331",
+      "cache_payload_verification": "scaling/live-final/cache-preservation.json",
+      "remote_source_and_logs": "scaling/live-final/download-verification.json",
+      "guard": "cancelled after actual stopped state confirmed"
+    },
+    "old_B": {
+      "id": "9vj8k6guaxsbhw",
+      "runtimeStatus": "stopped",
+      "note": "Restart had insufficient capacity; no new tests performed on it"
+    }
+  },
+  "account_after_stop": {
+    "observed_utc": "2026-09-18T11:54:11.966714+00:00",
+    "clientBalance": 8.2752197856,
+    "currentSpendPerHr": 0.122,
+    "evidence": "operations/final-infrastructure.json",
+    "note": "Retained storage continues billing; no GPU test pod is running."
+  },
+  "local_benchmark_services": "Stopped and verified; see scaling/owned-local-cleanup.json and owned-local-cleanup-verification.json",
+  "model": "Unchanged FLUX.2-klein 4B weights plus small decoder; FP8 control. NVFP4 remained a separate rejected experiment.",
+  "quality_scope": "Within-process skip/cast equivalence passed; no cross-stack, cross-worker or full-wrapper pixel equivalence claim. Human artistic acceptance of changed images is not implied.",
+  "continuity_scope": "All failures retained; higher median throughput does not establish stable delivery or identify the cause of stalls.",
+  "pulse_scope": "Source-frame lineage and timing, not perceptual beat strength. Uncaptured hold pulses are a subset of unobserved pulses.",
+  "lifecycle_scope": "Historical closed channel records are expected; exactly one current reliable ordered channel and matching nonce ACK establish final drain.",
+  "checkpoints": {
+    "input": "f63f927f0272ab6fa50ed0793d79420e76cc1f6d",
+    "compute": "74e4751a7d34f06ba740a2eb1fb762072559414c",
+    "nvfp4": "b30fad4868313c85d56247c0dfe9fd365706e4e9",
+    "final": "The commit containing this completed report; resolve from this branch history."
+  },
+  "remaining_gpu_work": [],
+  "independent_final_review": {
+    "path": "scaling/review-n06-final.json",
+    "evidence_and_reporting": "No blocking discrepancy found",
+    "continuity": "Matrix and hold failed their continuity requirement; failures retained",
+    "quality": "No artistic, cross-stack, cross-worker or full-wrapper equivalence pass implied"
+  },
+  "archive_reproduction": {
+    "files_verified": 629,
+    "original_raw_paths_unavailable": true,
+    "canonical_report_reproduced_bytes": 112093559,
+    "sha256": "a050dffe22afeebc394635886480bf28a5caf6e28b6bf1f9239fbb02d97a7288",
+    "whole_report_hash_depends_on_checkout_paths": true
+  }
+}

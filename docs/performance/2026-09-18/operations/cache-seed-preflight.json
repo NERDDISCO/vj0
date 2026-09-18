@@ -1,0 +1,14 @@
+{
+  "at": "2026-09-18T10:33:44.557574+00:00",
+  "status": "plan-reviewed-not-executed",
+  "independent_reviewer": "benchmark_review",
+  "scope": "Read-only conceptual provenance/fairness review; no remote cache internals re-attested",
+  "root_source_review": "Helper requires completeproductionproof, absentworker+compilerprocesses, idleGPU, pausedoriginaldispatcher, absentlivepaths/runtime, pinnedunchangedlauncher; copiesandSHAverifiescontent under120scap; retainsoriginals. Dryrunpassed.",
+  "helper_sha256": "ccecb6fa643a713ce49aef9cd3647579490ee33d24bb1adfc495e39c9f5a678a",
+  "limitations": [
+    "No guaranteedcachehit rate orportabilityforeveryentry",
+    "No transferof liveCUDAgraphs/modeltensors/RNGstate",
+    "Inertregularlockfilesdonotcarry OS-heldlocks; specialentriesreject",
+    "Actualremoteidentities/contentchecks pendingexecution"
+  ]
+}

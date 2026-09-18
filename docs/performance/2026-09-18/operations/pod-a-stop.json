@@ -1,0 +1,17 @@
+{
+  "pod": "0pxb4bss2jmbhg",
+  "requested_at": "2026-09-18T09:47:12.320341+00:00",
+  "reason": "N01/N02/N03/N04 completed; artifacts verified locally and JIT cache saved to persistent workspace",
+  "observations": [
+    {
+      "at": "2026-09-18T09:47:14.965084+00:00",
+      "id": "0pxb4bss2jmbhg",
+      "desiredStatus": "EXITED",
+      "runtimeStatus": "stopped",
+      "costPerHr": 2.09
+    }
+  ],
+  "stop_exit": 0,
+  "status": "verified-stopped",
+  "verified_epoch": 1789724834.966033
+}

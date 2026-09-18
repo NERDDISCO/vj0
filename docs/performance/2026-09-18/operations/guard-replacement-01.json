@@ -1,0 +1,109 @@
+{
+  "started_epoch": 1789723102.8727522,
+  "balance_before": {
+    "clientBalance": 20.4560162309,
+    "currentSpendPerHr": 6.376
+  },
+  "pods": [
+    {
+      "pod": "0pxb4bss2jmbhg",
+      "requested_deadline_utc": "2026-09-18T11:00:00+00:00",
+      "old_local": {
+        "pod": "0pxb4bss2jmbhg",
+        "run_tag": "20260918-next-a",
+        "status": "armed",
+        "deadline_epoch": 1789727440.991852,
+        "pid": 50121,
+        "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-a",
+        "runtime_json_sha256_at_arm": "c0301ac41e136f69f47037804d34c43f2ad89fc3a47cd8296ecfab3d5118838c"
+      },
+      "old_remote": {
+        "pod": "0pxb4bss2jmbhg",
+        "pid": 935,
+        "deadline_epoch": 1789727220.3838995,
+        "status": "armed",
+        "preflight_http": 200
+      },
+      "new_remote_arm": {
+        "pod": "0pxb4bss2jmbhg",
+        "guard_pid": 12018,
+        "deadline_epoch": 1789729201.2996233,
+        "preflight_http": 200
+      },
+      "local_launcher_pid": 38547,
+      "new_local": {
+        "pod": "0pxb4bss2jmbhg",
+        "run_tag": "20260918-next-a2",
+        "status": "armed",
+        "deadline_epoch": 1789729201.395634,
+        "pid": 38547,
+        "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-a2",
+        "runtime_json_sha256_at_arm": "431b0e0062b4de0854112416a625d851516fa4e46b5e4cb84bb2548c02e0fb99"
+      },
+      "new_remote_verified": {
+        "pod": "0pxb4bss2jmbhg",
+        "pid": 12018,
+        "deadline_epoch": 1789729201.2996233,
+        "status": "armed",
+        "preflight_http": 200
+      },
+      "replacement_verified_epoch": 1789723104.7743518,
+      "old_remote_retired": {
+        "retired_pid": 935
+      },
+      "old_local_retired_pid": 50121,
+      "old_local_absent_after_replacement": true
+    },
+    {
+      "pod": "v09w5n4ljqcjvj",
+      "requested_deadline_utc": "2026-09-18T12:50:00+00:00",
+      "old_local": {
+        "pod": "v09w5n4ljqcjvj",
+        "run_tag": "20260918-next-c",
+        "status": "armed",
+        "deadline_epoch": 1789731177.609856,
+        "pid": 54682,
+        "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-c",
+        "runtime_json_sha256_at_arm": "60f768b13a0e204d4a0340a5495036eb7c530ed3909fdda00e79bb6183c7c415"
+      },
+      "old_remote": {
+        "pod": "v09w5n4ljqcjvj",
+        "pid": 1596,
+        "deadline_epoch": 1789730814.6963854,
+        "status": "armed",
+        "preflight_http": 200
+      },
+      "new_remote_arm": {
+        "pod": "v09w5n4ljqcjvj",
+        "guard_pid": 14990,
+        "deadline_epoch": 1789735800.9862077,
+        "preflight_http": 200
+      },
+      "local_launcher_pid": 38555,
+      "new_local": {
+        "pod": "v09w5n4ljqcjvj",
+        "run_tag": "20260918-next-c2",
+        "status": "armed",
+        "deadline_epoch": 1789735801.074153,
+        "pid": 38555,
+        "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-c2",
+        "runtime_json_sha256_at_arm": "27b185b29f048431f011e321c279434a34cf69c4a8a534295e216f9486415acb"
+      },
+      "new_remote_verified": {
+        "pod": "v09w5n4ljqcjvj",
+        "pid": 14990,
+        "deadline_epoch": 1789735800.9862077,
+        "status": "armed",
+        "preflight_http": 200
+      },
+      "replacement_verified_epoch": 1789723107.446951,
+      "old_remote_retired": {
+        "retired_pid": 1596
+      },
+      "old_local_retired_pid": 54682,
+      "old_local_absent_after_replacement": true
+    }
+  ],
+  "status": "both-guard-pairs-replaced",
+  "finished_epoch": 1789723107.7974348
+}

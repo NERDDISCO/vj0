@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/release_live_c.py", line 161, in <module>
+    main()
+  File "/workspace/release_live_c.py", line 157, in main
+    assert record['released'], 'Resolve release before archiving caches or stopping the pod'
+           ~~~~~~^^^^^^^^^^^^
+AssertionError: Resolve release before archiving caches or stopping the pod

@@ -1,0 +1,11 @@
+{
+  "at_epoch": 1789732644.0186749,
+  "shared_input_path": "docs/performance/2026-09-18/input/browser-targets-v6-headless149/interceptions.jsonl",
+  "restored_committed_prefix_bytes": 8515,
+  "restored_sha256": "a6b5737fb4e828be4a1f0e2af5cc34b6e507d217ddf9cef991af10b2a9dfae18",
+  "preserved_n06_suffix": "docs/performance/2026-09-18/scaling/archived-browser-evidence/interceptions-n06-suffix.jsonl",
+  "preserved_suffix_sha256": "68451efbca22434f77b27439bab6beb5e8a616c90b71c70b0672f3c008bfeaa7",
+  "reconstructed_complete_log_sha256": "186040a96e73ac0f3f02f789615933b13809ea86c4eed5f2d8bc7e87ac3c1c52",
+  "matches_captured_full_log": true,
+  "reason": "After owned setup process stopped, retain N06 append in its verified archive and keep original N01 evidence byte-identical."
+}

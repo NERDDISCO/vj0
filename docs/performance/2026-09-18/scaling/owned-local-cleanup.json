@@ -1,0 +1,53 @@
+{
+  "started_epoch": 1789732518.53003,
+  "browser_completion": "browser-completion.json",
+  "verified_roots": [
+    {
+      "pid": 73222,
+      "ppid": 30329,
+      "argv": "node workers/runpod-flux2klein/bench/input_20260918/setup_targets.mjs ws://127.0.0.1:18779/devtools/browser/fb0971b2-535c-47cd-82e3-45e7d54db9a7 docs/performance/2026-09-18/input/browser-targets-v6-headless149 docs/performance/2026-09-18/input/frozen-harness-v5/app_probe.js .next/static/chunks"
+    },
+    {
+      "pid": 72490,
+      "ppid": 30329,
+      "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --headless=new --remote-debugging-port=18779 --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --no-first-run --no-default-browser-check --disable-background-networking --disable-backgrounding-occluded-windows --disable-component-update --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --disable-features=Translate --enable-features=NetworkService,NetworkServiceInProcess --metrics-recording-only --password-store=basic --use-mock-keychain --enable-unsafe-swiftshader --window-size=1280,720 --use-fake-ui-for-media-stream --use-fake-device-for-media-stream --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --disable-renderer-backgrounding about:blank"
+    },
+    {
+      "pid": 57535,
+      "ppid": 57534,
+      "argv": "next-server (v16.0.5)"
+    },
+    {
+      "pid": 57534,
+      "ppid": 30329,
+      "argv": "node /Users/nerddisco/.local/state/fnm_multishells/30690_1789716072309/bin/pnpm exec next start -p 18768"
+    },
+    {
+      "pid": 58068,
+      "ppid": 30329,
+      "argv": "caffeinate -di"
+    }
+  ],
+  "signals": [
+    {
+      "pid": 73222,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 72490,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 57535,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 58068,
+      "signal": "SIGTERM"
+    }
+  ],
+  "scope": "Only recorded owned benchmark services; unrelated user workloads untouched.",
+  "remaining_owned_roots": [],
+  "finished_epoch": 1789732519.545392,
+  "status": "complete"
+}

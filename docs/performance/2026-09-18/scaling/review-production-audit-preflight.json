@@ -1,0 +1,38 @@
+{
+  "status": "passed-offline-preflight",
+  "recorded_at_utc": "2026-09-18T10:13:10.252926+00:00",
+  "command": "python3 -B -m unittest discover -s workers/runpod-flux2klein/bench -p 'test_n06_production_audit.py' -v",
+  "execution": {
+    "exit_code": 0,
+    "tests_run": 9,
+    "failures": 0,
+    "errors": 0,
+    "reported_duration_seconds": 0.103,
+    "tests_rerun_for_this_record": false
+  },
+  "source_sha256": {
+    "workers/runpod-flux2klein/bench/audit_n06_production.py": "3d21802fdb34dbaf525182140e8cc3ec5493ce63b8c8d7f9d9b2d340d5b77053",
+    "workers/runpod-flux2klein/bench/test_n06_production_audit.py": "56b407ebc19a2b82e5cd64cecc6b4926758be98e506520bbf15e29ca0bee59bd",
+    "workers/runpod-flux2klein/bench/audit_post_live.py": "3730698cba54bf855720be11859632ec98330239fb05081137103c3663eef5dd",
+    "workers/runpod-flux2klein/bench/bench_post_live.py": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613"
+  },
+  "fixture": "docs/performance/2026-09-17/terminal-production-proof/result.json.gz and its unchanged PNG pairs; temporary copies remove only the two profile records and set arguments.skip_profiles=true, with corresponding declared runner argv. Negative tests introduce their named defect only.",
+  "tests": {
+    "test_declared_profile_omission_keeps_original_failure": "passed",
+    "test_duplicate_argv_rejected": "passed",
+    "test_failed_runner_and_wrong_sources_rejected": "passed",
+    "test_missing_quality_is_not_reclassified_as_pass": "passed",
+    "test_pixels_remain_exact": "passed",
+    "test_result_must_declare_omission": "passed",
+    "test_timing_arithmetic_remains_mandatory": "passed",
+    "test_unexpected_profile_artifact_rejected": "passed",
+    "test_wrong_launch_argv_rejected": "passed"
+  },
+  "review": "Root independently reviewed wrapper SHA 3d21802fdb34dbaf525182140e8cc3ec5493ce63b8c8d7f9d9b2d340d5b77053 and requested no changes.",
+  "scope": [
+    "CPU-only retained-data preflight; no GPU, browser or remote actions.",
+    "Historical auditor/probe unchanged. Original failed full-profile verdict remains nested; a separate quality/timing-only pass requires its sole error to be the explicitly declared omitted profiles.",
+    "This is preparation evidence, not an audit of the forthcoming C production run.",
+    "Standalone quality coverage is terminal skip/GPU output cast through production generate with per-frame noise, not the complete live constant-cache/event-timing bundle."
+  ]
+}

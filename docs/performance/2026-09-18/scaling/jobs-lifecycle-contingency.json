@@ -1,0 +1,21 @@
+[
+  {
+    "server": "https://v09w5n4ljqcjvj-3001.proxy.runpod.net",
+    "origin": "http://127.0.0.1:18768",
+    "layout": "vj-next",
+    "sendFps": 60,
+    "maxPending": 3,
+    "workerThreads": 128,
+    "mailbox": true,
+    "seconds": 8,
+    "name": "n06-lifecycle-after-failed-hold",
+    "width": 768,
+    "height": 448,
+    "activeWorkers": 2,
+    "variant": "terminal-noop",
+    "outputCast": "gpu",
+    "thresholdBytes": 262144,
+    "inputImpulses": false,
+    "stress": true
+  }
+]

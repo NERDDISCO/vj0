@@ -1,0 +1,361 @@
+{
+  "status": "completed-independent-quality-timing-and-cross-stack-agent-visual-review",
+  "reviewed_at_utc": "2026-09-18T10:40:54.700161+00:00",
+  "verdict": {
+    "quality_timing": "Passed within the declared standalone production-generate scope. No blocking arithmetic, source-identity or retained-fixture inconsistency found.",
+    "cross_stack_visual": "Nine native-resolution image pairs preserve broad composition and phase-dependent shapes, with nonzero and sometimes visible fine color/edge/detail changes. No gross new-stack-only collapse observed in this sample. This is independent agent judgment, not pixel equivalence, human acceptance or general quality approval.",
+    "promotion": "none; no live/browser or complete live-wrapper result is established"
+  },
+  "scope": "Read retained local artifacts only; no GPU, remote, browser or network activity. Independent numerical reconciliation and native-resolution viewing of all nine cross-stack image pairs.",
+  "bindings": {
+    "production-proof/result.json": "d8a001de9f6d22180dbf2b78fabb327d0c997b73194070e1877f6490a193e204",
+    "production-proof/records.jsonl": "7cbfcd41c1b1b28883ad2d05dd566b18b7856e37c1ee7d8b4a3442fb33b52481",
+    "production-run-status.json": "38cf87eac3df2984324a1c2f35fa31e992a7be196e07f7b4ca221238b2565a50",
+    "production-download-verification.json": "75117689959dead68a27fa041b673d986a03f0e28a892a47ec571a654525c860",
+    "frozen-production/hashes.json": "d99680eec848e7c489a895c51229a32b46c86421c80bb75fc456ca13f432455d",
+    "review-production-proof.json": "5757e840f6b3d9d83b8cf40ebb5e49170934ac6e8416dc4d4d1644fa52d43b54",
+    "cross-stack-images/result.json": "3b1eb0e4eb744d07454c07317b1796097086f1551425c9b385c6c1a17bf191e7"
+  },
+  "integrity": {
+    "download_manifest_files_verified": 24,
+    "download_manifest_bytes_verified": 5887285,
+    "all_local_downloaded_sizes_and_sha256_match": true,
+    "seven_frozen_source_sha256_match_runner": true,
+    "six_result_source_sha256_match_prior_stack_result": true,
+    "records_match_jsonl": true,
+    "record_counts": {
+      "boot-proof": 1,
+      "warmup": 3,
+      "quality": 27,
+      "compute-measured": 18
+    },
+    "runner_complete_exit_zero_result_complete": true,
+    "profile_omission_declared_in_result_and_saved_argv": true,
+    "profiles_present": false
+  },
+  "configuration": {
+    "versions": {
+      "torch": "2.13.0+cu132",
+      "torchao": "0.18.0+cu132",
+      "diffusers": "0.38.0.dev0",
+      "numpy": "2.4.4",
+      "pillow": "12.2.0"
+    },
+    "actual_torch_boot_log": "torch=2.13.0+cu132 cuda=13.2 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)",
+    "gpu_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "native_threads": 128,
+    "compile_mode": "reduce-overhead",
+    "model": "black-forest-labs/FLUX.2-klein-4B",
+    "transformer_and_vae_linear_quantization": "TorchAO Float8DynamicActivationFloat8WeightConfig PerTensor",
+    "jpeg_input_quality": 85,
+    "jpeg_output_quality": 80,
+    "alpha": 0.1,
+    "seed": 42,
+    "prompt": "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "quality_steps": [
+      2,
+      3,
+      4
+    ],
+    "timing_steps": 2,
+    "timing_frames_per_cell": 100,
+    "pairs_per_resolution": 3,
+    "timing_order": "baseline then optimized for pairs 0/2; optimized then baseline for pair 1; same loaded process"
+  },
+  "quality": {
+    "unique_cases": 27,
+    "same_tensor_cast_checks": 54,
+    "matrix": "3 resolutions x steps 2/3/4 x 3 waveform phases; four configurations per case: baseline CPU cast, terminal skip CPU cast, terminal skip GPU cast, baseline GPU cast",
+    "exact_pixels_and_jpeg_recorded_all_cases": true,
+    "global_rng_unchanged_recorded_all_cases": true,
+    "skip_counts_each_case": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "saved_step2_images": 18,
+    "nine_saved_baseline_optimized_pairs_exact_bytes_and_pixels": true,
+    "saved_pixel_hashes_match_quality_rows": true,
+    "limitations": [
+      "Only two-step PNG outputs are retained; three/four-step output equality, JPEG equality and RNG checks are saved execution assertions, not independently replayed tensors or JPEGs.",
+      "The finite check compares the two output-conversion arrays at pt_to_numpy; it does not independently attest raw decoder values before denormalization/clamping.",
+      "Standalone production generate creates per-frame noise. The complete live benchmark wrapper constant-cache/event-timing path is outside this 27-case quality proof."
+    ]
+  },
+  "timing": {
+    "boundary": "JPEG decode, VAE encode, worker.generate, JPEG encode, CUDA sync; excludes IPC/network/browser",
+    "fps_uses_observed_wall_interval": true,
+    "all_18_arrays_have_100_positive_finite_frame_durations": true,
+    "fps_percentiles_sums_and_aggregate_arithmetic_recomputed": true,
+    "selected_cast_calls_terminal_skip_counts_threads_and_uninstrumented_path_checks_pass": true,
+    "all_nine_matched_pairs_faster": true,
+    "no_cgroup_throttled_periods_in_measured_cells": true,
+    "comparisons": [
+      {
+        "size": [
+          512,
+          288
+        ],
+        "baseline_fps": [
+          32.08596285254634,
+          32.121510253794625,
+          31.977472511361558
+        ],
+        "optimized_fps": [
+          44.662115464075,
+          45.51809256385356,
+          45.519586155468744
+        ],
+        "baseline_median_fps": 32.08596285254634,
+        "optimized_median_fps": 45.51809256385356,
+        "paired_gain_percent": [
+          39.195185350439374,
+          41.70595406072586,
+          42.34891809943919
+        ],
+        "median_paired_gain_percent": 41.70595406072586,
+        "ratio_of_arm_medians_percent": 41.86294727397046,
+        "arms": {
+          "baseline": {
+            "median_trial_p50_ms": 31.12295246683061,
+            "median_trial_p95_ms": 31.325112306512892,
+            "median_trial_p99_ms": 31.70594284310937,
+            "max_frame_ms": 41.2643919698894
+          },
+          "optimized": {
+            "median_trial_p50_ms": 21.964404033496976,
+            "median_trial_p95_ms": 22.058117110282183,
+            "median_trial_p99_ms": 22.157793981023133,
+            "max_frame_ms": 33.99458434432745
+          }
+        }
+      },
+      {
+        "size": [
+          768,
+          448
+        ],
+        "baseline_fps": [
+          15.632683812871198,
+          15.51087225036005,
+          15.567976441348684
+        ],
+        "optimized_fps": [
+          22.039365936770473,
+          21.405585382755618,
+          22.1944650014469
+        ],
+        "baseline_median_fps": 15.567976441348684,
+        "optimized_median_fps": 22.039365936770473,
+        "paired_gain_percent": [
+          40.98261181886325,
+          38.00375012603649,
+          42.56486759896556
+        ],
+        "median_paired_gain_percent": 40.98261181886325,
+        "ratio_of_arm_medians_percent": 41.568597690279915,
+        "arms": {
+          "baseline": {
+            "median_trial_p50_ms": 63.84925381280482,
+            "median_trial_p95_ms": 66.08922644518316,
+            "median_trial_p99_ms": 68.43780681956564,
+            "max_frame_ms": 75.52709290757775
+          },
+          "optimized": {
+            "median_trial_p50_ms": 45.21404067054391,
+            "median_trial_p95_ms": 45.7727120956406,
+            "median_trial_p99_ms": 49.3662263499573,
+            "max_frame_ms": 65.60716172680259
+          }
+        }
+      },
+      {
+        "size": [
+          1024,
+          576
+        ],
+        "baseline_fps": [
+          9.15439041433177,
+          9.112305419494941,
+          9.12439542401332
+        ],
+        "optimized_fps": [
+          13.040592986480988,
+          13.082434238138559,
+          12.958641536273959
+        ],
+        "baseline_median_fps": 9.12439542401332,
+        "optimized_median_fps": 13.040592986480988,
+        "paired_gain_percent": [
+          42.4517897561494,
+          43.568873472457284,
+          42.02191963502349
+        ],
+        "median_paired_gain_percent": 42.4517897561494,
+        "ratio_of_arm_medians_percent": 42.92007722682789,
+        "arms": {
+          "baseline": {
+            "median_trial_p50_ms": 109.18791475705802,
+            "median_trial_p95_ms": 113.26525730546562,
+            "median_trial_p99_ms": 123.24577385094021,
+            "max_frame_ms": 132.47831584885716
+          },
+          "optimized": {
+            "median_trial_p50_ms": 76.2648859526962,
+            "median_trial_p95_ms": 79.94348269421606,
+            "median_trial_p99_ms": 87.34852046705784,
+            "max_frame_ms": 90.11782240122557
+          }
+        }
+      }
+    ],
+    "qualification": "Matched paired gains and ratio of arm medians are separate estimators and are named separately. No CUDA attribution profile was taken; no live FPS, input age, IPC, browser or physical display measurement is included."
+  },
+  "warmup": {
+    "rows": [
+      {
+        "size": [
+          512,
+          288
+        ],
+        "seconds": 337.1314880689606
+      },
+      {
+        "size": [
+          768,
+          448
+        ],
+        "seconds": 340.42931680427864
+      },
+      {
+        "size": [
+          1024,
+          576
+        ],
+        "seconds": 366.9892320209183
+      }
+    ],
+    "qualification": "Observed setup/warmup durations for all four flag combinations, not isolated compiler costs or a controlled cold-cache stack comparison."
+  },
+  "profile_coverage": {
+    "scope_auditor_status": "passed-quality-timing-only",
+    "historical_full_auditor_status": "failed",
+    "historical_error_retained": "Expected both requested CUDA profiles",
+    "interpretation": "The wrapper preserves the historical failure and permits only the predeclared absence of profiles; it does not reclassify a full-profile audit as passed."
+  },
+  "cross_stack": {
+    "old_result": "docs/performance/2026-09-17/terminal-production-proof/result.json.gz",
+    "new_result": "production-proof/result.json",
+    "old_versions": {
+      "torch": "2.11.0+cu128",
+      "torchao": "0.17.0+cu128",
+      "diffusers": "0.38.0.dev0",
+      "numpy": "2.4.4",
+      "pillow": "12.2.0"
+    },
+    "new_versions": {
+      "torch": "2.13.0+cu132",
+      "torchao": "0.18.0+cu132",
+      "diffusers": "0.38.0.dev0",
+      "numpy": "2.4.4",
+      "pillow": "12.2.0"
+    },
+    "same_gpu_model_name": true,
+    "pairs_checked": 9,
+    "pixels_equal_pairs": 0,
+    "mse_range": [
+      24.215923168041087,
+      123.51264784071181
+    ],
+    "psnr_db_range": [
+      27.21368928728254,
+      34.28979330840963
+    ],
+    "max_absolute_error_range": [
+      96.0,
+      196.0
+    ],
+    "all_metrics_and_png_hashes_independently_recomputed": true,
+    "viewed_fixtures": [
+      "512x288-phase0-optimized.png",
+      "512x288-phase1-optimized.png",
+      "512x288-phase2-optimized.png",
+      "768x448-phase0-optimized.png",
+      "768x448-phase1-optimized.png",
+      "768x448-phase2-optimized.png",
+      "1024x576-phase0-optimized.png",
+      "1024x576-phase1-optimized.png",
+      "1024x576-phase2-optimized.png"
+    ],
+    "method": "Opened all nine side-by-side pairs constructed directly from raw RGB PNGs without resampling using original image detail; includes worst MSE 512x288 phase0 and worst max absolute error 1024x576 phase0. Prior stack is left; new stack is right.",
+    "visual_observations": [
+      "512x288: all three phases retain the saturated abstract swirls, dominant loops, neon palette and major spatial layout. Small edge, internal stroke and local color differences are visible at native size; these are not byte-equivalent outputs.",
+      "768x448: all three phases retain the diagonal pink/cyan branch structure on the left and large dark region on the right. Fine speckle/edge widths and local intensity/color change, especially along bright branches; no major branch disappears in the new stack.",
+      "1024x576: all three phases retain the sparse bright ribbon/waveform structures and their phase-specific placement. Fine strand edges, glow and color vary; the high maximum pixel error is local, with no gross layout collapse in the inspected pairs.",
+      "The extensive dark areas in both stacks at higher resolutions limit global MSE/PSNR interpretation; scalar closeness does not establish preservation of rich detail absent from the reference."
+    ],
+    "causal_limits": [
+      "This is a sequential cross-process comparison on different physical GPU/host runs with the same GPU model name, not a paired isolated Torch version intervention.",
+      "Torch, TorchAO and CUDA distributions change together. Process restart, compilation/autotuning/cache state and hardware/clock/host conditions are additional confounds. Do not attribute changed pixels or FPS solely to Torch.",
+      "N05 independently found all 18 same-stack FP8 controls changed across attempts (MSE 18.56 to 220.63). That demonstrates restart/attempt variation is plausible; it neither identifies its cause nor provides a transferable acceptance tolerance for these different fixtures.",
+      "Only one prompt, one seed, three phases and three resolutions are inspected. No temporal clip, live audio response, flicker, source ordering or full-app quality is established by these still pairs."
+    ],
+    "prior_and_new_compute_medians_descriptive_only": [
+      {
+        "size": [
+          512,
+          288
+        ],
+        "old": {
+          "baseline": 29.3665048768833,
+          "optimized": 42.232828105764604
+        },
+        "new": {
+          "baseline": 32.08596285254634,
+          "optimized": 45.51809256385356
+        },
+        "scope": "Separate cohort observations; not a causal Torch speedup estimate."
+      },
+      {
+        "size": [
+          768,
+          448
+        ],
+        "old": {
+          "baseline": 14.376224952059319,
+          "optimized": 21.25060783744655
+        },
+        "new": {
+          "baseline": 15.567976441348684,
+          "optimized": 22.039365936770473
+        },
+        "scope": "Separate cohort observations; not a causal Torch speedup estimate."
+      },
+      {
+        "size": [
+          1024,
+          576
+        ],
+        "old": {
+          "baseline": 8.523742989169893,
+          "optimized": 12.719694176107872
+        },
+        "new": {
+          "baseline": 9.12439542401332,
+          "optimized": 13.040592986480988
+        },
+        "scope": "Separate cohort observations; not a causal Torch speedup estimate."
+      }
+    ]
+  },
+  "reproduction": {
+    "script": "/tmp/vj0-audit-production-result.py",
+    "script_sha256": "3e7bde50d00607b010279f29724d8fd9109db1c8f8810d959b974db28d764264",
+    "command": "/private/tmp/vj0-perf-python-20260917/bin/python -B /tmp/vj0-audit-production-result.py",
+    "outcome": "passed; local numerical reconciliation completed in under one second",
+    "temporary_numerical_report": "/tmp/vj0-production-independent-numerical.json",
+    "native_panel_directory": "/tmp/vj0-production-review-panels",
+    "archived_visual_sources": "cross-stack-images/*.webp plus both cohorts raw PNGs; no raw measurement changes"
+  }
+}

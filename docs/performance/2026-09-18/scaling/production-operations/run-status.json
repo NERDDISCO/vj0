@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "started_epoch": 1789726647.5724912,
+  "argv": [
+    "/workspace/envs/klein-torch213-cu132/bin/python",
+    "/workspace/vj0-next-c-production/bench/bench_post_live.py",
+    "--worker-script",
+    "/workspace/vj0-next-c-production/inference_server.py",
+    "--output",
+    "/workspace/vj0-next-c-production-results",
+    "--frames",
+    "100",
+    "--pairs",
+    "3",
+    "--warmup",
+    "4",
+    "--expected-native-threads",
+    "128",
+    "--skip-profiles"
+  ],
+  "environment": {
+    "HF_HOME": "/workspace/hf-cache",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+    "PATH": "/workspace/envs/klein-torch213-cu132/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "HF_HUB_OFFLINE": "1",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "COMPILE_MODE": "reduce-overhead",
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONPATH": "/workspace/vj0-next-c-production/bench",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/vj0-c-torch213",
+    "TRITON_CACHE_DIR": "/tmp/vj0-c-triton213"
+  },
+  "sources": {
+    "worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "bench/metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+    "bench/bench_terminal_followup.py": "ba90438e341c305607347db5e6380aba24451d9849554f9fa8c99c8d119b69d4",
+    "bench/bench_post_live.py": "7d9060c73965d3d7fa4e478b6f5211d4f640d6c1fb7b8d706ae80f2cb5fc7613",
+    "bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+  },
+  "child_pid": 24424,
+  "exit_code": 0,
+  "result_status": "complete",
+  "finished_epoch": 1789727829.7482026
+}

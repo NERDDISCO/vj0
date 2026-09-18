@@ -1,0 +1,35 @@
+{
+  "reviewer": "root",
+  "at": "2026-09-18T10:39:27.528070+00:00",
+  "comparison_sha256": "3b1eb0e4eb744d07454c07317b1796097086f1551425c9b385c6c1a17bf191e7",
+  "method": "Viewed native-resolution paired previews for the maximum-MSE fixture at each resolution. Independentreviewer reviewsallninepairs separately.",
+  "selected": [
+    {
+      "fixture": "512x288-phase0-optimized.png",
+      "preview": "512x288-phase0-optimized-stack-pair.webp",
+      "preview_sha256": "80bf2d33502dcf8bedc91b40b986ff7654052ba1e5dfe17b6c44f419b22dba25"
+    },
+    {
+      "fixture": "768x448-phase2-optimized.png",
+      "preview": "768x448-phase2-optimized-stack-pair.webp",
+      "preview_sha256": "7e1a8752b9faf25621fab642dd1decc2d4d77ec748c0e2eccfaadf5348b94f10"
+    },
+    {
+      "fixture": "1024x576-phase0-optimized.png",
+      "preview": "1024x576-phase0-optimized-stack-pair.webp",
+      "preview_sha256": "295589987b489ee48146e9933ddb73339e825a8d91258051bff3533f15b1aa38"
+    }
+  ],
+  "observations": [
+    "512: broad swirling composition and saturated palette remain similar; local swirl boundaries, texture and brightness differ.",
+    "768: similar colored plume/flow and dark negative space, with local shape/texture changes.",
+    "1024: similar sparse luminous arcs and dark background; local arc edges and color details differ."
+  ],
+  "decision": "Sufficient to continue the authorized experimental app comparison. No pixel-equivalence claim or blanket production/temporal-quality acceptance across stacks.",
+  "confounds": [
+    "Different physicalGPU and CPUquota between old/newcohorts",
+    "Different process/compilationcache/context; separateN05 FP8controls also varied acrossattempts",
+    "Torch/CUDA/TorchAOversions changedtogether; noisolatedTorchcausalclaim",
+    "Nine staticfixtures,oneprompt/seed; no cross-stacktemporalproof"
+  ]
+}

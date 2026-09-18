@@ -1,0 +1,110 @@
+{
+  "status": "local-preflight-passed; awaiting root review and later remote execution",
+  "reviewed_at_utc": "2026-09-18T10:49:02.804919+00:00",
+  "scope": "Source-only review, authorized local fixes, tiny synthetic temporary-directory checks and plan-only invocations. No remote actions, GPU/browser calls, live data scans or cache tree scans.",
+  "sources": {
+    "docs/performance/2026-09-18/operations/release_live_c.py": "4a012b3a67f591e66308f07dc7b38b1dedf7d70116d609ea33f3390f9eb7b68c",
+    "docs/performance/2026-09-18/operations/persist_c_caches.py": "3aa4d073418f51d4cad1bdc3902c5ad93bd311204cfb6f4c39f31b74f4cc91b4",
+    "docs/performance/2026-09-18/operations/test_shutdown_preflight.py": "8b014b46cafb82580b6093fbd6f33f495c28bf8d6eb5fc24ad4d8b586e46d940"
+  },
+  "resolved_findings": [
+    {
+      "priority": "P1",
+      "file": "operations/release_live_c.py",
+      "issue": "Diagnostic channelState can be stale and is not ordered-drain evidence.",
+      "fix": "Requires a launch-hash-bound capture completion handoff, authoritative active channel absent/closed, expected worker count and explicit zero pending/compile/mailbox-flight fields; records observation time and handoff hash."
+    },
+    {
+      "priority": "P1",
+      "file": "operations/persist_c_caches.py",
+      "issue": "tar -tf verifies readable member headers but not cache payload integrity.",
+      "fix": "Hashes ordinary source files, inventories directory/symlink entries, verifies unique exact tar member coverage, modes and every regular-file/hard-link payload against the manifest, and saves final archive SHA256 before completion."
+    },
+    {
+      "priority": "P2",
+      "file": "operations/persist_c_caches.py",
+      "issue": "GPU idleness alone does not establish that the released service has no CPU cache writers.",
+      "fix": "Requires successful release record with critical artifacts saved, currently empty live process group and bounded current GPU-idle check; retains declared missing cache names."
+    },
+    {
+      "priority": "P2",
+      "file": "operations/release_live_c.py",
+      "issue": "Signal/exit races or diagnostics failures can leave an incomplete release record; zombie-only groups can falsely block stopping.",
+      "fix": "Tolerates already-exited owned targets, records errors/final state in finally, bounds nvidia-smi, separates live members from retained zombie members and preserves original paused dispatcher."
+    },
+    {
+      "priority": "P2",
+      "file": "operations/persist_c_caches.py",
+      "issue": "A failed optional cache archive must not keep an idle paid pod open after critical evidence is saved.",
+      "fix": "After release/artifact prerequisites, failures are preserved as cache-preservation-failed-optional with stop_ready=true and stop_blocked_by_cache=false; prior attempts are retained. Such optional failures return normally without claiming a completed archive."
+    },
+    {
+      "priority": "P2",
+      "file": "operations/persist_c_caches.py",
+      "issue": "A 2x-payload-only quota estimate can miss tiny-file archive overhead; minimum one-second timeouts can outlive the nominal cap.",
+      "fix": "Reserves the larger of 2x payload or padded payload plus per-entry headers, with 64 MiB headroom; deadline expiration now raises instead of resetting the remaining allowance."
+    }
+  ],
+  "capture_completion_contract": {
+    "cli": "release_live_c.py --execute --capture-completion <handoff.json>",
+    "required": {
+      "status": "complete",
+      "owned_pgid": 34687,
+      "runtime_sha256": "SHA256 of exact remote live runtime.json bytes",
+      "completed_epoch": "Finite positive UTC epoch, not more than 60 seconds ahead of the release host clock",
+      "ordered_barrier_passed": true,
+      "cleanup_acknowledged": true,
+      "critical_artifacts_saved": true
+    },
+    "meaning": "Root supplies this only after capture confirms ordered cleanup and critical results are durably saved. The helper verifies the declaration/identity, not the browser raw evidence."
+  },
+  "checks": {
+    "unit_command": "python3 -B docs/performance/2026-09-18/operations/test_shutdown_preflight.py",
+    "unit_tests": 13,
+    "unit_failures": 0,
+    "unit_elapsed_seconds": 0.02,
+    "test_source_sha256": "8b014b46cafb82580b6093fbd6f33f495c28bf8d6eb5fc24ad4d8b586e46d940",
+    "cases": [
+      "valid handoff",
+      "missing/mismatched handoff flags, launch identity and timestamp rejected",
+      "actual open channel rejected despite stale closed diagnostic",
+      "pending work, compilation, mailbox flight, missing mailbox evidence and wrong worker count rejected",
+      "zombies distinguished from live members",
+      "process-exit signal race tolerated",
+      "regular files, empty file, symlink and hardlink archived exactly",
+      "payload corruption rejected although tar headers remain readable",
+      "missing/duplicate/extra archive members rejected",
+      "source changed after inventory rejected",
+      "expired verification deadline rejected",
+      "top-level symlink rejected",
+      "optional no-cache failure retains explicit failure and stop readiness"
+    ],
+    "plan_only_commands": [
+      "python3 -B docs/performance/2026-09-18/operations/release_live_c.py",
+      "python3 -B docs/performance/2026-09-18/operations/persist_c_caches.py"
+    ],
+    "plan_only_exit_codes": [
+      0,
+      0
+    ],
+    "plan_only_external_actions": false,
+    "syntax": "Both modules imported by the synthetic test runner and executed in plan-only mode.",
+    "original_temporary_test_run": {
+      "command": "python3 -B /tmp/vj0-test-shutdown-preflight.py",
+      "test_source_sha256": "f9fedd940da86084173011f469715f9db068d363ee1ad6aab93450e7f80983da",
+      "tests": 13,
+      "failures": 0,
+      "elapsed_seconds": 0.024
+    },
+    "test_source_path": "docs/performance/2026-09-18/operations/test_shutdown_preflight.py",
+    "repository_relative_imports_verified": true
+  },
+  "remaining_limits": [
+    "No remote release, cache preservation, quota measurement or stopped-pod verification has run as part of this preflight.",
+    "Workspace quota remains the explicitly declared 160 GB budget plus filesystem free-space guard; this helper does not query provider quota.",
+    "Symlinks are preserved and verified as links; external targets are not followed or included. A complete tar does not promise arbitrary-path cache portability or cache-hit rates.",
+    "A payload manifest and byte-verified tar are the source preservation evidence. Root must inspect the recorded cache status; a normal exit can intentionally represent optional cache failure.",
+    "Process ownership is tied to the specific prepared live launch PID/group, cwd, command, server hash and runtime-hash-bound handoff. A different launch requires a separately reviewed helper adjustment.",
+    "Deadline checks cover bounded subprocesses and each streaming hash chunk. This is not an independent remote watchdog or assurance against a kernel/filesystem I/O hang."
+  ]
+}

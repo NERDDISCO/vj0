@@ -1,0 +1,80 @@
+{
+  "status": "passed: archived-only report reproduced byte-for-byte with original raw roots unavailable",
+  "at_utc": "2026-09-18T11:54:26.417587+00:00",
+  "raw_backup_directory": "/tmp/vj0-n06-raw-20260918-0mp83q6t",
+  "original_raw_roots_absent": true,
+  "manifests": [
+    {
+      "path": "docs/performance/2026-09-18/scaling/archived-cohorts/qualification-01/archive.json",
+      "manifest_sha256": "7486d9f88f0c4c51c7e1b4c285886429f3231fe23ead17b95bf7728fc4096a1c",
+      "files": 76,
+      "source_bytes": 6380801,
+      "archive_bytes": 1982619
+    },
+    {
+      "path": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/archive.json",
+      "manifest_sha256": "deb65845a0737801e7690aa1ab30c43bf9ef1231b2014ec05918d79775a7bfc1",
+      "files": 508,
+      "source_bytes": 235931965,
+      "archive_bytes": 22773983
+    },
+    {
+      "path": "docs/performance/2026-09-18/scaling/archived-cohorts/hold-01/archive.json",
+      "manifest_sha256": "680093829ef63df3c86892354a67d0ce506c28e8f794a75c04186cd67f1bb836",
+      "files": 18,
+      "source_bytes": 70650265,
+      "archive_bytes": 6096067
+    },
+    {
+      "path": "docs/performance/2026-09-18/scaling/archived-cohorts/lifecycle-contingency-01/archive.json",
+      "manifest_sha256": "88fd70203a162d3e2e3272268d93419ffacad11657098975a9fd0462720e8983",
+      "files": 19,
+      "source_bytes": 3608281,
+      "archive_bytes": 466750
+    },
+    {
+      "path": "docs/performance/2026-09-18/scaling/archived-browser-evidence/archive.json",
+      "manifest_sha256": "63930c1abf4b387d13c47a3bdf11d3e208588d9033c99d71719bc7e17b3c152a",
+      "files": 8,
+      "source_bytes": 115989818,
+      "archive_bytes": 8911761
+    }
+  ],
+  "original_vs_archived_metrics_and_gates_equal": {
+    "status": true,
+    "trial_status_counts": true,
+    "common_errors": true,
+    "cells": true,
+    "comparisons": true,
+    "validation_gates": true,
+    "eligibility": true,
+    "failed_attempts": true
+  },
+  "original_vs_archived_all_trial_metrics_equal": true,
+  "provenance_scope": "Archive path/binding changes are expected; raw source payload bytes and all reported measurements/gates remain identical.",
+  "expected_audit_exit": 1,
+  "actual_audit_exit": 1,
+  "full_archived_report_bytes": 112093559,
+  "full_archived_report_sha256": "a050dffe22afeebc394635886480bf28a5caf6e28b6bf1f9239fbb02d97a7288",
+  "archive_only_reproduced_bytes": 112093559,
+  "archive_only_reproduced_sha256": "a050dffe22afeebc394635886480bf28a5caf6e28b6bf1f9239fbb02d97a7288",
+  "full_report_byte_identical": true,
+  "compact_reproduction": {
+    "metrics-compact-v1.json": {
+      "bytes": 418189,
+      "sha256": "1239df733b23d71d92d381160f8f8d1404330142ca8a1b844b6cc275e14bcc2d",
+      "byte_identical": true
+    },
+    "metrics-compact-v1.csv": {
+      "bytes": 9859,
+      "sha256": "67b1d0f84fc262045a5cb2953724a7c8109e24492523a702d95673904dccdf23",
+      "byte_identical": true
+    },
+    "RESULTS.md": {
+      "bytes": 8894,
+      "sha256": "81a2e6d1fda8a395c9c49338515a8c1a745f1f74144b5da4c5ca266ea5df8472",
+      "byte_identical": true
+    }
+  },
+  "canonical_report_archive": "docs/performance/2026-09-18/scaling/archived-reports/archive.json"
+}

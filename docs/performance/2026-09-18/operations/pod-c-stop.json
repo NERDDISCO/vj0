@@ -1,0 +1,17 @@
+{
+  "pod": "v09w5n4ljqcjvj",
+  "requested_at": "2026-09-18T11:53:50.103588+00:00",
+  "reason": "All authorized GPU/browser experiments completed; negative results retained; source/logs verified locally; cache payloads preserved and verified on persistent workspace",
+  "observations": [
+    {
+      "id": "v09w5n4ljqcjvj",
+      "desiredStatus": "EXITED",
+      "runtimeStatus": "stopped",
+      "costPerHr": 4.18,
+      "at": "2026-09-18T11:53:53.406440+00:00"
+    }
+  ],
+  "status": "verified-stopped",
+  "stop_exit": 0,
+  "verified_epoch": 1789732433.407542
+}

@@ -1,0 +1,9 @@
+{
+  "status": "prepared; explicit GPU slot grant pending",
+  "jobs_file": "docs/performance/2026-09-18/scaling/jobs-qualification-prepared.json",
+  "jobs_sha256": "f7428094881346572432a1920f5477a28f818ecc9ebcc21fd6df68cc4873929b",
+  "purpose": "Six excluded eight-second qualification windows: both loaded workers active at each of three shapes and each baseline/selected variant. Not N06 throughput evidence or formal matrix cells.",
+  "formal_matrix_may_start_only_after": "All six configurations complete warmup/telemetry checks with both workers, native128, correct shapes and output-cast identity; final ordered drain/cleanup verified.",
+  "compile_timeout_policy": "Preserve frozen-harness timeout and cleanup results. Stop capture through normal cleanup; wait for root-confirmed compile completion and idle/drain, then perform only a bounded qualification continuation. Never replace a formal outcome or alter frozen harness waits.",
+  "expected_minutes_if_already_warm": 3
+}

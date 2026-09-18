@@ -1,0 +1,107 @@
+{
+  "at_utc": "2026-09-18T09:58:07.523721+00:00",
+  "status": "preserve running until all N06 browser work and audits finish",
+  "owned_roots": [
+    {
+      "pid": 57534,
+      "ppid": 30329,
+      "argv": "node /Users/nerddisco/.local/state/fnm_multishells/30690_1789716072309/bin/pnpm exec next start -p 18768",
+      "role": "Next launcher on 18768",
+      "descendants_snapshot": [
+        {
+          "pid": 57535,
+          "ppid": 57534,
+          "argv": "next-server (v16.0.5)"
+        }
+      ]
+    },
+    {
+      "pid": 72490,
+      "ppid": 30329,
+      "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --headless=new --remote-debugging-port=18779 --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --no-first-run --no-default-browser-check --disable-background-networking --disable-backgrounding-occluded-windows --disable-component-update --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --disable-features=Translate --enable-features=NetworkService,NetworkServiceInProcess --metrics-recording-only --password-store=basic --use-mock-keychain --enable-unsafe-swiftshader --window-size=1280,720 --use-fake-ui-for-media-stream --use-fake-device-for-media-stream --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --disable-renderer-backgrounding about:blank",
+      "role": "owned HeadlessChrome 149 profile and CDP18779",
+      "descendants_snapshot": [
+        {
+          "pid": 45721,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=270 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=270 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=606095344267 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709239313170724 --seatbelt-client=125"
+        },
+        {
+          "pid": 46698,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=272 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=272 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=606173830995 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709241187254422 --seatbelt-client=126"
+        },
+        {
+          "pid": 46699,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=273 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=273 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=606173832875 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709242124296271 --seatbelt-client=126"
+        },
+        {
+          "pid": 46702,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=274 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=274 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=606175891008 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709243061338120 --seatbelt-client=125"
+        },
+        {
+          "pid": 72496,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (GPU).app/Contents/MacOS/Google Chrome for Testing Helper (GPU) --type=gpu-process --headless=new --enable-unsafe-swiftshader --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --start-stack-profiler --gpu-preferences=SAAAAAAAAAAgAAAEAAAAAAAAAAAAAMAAAwAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708988185955192 --seatbelt-client=24"
+        },
+        {
+          "pid": 72497,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --use-fake-device-for-media-stream --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --start-stack-profiler --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708989122997041 --seatbelt-client=24"
+        },
+        {
+          "pid": 72498,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --use-fake-device-for-media-stream --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708990060038890 --seatbelt-client=48"
+        },
+        {
+          "pid": 72500,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --top-chrome-webui --gpu-client-id=6 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --start-stack-profiler --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=6 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=600339030390 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708991934122588 --seatbelt-client=82"
+        },
+        {
+          "pid": 72501,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=8 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=600339058890 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708993808206286 --seatbelt-client=82"
+        },
+        {
+          "pid": 72502,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer) --type=renderer --gpu-client-id=7 --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --remote-debugging-port=18779 --use-fake-ui-for-media-stream --lang=en-US --num-raster-threads=4 --enable-zero-copy --enable-gpu-memory-buffer-compositor-resources --enable-main-frame-before-activation --renderer-client-id=7 --time-ticks-at-unix-epoch=-1789117624936159 --launch-time-ticks=600339059251 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190708992871164437 --seatbelt-client=82"
+        },
+        {
+          "pid": 73256,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --use-fake-device-for-media-stream --message-loop-type-ui --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709000367499229 --seatbelt-client=114"
+        },
+        {
+          "pid": 73258,
+          "ppid": 72490,
+          "argv": "/Users/nerddisco/.agent-browser/browsers/chrome-149.0.7827.22/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/149.0.7827.22/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper --type=utility --utility-sub-type=video_capture.mojom.VideoCaptureService --lang=en-US --service-sandbox-type=none --use-fake-device-for-media-stream --message-loop-type-ui --noerrdialogs --user-data-dir=/tmp/vj0-input149-headless-direct-20260918 --shared-files --field-trial-handle=1718379636,r,2796433766713231634,12258995637171350567,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=1935764596,r,15450377613215073977,1286939861881186712,4 --trace-process-track-uuid=3190709001304541078"
+        }
+      ]
+    },
+    {
+      "pid": 73222,
+      "ppid": 30329,
+      "argv": "node workers/runpod-flux2klein/bench/input_20260918/setup_targets.mjs ws://127.0.0.1:18779/devtools/browser/fb0971b2-535c-47cd-82e3-45e7d54db9a7 docs/performance/2026-09-18/input/browser-targets-v6-headless149 docs/performance/2026-09-18/input/frozen-harness-v5/app_probe.js .next/static/chunks",
+      "role": "owned benchmark CDP target/probe and chunk setup",
+      "descendants_snapshot": []
+    },
+    {
+      "pid": 58068,
+      "ppid": 30329,
+      "argv": "caffeinate -di",
+      "role": "owned benchmark caffeinate -di",
+      "descendants_snapshot": []
+    }
+  ],
+  "passive_logger": {
+    "current_status": "not running",
+    "new_output": "docs/performance/2026-09-18/scaling/passive-connections-n06.jsonl",
+    "pid_file_after_start": "docs/performance/2026-09-18/scaling/passive-connections-n06.jsonl.ready"
+  },
+  "safety": "Before cleanup recheck each PID argv against this record to guard PID reuse. Stop only owned processes; unrelated Cube/Kale Chrome, OBS, user workloads and any other caffeinate remain untouched. Do not kill by generic process name."
+}

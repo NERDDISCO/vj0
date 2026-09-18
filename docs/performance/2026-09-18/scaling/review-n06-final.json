@@ -1,0 +1,1690 @@
+{
+  "status": "completed-independent-archive-audit; retained performance failures; no promotion",
+  "reviewed_at_utc": "2026-09-18T12:01:20.464095+00:00",
+  "scope": "Offline review of frozen sources, archived browser raw evidence, local source/log downloads, cached-payload manifest and recorded infrastructure state. No GPU/browser/remote actions, no timed reruns, no reads from relocated original browser raw directories.",
+  "verdict": {
+    "evidence_and_reporting": "Passed bounded reconciliation; no blocking numerical, source, provenance, failure-accounting or reporting inconsistency found.",
+    "matrix": "All 36 declared complete windows retained: 35 passed; one complete window fails per-worker continuity and remains in descriptive statistics.",
+    "hold": "Complete 600.541-second hold fails continuity; its throughput and tails remain valid descriptive measurements.",
+    "lifecycle": "Separate predeclared contingency passed all 10 actions; it does not repair either continuity failure.",
+    "shutdown": "Saved observations establish both test pods stopped; initial failed release and later successful verification remain separate.",
+    "production_adoption": "None established by this audit. Median throughput gains do not establish uninterrupted delivery or artistic equivalence."
+  },
+  "artifact_bindings": {
+    "scaling/selection-archived-v1.json": "968f1364d1cb23cb2ce581808bb8d582139b94f07de510d956b741471c600292",
+    "scaling/metrics-compact-v1.json": "1239df733b23d71d92d381160f8f8d1404330142ca8a1b844b6cc275e14bcc2d",
+    "scaling/metrics-compact-v1.csv": "67b1d0f84fc262045a5cb2953724a7c8109e24492523a702d95673904dccdf23",
+    "scaling/RESULTS.md": "81a2e6d1fda8a395c9c49338515a8c1a745f1f74144b5da4c5ca266ea5df8472",
+    "scaling/archive-only-validation.json": "95887a2562df4078d32d70638d9b8602a8acd1620468c28b3baf4e252005ced2",
+    "README.md": "77343ad36759cd0bd233d2808839bbe5dbf11d2cc7d591aeb6dc34710f555ac0",
+    "scaling/input-prefix-restoration.json": "eb77aaae54b01d54a9b6d09183128e7b2a4b79d6e776fdeab85facc6e1401111",
+    "scaling/owned-local-cleanup.json": "cd1656656278277c68ccbf1db14978889c328a36075699e033cece8da18fb538",
+    "operations/pod-c-local-guard-final.json": "c3275d9ea23363d3ab5ffba54f5e57cb6c7dd4790e36867229774d34ac05245e",
+    "operations/final-infrastructure.json": "e15256ae70ec32f145cac35056076f6f93dcfb0ab616d3a5dc504c9e3096bfc1",
+    "scaling/ARCHIVE.md": "2fe7bc51328184987952778dd133ca52917711fa7144955ff8784761e10a5150"
+  },
+  "archive_integrity": {
+    "files": 629,
+    "source_bytes": 432561130,
+    "archive_bytes": 40231180,
+    "all_stored_and_payload_hashes_match": true,
+    "original_roots_absent": true,
+    "compact_json_csv_markdown_identical": true,
+    "canonical_report_bytes": 112093559,
+    "canonical_report_sha256": "a050dffe22afeebc394635886480bf28a5caf6e28b6bf1f9239fbb02d97a7288",
+    "canonical_reproduction_exact": true,
+    "canonical_reproduction_exit": 1,
+    "exit_interpretation": "Expected failed-continuity eligibility, not a report-generation failure.",
+    "original_raw_backup_not_read": true,
+    "portability": "The byte-identical full-report SHA was reproduced in this checkout. Resolved absolute source paths appear in generated reports, so a different checkout path changes whole-report bytes; retained source payload hashes, metrics and failure outcomes remain portable."
+  },
+  "matrix_checks": {
+    "declared_jobs": 36,
+    "selected_jobs_unique": 36,
+    "descriptive_windows": 36,
+    "timed_reruns_found": 0,
+    "setup_failure_attempts": [],
+    "cell_count": 12,
+    "matched_comparison_count": 9,
+    "three_repeats_each_cell": true,
+    "order": "Two forward repeats and one reversed-arm repeat, as declared; windows do not overlap or reverse.",
+    "observed_seconds_range": [
+      60.3447001953125,
+      60.49009985351562
+    ],
+    "total_stage_frames": 57887,
+    "observed_input_fps_range": [
+      33.22759898110521,
+      55.06456524742605
+    ],
+    "fps_age_percentile_byte_and_threshold_arithmetic_recomputed_from_raw": true,
+    "all_source_id_and_capture_timestamp_ordering_checks_pass": true,
+    "source_capture_timestamp_definition": "at - ageMs where available; IDs alone are not the ordering proof.",
+    "config_source_variants_clocks_threads_cast_worker_ids_and_dimensions_pass": true,
+    "mailbox_scope": "Requested maxPending=3; mailbox ACK makes effectiveMaxPending=1 per active worker with one waiting slot.",
+    "both_workers_remained_loaded": "One/two is active dispatch on one two-GPU host, not separately provisioned hardware.",
+    "qualifications_excluded": [
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-512-workers2-baseline",
+        "seconds": 8.31560009765625,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-512-workers2-terminal-noop",
+        "seconds": 8.306,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-768-workers2-baseline",
+        "seconds": 8.348900146484375,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-768-workers2-terminal-noop",
+        "seconds": 8.34089990234375,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-1024-workers2-baseline",
+        "seconds": 8.2822001953125,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "qualification-01",
+        "name": "n06-qualification-1024-workers2-terminal-noop",
+        "seconds": 8.3325,
+        "excluded_from_matrix_and_hold": true
+      },
+      {
+        "cohort": "lifecycle-contingency-01",
+        "name": "n06-lifecycle-after-failed-hold",
+        "seconds": 8.332199951171875,
+        "excluded_from_matrix_and_hold": true
+      }
+    ],
+    "all_cell_medians_and_matched_ratios_independently_recomputed": true,
+    "selected_two_over_one_paired_gain_percent": {
+      "512": 17.73509331602485,
+      "768": 63.00050669982797,
+      "1024": 91.36769034359189
+    },
+    "full_precision_trials": [
+      {
+        "name": "n06-512-workers1-baseline-r0",
+        "status": "passed",
+        "seconds": 60.37699975585937,
+        "sent_fps": 43.12900625287018,
+        "stage_frames": 1708,
+        "stage_fps": 28.28891807983958,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 106.000244140625,
+          "p95": 135.7001953125,
+          "p99": 174.15514648437522,
+          "max": 281.30029296875
+        },
+        "stage_max_gap_ms": 181.199951171875,
+        "worker_activity": {
+          "0": {
+            "frames": 1710,
+            "max_gap_ms": 186.699951171875
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers1-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.439,
+        "sent_fps": 42.505666870729165,
+        "stage_frames": 2270,
+        "stage_fps": 37.55853008818809,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 80.89990234375,
+          "p95": 110.45506591796877,
+          "p99": 152.87002685546838,
+          "max": 264.5
+        },
+        "stage_max_gap_ms": 160.900146484375,
+        "worker_activity": {
+          "0": {
+            "frames": 2273,
+            "max_gap_ms": 194.0
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-baseline-r0",
+        "status": "passed",
+        "seconds": 60.41210009765625,
+        "sent_fps": 49.46029015991653,
+        "stage_frames": 2643,
+        "stage_fps": 43.74951368562898,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 85.300048828125,
+          "p95": 135.18002929687512,
+          "p99": 197.24806152343746,
+          "max": 280.39990234375
+        },
+        "stage_max_gap_ms": 209.699951171875,
+        "worker_activity": {
+          "0": {
+            "frames": 1327,
+            "max_gap_ms": 233.2998046875
+          },
+          "1": {
+            "frames": 1317,
+            "max_gap_ms": 211.39990234375
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.36810009765625,
+        "sent_fps": 51.64979508972578,
+        "stage_frames": 3103,
+        "stage_fps": 51.401319487947106,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 64.699951171875,
+          "p95": 93.28981933593751,
+          "p99": 107.997998046875,
+          "max": 159.89990234375
+        },
+        "stage_max_gap_ms": 91.599853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 1550,
+            "max_gap_ms": 175.7001953125
+          },
+          "1": {
+            "frames": 1558,
+            "max_gap_ms": 127.800048828125
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-baseline-r0",
+        "status": "passed",
+        "seconds": 60.3742998046875,
+        "sent_fps": 47.48709317167773,
+        "stage_frames": 915,
+        "stage_fps": 15.155455267556722,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 143.500244140625,
+          "p95": 187.52011718749998,
+          "p99": 226.686181640625,
+          "max": 361.400146484375
+        },
+        "stage_max_gap_ms": 216.89990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 915,
+            "max_gap_ms": 241.800048828125
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.43590014648437,
+        "sent_fps": 40.671190369338525,
+        "stage_frames": 1299,
+        "stage_fps": 21.493847147994607,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 140.800048828125,
+          "p95": 622.2599853515618,
+          "p99": 925.5341406249998,
+          "max": 1200.699951171875
+        },
+        "stage_max_gap_ms": 523.800048828125,
+        "worker_activity": {
+          "0": {
+            "frames": 1299,
+            "max_gap_ms": 521.5
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-baseline-r0",
+        "status": "passed",
+        "seconds": 60.41099975585937,
+        "sent_fps": 42.12808942552148,
+        "stage_frames": 1708,
+        "stage_fps": 28.27299675394526,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 143.60009765625,
+          "p95": 177.26510009765627,
+          "p99": 214.05296142578138,
+          "max": 308.10009765625
+        },
+        "stage_max_gap_ms": 189.099853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 854,
+            "max_gap_ms": 212.0
+          },
+          "1": {
+            "frames": 854,
+            "max_gap_ms": 235.199951171875
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.35539990234375,
+        "sent_fps": 44.08884713390271,
+        "stage_frames": 2262,
+        "stage_fps": 37.47800534268618,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 109.2999267578125,
+          "p95": 142.1899536132812,
+          "p99": 166.13904052734372,
+          "max": 246.400146484375
+        },
+        "stage_max_gap_ms": 124.599853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 1134,
+            "max_gap_ms": 192.5
+          },
+          "1": {
+            "frames": 1131,
+            "max_gap_ms": 165.0
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-baseline-r0",
+        "status": "passed",
+        "seconds": 60.373,
+        "sent_fps": 54.113593825054245,
+        "stage_frames": 521,
+        "stage_fps": 8.629685455418814,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 191.199951171875,
+          "p95": 226.699951171875,
+          "p99": 246.1999511718749,
+          "max": 265.699951171875
+        },
+        "stage_max_gap_ms": 145.60009765625,
+        "worker_activity": {
+          "0": {
+            "frames": 521,
+            "max_gap_ms": 144.7998046875
+          }
+        },
+        "timely_pulses": 9,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.39580004882812,
+        "sent_fps": 50.036591907993724,
+        "stage_frames": 745,
+        "stage_fps": 12.3352948284101,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 164.400146484375,
+          "p95": 211.740283203125,
+          "p99": 359.00013671875,
+          "max": 494.400146484375
+        },
+        "stage_max_gap_ms": 293.5,
+        "worker_activity": {
+          "0": {
+            "frames": 745,
+            "max_gap_ms": 286.0
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-baseline-r0",
+        "status": "passed",
+        "seconds": 60.3447001953125,
+        "sent_fps": 44.129807445904895,
+        "stage_frames": 1039,
+        "stage_fps": 17.217750633231386,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 199.599853515625,
+          "p95": 241.83996582031253,
+          "p99": 279.37990234374956,
+          "max": 411.300048828125
+        },
+        "stage_max_gap_ms": 184.7001953125,
+        "worker_activity": {
+          "0": {
+            "frames": 518,
+            "max_gap_ms": 332.39990234375
+          },
+          "1": {
+            "frames": 521,
+            "max_gap_ms": 244.5
+          }
+        },
+        "timely_pulses": 17,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-terminal-noop-r0",
+        "status": "passed",
+        "seconds": 60.36659985351562,
+        "sent_fps": 43.89844726107544,
+        "stage_frames": 1425,
+        "stage_fps": 23.605768810200946,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 162.400146484375,
+          "p95": 211.200146484375,
+          "p99": 329.7880859375,
+          "max": 486.10009765625
+        },
+        "stage_max_gap_ms": 294.199951171875,
+        "worker_activity": {
+          "0": {
+            "frames": 708,
+            "max_gap_ms": 851.0
+          },
+          "1": {
+            "frames": 718,
+            "max_gap_ms": 511.300048828125
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.37510009765625,
+        "sent_fps": 46.29391910703435,
+        "stage_frames": 2771,
+        "stage_fps": 45.89640423813674,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 67.199951171875,
+          "p95": 95.550048828125,
+          "p99": 111.25009765625009,
+          "max": 357.500244140625
+        },
+        "stage_max_gap_ms": 188.800048828125,
+        "worker_activity": {
+          "0": {
+            "frames": 1391,
+            "max_gap_ms": 205.300048828125
+          },
+          "1": {
+            "frames": 1385,
+            "max_gap_ms": 398.5
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-baseline-r1",
+        "status": "passed",
+        "seconds": 60.39019995117187,
+        "sent_fps": 52.11110416167669,
+        "stage_frames": 2914,
+        "stage_fps": 48.25286225838128,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 79.4501953125,
+          "p95": 115.64029541015621,
+          "p99": 141.02211669921869,
+          "max": 205.500244140625
+        },
+        "stage_max_gap_ms": 98.5,
+        "worker_activity": {
+          "0": {
+            "frames": 1463,
+            "max_gap_ms": 154.199951171875
+          },
+          "1": {
+            "frames": 1452,
+            "max_gap_ms": 152.800048828125
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers1-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.411300048828124,
+        "sent_fps": 47.772519341039796,
+        "stage_frames": 2355,
+        "stage_fps": 38.98277305895659,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 85.800048828125,
+          "p95": 263.0198730468751,
+          "p99": 411.437939453125,
+          "max": 610.999755859375
+        },
+        "stage_max_gap_ms": 459.900146484375,
+        "worker_activity": {
+          "0": {
+            "frames": 2368,
+            "max_gap_ms": 458
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers1-baseline-r1",
+        "status": "passed",
+        "seconds": 60.3995,
+        "sent_fps": 43.17916539044197,
+        "stage_frames": 1715,
+        "stage_fps": 28.39427478704294,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 101.599853515625,
+          "p95": 130.5299560546875,
+          "p99": 148.23001464843745,
+          "max": 279.800048828125
+        },
+        "stage_max_gap_ms": 205.5,
+        "worker_activity": {
+          "0": {
+            "frames": 1715,
+            "max_gap_ms": 197.89990234375
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.4067998046875,
+        "sent_fps": 39.267102506164136,
+        "stage_frames": 2146,
+        "stage_fps": 35.52580184579605,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 122.10009765625,
+          "p95": 1189.250244140625,
+          "p99": 1363.575048828125,
+          "max": 1408.7001953125
+        },
+        "stage_max_gap_ms": 141.0,
+        "worker_activity": {
+          "0": {
+            "frames": 1079,
+            "max_gap_ms": 171.300048828125
+          },
+          "1": {
+            "frames": 1076,
+            "max_gap_ms": 173.0
+          }
+        },
+        "timely_pulses": 16,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-baseline-r1",
+        "status": "passed",
+        "seconds": 60.37560009765625,
+        "sent_fps": 43.69314749225003,
+        "stage_frames": 1730,
+        "stage_fps": 28.653959500224623,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 142.5999755859375,
+          "p95": 175.05491943359374,
+          "p99": 195.99696533203127,
+          "max": 360.60009765625
+        },
+        "stage_max_gap_ms": 204.39990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 866,
+            "max_gap_ms": 275.60009765625
+          },
+          "1": {
+            "frames": 864,
+            "max_gap_ms": 254.89990234375
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.34969970703125,
+        "sent_fps": 47.870992134587325,
+        "stage_frames": 1348,
+        "stage_fps": 22.336482311327003,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 114.2501220703125,
+          "p95": 154.01003417968764,
+          "p99": 175.75311767578125,
+          "max": 242.10009765625
+        },
+        "stage_max_gap_ms": 117.800048828125,
+        "worker_activity": {
+          "0": {
+            "frames": 1348,
+            "max_gap_ms": 114.0
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-baseline-r1",
+        "status": "passed",
+        "seconds": 60.3732998046875,
+        "sent_fps": 52.920744937515146,
+        "stage_frames": 918,
+        "stage_fps": 15.205397136976183,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 139.400146484375,
+          "p95": 163.60009765625,
+          "p99": 191.17101562500014,
+          "max": 226.599853515625
+        },
+        "stage_max_gap_ms": 103.699951171875,
+        "worker_activity": {
+          "0": {
+            "frames": 918,
+            "max_gap_ms": 99.599853515625
+          }
+        },
+        "timely_pulses": 16,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.36160009765625,
+        "sent_fps": 44.58132315323575,
+        "stage_frames": 1469,
+        "stage_fps": 24.336664330027247,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 163.5,
+          "p95": 195.95981445312498,
+          "p99": 214.91985351562494,
+          "max": 395.69970703125
+        },
+        "stage_max_gap_ms": 212.699951171875,
+        "worker_activity": {
+          "0": {
+            "frames": 734,
+            "max_gap_ms": 280.2001953125
+          },
+          "1": {
+            "frames": 735,
+            "max_gap_ms": 246.5
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-baseline-r1",
+        "status": "passed",
+        "seconds": 60.414199951171874,
+        "sent_fps": 43.28452585838267,
+        "stage_frames": 1038,
+        "stage_fps": 17.181391143786314,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 199.300048828125,
+          "p95": 241.51497802734374,
+          "p99": 276.1011157226566,
+          "max": 377.2998046875
+        },
+        "stage_max_gap_ms": 229.10009765625,
+        "worker_activity": {
+          "0": {
+            "frames": 518,
+            "max_gap_ms": 270.599853515625
+          },
+          "1": {
+            "frames": 520,
+            "max_gap_ms": 228.800048828125
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-terminal-noop-r1",
+        "status": "passed",
+        "seconds": 60.3842998046875,
+        "sent_fps": 52.44740785673817,
+        "stage_frames": 754,
+        "stage_fps": 12.486689461313727,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 159.60009765625,
+          "p95": 187.00512695312506,
+          "p99": 208.5820947265625,
+          "max": 303.10009765625
+        },
+        "stage_max_gap_ms": 144.599853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 754,
+            "max_gap_ms": 142.699951171875
+          }
+        },
+        "timely_pulses": 17,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-baseline-r1",
+        "status": "passed",
+        "seconds": 60.365499755859375,
+        "sent_fps": 55.06456524742605,
+        "stage_frames": 524,
+        "stage_fps": 8.68045493070134,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 180.500244140625,
+          "p95": 218.055126953125,
+          "p99": 241.45119140624988,
+          "max": 265.500244140625
+        },
+        "stage_max_gap_ms": 148.400146484375,
+        "worker_activity": {
+          "0": {
+            "frames": 524,
+            "max_gap_ms": 148.199951171875
+          }
+        },
+        "timely_pulses": 13,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers1-baseline-r2",
+        "status": "passed",
+        "seconds": 60.36430004882813,
+        "sent_fps": 51.88497170457628,
+        "stage_frames": 1731,
+        "stage_fps": 28.67588953404264,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 96.60009765625,
+          "p95": 125.2501220703125,
+          "p99": 144.8399169921875,
+          "max": 210.199951171875
+        },
+        "stage_max_gap_ms": 112.39990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 1731,
+            "max_gap_ms": 114.5
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers1-terminal-noop-r2",
+        "status": "passed",
+        "seconds": 60.3705,
+        "sent_fps": 45.469227520063605,
+        "stage_frames": 2394,
+        "stage_fps": 39.65512957487515,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 83.39990234375,
+          "p95": 109.0,
+          "p99": 125.09987060546875,
+          "max": 183.099853515625
+        },
+        "stage_max_gap_ms": 97.400146484375,
+        "worker_activity": {
+          "0": {
+            "frames": 2394,
+            "max_gap_ms": 97.800048828125
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-baseline-r2",
+        "status": "passed",
+        "seconds": 60.424800048828125,
+        "sent_fps": 40.57936473134517,
+        "stage_frames": 2349,
+        "stage_fps": 38.87476662068916,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 95.89990234375,
+          "p95": 131.1,
+          "p99": 159.59998046875,
+          "max": 260.89990234375
+        },
+        "stage_max_gap_ms": 146.599853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 1178,
+            "max_gap_ms": 190.2998046875
+          },
+          "1": {
+            "frames": 1173,
+            "max_gap_ms": 194.10009765625
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-512-workers2-terminal-noop-r2",
+        "status": "passed",
+        "seconds": 60.38410009765625,
+        "sent_fps": 41.898446708791795,
+        "stage_frames": 2513,
+        "stage_fps": 41.616915643950115,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 76.2998046875,
+          "p95": 106.7998046875,
+          "p99": 132.7037988281251,
+          "max": 239.19970703125
+        },
+        "stage_max_gap_ms": 127.099853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 1260,
+            "max_gap_ms": 201.0
+          },
+          "1": {
+            "frames": 1260,
+            "max_gap_ms": 165.10009765625
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-baseline-r2",
+        "status": "passed",
+        "seconds": 60.3602998046875,
+        "sent_fps": 51.25885739486874,
+        "stage_frames": 919,
+        "stage_fps": 15.225239155101606,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 139.60009765625,
+          "p95": 165.7199462890625,
+          "p99": 197.39222656250004,
+          "max": 259.7001953125
+        },
+        "stage_max_gap_ms": 164.599853515625,
+        "worker_activity": {
+          "0": {
+            "frames": 919,
+            "max_gap_ms": 164.599853515625
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers1-terminal-noop-r2",
+        "status": "passed",
+        "seconds": 60.38139990234375,
+        "sent_fps": 50.661296441410634,
+        "stage_frames": 1354,
+        "stage_fps": 22.4241240214678,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 111.9000244140625,
+          "p95": 146.93509521484373,
+          "p99": 177.33496826171876,
+          "max": 299.900146484375
+        },
+        "stage_max_gap_ms": 169.60009765625,
+        "worker_activity": {
+          "0": {
+            "frames": 1354,
+            "max_gap_ms": 186.699951171875
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-baseline-r2",
+        "status": "passed",
+        "seconds": 60.3787998046875,
+        "sent_fps": 45.612036160185376,
+        "stage_frames": 1646,
+        "stage_fps": 27.261224226457927,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 144.400146484375,
+          "p95": 283.9251708984375,
+          "p99": 1205.5251464843736,
+          "max": 2580.400146484375
+        },
+        "stage_max_gap_ms": 1840.89990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 824,
+            "max_gap_ms": 1834.199951171875
+          },
+          "1": {
+            "frames": 822,
+            "max_gap_ms": 1977.300048828125
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-768-workers2-terminal-noop-r2",
+        "status": "passed",
+        "seconds": 60.49009985351562,
+        "sent_fps": 40.84965979530265,
+        "stage_frames": 2211,
+        "stage_fps": 36.551435777990356,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 116.0,
+          "p95": 152.699951171875,
+          "p99": 308.7499511718768,
+          "max": 471.599853515625
+        },
+        "stage_max_gap_ms": 150.300048828125,
+        "worker_activity": {
+          "0": {
+            "frames": 1110,
+            "max_gap_ms": 180.400146484375
+          },
+          "1": {
+            "frames": 1110,
+            "max_gap_ms": 201.199951171875
+          }
+        },
+        "timely_pulses": 19,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-baseline-r2",
+        "status": "passed",
+        "seconds": 60.34939990234375,
+        "sent_fps": 50.20762434925763,
+        "stage_frames": 524,
+        "stage_fps": 8.682770679541584,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 187.2498779296875,
+          "p95": 235.16995849609376,
+          "p99": 255.5789624023437,
+          "max": 358.900146484375
+        },
+        "stage_max_gap_ms": 237.39990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 524,
+            "max_gap_ms": 234.60009765625
+          }
+        },
+        "timely_pulses": 15,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers1-terminal-noop-r2",
+        "status": "passed",
+        "seconds": 60.382099853515626,
+        "sent_fps": 53.1945726927711,
+        "stage_frames": 748,
+        "stage_fps": 12.387777202426147,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 158.699951171875,
+          "p95": 186.16507568359376,
+          "p99": 225.3830517578122,
+          "max": 358.89990234375
+        },
+        "stage_max_gap_ms": 202.800048828125,
+        "worker_activity": {
+          "0": {
+            "frames": 748,
+            "max_gap_ms": 203
+          }
+        },
+        "timely_pulses": 18,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-baseline-r2",
+        "status": "passed",
+        "seconds": 60.3575,
+        "sent_fps": 52.68607878059893,
+        "stage_frames": 1048,
+        "stage_fps": 17.363210868574743,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 191.10009765625,
+          "p95": 229.89990234375,
+          "p99": 246.77699707031246,
+          "max": 320.199951171875
+        },
+        "stage_max_gap_ms": 148.5,
+        "worker_activity": {
+          "0": {
+            "frames": 524,
+            "max_gap_ms": 166.0
+          },
+          "1": {
+            "frames": 524,
+            "max_gap_ms": 161.099853515625
+          }
+        },
+        "timely_pulses": 17,
+        "expected_pulses": 19
+      },
+      {
+        "name": "n06-1024-workers2-terminal-noop-r2",
+        "status": "continuity-failed",
+        "seconds": 60.37150024414063,
+        "sent_fps": 33.22759898110521,
+        "stage_frames": 1130,
+        "stage_fps": 18.71744110102138,
+        "stage_age_p50_p95_p99_max_ms": {
+          "p50": 173.8499755859375,
+          "p95": 2743.7499023437485,
+          "p99": 5676.178957519532,
+          "max": 7122.099853515625
+        },
+        "stage_max_gap_ms": 1970.89990234375,
+        "worker_activity": {
+          "0": {
+            "frames": 565,
+            "max_gap_ms": 2076.599853515625
+          },
+          "1": {
+            "frames": 566,
+            "max_gap_ms": 3490.5
+          }
+        },
+        "timely_pulses": 14,
+        "expected_pulses": 19
+      }
+    ]
+  },
+  "negative_matrix_window": {
+    "name": "n06-1024-workers2-terminal-noop-r2",
+    "raw_continuity_errors": [
+      "Worker 0: arrival gap over 2 seconds",
+      "Worker 1: arrival gap over 2 seconds"
+    ],
+    "stage_fps": 18.71744110102138,
+    "stage_max_gap_ms": 1970.89990234375,
+    "stage_age_ms": {
+      "count": 1130,
+      "mean": 594.2532185512306,
+      "p50": 173.8499755859375,
+      "p95": 2743.7499023437485,
+      "p99": 5676.178957519532,
+      "min": 114.599853515625,
+      "max": 7122.099853515625
+    },
+    "worker_activity": {
+      "0": {
+        "frames": 565,
+        "max_gap_ms": 2076.599853515625
+      },
+      "1": {
+        "frames": 566,
+        "max_gap_ms": 3490.5
+      }
+    },
+    "interpretation": "Overall stage gap below 2 seconds does not override the predeclared per-worker >2-second failure. No rerun or omission repairs this outcome."
+  },
+  "hold": {
+    "status": "complete-continuity-negative",
+    "seconds": 600.541,
+    "surface_counts": {
+      "main/preview-image-raf": 16404,
+      "main/received": 21855,
+      "main/sent": 25494,
+      "stage/webgl-frame-submitted": 21832
+    },
+    "stage_fps": 36.353887578033806,
+    "stage_age_ms": {
+      "count": 21832,
+      "mean": 134.664409510248,
+      "p50": 113.599853515625,
+      "p95": 162.39990234375,
+      "p99": 767.5,
+      "min": 73.60009765625,
+      "max": 4139.800048828125
+    },
+    "stage_age_over_ms": {
+      "250": {
+        "frames": 557,
+        "percent": 2.5513008427995603
+      },
+      "500": {
+        "frames": 344,
+        "percent": 1.5756687431293515
+      },
+      "1000": {
+        "frames": 131,
+        "percent": 0.6000366434591425
+      }
+    },
+    "stage_max_gap_ms": 2005.900146484375,
+    "worker_activity": {
+      "0": {
+        "frames": 10927,
+        "max_gap_ms": 2038.099853515625
+      },
+      "1": {
+        "frames": 10928,
+        "max_gap_ms": 2008.5
+      }
+    },
+    "source_ordering": {
+      "main": {
+        "preview-image-raf": {
+          "frames": 16404,
+          "missing_ids": 0,
+          "reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamps": 16404,
+          "capture_reversals": 0,
+          "capture_duplicates": 0,
+          "negative_ages": 0
+        },
+        "received": {
+          "frames": 21855,
+          "missing_ids": 0,
+          "reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamps": 21855,
+          "capture_reversals": 0,
+          "capture_duplicates": 0,
+          "negative_ages": 0
+        },
+        "sent": {
+          "frames": 25494,
+          "missing_ids": 0,
+          "reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamps": 0,
+          "capture_reversals": 0,
+          "capture_duplicates": 0,
+          "negative_ages": 0
+        }
+      },
+      "stage": {
+        "webgl-frame-submitted": {
+          "frames": 21832,
+          "missing_ids": 0,
+          "reversals": 0,
+          "duplicate_ids": 0,
+          "capture_timestamps": 21832,
+          "capture_reversals": 0,
+          "capture_duplicates": 0,
+          "negative_ages": 0
+        }
+      }
+    },
+    "independent_arithmetic_errors": [],
+    "independent_worker_continuity_failures": [
+      "Worker 0: arrival gap over 2 seconds",
+      "Worker 1: arrival gap over 2 seconds"
+    ],
+    "additional_surface_continuity_observation": "Overall stage maximum gap is also above 2000 ms; raw harness status remains invalid from its per-worker gates.",
+    "pulse_checks": {
+      "name": "n06-768-workers2-selected-hold",
+      "seconds": 600.541,
+      "expected_pulses": 199,
+      "timely_pulses": 194,
+      "unobserved_pulses": 4,
+      "uncaptured_subset": 3,
+      "observed_late_pulses": 1
+    }
+  },
+  "pulse_audit": {
+    "matrix_expected": 684,
+    "matrix_timely": 638,
+    "all_planned_pulses_enumerated_and_none_invalid_or_censored": true,
+    "independent_method": "For each planned pulse, match unique onset/offset and current analyser samples. Admitted captures require RMS >=0.25, audioAt in onset..offset+250ms, and captureAt-audioAt in 0..100ms. Match those source IDs to received/stage timestamps inside the common interval and recompute first response delay, <=1000ms delivery and every published count.",
+    "hold_expected": 199,
+    "hold_timely": 194,
+    "hold_unobserved": 4,
+    "hold_uncaptured_subset_of_unobserved": 3,
+    "hold_observed_but_late": 1,
+    "limitations": "Source lineage and sampled waveform RMS do not establish visible beat strength, semantic prompt correctness or artistic response. Uncaptured is a subset of unobserved, not an additional independent loss. N01 admission-promotion gates were not imposed on N06."
+  },
+  "lifecycle": {
+    "status": "passed",
+    "independent_errors": [],
+    "actions": [
+      {
+        "action": "prompt",
+        "index": 0,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789732082823.2998,
+        "first_subsequent_capture_received_at": 1789732082940.5999,
+        "settings_to_new_capture_receive_ms": 117.300048828125,
+        "frame_id": 495
+      },
+      {
+        "action": "prompt",
+        "index": 1,
+        "prompt": "rippling liquid metal sculpture with orange and purple reflections",
+        "settings_sent_at": 1789732085220.9,
+        "first_subsequent_capture_received_at": 1789732085323.2,
+        "settings_to_new_capture_receive_ms": 102.300048828125,
+        "frame_id": 603
+      },
+      {
+        "action": "prompt",
+        "index": 2,
+        "prompt": "luminous glass ribbons woven through a dark teal space, shimmering gradients",
+        "settings_sent_at": 1789732087668.5,
+        "first_subsequent_capture_received_at": 1789732087781.2,
+        "settings_to_new_capture_receive_ms": 112.699951171875,
+        "frame_id": 720
+      },
+      {
+        "action": "resolution",
+        "width": 1024,
+        "height": 576,
+        "started_at": 1789732090021.0999,
+        "matching_worker_output_at": 1789732090269,
+        "change_to_matching_worker_output_ms": 247.900146484375,
+        "subsequent_frame_id": 844,
+        "main_decoded_frame_id": 844,
+        "stage_decoded_frame_id": 844
+      },
+      {
+        "action": "resolution",
+        "width": 512,
+        "height": 288,
+        "started_at": 1789732093791.7,
+        "matching_worker_output_at": 1789732093951.0999,
+        "change_to_matching_worker_output_ms": 159.39990234375,
+        "subsequent_frame_id": 1024,
+        "main_decoded_frame_id": 1024,
+        "stage_decoded_frame_id": 1024
+      },
+      {
+        "action": "resolution",
+        "width": 768,
+        "height": 448,
+        "started_at": 1789732097570.2998,
+        "matching_worker_output_at": 1789732097748.5999,
+        "change_to_matching_worker_output_ms": 178.300048828125,
+        "subsequent_frame_id": 1206,
+        "main_decoded_frame_id": 1206,
+        "stage_decoded_frame_id": 1206
+      },
+      {
+        "action": "ten-rapid-prompts",
+        "final_prompt_observed": true,
+        "subsequent_frame_id": 1430
+      },
+      {
+        "action": "reconnect",
+        "index": 0,
+        "connect_clicked_at": 1789732106311.2998,
+        "disconnect_clicked_at": 1789732104081.5,
+        "new_capture_received_at": 1789732117581.7,
+        "reconnect_to_new_capture_receive_ms": 11270.400146484375,
+        "frame_id": 1492
+      },
+      {
+        "action": "reconnect",
+        "index": 1,
+        "connect_clicked_at": 1789732124136.9,
+        "disconnect_clicked_at": 1789732121938,
+        "new_capture_received_at": 1789732135364.9,
+        "reconnect_to_new_capture_receive_ms": 11228.0,
+        "frame_id": 1673
+      },
+      {
+        "action": "reconnect",
+        "index": 2,
+        "connect_clicked_at": 1789732141906,
+        "disconnect_clicked_at": 1789732139722.2998,
+        "new_capture_received_at": 1789732153098.5,
+        "reconnect_to_new_capture_receive_ms": 11192.5,
+        "frame_id": 1847
+      }
+    ],
+    "source_ordering": {
+      "main/received": {
+        "frames": 1262,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "capture_timestamps": 1262,
+        "capture_reversals": 0,
+        "capture_duplicates": 0,
+        "negative_ages": 0
+      },
+      "main/preview-image-raf": {
+        "frames": 988,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "capture_timestamps": 988,
+        "capture_reversals": 0,
+        "capture_duplicates": 0,
+        "negative_ages": 0
+      },
+      "stage/webgl-frame-submitted": {
+        "frames": 1259,
+        "missing_ids": 0,
+        "reversals": 0,
+        "duplicate_ids": 0,
+        "capture_timestamps": 1259,
+        "capture_reversals": 0,
+        "capture_duplicates": 0,
+        "negative_ages": 0
+      }
+    },
+    "own_window_counts": {
+      "main/received": 1262,
+      "main/preview-image-raf": 988,
+      "stage/webgl-frame-submitted": 1259
+    },
+    "scope": "Lifecycle counts use each target own window and are not common-window steady FPS. Settings-to-subsequent-capture delivery does not prove the worker used a particular prompt revision. Resolution changes are corroborated by worker and decoded image dimensions; reconnect measurements are startup/recovery times."
+  },
+  "drain_and_cleanup": {
+    "cohort_barriers": [
+      {
+        "cohort": "qualification-01",
+        "nonce": "input-1789728363656-khlv2bbljbn",
+        "client_epoch": 6,
+        "historical_closed_channels": 0,
+        "one_current_reliable_ordered_open_channel": true,
+        "cleanup_passed": true
+      },
+      {
+        "cohort": "matrix-01",
+        "nonce": "input-1789731280290-sndi0tkw4bp",
+        "client_epoch": 43,
+        "historical_closed_channels": 0,
+        "one_current_reliable_ordered_open_channel": true,
+        "cleanup_passed": true
+      },
+      {
+        "cohort": "hold-01",
+        "nonce": "input-1789732000605-qoe97k58z6p",
+        "client_epoch": 45,
+        "historical_closed_channels": 0,
+        "one_current_reliable_ordered_open_channel": true,
+        "cleanup_passed": true
+      },
+      {
+        "cohort": "lifecycle-contingency-01",
+        "nonce": "input-1789732158532-5shxb0izhpm",
+        "client_epoch": 50,
+        "historical_closed_channels": 3,
+        "one_current_reliable_ordered_open_channel": true,
+        "cleanup_passed": true
+      }
+    ],
+    "lifecycle_historical_channels": "Three closed historical channels remain in evidence. Exactly one current reliable ordered open channel, its successful nonce ACK, zero current buffered amount and idle workers establish final ordered drain. Historical closed channels are not required to reopen.",
+    "owned_local_cleanup": "complete",
+    "remaining_owned_local_roots": []
+  },
+  "operations": {
+    "status": "passed-bounded-operations-audit",
+    "downloaded_files_verified": 16,
+    "downloaded_bytes_verified": 980294,
+    "frozen_live_sources": {
+      "metrics.py": "820490a5067dfdc126fa7e6ed253779eabd7383855817d92eddf606fdf1c93ac",
+      "server.js": "8abdfb33cd5c72cba3efbac662ca2bef5805e16ffca06c96285b18ebc0b4674c",
+      "gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+      "generator-proof.json": "3896091d126e4d4a9c0db7153b9ec795264ca72bbc3b2a978f1d43302419ce30",
+      "inference_server.py": "f74b6b0730e1268c8295a5f4d1f2e4a2a47ef264902005c596eb3dcab876407d",
+      "terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+      "compute.py": "c56399079fe7a9a1f079d29e9d7cf3ca653102f18107f937b7d239625804b7fe"
+    },
+    "runtime_sha256": "2ed46727de86ba3ed3b55fcb9488f753091db4ab87caca49d4a5b9136219c108",
+    "service_sha256": "ca6d3b24c0fb6a41410c348b0268699d29b77bb492554bd02a34a4980aa885d0",
+    "worker_spawns": 2,
+    "all_shapes_warmed_per_worker": true,
+    "logged_watchdog_compile_or_traceback_failure": false,
+    "release_initial_status": "failed",
+    "release_verification_status": "released",
+    "verification_delay_seconds": 40.01892447471619,
+    "cache_manifest_counts": {
+      "directory": 26075,
+      "file": 201311
+    },
+    "cache_source_bytes": 6099236280,
+    "cache_archive_bytes": 6503802880,
+    "cache_manifest_sha256": "71b55c9e29ea143acd368ab451996c59e25d3eb3e51c55ebf3a5472458e3cf6e",
+    "archive_remote_claim_only": true,
+    "archive_not_downloaded": true,
+    "cache_archive_sha256": "5aed5496268f6d7600a7486d5a8d77cc440412c960903489af6e5e0ab58fe331",
+    "cache_elapsed_seconds": 57.129285449162126,
+    "infrastructure": {
+      "observed_utc": "2026-09-18T11:54:11.966714+00:00",
+      "pods": [
+        {
+          "id": "0pxb4bss2jmbhg",
+          "desiredStatus": "EXITED",
+          "runtimeStatus": "stopped",
+          "costPerHr": 2.09
+        },
+        {
+          "id": "v09w5n4ljqcjvj",
+          "desiredStatus": "EXITED",
+          "runtimeStatus": "stopped",
+          "costPerHr": 4.18
+        },
+        {
+          "id": "9vj8k6guaxsbhw",
+          "desiredStatus": "EXITED",
+          "runtimeStatus": "stopped",
+          "costPerHr": 4.18
+        }
+      ],
+      "clientBalance": 8.2752197856,
+      "currentSpendPerHr": 0.122,
+      "note": "Stopped pods retain storage; account spend is not necessarily zero."
+    },
+    "pod_a_stop": {
+      "pod": "0pxb4bss2jmbhg",
+      "requested_at": "2026-09-18T09:47:12.320341+00:00",
+      "reason": "N01/N02/N03/N04 completed; artifacts verified locally and JIT cache saved to persistent workspace",
+      "observations": [
+        {
+          "at": "2026-09-18T09:47:14.965084+00:00",
+          "id": "0pxb4bss2jmbhg",
+          "desiredStatus": "EXITED",
+          "runtimeStatus": "stopped",
+          "costPerHr": 2.09
+        }
+      ],
+      "stop_exit": 0,
+      "status": "verified-stopped",
+      "verified_epoch": 1789724834.966033
+    },
+    "pod_c_stop": {
+      "pod": "v09w5n4ljqcjvj",
+      "requested_at": "2026-09-18T11:53:50.103588+00:00",
+      "reason": "All authorized GPU/browser experiments completed; negative results retained; source/logs verified locally; cache payloads preserved and verified on persistent workspace",
+      "observations": [
+        {
+          "id": "v09w5n4ljqcjvj",
+          "desiredStatus": "EXITED",
+          "runtimeStatus": "stopped",
+          "costPerHr": 4.18,
+          "at": "2026-09-18T11:53:53.406440+00:00"
+        }
+      ],
+      "status": "verified-stopped",
+      "stop_exit": 0,
+      "verified_epoch": 1789732433.407542
+    },
+    "guard_files": [
+      "docs/performance/2026-09-18/operations/pod-a-local-guard-final.json",
+      "docs/performance/2026-09-18/operations/pod-c-local-guard-final.json"
+    ]
+  },
+  "guards_and_billing": {
+    "pod_a_local_guard": {
+      "pod": "0pxb4bss2jmbhg",
+      "run_tag": "20260918-next-a2",
+      "status": "cancelled-after-confirmed-stop",
+      "deadline_epoch": 1789729201.395634,
+      "pid": 38547,
+      "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-a2",
+      "runtime_json_sha256_at_arm": "431b0e0062b4de0854112416a625d851516fa4e46b5e4cb84bb2548c02e0fb99"
+    },
+    "pod_c_local_guard": {
+      "pod": "v09w5n4ljqcjvj",
+      "run_tag": "20260918-next-c2",
+      "status": "cancelled-after-confirmed-stop",
+      "deadline_epoch": 1789735801.074153,
+      "pid": 38555,
+      "confirmation_marker": "/tmp/vj0-pod-stop-confirmed-20260918-next-c2",
+      "runtime_json_sha256_at_arm": "27b185b29f048431f011e321c279434a34cf69c4a8a534295e216f9486415acb"
+    },
+    "remote_guard_record": "The remote guard artifact was still armed before pod stop; it is not claimed to have written a cancellation after shutdown. Local guards recorded cancellation after confirmed stop.",
+    "final_balance": 8.2752197856,
+    "balance_observed_utc": "2026-09-18T11:54:11.966714+00:00",
+    "post_stop_account_spend_per_hour": 0.122,
+    "storage_limitation": "Stopped pods retain persistent storage and storage charges; stopped is not deleted."
+  },
+  "cache_integrity_scope": {
+    "source_regular_files": 201311,
+    "manifest_members": 227386,
+    "source_payload_bytes": 6099236280,
+    "archive_bytes": 6503802880,
+    "remote_archive_sha256": "5aed5496268f6d7600a7486d5a8d77cc440412c960903489af6e5e0ab58fe331",
+    "local_gzip_and_decompressed_manifest_hashes_verified": true,
+    "local_manifest_counts_and_file_sizes_reconciled": true,
+    "proof_records_payload_verification": true,
+    "tar_not_downloaded_or_independently_rehashed_locally": true,
+    "meaning": "The reviewed deployed helper records full remote payload verification. Local review verifies the manifest and proof bindings, not the 6.504 GB tar bytes retained on persistent workspace."
+  },
+  "protected_prior_evidence": {
+    "original_input_prefix_bytes": 8515,
+    "archived_n06_suffix_bytes": 5764,
+    "reconstructed_full_interception_sha256": "186040a96e73ac0f3f02f789615933b13809ea86c4eed5f2d8bc7e87ac3c1c52",
+    "prefix_plus_archived_suffix_independently_reconstructed": true,
+    "restoration_record": "input-prefix-restoration.json"
+  },
+  "visual_sample": {
+    "reviewer": "independent agent visual judgment",
+    "snapshots_viewed": 28,
+    "selection": [
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers1-baseline-r0/output-0.2.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "6bc9e10f6117331830a5ae8fba463dcbf58b4910f442dd9f2b7dacd49cd6c8cd"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers1-terminal-noop-r0/output-0.2.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "1205a8d0e5b4c7191e84aab4ff672b478024fa7b07f6c8cd4050e75a0d8f379f"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers2-baseline-r0/output-0.2.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "8423fd797aba17b90e3d2b8aa83234e9c1c4e6dcd55ab21b647df4ee33957088"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers2-terminal-noop-r0/output-0.2.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "412248c7d15714474943650b5b6488eac8fdd7f4dcb5c164c5c255d205e0ea7b"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers1-baseline-r0/output-0.65.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "c8f7dfa982a4f7924ca9857228af1a861e74f15df6b0948616dbd74749c4f17c"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers1-terminal-noop-r0/output-0.65.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "5dd248c1e9458ee6be95229628969286047d76c99066c4974909e2298ffa5b48"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers2-baseline-r0/output-0.65.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "869eb7934507f5b9f3e68b5335b8fc170c31cdc75fe86c39d799ce4e93e5f52a"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-512-workers2-terminal-noop-r0/output-0.65.jpg",
+        "width": 512,
+        "height": 288,
+        "sha256": "a9e7c199ba1717515c46da4436c0d7682c89851234f57b9768faacce547d053f"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers1-baseline-r0/output-0.2.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "4bbf41dbc5ec787fe204a562581c9fe5693837e1669dab596a89813a63e834a5"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers1-terminal-noop-r0/output-0.2.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "685a37e51aa712dc35d1fbf578f26afe77add68503ae051b3562a88319242dbf"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers2-baseline-r0/output-0.2.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "ae4a1691eba3cd777fae62c8d55d660f3c81538cd93afaa46274ab38818f4c56"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers2-terminal-noop-r0/output-0.2.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "7be09ff1c815d44fae8b39a33b34c62434b79468d1e70c97ced093ac94ceb2b4"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers1-baseline-r0/output-0.65.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "016dce075890815f76da59dff32fe962f761e8aabadf17c15cbb908864673e9d"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers1-terminal-noop-r0/output-0.65.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "59242daad0edc5a4b844ac766d0e2939a822dbc08b5f696431fa83ca55697e93"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers2-baseline-r0/output-0.65.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "75850bd00a55c518501608b7f70b2b651185acf0497df73e00bcf26af5f0cfa3"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-768-workers2-terminal-noop-r0/output-0.65.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "4e96cdb1684bb50b52df6fb93cda46391418452d4a711767618d3080f989e84c"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers1-baseline-r0/output-0.2.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "04c9691bc21d29fd6b191e046f6f225f7b9057cbaf4b2d18e61d15def224c9bd"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers1-terminal-noop-r0/output-0.2.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "c04440fa6ef9e7655f66674bcb79fa9ba7f7ecfa49f754161fc37d7feb3dae22"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-baseline-r0/output-0.2.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "704558f941cf88236fe42e9f3fc21fa2df26d625aab89dc042a856f7b302f48e"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-terminal-noop-r0/output-0.2.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "ab4cd488af7eefa1170bc52ee89ee2cebefc0a49c2e6b124ce81a4a15cd3caf3"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers1-baseline-r0/output-0.65.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "054d85c613a0234f066a89832d7d38963929d9ea702712a94e5d6e186a0e8010"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers1-terminal-noop-r0/output-0.65.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "30ef95e83c94da6ea9f1b946f69e31238d87e64ed4f7365a41eabe7c4c5af81a"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-baseline-r0/output-0.65.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "77008070ac320544e27c7e9931ea038f6b6835b4b0c7c8bfbcbc8ae791489aa8"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-terminal-noop-r0/output-0.65.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "af26add45b664cb233e6705251b06ec868672d018531c85cce223cae54037f19"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-terminal-noop-r2/output-0.2.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "d595bfacb1aa443399066352094f5b274776bf46fcf4e10ae5e4f7734273d674"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/matrix-01/n06-1024-workers2-terminal-noop-r2/output-0.65.jpg",
+        "width": 1024,
+        "height": 576,
+        "sha256": "75b0acf7d647effcf54c86168807b3823554a54debce9450a853f9c229afad07"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/hold-01/n06-768-workers2-selected-hold/output-0.2.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "8ccfa05dee2662f852e5a1ab9702bc570964af666ff293dc221cb62770b2b7b6"
+      },
+      {
+        "source": "docs/performance/2026-09-18/scaling/archived-cohorts/hold-01/n06-768-workers2-selected-hold/output-0.65.jpg",
+        "width": 768,
+        "height": 448,
+        "sha256": "2b9e274eccd41756aea134aed063efeb421e693bab35219dd1b35c2a3945d37c"
+      }
+    ],
+    "method": "Viewed contact sheets of both saved input-level output JPEGs for all 12 repeat-zero cells, plus both outputs from the retained negative matrix window and hold. Source JPEGs decoded at their declared generated dimensions.",
+    "observation": "Colored waveform/ribbon forms on dark backgrounds remain recognizable across samples. No gross scrambled blocks, truncated image, all-frame blank output or new configuration-specific collapse was observed. Shapes, background colors and fine detail vary.",
+    "limits": "Samples are the first received JPEG stored for each audioLevel during measurement, not necessarily the same input phase across trials and not frames selected from the later stall episode. This is a gross-corruption check only; no pixel/perceptual/cross-worker/temporal equivalence or human artistic approval is implied.",
+    "contact_sheets_temporary": [
+      "/tmp/vj0-n06-visual-review/matrix-r0-contact.png",
+      "/tmp/vj0-n06-visual-review/negative-window-snapshots.png"
+    ]
+  },
+  "reporting_review": {
+    "files": [
+      "README.md",
+      "scaling/RESULTS.md",
+      "scaling/metrics-compact-v1.json",
+      "scaling/metrics-compact-v1.csv",
+      "scaling/ARCHIVE.md"
+    ],
+    "numerical_and_claim_errors_found": [],
+    "important_limits_retained": [
+      "Selected/baseline is a configuration bundle; one/two active-worker contrasts run sequentially. Throughput differences are not causal attribution of every stall to GPUs.",
+      "Stage FPS counts source frames submitted to WebGL, not physical presentation; actual stage raster can be larger than generated dimensions.",
+      "Age uses local capture encode start to the named boundary. Worker stats arrival gaps are observed at the client, not direct measurements of GPU execution gaps.",
+      "Medians of per-trial percentiles and matched-ratio medians are distinct from pooled percentiles and ratios of cell medians; worst tails remain explicit.",
+      "Both models loaded on the same two-GPU host; all shapes qualified before formal timing and caches seeded from completed same-stack proof. No cold-start performance conclusion.",
+      "Cross-process, physical-GPU, dependency and cache-history differences prevent attributing old/new-stack pixel or FPS changes solely to Torch.",
+      "Same-process terminal-skip/output-cast production proof does not directly prove the full live constant-cache/event wrapper or cross-worker pixel equivalence."
+    ]
+  },
+  "reproduction": {
+    "matrix_command": "python3 -B workers/runpod-flux2klein/bench/n06_aggregate.py --selection docs/performance/2026-09-18/scaling/selection-archived-v1.json --output /tmp/vj0-n06-independent-reproduced.json",
+    "matrix_expected_and_actual_exit": 1,
+    "compact_command": "python3 -B workers/runpod-flux2klein/bench/n06_compact.py --report /tmp/vj0-n06-independent-reproduced.json --base docs/performance/2026-09-18/scaling --output /tmp/vj0-n06-independent-compact",
+    "extra_pulse_hold_lifecycle_script": "/tmp/vj0-n06-final-extra-audit.py",
+    "extra_script_sha256": "3ba2a4e8477d2085307e6146a763c98c1c038142aa6d3b68b8a412f891da933f",
+    "extra_script_outcome": "passed; initial reviewer-only assertion used status passed instead of the saved drain schema value drained, corrected before the successful final run; no measured evidence changed."
+  }
+}
