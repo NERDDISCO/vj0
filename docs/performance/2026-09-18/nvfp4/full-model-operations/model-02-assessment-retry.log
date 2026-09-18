@@ -1,0 +1,7 @@
+Setting up [LPIPS] perceptual loss: trunk [squeeze], v[0.1], spatial [off]
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torchvision/models/_utils.py:207: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torchvision/models/_utils.py:222: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=SqueezeNet1_1_Weights.IMAGENET1K_V1`. You can also use `weights=SqueezeNet1_1_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/lpips/weights/v0.1/squeeze.pth
+{"quality_pairs": 108, "temporal_pairs": 6, "assessment": "/workspace/vj0-n05/results/model-02/assessment.json", "visual_acceptance": "pending independent human decision; metrics cannot certify artistic equivalence"}

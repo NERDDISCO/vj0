@@ -1,0 +1,64 @@
+{
+  "model_result_sha256": "04ae53bf7cf95526279c8f1a8f290ff236950fc17a5a4641620605cb7ad8453f",
+  "selection": "Four highest LPIPS comparisons; prompt0/seed42/waveform phase2 at768+1024. No resizing.",
+  "worst": [
+    {
+      "fixture": "512x288-prompt1-seed42-phase0",
+      "variant": "image_ff_both",
+      "pixels_equal": false,
+      "mse": 826.751953125,
+      "psnr_db": 18.957051313004246,
+      "changed_value_fraction": 0.6662303783275463,
+      "max_absolute_error": 187,
+      "jpeg_equal": false,
+      "lpips": 0.13700315356254578
+    },
+    {
+      "fixture": "512x288-prompt0-seed42-phase0",
+      "variant": "image_ff_both",
+      "pixels_equal": false,
+      "mse": 1759.2041128653068,
+      "psnr_db": 15.677641291714863,
+      "changed_value_fraction": 0.9667426215277778,
+      "max_absolute_error": 251,
+      "jpeg_equal": false,
+      "lpips": 0.09124138951301575
+    },
+    {
+      "fixture": "512x288-prompt1-seed123-phase0",
+      "variant": "image_ff_both",
+      "pixels_equal": false,
+      "mse": 376.372723614728,
+      "psnr_db": 22.374622190479965,
+      "changed_value_fraction": 0.6608705873842593,
+      "max_absolute_error": 171,
+      "jpeg_equal": false,
+      "lpips": 0.07442626357078552
+    },
+    {
+      "fixture": "512x288-prompt0-seed42-phase0",
+      "variant": "image_ff_in",
+      "pixels_equal": false,
+      "mse": 1135.3404880099827,
+      "psnr_db": 17.57954235120006,
+      "changed_value_fraction": 0.9431830512152778,
+      "max_absolute_error": 246,
+      "jpeg_equal": false,
+      "lpips": 0.0640898048877716
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "worst-four-pairs.png",
+      "sha256": "e419d8df3623962a25fbe11f22cbeeee36664099721f1b838ed1ff78b3f07606"
+    },
+    {
+      "file": "waveform-1024x576.png",
+      "sha256": "862205bf0f2303f503d3acc9d2e7d0d51bf756a1abbc533181b27eab13f4cbdb"
+    },
+    {
+      "file": "waveform-768x448.png",
+      "sha256": "e7d9716209d6c01570ec6e1c3a5aa32a4604337fe122ca1d8e58269ecc7632d0"
+    }
+  ]
+}

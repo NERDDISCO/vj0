@@ -1,0 +1,21 @@
+{
+  "status": "independent-source-review-clear",
+  "reviewer": "benchmark_review",
+  "probe_sha256": "7d444ab681fd4ac58aea2ec329f9ae30126d2705acedd39342f2d12570c588bf",
+  "manifest_sha256": "c6c091d898d36354ed2aab8c660d8098e3cccbb257bdd53815b1cd5538fdd4e6",
+  "runner_sha256": "4803753f9135daab20963caf89584d790b020fc3110b46881fe2cb5d1b522931",
+  "change": "Allocate existing32MiB FlashInfer mm_fp4_workspace global cache buffer on actual packed_weight device before all compiled frames",
+  "unchanged": [
+    "native helper and arithmetic",
+    "CUDA graph correctness checks",
+    "paired control settings",
+    "quality/native proof/timing/control return gates"
+  ],
+  "installed_source_hashes": {
+    "utils.py": "6cb8ebcc25eb65521808bf40a8aaf0c5a868827283955867ae382ad7ec773815",
+    "gemm/gemm_base.py": "de6b7ec299f45801e15e5b9ec7341c417c4d9df8d4a5b4650d701694c483ab8e"
+  },
+  "cause_status": "Source-supported late workspace-allocation hypothesis; observed failure cause not directly pointer-proven",
+  "original_shared_deadline_utc": "2026-09-18T10:49:43.769467+00:00",
+  "failed_attempt": "model-01 preserved; no timed cells completed"
+}

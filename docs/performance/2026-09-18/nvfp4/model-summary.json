@@ -1,0 +1,372 @@
+{
+  "status": "complete-no-promotion-recommended",
+  "inference_status": "compute-and-images-complete",
+  "assessment_complete": true,
+  "torch_threads": 128,
+  "torch_dynamo_recompile_limit": 64,
+  "timing_boundary": "JPEG input decode + VAE encode + generate + output JPEG80 + CUDA completion; no text encoding/IPC/network/browser",
+  "timing": [
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        42.79439959212025,
+        41.988801938643476,
+        43.44782008299516
+      ],
+      "nvfp4_trial_fps": [
+        43.090478337167056,
+        40.004972725831664,
+        43.876822916457826
+      ],
+      "fp8_median_fps": 42.79439959212025,
+      "nvfp4_median_fps": 43.090478337167056,
+      "ratio_of_arm_medians": 1.0069186329956437,
+      "matched_pair_speed_ratios": [
+        1.0069186329956437,
+        0.9527533742041342,
+        1.0098739783179727
+      ],
+      "matched_pair_fps_deltas": [
+        0.2960787450468061,
+        -1.9838292128118127,
+        0.4290028334626683
+      ],
+      "median_matched_pair_gain_percent": 0.6918632995643659,
+      "matched_pair_ratio_range": [
+        0.9527533742041342,
+        1.0098739783179727
+      ],
+      "median_matched_pair_fps_delta": 0.2960787450468061,
+      "matched_pair_fps_delta_range": [
+        -1.9838292128118127,
+        0.4290028334626683
+      ]
+    },
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        43.65154770590683,
+        43.39133099772518,
+        43.384158785256865
+      ],
+      "nvfp4_trial_fps": [
+        44.180568807575504,
+        43.17056998885347,
+        43.49435852699224
+      ],
+      "fp8_median_fps": 43.39133099772518,
+      "nvfp4_median_fps": 43.49435852699224,
+      "ratio_of_arm_medians": 1.0023743804787288,
+      "matched_pair_speed_ratios": [
+        1.012119183155494,
+        0.9949123245635567,
+        1.0025400917021543
+      ],
+      "matched_pair_fps_deltas": [
+        0.5290211016686754,
+        -0.2207610088717047,
+        0.1101997417353715
+      ],
+      "median_matched_pair_gain_percent": 0.2540091702154301,
+      "matched_pair_ratio_range": [
+        0.9949123245635567,
+        1.012119183155494
+      ],
+      "median_matched_pair_fps_delta": 0.1101997417353715,
+      "matched_pair_fps_delta_range": [
+        -0.2207610088717047,
+        0.5290211016686754
+      ]
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        22.03661194321366,
+        21.977609258156665,
+        22.232627198586634
+      ],
+      "nvfp4_trial_fps": [
+        22.38457315560715,
+        22.281013934851117,
+        22.26677446528889
+      ],
+      "fp8_median_fps": 22.03661194321366,
+      "nvfp4_median_fps": 22.281013934851117,
+      "ratio_of_arm_medians": 1.0110907244846556,
+      "matched_pair_speed_ratios": [
+        1.0157901411201573,
+        1.0138051720335253,
+        1.0015359078527808
+      ],
+      "matched_pair_fps_deltas": [
+        0.3479612123934892,
+        0.30340467669445204,
+        0.03414726670225576
+      ],
+      "median_matched_pair_gain_percent": 1.380517203352527,
+      "matched_pair_ratio_range": [
+        1.0015359078527808,
+        1.0157901411201573
+      ],
+      "median_matched_pair_fps_delta": 0.30340467669445204,
+      "matched_pair_fps_delta_range": [
+        0.03414726670225576,
+        0.3479612123934892
+      ]
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        22.269853916520002,
+        22.040016018409457,
+        22.166312590784987
+      ],
+      "nvfp4_trial_fps": [
+        22.021190586503575,
+        22.274633911184758,
+        22.269629915575354
+      ],
+      "fp8_median_fps": 22.166312590784987,
+      "nvfp4_median_fps": 22.269629915575354,
+      "ratio_of_arm_medians": 1.0046610063973076,
+      "matched_pair_speed_ratios": [
+        0.9888340834677876,
+        1.0106450872167847,
+        1.0046610063973076
+      ],
+      "matched_pair_fps_deltas": [
+        -0.24866333001642715,
+        0.23461789277530087,
+        0.10331732479036759
+      ],
+      "median_matched_pair_gain_percent": 0.4661006397307599,
+      "matched_pair_ratio_range": [
+        0.9888340834677876,
+        1.0106450872167847
+      ],
+      "median_matched_pair_fps_delta": 0.10331732479036759,
+      "matched_pair_fps_delta_range": [
+        -0.24866333001642715,
+        0.23461789277530087
+      ]
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        13.03294781058231,
+        13.03113306330219,
+        12.913453359562912
+      ],
+      "nvfp4_trial_fps": [
+        13.18854004138251,
+        13.206557384710399,
+        13.150993195835829
+      ],
+      "fp8_median_fps": 13.03113306330219,
+      "nvfp4_median_fps": 13.18854004138251,
+      "ratio_of_arm_medians": 1.012079300956845,
+      "matched_pair_speed_ratios": [
+        1.0119383759577294,
+        1.01346193923092,
+        1.0183947569762204
+      ],
+      "matched_pair_fps_deltas": [
+        0.1555922308001989,
+        0.17542432140820807,
+        0.23753983627291753
+      ],
+      "median_matched_pair_gain_percent": 1.3461939230920095,
+      "matched_pair_ratio_range": [
+        1.0119383759577294,
+        1.0183947569762204
+      ],
+      "median_matched_pair_fps_delta": 0.17542432140820807,
+      "matched_pair_fps_delta_range": [
+        0.1555922308001989,
+        0.23753983627291753
+      ]
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        13.030551781996841,
+        13.010389118062335,
+        13.031982545770404
+      ],
+      "nvfp4_trial_fps": [
+        13.078162883978168,
+        13.102746089981444,
+        13.100729206494503
+      ],
+      "fp8_median_fps": 13.030551781996841,
+      "nvfp4_median_fps": 13.100729206494503,
+      "ratio_of_arm_medians": 1.005385606509359,
+      "matched_pair_speed_ratios": [
+        1.0036538055162871,
+        1.007098709429904,
+        1.0052752265806564
+      ],
+      "matched_pair_fps_deltas": [
+        0.04761110198132634,
+        0.0923569719191093,
+        0.06874666072409852
+      ],
+      "median_matched_pair_gain_percent": 0.5275226580656378,
+      "matched_pair_ratio_range": [
+        1.0036538055162871,
+        1.007098709429904
+      ],
+      "median_matched_pair_fps_delta": 0.06874666072409852,
+      "matched_pair_fps_delta_range": [
+        0.04761110198132634,
+        0.0923569719191093
+      ]
+    }
+  ],
+  "quality": {
+    "image_ff_in": {
+      "cases": 54,
+      "exact_pixels": 0,
+      "psnr_db": {
+        "minimum": 17.57954235120006,
+        "median": 32.34569016441223,
+        "maximum": 58.585501850881315
+      },
+      "lpips": {
+        "minimum": 0.00046426631161011755,
+        "median": 0.005983125884085894,
+        "maximum": 0.0640898048877716
+      }
+    },
+    "image_ff_both": {
+      "cases": 54,
+      "exact_pixels": 0,
+      "psnr_db": {
+        "minimum": 15.677641291714863,
+        "median": 30.964852649205092,
+        "maximum": 57.98950240049665
+      },
+      "lpips": {
+        "minimum": 0.0005023913690820336,
+        "median": 0.008025577291846275,
+        "maximum": 0.13700315356254578
+      }
+    }
+  },
+  "temporal": [
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_in",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 12.707615922088682,
+      "preview": "paired-512x288-image_ff_in.webp"
+    },
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_both",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 14.055946823792457,
+      "preview": "paired-512x288-image_ff_both.webp"
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_in",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 6.860397071275863,
+      "preview": "paired-768x448-image_ff_in.webp"
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_both",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 7.327949364053389,
+      "preview": "paired-768x448-image_ff_both.webp"
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_in",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 4.847436374911794,
+      "preview": "paired-1024x576-image_ff_in.webp"
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_both",
+      "duplicate_phase_transitions": 4,
+      "duplicate_outputs_remain_identical": true,
+      "median_transition_delta_error_rms": 5.649422230994406,
+      "preview": "paired-1024x576-image_ff_both.webp"
+    }
+  ],
+  "acceptance": "No precision change recommended from these modest paired gains and changed outputs; independent visual review remains separate, no new numerical acceptance threshold invented",
+  "production_default_changed": false,
+  "limitations": [
+    "Only five or ten selected image FFN linears; not whole-model NVFP4",
+    "Matched newer-stack controls; not old-stack versus new-stack comparison",
+    "Offline compute, not app/WebRTC FPS",
+    "Three prompts, two seeds, three input states per size; two inference steps, alpha0.1",
+    "No scalar metric certifies visual equivalence",
+    "All18 original-process vs retry512 FP8 control PNGs differ: MSE18.56\u2013220.63, max79\u2013222. Cause unresolved; no exact cross-process neutrality claim. Same-process model02 paired comparisons remain valid.",
+    "Dependency inventory snapshots collapse duplicate distribution names from inherited system-site paths; active versions are established separately by the successful model manifest/pinned executable, not those snapshots alone.",
+    "Independent reviewer recomputed pixel, timing and temporal delta metrics; LPIPS network was not rerun locally, only source-binding/coverage/finiteness checked."
+  ],
+  "retained_failures": [
+    "model-01: first-use global workspace allocation triggered CUDA graph tracking failure before timings",
+    "model-02 assessment import: missing SciPy; no model timings rerun; assessment-only succeeded after scipy1.17.1 --no-deps. Pip log shows only SciPy added; before/after inventory collapses duplicate system-site names and is not active-runtime attestation."
+  ],
+  "independent_review": {
+    "evidence_integrity": "passed bounded numerical and source/runtime checks",
+    "agent_visual_judgment": "Neither configuration accepted as an appearance-preserving replacement. Broad scene content is retained, but visible color/brightness/detail changes occur; image_ff_both has the stronger low-resolution departures. Small measured gains do not remove this artistic tradeoff.",
+    "human_acceptance": "not supplied; this explicit independent agent judgment does not satisfy or impersonate a human visual decision",
+    "promotion": "none",
+    "threshold_policy": "N05 has no predeclared 2% acceptance gate. N03 advancement thresholds were not applied."
+  },
+  "independent_review_path": "review-model.json"
+}

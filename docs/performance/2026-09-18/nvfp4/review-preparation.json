@@ -1,0 +1,122 @@
+{
+  "schema": "n05-preparation-review-v1",
+  "reviewed_at_utc": "2026-09-18T08:02:34.895635+00:00",
+  "verdict": "preparation corrections verified; no remaining identified launch blocker in bounded source review",
+  "scope": "Read-only local review of paired control/candidate measurement, selective native execution proof and output gates. No browser, GPU, network or remote commands executed.",
+  "source_sha256": {
+    "workers/runpod-flux2klein/bench/n05_model_probe.py": "5f7de59970f13ad94b1591e358e4fcf11c684e025a3b48541e01d858d78d9503",
+    "workers/runpod-flux2klein/bench/n05_analyze.py": "bf403bb556c0077037b8deb21df038b52d3f2b89f746da25e8740436cb58aee4",
+    "workers/runpod-flux2klein/bench/n05_nvfp4.py": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe",
+    "workers/runpod-flux2klein/bench/n05_kernel_probe.py": "fbab57593c5638f8802163a5fe8314715ba51167f0014addfde405c5b34545db",
+    "docs/performance/2026-09-18/nvfp4/PLAN.md": "47d0c4ef808189021ce7dd26f9abcb5c37b67d2d88cc167b2efb366ac8cbda98",
+    "docs/performance/2026-09-18/nvfp4/kernel-05/result.json": "9fe1a5683436402f58a0848af707d7ddec8f9d3bcafd0361f0ce05469d910cd5"
+  },
+  "resolved_findings": [
+    {
+      "priority": "P1",
+      "issue": "Decoder finiteness checked only after denormalization/clamp",
+      "resolution": "frame wraps pipe.vae.decode, checks raw tensor before postprocess, requires both raw decoder and converter guards, and restores methods in finally. Quality and temporal samples enable guards; timed frames do not add validation synchronization.",
+      "source": "n05_model_probe.py:136-167"
+    },
+    {
+      "priority": "P1",
+      "issue": "Eager microkernel evidence did not attest compiled full-model module swaps",
+      "resolution": "One warmed untimed frame per shape/config records GPU kernel events matching both dense_blockscaled_gemm_sm120_b12x and f4E2M1FN. Native launch count must equal 0/5/10 for FP8/image_ff_in/image_ff_both. Exactly one terminal skip is checked. CPU custom-op count is informational because CUDA graph replay may omit it.",
+      "source": "n05_model_probe.py:197-223"
+    },
+    {
+      "priority": "P2",
+      "issue": "LPIPS NaN could be serialized without failing assessment",
+      "resolution": "LPIPS explicitly rejects nonfinite values; assessment JSON forbids NaN.",
+      "source": "n05_analyze.py:42-46,116"
+    },
+    {
+      "priority": "P2",
+      "issue": "Timing gain discarded matched pair identity",
+      "resolution": "Unique pair/variant keys and formal 100-frame/3-pair matrix are required, FPS is reconciled with observed wall time, and matched pair ratios/deltas are primary. Ratio of arm medians remains explicitly named.",
+      "source": "n05_analyze.py:86-115"
+    }
+  ],
+  "checks": {
+    "preclamp_guard_cpu_source_mocks": [
+      "finite succeeds",
+      "positive infinity fails",
+      "negative infinity fails",
+      "NaN fails",
+      "bypassed decoder fails",
+      "original decoder/converter restored after success and failure"
+    ],
+    "native_event_predicate_cpu_source_mocks": [
+      "FP8 0 passes / 1 fails",
+      "image_ff_in 5 passes / 4 fails",
+      "image_ff_both 10 passes / 9 fails"
+    ],
+    "kernel_gate_status": "kernel-gate-passed",
+    "kernel_cells": [
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "layer": "transformer_blocks.2.ff.linear_in",
+        "micro_speed_ratio": 1.46116660559724
+      },
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "layer": "transformer_blocks.2.ff.linear_out",
+        "micro_speed_ratio": 1.4298528640944594
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "layer": "transformer_blocks.2.ff.linear_in",
+        "micro_speed_ratio": 1.764093620427958
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "layer": "transformer_blocks.2.ff.linear_out",
+        "micro_speed_ratio": 1.5049688073798162
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "layer": "transformer_blocks.2.ff.linear_in",
+        "micro_speed_ratio": 1.65730961354391
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "layer": "transformer_blocks.2.ff.linear_out",
+        "micro_speed_ratio": 1.7129013075884845
+      }
+    ],
+    "unchanged_helper_matches_passed_kernel_gate": true,
+    "source_guard_reference": {
+      "pipeline": "/private/tmp/vj0-python-deep-dive-20260917/pipeline_flux2_klein_kv.py:877-878",
+      "postprocess": "/private/tmp/vj0-python-deep-dive-20260917/image_processor.py:234,775-780"
+    },
+    "paired_controls": "Same worker/environment, original BF16 source weights quantized to selected FP4 only, other FP8 modules retained; seed/prompt/input JPEG bytes/steps/alpha/native threads/terminal skip/output cast fixed. Alternating sequential order and exact FP8 return checks retained.",
+    "quality_matrix": "54 paired fixtures per candidate (3 resolutions x 3 prompts x 2 seeds x 3 input phases), plus 12-frame deterministic clips per variant/resolution; numerical full-resolution PNG evidence and separate previews.",
+    "timing_boundary": "Observed synchronized wall time includes JPEG input decode, VAE encode/generate, output/JPEG80 and CUDA completion; excludes prompt embedding, profiler, PNG writing and image metrics."
+  },
+  "limitations": [
+    "Full-model run has not executed. Profile counts and preclamp guards are preparation logic, not measured full-model correctness, performance or FP4 execution evidence.",
+    "Native kernel gate is an eager representative-layer microbenchmark and is not full-model or live application speed.",
+    "Finite tensors can still be artistically poor. Temporal LPIPS/frame-delta RMS are descriptive; no scalar metric automatically accepts output. Independent visual/temporal acceptance remains pending.",
+    "Both alternatives remain resident in one comparison process; memory numbers are not standalone deployment footprint.",
+    "Analyzer intentionally accepts the formal default 100 frames x 3 pairs; non-default probe counts would require an explicitly updated assessment contract.",
+    "No production promotion or UI behavior change is authorized by this preparation verdict."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "issue": "Duplicate system-site packages overwrite venv entries in a name-keyed distribution inventory",
+  "original_capture_expression": "{d.metadata['Name']: d.version for d in importlib.metadata.distributions()}",
+  "effect": "Some inventory values show globally installed Torch2.11/TorchAO0.17 although active model manifest records venv Torch2.13/TorchAO0.18. Do not interpret inventory as imported-runtime attestation.",
+  "evidence_retained": [
+    "assessment-dependency-before.json",
+    "assessment-dependency-after.json",
+    "assessment-dependency-verification.json",
+    "assessment-scipy-install.log"
+  ],
+  "valid_conclusions": [
+    "Preserved pip --no-deps log installed only SciPy1.17.1",
+    "Collapsed inventory keys were unchanged except SciPy",
+    "Model runtime metadata.version checks matched the previously passed Torch2.13 kernel gate",
+    "Assessment used the identical pinned venv executable"
+  ],
+  "scope": "Raw evidence is unchanged; this interpretation corrects an overly broad field label in the capture script."
+}

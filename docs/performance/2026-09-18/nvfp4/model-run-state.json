@@ -1,0 +1,18 @@
+{
+  "status": "complete-and-archived",
+  "started_utc": "2026-09-18T09:57:58.158050+00:00",
+  "pod": "v09w5n4ljqcjvj",
+  "runner_pid": 18239,
+  "output": "/workspace/vj0-n05/results/model-02",
+  "original_deadline_utc": "2026-09-18T10:49:43.769467+00:00",
+  "source_manifest_sha256": "c6c091d898d36354ed2aab8c660d8098e3cccbb257bdd53815b1cd5538fdd4e6",
+  "failed_attempt": "model-01 CUDAgraph allocation-tracking failure before any timed cells; evidence preserved",
+  "correction": "Independently reviewed32MiB global workspace initialization before graph frames; same math and graph checks",
+  "acceptance": "Pending measured outcome and independent visual review; no promotion",
+  "remote_gpu_and_heavy_work_released": true,
+  "all_remote_artifact_hashes_verified": true,
+  "artifacts": 387,
+  "bytes": 98216854,
+  "visual_review": "Completed independent agent review: neither configuration accepted as appearance-preserving; no production promotion",
+  "assessment_retry": "Completed10:14:58UTC; inference timing not repeated"
+}

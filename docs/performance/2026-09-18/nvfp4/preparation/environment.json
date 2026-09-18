@@ -1,0 +1,26 @@
+{
+  "cuda_prefix": "/workspace/cuda-13.2",
+  "resolves_to": "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/nvidia/cu13",
+  "paths": {
+    "bin/nvcc": true,
+    "include/cuda_runtime.h": true,
+    "include/cccl/cuda/std": true,
+    "nvvm/libdevice": true,
+    "lib/libcudart.so.13": true
+  },
+  "versions": {
+    "torch": "2.13.0+cu132",
+    "torchao": "0.18.0+cu132",
+    "torchvision": "0.28.0+cu132",
+    "triton": "3.7.1",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "huggingface-hub": "1.13.0",
+    "flashinfer-python": "0.6.18.post1",
+    "nvidia-cutlass-dsl": "4.7.1",
+    "cuda-toolkit": "13.2.1",
+    "nvidia-cuda-nvcc": "13.2.78",
+    "nvidia-cuda-cccl": "13.2.75"
+  },
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0\n"
+}

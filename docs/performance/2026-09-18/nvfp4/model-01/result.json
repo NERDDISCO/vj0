@@ -1,0 +1,341 @@
+{
+  "status": "stopped",
+  "started_utc": "2026-09-18T09:49:43.956140+00:00",
+  "records": [
+    {
+      "phase": "warmup",
+      "variant": "fp8",
+      "resolution": [
+        512,
+        288
+      ],
+      "seconds": 121.67328723333776,
+      "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+      "memory_allocated_bytes": 12541916672,
+      "memory_reserved_bytes": 13161725952
+    },
+    {
+      "phase": "compiled-native-proof",
+      "variant": "fp8",
+      "resolution": [
+        512,
+        288
+      ],
+      "native_gpu_launches": 0,
+      "expected_native_gpu_launches": 0,
+      "cpu_custom_op_events": 0,
+      "cpu_event_note": "May be zero on valid CUDA graph replay",
+      "native_kernel_names": [],
+      "trace": "profile-512x288-fp8.json.gz"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed42-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "e0a46541377b9724a480ac667f4edfa071a7f62e61e337de68daa66b6ac63086"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed42-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "35b69b3c1d4de0985d897ae4ef46e7743f5ce6123dcba341852411836d3d6780"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed42-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "37a20102abbb2a305711ef40f5e99b48fc53021d8258c1c962a153e1791fae30"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed123-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "2973964ad6d4925d07114ade1b5d420c46189270933b728ad9a40983940a03a1"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed123-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "dc520a9d0d660f2a4c2fb813e9420f0e1d8a3ef402f3a2882e2a8e4748343921"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt0-seed123-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "43574bdb64cea7c5e7d249cb38a6496a2cb94a713e11ad67940f9cf3c7889fcd"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed42-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "155adf3b0f88ecd4ea4d2e0b91c8380c9c54813510812b4dbf7e9fd3ef1c4c57"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed42-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "5ac985719e09e209cdb9ca2cb592c75e12dd594b4565326768c10cba2980025d"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed42-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "eceeacde6fce42919cadda77f2c5515e142a68c687b9b05b22b6350090544e2a"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed123-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "46ec5c9003fb9b3aa30765111d5eb82b9a6d0e0af826f544bfb6e7691d5d2b1c"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed123-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "b64d06ce6528c25211daaab9a26f0c740b05387052033c5e84c7718330941195"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt1-seed123-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "405c9227484e6878e5d5f173bd83eb76b521512d7e2ed9aac1c808d9f202a539"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed42-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "cdb5bb935377897c53d867d20e0011aae2ba7f8d236270ffd3c3c1f1a1432743"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed42-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "aa22d06124ae823eec0855f58660cafbd79c97fa45fa4dcc0ad99403f90b725e"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed42-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "8dd825fe1ce7287240aee38929b4c193bfb5a539a2a24cfefab5c1ce5b8dbb3b"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed123-phase0",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "5808217fc5af97bcba8acd09373fa5ccd7b34f6f3467fd3f7cbd513fcc456bbe"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed123-phase2",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "4862f0b41ca5ff7007e7f4d180fcdb51af9af6e11d89514534f86594a5374540"
+    },
+    {
+      "phase": "quality",
+      "variant": "fp8",
+      "fixture": "512x288-prompt2-seed123-phase4",
+      "comparison": {
+        "control": true
+      },
+      "global_rng_unchanged": true,
+      "encoded_and_decoded_tensors_finite": true,
+      "pixel_sha256": "983caad4df74dce53efa5932a6301393c5a61847c349a260b9bced7087de6154"
+    },
+    {
+      "phase": "temporal",
+      "variant": "fp8",
+      "resolution": [
+        512,
+        288
+      ],
+      "frames": 12,
+      "directory": "clip-512x288-fp8"
+    }
+  ],
+  "acceptance": "not accepted; non-exact results require explicit visual review",
+  "kernel_gate_sha256": "9fe1a5683436402f58a0848af707d7ddec8f9d3bcafd0361f0ce05469d910cd5",
+  "prompts": [
+    "vibrant neon cyberpunk city street at night, rain, reflections, wide angle",
+    "colorful abstract art, vibrant neon lights, psychedelic patterns",
+    "iridescent organic sculpture, flowing glass ribbons, intricate surface texture, dramatic studio lighting"
+  ],
+  "seeds": [
+    42,
+    123
+  ],
+  "steps": 2,
+  "alpha": 0.1,
+  "input_jpeg_quality": 85,
+  "output_jpeg_quality": 80,
+  "temporal_phases": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    0,
+    4,
+    4,
+    2,
+    0
+  ],
+  "timing_boundary": "JPEG input decode + VAE encode + generate + output JPEG80 + CUDA completion; no text encoding/IPC/network/browser",
+  "native": {
+    "version": "0.6.18.post1",
+    "release_commit": "8bc3b578027791336c6ae87db5c9d76f82cef8bc",
+    "backend": "b12x",
+    "activation_quantization": "cuda, dynamic tensor global + block16",
+    "source_sha256": {
+      "gemm/gemm_base.py": "de6b7ec299f45801e15e5b9ec7341c417c4d9df8d4a5b4650d701694c483ab8e",
+      "gemm/kernels/dense_blockscaled_gemm_sm120_b12x.py": "eee668e5c143f1c31690ad8a7b44f65050fee3232df1e1c484a3789c2ef0d960",
+      "quantization/fp4_quantization.py": "a003e182bf9667c28bf925fb6749f944dbb6b1d30e1800bf0d4f2a1bf855d23c"
+    }
+  },
+  "boot_logs": [
+    "CPU intra-op threads=128 (previous=128, TORCH_NUM_THREADS=0; 0 preserves native selection)",
+    "torch=2.13.0+cu132 cuda=13.2 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)",
+    "loading black-forest-labs/FLUX.2-klein-4B...",
+    "loaded in 50.9s, vram=15.98GB",
+    "applying TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor) on transformer...",
+    "fp8 applied to transformer in 0.4s, vram=12.30GB",
+    "fp8 applied to VAE linears in 0.0s, vram=12.30GB",
+    "compiling transformer + vae.encoder + vae.decoder (mode=reduce-overhead)...",
+    "compile stubs registered in 1.7s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)",
+    "terminal_noop=enabled; audited helper, pipeline and scheduler source guards passed",
+    "gpu_output_cast=enabled; measured helper and pinned image-conversion source guards passed",
+    "encoding prompt (len=74 chars, max_seq=64) [cache: 0/32, hits=0 misses=1]",
+    "prompt encoded in 1916ms shape=(1, 64, 7680) [cached 1/32]",
+    "encoding prompt (len=64 chars, max_seq=64) [cache: 1/32, hits=0 misses=2]",
+    "prompt encoded in 26ms shape=(1, 64, 7680) [cached 2/32]",
+    "encoding prompt (len=104 chars, max_seq=64) [cache: 2/32, hits=0 misses=3]",
+    "prompt encoded in 17ms shape=(1, 64, 7680) [cached 3/32]"
+  ],
+  "torch_dynamo_recompile_limit": 64,
+  "compile_limit_scope": "64 for every paired control/candidate; not comparable directly to production-default8 measurements",
+  "torch_threads": 128,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "versions": {
+    "torch": "2.13.0+cu132",
+    "torchao": "0.18.0+cu132",
+    "diffusers": "0.38.0.dev0",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "flashinfer-python": "0.6.18.post1"
+  },
+  "source_sha256": {
+    "probe": "5f7de59970f13ad94b1591e358e4fcf11c684e025a3b48541e01d858d78d9503",
+    "helper": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe",
+    "worker": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad"
+  },
+  "variants": {
+    "image_ff_in": [
+      "transformer_blocks.0.ff.linear_in",
+      "transformer_blocks.1.ff.linear_in",
+      "transformer_blocks.2.ff.linear_in",
+      "transformer_blocks.3.ff.linear_in",
+      "transformer_blocks.4.ff.linear_in"
+    ],
+    "image_ff_both": [
+      "transformer_blocks.0.ff.linear_in",
+      "transformer_blocks.0.ff.linear_out",
+      "transformer_blocks.1.ff.linear_in",
+      "transformer_blocks.1.ff.linear_out",
+      "transformer_blocks.2.ff.linear_in",
+      "transformer_blocks.2.ff.linear_out",
+      "transformer_blocks.3.ff.linear_in",
+      "transformer_blocks.3.ff.linear_out",
+      "transformer_blocks.4.ff.linear_in",
+      "transformer_blocks.4.ff.linear_out"
+    ]
+  },
+  "error": "RuntimeError: Detected 1 tensor(s) in the cudagraph pool not tracked as outputs. All live allocations must be tracked for correctness.\nDebugging:\n- Set torch._inductor.config.triton.cudagraph_trees_history_recording = True for allocation origins\n- Objgraph backrefs disabled; set torch._inductor.config.triton.cudagraph_trees_objgraph = True (refs_live_tensor_{index}.svg)\n- Search gc.get_objects() for tensors with data_ptr() in OrderedSet([128300659769344])\n- Use refcycle to find what is preventing cleanup\nAllocations:\nData Pointer: 128300659769344, history: \n",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/vj0-n05/bench/n05_model_probe.py\", line 191, in main\n    frame(inputs[2], width, height, 0, 42)\n  File \"/workspace/vj0-n05/bench/n05_model_probe.py\", line 161, in frame\n    result = worker.generate(pipe, latents, embeddings[prompt_index], .1, 2, height, width, seed)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/vj0-n05/inference_server.py\", line 321, in generate\n    return pipe(\n           ^^^^^\n  File \"/workspace/vj0-n05/bench/terminal_noop.py\", line 80, in dispatch\n    return call(self, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/diffusers/pipelines/flux2/pipeline_flux2_klein_kv.py:vj0-terminal-noop\", line 826, in __call__\n    noise_pred = self.transformer(\n                 ^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py\", line 511, in __call__\n    return super().__call__(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1778, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py\", line 1166, in compile_wrapper\n    result = fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1778, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/diffusers/utils/peft_utils.py\", line 292, in wrapper\n    @functools.wraps(forward_fn)\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py\", line 1446, in _fn\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/aot_autograd.py\", line 1277, in forward\n    return compiled_fn(full_args)\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 1141, in runtime_wrapper\n    result = _codegen_runtime_wrapper(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/subclass_codegen.py:codegen(runtime_wrapper_orchestration)\", line 8, in _runtime_wrapper\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py\", line 2548, in __call__\n    return self.compiled_fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/subclass_codegen.py:codegen(subclass_wrapper)\", line 474, in inner_fn\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/output_code.py\", line 763, in __call__\n    return self.current_callable(inputs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/vj0-n05-inductor/7e/c7e3nc7wdd4edruo4q4v3i74jcgvyivi7iiff7vxc6fqper4guvl.py\", line 7405, in call\n    (buf1059,) = self.partitions[0](partition0_args)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_fx.py\", line 1925, in run\n    return compiled_fn(new_inputs)  # type: ignore[arg-type]\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 460, in deferred_cudagraphify\n    fn, out = cudagraphify(model, inputs, new_static_input_idxs, *args, **kwargs)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 520, in cudagraphify\n    return manager.add_function(\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 2519, in add_function\n    return fn, fn(inputs)\n               ^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 2178, in run\n    out = self._run(new_inputs, function_id)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 2280, in _run\n    return self.run_eager(new_inputs, function_id)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 2477, in run_eager\n    return node.run(new_inputs)\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 798, in run\n    check_memory_pool(self.device_index, self.cuda_graphs_pool, out_refs)\n  File \"/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py\", line 2015, in check_memory_pool\n    raise RuntimeError(msg)\nRuntimeError: Detected 1 tensor(s) in the cudagraph pool not tracked as outputs. All live allocations must be tracked for correctness.\nDebugging:\n- Set torch._inductor.config.triton.cudagraph_trees_history_recording = True for allocation origins\n- Objgraph backrefs disabled; set torch._inductor.config.triton.cudagraph_trees_objgraph = True (refs_live_tensor_{index}.svg)\n- Search gc.get_objects() for tensors with data_ptr() in OrderedSet([128300659769344])\n- Use refcycle to find what is preventing cleanup\nAllocations:\nData Pointer: 128300659769344, history: \n\n",
+  "ended_utc": "2026-09-18T09:54:34.531019+00:00"
+}

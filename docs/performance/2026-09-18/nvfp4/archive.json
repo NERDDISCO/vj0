@@ -1,0 +1,233 @@
+{
+  "status": "native kernel gate complete; full-model/visual study queued",
+  "files": {
+    "review-preparation.json": {
+      "bytes": 6317,
+      "sha256": "dcee06d3e221ecc95c00a9c3adbad2f61197e82ecb38cccf4e203e84a500c9b2"
+    },
+    "kernel-05-idle.json": {
+      "bytes": 219,
+      "sha256": "a7c172550c4293a28e9092b424291de25bfa9927be9d810e5e7f87d4478e9ee6"
+    },
+    "kernel-consistency.json": {
+      "bytes": 2629,
+      "sha256": "4deb452ca2bd399def84508ac78634a935e153395d6168415283b2ebc46e97e5"
+    },
+    "README.md": {
+      "bytes": 3786,
+      "sha256": "299a81bcbb26336cba1f2f49050ffaa46f01edf6dfff13107026e7d05763a003"
+    },
+    "NEXT-RUN.md": {
+      "bytes": 2871,
+      "sha256": "1a75c9985b7ccf45157c12c20cc11c1d052df8015244ec31dee85646c1d670d3"
+    },
+    "PLAN.md": {
+      "bytes": 9652,
+      "sha256": "47d0c4ef808189021ce7dd26f9abcb5c37b67d2d88cc167b2efb366ac8cbda98"
+    },
+    "kernel-01.log": {
+      "bytes": 10629,
+      "sha256": "c195cb75daacfa613dc2e6533a7c1264a1dff8e4b5fca26a43145da64d69a91e"
+    },
+    "kernel-03.log": {
+      "bytes": 186389,
+      "sha256": "a28c0df9e9607643f6f6f46fa03df595782c6a7b2b3f04e45487345e34d31881"
+    },
+    "kernel-02.log": {
+      "bytes": 7642,
+      "sha256": "b4fe168a06f106fbe212169a1f77628b072f7870d2268301bde73d13cd002e51"
+    },
+    "kernel-05.log": {
+      "bytes": 33499,
+      "sha256": "f7878f593bb661edb81c01fceb925e56d018ca785e7ca0ece76a1261ac2f0cee"
+    },
+    "kernel-04.log": {
+      "bytes": 8959,
+      "sha256": "9dd1a238158a5bc53b452ba382f31006e498a41fb56320632f19c5fe6e17ae59"
+    },
+    "model-frozen-sources/worker_runtime.py": {
+      "bytes": 6232,
+      "sha256": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba"
+    },
+    "model-frozen-sources/sha256.json": {
+      "bytes": 665,
+      "sha256": "97ba026a96880481d95dae025cc5c87a2edb468e5ba8c97ff36946c02192d977"
+    },
+    "model-frozen-sources/inference_server.py": {
+      "bytes": 30573,
+      "sha256": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad"
+    },
+    "kernel-05/512x288-transformer_blocks.2.ff.linear_out-native.json.gz": {
+      "bytes": 7456,
+      "sha256": "bc4663b134bef2d2852027f4ab25e49a774eb5fc83d9b28626083f03788f8016"
+    },
+    "kernel-05/768x448-transformer_blocks.2.ff.linear_in-native.json.gz": {
+      "bytes": 7707,
+      "sha256": "31ce289ed6b470d0af3cf634ce334fb4e191027e14c67fb969a0d5249ffb110b"
+    },
+    "kernel-05/1024x576-transformer_blocks.2.ff.linear_in-native.json.gz": {
+      "bytes": 7717,
+      "sha256": "5ef23da4dbca59143f16df8b6f8cacceca0b738c33f3bc55f193877a9eca406a"
+    },
+    "kernel-05/result.json": {
+      "bytes": 33207,
+      "sha256": "9fe1a5683436402f58a0848af707d7ddec8f9d3bcafd0361f0ce05469d910cd5"
+    },
+    "kernel-05/1024x576-transformer_blocks.2.ff.linear_out-native.json.gz": {
+      "bytes": 7864,
+      "sha256": "bd86020f42b43fc233ab2c9a40e057cdae3639ebfbfb6cbdd5b70f69c7f20723"
+    },
+    "kernel-05/768x448-transformer_blocks.2.ff.linear_out-native.json.gz": {
+      "bytes": 7770,
+      "sha256": "be16ee9263e535756b166c584f8e1fd8377e422cb37e9f2b99eef1520eb53663"
+    },
+    "kernel-05/512x288-transformer_blocks.2.ff.linear_in-native.json.gz": {
+      "bytes": 7437,
+      "sha256": "9b443fe35042988b73438d23628ed7c216489b3a50bc31bffd1ef128ad979510"
+    },
+    "kernel-02/result.json": {
+      "bytes": 6023,
+      "sha256": "f30e912b1242598473f13f5a4b48810ddf3b86487873c4d94a9cacd1c66e3f15"
+    },
+    "kernel-03/result.json": {
+      "bytes": 365130,
+      "sha256": "4edc3e75a84259d5a15176724bbc70413144c84c1977b4cd639467ff8bb0bbda"
+    },
+    "kernel-04/result.json": {
+      "bytes": 7254,
+      "sha256": "cd408c38b6224710baeb4c459a65dc7d52b004ca08b320694f9a06620f39d59c"
+    },
+    "kernel-04/512x288-transformer_blocks.2.ff.linear_in-native.json.gz": {
+      "bytes": 7462,
+      "sha256": "b14b15ed8d943e130aa197e12cc50a20471db27cba39a63d07aac14d53881117"
+    },
+    "kernel-05-frozen-sources/worker_runtime.py": {
+      "bytes": 6232,
+      "sha256": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba"
+    },
+    "kernel-05-frozen-sources/sha256.json": {
+      "bytes": 572,
+      "sha256": "2b3f6d62c59523b2763962364037f9d57a8f70d1fdb2f094411cac778c1089b1"
+    },
+    "kernel-05-frozen-sources/inference_server.py": {
+      "bytes": 30573,
+      "sha256": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad"
+    },
+    "kernel-frozen-sources/worker_runtime.py": {
+      "bytes": 6232,
+      "sha256": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba"
+    },
+    "kernel-frozen-sources/sha256.json": {
+      "bytes": 572,
+      "sha256": "aaad727d334f97d2bf81820cdee585279819941037e662f8c39f543d8fb6c2aa"
+    },
+    "kernel-frozen-sources/inference_server.py": {
+      "bytes": 30573,
+      "sha256": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad"
+    },
+    "preparation/kernel-05-launch.json": {
+      "bytes": 909,
+      "sha256": "e9cda2ce21337a18d7ffded2cd8e2c01e2502cea00bff7b56c2bb51f0f9f6496"
+    },
+    "preparation/cuda-prefix-correction.json": {
+      "bytes": 3902,
+      "sha256": "aa0d110ab66f2c74da46042fd11af46724c916d7dbc180541b4b4c848de726cf"
+    },
+    "preparation/vj0-next-c-install-fixed.log": {
+      "bytes": 2436,
+      "sha256": "0620b1ccf16aefa728b90da66ef3c6b1b021ae07cb0ac875dad76505600dfc2b"
+    },
+    "preparation/lpips-install.log": {
+      "bytes": 498,
+      "sha256": "b585adac6ff8da15bb52298edb0f9bb6dcf694598b0d7433e629f3d6caf5ddfd"
+    },
+    "preparation/kernel-03-launch.json": {
+      "bytes": 909,
+      "sha256": "ef1a469cea7bc19431cf2fcd3672857a4879d3951e2ed091091f179f4bff2a94"
+    },
+    "preparation/lpips-backbone.json": {
+      "bytes": 351,
+      "sha256": "63fe8838959d1c8a3e4fb73557d64e2481eaf54e251831fc843f895728600009"
+    },
+    "preparation/vj0-next-c-constrained-dryrun.log": {
+      "bytes": 518,
+      "sha256": "f568b585fc7b1e6682a1686cc8924aaf57ee4c965d8bb46c284ed3ff58dfef3a"
+    },
+    "preparation/model-cache-identity.json": {
+      "bytes": 661,
+      "sha256": "4de90a47971f35d13e74276a015a4126bbf8f26e896a248428cb398991cb784e"
+    },
+    "preparation/kernel-01-launch.json": {
+      "bytes": 695,
+      "sha256": "f6992bbfb02f8ea085b39c4528ea614900776bb8857c62fe5153905a6e544b8b"
+    },
+    "preparation/kernel-04-launch.json": {
+      "bytes": 909,
+      "sha256": "e031df8b1c59762d9215211cabad7dfb9af2a80367faad0fc36c6d2a9e58cf09"
+    },
+    "preparation/kernel-02-launch.json": {
+      "bytes": 730,
+      "sha256": "7219d5fff4dfea5a29f0fb12425c2cf6d0de9f73ed0c8dfce97fb75040e1c5e6"
+    },
+    "preparation/environment.json": {
+      "bytes": 936,
+      "sha256": "6ae44224b081ca21a938ccbf6879d1a3808dcf99cb59009c62f5895ef3541542"
+    },
+    "kernel-01/result.json": {
+      "bytes": 12913,
+      "sha256": "20a988c2ee28eabb4f4cc36679e10da429945ecd74355c842655fd1b580af563"
+    },
+    "kernel-frozen-sources/bench/gpu_output_cast.py": {
+      "bytes": 1764,
+      "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+    },
+    "kernel-frozen-sources/bench/n05_nvfp4.py": {
+      "bytes": 7491,
+      "sha256": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe"
+    },
+    "kernel-frozen-sources/bench/terminal_noop.py": {
+      "bytes": 4293,
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+    },
+    "kernel-frozen-sources/bench/n05_kernel_probe.py": {
+      "bytes": 12845,
+      "sha256": "e5ebcd8db8616cf8705d543a4dd62064ab7371ebadecaec27e362831bea55b6e"
+    },
+    "kernel-05-frozen-sources/bench/gpu_output_cast.py": {
+      "bytes": 1764,
+      "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+    },
+    "kernel-05-frozen-sources/bench/n05_nvfp4.py": {
+      "bytes": 7491,
+      "sha256": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe"
+    },
+    "kernel-05-frozen-sources/bench/terminal_noop.py": {
+      "bytes": 4293,
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+    },
+    "kernel-05-frozen-sources/bench/n05_kernel_probe.py": {
+      "bytes": 13065,
+      "sha256": "fbab57593c5638f8802163a5fe8314715ba51167f0014addfde405c5b34545db"
+    },
+    "model-frozen-sources/bench/gpu_output_cast.py": {
+      "bytes": 1764,
+      "sha256": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87"
+    },
+    "model-frozen-sources/bench/n05_model_probe.py": {
+      "bytes": 17691,
+      "sha256": "5f7de59970f13ad94b1591e358e4fcf11c684e025a3b48541e01d858d78d9503"
+    },
+    "model-frozen-sources/bench/n05_nvfp4.py": {
+      "bytes": 7491,
+      "sha256": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe"
+    },
+    "model-frozen-sources/bench/terminal_noop.py": {
+      "bytes": 4293,
+      "sha256": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da"
+    },
+    "model-frozen-sources/bench/n05_analyze.py": {
+      "bytes": 7011,
+      "sha256": "bf403bb556c0077037b8deb21df038b52d3f2b89f746da25e8740436cb58aee4"
+    }
+  }
+}

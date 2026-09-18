@@ -1,0 +1,70 @@
+{
+  "status": "failed",
+  "started_utc": "2026-09-18T09:49:43.769467+00:00",
+  "pid": 15818,
+  "cap_seconds": 3600,
+  "jobs": [
+    {
+      "name": "model",
+      "command": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/vj0-n05/bench/n05_model_probe.py",
+        "--worker-script",
+        "/workspace/vj0-n05/inference_server.py",
+        "--kernel-gate",
+        "/workspace/vj0-n05/results/kernel-05/result.json",
+        "--output",
+        "/workspace/vj0-n05/results/model-01",
+        "--frames",
+        "100",
+        "--pairs",
+        "3"
+      ],
+      "started_utc": "2026-09-18T09:49:43.844356+00:00",
+      "log": "/workspace/vj0-n05/model-01-model.log",
+      "pid": 15823,
+      "pgid": 15823,
+      "status": "exited",
+      "returncode": 1,
+      "finished_utc": "2026-09-18T09:54:40.922223+00:00"
+    }
+  ],
+  "runner_sha256": "d922232980cf26b6d0c096a5849dfb154af3ec3721c6ec46e111ef8f55c00308",
+  "manifest_sha256": "97ba026a96880481d95dae025cc5c87a2edb468e5ba8c97ff36946c02192d977",
+  "sources": {
+    "inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "bench/n05_nvfp4.py": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe",
+    "bench/n05_model_probe.py": "5f7de59970f13ad94b1591e358e4fcf11c684e025a3b48541e01d858d78d9503",
+    "bench/n05_analyze.py": "bf403bb556c0077037b8deb21df038b52d3f2b89f746da25e8740436cb58aee4"
+  },
+  "original_state": "State:\tT (stopped)",
+  "selected_env": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUDA_HOME": "/workspace/cuda-13.2",
+    "PATH": "/workspace/envs/klein-torch213-cu132/bin:/workspace/cuda-13.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "HF_HOME": "/workspace/hf-cache",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/vj0-n05-inductor",
+    "TRITON_CACHE_DIR": "/tmp/vj0-n05-triton",
+    "FLASHINFER_WORKSPACE_BASE": "/tmp/vj0-n05-flashinfer",
+    "TORCH_HOME": "/workspace/vj0-n05/torchhub",
+    "MAX_JOBS": "8",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "elapsed_seconds": 297.1619308167137,
+  "error": "AssertionError: model failed; preserve partial evidence",
+  "finished_utc": "2026-09-18T09:54:40.931389+00:00",
+  "gpu_processes_at_finish": ""
+}
+Traceback (most recent call last):
+  File "/workspace/vj0-n05/run_n05_model.py", line 107, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/vj0-n05/run_n05_model.py", line 91, in main
+    assert row['returncode']==0,f'{name} failed; preserve partial evidence'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: model failed; preserve partial evidence

@@ -1,0 +1,873 @@
+{
+  "status": "completed-independent-numerical-proof-and-agent-visual-review; no production acceptance",
+  "reviewed_at_utc": "2026-09-18T10:24:41.409770+00:00",
+  "scope": "Local retained N05 model-02 and failed model-01 evidence. No GPU, browser, network, or remote actions; no additional performance runs.",
+  "verdict": {
+    "evidence_integrity": "passed bounded numerical and source/runtime checks",
+    "agent_visual_judgment": "Neither configuration accepted as an appearance-preserving replacement. Broad scene content is retained, but visible color/brightness/detail changes occur; image_ff_both has the stronger low-resolution departures. Small measured gains do not remove this artistic tradeoff.",
+    "human_acceptance": "not supplied; this explicit independent agent judgment does not satisfy or impersonate a human visual decision",
+    "promotion": "none",
+    "threshold_policy": "N05 has no predeclared 2% acceptance gate. N03 advancement thresholds were not applied."
+  },
+  "artifact_bindings": {
+    "model-02/result.json": {
+      "sha256": "04ae53bf7cf95526279c8f1a8f290ff236950fc17a5a4641620605cb7ad8453f"
+    },
+    "model-02/assessment.json": {
+      "sha256": "4b397f54a026b633fec06403720025a5b78e13a26ab23d031820962db08bbc44"
+    },
+    "model-02/records.jsonl": {
+      "sha256": "73d3ee88e2b0df161584179efafed5586806c959a912479c26ae1ebedd068133"
+    },
+    "model-01/result.json": {
+      "sha256": "a9f02a90f180c70d18e319bc97f97e4b1239186c8dcdc8c204ef4ee085d7c5c1"
+    },
+    "model-frozen-sources-v2/bench/n05_model_probe.py": {
+      "sha256": "7d444ab681fd4ac58aea2ec329f9ae30126d2705acedd39342f2d12570c588bf"
+    },
+    "model-frozen-sources-v2/bench/n05_analyze.py": {
+      "sha256": "bf403bb556c0077037b8deb21df038b52d3f2b89f746da25e8740436cb58aee4"
+    },
+    "model-frozen-sources-v2/bench/n05_nvfp4.py": {
+      "sha256": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe"
+    },
+    "review-model-panels/selection.json": {
+      "sha256": "19aef26d7378d1289f9dcf2396276eb9d79dd446acabbd5640e67df29e9085bb"
+    }
+  },
+  "checks": {
+    "record_counts": {
+      "warmup": 9,
+      "compiled-native-proof": 9,
+      "quality": 162,
+      "temporal": 9,
+      "timing": 36,
+      "control-return": 3,
+      "native-workspace-preinit": 1
+    },
+    "records_match_jsonl": true,
+    "total_records": 229,
+    "quality_matrix": "162 unique rows = 54 fixtures (3 resolutions \u00d7 3 prompts \u00d7 2 seeds \u00d7 phases0/2/4) \u00d7 FP8/image_ff_in/image_ff_both; 108 unique paired candidate assessments",
+    "pixel_checks": "All 162 raw RGB PNG hashes and dimensions match recorded fixtures; all 108 candidate MSE/PSNR/changed-value fraction/max-error values recomputed independently and match.",
+    "tensor_finite_scope": "Every quality row records successful encoded-input/raw-decoder-before-clamp/converter guards and unchanged global RNG. The same frozen guards run for temporal samples. These are saved execution assertions, not retained float tensors; timed frames deliberately exclude guard synchronization.",
+    "native_proofs": [
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "variant": "fp8",
+        "launches": 0,
+        "trace": "profile-512x288-fp8.json.gz",
+        "sha256": "4cec43e7fe7ea96b09f313936cb291ef08f9771f9832c36309ce5bc68918636d"
+      },
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "variant": "image_ff_in",
+        "launches": 5,
+        "trace": "profile-512x288-image_ff_in.json.gz",
+        "sha256": "9efc04ee4c1d56eba21ba0fe84ceebea6fce58e250e11a5ed22b74a676749c07"
+      },
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "variant": "image_ff_both",
+        "launches": 10,
+        "trace": "profile-512x288-image_ff_both.json.gz",
+        "sha256": "39dba5933902cd1398e1b5296041d9e8588b524e994a68f45244a999087b7955"
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "variant": "fp8",
+        "launches": 0,
+        "trace": "profile-768x448-fp8.json.gz",
+        "sha256": "0d3308872f621a340b78637d959e79463f920fd967be2d1079b72aa5203cc941"
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "variant": "image_ff_in",
+        "launches": 5,
+        "trace": "profile-768x448-image_ff_in.json.gz",
+        "sha256": "42909d740e857cf12adba09d538e8d70bc2ae38404f7c3ae0c7b55b4b0a2054b"
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "variant": "image_ff_both",
+        "launches": 10,
+        "trace": "profile-768x448-image_ff_both.json.gz",
+        "sha256": "0821d947c102845b356a7624c5542c5dc84d1c749ed5a0cd61463492d6891ede"
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "variant": "fp8",
+        "launches": 0,
+        "trace": "profile-1024x576-fp8.json.gz",
+        "sha256": "da86fe2d8f27387e63be4832a4e261b4fda33dd70ca89d660a4637bddc1d4b75"
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "variant": "image_ff_in",
+        "launches": 5,
+        "trace": "profile-1024x576-image_ff_in.json.gz",
+        "sha256": "be3ff9ac3e02373bfb983142ded5744d0336bff7a63529801cad3b8e28690c4a"
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "variant": "image_ff_both",
+        "launches": 10,
+        "trace": "profile-1024x576-image_ff_both.json.gz",
+        "sha256": "51bc8409f4ffcba3b6ee21a9dec9afea66895585fb9832153cd9520f3447ffdb"
+      }
+    ],
+    "native_proof_scope": "Independently recounted actual GPU kernel events matching both pinned dense_blockscaled_gemm_sm120_b12x and f4E2M1FN symbols: exactly0/5/10 at each resolution. CPU custom-op events are not substituted for GPU proof.",
+    "timing": "All36 unique timing rows (18 matched pairs),100 frames each, alternating order, wall-time FPS, frame median/p95/max, sum-of-frame-time bounds, paired ratios/deltas and arm medians recomputed.",
+    "control_returns": [
+      {
+        "phase": "control-return",
+        "resolution": [
+          512,
+          288
+        ],
+        "pixels_equal": true,
+        "jpeg_equal": true
+      },
+      {
+        "phase": "control-return",
+        "resolution": [
+          768,
+          448
+        ],
+        "pixels_equal": true,
+        "jpeg_equal": true
+      },
+      {
+        "phase": "control-return",
+        "resolution": [
+          1024,
+          576
+        ],
+        "pixels_equal": true,
+        "jpeg_equal": true
+      }
+    ],
+    "control_return_scope": "Three exact PNG-pixel/JPEG returns are recorded after both alternatives within model-02. Return-frame bytes themselves are not separately saved for independent offline comparison.",
+    "temporal": [
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "variant": "image_ff_in",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 14.781597233437147
+      },
+      {
+        "resolution": [
+          512,
+          288
+        ],
+        "variant": "image_ff_both",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 32.26146948567733
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "variant": "image_ff_in",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 10.042315275405857
+      },
+      {
+        "resolution": [
+          768,
+          448
+        ],
+        "variant": "image_ff_both",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 10.382521931062584
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "variant": "image_ff_in",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 8.451337287750178
+      },
+      {
+        "resolution": [
+          1024,
+          576
+        ],
+        "variant": "image_ff_both",
+        "all_12_png_frames_and_lossless_preview_timeline_match": true,
+        "maximum_transition_delta_error_rms": 11.069405047640274
+      }
+    ],
+    "repeated_same_input_pairs_pixel_exact": 99,
+    "temporal_scope": "All108 raw clip PNG frames checked. All66 consecutive-transition RMS/delta-error entries recomputed. All six lossless paired WebP previews decode to the exact12 PNG pairs over1200ms, including merged duplicate-frame durations. This is a constructed10Hz preview, not measured live playback or audio latency.",
+    "lpips": "All108 quality and72 temporal LPIPS values are finite, nonnegative, uniquely fixture-keyed and bound to the correct result/analyzer hashes. LPIPS0.1.4 SqueezeNet RGB[-1,1] full-resolution execution is analyzer-reported; the metric network was not rerun in this independent local audit."
+  },
+  "timing_comparisons": [
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        42.79439959212025,
+        41.988801938643476,
+        43.44782008299516
+      ],
+      "nvfp4_trial_fps": [
+        43.090478337167056,
+        40.004972725831664,
+        43.876822916457826
+      ],
+      "fp8_median_fps": 42.79439959212025,
+      "nvfp4_median_fps": 43.090478337167056,
+      "ratio_of_arm_medians": 1.0069186329956437,
+      "matched_pair_speed_ratios": [
+        1.0069186329956437,
+        0.9527533742041342,
+        1.0098739783179727
+      ],
+      "matched_pair_fps_deltas": [
+        0.2960787450468061,
+        -1.9838292128118127,
+        0.4290028334626683
+      ],
+      "median_matched_pair_gain_percent": 0.6918632995643659,
+      "matched_pair_ratio_range": [
+        0.9527533742041342,
+        1.0098739783179727
+      ],
+      "median_matched_pair_fps_delta": 0.2960787450468061,
+      "matched_pair_fps_delta_range": [
+        -1.9838292128118127,
+        0.4290028334626683
+      ],
+      "all_pairs_faster": false,
+      "worst_frame_ms_by_arm": {
+        "fp8": 43.62884536385536,
+        "image_ff_in": 41.065298952162266
+      }
+    },
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        43.65154770590683,
+        43.39133099772518,
+        43.384158785256865
+      ],
+      "nvfp4_trial_fps": [
+        44.180568807575504,
+        43.17056998885347,
+        43.49435852699224
+      ],
+      "fp8_median_fps": 43.39133099772518,
+      "nvfp4_median_fps": 43.49435852699224,
+      "ratio_of_arm_medians": 1.0023743804787288,
+      "matched_pair_speed_ratios": [
+        1.012119183155494,
+        0.9949123245635567,
+        1.0025400917021543
+      ],
+      "matched_pair_fps_deltas": [
+        0.5290211016686754,
+        -0.2207610088717047,
+        0.1101997417353715
+      ],
+      "median_matched_pair_gain_percent": 0.2540091702154301,
+      "matched_pair_ratio_range": [
+        0.9949123245635567,
+        1.012119183155494
+      ],
+      "median_matched_pair_fps_delta": 0.1101997417353715,
+      "matched_pair_fps_delta_range": [
+        -0.2207610088717047,
+        0.5290211016686754
+      ],
+      "all_pairs_faster": false,
+      "worst_frame_ms_by_arm": {
+        "fp8": 24.735454004257917,
+        "image_ff_both": 35.84146173670888
+      }
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        22.03661194321366,
+        21.977609258156665,
+        22.232627198586634
+      ],
+      "nvfp4_trial_fps": [
+        22.38457315560715,
+        22.281013934851117,
+        22.26677446528889
+      ],
+      "fp8_median_fps": 22.03661194321366,
+      "nvfp4_median_fps": 22.281013934851117,
+      "ratio_of_arm_medians": 1.0110907244846556,
+      "matched_pair_speed_ratios": [
+        1.0157901411201573,
+        1.0138051720335253,
+        1.0015359078527808
+      ],
+      "matched_pair_fps_deltas": [
+        0.3479612123934892,
+        0.30340467669445204,
+        0.03414726670225576
+      ],
+      "median_matched_pair_gain_percent": 1.380517203352527,
+      "matched_pair_ratio_range": [
+        1.0015359078527808,
+        1.0157901411201573
+      ],
+      "median_matched_pair_fps_delta": 0.30340467669445204,
+      "matched_pair_fps_delta_range": [
+        0.03414726670225576,
+        0.3479612123934892
+      ],
+      "all_pairs_faster": true,
+      "worst_frame_ms_by_arm": {
+        "fp8": 56.10806681215763,
+        "image_ff_in": 62.91194399818778
+      }
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        22.269853916520002,
+        22.040016018409457,
+        22.166312590784987
+      ],
+      "nvfp4_trial_fps": [
+        22.021190586503575,
+        22.274633911184758,
+        22.269629915575354
+      ],
+      "fp8_median_fps": 22.166312590784987,
+      "nvfp4_median_fps": 22.269629915575354,
+      "ratio_of_arm_medians": 1.0046610063973076,
+      "matched_pair_speed_ratios": [
+        0.9888340834677876,
+        1.0106450872167847,
+        1.0046610063973076
+      ],
+      "matched_pair_fps_deltas": [
+        -0.24866333001642715,
+        0.23461789277530087,
+        0.10331732479036759
+      ],
+      "median_matched_pair_gain_percent": 0.4661006397307599,
+      "matched_pair_ratio_range": [
+        0.9888340834677876,
+        1.0106450872167847
+      ],
+      "median_matched_pair_fps_delta": 0.10331732479036759,
+      "matched_pair_fps_delta_range": [
+        -0.24866333001642715,
+        0.23461789277530087
+      ],
+      "all_pairs_faster": false,
+      "worst_frame_ms_by_arm": {
+        "fp8": 55.03534805029631,
+        "image_ff_both": 58.06264188140631
+      }
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_in",
+      "fp8_trial_fps": [
+        13.03294781058231,
+        13.03113306330219,
+        12.913453359562912
+      ],
+      "nvfp4_trial_fps": [
+        13.18854004138251,
+        13.206557384710399,
+        13.150993195835829
+      ],
+      "fp8_median_fps": 13.03113306330219,
+      "nvfp4_median_fps": 13.18854004138251,
+      "ratio_of_arm_medians": 1.012079300956845,
+      "matched_pair_speed_ratios": [
+        1.0119383759577294,
+        1.01346193923092,
+        1.0183947569762204
+      ],
+      "matched_pair_fps_deltas": [
+        0.1555922308001989,
+        0.17542432140820807,
+        0.23753983627291753
+      ],
+      "median_matched_pair_gain_percent": 1.3461939230920095,
+      "matched_pair_ratio_range": [
+        1.0119383759577294,
+        1.0183947569762204
+      ],
+      "median_matched_pair_fps_delta": 0.17542432140820807,
+      "matched_pair_fps_delta_range": [
+        0.1555922308001989,
+        0.23753983627291753
+      ],
+      "all_pairs_faster": true,
+      "worst_frame_ms_by_arm": {
+        "fp8": 89.55751219764352,
+        "image_ff_in": 85.15389123931527
+      }
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "variant": "image_ff_both",
+      "fp8_trial_fps": [
+        13.030551781996841,
+        13.010389118062335,
+        13.031982545770404
+      ],
+      "nvfp4_trial_fps": [
+        13.078162883978168,
+        13.102746089981444,
+        13.100729206494503
+      ],
+      "fp8_median_fps": 13.030551781996841,
+      "nvfp4_median_fps": 13.100729206494503,
+      "ratio_of_arm_medians": 1.005385606509359,
+      "matched_pair_speed_ratios": [
+        1.0036538055162871,
+        1.007098709429904,
+        1.0052752265806564
+      ],
+      "matched_pair_fps_deltas": [
+        0.04761110198132634,
+        0.0923569719191093,
+        0.06874666072409852
+      ],
+      "median_matched_pair_gain_percent": 0.5275226580656378,
+      "matched_pair_ratio_range": [
+        1.0036538055162871,
+        1.007098709429904
+      ],
+      "median_matched_pair_fps_delta": 0.06874666072409852,
+      "matched_pair_fps_delta_range": [
+        0.04761110198132634,
+        0.0923569719191093
+      ],
+      "all_pairs_faster": true,
+      "worst_frame_ms_by_arm": {
+        "fp8": 83.9739223010838,
+        "image_ff_both": 81.0897508636117
+      }
+    }
+  ],
+  "quality_summary": {
+    "image_ff_in": {
+      "count": 54,
+      "psnr_db_median": 32.34569016441223,
+      "psnr_db_range": [
+        17.57954235120006,
+        58.585501850881315
+      ],
+      "lpips_median": 0.005983125884085894,
+      "lpips_range": [
+        0.00046426631161011755,
+        0.0640898048877716
+      ]
+    },
+    "image_ff_both": {
+      "count": 54,
+      "psnr_db_median": 30.964852649205092,
+      "psnr_db_range": [
+        15.677641291714863,
+        57.98950240049665
+      ],
+      "lpips_median": 0.008025577291846275,
+      "lpips_range": [
+        0.0005023913690820336,
+        0.13700315356254578
+      ]
+    }
+  },
+  "visual_review": {
+    "reviewer": "independent assistant benchmark_review; direct visual inspection, separate from root visual review",
+    "method": "Viewed all nine six-fixture contact sheets at original sheet resolution (all54 input/prompt/seed combinations across all3 variants), all three12-frame chronological storyboards (all six paired clips), and five selected worst-case strips at native output pixels. Contact sheets use384px-wide previews; native strips use no resizing. Lossless animation timelines were additionally verified against every PNG; no claim of monitor playback observation.",
+    "panels_manifest": "review-model-panels/selection.json",
+    "panel_count": 17,
+    "native_resolution_fixtures": [
+      "512x288-prompt0-seed42-phase0",
+      "512x288-prompt1-seed42-phase0",
+      "512x288-prompt0-seed42-phase2",
+      "512x288-prompt0-seed123-phase2",
+      "768x448-prompt0-seed123-phase2"
+    ],
+    "observations": [
+      {
+        "scope": "city prompt",
+        "observation": "Street layout, neon palette and reflective-surface theme survive. At512 seed42 silence, both candidates visibly shift the bright architectural/reflection structure and exposure; image_ff_both changes it more. Dense waveform fixtures preserve the scene but shift fine signage, lines and reflections. The768 seed123 dense fixture also has visible local structure/detail shifts."
+      },
+      {
+        "scope": "abstract prompt",
+        "observation": "The vivid swirl/oval language survives. At512 seed42 silence, image_ff_both fills the dark central area with substantially brighter green/blue/red structure; this is a visible content/exposure change, not merely an invisible numerical difference. image_ff_in changes that fixture more mildly."
+      },
+      {
+        "scope": "sculpture prompt",
+        "observation": "Ribbon silhouettes and the switch between thin/dense/oval forms remain visually close across this sample matrix; texture strands and small highlights differ. No candidate-only gross collapse was observed."
+      },
+      {
+        "scope": "larger-resolution limits",
+        "observation": "Many768/1024 controls already show nearly black silence, sparse waveform imagery, or broad flat oval regions; candidates closely match those appearances. High PSNR/low LPIPS there do not establish preservation of richly textured scenes that the control did not produce."
+      },
+      {
+        "scope": "temporal sequence",
+        "observation": "Held inputs are exactly repeatable within each variant, including returns to earlier phases. Waveform/beat/scene-cut state ordering is retained with no observed extra stale/missing state in the offline sequence. The512 image_ff_both silence brightness change alters contrast across transitions. Short deterministic clips do not prove musical responsiveness or long-run flicker freedom."
+      }
+    ]
+  },
+  "cross_attempt_controls": {
+    "status": "not-exact; retained limitation",
+    "compared_pngs": 18,
+    "equal_pixel_pairs": 0,
+    "mse_range": [
+      18.561607078269677,
+      220.63458704065394
+    ],
+    "maximum_absolute_error_range": [
+      79.0,
+      222.0
+    ],
+    "per_fixture": [
+      {
+        "name": "512x288-prompt0-seed123-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 204.76191089771413,
+        "max_abs_error": 178.0,
+        "changed_fraction": 0.9022691514756944
+      },
+      {
+        "name": "512x288-prompt0-seed123-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 198.29380515769677,
+        "max_abs_error": 194.0,
+        "changed_fraction": 0.8889408817997685
+      },
+      {
+        "name": "512x288-prompt0-seed123-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 121.69362160011575,
+        "max_abs_error": 155.0,
+        "changed_fraction": 0.7429515697337963
+      },
+      {
+        "name": "512x288-prompt0-seed42-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 48.565327962239586,
+        "max_abs_error": 132.0,
+        "changed_fraction": 0.8383653428819444
+      },
+      {
+        "name": "512x288-prompt0-seed42-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 220.63458704065394,
+        "max_abs_error": 189.0,
+        "changed_fraction": 0.8534297236689815
+      },
+      {
+        "name": "512x288-prompt0-seed42-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 18.561607078269677,
+        "max_abs_error": 79.0,
+        "changed_fraction": 0.6135683412905093
+      },
+      {
+        "name": "512x288-prompt1-seed123-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 34.234031394675924,
+        "max_abs_error": 102.0,
+        "changed_fraction": 0.5650928638599537
+      },
+      {
+        "name": "512x288-prompt1-seed123-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 73.29319480613425,
+        "max_abs_error": 110.0,
+        "changed_fraction": 0.6266569914641203
+      },
+      {
+        "name": "512x288-prompt1-seed123-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 40.76818169487847,
+        "max_abs_error": 114.0,
+        "changed_fraction": 0.5386149088541666
+      },
+      {
+        "name": "512x288-prompt1-seed42-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 34.8434154369213,
+        "max_abs_error": 95.0,
+        "changed_fraction": 0.5873933015046297
+      },
+      {
+        "name": "512x288-prompt1-seed42-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 62.75429732711227,
+        "max_abs_error": 83.0,
+        "changed_fraction": 0.5858312536168981
+      },
+      {
+        "name": "512x288-prompt1-seed42-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 51.14597800925926,
+        "max_abs_error": 120.0,
+        "changed_fraction": 0.6136791087962963
+      },
+      {
+        "name": "512x288-prompt2-seed123-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 99.93137613932292,
+        "max_abs_error": 222.0,
+        "changed_fraction": 0.30132152416087965
+      },
+      {
+        "name": "512x288-prompt2-seed123-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 63.29920563874421,
+        "max_abs_error": 216.0,
+        "changed_fraction": 0.24271647135416666
+      },
+      {
+        "name": "512x288-prompt2-seed123-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 75.08285183376736,
+        "max_abs_error": 185.0,
+        "changed_fraction": 0.37992576316550924
+      },
+      {
+        "name": "512x288-prompt2-seed42-phase0-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 52.59050383391204,
+        "max_abs_error": 166.0,
+        "changed_fraction": 0.3800613968460648
+      },
+      {
+        "name": "512x288-prompt2-seed42-phase2-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 36.62170862268518,
+        "max_abs_error": 171.0,
+        "changed_fraction": 0.20776819299768517
+      },
+      {
+        "name": "512x288-prompt2-seed42-phase4-fp8.png",
+        "bytes_equal": false,
+        "pixels_equal": false,
+        "mse": 26.682761863425927,
+        "max_abs_error": 113.0,
+        "changed_fraction": 0.3781082718460648
+      }
+    ],
+    "interpretation": "All saved512 FP8 controls differ across failed model-01 and retry model-02. This does not identify preallocation, a restart, compilation/cache state, or any other component as the cause. It prevents claiming cross-process pixel exactness or attributing cross-attempt/cross-stack pixel changes to Torch alone. Candidate quality comparisons use only model-02 controls; those within-process controls and exact returns remain the relevant evidence. No extra baseline rerun was performed."
+  },
+  "failure_and_setup_accounting": {
+    "model_01": "Preserved first-candidate-warmup CUDAgraph pool error; no candidate timing rows. Its18 control PNGs and clip are retained, not combined with successful-run metrics.",
+    "workspace_preinitialization": {
+      "phase": "native-workspace-preinit",
+      "device": "cuda:0",
+      "bytes": 33554432,
+      "already_existed": false,
+      "outside_stream_capture": true,
+      "allocation_data_ptr": 125219607937024,
+      "utils_source_sha256": "6cb8ebcc25eb65521808bf40a8aaf0c5a868827283955867ae382ad7ec773815",
+      "scope": "Setup-only global scratch allocation shared by every arm; native kernels and graph checks unchanged"
+    },
+    "recovery_scope": "Model-02 completed with the reviewed setup-only global scratch preallocation and all original graph/numerical checks intact. This is successful recovery evidence, not an isolated causal experiment proving the sole source of the original allocation error.",
+    "assessment_retry": "Initial offline assessment import failed because SciPy was absent. Assessment-only retry after scipy1.17.1 --no-deps completed; no timed model run was repeated.",
+    "dependency_inventory_caveat": "Saved before/after dictionaries add only scipy1.17.1 with existing entries unchanged. They were constructed from distributions() and duplicate system-site entries overwrite venv names (including old Torch2.11); they are inventory snapshots, not imported-runtime attestations. Model-02 metadata.version records Torch2.13/TorchAO0.18; the assessment runner selects the pinned Torch2.13 venv. The analyzer does not itself save a separate imported Torch runtime version."
+  },
+  "memory_and_initialization_limits": {
+    "warmup_records": [
+      {
+        "phase": "warmup",
+        "variant": "fp8",
+        "resolution": [
+          512,
+          288
+        ],
+        "seconds": 6.75095639238134,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575471104,
+        "memory_reserved_bytes": 13140754432
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_in",
+        "resolution": [
+          512,
+          288
+        ],
+        "seconds": 29.576974067837,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575472128,
+        "memory_reserved_bytes": 13277069312
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_both",
+        "resolution": [
+          512,
+          288
+        ],
+        "seconds": 73.08317344728857,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575473152,
+        "memory_reserved_bytes": 13277069312
+      },
+      {
+        "phase": "warmup",
+        "variant": "fp8",
+        "resolution": [
+          768,
+          448
+        ],
+        "seconds": 111.49996576830745,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575476224,
+        "memory_reserved_bytes": 13633585152
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_in",
+        "resolution": [
+          768,
+          448
+        ],
+        "seconds": 90.55043866718188,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575477248,
+        "memory_reserved_bytes": 13633585152
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_both",
+        "resolution": [
+          768,
+          448
+        ],
+        "seconds": 82.51498825615272,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575478272,
+        "memory_reserved_bytes": 13633585152
+      },
+      {
+        "phase": "warmup",
+        "variant": "fp8",
+        "resolution": [
+          1024,
+          576
+        ],
+        "seconds": 110.89750011404976,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575481344,
+        "memory_reserved_bytes": 14845739008
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_in",
+        "resolution": [
+          1024,
+          576
+        ],
+        "seconds": 82.9023628141731,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575482368,
+        "memory_reserved_bytes": 14845739008
+      },
+      {
+        "phase": "warmup",
+        "variant": "image_ff_both",
+        "resolution": [
+          1024,
+          576
+        ],
+        "seconds": 65.51790513517335,
+        "memory_scope": "comparison process with retained FP8 and NVFP4 alternatives; not deployment footprint",
+        "memory_allocated_bytes": 12575483392,
+        "memory_reserved_bytes": 14845739008
+      }
+    ],
+    "qualification": "Recorded allocated/reserved snapshots belong to one process retaining FP8 and both NVFP4 alternatives. They are not peak memory or standalone deployment footprint. Five-frame warmups include compilation/cache effects; model-02 follows a failed attempt with existing caches, so these are not cold-start estimates."
+  },
+  "measurement_limits": [
+    "Full-frame offline compute includes JPEG decode, VAE/generation, output JPEG and CUDA completion, with prompt embeddings cached; excludes IPC/network/browser/display.",
+    "All timing arms use the same native128 threads and recompile limit64. Do not treat these as directly interchangeable with production recompile limit8 or other-stack/other-pod baselines.",
+    "Only two selective FFN configurations and the planned fixture matrix were tested; no broader layer search or whole-model NVFP4 conclusion is implied.",
+    "Paired median gains are descriptive: image_ff_in +0.692/+1.381/+1.346% and image_ff_both +0.254/+0.466/+0.528% at512/768/1024. Three of six comparisons contain a negative pair; no confidence interval or universal gain is established.",
+    "No physical-display, live-app, sustained-soak or human artistic acceptance follows from these offline results."
+  ],
+  "reproduction": {
+    "script_local": "/tmp/vj0-audit-n05-model.py",
+    "script_sha256": "40f983ed82e39207797201a0386a5d565726a5df237f45fe66d25ce4849c205b",
+    "libraries": "Independent image arithmetic used existing local NumPy2.3.3 and Pillow11.3.0; all raw metrics matched saved NumPy2.4.4/Pillow12.2.0 results. LPIPS was not independently rerun."
+  }
+}

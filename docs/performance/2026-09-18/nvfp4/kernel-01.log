@@ -1,0 +1,124 @@
+W0918 07:40:31.203000 2799 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+{"log": "CPU intra-op threads=128 (previous=128, TORCH_NUM_THREADS=0; 0 preserves native selection)"}
+{"log": "torch=2.13.0+cu132 cuda=13.2 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)"}
+W0918 07:40:34.353000 2799 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+{"status": "phase", "stage": "loading_weights", "repo": "black-forest-labs/FLUX.2-klein-4B", "est_seconds": 140}
+{"log": "loading black-forest-labs/FLUX.2-klein-4B..."}
+Couldn't connect to the Hub: Cannot reach https://huggingface.co/api/models/black-forest-labs/FLUX.2-klein-4B: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable..
+Will try to load from local cache.
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]Loading pipeline components...:  60%|██████    | 3/5 [00:00<00:00,  6.98it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 398/398 [00:00<00:00, 13814.52it/s]
+Loading pipeline components...: 100%|██████████| 5/5 [00:00<00:00,  9.59it/s]
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+{"log": "loaded in 2.7s, vram=15.98GB"}
+{"status": "phase", "stage": "loaded", "elapsed_ms": 2713, "vram_gb": 15.98}
+{"status": "phase", "stage": "applying_fp8", "est_seconds": 1}
+{"log": "applying TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor) on transformer..."}
+{"log": "fp8 applied to transformer in 0.3s, vram=12.30GB"}
+{"log": "fp8 applied to VAE linears in 0.0s, vram=12.30GB"}
+{"status": "phase", "stage": "registering_compile_stubs", "est_seconds": 1}
+{"log": "compiling transformer + vae.encoder + vae.decoder (mode=reduce-overhead)..."}
+{"log": "compile stubs registered in 5.2s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)"}
+{"log": "terminal_noop=enabled; audited helper, pipeline and scheduler source guards passed"}
+{"log": "gpu_output_cast=enabled; measured helper and pinned image-conversion source guards passed"}
+{"log": "encoding prompt (len=64 chars, max_seq=64) [cache: 0/32, hits=0 misses=1]"}
+{"log": "prompt encoded in 1273ms shape=(1, 64, 7680) [cached 1/32]"}
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:675: UserWarning: Float8Tensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+Traceback (most recent call last):
+  File "/workspace/vj0-n05/bench/n05_kernel_probe.py", line 239, in <module>
+    main()
+  File "/workspace/vj0-n05/bench/n05_kernel_probe.py", line 152, in main
+    latents = worker.encode_image_to_latents(pipe, image, width, height)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vj0-n05/inference_server.py", line 308, in encode_image_to_latents
+    raw = retrieve_latents(pipe.vae.encode(t), sample_mode="argmax")
+                           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/diffusers/utils/accelerate_utils.py", line 46, in wrapper
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/diffusers/models/autoencoders/autoencoder_kl_flux2.py", line 207, in encode
+    h = self._encode(x)
+        ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/diffusers/models/autoencoders/autoencoder_kl_flux2.py", line 181, in _encode
+    enc = self.encoder(x)
+          ^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 511, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1183, in compile_wrapper
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1079, in _compile_fx_inner
+    raise InductorError(e, currentframe()).with_traceback(
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1059, in _compile_fx_inner
+    mb_compiled_graph = fx_codegen_and_compile(
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1847, in fx_codegen_and_compile
+    return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1608, in codegen_and_compile
+    compiled_module = graph.compile_to_module()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2669, in compile_to_module
+    return self._compile_to_module()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2679, in _compile_to_module
+    mod = self._compile_to_module_lines(wrapper_code)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2754, in _compile_to_module_lines
+    mod = PyCodeCache.load_by_key_path(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 4622, in load_by_key_path
+    mod = _reload_python_module(key, path, set_sys_modules=set_sys_modules)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/runtime/compile_tasks.py", line 35, in _reload_python_module
+    exec(code, mod.__dict__, mod.__dict__)
+  File "/workspace/vj0-n05/inductor/gq/cgq3wbtku2yjlvn56bk4t365mqbpxomsdpye2wmb7nflv72gfuyz.py", line 5219, in <module>
+    async_compile.wait(globals())
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 818, in wait
+    self._wait_futures(scope)
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 848, in _wait_futures
+    kernel = result.result(timeout=wait_timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 5306, in result
+    return self.result_fn()
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 500, in get_result
+    raise e.with_name(kernel_name) from e
+torch._inductor.exc.InductorError: SubprocException: An exception occurred in a subprocess:
+
+Name=triton_poi_fused_native_group_norm_silu_12
+Traceback (most recent call last):
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/compile_worker/subproc_pool.py", line 475, in do_job
+    result = job()
+             ^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/runtime/compile_tasks.py", line 204, in _worker_compile_triton
+    kernel.precompile(warm_cache_only=True)
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 648, in precompile
+    self._precompile_worker()
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 687, in _precompile_worker
+    compile_results.append(self._precompile_config(c))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 1156, in _precompile_config
+    binary = triton.compile(*compile_args, **compile_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/triton/compiler/compiler.py", line 354, in compile
+    metadata_group[metadata_filename] = fn_cache_manager.put(json.dumps(metadata, default=vars), metadata_filename,
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/triton/runtime/cache.py", line 116, in put
+    os.makedirs(temp_dir, exist_ok=True)
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 116] Stale file handle: '/workspace/vj0-n05/inductor/triton/0/TSENZ5TRCVHDBOT4MYG4WOXGIC5NBDCI4LZ3WXTV3AEPDWE7OENA/tmp.pid_3214_bf48ff65-821c-4df9-8d8e-3975abc9336c'
+
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

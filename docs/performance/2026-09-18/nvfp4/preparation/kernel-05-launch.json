@@ -1,0 +1,27 @@
+{
+  "pid": 7974,
+  "started_epoch": 1789717766.4059856,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=30",
+    "653",
+    "/workspace/envs/klein-torch213-cu132/bin/python",
+    "/workspace/vj0-n05/bench/n05_kernel_probe.py",
+    "--worker-script",
+    "/workspace/vj0-n05/inference_server.py",
+    "--output",
+    "/workspace/vj0-n05/results/kernel-05"
+  ],
+  "selected_env": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUDA_HOME": "/workspace/cuda-13.2",
+    "HF_HOME": "/workspace/hf-cache",
+    "HF_HUB_OFFLINE": "1",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/vj0-n05-inductor",
+    "FLASHINFER_WORKSPACE_BASE": "/tmp/vj0-n05-flashinfer",
+    "MAX_JOBS": "8",
+    "TRITON_CACHE_DIR": "/tmp/vj0-n05-triton",
+    "PATH": "/workspace/envs/klein-torch213-cu132/bin:/workspace/cuda-13.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+  }
+}

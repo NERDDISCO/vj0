@@ -1,0 +1,91 @@
+{
+  "status": "failed",
+  "started_utc": "2026-09-18T09:57:58.179784+00:00",
+  "pid": 18239,
+  "cap_seconds": 3600,
+  "remaining_original_slot_seconds": 3105.5896904468536,
+  "original_deadline_epoch": 1789728583.769467,
+  "jobs": [
+    {
+      "name": "model",
+      "command": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/vj0-n05/bench/n05_model_probe.py",
+        "--worker-script",
+        "/workspace/vj0-n05/inference_server.py",
+        "--kernel-gate",
+        "/workspace/vj0-n05/results/kernel-05/result.json",
+        "--output",
+        "/workspace/vj0-n05/results/model-02",
+        "--frames",
+        "100",
+        "--pairs",
+        "3"
+      ],
+      "started_utc": "2026-09-18T09:57:58.248622+00:00",
+      "log": "/workspace/vj0-n05/model-02-model.log",
+      "pid": 18244,
+      "pgid": 18244,
+      "status": "exited",
+      "returncode": 0,
+      "finished_utc": "2026-09-18T10:12:45.314356+00:00",
+      "gpu_released": true
+    },
+    {
+      "name": "assessment",
+      "command": [
+        "/workspace/envs/klein-torch213-cu132/bin/python",
+        "/workspace/vj0-n05/bench/n05_analyze.py",
+        "--results",
+        "/workspace/vj0-n05/results/model-02",
+        "--device",
+        "cuda"
+      ],
+      "started_utc": "2026-09-18T10:12:45.420230+00:00",
+      "log": "/workspace/vj0-n05/model-02-assessment.log",
+      "pid": 23607,
+      "pgid": 23607,
+      "status": "exited",
+      "returncode": 1,
+      "finished_utc": "2026-09-18T10:12:49.437699+00:00"
+    }
+  ],
+  "runner_sha256": "4803753f9135daab20963caf89584d790b020fc3110b46881fe2cb5d1b522931",
+  "manifest_sha256": "c6c091d898d36354ed2aab8c660d8098e3cccbb257bdd53815b1cd5538fdd4e6",
+  "sources": {
+    "inference_server.py": "e28fd5079951160c264bbcbae80499c0e25fe0114f13b14a439cc49425d4daad",
+    "worker_runtime.py": "9f4db6c60d93fba34724136687b6e1fde9de0fa863c033a2c418779b6ba85fba",
+    "bench/terminal_noop.py": "33a741c159b6432bc5ee38b8206708cb41cbbfb648072faa9cd0817fbcb667da",
+    "bench/gpu_output_cast.py": "2bf079647d464b4dbc5c429615d66e47cf93a8b9ddebb4cd1278c6aeb9562d87",
+    "bench/n05_nvfp4.py": "11a7706e6427ecf7e0c7db56ef760067346c19e00dd2f5319d4d89a7bc908abe",
+    "bench/n05_model_probe.py": "7d444ab681fd4ac58aea2ec329f9ae30126d2705acedd39342f2d12570c588bf",
+    "bench/n05_analyze.py": "bf403bb556c0077037b8deb21df038b52d3f2b89f746da25e8740436cb58aee4"
+  },
+  "original_state": "State:\tT (stopped)",
+  "selected_env": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUDA_HOME": "/workspace/cuda-13.2",
+    "PATH": "/workspace/envs/klein-torch213-cu132/bin:/workspace/cuda-13.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "HF_HOME": "/workspace/hf-cache",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/vj0-n05-inductor",
+    "TRITON_CACHE_DIR": "/tmp/vj0-n05-triton",
+    "FLASHINFER_WORKSPACE_BASE": "/tmp/vj0-n05-flashinfer",
+    "TORCH_HOME": "/workspace/vj0-n05/torchhub",
+    "MAX_JOBS": "8",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "elapsed_seconds": 891.2657628874294,
+  "error": "AssertionError: assessment failed; preserve partial evidence",
+  "finished_utc": "2026-09-18T10:12:49.445534+00:00",
+  "gpu_processes_at_finish": ""
+}
+Traceback (most recent call last):
+  File "/workspace/vj0-n05/run_n05_model_v2.py", line 108, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/vj0-n05/run_n05_model_v2.py", line 92, in main
+    assert row['returncode']==0,f'{name} failed; preserve partial evidence'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: assessment failed; preserve partial evidence

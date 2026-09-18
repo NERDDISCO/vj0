@@ -1,0 +1,93 @@
+{
+  "kind": "author consistency check; independent review separate",
+  "quality_gate_records": 6,
+  "finite_nonzero_all": true,
+  "numerical_oracle_all_passed": true,
+  "trace_native_launch_counts": {
+    "1024x576-transformer_blocks.2.ff.linear_in-native.json.gz": 3,
+    "1024x576-transformer_blocks.2.ff.linear_out-native.json.gz": 3,
+    "512x288-transformer_blocks.2.ff.linear_in-native.json.gz": 3,
+    "512x288-transformer_blocks.2.ff.linear_out-native.json.gz": 3,
+    "768x448-transformer_blocks.2.ff.linear_in-native.json.gz": 3,
+    "768x448-transformer_blocks.2.ff.linear_out-native.json.gz": 3
+  },
+  "source_hashes_match_frozen_files": true,
+  "paired_trials_per_variant_per_shape": 5,
+  "replays_per_trial": 100,
+  "timed_replays_total": 6000,
+  "oracle_normalized_rmse_range": [
+    3.4820008295355365e-05,
+    5.918637180002406e-05
+  ],
+  "fp8_relative_activation_rmse_range": [
+    0.09698733687400818,
+    0.1083199679851532
+  ],
+  "micro_speed_ratio_range": [
+    1.4298528640944594,
+    1.764093620427958
+  ],
+  "full_frame_or_image_quality_tested": false,
+  "rows": [
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "layer": "transformer_blocks.2.ff.linear_in",
+      "fp8_median_ms": 0.12572671890258788,
+      "nvfp4_median_ms": 0.08604543685913085,
+      "micro_speed_ratio": 1.46116660559724
+    },
+    {
+      "resolution": [
+        512,
+        288
+      ],
+      "layer": "transformer_blocks.2.ff.linear_out",
+      "fp8_median_ms": 0.10875712394714356,
+      "nvfp4_median_ms": 0.07606175899505616,
+      "micro_speed_ratio": 1.4298528640944594
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "layer": "transformer_blocks.2.ff.linear_in",
+      "fp8_median_ms": 0.29084287643432616,
+      "nvfp4_median_ms": 0.1648681640625,
+      "micro_speed_ratio": 1.764093620427958
+    },
+    {
+      "resolution": [
+        768,
+        448
+      ],
+      "layer": "transformer_blocks.2.ff.linear_out",
+      "fp8_median_ms": 0.24007936477661132,
+      "nvfp4_median_ms": 0.15952447891235352,
+      "micro_speed_ratio": 1.5049688073798162
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "layer": "transformer_blocks.2.ff.linear_in",
+      "fp8_median_ms": 0.42272319793701174,
+      "nvfp4_median_ms": 0.25506591796875,
+      "micro_speed_ratio": 1.65730961354391
+    },
+    {
+      "resolution": [
+        1024,
+        576
+      ],
+      "layer": "transformer_blocks.2.ff.linear_out",
+      "fp8_median_ms": 0.4776089477539063,
+      "nvfp4_median_ms": 0.27883039474487303,
+      "micro_speed_ratio": 1.7129013075884845
+    }
+  ]
+}

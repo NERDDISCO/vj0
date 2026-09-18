@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/vj0-n05/bench/n05_analyze.py", line 122, in <module>
+    main()
+  File "/workspace/vj0-n05/bench/n05_analyze.py", line 31, in main
+    import lpips
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/lpips/__init__.py", line 10, in <module>
+    from lpips.trainer import *
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/lpips/trainer.py", line 9, in <module>
+    from scipy.ndimage import zoom
+ModuleNotFoundError: No module named 'scipy'

@@ -1,0 +1,85 @@
+W0918 07:41:20.060000 3536 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+{"log": "CPU intra-op threads=128 (previous=128, TORCH_NUM_THREADS=0; 0 preserves native selection)"}
+{"log": "torch=2.13.0+cu132 cuda=13.2 device=NVIDIA RTX PRO 6000 Blackwell Server Edition cap=(12, 0)"}
+W0918 07:41:22.257000 3536 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+{"status": "phase", "stage": "loading_weights", "repo": "black-forest-labs/FLUX.2-klein-4B", "est_seconds": 140}
+{"log": "loading black-forest-labs/FLUX.2-klein-4B..."}
+Couldn't connect to the Hub: Cannot reach https://huggingface.co/api/models/black-forest-labs/FLUX.2-klein-4B: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable..
+Will try to load from local cache.
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 398/398 [00:00<00:00, 12683.17it/s]
+Loading pipeline components...:  60%|██████    | 3/5 [00:00<00:00, 29.14it/s]Loading pipeline components...: 100%|██████████| 5/5 [00:00<00:00,  8.86it/s]
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+{"log": "loaded in 2.7s, vram=15.98GB"}
+{"status": "phase", "stage": "loaded", "elapsed_ms": 2730, "vram_gb": 15.98}
+{"status": "phase", "stage": "applying_fp8", "est_seconds": 1}
+{"log": "applying TorchAO Float8DynamicActivationFloat8WeightConfig (PerTensor) on transformer..."}
+{"log": "fp8 applied to transformer in 0.3s, vram=12.30GB"}
+{"log": "fp8 applied to VAE linears in 0.0s, vram=12.30GB"}
+{"status": "phase", "stage": "registering_compile_stubs", "est_seconds": 1}
+{"log": "compiling transformer + vae.encoder + vae.decoder (mode=reduce-overhead)..."}
+{"log": "compile stubs registered in 1.1s (actual JIT happens on first call per (height, width, steps) shape; with fp8 expect ~80-160 s extra warmup at the first new resolution)"}
+{"log": "terminal_noop=enabled; audited helper, pipeline and scheduler source guards passed"}
+{"log": "gpu_output_cast=enabled; measured helper and pinned image-conversion source guards passed"}
+{"log": "encoding prompt (len=64 chars, max_seq=64) [cache: 0/32, hits=0 misses=1]"}
+{"log": "prompt encoded in 840ms shape=(1, 64, 7680) [cached 1/32]"}
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:675: UserWarning: Float8Tensor does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+/usr/local/lib/python3.12/dist-packages/diffusers/schedulers/scheduling_flow_match_euler_discrete.py:649: RuntimeWarning: divide by zero encountered in divide
+  return math.exp(mu) / (math.exp(mu) + (1 / t - 1) ** sigma)
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:2590: UserWarning: Dynamo detected a call to a `functools.lru_cache`-wrapped function at 'upsampling.py:156'. Dynamo ignores the cache wrapper and directly traces the wrapped function. Silent incorrectness is only a *potential* risk, not something we have observed. Enable TORCH_LOGS=+dynamo for a DEBUG stack trace.
+
+This call originates from:
+  File "/usr/local/lib/python3.12/dist-packages/diffusers/models/upsampling.py", line 156, in forward
+    if dtype == torch.bfloat16 and is_torch_version("<", "2.1"):
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  torch._dynamo.utils.warn_once(msg)
+/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py:2590: UserWarning: Dynamo detected a call to a `functools.lru_cache`-wrapped function at 'upsampling.py:180'. Dynamo ignores the cache wrapper and directly traces the wrapped function. Silent incorrectness is only a *potential* risk, not something we have observed. Enable TORCH_LOGS=+dynamo for a DEBUG stack trace.
+
+This call originates from:
+  File "/usr/local/lib/python3.12/dist-packages/diffusers/models/upsampling.py", line 180, in forward
+    if dtype == torch.bfloat16 and is_torch_version("<", "2.1"):
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  torch._dynamo.utils.warn_once(msg)
+Traceback (most recent call last):
+  File "/workspace/vj0-n05/bench/n05_kernel_probe.py", line 239, in <module>
+    main()
+  File "/workspace/vj0-n05/bench/n05_kernel_probe.py", line 161, in main
+    candidate = Nvfp4Linear(originals[name])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vj0-n05/bench/n05_nvfp4.py", line 117, in __init__
+    packed, block_scale = nvfp4_quantize(
+                          ^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/api_logging.py", line 2333, in _auto_dump_wrapper
+    return _inner(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/quantization/fp4_quantization.py", line 1481, in nvfp4_quantize
+    a_fp4, a_sf = fp4_quantize(
+                  ^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/api_logging.py", line 2333, in _auto_dump_wrapper
+    return _inner(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/quantization/fp4_quantization.py", line 1007, in fp4_quantize
+    x_q, sf = get_fp4_quantization_module(f"{major}{minor}").fp4_quantize_sm100(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/quantization/fp4_quantization.py", line 261, in get_fp4_quantization_module
+    module = backend_modules[backend]().build_and_load()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/jit/core.py", line 320, in build_and_load
+    self.build()
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/jit/core.py", line 427, in build
+    run_ninja(self.build_dir, self.ninja_path, verbose)
+  File "/workspace/envs/klein-torch213-cu132/lib/python3.12/site-packages/flashinfer/jit/cpp_ext.py", line 370, in run_ninja
+    subprocess.run(
+  File "/usr/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'ninja'

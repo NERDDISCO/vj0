@@ -1,0 +1,12 @@
+{
+  "reviewer": "root",
+  "at": "2026-09-18T10:18:39.901208+00:00",
+  "method": "Viewed unresized PNG composites with the image tool; four highest LPIPS comparisons and prompt0 seed42 phase2 at768/1024. Additional independent full visual/temporal audit is separate.",
+  "observations": [
+    "All four worst pairs retain broad palette/subject structure, but 512 ten-layer examples visibly change central brightness, dark negative space, fine texture and illuminated details. This is an appearance change, not evidence that one artwork is universally worse.",
+    "The selected768 waveform example appears much closer in overall composition and palette, with local detail differences.",
+    "The selected1024 waveform example remains very dark in all three arms, with similar luminous structures and small local differences; darkness is already present in FP8 control."
+  ],
+  "decision": "No blanket preservation-of-look acceptance. Retain FP8 as the recommendation given small and inconsistent measured gains and visible changes in some samples. No new numerical threshold applied.",
+  "limitations": "A targeted static visual sample, not the independent full fixture/temporal audit or human artistic acceptance."
+}

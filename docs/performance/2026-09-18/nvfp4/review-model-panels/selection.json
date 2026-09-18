@@ -1,0 +1,867 @@
+{
+  "method": "Every18 prompt/seed/state fixture at each size; all12 temporal frames, no favorable-example selection. Full-resolution worst LPIPS/PSNR inspected separately.",
+  "panels": [
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-512x288-prompt0.png",
+      "sha256": "b50bdb83b953626cfa9b18e9c7e56665f5d2a29fea744804a0a6bd99b1e09663",
+      "rows": [
+        {
+          "label": "512x288-prompt0-seed42-phase0",
+          "sources": [
+            "512x288-prompt0-seed42-phase0-fp8.png",
+            "512x288-prompt0-seed42-phase0-image_ff_in.png",
+            "512x288-prompt0-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt0-seed42-phase2",
+          "sources": [
+            "512x288-prompt0-seed42-phase2-fp8.png",
+            "512x288-prompt0-seed42-phase2-image_ff_in.png",
+            "512x288-prompt0-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt0-seed42-phase4",
+          "sources": [
+            "512x288-prompt0-seed42-phase4-fp8.png",
+            "512x288-prompt0-seed42-phase4-image_ff_in.png",
+            "512x288-prompt0-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt0-seed123-phase0",
+          "sources": [
+            "512x288-prompt0-seed123-phase0-fp8.png",
+            "512x288-prompt0-seed123-phase0-image_ff_in.png",
+            "512x288-prompt0-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt0-seed123-phase2",
+          "sources": [
+            "512x288-prompt0-seed123-phase2-fp8.png",
+            "512x288-prompt0-seed123-phase2-image_ff_in.png",
+            "512x288-prompt0-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt0-seed123-phase4",
+          "sources": [
+            "512x288-prompt0-seed123-phase4-fp8.png",
+            "512x288-prompt0-seed123-phase4-image_ff_in.png",
+            "512x288-prompt0-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-512x288-prompt1.png",
+      "sha256": "0c4f07082fb4578a44244aab5da07e406a824325c4de59e324272d0836950e32",
+      "rows": [
+        {
+          "label": "512x288-prompt1-seed42-phase0",
+          "sources": [
+            "512x288-prompt1-seed42-phase0-fp8.png",
+            "512x288-prompt1-seed42-phase0-image_ff_in.png",
+            "512x288-prompt1-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt1-seed42-phase2",
+          "sources": [
+            "512x288-prompt1-seed42-phase2-fp8.png",
+            "512x288-prompt1-seed42-phase2-image_ff_in.png",
+            "512x288-prompt1-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt1-seed42-phase4",
+          "sources": [
+            "512x288-prompt1-seed42-phase4-fp8.png",
+            "512x288-prompt1-seed42-phase4-image_ff_in.png",
+            "512x288-prompt1-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt1-seed123-phase0",
+          "sources": [
+            "512x288-prompt1-seed123-phase0-fp8.png",
+            "512x288-prompt1-seed123-phase0-image_ff_in.png",
+            "512x288-prompt1-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt1-seed123-phase2",
+          "sources": [
+            "512x288-prompt1-seed123-phase2-fp8.png",
+            "512x288-prompt1-seed123-phase2-image_ff_in.png",
+            "512x288-prompt1-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt1-seed123-phase4",
+          "sources": [
+            "512x288-prompt1-seed123-phase4-fp8.png",
+            "512x288-prompt1-seed123-phase4-image_ff_in.png",
+            "512x288-prompt1-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-512x288-prompt2.png",
+      "sha256": "833797ab6a7c716fa328c9ebf5939e6e2995a18d343e6502181cf424bdfe7d77",
+      "rows": [
+        {
+          "label": "512x288-prompt2-seed42-phase0",
+          "sources": [
+            "512x288-prompt2-seed42-phase0-fp8.png",
+            "512x288-prompt2-seed42-phase0-image_ff_in.png",
+            "512x288-prompt2-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt2-seed42-phase2",
+          "sources": [
+            "512x288-prompt2-seed42-phase2-fp8.png",
+            "512x288-prompt2-seed42-phase2-image_ff_in.png",
+            "512x288-prompt2-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt2-seed42-phase4",
+          "sources": [
+            "512x288-prompt2-seed42-phase4-fp8.png",
+            "512x288-prompt2-seed42-phase4-image_ff_in.png",
+            "512x288-prompt2-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt2-seed123-phase0",
+          "sources": [
+            "512x288-prompt2-seed123-phase0-fp8.png",
+            "512x288-prompt2-seed123-phase0-image_ff_in.png",
+            "512x288-prompt2-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt2-seed123-phase2",
+          "sources": [
+            "512x288-prompt2-seed123-phase2-fp8.png",
+            "512x288-prompt2-seed123-phase2-image_ff_in.png",
+            "512x288-prompt2-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "512x288-prompt2-seed123-phase4",
+          "sources": [
+            "512x288-prompt2-seed123-phase4-fp8.png",
+            "512x288-prompt2-seed123-phase4-image_ff_in.png",
+            "512x288-prompt2-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/temporal-512x288.png",
+      "sha256": "6d806f0ee859aa25a2ef120ebdab8294040d46aa1734d080c1b1da3c9c55171a",
+      "rows": [
+        {
+          "label": "frame 00, input phase 0",
+          "sources": [
+            "clip-512x288-fp8/000.png",
+            "clip-512x288-image_ff_in/000.png",
+            "clip-512x288-image_ff_both/000.png"
+          ]
+        },
+        {
+          "label": "frame 01, input phase 0",
+          "sources": [
+            "clip-512x288-fp8/001.png",
+            "clip-512x288-image_ff_in/001.png",
+            "clip-512x288-image_ff_both/001.png"
+          ]
+        },
+        {
+          "label": "frame 02, input phase 1",
+          "sources": [
+            "clip-512x288-fp8/002.png",
+            "clip-512x288-image_ff_in/002.png",
+            "clip-512x288-image_ff_both/002.png"
+          ]
+        },
+        {
+          "label": "frame 03, input phase 1",
+          "sources": [
+            "clip-512x288-fp8/003.png",
+            "clip-512x288-image_ff_in/003.png",
+            "clip-512x288-image_ff_both/003.png"
+          ]
+        },
+        {
+          "label": "frame 04, input phase 2",
+          "sources": [
+            "clip-512x288-fp8/004.png",
+            "clip-512x288-image_ff_in/004.png",
+            "clip-512x288-image_ff_both/004.png"
+          ]
+        },
+        {
+          "label": "frame 05, input phase 2",
+          "sources": [
+            "clip-512x288-fp8/005.png",
+            "clip-512x288-image_ff_in/005.png",
+            "clip-512x288-image_ff_both/005.png"
+          ]
+        },
+        {
+          "label": "frame 06, input phase 3",
+          "sources": [
+            "clip-512x288-fp8/006.png",
+            "clip-512x288-image_ff_in/006.png",
+            "clip-512x288-image_ff_both/006.png"
+          ]
+        },
+        {
+          "label": "frame 07, input phase 0",
+          "sources": [
+            "clip-512x288-fp8/007.png",
+            "clip-512x288-image_ff_in/007.png",
+            "clip-512x288-image_ff_both/007.png"
+          ]
+        },
+        {
+          "label": "frame 08, input phase 4",
+          "sources": [
+            "clip-512x288-fp8/008.png",
+            "clip-512x288-image_ff_in/008.png",
+            "clip-512x288-image_ff_both/008.png"
+          ]
+        },
+        {
+          "label": "frame 09, input phase 4",
+          "sources": [
+            "clip-512x288-fp8/009.png",
+            "clip-512x288-image_ff_in/009.png",
+            "clip-512x288-image_ff_both/009.png"
+          ]
+        },
+        {
+          "label": "frame 10, input phase 2",
+          "sources": [
+            "clip-512x288-fp8/010.png",
+            "clip-512x288-image_ff_in/010.png",
+            "clip-512x288-image_ff_both/010.png"
+          ]
+        },
+        {
+          "label": "frame 11, input phase 0",
+          "sources": [
+            "clip-512x288-fp8/011.png",
+            "clip-512x288-image_ff_in/011.png",
+            "clip-512x288-image_ff_both/011.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-768x448-prompt0.png",
+      "sha256": "780711d12476a3ae11d52868bf3deae3dcf3ad3d973a9f893e4bcea6b439920d",
+      "rows": [
+        {
+          "label": "768x448-prompt0-seed42-phase0",
+          "sources": [
+            "768x448-prompt0-seed42-phase0-fp8.png",
+            "768x448-prompt0-seed42-phase0-image_ff_in.png",
+            "768x448-prompt0-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt0-seed42-phase2",
+          "sources": [
+            "768x448-prompt0-seed42-phase2-fp8.png",
+            "768x448-prompt0-seed42-phase2-image_ff_in.png",
+            "768x448-prompt0-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt0-seed42-phase4",
+          "sources": [
+            "768x448-prompt0-seed42-phase4-fp8.png",
+            "768x448-prompt0-seed42-phase4-image_ff_in.png",
+            "768x448-prompt0-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt0-seed123-phase0",
+          "sources": [
+            "768x448-prompt0-seed123-phase0-fp8.png",
+            "768x448-prompt0-seed123-phase0-image_ff_in.png",
+            "768x448-prompt0-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt0-seed123-phase2",
+          "sources": [
+            "768x448-prompt0-seed123-phase2-fp8.png",
+            "768x448-prompt0-seed123-phase2-image_ff_in.png",
+            "768x448-prompt0-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt0-seed123-phase4",
+          "sources": [
+            "768x448-prompt0-seed123-phase4-fp8.png",
+            "768x448-prompt0-seed123-phase4-image_ff_in.png",
+            "768x448-prompt0-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-768x448-prompt1.png",
+      "sha256": "701907f4690a2998449c4e29357c18d921aee8df91af52cdd88a204bbb08e937",
+      "rows": [
+        {
+          "label": "768x448-prompt1-seed42-phase0",
+          "sources": [
+            "768x448-prompt1-seed42-phase0-fp8.png",
+            "768x448-prompt1-seed42-phase0-image_ff_in.png",
+            "768x448-prompt1-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt1-seed42-phase2",
+          "sources": [
+            "768x448-prompt1-seed42-phase2-fp8.png",
+            "768x448-prompt1-seed42-phase2-image_ff_in.png",
+            "768x448-prompt1-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt1-seed42-phase4",
+          "sources": [
+            "768x448-prompt1-seed42-phase4-fp8.png",
+            "768x448-prompt1-seed42-phase4-image_ff_in.png",
+            "768x448-prompt1-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt1-seed123-phase0",
+          "sources": [
+            "768x448-prompt1-seed123-phase0-fp8.png",
+            "768x448-prompt1-seed123-phase0-image_ff_in.png",
+            "768x448-prompt1-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt1-seed123-phase2",
+          "sources": [
+            "768x448-prompt1-seed123-phase2-fp8.png",
+            "768x448-prompt1-seed123-phase2-image_ff_in.png",
+            "768x448-prompt1-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt1-seed123-phase4",
+          "sources": [
+            "768x448-prompt1-seed123-phase4-fp8.png",
+            "768x448-prompt1-seed123-phase4-image_ff_in.png",
+            "768x448-prompt1-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-768x448-prompt2.png",
+      "sha256": "6ab7198f4fe6f8f1c0770fd3af9d44f7c4916989b400c9c84172e9d7f94733a7",
+      "rows": [
+        {
+          "label": "768x448-prompt2-seed42-phase0",
+          "sources": [
+            "768x448-prompt2-seed42-phase0-fp8.png",
+            "768x448-prompt2-seed42-phase0-image_ff_in.png",
+            "768x448-prompt2-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt2-seed42-phase2",
+          "sources": [
+            "768x448-prompt2-seed42-phase2-fp8.png",
+            "768x448-prompt2-seed42-phase2-image_ff_in.png",
+            "768x448-prompt2-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt2-seed42-phase4",
+          "sources": [
+            "768x448-prompt2-seed42-phase4-fp8.png",
+            "768x448-prompt2-seed42-phase4-image_ff_in.png",
+            "768x448-prompt2-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt2-seed123-phase0",
+          "sources": [
+            "768x448-prompt2-seed123-phase0-fp8.png",
+            "768x448-prompt2-seed123-phase0-image_ff_in.png",
+            "768x448-prompt2-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt2-seed123-phase2",
+          "sources": [
+            "768x448-prompt2-seed123-phase2-fp8.png",
+            "768x448-prompt2-seed123-phase2-image_ff_in.png",
+            "768x448-prompt2-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "768x448-prompt2-seed123-phase4",
+          "sources": [
+            "768x448-prompt2-seed123-phase4-fp8.png",
+            "768x448-prompt2-seed123-phase4-image_ff_in.png",
+            "768x448-prompt2-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/temporal-768x448.png",
+      "sha256": "a43935fce6f6cadf82c06f78deacff6dd5d3f5664565d1633167f94e185a7ccb",
+      "rows": [
+        {
+          "label": "frame 00, input phase 0",
+          "sources": [
+            "clip-768x448-fp8/000.png",
+            "clip-768x448-image_ff_in/000.png",
+            "clip-768x448-image_ff_both/000.png"
+          ]
+        },
+        {
+          "label": "frame 01, input phase 0",
+          "sources": [
+            "clip-768x448-fp8/001.png",
+            "clip-768x448-image_ff_in/001.png",
+            "clip-768x448-image_ff_both/001.png"
+          ]
+        },
+        {
+          "label": "frame 02, input phase 1",
+          "sources": [
+            "clip-768x448-fp8/002.png",
+            "clip-768x448-image_ff_in/002.png",
+            "clip-768x448-image_ff_both/002.png"
+          ]
+        },
+        {
+          "label": "frame 03, input phase 1",
+          "sources": [
+            "clip-768x448-fp8/003.png",
+            "clip-768x448-image_ff_in/003.png",
+            "clip-768x448-image_ff_both/003.png"
+          ]
+        },
+        {
+          "label": "frame 04, input phase 2",
+          "sources": [
+            "clip-768x448-fp8/004.png",
+            "clip-768x448-image_ff_in/004.png",
+            "clip-768x448-image_ff_both/004.png"
+          ]
+        },
+        {
+          "label": "frame 05, input phase 2",
+          "sources": [
+            "clip-768x448-fp8/005.png",
+            "clip-768x448-image_ff_in/005.png",
+            "clip-768x448-image_ff_both/005.png"
+          ]
+        },
+        {
+          "label": "frame 06, input phase 3",
+          "sources": [
+            "clip-768x448-fp8/006.png",
+            "clip-768x448-image_ff_in/006.png",
+            "clip-768x448-image_ff_both/006.png"
+          ]
+        },
+        {
+          "label": "frame 07, input phase 0",
+          "sources": [
+            "clip-768x448-fp8/007.png",
+            "clip-768x448-image_ff_in/007.png",
+            "clip-768x448-image_ff_both/007.png"
+          ]
+        },
+        {
+          "label": "frame 08, input phase 4",
+          "sources": [
+            "clip-768x448-fp8/008.png",
+            "clip-768x448-image_ff_in/008.png",
+            "clip-768x448-image_ff_both/008.png"
+          ]
+        },
+        {
+          "label": "frame 09, input phase 4",
+          "sources": [
+            "clip-768x448-fp8/009.png",
+            "clip-768x448-image_ff_in/009.png",
+            "clip-768x448-image_ff_both/009.png"
+          ]
+        },
+        {
+          "label": "frame 10, input phase 2",
+          "sources": [
+            "clip-768x448-fp8/010.png",
+            "clip-768x448-image_ff_in/010.png",
+            "clip-768x448-image_ff_both/010.png"
+          ]
+        },
+        {
+          "label": "frame 11, input phase 0",
+          "sources": [
+            "clip-768x448-fp8/011.png",
+            "clip-768x448-image_ff_in/011.png",
+            "clip-768x448-image_ff_both/011.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-1024x576-prompt0.png",
+      "sha256": "5ccea24b88cefa39fa5fd5347a4b42f7c41328b45bf8cf72f6654013670c17ff",
+      "rows": [
+        {
+          "label": "1024x576-prompt0-seed42-phase0",
+          "sources": [
+            "1024x576-prompt0-seed42-phase0-fp8.png",
+            "1024x576-prompt0-seed42-phase0-image_ff_in.png",
+            "1024x576-prompt0-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt0-seed42-phase2",
+          "sources": [
+            "1024x576-prompt0-seed42-phase2-fp8.png",
+            "1024x576-prompt0-seed42-phase2-image_ff_in.png",
+            "1024x576-prompt0-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt0-seed42-phase4",
+          "sources": [
+            "1024x576-prompt0-seed42-phase4-fp8.png",
+            "1024x576-prompt0-seed42-phase4-image_ff_in.png",
+            "1024x576-prompt0-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt0-seed123-phase0",
+          "sources": [
+            "1024x576-prompt0-seed123-phase0-fp8.png",
+            "1024x576-prompt0-seed123-phase0-image_ff_in.png",
+            "1024x576-prompt0-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt0-seed123-phase2",
+          "sources": [
+            "1024x576-prompt0-seed123-phase2-fp8.png",
+            "1024x576-prompt0-seed123-phase2-image_ff_in.png",
+            "1024x576-prompt0-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt0-seed123-phase4",
+          "sources": [
+            "1024x576-prompt0-seed123-phase4-fp8.png",
+            "1024x576-prompt0-seed123-phase4-image_ff_in.png",
+            "1024x576-prompt0-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-1024x576-prompt1.png",
+      "sha256": "a4ebfa822c4468cc8bf33e3547db7fc329d4bb292ce28bcdcdeffece92b9f9ff",
+      "rows": [
+        {
+          "label": "1024x576-prompt1-seed42-phase0",
+          "sources": [
+            "1024x576-prompt1-seed42-phase0-fp8.png",
+            "1024x576-prompt1-seed42-phase0-image_ff_in.png",
+            "1024x576-prompt1-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt1-seed42-phase2",
+          "sources": [
+            "1024x576-prompt1-seed42-phase2-fp8.png",
+            "1024x576-prompt1-seed42-phase2-image_ff_in.png",
+            "1024x576-prompt1-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt1-seed42-phase4",
+          "sources": [
+            "1024x576-prompt1-seed42-phase4-fp8.png",
+            "1024x576-prompt1-seed42-phase4-image_ff_in.png",
+            "1024x576-prompt1-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt1-seed123-phase0",
+          "sources": [
+            "1024x576-prompt1-seed123-phase0-fp8.png",
+            "1024x576-prompt1-seed123-phase0-image_ff_in.png",
+            "1024x576-prompt1-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt1-seed123-phase2",
+          "sources": [
+            "1024x576-prompt1-seed123-phase2-fp8.png",
+            "1024x576-prompt1-seed123-phase2-image_ff_in.png",
+            "1024x576-prompt1-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt1-seed123-phase4",
+          "sources": [
+            "1024x576-prompt1-seed123-phase4-fp8.png",
+            "1024x576-prompt1-seed123-phase4-image_ff_in.png",
+            "1024x576-prompt1-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/quality-1024x576-prompt2.png",
+      "sha256": "bad811701240ae2de1bc4f76f1c5360a0b39a4e072cff4115948b94f184a3419",
+      "rows": [
+        {
+          "label": "1024x576-prompt2-seed42-phase0",
+          "sources": [
+            "1024x576-prompt2-seed42-phase0-fp8.png",
+            "1024x576-prompt2-seed42-phase0-image_ff_in.png",
+            "1024x576-prompt2-seed42-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt2-seed42-phase2",
+          "sources": [
+            "1024x576-prompt2-seed42-phase2-fp8.png",
+            "1024x576-prompt2-seed42-phase2-image_ff_in.png",
+            "1024x576-prompt2-seed42-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt2-seed42-phase4",
+          "sources": [
+            "1024x576-prompt2-seed42-phase4-fp8.png",
+            "1024x576-prompt2-seed42-phase4-image_ff_in.png",
+            "1024x576-prompt2-seed42-phase4-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt2-seed123-phase0",
+          "sources": [
+            "1024x576-prompt2-seed123-phase0-fp8.png",
+            "1024x576-prompt2-seed123-phase0-image_ff_in.png",
+            "1024x576-prompt2-seed123-phase0-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt2-seed123-phase2",
+          "sources": [
+            "1024x576-prompt2-seed123-phase2-fp8.png",
+            "1024x576-prompt2-seed123-phase2-image_ff_in.png",
+            "1024x576-prompt2-seed123-phase2-image_ff_both.png"
+          ]
+        },
+        {
+          "label": "1024x576-prompt2-seed123-phase4",
+          "sources": [
+            "1024x576-prompt2-seed123-phase4-fp8.png",
+            "1024x576-prompt2-seed123-phase4-image_ff_in.png",
+            "1024x576-prompt2-seed123-phase4-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/temporal-1024x576.png",
+      "sha256": "76a0cf333e0fcb4d9680b229db1bf95ac3c7d084431aa5acdb6b2dbdfd4d044a",
+      "rows": [
+        {
+          "label": "frame 00, input phase 0",
+          "sources": [
+            "clip-1024x576-fp8/000.png",
+            "clip-1024x576-image_ff_in/000.png",
+            "clip-1024x576-image_ff_both/000.png"
+          ]
+        },
+        {
+          "label": "frame 01, input phase 0",
+          "sources": [
+            "clip-1024x576-fp8/001.png",
+            "clip-1024x576-image_ff_in/001.png",
+            "clip-1024x576-image_ff_both/001.png"
+          ]
+        },
+        {
+          "label": "frame 02, input phase 1",
+          "sources": [
+            "clip-1024x576-fp8/002.png",
+            "clip-1024x576-image_ff_in/002.png",
+            "clip-1024x576-image_ff_both/002.png"
+          ]
+        },
+        {
+          "label": "frame 03, input phase 1",
+          "sources": [
+            "clip-1024x576-fp8/003.png",
+            "clip-1024x576-image_ff_in/003.png",
+            "clip-1024x576-image_ff_both/003.png"
+          ]
+        },
+        {
+          "label": "frame 04, input phase 2",
+          "sources": [
+            "clip-1024x576-fp8/004.png",
+            "clip-1024x576-image_ff_in/004.png",
+            "clip-1024x576-image_ff_both/004.png"
+          ]
+        },
+        {
+          "label": "frame 05, input phase 2",
+          "sources": [
+            "clip-1024x576-fp8/005.png",
+            "clip-1024x576-image_ff_in/005.png",
+            "clip-1024x576-image_ff_both/005.png"
+          ]
+        },
+        {
+          "label": "frame 06, input phase 3",
+          "sources": [
+            "clip-1024x576-fp8/006.png",
+            "clip-1024x576-image_ff_in/006.png",
+            "clip-1024x576-image_ff_both/006.png"
+          ]
+        },
+        {
+          "label": "frame 07, input phase 0",
+          "sources": [
+            "clip-1024x576-fp8/007.png",
+            "clip-1024x576-image_ff_in/007.png",
+            "clip-1024x576-image_ff_both/007.png"
+          ]
+        },
+        {
+          "label": "frame 08, input phase 4",
+          "sources": [
+            "clip-1024x576-fp8/008.png",
+            "clip-1024x576-image_ff_in/008.png",
+            "clip-1024x576-image_ff_both/008.png"
+          ]
+        },
+        {
+          "label": "frame 09, input phase 4",
+          "sources": [
+            "clip-1024x576-fp8/009.png",
+            "clip-1024x576-image_ff_in/009.png",
+            "clip-1024x576-image_ff_both/009.png"
+          ]
+        },
+        {
+          "label": "frame 10, input phase 2",
+          "sources": [
+            "clip-1024x576-fp8/010.png",
+            "clip-1024x576-image_ff_in/010.png",
+            "clip-1024x576-image_ff_both/010.png"
+          ]
+        },
+        {
+          "label": "frame 11, input phase 0",
+          "sources": [
+            "clip-1024x576-fp8/011.png",
+            "clip-1024x576-image_ff_in/011.png",
+            "clip-1024x576-image_ff_both/011.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/native-512x288-prompt0-seed42-phase0.png",
+      "sha256": "2402edd9a279aea3d70599302999d37d80b2dac44609479178aecd80cce2c696",
+      "rows": [
+        {
+          "label": "512x288-prompt0-seed42-phase0",
+          "sources": [
+            "512x288-prompt0-seed42-phase0-fp8.png",
+            "512x288-prompt0-seed42-phase0-image_ff_in.png",
+            "512x288-prompt0-seed42-phase0-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/native-512x288-prompt1-seed42-phase0.png",
+      "sha256": "ca838609cd99d1de7a41506e49d356cb5276a26384237220aa69896afed893f8",
+      "rows": [
+        {
+          "label": "512x288-prompt1-seed42-phase0",
+          "sources": [
+            "512x288-prompt1-seed42-phase0-fp8.png",
+            "512x288-prompt1-seed42-phase0-image_ff_in.png",
+            "512x288-prompt1-seed42-phase0-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/native-512x288-prompt0-seed42-phase2.png",
+      "sha256": "d5fce80700c2fbe3df975774db9cf80678969809fd8e8f89b00be1a9424813e8",
+      "rows": [
+        {
+          "label": "512x288-prompt0-seed42-phase2",
+          "sources": [
+            "512x288-prompt0-seed42-phase2-fp8.png",
+            "512x288-prompt0-seed42-phase2-image_ff_in.png",
+            "512x288-prompt0-seed42-phase2-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/native-512x288-prompt0-seed123-phase2.png",
+      "sha256": "6db02850a049b7104a28d115fd8aa1104fd9b76109a39173079bb5321735f958",
+      "rows": [
+        {
+          "label": "512x288-prompt0-seed123-phase2",
+          "sources": [
+            "512x288-prompt0-seed123-phase2-fp8.png",
+            "512x288-prompt0-seed123-phase2-image_ff_in.png",
+            "512x288-prompt0-seed123-phase2-image_ff_both.png"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "docs/performance/2026-09-18/nvfp4/review-model-panels/native-768x448-prompt0-seed123-phase2.png",
+      "sha256": "6edc263313abb6a8bdc985fafc102db96569316bcab002359819bd36e931b410",
+      "rows": [
+        {
+          "label": "768x448-prompt0-seed123-phase2",
+          "sources": [
+            "768x448-prompt0-seed123-phase2-fp8.png",
+            "768x448-prompt0-seed123-phase2-image_ff_in.png",
+            "768x448-prompt0-seed123-phase2-image_ff_both.png"
+          ]
+        }
+      ]
+    }
+  ]
+}

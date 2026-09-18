@@ -1,0 +1,146 @@
+[
+  {
+    "name": "512x288-prompt0-seed123-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 204.76191089771413,
+    "max_abs_error": 178.0,
+    "changed_fraction": 0.9022691514756944
+  },
+  {
+    "name": "512x288-prompt0-seed123-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 198.29380515769677,
+    "max_abs_error": 194.0,
+    "changed_fraction": 0.8889408817997685
+  },
+  {
+    "name": "512x288-prompt0-seed123-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 121.69362160011575,
+    "max_abs_error": 155.0,
+    "changed_fraction": 0.7429515697337963
+  },
+  {
+    "name": "512x288-prompt0-seed42-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 48.565327962239586,
+    "max_abs_error": 132.0,
+    "changed_fraction": 0.8383653428819444
+  },
+  {
+    "name": "512x288-prompt0-seed42-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 220.63458704065394,
+    "max_abs_error": 189.0,
+    "changed_fraction": 0.8534297236689815
+  },
+  {
+    "name": "512x288-prompt0-seed42-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 18.561607078269677,
+    "max_abs_error": 79.0,
+    "changed_fraction": 0.6135683412905093
+  },
+  {
+    "name": "512x288-prompt1-seed123-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 34.234031394675924,
+    "max_abs_error": 102.0,
+    "changed_fraction": 0.5650928638599537
+  },
+  {
+    "name": "512x288-prompt1-seed123-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 73.29319480613425,
+    "max_abs_error": 110.0,
+    "changed_fraction": 0.6266569914641203
+  },
+  {
+    "name": "512x288-prompt1-seed123-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 40.76818169487847,
+    "max_abs_error": 114.0,
+    "changed_fraction": 0.5386149088541666
+  },
+  {
+    "name": "512x288-prompt1-seed42-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 34.8434154369213,
+    "max_abs_error": 95.0,
+    "changed_fraction": 0.5873933015046297
+  },
+  {
+    "name": "512x288-prompt1-seed42-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 62.75429732711227,
+    "max_abs_error": 83.0,
+    "changed_fraction": 0.5858312536168981
+  },
+  {
+    "name": "512x288-prompt1-seed42-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 51.14597800925926,
+    "max_abs_error": 120.0,
+    "changed_fraction": 0.6136791087962963
+  },
+  {
+    "name": "512x288-prompt2-seed123-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 99.93137613932292,
+    "max_abs_error": 222.0,
+    "changed_fraction": 0.30132152416087965
+  },
+  {
+    "name": "512x288-prompt2-seed123-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 63.29920563874421,
+    "max_abs_error": 216.0,
+    "changed_fraction": 0.24271647135416666
+  },
+  {
+    "name": "512x288-prompt2-seed123-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 75.08285183376736,
+    "max_abs_error": 185.0,
+    "changed_fraction": 0.37992576316550924
+  },
+  {
+    "name": "512x288-prompt2-seed42-phase0-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 52.59050383391204,
+    "max_abs_error": 166.0,
+    "changed_fraction": 0.3800613968460648
+  },
+  {
+    "name": "512x288-prompt2-seed42-phase2-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 36.62170862268518,
+    "max_abs_error": 171.0,
+    "changed_fraction": 0.20776819299768517
+  },
+  {
+    "name": "512x288-prompt2-seed42-phase4-fp8.png",
+    "bytes_equal": false,
+    "pixels_equal": false,
+    "mse": 26.682761863425927,
+    "max_abs_error": 113.0,
+    "changed_fraction": 0.3781082718460648
+  }
+]
