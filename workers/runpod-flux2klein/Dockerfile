@@ -111,11 +111,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # ── Production env defaults (Phase 9A winner + Phase 10 full ladder) ──
-# WARMUP_SHAPES: pre-compile all 9 frontend resolution presets at startup.
-# Each shape costs ~35-150s cold-compile (first ever) or <1s with a warm
-# Inductor cache on /workspace. With 96 GB VRAM (PRO 6000) all shapes
-# fit comfortably — each CUDA graph capture uses ~1-2 GB. On 32 GB GPUs
-# (5090), trim to the 3-4 shapes you actually use to avoid VRAM pressure.
+# WARMUP_SHAPES: the resolutions we actually perform at. The first shape
+# is compiled synchronously before /healthz reports ready; the rest warm
+# in a background thread that holds the GPU lock per shape, so every
+# extra shape delays live frames by its compile time (~35-150s cold, <1s
+# with a warm Inductor cache on /workspace). Keep this list short.
 ENV PORT=3000 \
     HF_HOME=/workspace/hf-cache \
     TORCHINDUCTOR_CACHE_DIR=/tmp/torchinductor_root \
@@ -130,7 +130,7 @@ ENV PORT=3000 \
     USE_GPU_OUTPUT_CAST=0 \
     JPEG_QUALITY=80 \
     MAX_PENDING_PER_WORKER=3 \
-    WARMUP_SHAPES=512x288,768x448,288x512,256x144,448x768,1024x576,576x1024,1280x720,720x1280
+    WARMUP_SHAPES=768x448,1024x576
 
 EXPOSE 3000 22
 
