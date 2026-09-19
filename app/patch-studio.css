@@ -206,16 +206,64 @@
   color: var(--vj-ink-dim);
 }
 
-/* ─── Two-column workspace ─────────────────────────────────────── */
+/* ─── Three-column workspace: input · output · launchpad ─────────
+       --col-input / --col-output are fractions (0..1) from the layout
+       store, set inline by VJNextApp. The launchpad takes the rest and
+       its pads scale to the column via a container query. Gutters
+       between the columns are the drag handles. */
 .vp-workspace {
+  --col-input: 0.3;
+  --col-output: 0.3;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.25rem;
+  /* 4 gaps + 2 gutters (0.75rem − 2×0.125rem margin = 0.5rem each). */
+  --fixed: calc(4 * 0.5rem + 2 * 0.5rem);
+  --free: calc(100% - var(--fixed));
+  grid-template-columns:
+    minmax(0, calc(var(--free) * var(--col-input)))
+    auto
+    minmax(0, calc(var(--free) * var(--col-output)))
+    auto
+    minmax(0, 1fr);
+  gap: 0.5rem;
   padding: 1.25rem;
   align-items: start;
 }
+.vp-col--launchpad {
+  position: sticky;
+  top: 1.25rem;
+  container-type: inline-size;
+}
+.vp-gutter {
+  align-self: stretch;
+  width: 0.75rem;
+  margin: 0 -0.125rem;
+  cursor: col-resize;
+  position: relative;
+  touch-action: none;
+}
+.vp-gutter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--vp-edge);
+  transition: background 120ms, box-shadow 120ms;
+}
+.vp-gutter:hover::before,
+.vp-resizing .vp-gutter::before {
+  background: var(--vp-cable-a);
+  box-shadow: 0 0 8px var(--vp-cable-a);
+}
+.vp-resizing {
+  cursor: col-resize;
+  user-select: none;
+}
 @media (max-width: 1100px) {
   .vp-workspace { grid-template-columns: minmax(0, 1fr); }
+  .vp-col--launchpad { position: static; }
+  .vp-gutter { display: none; }
 }
 
 .vp-col {
@@ -480,24 +528,39 @@
 .vp-selection {
   position: absolute;
   border: 1px dashed var(--vp-cable-b);
+  /* The box itself is transparent to the pointer — clicks inside fall
+     through to the wrapper's hit-test (which uses the same bounds) and
+     become a move. Only the handles catch events. */
   pointer-events: none;
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-cable-b) 25%, transparent);
 }
-.vp-selection::before,
-.vp-selection::after,
-.vp-selection > b::before,
-.vp-selection > b::after {
-  content: "";
+.vp-selection__handle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
   background: var(--vp-cable-b);
+  border: 1px solid #000;
   box-shadow: 0 0 6px var(--vp-cable-b);
+  pointer-events: auto;
+  touch-action: none;
+  transition: transform 80ms;
 }
-.vp-selection::before { top: -3px; left: -3px; }
-.vp-selection::after  { top: -3px; right: -3px; }
-.vp-selection > b::before { content: ""; bottom: -3px; left: -3px; }
-.vp-selection > b::after  { content: ""; bottom: -3px; right: -3px; }
+.vp-selection__handle:hover {
+  transform: scale(1.4);
+}
+.vp-selection--locked .vp-selection__handle {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.vp-selection__handle--nw { left: 0;    top: 0;    cursor: nwse-resize; }
+.vp-selection__handle--n  { left: 50%;  top: 0;    cursor: ns-resize; }
+.vp-selection__handle--ne { left: 100%; top: 0;    cursor: nesw-resize; }
+.vp-selection__handle--e  { left: 100%; top: 50%;  cursor: ew-resize; }
+.vp-selection__handle--se { left: 100%; top: 100%; cursor: nwse-resize; }
+.vp-selection__handle--s  { left: 50%;  top: 100%; cursor: ns-resize; }
+.vp-selection__handle--sw { left: 0;    top: 100%; cursor: nesw-resize; }
+.vp-selection__handle--w  { left: 0;    top: 50%;  cursor: ew-resize; }
 
 /* ─── Card — the workhorse panel for inspector / options ──────── */
 .vp-card {
@@ -2446,3 +2509,325 @@
   color: var(--vp-cable-a);
 }
 
+
+/* ─────────────────────────────────────────────────────────────
+   Launchpad Pro MK3 — virtual controller (drawer "midi" mode).
+   10×10 button field laid out like the hardware: top row of round
+   buttons, 8×8 square grid framed by the left/right columns, bottom
+   row of round buttons. Each pad paints itself from two custom
+   props set inline by LaunchpadMode:
+     --pad  the binding's colour (#rrggbb)
+     --lvl  brightness 0..1 (0 unbound · 0.22 idle · 0.45 momentary
+            · 1 active) — the same ladder the hardware LEDs use.
+   ───────────────────────────────────────────────────────────── */
+.vp-lp {
+  --gap: 4px;
+  /* Pad size follows the launchpad column: 10 pads + 9 gaps + device
+     padding + border must equal the container's inline size. */
+  --cell: max(18px, calc((100cqw - 9 * var(--gap) - 1.4rem - 2px) / 10));
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-height: 0;
+  width: 100%;
+}
+.vp-lp__bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-lp__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--vj-ink);
+  font-family: var(--font-doto), monospace;
+  font-weight: 800;
+  font-size: 0.72rem;
+}
+.vp-lp__status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--vj-ink-dim);
+  box-shadow: 0 0 0 0 transparent;
+}
+.vp-lp__status--connected i {
+  background: var(--vp-cable-a);
+  box-shadow: 0 0 10px var(--vp-cable-a);
+}
+.vp-lp__status--connecting i {
+  background: #ffb300;
+  animation: vp-lp-blink 0.8s ease-in-out infinite;
+}
+.vp-lp__status--error i,
+.vp-lp__status--no-device i {
+  background: #ff2d2d;
+}
+.vp-lp__auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+.vp-lp__hint kbd {
+  font: inherit;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid var(--vp-edge-hot);
+  border-radius: 3px;
+  background: var(--vp-void);
+  color: var(--vj-ink);
+}
+.vp-lp__hint b {
+  color: var(--vp-cable-a);
+}
+@keyframes vp-lp-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+.vp-lp__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+/* The device shell. Cell size tracks the viewport width so the 10×10
+   field sits beside the two stages without pushing them off-screen. */
+.vp-lp__device {
+  display: grid;
+  grid-template-columns: repeat(10, var(--cell));
+  gap: var(--gap);
+  padding: 0.7rem;
+  border: 1px solid var(--vp-edge-hot);
+  border-radius: 10px;
+  background:
+    radial-gradient(
+      120% 100% at 50% 0%,
+      color-mix(in srgb, var(--vp-cable-a) 5%, var(--vp-void)),
+      var(--vp-void) 70%
+    );
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-cable-a) 6%, transparent),
+    0 18px 40px -22px rgba(0, 0, 0, 0.9);
+  width: max-content;
+}
+.vp-lp__row {
+  display: contents;
+}
+.vp-lp__corner {
+  width: var(--cell);
+  height: var(--cell);
+}
+.vp-lp__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vp-edge-hot);
+  font-size: 1rem;
+}
+
+.vp-lp__pad {
+  position: relative;
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 5px;
+  border: 1px solid color-mix(in srgb, var(--pad) calc(var(--lvl) * 70%), var(--vp-edge-hot));
+  background: color-mix(in srgb, var(--pad) calc(var(--lvl) * 72%), #101018);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 0 calc(var(--lvl) * 16px) calc(var(--lvl) * -2px) var(--pad);
+  transition: background 90ms, box-shadow 120ms, transform 60ms;
+  overflow: hidden;
+}
+.vp-lp__pad--round {
+  border-radius: 999px;
+}
+.vp-lp__pad--empty {
+  background: #0a0a12;
+  border-style: dashed;
+}
+/* Bound but dark (edge button that's off). A faint ring in the binding's
+   colour keeps the mapping readable without pretending the LED is lit. */
+.vp-lp__pad--off {
+  border-color: color-mix(in srgb, var(--pad) 45%, var(--vp-edge-hot));
+}
+.vp-lp__pad--off .vp-lp__label {
+  color: color-mix(in srgb, var(--vj-ink) 75%, var(--vj-ink-dim));
+}
+.vp-lp__auto input[type="range"] {
+  accent-color: var(--vp-cable-a);
+  margin: 0 0.3rem;
+}
+.vp-lp__pad--on .vp-lp__label {
+  color: #000;
+}
+.vp-lp__pad--held {
+  transform: scale(0.94);
+  background: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 22px 0 #fff;
+}
+.vp-lp__pad--held .vp-lp__label {
+  color: #000;
+}
+.vp-lp__pad--editing {
+  outline: 2px solid var(--vp-cable-b);
+  outline-offset: 1px;
+}
+.vp-lp__pad:hover:not(.vp-lp__pad--empty) {
+  border-color: color-mix(in srgb, var(--pad) 90%, #fff);
+}
+.vp-lp__fire {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 2px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--vj-ink);
+  font: inherit;
+  min-width: 0;
+}
+.vp-lp__fire:disabled {
+  cursor: default;
+}
+.vp-lp__fire:active {
+  transform: scale(0.96);
+}
+/* Label scales with the pad so a big launchpad column is readable from
+   the booth. Wraps to two lines; anything longer is clipped. */
+.vp-lp__label {
+  font-family: var(--font-jb-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+  font-size: max(0.5rem, calc(var(--cell) * 0.18));
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-transform: lowercase;
+}
+.vp-lp__edit {
+  --edit: max(14px, calc(var(--cell) * 0.24));
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: var(--edit);
+  height: var(--edit);
+  border: 0;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: calc(var(--edit) * 0.6);
+  line-height: var(--edit);
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 100ms;
+}
+.vp-lp__pad:hover .vp-lp__edit,
+.vp-lp__pad--editing .vp-lp__edit {
+  opacity: 1;
+}
+
+.vp-lp__editor {
+  flex: 1 1 260px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--vp-cable-b);
+  border-radius: 8px;
+  background: var(--vp-rail);
+  box-shadow: 0 0 22px -10px var(--vp-cable-b);
+}
+.vp-lp__editor-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-doto), monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vj-ink);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-edge);
+}
+.vp-lp__editor-head b { color: var(--vp-cable-b); }
+.vp-lp__editor-foot {
+  display: flex;
+  gap: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--vp-edge);
+}
+.vp-lp__field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vj-ink-dim);
+}
+.vp-lp__field input,
+.vp-lp__field textarea,
+.vp-lp__field select {
+  background: var(--vp-void);
+  border: 1px solid var(--vp-edge-hot);
+  color: var(--vj-ink);
+  padding: 0.35rem 0.5rem;
+  font: inherit;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  outline: 0;
+  resize: vertical;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.vp-lp__field input:focus,
+.vp-lp__field textarea:focus,
+.vp-lp__field select:focus {
+  border-color: var(--vp-cable-a);
+  box-shadow: 0 0 0 1px var(--vp-cable-a);
+}
+.vp-lp__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+.vp-lp__swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.vp-lp__swatch[aria-pressed="true"] {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+.vp-lp__swatches input[type="color"] {
+  width: 26px;
+  height: 22px;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}

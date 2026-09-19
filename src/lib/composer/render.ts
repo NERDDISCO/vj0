@@ -17,6 +17,7 @@ import {
   NUMERIC_PROPERTY_KEYS,
 } from "./types";
 import { compileFormula, type FormulaInput } from "./formula";
+import { getAssetBitmap } from "../assets/asset-bitmaps";
 
 // Reuse one "resolved properties" object per element to avoid GC pressure.
 // Keyed by element id.
@@ -48,6 +49,9 @@ export function resolveElementProperties(
   // Copy non-numeric props as-is, then resolve each numeric prop with binding.
   target.color = el.props.color;
   target.text = el.props.text;
+  target.assetId = el.props.assetId;
+  target.placement = el.props.placement;
+  target.enabled = el.props.enabled ?? true;
 
   const short = shortenFeatures(features);
   formulaInput.rms = short.rms;
@@ -224,6 +228,32 @@ export function renderElement(
       ctx.stroke();
       break;
     }
+    case "image": {
+      // Width = size×2 like a rectangle; height follows the bitmap's own
+      // aspect, with `aspect` as an extra stretch on top. Alpha in the
+      // bitmap composites over whatever is already on the canvas.
+      const w = sizePx * 2;
+      const bmp = resolved.assetId ? getAssetBitmap(resolved.assetId) : null;
+      if (bmp) {
+        const h = (w * bmp.height) / bmp.width / Math.max(0.01, aspect);
+        ctx.drawImage(bmp, -w / 2, -h / 2, w, h);
+      } else {
+        // Placeholder: dashed box + cross so the user sees where the logo
+        // will land while it loads or if the asset was deleted.
+        const h = w / Math.max(0.01, aspect);
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 4]);
+        ctx.strokeRect(-w / 2, -h / 2, w, h);
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.moveTo(-w / 2, -h / 2);
+        ctx.lineTo(w / 2, h / 2);
+        ctx.moveTo(w / 2, -h / 2);
+        ctx.lineTo(-w / 2, h / 2);
+        ctx.stroke();
+      }
+      break;
+    }
   }
 
   ctx.restore();
@@ -234,11 +264,28 @@ export function purgeElementCache(elementId: string): void {
   resolvedCache.delete(elementId);
 }
 
+/** Does this element belong in the source canvas (the AI's input)? */
+function inSourcePass(el: Element): boolean {
+  if (el.props.enabled === false) return false;
+  if (el.kind !== "image") return true;
+  const p = el.props.placement ?? "both";
+  return p === "source" || p === "both";
+}
+
+/** Does this element get drawn crisp on top of the AI output? */
+function inOverlayPass(el: Element): boolean {
+  if (el.props.enabled === false) return false;
+  if (el.kind !== "image") return false;
+  const p = el.props.placement ?? "both";
+  return p === "overlay" || p === "both" || p === "mask";
+}
+
 /**
  * Convenience: paint a whole scene. Used by both the input canvas and the
  * preset preview. The caller controls clearing — usually the scene's own
  * background. `timeDomain` is forwarded to renderElement so waveform
- * elements can draw the live PCM buffer.
+ * elements can draw the live PCM buffer. Image elements placed
+ * "overlay" are skipped here — see collectOverlayItems.
  */
 export function renderScene(
   ctx: CanvasRenderingContext2D,
@@ -255,7 +302,269 @@ export function renderScene(
   ctx.fillRect(0, 0, width, height);
   ctx.restore();
   for (const el of scene.elements) {
+    if (!inSourcePass(el)) continue;
     const resolved = resolveElementProperties(el, features, presetMap, tSeconds);
     renderElement(ctx, el, resolved, width, height, timeDomain);
+  }
+}
+
+// ─── Overlay pass ────────────────────────────────────────────────────
+//
+// Logos that must stay legible can't survive the img2img restyle (tested
+// on FLUX.2 Klein: at alpha ≤ 0.2 text scrambles or dissolves; at ≥ 0.35
+// the AI barely changes the frame). So they get a second, crisp pass on
+// top of the AI output. The pass is expressed as a flat list of resolved
+// items so the same data can be drawn on the preview and posted over the
+// BroadcastChannel to the projector tab (which has no audio features).
+
+export interface OverlayItem {
+  assetId: string;
+  /** Centre, scene-space 0..1. */
+  x: number;
+  y: number;
+  /** Half-width as a fraction of min(width, height) — matches `size`. */
+  size: number;
+  aspect: number;
+  /** Turns. */
+  rotation: number;
+  opacity: number;
+  /** 0 = window into the AI frame, 1 = flat logo. */
+  mix: number;
+  /** Rim-glow colour, "#rrggbb". */
+  color: string;
+  /** Full-frame mask: black outside the logo, backdrop inside. */
+  mask: boolean;
+}
+
+const overlayPool: OverlayItem[] = [];
+
+/**
+ * Resolve every overlay-placed image element into `out` (reused, no
+ * allocations once the pool has grown to the scene's size). Returns the
+ * number of live items.
+ */
+export function collectOverlayItems(
+  scene: Scene,
+  features: AudioFeatures | null,
+  presetMap: Map<string, AudioPreset>,
+  tSeconds: number,
+  out: OverlayItem[] = overlayPool,
+): number {
+  let n = 0;
+  for (const el of scene.elements) {
+    if (!inOverlayPass(el) || !el.props.assetId) continue;
+    const r = resolveElementProperties(el, features, presetMap, tSeconds);
+    let item = out[n];
+    if (!item) {
+      item = {
+        assetId: "", x: 0, y: 0, size: 0, aspect: 1, rotation: 0, opacity: 1, mix: 1, color: "#ffffff",
+        mask: false,
+      };
+      out[n] = item;
+    }
+    item.assetId = r.assetId;
+    item.x = r.x;
+    item.y = r.y;
+    item.size = r.size;
+    item.aspect = r.aspect;
+    item.rotation = r.rotation;
+    item.opacity = r.opacity;
+    item.mix = r.mix;
+    item.color = r.color;
+    item.mask = (r.placement ?? "both") === "mask";
+    n++;
+  }
+  return n;
+}
+
+// Scratch canvases for the cutout compositing. Grow-only, shared by every
+// item and every frame — no per-frame allocation once warm.
+let scratchA: OffscreenCanvas | HTMLCanvasElement | null = null;
+let scratchB: OffscreenCanvas | HTMLCanvasElement | null = null;
+let scratchACtx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null = null;
+let scratchBCtx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null = null;
+
+function scratch(
+  which: "a" | "b",
+  w: number,
+  h: number,
+): OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null {
+  let c = which === "a" ? scratchA : scratchB;
+  let ctx = which === "a" ? scratchACtx : scratchBCtx;
+  if (!c) {
+    c = typeof OffscreenCanvas !== "undefined"
+      ? new OffscreenCanvas(w, h)
+      : document.createElement("canvas");
+    ctx = c.getContext("2d") as typeof ctx;
+    if (which === "a") { scratchA = c; scratchACtx = ctx; } else { scratchB = c; scratchBCtx = ctx; }
+  }
+  if (c.width < w || c.height < h) {
+    c.width = Math.max(c.width, w);
+    c.height = Math.max(c.height, h);
+  }
+  return ctx;
+}
+
+function sourceSize(src: CanvasImageSource): { w: number; h: number } {
+  if (src instanceof HTMLImageElement) return { w: src.naturalWidth, h: src.naturalHeight };
+  if (src instanceof HTMLVideoElement) return { w: src.videoWidth, h: src.videoHeight };
+  const any = src as { width: number; height: number };
+  return { w: any.width, h: any.height };
+}
+
+/**
+ * Draw `count` overlay items from `items` onto a (cleared) canvas.
+ *
+ * With a `backdrop` (the AI frame: <img> on the preview, WebGL canvas on
+ * the projector) each logo becomes a window: the frame shows through the
+ * logo shape, boosted and tinted toward the logo by `mix`, with a soft
+ * dark halo outside and a rim glow in `color`. Without a backdrop, or at
+ * mix = 1, the flat logo is drawn. Compositing happens in a scratch
+ * canvas the size of the logo's bounding box, so cost scales with logo
+ * area, not stage area.
+ */
+export function renderOverlayItems(
+  ctx: CanvasRenderingContext2D,
+  items: OverlayItem[],
+  count: number,
+  width: number,
+  height: number,
+  backdrop: CanvasImageSource | null = null,
+): void {
+  const minDim = Math.min(width, height);
+  const src = backdrop ? sourceSize(backdrop) : null;
+  const hasBackdrop = !!backdrop && !!src && src.w > 0 && src.h > 0;
+
+  // Mask pass first: one black plate for the whole frame, then every
+  // mask logo punches its shape out of it (destination-out honours the
+  // logo's alpha, so soft edges stay soft). The backdrop underneath the
+  // overlay canvas shows through the holes. `mix` fades the flat logo
+  // back in on top of the hole.
+  let anyMask = false;
+  for (let i = 0; i < count; i++) if (items[i].mask && getAssetBitmap(items[i].assetId)) anyMask = true;
+  if (anyMask) {
+    ctx.save();
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, width, height);
+    for (let i = 0; i < count; i++) {
+      const it = items[i];
+      if (!it.mask) continue;
+      const bmp = getAssetBitmap(it.assetId);
+      if (!bmp) continue;
+      const w = it.size * minDim * 2;
+      const h = (w * bmp.height) / bmp.width / Math.max(0.01, it.aspect);
+      ctx.save();
+      ctx.translate(it.x * width, it.y * height);
+      if (it.rotation !== 0) ctx.rotate(it.rotation * Math.PI * 2);
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.globalAlpha = it.opacity;
+      ctx.drawImage(bmp, -w / 2, -h / 2, w, h);
+      const mix = it.mix < 0 ? 0 : it.mix > 1 ? 1 : it.mix;
+      if (mix > 0) {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = it.opacity * mix;
+        ctx.drawImage(bmp, -w / 2, -h / 2, w, h);
+      }
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  for (let i = 0; i < count; i++) {
+    const it = items[i];
+    if (it.mask) continue;
+    const bmp = getAssetBitmap(it.assetId);
+    if (!bmp) continue;
+    const w = it.size * minDim * 2;
+    const h = (w * bmp.height) / bmp.width / Math.max(0.01, it.aspect);
+    const mix = it.mix < 0 ? 0 : it.mix > 1 ? 1 : it.mix;
+
+    if (!hasBackdrop || mix >= 1) {
+      ctx.save();
+      ctx.globalAlpha = it.opacity;
+      ctx.translate(it.x * width, it.y * height);
+      if (it.rotation !== 0) ctx.rotate(it.rotation * Math.PI * 2);
+      ctx.drawImage(bmp, -w / 2, -h / 2, w, h);
+      ctx.restore();
+      continue;
+    }
+
+    // Bounding box of the (possibly rotated) logo plus glow margin, in
+    // overlay pixels. All scratch work happens in this box.
+    const blur = Math.max(4, w * 0.06);
+    const pad = Math.ceil(blur * 3);
+    const cos = Math.abs(Math.cos(it.rotation * Math.PI * 2));
+    const sin = Math.abs(Math.sin(it.rotation * Math.PI * 2));
+    const bw = Math.ceil(w * cos + h * sin) + pad * 2;
+    const bh = Math.ceil(w * sin + h * cos) + pad * 2;
+    const bx = Math.round(it.x * width - bw / 2);
+    const by = Math.round(it.y * height - bh / 2);
+    const a = scratch("a", bw, bh);
+    const b = scratch("b", bw, bh);
+    if (!a || !b) continue;
+    const drawLogo = (c: typeof a) => {
+      c.save();
+      c.translate(bw / 2, bh / 2);
+      if (it.rotation !== 0) c.rotate(it.rotation * Math.PI * 2);
+      c.drawImage(bmp, -w / 2, -h / 2, w, h);
+      c.restore();
+    };
+
+    // 1. Dark halo: blurred black logo minus the logo itself.
+    b.save();
+    b.clearRect(0, 0, bw, bh);
+    b.globalCompositeOperation = "source-over";
+    b.shadowColor = "rgba(0,0,0,1)";
+    b.shadowBlur = blur * 2.5;
+    drawLogo(b);
+    drawLogo(b);
+    b.shadowBlur = 0;
+    b.globalCompositeOperation = "destination-out";
+    drawLogo(b);
+    b.restore();
+    ctx.save();
+    ctx.globalAlpha = it.opacity * 0.75;
+    ctx.drawImage(b.canvas, 0, 0, bw, bh, bx, by, bw, bh);
+    ctx.restore();
+
+    // 2. Window: the backdrop through the logo shape, boosted, then the
+    //    flat logo blended in at `mix` (source-atop keeps the shape).
+    a.save();
+    a.clearRect(0, 0, bw, bh);
+    a.globalCompositeOperation = "source-over";
+    drawLogo(a);
+    a.globalCompositeOperation = "source-in";
+    a.filter = "brightness(2) saturate(1.6) contrast(1.2)";
+    const sx = src!.w / width;
+    const sy = src!.h / height;
+    a.drawImage(backdrop!, bx * sx, by * sy, bw * sx, bh * sy, 0, 0, bw, bh);
+    a.filter = "none";
+    if (mix > 0) {
+      a.globalCompositeOperation = "source-atop";
+      a.globalAlpha = mix;
+      drawLogo(a);
+    }
+    a.restore();
+    ctx.save();
+    ctx.globalAlpha = it.opacity;
+    ctx.drawImage(a.canvas, 0, 0, bw, bh, bx, by, bw, bh);
+    ctx.restore();
+
+    // 3. Rim glow in the logo colour, additive.
+    b.save();
+    b.clearRect(0, 0, bw, bh);
+    b.globalCompositeOperation = "source-over";
+    b.shadowColor = it.color;
+    b.shadowBlur = blur;
+    drawLogo(b);
+    b.shadowBlur = 0;
+    b.globalCompositeOperation = "destination-out";
+    drawLogo(b);
+    b.restore();
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    ctx.globalAlpha = it.opacity * 0.9;
+    ctx.drawImage(b.canvas, 0, 0, bw, bh, bx, by, bw, bh);
+    ctx.restore();
   }
 }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   NUMERIC_PROPERTY_KEYS,
+  KIND_ONLY_PROPERTY_KEYS,
   PROPERTY_META,
   buildPresetMap,
   resolveElementProperties,
@@ -10,11 +11,14 @@ import {
   selectSelectedElement,
   useSceneStore,
   usePresetStore,
+  useUiStore,
   type Element,
   type ElementProperties,
+  type ImagePlacement,
   type PropertyKey,
 } from "@/src/lib/composer";
 import type { AudioFeatures } from "@/src/lib/audio-features";
+import { useAssetStore } from "@/src/lib/assets";
 import { BindPopover } from "./BindPopover";
 
 interface ElementInspectorProps {
@@ -48,6 +52,9 @@ export function ElementInspector({
   const renameElement = useSceneStore((s) => s.renameElement);
   const selectElement = useSceneStore((s) => s.selectElement);
   const bringForward = useSceneStore((s) => s.bringForward);
+  const toggleEnabled = useSceneStore((s) => s.toggleElementEnabled);
+  const assets = useAssetStore((s) => s.assets);
+  const openDrawer = useUiStore((s) => s.openDrawer);
   const presetMap = useMemo(() => buildPresetMap(presets), [presets]);
 
   const [bindingKey, setBindingKey] = useState<PropertyKey | null>(null);
@@ -122,7 +129,20 @@ export function ElementInspector({
                 }}
               >
                 <ElementGlyph kind={el.kind} />
-                <span>{el.name}</span>
+                <span style={{ opacity: el.props.enabled === false ? 0.45 : 1 }}>{el.name}</span>
+                <button
+                  type="button"
+                  className="vp-element-pill__rm"
+                  aria-pressed={el.props.enabled !== false}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleEnabled(el.id);
+                  }}
+                  title={el.props.enabled === false ? "Enable" : "Disable"}
+                  style={{ color: el.props.enabled === false ? "var(--vj-ink-dim)" : "var(--vj-live)" }}
+                >
+                  ●
+                </button>
                 <button
                   type="button"
                   className="vp-element-pill__rm"
@@ -180,6 +200,15 @@ export function ElementInspector({
         <div style={{ display: "inline-flex", gap: "0.3rem", alignItems: "center" }}>
           <button
             type="button"
+            className={`vj-btn ${selected.props.enabled === false ? "" : "vj-btn--live"}`}
+            title={selected.props.enabled === false ? "Enable — draw this element" : "Disable — hide this element everywhere"}
+            onClick={() => toggleEnabled(selected.id)}
+            style={{ padding: "0.15rem 0.5rem", fontSize: "0.62rem" }}
+          >
+            {selected.props.enabled === false ? "off" : "on"}
+          </button>
+          <button
+            type="button"
             className="vj-icon-btn"
             title="Bring forward"
             onClick={() => bringForward(selected.id)}
@@ -199,6 +228,8 @@ export function ElementInspector({
 
       {/* Numeric properties */}
       {NUMERIC_PROPERTY_KEYS.map((key) => {
+        const onlyKind = KIND_ONLY_PROPERTY_KEYS[key];
+        if (onlyKind && onlyKind !== selected.kind) return null;
         const meta = PROPERTY_META[key];
         const baseValue = selected.props[key];
         const resolvedValue = resolved[key];
@@ -263,9 +294,10 @@ export function ElementInspector({
         );
       })}
 
-      {/* Color row — special-cased, no audio binding */}
+      {/* Color row — special-cased, no audio binding. For images it's
+          the rim-glow colour of the overlay pass. */}
       <div className="vp-prop">
-        <span className="vp-prop__label">color</span>
+        <span className="vp-prop__label">{selected.kind === "image" ? "glow" : "color"}</span>
         <div className="vp-prop__control">
           <label className="vp-swatch">
             <input
@@ -283,6 +315,79 @@ export function ElementInspector({
         </div>
         <span style={{ width: "1.55rem" }} />
       </div>
+
+      {/* Asset picker for image (logo) elements */}
+      {selected.kind === "image" && (
+        <div className="vp-prop">
+          <span className="vp-prop__label">logo</span>
+          <div className="vp-prop__control">
+            <select
+              value={selected.props.assetId ?? ""}
+              onChange={(e) => updateProp(selected.id, "assetId", e.target.value)}
+              style={{
+                flex: 1,
+                background: "var(--vp-void)",
+                border: "1px solid var(--vp-edge-hot)",
+                color: "var(--vj-ink)",
+                padding: "0.4rem 0.55rem",
+                fontFamily: "inherit",
+                fontSize: "0.72rem",
+                borderRadius: 4,
+                outline: 0,
+              }}
+            >
+              <option value="">— none —</option>
+              {assets.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.name} ({a.width}×{a.height})
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className="vj-btn"
+              title="Open logo library"
+              onClick={() => openDrawer("logos")}
+            >
+              library
+            </button>
+          </div>
+          <span style={{ width: "1.55rem" }} />
+        </div>
+      )}
+
+      {/* Placement: where the logo is drawn relative to the AI pass */}
+      {selected.kind === "image" && (
+        <div className="vp-prop">
+          <span className="vp-prop__label">placement</span>
+          <div className="vp-prop__control">
+            <select
+              value={selected.props.placement ?? "both"}
+              onChange={(e) =>
+                updateProp(selected.id, "placement", e.target.value as ImagePlacement)
+              }
+              title="source: fed to the AI (restyled, silhouette only) · overlay: cutout on top of the AI output · both: combined · mask: black frame, AI visuals only inside the logo"
+              style={{
+                flex: 1,
+                background: "var(--vp-void)",
+                border: "1px solid var(--vp-edge-hot)",
+                color: "var(--vj-ink)",
+                padding: "0.4rem 0.55rem",
+                fontFamily: "inherit",
+                fontSize: "0.72rem",
+                borderRadius: 4,
+                outline: 0,
+              }}
+            >
+              <option value="both">both · ai riffs on it + cutout on top</option>
+              <option value="overlay">overlay · cutout on top only</option>
+              <option value="source">source · fed to the ai only</option>
+              <option value="mask">mask · only the logo, ai visuals inside it</option>
+            </select>
+          </div>
+          <span style={{ width: "1.55rem" }} />
+        </div>
+      )}
 
       {/* Text-only row for text element kind */}
       {selected.kind === "text" && (
@@ -339,6 +444,13 @@ function ElementGlyph({ kind }: { kind: Element["kind"] }) {
     line: <path d="M2.5 13.5 15.5 4.5" />,
     text: <path d="M4 5.5V4.5h10v1M9 4.5v9M7 13.5h4" />,
     waveform: <path d="M1 9c1.5 0 1.5-4.5 3-4.5s1.5 9 3 9 1.5-7 3-7 1.5 4.5 3 4.5 1.5-2 3-2" />,
+    image: (
+      <>
+        <rect x="2.5" y="3.5" width="13" height="11" rx="0.8" />
+        <circle cx="6.5" cy="7.5" r="1.4" />
+        <path d="M2.5 13l4-3.5 3 2.5 2-1.5 4 3" />
+      </>
+    ),
   }[kind];
   return (
     <svg

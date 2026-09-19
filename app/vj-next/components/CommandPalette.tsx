@@ -135,6 +135,13 @@ export function CommandPalette() {
       },
       {
         type: "command",
+        id: "cmd:open-logos",
+        name: "Open logo library",
+        meta: "drawer",
+        run: () => openDrawer("logos"),
+      },
+      {
+        type: "command",
         id: "cmd:toggle-grid",
         name: showGrid ? "Hide canvas grid" : "Show canvas grid",
         meta: "view",

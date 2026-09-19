@@ -86,6 +86,18 @@ const ELEMENT_LIBRARY: KindEntry[] = [
       </svg>
     ),
   },
+  {
+    kind: "image",
+    label: "logo",
+    description: "uploaded svg / png image",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <rect x="3" y="4" width="18" height="16" rx="1" />
+        <circle cx="9" cy="10" r="2" />
+        <path d="M3 18l6-5 4 3 3-2 5 4" />
+      </svg>
+    ),
+  },
 ];
 
 interface QuickAddMenuProps {

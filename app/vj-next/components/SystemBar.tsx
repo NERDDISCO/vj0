@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useUiStore, useSceneStore, usePresetStore } from "@/src/lib/composer";
+import { useAssetStore } from "@/src/lib/assets";
 import type { AiTransportStatus } from "@/src/lib/ai/transport";
 import type { AiBackend } from "@/src/lib/stores/ai-settings-store";
 import type { AudioFeatures } from "@/src/lib/audio-features";
@@ -89,8 +90,9 @@ export function SystemBar({
     (s) => s.scenes.find((sc) => sc.id === s.activeSceneId)?.elements.length ?? 0,
   );
   const presetCount = usePresetStore((s) => s.presets.length);
+  const assetCount = useAssetStore((s) => s.assets.length);
 
-  // Keyboard shortcut: P = presets, S = scenes, L = lighting (when not in input)
+  // Keyboard shortcut: P = presets, S = scenes, L = lighting, O = logos, M = launchpad (when not in input)
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const target = e.target as HTMLElement | null;
@@ -100,6 +102,7 @@ export function SystemBar({
       if (e.key.toLowerCase() === "p" && !e.metaKey && !e.ctrlKey) openDrawer("presets");
       if (e.key.toLowerCase() === "s" && !e.metaKey && !e.ctrlKey) openDrawer("scenes");
       if (e.key.toLowerCase() === "l" && !e.metaKey && !e.ctrlKey) openDrawer("lighting");
+      if (e.key.toLowerCase() === "o" && !e.metaKey && !e.ctrlKey) openDrawer("logos");
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -313,6 +316,18 @@ export function SystemBar({
         }
       >
         ✷ lighting
+      </button>
+      <button
+        type="button"
+        className="vj-btn vj-btn--bar"
+        onClick={() => openDrawer("logos")}
+        style={
+          drawerOpen && drawerMode === "logos"
+            ? { borderColor: "var(--vp-cable-b)", color: "var(--vp-cable-b)" }
+            : undefined
+        }
+      >
+        ◈ logos <span style={{ opacity: 0.5, marginLeft: 4 }}>{assetCount}</span>
       </button>
 
       <span

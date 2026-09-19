@@ -5,6 +5,7 @@ import { useUiStore, type DrawerMode } from "@/src/lib/composer";
 import { AudioPresetGrid } from "./AudioPresetGrid";
 import { SceneLibrary } from "./SceneLibrary";
 import { LightingMode } from "./LightingMode";
+import { LogoLibrary } from "./LogoLibrary";
 import type { AudioFeatures } from "@/src/lib/audio-features";
 import type { AudioEngine } from "@/src/lib/audio-engine";
 
@@ -85,6 +86,9 @@ export function Drawer({
           <ModePill mode="lighting" current={mode} onChange={setMode}>
             lighting
           </ModePill>
+          <ModePill mode="logos" current={mode} onChange={setMode}>
+            logos
+          </ModePill>
         </div>
         <button
           type="button"
@@ -104,6 +108,7 @@ export function Drawer({
           />
         )}
         {mode === "scenes" && <SceneLibrary />}
+        {mode === "logos" && <LogoLibrary />}
         {mode === "lighting" && (
           <LightingMode
             sourceCanvasRef={inputCanvasRef}
@@ -139,18 +144,28 @@ function ModePill({
 }
 
 function modeTitle(mode: DrawerMode): string {
-  return mode === "presets"
-    ? "audio presets"
-    : mode === "scenes"
-      ? "scene library"
-      : "lighting";
+  switch (mode) {
+    case "presets":
+      return "audio presets";
+    case "scenes":
+      return "scene library";
+    case "lighting":
+      return "lighting";
+    case "logos":
+      return "logos";
+  }
 }
 
 function modeSubtitle(mode: DrawerMode): string {
-  return mode === "presets"
-    ? "global · cross-scene · formula-driven"
-    : mode === "scenes"
-      ? "manage compositions"
-      : "DMX fixtures · fog · cues";
+  switch (mode) {
+    case "presets":
+      return "global · cross-scene · formula-driven";
+    case "scenes":
+      return "manage compositions";
+    case "lighting":
+      return "DMX fixtures · fog · cues";
+    case "logos":
+      return "artist logos · global · svg + png";
+  }
 }
 

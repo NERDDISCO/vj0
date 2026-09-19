@@ -33,6 +33,7 @@ No test framework is configured. Audio features require real browser microphone 
 - **VjScene** (`src/lib/scenes/types.ts`) — Interface for visual scenes. Lifecycle: `init?` → `render` (every frame) → `resize?` → `destroy?`. Scenes are registered in `SCENES` array in `src/lib/scenes/index.ts`.
 - **LightingEngine** (`src/lib/lighting/lighting-engine.ts`) — Samples canvas pixels at fixture mapping coordinates on a `setInterval` (30Hz, decoupled from 60fps render loop). Maps RGB to DMX channels via fixture profiles. Reuses a single `Uint8Array(512)` universe buffer.
 - **DmxOutput** (`src/lib/lighting/dmx-output.ts`) — WebUSB wrapper for Arduino Leonardo-based DMX512 controllers. Graceful no-op when WebUSB unavailable.
+- **MIDI / Launchpad** (`src/lib/midi/`) — Web MIDI driver for the Novation Launchpad Pro MK3 (programmer mode over SysEx). `pad-actions.ts` maps pad ids to one-shot actions (prompt switch, toggles, nudges, steps, resolution, scene); `default-layout.ts` holds the factory 64-prompt grid. Bindings persist in `src/lib/stores/midi-store.ts`; `app/vj-next/hooks/useLaunchpad.ts` mounts the controller + LED feedback, `LaunchpadMode.tsx` is the virtual twin in the drawer (hotkey `M`).
 - **AI Transport** (`src/lib/ai/`) — `AiTransport` interface with WebRTC data channel implementation. Includes backpressure via `canSend()`.
 
 ### Orchestrator

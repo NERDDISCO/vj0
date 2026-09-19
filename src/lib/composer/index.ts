@@ -8,6 +8,7 @@ export type {
   Element,
   ElementKind,
   ElementProperties,
+  ImagePlacement,
   PropertyBinding,
   PropertyKey,
   Scene,
@@ -15,6 +16,7 @@ export type {
 export {
   AUDIO_FEATURE_KEYS,
   NUMERIC_PROPERTY_KEYS,
+  KIND_ONLY_PROPERTY_KEYS,
   PROPERTY_META,
   shortenFeatures,
 } from "./types";
@@ -31,6 +33,9 @@ export {
   renderScene,
   resolveElementProperties,
   purgeElementCache,
+  collectOverlayItems,
+  renderOverlayItems,
+  type OverlayItem,
 } from "./render";
 
 export {

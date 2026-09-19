@@ -1,7 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { selectActiveScene, useSceneStore } from "@/src/lib/composer";
+import { useEffect, useMemo, useRef } from "react";
+import {
+  buildPresetMap,
+  collectOverlayItems,
+  renderOverlayItems,
+  selectActiveScene,
+  usePresetStore,
+  useSceneStore,
+  type OverlayItem,
+} from "@/src/lib/composer";
+import type { AudioFeatures } from "@/src/lib/audio-features";
 import type { AiTransportStatus } from "@/src/lib/ai/transport";
 import { CompileOverlay, type AiCompileState } from "./CompileOverlay";
 
@@ -22,7 +31,21 @@ interface OutputStageProps {
   aiCompile: AiCompileState | null;
   /** Whether the user has armed generation (▶ generate). */
   generating: boolean;
+  /** Live audio features — resolves audio-bound logo properties for the overlay. */
+  audioFeaturesRef: React.MutableRefObject<AudioFeatures | null>;
+  startedAt: number;
+  /** Called every overlay frame with the resolved items so the app can
+   *  forward them to the projector tab. `count` items of `items` are live. */
+  onOverlay?: (items: OverlayItem[], count: number) => void;
+  /** Receives the offscreen composite (AI frame + logo overlay) while a
+   *  frame is showing, null otherwise. The recorder captures from it. */
+  outputCanvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+  /** Paint the composite only while recording — it's an extra full pass. */
+  recording: boolean;
 }
+
+/** Long side the composite is upscaled to (integer multiple of the frame). */
+const COMPOSITE_TARGET_LONG_SIDE = 1920;
 
 /**
  * Output stage — the right-column counterpart to the input scene canvas.
@@ -42,9 +65,93 @@ export function OutputStage({
   aiServer,
   aiCompile,
   generating,
+  audioFeaturesRef,
+  startedAt,
+  onOverlay,
+  outputCanvasRef,
+  recording,
 }: OutputStageProps) {
   const activeScene = useSceneStore(selectActiveScene);
+  const presets = usePresetStore((s) => s.presets);
+  const presetMap = useMemo(() => buildPresetMap(presets), [presets]);
   const imgRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLCanvasElement>(null);
+  const onOverlayRef = useRef(onOverlay);
+  const recordingRef = useRef(recording);
+  useEffect(() => {
+    onOverlayRef.current = onOverlay;
+    recordingRef.current = recording;
+  }, [onOverlay, recording]);
+  // Offscreen composite for the recorder: the AI frame drawn at an
+  // integer upscale, then the overlay re-rendered at that size on a
+  // transparent layer and stamped on top (the mask's black plate must
+  // not be painted straight onto the frame, or it would erase it).
+  const compositeRef = useRef<HTMLCanvasElement | null>(null);
+  const layerRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Crisp logo pass on top of the AI frame. Runs its own rAF while a frame
+  // is showing: the <img> below is 16:9 and object-fit: contain inside a
+  // 16:9 stage, so a canvas filling the same box lines up with the frame.
+  const hasFrame = !!aiImageUrl;
+  useEffect(() => {
+    const canvas = overlayRef.current;
+    if (!canvas || !hasFrame) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let raf = 0;
+    const items: OverlayItem[] = [];
+    if (!compositeRef.current) compositeRef.current = document.createElement("canvas");
+    if (!layerRef.current) layerRef.current = document.createElement("canvas");
+    const composite = compositeRef.current;
+    const layer = layerRef.current;
+    outputCanvasRef.current = composite;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const scene = useSceneStore.getState().scenes.find(
+        (s) => s.id === useSceneStore.getState().activeSceneId,
+      );
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+      }
+      ctx.clearRect(0, 0, w, h);
+      if (!scene) return;
+      const t = (performance.now() - startedAt) / 1000;
+      const n = collectOverlayItems(scene, audioFeaturesRef.current, presetMap, t, items);
+      renderOverlayItems(ctx, items, n, w, h, imgRef.current);
+      onOverlayRef.current?.(items, n);
+
+      const img = imgRef.current;
+      if (recordingRef.current && img && img.naturalWidth > 0) {
+        const scale = Math.max(1, Math.ceil(COMPOSITE_TARGET_LONG_SIDE / Math.max(img.naturalWidth, img.naturalHeight)));
+        const cw = img.naturalWidth * scale;
+        const ch = img.naturalHeight * scale;
+        if (composite.width !== cw || composite.height !== ch) {
+          composite.width = cw;
+          composite.height = ch;
+          layer.width = cw;
+          layer.height = ch;
+        }
+        const cctx = composite.getContext("2d");
+        const lctx = layer.getContext("2d");
+        if (cctx && lctx) {
+          cctx.drawImage(img, 0, 0, cw, ch);
+          lctx.clearRect(0, 0, cw, ch);
+          renderOverlayItems(lctx, items, n, cw, ch, composite);
+          cctx.drawImage(layer, 0, 0);
+        }
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      outputCanvasRef.current = null;
+    };
+  }, [hasFrame, audioFeaturesRef, presetMap, startedAt, outputCanvasRef]);
 
   // Briefly fade the image when a new frame arrives so the static "running"
   // state has visual life. CSS handles the fade; we just reset the key.
@@ -86,6 +193,21 @@ export function OutputStage({
             objectFit: "contain",
             background: "#000",
             transition: "opacity 80ms linear",
+          }}
+        />
+      )}
+
+      {/* Logo overlay — see effect above. pointer-events none so the
+          stage keeps behaving like a passive monitor. */}
+      {hasFrame && (
+        <canvas
+          ref={overlayRef}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
           }}
         />
       )}

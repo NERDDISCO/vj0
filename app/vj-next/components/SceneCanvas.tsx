@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import {
+  PROPERTY_META,
   buildPresetMap,
   renderScene,
   resolveElementProperties,
@@ -19,6 +20,7 @@ import {
 import type { Element, ElementKind, Scene } from "@/src/lib/composer";
 import type { AudioFeatures } from "@/src/lib/audio-features";
 import { QuickAddMenu } from "./QuickAddMenu";
+import { getAssetAspect } from "@/src/lib/assets";
 
 interface SceneCanvasProps {
   /** Latest features from the audio engine, polled by the parent in rAF.
@@ -84,7 +86,7 @@ export function SceneCanvas({
   // Drag indicator + cached wrapper rect — declared up here so the
   // pointer-handler useCallbacks below them can capture stable setters
   // without React's lint flagging "use before declaration".
-  const [isDragging, setIsDragging] = useState(false);
+  const [dragMode, setDragMode] = useState<"move" | "resize" | null>(null);
   const [wrapperRect, setWrapperRect] = useState<DOMRect | null>(null);
 
   // 30 Hz audio+time snapshot — stored as React state so render and
@@ -199,36 +201,26 @@ export function SceneCanvas({
     [addElement, quickAdd],
   );
 
-  // ─── Element click → select; element drag → reposition ─────────
-  // Hit-testing is done at click time using the *current* resolved bounding
-  // box of each element (so audio-modulated positions still hit). We loop
-  // back to front so top-most element wins.
-  const dragRef = useRef<{
-    elementId: string;
-    startX: number;
-    startY: number;
-    baseX: number;
-    baseY: number;
-  } | null>(null);
+  // ─── Element click → select · drag → move · handles → resize ────
+  // Hit-testing uses the *same* pixel bounds the selection box is drawn
+  // with (elementHalfExtents), so whatever is inside the dashed box is
+  // grabbable. Audio-modulated positions still hit because we resolve the
+  // element at pointer time. Iterates back-to-front so the top-most wins.
+  const dragRef = useRef<DragState | null>(null);
 
   const hitTestElement = useCallback(
-    (sceneX: number, sceneY: number, scene: Scene): Element | null => {
+    (px: number, py: number, scene: Scene, rect: DOMRect): Element | null => {
       const features = audioFeaturesRef.current;
       const t = (performance.now() - startedAt) / 1000;
-      // Iterate in reverse z-order
+      const minDim = Math.min(rect.width, rect.height);
       for (let i = scene.elements.length - 1; i >= 0; i--) {
         const el = scene.elements[i];
+        if (el.props.enabled === false) continue;
         const r = resolveElementProperties(el, features, presetMap, t);
-        const dx = sceneX - r.x;
-        const dy = sceneY - r.y;
-        // Approximate bounding box. Size in scene-space derived from the
-        // canvas's smaller dim — but we don't have access to dims here, so
-        // use an aspect-aware square hit using the larger of the two.
-        const radius = Math.max(0.02, r.size * 0.55); // a forgiving target
-        if (Math.abs(dx) <= radius * (el.kind === "line" ? 1.6 : 1) &&
-            Math.abs(dy) <= radius / Math.max(0.6, r.aspect)) {
-          return el;
-        }
+        const { halfW, halfH } = elementHalfExtents(el.kind, r.size, boxAspect(el, r.aspect), minDim);
+        const dx = Math.abs(px - r.x * rect.width);
+        const dy = Math.abs(py - r.y * rect.height);
+        if (dx <= halfW + HIT_PAD_PX && dy <= halfH + HIT_PAD_PX) return el;
       }
       return null;
     },
@@ -246,25 +238,63 @@ export function SceneCanvas({
       const wrap = wrapperRef.current;
       if (!wrap) return;
       const rect = wrap.getBoundingClientRect();
-      const sceneX = clamp01((e.clientX - rect.left) / rect.width);
-      const sceneY = clamp01((e.clientY - rect.top) / rect.height);
-      const hit = hitTestElement(sceneX, sceneY, scene);
+      const px = e.clientX - rect.left;
+      const py = e.clientY - rect.top;
+      const hit = hitTestElement(px, py, scene, rect);
       if (hit) {
         selectElement(hit.id);
+        if (canvasLocked) return;
         dragRef.current = {
+          mode: "move",
           elementId: hit.id,
-          startX: sceneX,
-          startY: sceneY,
+          startX: px / rect.width,
+          startY: py / rect.height,
           baseX: hit.props.x,
           baseY: hit.props.y,
         };
-        setIsDragging(true);
+        setDragMode("move");
         wrap.setPointerCapture(e.pointerId);
       } else {
         selectElement(null);
       }
     },
-    [activeScene, hitTestElement, quickAdd, selectElement],
+    [activeScene, canvasLocked, hitTestElement, quickAdd, selectElement],
+  );
+
+  // Resize handles live inside the selection box. They stop propagation
+  // so the wrapper's hit-test doesn't turn the gesture into a move.
+  const handleResizeStart = useCallback(
+    (e: React.PointerEvent<HTMLElement>, handle: ResizeHandle) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (canvasLocked) return;
+      const scene = activeScene;
+      const wrap = wrapperRef.current;
+      if (!scene || !wrap || !selectedElementId) return;
+      const el = scene.elements.find((x) => x.id === selectedElementId);
+      if (!el) return;
+      const rect = wrap.getBoundingClientRect();
+      const r = resolveElementProperties(el, audioFeaturesRef.current, presetMap, (performance.now() - startedAt) / 1000);
+      const minDim = Math.min(rect.width, rect.height);
+      const { halfW, halfH } = elementHalfExtents(el.kind, r.size, boxAspect(el, r.aspect), minDim);
+      dragRef.current = {
+        mode: "resize",
+        elementId: el.id,
+        kind: el.kind,
+        // Images fold their bitmap's own ratio into the drag box; undo
+        // that when writing `aspect` back so the stored value stays a
+        // pure stretch factor.
+        naturalAspect: el.kind === "image" ? getAssetAspect(el.props.assetId ?? "") : 1,
+        handle,
+        centerX: r.x * rect.width,
+        centerY: r.y * rect.height,
+        baseHalfW: halfW,
+        baseHalfH: halfH,
+      };
+      setDragMode("resize");
+      wrap.setPointerCapture(e.pointerId);
+    },
+    [activeScene, audioFeaturesRef, canvasLocked, presetMap, selectedElementId, startedAt],
   );
 
   const handlePointerMove = useCallback(
@@ -274,12 +304,36 @@ export function SceneCanvas({
       const wrap = wrapperRef.current;
       if (!wrap) return;
       const rect = wrap.getBoundingClientRect();
-      const sceneX = (e.clientX - rect.left) / rect.width;
-      const sceneY = (e.clientY - rect.top) / rect.height;
-      const dx = sceneX - drag.startX;
-      const dy = sceneY - drag.startY;
-      updateElementProp(drag.elementId, "x", clamp01(drag.baseX + dx));
-      updateElementProp(drag.elementId, "y", clamp01(drag.baseY + dy));
+      const px = e.clientX - rect.left;
+      const py = e.clientY - rect.top;
+
+      if (drag.mode === "move") {
+        const dx = px / rect.width - drag.startX;
+        const dy = py / rect.height - drag.startY;
+        updateElementProp(drag.elementId, "x", clamp01(drag.baseX + dx));
+        updateElementProp(drag.elementId, "y", clamp01(drag.baseY + dy));
+        return;
+      }
+
+      // Resize: the dragged handle follows the pointer, the centre stays
+      // put, so the new half-extents are just |pointer − centre|.
+      const minDim = Math.min(rect.width, rect.height);
+      const h = drag.handle;
+      const horizontal = h === "e" || h === "w" || h === "ne" || h === "nw" || h === "se" || h === "sw";
+      const vertical = h === "n" || h === "s" || h === "ne" || h === "nw" || h === "se" || h === "sw";
+      const halfW = horizontal ? Math.max(MIN_HALF_PX, Math.abs(px - drag.centerX)) : drag.baseHalfW;
+      const halfH = vertical ? Math.max(MIN_HALF_PX, Math.abs(py - drag.centerY)) : drag.baseHalfH;
+      const next = sizeAspectFromExtents(drag.kind, halfW, halfH, minDim);
+      updateElementProp(drag.elementId, "size", next.size);
+      if (next.aspect !== null) {
+        const aspectMeta = PROPERTY_META.aspect;
+        const stored = next.aspect / Math.max(0.01, drag.naturalAspect);
+        updateElementProp(
+          drag.elementId,
+          "aspect",
+          Math.max(aspectMeta.min, Math.min(aspectMeta.max, stored)),
+        );
+      }
     },
     [updateElementProp],
   );
@@ -291,7 +345,7 @@ export function SceneCanvas({
         wrap.releasePointerCapture(e.pointerId);
       }
       dragRef.current = null;
-      setIsDragging(false);
+      setDragMode(null);
     },
     [],
   );
@@ -319,7 +373,7 @@ export function SceneCanvas({
   }, [selectedElementId, quickAdd, removeElement, selectElement]);
 
   // ─── Live resolved bbox for the selection marker ──────────────────
-  // The tick + wrapperRect + isDragging state objects are declared at the
+  // The tick + wrapperRect + dragMode state objects are declared at the
   // top of the component (above the pointer handlers) so callbacks can
   // capture them without lint errors. Below: the effects that drive them.
   useEffect(() => {
@@ -356,19 +410,7 @@ export function SceneCanvas({
     const r = resolveElementProperties(el, tick.features, presetMap, tick.t);
     const rect = wrapperRect;
     const minDim = Math.min(rect.width, rect.height);
-    const sizePx = r.size * minDim;
-    let halfW = sizePx;
-    let halfH = sizePx / r.aspect;
-    if (el.kind === "rectangle" || el.kind === "triangle") {
-      halfW = sizePx;
-      halfH = sizePx / r.aspect;
-    } else if (el.kind === "line") {
-      halfW = sizePx;
-      halfH = Math.max(8, sizePx * 0.05);
-    } else if (el.kind === "text") {
-      halfW = sizePx * 1.3;
-      halfH = sizePx * 0.5;
-    }
+    const { halfW, halfH } = elementHalfExtents(el.kind, r.size, boxAspect(el, r.aspect), minDim);
     return {
       left: r.x * rect.width - halfW,
       top: r.y * rect.height - halfH,
@@ -376,6 +418,11 @@ export function SceneCanvas({
       height: halfH * 2,
     };
   }, [selectedElementId, activeScene, presetMap, tick, wrapperRect]);
+
+  const selectedKind = useMemo(
+    () => activeScene?.elements.find((e) => e.id === selectedElementId)?.kind ?? null,
+    [activeScene, selectedElementId],
+  );
 
   // ─── Render ───────────────────────────────────────────────────────
   return (
@@ -388,7 +435,7 @@ export function SceneCanvas({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        style={{ cursor: isDragging ? "grabbing" : "crosshair" }}
+        style={{ cursor: dragMode === "move" ? "grabbing" : dragMode === "resize" ? "inherit" : "crosshair" }}
       >
         <div className="vp-stage__brackets"><b /></div>
 
@@ -465,9 +512,19 @@ export function SceneCanvas({
           </div>
         )}
 
-        {selectionStyle && (
-          <div className="vp-selection" style={selectionStyle}>
-            <b />
+        {selectionStyle && selectedKind && (
+          <div
+            className={`vp-selection ${canvasLocked ? "vp-selection--locked" : ""}`}
+            style={selectionStyle}
+          >
+            {handlesForKind(selectedKind).map((h) => (
+              <i
+                key={h}
+                className={`vp-selection__handle vp-selection__handle--${h}`}
+                onPointerDown={(e) => handleResizeStart(e, h)}
+                title="drag to resize"
+              />
+            ))}
           </div>
         )}
 
@@ -490,4 +547,108 @@ function clamp01(v: number): number {
   if (v < 0) return 0;
   if (v > 1) return 1;
   return v;
+}
+
+// ─── Selection geometry ──────────────────────────────────────────────
+// One source of truth for "how big is this element on screen", shared by
+// the dashed selection box, the pointer hit-test and the resize maths.
+// Mirrors the per-kind sizing in composer/render.ts.
+
+type ResizeHandle = "n" | "s" | "e" | "w" | "ne" | "nw" | "se" | "sw";
+
+type DragState =
+  | {
+      mode: "move";
+      elementId: string;
+      startX: number;
+      startY: number;
+      baseX: number;
+      baseY: number;
+    }
+  | {
+      mode: "resize";
+      naturalAspect: number;
+      elementId: string;
+      kind: ElementKind;
+      handle: ResizeHandle;
+      centerX: number;
+      centerY: number;
+      baseHalfW: number;
+      baseHalfH: number;
+    };
+
+/** Extra grab margin around an element's box, in CSS px. */
+const HIT_PAD_PX = 6;
+/** Smallest half-extent a resize can produce, in CSS px. */
+const MIN_HALF_PX = 4;
+
+const ALL_HANDLES: ReadonlyArray<ResizeHandle> = ["nw", "n", "ne", "e", "se", "s", "sw", "w"];
+const CORNER_HANDLES: ReadonlyArray<ResizeHandle> = ["nw", "ne", "se", "sw"];
+const HORIZONTAL_HANDLES: ReadonlyArray<ResizeHandle> = ["nw", "ne", "se", "sw", "e", "w"];
+
+/** Which handles make sense for a kind (lines have no height to drag). */
+function handlesForKind(kind: ElementKind): ReadonlyArray<ResizeHandle> {
+  if (kind === "line") return HORIZONTAL_HANDLES;
+  if (kind === "text") return CORNER_HANDLES;
+  return ALL_HANDLES;
+}
+
+/**
+ * Effective width/height ratio of an element's box. For everything but
+ * images that's the `aspect` prop; images also carry the bitmap's own
+ * ratio (render.ts derives height from it).
+ */
+function boxAspect(el: Element, aspect: number): number {
+  if (el.kind !== "image") return aspect;
+  return aspect * getAssetAspect(el.props.assetId ?? "");
+}
+
+function elementHalfExtents(
+  kind: ElementKind,
+  size: number,
+  aspect: number,
+  minDim: number,
+): { halfW: number; halfH: number } {
+  const sizePx = size * minDim;
+  const a = Math.max(0.01, aspect);
+  switch (kind) {
+    case "line":
+      return { halfW: sizePx, halfH: Math.max(8, sizePx * 0.05) };
+    case "text":
+      return { halfW: sizePx * 1.3, halfH: sizePx * 0.5 };
+    default:
+      // circle / ring (ellipse radii), rectangle / triangle / waveform
+      // (width = size×2, height = width / aspect).
+      return { halfW: sizePx, halfH: sizePx / a };
+  }
+}
+
+/**
+ * Inverse of elementHalfExtents: given the box the user dragged out,
+ * produce the size (and aspect, where the kind has one) that draws it.
+ */
+function sizeAspectFromExtents(
+  kind: ElementKind,
+  halfW: number,
+  halfH: number,
+  minDim: number,
+): { size: number; aspect: number | null } {
+  const sizeMeta = PROPERTY_META.size;
+  const aspectMeta = PROPERTY_META.aspect;
+  const clampSize = (v: number) => Math.max(0.005, Math.min(sizeMeta.max, v));
+  switch (kind) {
+    case "line":
+      return { size: clampSize(halfW / minDim), aspect: null };
+    case "text":
+      // Corners only: take whichever axis the user stretched further.
+      return {
+        size: clampSize(Math.max(halfW / 1.3, halfH / 0.5) / minDim),
+        aspect: null,
+      };
+    default: {
+      const size = clampSize(halfW / minDim);
+      const aspect = Math.max(aspectMeta.min, Math.min(aspectMeta.max, halfW / Math.max(1, halfH)));
+      return { size, aspect };
+    }
+  }
 }

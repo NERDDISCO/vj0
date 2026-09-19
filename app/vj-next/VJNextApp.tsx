@@ -14,7 +14,7 @@ import {
   useAiSettingsStore,
   type AiBackend,
 } from "@/src/lib/stores/ai-settings-store";
-import { useSceneStore } from "@/src/lib/composer";
+import { useSceneStore, type OverlayItem } from "@/src/lib/composer";
 import {
   openStageChannel,
   type StageMsg,
@@ -31,7 +31,12 @@ import { CommandPalette } from "./components/CommandPalette";
 import type { AiCompileState, BootPhase } from "./components/CompileOverlay";
 import { SYSTEM_AUDIO_VALUE } from "./components/AudioPopover";
 import { PerformanceDeck } from "./components/PerformanceDeck";
+import { LaunchpadMode } from "./components/LaunchpadMode";
+import { WorkspaceGutter } from "./components/WorkspaceGutter";
+import { useLayoutStore } from "@/src/lib/stores/layout-store";
 import { useRecording } from "./hooks/useRecording";
+import { useLaunchpad } from "./hooks/useLaunchpad";
+import type { PadActionContext, PadFeedbackState } from "@/src/lib/midi";
 
 /**
  * VJNextApp — orchestrator for /vj-next.
@@ -349,14 +354,28 @@ export function VJNextApp() {
     };
   }, []);
 
+  // Forward the resolved logo overlay to /vj/stage alongside the frames.
+  // The stage tab has no audio features, so the control tab resolves the
+  // bindings and ships plain numbers; a few small objects per frame is
+  // nothing next to the JPEG bytes already going over the channel.
+  const publishOverlay = useCallback((items: OverlayItem[], count: number) => {
+    const ch = stageChannelRef.current;
+    if (!ch) return;
+    // Slice + copy: postMessage structured-clones, and the pool array is
+    // reused by the next frame.
+    const out = new Array(count);
+    for (let i = 0; i < count; i++) out[i] = { ...items[i] };
+    ch.postMessage({ type: "overlay", items: out });
+  }, []);
+
   // ─── Recording ────────────────────────────────────────────────────
-  // For now we record the input scene canvas — always has content even
-  // when AI isn't connected. When the WebGL StageRenderer for the AI
-  // preview lands (Batch 5), getSourceCanvas can switch to the AI
-  // canvas while connected so the recording captures the actual stage
-  // output rather than the source.
+  // Records the output composite (AI frame + logo overlay, painted by
+  // OutputStage while recording) whenever AI frames are showing, and
+  // falls back to the input scene canvas otherwise so a recording always
+  // has content.
+  const outputCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const recording = useRecording({
-    getSourceCanvas: () => inputCanvasRef.current,
+    getSourceCanvas: () => outputCanvasRef.current ?? inputCanvasRef.current,
     audioEngineRef,
   });
 
@@ -551,6 +570,10 @@ export function VJNextApp() {
       : aiStatus === "connected" && generating
         ? "running"
         : "idle";
+
+  // Persisted column split — the workspace grid reads these as CSS vars.
+  const inputFr = useLayoutStore((s) => s.inputFr);
+  const outputFr = useLayoutStore((s) => s.outputFr);
 
   // The active scene's prompt — sent to the worker via flushSettingsNow.
   const activePromptRef = useRef<string>("");
@@ -767,11 +790,11 @@ export function VJNextApp() {
   // Fire a preset by index — set the active scene's prompt to the
   // preset's prompt, reroll the seed, then flush. Same shape as legacy.
   const promptPresets = useAiSettingsStore((s) => s.promptPresets);
-  const firePresetByIndex = useCallback(
-    (idx: number) => {
-      const preset = promptPresets[idx];
-      if (!preset) return;
-      setActiveScenePrompt(preset.prompt);
+  // Shared by the 1-9 keys, the PerformanceDeck cards and every Launchpad
+  // prompt pad: swap the active scene's prompt + reroll the seed.
+  const firePrompt = useCallback(
+    (prompt: string) => {
+      setActiveScenePrompt(prompt);
       setSeed(Math.floor(Math.random() * 1_000_000));
       // flushSettingsNow runs from the prompt-change effect below, but
       // we fire it directly too so the wire-payload lands in the same
@@ -779,7 +802,14 @@ export function VJNextApp() {
       // perceptible "click did nothing" lag).
       window.queueMicrotask(() => flushSettingsNow());
     },
-    [promptPresets, setActiveScenePrompt, setSeed, flushSettingsNow],
+    [setActiveScenePrompt, setSeed, flushSettingsNow],
+  );
+  const firePresetByIndex = useCallback(
+    (idx: number) => {
+      const preset = promptPresets[idx];
+      if (preset) firePrompt(preset.prompt);
+    },
+    [promptPresets, firePrompt],
   );
   const rerollSeed = useCallback(() => {
     setSeed(Math.floor(Math.random() * 1_000_000));
@@ -837,6 +867,75 @@ export function VJNextApp() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [firePresetByIndex, rerollSeed, adjustAlpha, aiBackend]);
+
+  // ─── Launchpad Pro MK3 ───────────────────────────────────────────
+  // Hardware pads + the virtual grid in the drawer both dispatch through
+  // this context. Store-backed actions (stage FX, steps, resolution,
+  // scenes) execute directly against zustand inside the pad-actions
+  // module; only app-owned state needs to be threaded through here.
+  const stageScanlines = useAiSettingsStore((s) => s.stageScanlines);
+  const stageVignette = useAiSettingsStore((s) => s.stageVignette);
+  const stagePixelate = useAiSettingsStore((s) => s.stagePixelate);
+  const activeSceneIndex = useSceneStore((s) =>
+    s.scenes.findIndex((sc) => sc.id === s.activeSceneId),
+  );
+  const disabledElementIds = useSceneStore((s) => {
+    let out = "";
+    for (const sc of s.scenes)
+      for (const el of sc.elements)
+        if (el.props.enabled === false) out += (out ? "," : "") + el.id;
+    return out;
+  });
+  const padFeedback = useMemo<PadFeedbackState>(
+    () => ({
+      activePrompt: activeScene?.prompt ?? "",
+      generating,
+      aiConnected: aiStatus === "connected",
+      recording: recording.isRecording,
+      scanlines: stageScanlines,
+      vignette: stageVignette,
+      pixelate: stagePixelate,
+      steps,
+      outputWidth: outWidth,
+      outputHeight: outHeight,
+      activeSceneIndex,
+      disabledElementIds,
+    }),
+    [
+      activeScene?.prompt,
+      generating,
+      aiStatus,
+      recording.isRecording,
+      stageScanlines,
+      stageVignette,
+      stagePixelate,
+      steps,
+      outWidth,
+      outHeight,
+      activeSceneIndex, disabledElementIds],
+  );
+  const { start: startRecording, stop: stopRecording } = recording;
+  const padContext = useMemo<PadActionContext>(
+    () => ({
+      firePrompt,
+      rerollSeed,
+      nudgeAlpha: adjustAlpha,
+      setGenerating: (on) => {
+        // Mirrors the ▶ generate button: can't generate without a link.
+        if (on && aiStatus !== "connected") return;
+        setGenerating(on);
+      },
+      connectAi: () => void aiTransport.start(),
+      disconnectAi: () => {
+        setGenerating(false);
+        void aiTransport.stop();
+      },
+      startRecording,
+      stopRecording: () => void stopRecording(),
+    }),
+    [firePrompt, rerollSeed, adjustAlpha, aiStatus, aiTransport, startRecording, stopRecording],
+  );
+  useLaunchpad({ ctx: padContext, feedback: padFeedback });
 
   // ▶ generate is wired to the OutputOptions button + the explicit
   // generate ▶ inside the popover. Spacebar above no longer toggles
@@ -921,7 +1020,10 @@ export function VJNextApp() {
         </button>
       )}
 
-      <div className="vp-workspace">
+      <div
+        className="vp-workspace"
+        style={{ "--col-input": inputFr, "--col-output": outputFr } as React.CSSProperties}
+      >
         {/* INPUT column — scene canvas + element inspector */}
         <div className="vp-col">
           <SceneCanvas
@@ -936,6 +1038,8 @@ export function VJNextApp() {
           />
         </div>
 
+        <WorkspaceGutter after="input" />
+
         {/* OUTPUT column — preview + options */}
         <div className="vp-col">
           <OutputStage
@@ -946,6 +1050,11 @@ export function VJNextApp() {
             aiServer={aiServer}
             aiCompile={aiCompile}
             generating={generating}
+            audioFeaturesRef={audioFeaturesRef}
+            startedAt={startedAt}
+            onOverlay={publishOverlay}
+            outputCanvasRef={outputCanvasRef}
+            recording={recording.isRecording}
           />
           <OutputOptions
             width={outWidth}
@@ -968,6 +1077,13 @@ export function VJNextApp() {
             onAlphaNudge={aiBackend === "klein" ? adjustAlpha : null}
             alpha={aiBackend === "klein" ? alpha : null}
           />
+        </div>
+
+        <WorkspaceGutter after="output" />
+
+        {/* LAUNCHPAD column — always on screen, takes what's left */}
+        <div className="vp-col vp-col--launchpad">
+          <LaunchpadMode feedback={padFeedback} />
         </div>
       </div>
 

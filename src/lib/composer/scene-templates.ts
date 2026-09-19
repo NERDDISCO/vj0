@@ -12,6 +12,7 @@
  * fresh user gets working audio reactivity on first paint.
  */
 
+import { DEFAULT_LOGO_MIX } from "./types";
 import type { Element, ElementProperties, PropertyBinding } from "./types";
 
 export interface SceneTemplate {
@@ -36,6 +37,10 @@ function makeProps(overrides: Partial<ElementProperties>): ElementProperties {
     opacity: 1,
     stroke: 0,
     text: "",
+    assetId: "",
+    placement: "source",
+    enabled: true,
+    mix: DEFAULT_LOGO_MIX,
     ...overrides,
   };
 }

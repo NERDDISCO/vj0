@@ -34,11 +34,34 @@ export type StageHelloMsg = {
   type: "hello";
 };
 
+/**
+ * Crisp logo overlay for the current frame — resolved in the control tab
+ * (which has the audio features) and drawn on top of the stage output.
+ * `items` mirrors composer's OverlayItem; duplicated here so the channel
+ * protocol has no dependency on the composer module.
+ */
+export type StageOverlayMsg = {
+  type: "overlay";
+  items: Array<{
+    assetId: string;
+    x: number;
+    y: number;
+    size: number;
+    aspect: number;
+    rotation: number;
+    opacity: number;
+    mix: number;
+    color: string;
+    mask: boolean;
+  }>;
+};
+
 export type StageMsg =
   | StageFrameMsg
   | StagePromptMsg
   | StageConnectionMsg
-  | StageHelloMsg;
+  | StageHelloMsg
+  | StageOverlayMsg;
 
 export function openStageChannel(): BroadcastChannel | null {
   if (typeof window === "undefined") return null;

@@ -258,6 +258,15 @@ vj0/
 - Serializes fixtures (stores profile ID, not full profile object)
 - Actions for add/remove/update fixtures and their settings
 
+#### Launchpad / MIDI (`midi/`)
+
+- Web MIDI driver for the Novation Launchpad Pro MK3 — no React dependency
+- `launchpad-pro-mk3.ts` – programmer-mode protocol: pad id grid (`10*row+col`), SysEx builders (programmer mode on/off, batched RGB LEDs), message parser
+- `launchpad-controller.ts` – `LaunchpadController` singleton via `getLaunchpad()`: requests MIDI+SysEx access, binds the `LPProMK3 MIDI` port (ignores DIN/DAW), hot-plug via `statechange`, diffs LED state so only changed pads are sent
+- `pad-actions.ts` – `PadAction` union (prompt / random-prompt / reroll / toggle / nudge / steps / resolution / scene). Every action is one-shot on press; release is ignored. `executePadAction` runs store-backed actions directly against zustand, app-owned ones through `PadActionContext`. `padActionActive` + `computeLeds` derive LED/virtual feedback
+- `default-layout.ts` – factory layout: 64 concise prompt pads (one colour per row) + edge buttons for seed/α/steps, toggles, scenes, resolution ladder
+- Bindings persist in `stores/midi-store.ts` (`vj0-midi-storage`); `app/vj-next/hooks/useLaunchpad.ts` mounts the controller for the app lifetime; `LaunchpadMode.tsx` renders the 1:1 virtual controller in the drawer (hotkey `M`), with a per-pad binding editor
+
 ### Design Principles
 
 1. **Separation of Concerns** – React handles UI state, core modules handle audio/rendering

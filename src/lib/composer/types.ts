@@ -60,7 +60,8 @@ export type ElementKind =
   | "text"
   | "ring"
   | "triangle"
-  | "waveform";
+  | "waveform"
+  | "image";
 
 /**
  * Properties that drive an Element. We keep the schema flat (no nested
@@ -89,7 +90,34 @@ export interface ElementProperties {
   stroke: number;
   /** Free text — only meaningful for `text` element kind. */
   text: string;
+  /** Off = not drawn anywhere (source, overlay, hit-test). Toggle from the
+   *  inspector or a Launchpad pad — lets a logo be armed for a drop. */
+  enabled: boolean;
+  /**
+   * Overlay blend for `image` kind, 0..1. 0 = pure window: the AI frame
+   * shows through the logo shape (boosted + rim glow). 1 = the flat logo.
+   * Bindable, so a kick can pulse the logo solid.
+   */
+  mix: number;
+  /** Asset id (uploaded logo/image) — only meaningful for `image` kind. */
+  assetId: string;
+  /**
+   * Where an `image` element is drawn — only meaningful for `image` kind.
+   *   source  → into the input canvas the AI restyles (logo dissolves at
+   *             low alpha, but the model riffs on its silhouette)
+   *   overlay → crisp on top of the AI output (preview, projector)
+   *   both    → the two combined (default for logos)
+   *   mask    → the logo is a window over the whole output: black
+   *             everywhere, the AI visuals only inside the logo shape.
+   *             Not fed to the AI. Toggle the element to drop in/out.
+   */
+  placement: ImagePlacement;
 }
+
+export type ImagePlacement = "source" | "overlay" | "both" | "mask";
+
+/** Default overlay mix for a new logo — picked from mockups on 2026-09-19. */
+export const DEFAULT_LOGO_MIX = 0.45;
 
 export type PropertyKey =
   | "x"
@@ -98,9 +126,11 @@ export type PropertyKey =
   | "aspect"
   | "rotation"
   | "opacity"
-  | "stroke";
-// Note: `color` and `text` aren't in PropertyKey because they can't be
-// audio-bound — they have non-scalar values. We could add hue-shift later.
+  | "stroke"
+  | "mix";
+// Note: `color`, `text` and `assetId` aren't in PropertyKey because they
+// can't be audio-bound — they have non-scalar values. We could add
+// hue-shift later.
 
 export const NUMERIC_PROPERTY_KEYS: PropertyKey[] = [
   "x",
@@ -110,7 +140,13 @@ export const NUMERIC_PROPERTY_KEYS: PropertyKey[] = [
   "rotation",
   "opacity",
   "stroke",
+  "mix",
 ];
+
+/** Numeric keys that only make sense for a given kind (hidden elsewhere). */
+export const KIND_ONLY_PROPERTY_KEYS: Partial<Record<PropertyKey, ElementKind>> = {
+  mix: "image",
+};
 
 /**
  * Range and stepping for each numeric property. The formula language always
@@ -129,6 +165,7 @@ export const PROPERTY_META: Record<
   rotation: { min: 0,    max: 1,    step: 0.001, label: "rot" },
   opacity:  { min: 0,    max: 1,    step: 0.01,  label: "opacity" },
   stroke:   { min: 0,    max: 0.4,  step: 0.001, label: "stroke" },
+  mix:      { min: 0,    max: 1,    step: 0.01,  label: "mix" },
 };
 
 /**

@@ -18,7 +18,7 @@
 
 import { create } from "zustand";
 
-export type DrawerMode = "presets" | "scenes" | "lighting";
+export type DrawerMode = "presets" | "scenes" | "lighting" | "logos";
 
 interface UiState {
   /** Drawer is open at all. Closed = transform translateY(100%). */

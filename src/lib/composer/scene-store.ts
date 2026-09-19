@@ -10,19 +10,26 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type {
-  Element,
-  ElementKind,
-  ElementProperties,
-  PropertyKey,
-  PropertyBinding,
-  Scene,
+import {
+  DEFAULT_LOGO_MIX,
+  type Element,
+  type ElementKind,
+  type ElementProperties,
+  type PropertyKey,
+  type PropertyBinding,
+  type Scene,
 } from "./types";
 import { purgeElementCache } from "./render";
 import { getSceneTemplate } from "./scene-templates";
+import { selectNewestAssetId, useAssetStore } from "../assets/asset-store";
 
 // ─── Defaults ────────────────────────────────────────────────────────
-function defaultProps(kind: ElementKind, x = 0.5, y = 0.5): ElementProperties {
+function defaultProps(
+  kind: ElementKind,
+  x = 0.5,
+  y = 0.5,
+  overrides: Partial<ElementProperties> = {},
+): ElementProperties {
   // Per-kind initial sizes — a default circle should look chunky, a
   // default text should be readable. Tuned by eye.
   const baseSize: Record<ElementKind, number> = {
@@ -37,6 +44,9 @@ function defaultProps(kind: ElementKind, x = 0.5, y = 0.5): ElementProperties {
     // reads as a strip, not a square scope. Stroke 0 means render uses
     // its sensible default thickness derived from size.
     waveform: 0.45,
+    // Logo: ~40% of the short edge wide — big enough to survive the AI
+    // restyle, small enough to sit beside other elements.
+    image: 0.2,
   };
   // Each kind gets a different default color — keeps a multi-element scene
   // from looking like all-magenta camo. Pulls from the patch palette.
@@ -48,6 +58,7 @@ function defaultProps(kind: ElementKind, x = 0.5, y = 0.5): ElementProperties {
     line: "#e9e9f2",
     text: "#ff00aa",
     waveform: "#00e5ff",
+    image: "#ffffff",
   };
   return {
     x,
@@ -59,6 +70,13 @@ function defaultProps(kind: ElementKind, x = 0.5, y = 0.5): ElementProperties {
     opacity: 1,
     stroke: 0,
     text: kind === "text" ? "VJ0" : "",
+    // A logo dropped via quick-add grabs the newest upload so it shows
+    // something immediately; the inspector can swap it.
+    assetId: kind === "image" ? selectNewestAssetId(useAssetStore.getState()) : "",
+    placement: kind === "image" ? "both" : "source",
+    enabled: true,
+    mix: DEFAULT_LOGO_MIX,
+    ...overrides,
   };
 }
 
@@ -67,7 +85,7 @@ function uid(prefix: string): string {
 }
 
 function defaultElementName(kind: ElementKind, index: number): string {
-  return `${kind} ${index}`;
+  return `${kind === "image" ? "logo" : kind} ${index}`;
 }
 
 // ─── Store ──────────────────────────────────────────────────────────
@@ -90,7 +108,12 @@ interface SceneState {
   updateSceneBackground: (id: string, color: string) => void;
 
   // ─── Element actions (operate on the active scene)
-  addElement: (kind: ElementKind, x?: number, y?: number) => string | null;
+  addElement: (
+    kind: ElementKind,
+    x?: number,
+    y?: number,
+    overrides?: Partial<ElementProperties>,
+  ) => string | null;
   removeElement: (id: string) => void;
   selectElement: (id: string | null) => void;
   updateElementProp: <K extends keyof ElementProperties>(
@@ -105,6 +128,8 @@ interface SceneState {
   ) => void;
   /** Move element to top of z-order (last in elements array). */
   bringForward: (id: string) => void;
+  /** Flip `enabled` on an element in any scene (pads target by id). */
+  toggleElementEnabled: (id: string) => void;
   renameElement: (id: string, name: string) => void;
 }
 
@@ -249,7 +274,7 @@ export const useSceneStore = create<SceneState>()(
         }));
       },
 
-      addElement: (kind, x = 0.5, y = 0.5) => {
+      addElement: (kind, x = 0.5, y = 0.5, overrides = {}) => {
         const activeId = get().activeSceneId;
         if (!activeId) return null;
         const newId = uid("el");
@@ -260,7 +285,7 @@ export const useSceneStore = create<SceneState>()(
           id: newId,
           kind,
           name: defaultElementName(kind, indexForName),
-          props: defaultProps(kind, x, y),
+          props: defaultProps(kind, x, y, overrides),
           bindings: {},
         };
         set((s) => ({
@@ -325,6 +350,19 @@ export const useSceneStore = create<SceneState>()(
         }));
       },
 
+      toggleElementEnabled: (id) => {
+        set((s) => ({
+          scenes: s.scenes.map((sc) => ({
+            ...sc,
+            elements: sc.elements.map((el) =>
+              el.id === id
+                ? { ...el, props: { ...el.props, enabled: !(el.props.enabled ?? true) } }
+                : el,
+            ),
+          })),
+        }));
+      },
+
       renameElement: (id, name) => {
         set((s) => ({
           scenes: s.scenes.map((sc) => ({
@@ -343,6 +381,17 @@ export const useSceneStore = create<SceneState>()(
         if (!state) return;
         if (!state.scenes.find((s) => s.id === state.activeSceneId)) {
           state.activeSceneId = state.scenes[0]?.id ?? null;
+        }
+        // Backfill props added after a scene was persisted, so the
+        // renderer never sees undefined numerics.
+        for (const sc of state.scenes) {
+          for (const el of sc.elements) {
+            const p = el.props;
+            if (p.assetId === undefined) p.assetId = "";
+            if (p.placement === undefined) p.placement = el.kind === "image" ? "both" : "source";
+            if (p.enabled === undefined) p.enabled = true;
+            if (typeof p.mix !== "number") p.mix = DEFAULT_LOGO_MIX;
+          }
         }
       },
     },
